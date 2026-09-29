@@ -1,0 +1,55 @@
+# P73 — ballistic pendulum, swing height from the bullet speed. The bullet sticks (perfectly
+# inelastic): V = m v / (m + M); the block then rises h = V² / (2 g). Bullet mass is given in g.
+id: phys161-e2-p073-ballistic-pendulum-height
+title: Swing height of a ballistic pendulum
+source: { document: PHYS161_Exam2, labels: [ P73 ] }
+section: Conservation of linear momentum
+tags: [ momentum, inelastic-collision, energy-conservation, ballistic-pendulum ]
+figure:
+  id: fig
+  src: figures/unnamed_003_GNcJ.gif
+  alt: >-
+    Left: a bullet flying horizontally to the right toward a rectangular block that hangs at rest
+    from two vertical cords attached to the ceiling. Right: with the bullet embedded in it, the
+    block has swung to the right on its tilted cords and risen; two dashed lines mark the block's
+    initial and final levels, and arrows show the height difference h between them.
+narrative: >-
+  A ballistic pendulum is initially at rest. A bullet of mass {m:unit} strikes a block of mass
+  {M:unit} horizontally at {v:unit} and remains stuck in it, putting the block in motion. {@fig}
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 8.0,
+      max: 15.0,
+      step: 0.1,
+      decimals: 1,
+      unit: g,
+      label: bullet mass
+    }
+  - {
+      name: M,
+      kind: range,
+      min: 4.5,
+      max: 9.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: block mass
+    }
+  - { name: v, kind: range, min: 350, max: 650, step: 10, unit: m/s, label: bullet speed }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: V, expr: "(m / 1000) * v / (m / 1000 + M)", unit: m/s }
+parts:
+  - id: swing-height
+    prompt: >-
+      To what height does the block swing? The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: V^2 / (2 * g)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 11.5, M: 6.6, v: 510, g: 9.8 }
+  parts:
+    - { id: swing-height, answer: 0.0401495, unit: m, source: P73 }

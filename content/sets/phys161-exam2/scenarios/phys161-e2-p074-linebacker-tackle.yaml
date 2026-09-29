@@ -1,0 +1,45 @@
+# P74/P75 — a moving linebacker tackles a quarterback at rest (perfectly inelastic):
+# V = m1 v / (m1 + m2), and the kinetic energy lost is ½ m1 v² − ½ (m1 + m2) V²
+# = ½ m1 v² · m2 / (m1 + m2). The two source problems use different numbers: the base canonical
+# values are P74's and P75 overrides them with its own.
+id: phys161-e2-p074-linebacker-tackle
+title: Linebacker tackles a quarterback
+source: { document: PHYS161_Exam2, labels: [ P74, P75 ] }
+section: Conservation of linear momentum
+tags: [ momentum, inelastic-collision, kinetic-energy, multi-part ]
+narrative: >-
+  A linebacker with mass {m1:unit} and initial speed {v:unit} makes a perfectly inelastic collision
+  with a {m2:unit} quarterback that is initially at rest.
+vars:
+  - { name: m1, kind: range, min: 70, max: 115, step: 1, unit: kg, label: linebacker mass }
+  - {
+      name: v,
+      kind: range,
+      min: 2.50,
+      max: 5.00,
+      step: 0.01,
+      decimals: 2,
+      unit: m/s,
+      label: linebacker speed
+    }
+  - { name: m2, kind: range, min: 65, max: 110, step: 1, unit: kg, label: quarterback mass }
+derived:
+  - { name: V, expr: "m1 * v / (m1 + m2)", unit: m/s }
+parts:
+  - id: final-speed
+    prompt: "Find the speeds of the players just after their collision. {_0}{_u}"
+    answer: V
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: energy-lost
+    prompt: "How much kinetic energy is lost in the collision? {_0}{_u}"
+    answer: 0.5 * m1 * v^2 - 0.5 * (m1 + m2) * V^2
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m1: 85, v: 3.17, m2: 86 }
+  parts:
+    - { id: final-speed, answer: 1.5757, unit: m/s, source: P74 }
+    - { id: energy-lost, answer: 344.119, unit: J, source: P75, vars: { m1: 90, v: 3.98, m2: 84 } }

@@ -1,0 +1,41 @@
+# P81 — an arrow embeds in a block at rest (perfectly inelastic, friction impulse negligible during
+# the strike): V = m v / (M + m). Kinetic friction then stops the pair: V² = 2 μ g s, so
+# s = V² / (2 μ g). Arrow mass is given in g.
+id: phys161-e2-p081-arrow-block-friction-slide
+title: Block slides after an arrow sticks in it
+source: { document: PHYS161_Exam2, labels: [ P81 ] }
+section: Conservation of linear momentum
+tags: [ momentum, inelastic-collision, friction ]
+narrative: >-
+  A block of mass {M:unit} stays at rest on a horizontal surface with coefficient of kinetic
+  friction {mu}. When an arrow of mass {m:unit} strikes the block with the speed {v:unit} it gets
+  stuck in the block.
+vars:
+  - { name: M, kind: range, min: 1, max: 2, step: 0.5, unit: kg, label: block mass }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.10,
+      max: 0.25,
+      step: 0.01,
+      decimals: 2,
+      label: coefficient of kinetic friction
+    }
+  - { name: m, kind: range, min: 180, max: 340, step: 10, unit: g, label: arrow mass }
+  - { name: v, kind: range, min: 20, max: 40, step: 1, unit: m/s, label: arrow speed }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: V, expr: "(m / 1000) * v / (M + m / 1000)", unit: m/s }
+parts:
+  - id: slide-distance
+    prompt: >-
+      Find the distance to which the block with the arrow will slide after the strike till they come
+      to rest. The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: V^2 / (2 * mu * g)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { M: 1, mu: 0.15, m: 260, v: 30, g: 9.8 }
+  parts:
+    - { id: slide-distance, answer: 13.035, unit: m, source: P81 }

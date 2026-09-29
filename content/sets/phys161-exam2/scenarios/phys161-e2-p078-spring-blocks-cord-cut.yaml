@@ -1,0 +1,73 @@
+# P78/P79 — two blocks pushed apart by a compressed spring (recoil from rest). Momentum:
+# m1 v1 = m2 v2; energy: ½ k d² = ½ m1 v1² + ½ m2 v2², so
+# v1 = d √(k m2 / (m1 (m1 + m2))) and v2 = d √(k m1 / (m2 (m1 + m2))). Compression d is in cm.
+# Base canonical values are P78's; P79 overrides them with its own. Both source figures are the
+# same drawing (with m1 the smaller block); P78's file is used.
+id: phys161-e2-p078-spring-blocks-cord-cut
+title: Blocks pushed apart by a spring
+source: { document: PHYS161_Exam2, labels: [ P78, P79 ] }
+section: Conservation of linear momentum
+tags: [ momentum, energy-conservation, spring, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_027_GNcJ.png
+  alt: >-
+    Top: a small block m1 and a larger block m2 on a horizontal surface, with a compressed spring
+    between them and a cord tied across the top holding them together. Bottom: after the cord is
+    cut, the spring is relaxed, m1 moves to the left with speed v1 and m2 moves to the right with
+    speed v2, as shown by red arrows.
+narrative: >-
+  On a frictionless horizontal surface two blocks of masses {m1:unit} and {m2:unit} are connected by
+  a spring of stiffness $k = {k:unit}$ and negligible mass. Initially, the blocks are pushed
+  together to compress the spring by a distance $d = {d:unit}$ from its equilibrium length and the
+  configuration is fixed by a cord that holds the blocks. When the cord is cut, the blocks move in
+  opposite directions. {@fig}
+vars:
+  - {
+      name: m1,
+      kind: range,
+      min: 1.5,
+      max: 2.8,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: mass of the first block
+    }
+  - {
+      name: m2,
+      kind: range,
+      min: 2.0,
+      max: 4.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: mass of the second block
+    }
+  - { name: k, kind: range, min: 600, max: 1100, step: 10, unit: N/m, label: spring stiffness }
+  - { name: d, kind: range, min: 14, max: 28, step: 1, unit: cm, label: spring compression }
+constraints:
+  - "m1 < m2" # as drawn in the figure (m1 the smaller block)
+parts:
+  - id: first-block-speed
+    prompt: "Calculate the speed of the first block. {_0}{_u}"
+    answer: (d / 100) * sqrt(k * m2 / (m1 * (m1 + m2)))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: second-block-speed
+    prompt: "Calculate the speed of the second block. {_0}{_u}"
+    answer: (d / 100) * sqrt(k * m1 / (m2 * (m1 + m2)))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m1: 2.1, m2: 2.9, k: 820, d: 19 }
+  parts:
+    - { id: first-block-speed, answer: 2.859, unit: m/s, source: P78 }
+    - {
+        id: second-block-speed,
+        answer: 2.49622,
+        unit: m/s,
+        source: P79,
+        vars: { m1: 2.3, m2: 3, k: 890, d: 22 }
+      }

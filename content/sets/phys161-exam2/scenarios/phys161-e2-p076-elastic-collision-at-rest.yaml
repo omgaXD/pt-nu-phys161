@@ -1,0 +1,37 @@
+# P76/P77 — 1-D elastic collision of M1 moving at v with M2 at rest:
+# v2' = 2 M1 v / (M1 + M2) and v1' = (M1 − M2) v / (M1 + M2). Both sources have M1 > M2, so the
+# first mass keeps moving forward; the constraint keeps it so and keeps v1' away from zero.
+# Base canonical values are P76's; P77 overrides them with its own.
+id: phys161-e2-p076-elastic-collision-at-rest
+title: Elastic collision with a mass at rest
+source: { document: PHYS161_Exam2, labels: [ P76, P77 ] }
+section: Conservation of linear momentum
+tags: [ momentum, elastic-collision, multi-part ]
+narrative: >-
+  Two masses $M_{1}$ = {M1:unit} and $M_{2}$ = {M2:unit} collide elastically. The initial velocity
+  of the first mass $M_{1}$ is {v:unit}, whereas the second mass $M_{2}$ is at rest before the
+  collision.
+vars:
+  - { name: M1, kind: range, min: 6, max: 12, step: 0.5, unit: kg, label: first mass }
+  - { name: M2, kind: range, min: 2, max: 5, step: 1, unit: kg, label: second mass }
+  - { name: v, kind: range, min: 2, max: 7, step: 1, unit: m/s, label: initial speed of M1 }
+constraints:
+  - "M1 >= 1.5 * M2" # the first mass keeps moving forward, at a speed well away from zero
+parts:
+  - id: second-mass-speed
+    prompt: "Find the speed of the second mass after the collision. {_0}{_u}"
+    answer: 2 * M1 * v / (M1 + M2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: first-mass-speed
+    prompt: "Find the speed of the first mass after the collision. {_0}{_u}"
+    answer: (M1 - M2) * v / (M1 + M2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { M1: 8, M2: 4, v: 5 }
+  parts:
+    - { id: second-mass-speed, answer: 6.667, unit: m/s, source: P76 }
+    - { id: first-mass-speed, answer: 1.56, unit: m/s, source: P77, vars: { M1: 9.5, M2: 3, v: 3 } }

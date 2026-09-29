@@ -1,0 +1,58 @@
+# P72 — ballistic pendulum, bullet speed from the swing height. The bullet sticks (perfectly
+# inelastic): m v = (m + M) V; the block then rises h with ½ V² = g h, so
+# v = (m + M)/m · √(2 g h). Bullet mass is given in g and the height in cm.
+id: phys161-e2-p072-ballistic-pendulum-bullet-speed
+title: Bullet speed from a ballistic pendulum
+source: { document: PHYS161_Exam2, labels: [ P72 ] }
+section: Conservation of linear momentum
+tags: [ momentum, inelastic-collision, energy-conservation, ballistic-pendulum ]
+figure:
+  id: fig
+  src: figures/unnamed_018_GNcJ.png
+  alt: >-
+    Left: a bullet flying horizontally to the right toward a rectangular block that hangs at rest
+    from two vertical cords attached to the ceiling. Right: with the bullet embedded in it, the
+    block has swung to the right on its tilted cords and risen; two dashed lines mark the block's
+    initial and final levels, and arrows show the height difference h between them.
+narrative: >-
+  Figure shows a ballistic pendulum. Initially, the pendulum is at rest. The bullet strikes the
+  block horizontally and remains stuck in it. The impact of the bullet puts the block in motion,
+  causing it to swing upward to a height $h$. {@fig}
+vars:
+  - { name: m, kind: range, min: 11, max: 20, step: 1, unit: g, label: bullet mass }
+  - {
+      name: M,
+      kind: range,
+      min: 5.5,
+      max: 9.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: block mass
+    }
+  - {
+      name: h,
+      kind: range,
+      min: 4.5,
+      max: 8.5,
+      step: 0.1,
+      decimals: 1,
+      unit: cm,
+      label: swing height
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: bullet-speed
+    prompt: >-
+      If the bullet has a mass of {m:unit}, and the block of mass {M:unit} swings up to a height of
+      {h:unit}, what was the speed of the bullet before impact? The gravitational acceleration is $g
+      = {g:unit}$. {_0}{_u}
+    answer: (m / 1000 + M) / (m / 1000) * sqrt(2 * g * h / 100)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 15, M: 7.3, h: 6.6, g: 9.8 }
+  parts:
+    - { id: bullet-speed, answer: 554.655, unit: m/s, source: P72 }
