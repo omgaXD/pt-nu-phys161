@@ -1,0 +1,54 @@
+# P10/P12 — energy conservation for an object launched from the Earth's surface (no drag, no
+# rotation): ½ v0² − G M_E / R_E = ½ v∞². P10 gives the speed far away and asks for the launch
+# speed, v0 = sqrt(v∞² + 2 G M_E / R_E); P12 inverts it, v∞ = sqrt(v0² − 2 G M_E / R_E).
+# G, M_E and R_E are the constants the source states (R_E in km, converted inside the formulas);
+# the object's mass (P10) does not enter the answer. The two parts use separate variables.
+id: phys161-e3-p010-launch-speed-far-away
+title: Launch speed and speed far from the Earth
+source: { document: PHYS161_Exam3, labels: [ P10, P12 ] }
+section: Gravitation
+tags: [ gravitation, escape-velocity, energy-conservation, multi-part ]
+narrative: >-
+  Neglect atmospheric friction and the rotation of the Earth. The Earth's radius and mass are
+  {RE:unit} and {ME:unit}, respectively. Gravitational constant is {G:unit}.
+vars:
+  - { name: m, kind: range, min: 1, max: 6, step: 1, unit: kg, label: object mass }
+  - { name: vf, kind: range, min: 9000, max: 18000, step: 100, unit: m/s, label: final speed }
+  - {
+      name: v0,
+      kind: range,
+      min: 1.3e+4,
+      max: 2.6e+4,
+      step: 1e+3,
+      sigfigs: 2,
+      unit: m/s,
+      label: initial speed
+    }
+derived:
+  - { name: RE, expr: "6371", unit: km }
+  - { name: ME, expr: "5.97e24", unit: kg }
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+constraints:
+  - "v0^2 > 2 * G * ME / (RE * 1000)" # P12's object escapes, so it has a speed far away
+parts:
+  - id: initial-speed
+    prompt: >-
+      Calculate the initial speed of the object of mass {m:unit} launched from the Earth's surface
+      and reaching the speed of {vf:unit} at a very far distance from the Earth. {_0}{_u}
+    answer: sqrt(vf^2 + 2 * G * ME / (RE * 1000))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: final-speed
+    prompt: >-
+      Initial speed of an object projected away from the surface of Earth is {v0:unit}. Find the
+      object's speed when it is very far from the Earth. {_0}{_u}
+    answer: sqrt(v0^2 - 2 * G * ME / (RE * 1000))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 3, vf: 13800, v0: 19000, RE: 6371, ME: 5.97e+24, G: 6.67e-11 }
+  parts:
+    - { id: initial-speed, answer: 17760.73, unit: m/s, source: P10 }
+    - { id: final-speed, answer: 15366.47, unit: m/s, source: P12 }

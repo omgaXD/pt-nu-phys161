@@ -1,0 +1,47 @@
+# P15 — circular orbit: G m / r² = (2π / T)² r, so r = (G m T² / (4π²))^(1/3). The period is
+# given in days and converted inside the formula.
+id: phys161-e3-p015-satellite-orbit-radius
+title: Orbit radius from the orbital period
+source: { document: PHYS161_Exam3, labels: [ P15 ] }
+section: Gravitation
+tags: [ gravitation, orbits, keplers-third-law, units ]
+narrative: >-
+  Assume that the satellite orbits a planet in a circular orbit. Assume that the satellite's motion
+  is determined solely by the gravitational force exerted on it by the planet, and the mass of the
+  planet is $m = {m:unit}$. Gravitational constant is {G:unit}.
+vars:
+  - {
+      name: T,
+      kind: range,
+      min: 18.0,
+      max: 40.0,
+      step: 0.1,
+      decimals: 1,
+      unit: days,
+      label: period
+    }
+  - {
+      name: m,
+      kind: range,
+      min: 2e+24,
+      max: 7e+24,
+      step: 1e+24,
+      sigfigs: 1,
+      unit: kg,
+      label: planet mass
+    }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: orbit-radius
+    prompt: >-
+      From the observed orbital period of {T:unit}, calculate the distance of the satellite from the
+      center of the planet. {_0}{_u}
+    answer: (G * m * (T * 86400)^2 / (4 * pi^2))^(1 / 3)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { T: 28.4, m: 4e+24, G: 6.67e-11 }
+  parts:
+    - { id: orbit-radius, answer: 343951138.39, unit: m, source: P15 }

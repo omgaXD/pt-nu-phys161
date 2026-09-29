@@ -1,0 +1,48 @@
+# P11 — three equal stars m at the vertices of an equilateral triangle of side a, circling the
+# circumscribed circle of radius r = a / √3. Each feels two pulls G m² / a² at ±30° to the centre:
+# F = √3 G m² / a² = m v² / r, so v = sqrt(G m / a). The side is given in km and converted inside
+# the formula. The figure prints only the 120° angles of the geometry, no parameter values.
+id: phys161-e3-p011-three-star-orbit
+title: Three stars on a circular orbit
+source: { document: PHYS161_Exam3, labels: [ P11 ] }
+section: Gravitation
+tags: [ gravitation, orbits, superposition, circular-motion ]
+figure:
+  id: three-stars
+  src: figures/unnamed_005_LYNB.png
+  alt: >-
+    Three grey spheres equally spaced on a dashed circle: one at the top, one at the lower left and
+    one at the lower right. Dashed lines from the centre of the circle to each sphere divide it into
+    three 120° angles. A curved arrow next to each sphere shows all three moving counterclockwise
+    along the circle.
+narrative: >-
+  Three identical stars of mass {m:unit} are located at the vertices of an equilateral triangle with
+  side {a:unit}. Gravitational constant is {G:unit}. {@fig}
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 3.5e+24,
+      max: 7e+24,
+      step: 1e+22,
+      sigfigs: 3,
+      unit: kg,
+      label: star mass
+    }
+  - { name: a, kind: range, min: 4500, max: 9500, step: 10, unit: km, label: side }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: orbital-speed
+    prompt: >-
+      At what speed must they move if they all revolve under the influence of one another's
+      gravitational force in a circular orbit circumscribing the triangle while still preserving the
+      equilateral triangle? {_0}{_u}
+    answer: sqrt(G * m / (a * 1000))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m: 5.27e+24, a: 6930, G: 6.67e-11 }
+  parts:
+    - { id: orbital-speed, answer: 7121.99, unit: m/s, source: P11 }
