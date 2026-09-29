@@ -1,0 +1,43 @@
+# P27/P28 — magnitudes A, B and the vector product C = A × B = Cx î + Cy ĵ are given:
+#   |C| = A B sin θ  →  θ = arcsin(|C| / (A B))  (the acute angle, as the sources print),
+#   |A · B| = A B cos θ = √((A B)² − |C|²).
+# The constraint |C| < A B (always met by these ranges) keeps the angle defined.
+# The base canonical values are P27's; P28 (A = 6.5, B = 19, C = 9î + 13ĵ) overrides them.
+# A steps by 0.5 so that both sources' values lie on the grid.
+id: phys161-e1-p027-products-from-cross
+title: Angle and scalar product from a given vector product
+source: { document: PHYS161_Exam1, labels: [ P27, P28 ] }
+section: Vectors
+tags: [ vectors, vector-product, scalar-product, angle, multi-part ]
+narrative: >-
+  Two vectors $\vec{A}$ and $\vec{B}$ have magnitudes $A = {A}$ and $B = {B}$. Their vector product
+  is $\vec{A} \times \vec{B} = {C}$.
+vars:
+  - { name: A, kind: range, min: 4, max: 9, step: 0.5, label: magnitude of A }
+  - { name: B, kind: range, min: 13, max: 24, step: 1, label: magnitude of B }
+  - { name: Cx, kind: range, min: 5, max: 12, step: 1, label: x-component of A × B }
+  - { name: Cy, kind: range, min: 5, max: 16, step: 1, label: y-component of A × B }
+derived:
+  - { name: C, expr: "[Cx, Cy]" }
+constraints:
+  - "norm(C) < A * B" # |A × B| cannot exceed A B
+parts:
+  - id: angle
+    prompt: >-
+      What is the angle (in radians) between $\vec{A}$ and $\vec{B}$? {_0}{_u}
+    answer: asin(norm(C) / (A * B))
+    unit: rad
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: scalar-product
+    prompt: >-
+      What is the magnitude of their scalar product $\vec{A} \cdot \vec{B}$? {_0}
+    answer: sqrt((A * B)^2 - dot(C, C))
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { A: 6, B: 18, Cx: 8, Cy: 8 }
+  parts:
+    - { id: angle, answer: 0.104949, unit: rad, source: P27 }
+    - { id: scalar-product, answer: 122.484, source: P28, vars: { A: 6.5, B: 19, Cx: 9, Cy: 13 } }

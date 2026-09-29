@@ -1,0 +1,36 @@
+# P25/P26 — A lies along +x and B lies in the xy-plane at θ from +x, so
+#   |A × B| = A B sin θ,  |A · B| = A B |cos θ|.
+# θ stays acute (as in both sources), well away from 0° and 90°, so neither product vanishes.
+# The base canonical values are P25's; P26 (A = 7.5, B = 17.5, θ = 53°) overrides them.
+# A and B step by 0.5 so that both sources' values lie on the grid.
+id: phys161-e1-p025-products-xy-plane
+title: Products of a vector along x and a vector in the xy-plane
+source: { document: PHYS161_Exam1, labels: [ P25, P26 ] }
+section: Vectors
+tags: [ vectors, vector-product, scalar-product, multi-part ]
+narrative: >-
+  Vector $\vec{A}$ has a magnitude of {A} units and is in the direction of the +x-axis. Vector
+  $\vec{B}$ has magnitude of {B} units and lies in the xy-plane, making an angle of {theta:unit}
+  with the +x-axis.
+vars:
+  - { name: A, kind: range, min: 2, max: 9.5, step: 0.5, label: magnitude of A }
+  - { name: B, kind: range, min: 10, max: 22, step: 0.5, label: magnitude of B }
+  - { name: theta, kind: range, min: 35, max: 75, step: 1, unit: "°", label: angle of B from +x }
+parts:
+  - id: vector-product
+    prompt: >-
+      Find the magnitude of the vector product $\vec{A} \times \vec{B}$. {_0}
+    answer: A * B * sin(rad(theta))
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: scalar-product
+    prompt: >-
+      Find the magnitude of the scalar product $\vec{A} \cdot \vec{B}$. {_0}
+    answer: abs(A * B * cos(rad(theta)))
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { A: 3, B: 14, theta: 60 }
+  parts:
+    - { id: vector-product, answer: 36.3731, source: P25 }
+    - { id: scalar-product, answer: 78.9882, source: P26, vars: { A: 7.5, B: 17.5, theta: 53 } }

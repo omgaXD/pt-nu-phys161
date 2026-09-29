@@ -1,0 +1,32 @@
+# P24 — magnitude of the vector product of two 3-D vectors: |A × B| = |cross(A, B)|.
+# Components are independent integers whose signs match the source (A = (+, +, +),
+# B = (−, +, −)); since Ax Bx < 0 but Ay By > 0, A and B are never (anti)parallel, so
+# |A × B| never vanishes. (The source prints "+ -3k̂"; here it renders as "− 3k̂".)
+id: phys161-e1-p024-vector-product-magnitude
+title: Magnitude of the vector product of two vectors
+source: { document: PHYS161_Exam1, labels: [ P24 ] }
+section: Vectors
+tags: [ vectors, vector-product, magnitude ]
+narrative: >-
+  Given the two vectors $\vec{A} = \left({A}\right)$ and $\vec{B} = \left({B}\right)$.
+vars:
+  - { name: Ax, kind: range, min: 3, max: 7, step: 1 }
+  - { name: Ay, kind: range, min: 2, max: 4, step: 1 }
+  - { name: Az, kind: range, min: 2, max: 5, step: 1 }
+  - { name: Bx, kind: range, min: -6, max: -2, step: 1 }
+  - { name: By, kind: range, min: 2, max: 6, step: 1 }
+  - { name: Bz, kind: range, min: -5, max: -2, step: 1 }
+derived:
+  - { name: A, expr: "[Ax, Ay, Az]" }
+  - { name: B, expr: "[Bx, By, Bz]" }
+parts:
+  - id: cross-magnitude
+    prompt: >-
+      Find the magnitude of their vector product $\vec{A} \times \vec{B}$. {_0}
+    answer: norm(cross(A, B))
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { Ax: 5, Ay: 2, Az: 3, Bx: -4, By: 4, Bz: -3 }
+  parts:
+    - { id: cross-magnitude, answer: 33.4215, source: P24 }
