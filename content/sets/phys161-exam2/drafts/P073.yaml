@@ -1,0 +1,63 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P73
+number: 73
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A ballistic pendulum is initially at rest. A bullet of mass 11.5 g strikes a block of mass 6.6
+  kg horizontally at 510 m/s and remains stuck in it, putting the block in motion. To what height
+  does the block swing? The gravitational acceleration is g = 9.8 m/s². (0.0401495 m)
+text: A ballistic pendulum is initially at rest. A bullet of mass 11.5 g strikes a block of mass 6.6
+  kg horizontally at 510 m/s and remains stuck in it, putting the block in motion. To what height
+  does the block swing? The gravitational acceleration is g = 9.8 m/s^2. (0.0401495 m)
+answer: { value: 0.0401495, unit: m, raw: 0.0401495 m }
+figures:
+  - { src: figures/unnamed_002_fr4U.gif, original: PHYS161_Exam2_new.docx_files/unnamed_002_fr4U.gif }
+literals:
+  - name: m
+    value: 11.5
+    unit: g
+    text: "11.5"
+    suggest: { min: 8, max: 15, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 6.6
+    unit: kg
+    text: "6.6"
+    suggest: { min: 4.6, max: 8.6, step: 0.1, decimals: 1 }
+  - name: v
+    value: 510
+    unit: m/s
+    text: "510"
+    suggest: { min: 357, max: 663, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p073
+  source: { document: PHYS161_Exam2, labels: [ P73 ] }
+  section: Conservation of linear momentum
+  figure: { id: fig, src: figures/unnamed_002_fr4U.gif, alt: "TODO: describe the figure" }
+  narrative: >-
+    A ballistic pendulum is initially at rest. A bullet of mass {m:unit} strikes a block of mass
+    {m2:unit} horizontally at {v:unit} and remains stuck in it, putting the block in motion. The
+    gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: To what height does the block swing? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 11.5, m2: 6.6, v: 510, g: 9.8 }
+    parts:
+      - { id: answer, answer: 0.0401495, unit: m, source: P73 }

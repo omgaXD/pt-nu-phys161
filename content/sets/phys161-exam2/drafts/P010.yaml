@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P10
+number: 10
+section: Work
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A farmer pulls a sled with firewood by a tractor a distance of 19.5 m along level ground. The
+  tractor exerts a constant 4350 N force at an angle of 29.5° above the horizontal. There is a 3750
+  N friction force opposing the sled's motion. Find the work done by the friction force on the sled.
+  (-73125 J)
+text: A farmer pulls a sled with firewood by a tractor a distance of 19.5 m along level ground. The
+  tractor exerts a constant 4350 N force at an angle of 29.5° above the horizontal. There is a 3750
+  N friction force opposing the sled's motion. Find the work done by the friction force on the sled.
+  (-73125 J)
+answer: { value: -73125, unit: J, raw: -73125 J }
+figures:
+  - { src: figures/unnamed_019_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_019_fr4U.png }
+literals:
+  - name: d
+    value: 19.5
+    unit: m
+    text: "19.5"
+    suggest: { min: 13.6, max: 25.4, step: 0.1, decimals: 1 }
+  - name: F
+    value: 4350
+    unit: N
+    text: "4350"
+    suggest: { min: 3045, max: 5655, step: 1 }
+  - name: theta
+    value: 29.5
+    unit: °
+    text: "29.5"
+    suggest: { min: 20.6, max: 38.4, step: 0.1, decimals: 1 }
+  - name: F2
+    value: 3750
+    unit: N
+    text: "3750"
+    suggest: { min: 2625, max: 4875, step: 1 }
+scenario:
+  id: phys161-exam2-p010
+  source: { document: PHYS161_Exam2, labels: [ P10 ] }
+  section: Work
+  figure: { id: fig, src: figures/unnamed_019_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A farmer pulls a sled with firewood by a tractor a distance of {d:unit} along level ground. The
+    tractor exerts a constant {F:unit} force at an angle of {theta}° above the horizontal. There is
+    a {F2:unit} friction force opposing the sled's motion. {@fig}
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the work done by the friction force on the sled. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 19.5, F: 4350, theta: 29.5, F2: 3750 }
+    parts:
+      - { id: answer, answer: -73125, unit: J, source: P10 }

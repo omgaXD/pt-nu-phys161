@@ -1,0 +1,62 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P95
+number: 95
+section: Moment of Inertia
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Assume a simple non-uniform model of Earth's density with an inner spherical region of density
+  6200 kg/m^3 and the outer (spherical shell) region of density 4300 kg/m^3. Taking the radius of
+  the Earth as 6110000 m and moment of inertia as 8.5E+37 kg*m^2, calculate the radius of the inner
+  region. (5945403.82 m)
+text: Assume a simple non-uniform model of Earth's density with an inner spherical region of density
+  6200 kg/m^3 and the outer (spherical shell) region of density 4300 kg/m^3. Taking the radius of
+  the Earth as 6110000 m and moment of inertia as 8.5E+37 kg*m^2, calculate the radius of the inner
+  region. (5945403.82 m)
+answer: { value: 5945403.82, unit: m, raw: 5945403.82 m }
+figures: []
+literals:
+  - name: rho
+    value: 6200
+    unit: kg/m^3
+    text: "6200"
+    suggest: { min: 4340, max: 8060, step: 1 }
+  - name: rho2
+    value: 4300
+    unit: kg/m^3
+    text: "4300"
+    suggest: { min: 3010, max: 5590, step: 1 }
+  - name: r
+    value: 6110000
+    unit: m
+    text: "6110000"
+    suggest: { min: 4277000, max: 7943000, step: 1 }
+  - name: I
+    value: 8.5e+37
+    unit: kg m^2
+    text: "8.5E+37"
+    suggest: { min: 5.9e+37, max: 1.11e+38, step: 1e+36 }
+scenario:
+  id: phys161-exam2-p095
+  source: { document: PHYS161_Exam2, labels: [ P95 ] }
+  section: Moment of Inertia
+  narrative: >-
+    Assume a simple non-uniform model of Earth's density with an inner spherical region of density
+    {rho:unit} and the outer (spherical shell) region of density {rho2:unit}.
+  vars:
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: rho2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: I, kind: range, min: TODO, max: TODO, step: TODO, unit: kg m^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Taking the radius of the Earth as {r:unit} and moment of inertia as {I:unit}, calculate the
+        radius of the inner region. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { rho: 6200, rho2: 4300, r: 6110000, I: 8.5e+37 }
+    parts:
+      - { id: answer, answer: 5945403.82, unit: m, source: P95 }

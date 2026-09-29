@@ -1,0 +1,83 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P69
+number: 69
+section: Impulse and collisions
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Just before it is struck by a racket, a tennis ball weighing 0.65 N has a velocity of 19 m/s iˆ
+  - 4 m/s jˆ . During the 4 ms that the racket and ball are in contact, the net force on the ball is
+  constant and equal to - 392 N iˆ + 108 N jˆ. What is the magnitude of the final velocity of the
+  ball? The gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (5.278 m/s)
+text: Just before it is struck by a racket, a tennis ball weighing 0.65 N has a velocity of 19 m/s î
+  - 4 m/s ĵ . During the 4 ms that the racket and ball are in contact, the net force on the ball is
+  constant and equal to - 392 N î + 108 N ĵ. What is the magnitude of the final velocity of the
+  ball? The gravitational acceleration is g = 9.8 m/s^2. (5.278 m/s)
+answer: { value: 5.278, unit: m/s, raw: 5.278 m/s }
+figures: []
+literals:
+  - name: F
+    value: 0.65
+    unit: N
+    text: "0.65"
+    suggest: { min: 0.45, max: 0.85, step: 0.01, decimals: 2 }
+  - name: vx
+    value: 19
+    unit: m/s
+    text: "19"
+    suggest: { min: 13, max: 25, step: 1 }
+  - name: vy
+    value: 4
+    unit: m/s
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: t
+    value: 4
+    unit: ms
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: Fx
+    value: 392
+    unit: N
+    text: "392"
+    suggest: { min: 274, max: 510, step: 1 }
+  - name: Fy
+    value: 108
+    unit: N
+    text: "108"
+    suggest: { min: 76, max: 140, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p069
+  source: { document: PHYS161_Exam2, labels: [ P69 ] }
+  section: Impulse and collisions
+  narrative: >-
+    Just before it is struck by a racket, a tennis ball weighing {F:unit} has a velocity of
+    {vx:unit} î - {vy:unit} ĵ . During the {t:unit} that the racket and ball are in contact, the net
+    force on the ball is constant and equal to - {Fx:unit} î + {Fy:unit} ĵ. The gravitational
+    acceleration is g = {g:unit}.
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: vx, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: ms }
+    - { name: Fx, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: Fy, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the final velocity of the ball? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 0.65, vx: 19, vy: 4, t: 4, Fx: 392, Fy: 108, g: 9.8 }
+    parts:
+      - { id: answer, answer: 5.278, unit: m/s, source: P69 }

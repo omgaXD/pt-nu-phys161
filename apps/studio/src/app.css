@@ -1,0 +1,59 @@
+:root {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--pt-fg);
+  background: var(--pt-bg);
+}
+body {
+  margin: 0;
+  background: var(--pt-bg);
+  color: var(--pt-fg);
+}
+a {
+  color: var(--pt-accent);
+}
+button {
+  font: inherit;
+}
+.studio-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--pt-border);
+  background: var(--pt-surface);
+}
+.studio-header .brand {
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+.studio-header .note {
+  margin-left: auto;
+  font-size: 0.8em;
+  color: var(--pt-muted);
+}
+main {
+  padding: 1rem;
+}
+.pill {
+  display: inline-block;
+  padding: 0.05em 0.5em;
+  border-radius: 999px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.pill.pass {
+  background: var(--pt-good-bg);
+  color: var(--pt-good);
+}
+.pill.fail {
+  background: var(--pt-bad-bg);
+  color: var(--pt-bad);
+}
+.pill.draft {
+  background: var(--pt-warn-bg);
+  color: var(--pt-warn);
+}
+.muted {
+  color: var(--pt-muted);
+}

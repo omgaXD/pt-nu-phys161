@@ -1,0 +1,60 @@
+# C13 — one function, four different asks (P115–P118). θ(t) = γt² − βt³;
+# every answer is derived analytically. Each part is verified against its own
+# source problem's γ and β.
+id: c13-printing-roller
+title: Printing-press roller θ(t) = γt² − βt³
+source: { document: PHYS161_Exam2, labels: [ P115, P116, P117, P118 ] }
+section: Rotation
+tags: [ rotation, kinematics, calculus, multi-part ]
+narrative: >-
+  A roller in a printing press turns through an angle $\theta(t)$ given by $\theta(t) = \gamma t^2 -
+  \beta t^3$, where $\gamma = {gamma:unit}$ and $\beta = {beta:unit}$.
+vars:
+  - { name: gamma, kind: range, min: 2.5, max: 3.5, step: 0.1, decimals: 1, unit: rad/s^2 }
+  - { name: beta, kind: range, min: 0.40, max: 0.55, step: 0.01, decimals: 2, unit: rad/s^3 }
+  - { name: t1, kind: range, min: 2, max: 5, step: 1, unit: s }
+  - { name: T, kind: range, min: 2, max: 5, step: 1, unit: s }
+  - { name: t2, kind: range, min: 5, max: 10, step: 1, unit: s }
+constraints:
+  # A zero model answer would demand an exact 0 under relative tolerance.
+  - "abs(2 * gamma * t1 - 3 * beta * t1^2) > 0.5"
+  - "abs(gamma * T - beta * T^2) > 0.5"
+parts:
+  - id: omega-at-t
+    prompt: "Calculate the angular velocity of the roller at $t = {t1}$ s. {_0}{_u}"
+    answer: 2 * gamma * t1 - 3 * beta * t1^2
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: omega-average
+    prompt: >-
+      Calculate the average angular velocity of the roller between $t = 0$ and $t = {T}$ s. {_0}{_u}
+    answer: gamma * T - beta * T^2
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: alpha-at-t
+    prompt: "Calculate the angular acceleration of the roller at $t = {t2}$ s. {_0}{_u}"
+    answer: 2 * gamma - 6 * beta * t2
+    unit: rad/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: t-max-omega
+    prompt: "At what value of $t$ does the maximum positive angular velocity occur? {_0}{_u}"
+    answer: gamma / (3 * beta)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { gamma: 3.2, beta: 0.43, t1: 4, T: 3, t2: 8 }
+  parts:
+    - { id: omega-at-t, answer: 4.96, unit: rad/s, source: P115 }
+    - { id: omega-average, answer: 5.01, unit: rad/s, source: P116, vars: { gamma: 2.9, beta: 0.41 } }
+    - {
+        id: alpha-at-t,
+        answer: -20.32,
+        unit: rad/s^2,
+        source: P117,
+        vars: { gamma: 2.8, beta: 0.54 }
+      }
+    - { id: t-max-omega, answer: 2.536, unit: s, source: P118, vars: { gamma: 3.5, beta: 0.46 } }

@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P113
+number: 113
+section: Rotation
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A safety device brings the blade of a power mower from an initial angular speed w<sub>1</sub>
+  to rest in 1 revolution. At the same constant acceleration, what angle of rotation would it take
+  the blade to come to rest from an initial angular speed w<sub>2</sub> that is 4 times as great,
+  w<sub>2</sub> = 4w<sub>1</sub>? Provide the answer in units of radian (rad). (100.53 rad)
+text: A safety device brings the blade of a power mower from an initial angular speed w_1 to rest in
+  1 revolution. At the same constant acceleration, what angle of rotation would it take the blade to
+  come to rest from an initial angular speed w_2 that is 4 times as great, w_2 = 4w_1? Provide the
+  answer in units of radian (rad). (100.53 rad)
+answer: { value: 100.53, unit: rad, raw: 100.53 rad }
+figures: []
+literals:
+  - name: x
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: ratio
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: w2
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+scenario:
+  id: phys161-exam2-p113
+  source: { document: PHYS161_Exam2, labels: [ P113 ] }
+  section: Rotation
+  narrative: >-
+    A safety device brings the blade of a power mower from an initial angular speed $w_{1}$ to rest
+    in {x} revolution.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: ratio, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: w2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        At the same constant acceleration, what angle of rotation would it take the blade to come to
+        rest from an initial angular speed $w_{2}$ that is {ratio} times as great, $w_{2}$ =
+        {w2}$w_{1}$? Provide the answer in units of radian (rad). {_0}{_u}
+      answer: TODO
+      unit: rad
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 1, ratio: 4, w2: 4 }
+    parts:
+      - { id: answer, answer: 100.53, unit: rad, source: P113 }

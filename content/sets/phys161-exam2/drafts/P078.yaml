@@ -1,0 +1,67 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P78
+number: 78
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: On a frictionless horizontal surface two blocks of masses 2.1 kg and 2.9 kg are connected by a
+  spring of stiffness k=820 N/m and negligible mass. Initially, the blocks are pushed together to
+  compress the spring by distance d=19 cm from its equilibrium length and the configuration is fixed
+  by a cord that holds the blocks. When the cord is cut, the blocks move in opposite directions.
+  Calculate the speed of the first block. (2.859 m/s)
+text: On a frictionless horizontal surface two blocks of masses 2.1 kg and 2.9 kg are connected by a
+  spring of stiffness k=820 N/m and negligible mass. Initially, the blocks are pushed together to
+  compress the spring by distance d=19 cm from its equilibrium length and the configuration is fixed
+  by a cord that holds the blocks. When the cord is cut, the blocks move in opposite directions.
+  Calculate the speed of the first block. (2.859 m/s)
+answer: { value: 2.859, unit: m/s, raw: 2.859 m/s }
+figures:
+  - { src: figures/unnamed_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_fr4U.png }
+literals:
+  - name: m
+    value: 2.1
+    unit: kg
+    text: "2.1"
+    suggest: { min: 1.5, max: 2.7, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 2.9
+    unit: kg
+    text: "2.9"
+    suggest: { min: 2, max: 3.8, step: 0.1, decimals: 1 }
+  - name: k
+    value: 820
+    unit: N/m
+    text: "820"
+    suggest: { min: 574, max: 1066, step: 1 }
+  - name: d
+    value: 19
+    unit: cm
+    text: "19"
+    suggest: { min: 13, max: 25, step: 1 }
+scenario:
+  id: phys161-exam2-p078
+  source: { document: PHYS161_Exam2, labels: [ P78 ] }
+  section: Conservation of linear momentum
+  figure: { id: fig, src: figures/unnamed_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    On a frictionless horizontal surface two blocks of masses {m:unit} and {m2:unit} are connected
+    by a spring of stiffness k={k:unit} and negligible mass. Initially, the blocks are pushed
+    together to compress the spring by distance d={d:unit} from its equilibrium length and the
+    configuration is fixed by a cord that holds the blocks. When the cord is cut, the blocks move in
+    opposite directions. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: Calculate the speed of the first block. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 2.1, m2: 2.9, k: 820, d: 19 }
+    parts:
+      - { id: answer, answer: 2.859, unit: m/s, source: P78 }

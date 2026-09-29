@@ -1,0 +1,79 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P138
+number: 138
+section: Angular momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A 5-kg ball is dropped from a height of 8 m above one end of a uniform bar that pivots about
+  its center. The bar has a mass of 5.5 kg and is 4.2 m long. At the other end of the bar sits
+  another ball of mass 4.6 kg. The dropped ball sticks to the bar after the collision. Find the
+  angular velocity of the bar immediately after the collision. The gravitational acceleration is g =
+  9.8 m/s². (2.60766 rad/s)
+text: A 5-kg ball is dropped from a height of 8 m above one end of a uniform bar that pivots about
+  its center. The bar has a mass of 5.5 kg and is 4.2 m long. At the other end of the bar sits
+  another ball of mass 4.6 kg. The dropped ball sticks to the bar after the collision. Find the
+  angular velocity of the bar immediately after the collision. The gravitational acceleration is g =
+  9.8 m/s^2. (2.60766 rad/s)
+answer: { value: 2.60766, unit: rad/s, raw: 2.60766 rad/s }
+figures: []
+literals:
+  - name: m
+    value: 5
+    unit: kg
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: h
+    value: 8
+    unit: m
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: m2
+    value: 5.5
+    unit: kg
+    text: "5.5"
+    suggest: { min: 3.8, max: 7.2, step: 0.1, decimals: 1 }
+  - name: d
+    value: 4.2
+    unit: m
+    text: "4.2"
+    suggest: { min: 2.9, max: 5.5, step: 0.1, decimals: 1 }
+  - name: m3
+    value: 4.6
+    unit: kg
+    text: "4.6"
+    suggest: { min: 3.2, max: 6, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p138
+  source: { document: PHYS161_Exam2, labels: [ P138 ] }
+  section: Angular momentum
+  narrative: >-
+    A {m}-kg ball is dropped from a height of {h:unit} above one end of a uniform bar that pivots
+    about its center. The bar has a mass of {m2:unit} and is {d:unit} long. At the other end of the
+    bar sits another ball of mass {m3:unit}. The dropped ball sticks to the bar after the collision.
+    The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m3, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the angular velocity of the bar immediately after the collision. {_0}{_u}
+      answer: TODO
+      unit: rad/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 5, h: 8, m2: 5.5, d: 4.2, m3: 4.6, g: 9.8 }
+    parts:
+      - { id: answer, answer: 2.60766, unit: rad/s, source: P138 }

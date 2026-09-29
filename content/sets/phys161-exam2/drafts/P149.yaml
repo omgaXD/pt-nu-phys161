@@ -1,0 +1,49 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P149
+number: 149
+section: Angular momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A stiff uniform wire of mass 5.4 kg and length 1.75 m is cut, bent, and the parts soldered
+  together so that it forms a circular wheel having four identical spokes coming out from the center
+  to the rim. None of the wire is wasted, and you can neglect the mass of the solder. What is the
+  radius of this wheel? (0.170181 m)
+text: A stiff uniform wire of mass 5.4 kg and length 1.75 m is cut, bent, and the parts soldered
+  together so that it forms a circular wheel having four identical spokes coming out from the center
+  to the rim. None of the wire is wasted, and you can neglect the mass of the solder. What is the
+  radius of this wheel? (0.170181 m)
+answer: { value: 0.170181, unit: m, raw: 0.170181 m }
+figures: []
+literals:
+  - name: m
+    value: 5.4
+    unit: kg
+    text: "5.4"
+    suggest: { min: 3.8, max: 7, step: 0.1, decimals: 1 }
+  - name: L
+    value: 1.75
+    unit: m
+    text: "1.75"
+    suggest: { min: 1.22, max: 2.28, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam2-p149
+  source: { document: PHYS161_Exam2, labels: [ P149 ] }
+  section: Angular momentum
+  narrative: >-
+    A stiff uniform wire of mass {m:unit} and length {L:unit} is cut, bent, and the parts soldered
+    together so that it forms a circular wheel having four identical spokes coming out from the
+    center to the rim. None of the wire is wasted, and you can neglect the mass of the solder.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: What is the radius of this wheel? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 5.4, L: 1.75 }
+    parts:
+      - { id: answer, answer: 0.170181, unit: m, source: P149 }

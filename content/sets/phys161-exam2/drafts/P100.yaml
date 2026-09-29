@@ -1,0 +1,47 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P100
+number: 100
+section: Moment of Inertia
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: While redesigning a rocket engine, in order to reduce weight, a solid spherical part is
+  replaced with a hollow spherical shell of the same size. The parts rotate about an axis through
+  their center. You need to make sure that the new part always has the same rotational kinetic
+  energy as the original part had at any given rate of rotation. If the original part had a mass of
+  180 kg, what must be the mass of the new part? (108 kg)
+text: While redesigning a rocket engine, in order to reduce weight, a solid spherical part is
+  replaced with a hollow spherical shell of the same size. The parts rotate about an axis through
+  their center. You need to make sure that the new part always has the same rotational kinetic
+  energy as the original part had at any given rate of rotation. If the original part had a mass of
+  180 kg, what must be the mass of the new part? (108 kg)
+answer: { value: 108, unit: kg, raw: 108 kg }
+figures: []
+literals:
+  - name: m
+    value: 180
+    unit: kg
+    text: "180"
+    suggest: { min: 126, max: 234, step: 1 }
+scenario:
+  id: phys161-exam2-p100
+  source: { document: PHYS161_Exam2, labels: [ P100 ] }
+  section: Moment of Inertia
+  narrative: >-
+    While redesigning a rocket engine, in order to reduce weight, a solid spherical part is replaced
+    with a hollow spherical shell of the same size. The parts rotate about an axis through their
+    center. You need to make sure that the new part always has the same rotational kinetic energy as
+    the original part had at any given rate of rotation.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  parts:
+    - id: answer
+      prompt: >-
+        If the original part had a mass of {m:unit}, what must be the mass of the new part? {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 180 }
+    parts:
+      - { id: answer, answer: 108, unit: kg, source: P100 }

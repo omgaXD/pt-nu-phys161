@@ -1,0 +1,65 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P126
+number: 126
+section: Torque
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: An experimental bicycle wheel is placed on a test stand so that it is free to turn on its axle.
+  If a constant net torque of 4.7 N⋅m is applied to the tire for 2.55 s, the angular speed of the
+  tire increases from 0 to 120 rev/min. The external torque is then removed, and the wheel is
+  brought to rest by friction in its bearings in 121 s. Compute the magnitude of the friction
+  torque. Ignore the contribution of friction to accelerating motion of the wheel. (0.09905 N m)
+text: An experimental bicycle wheel is placed on a test stand so that it is free to turn on its
+  axle. If a constant net torque of 4.7 N⋅m is applied to the tire for 2.55 s, the angular speed of
+  the tire increases from 0 to 120 rev/min. The external torque is then removed, and the wheel is
+  brought to rest by friction in its bearings in 121 s. Compute the magnitude of the friction
+  torque. Ignore the contribution of friction to accelerating motion of the wheel. (0.09905 N m)
+answer: { value: 0.09905, unit: N m, raw: 0.09905 N m }
+figures: []
+literals:
+  - name: tau
+    value: 4.7
+    unit: N m
+    text: "4.7"
+    suggest: { min: 3.3, max: 6.1, step: 0.1, decimals: 1 }
+  - name: t
+    value: 2.55
+    unit: s
+    text: "2.55"
+    suggest: { min: 1.78, max: 3.32, step: 0.01, decimals: 2 }
+  - name: n
+    value: 120
+    unit: rpm
+    text: "120"
+    suggest: { min: 84, max: 156, step: 1 }
+  - name: t2
+    value: 121
+    unit: s
+    text: "121"
+    suggest: { min: 85, max: 157, step: 1 }
+scenario:
+  id: phys161-exam2-p126
+  source: { document: PHYS161_Exam2, labels: [ P126 ] }
+  section: Torque
+  narrative: >-
+    An experimental bicycle wheel is placed on a test stand so that it is free to turn on its axle.
+    If a constant net torque of {tau:unit} is applied to the tire for {t:unit}, the angular speed of
+    the tire increases from 0 to {n:unit}. The external torque is then removed, and the wheel is
+    brought to rest by friction in its bearings in {t2:unit}. Ignore the contribution of friction to
+    accelerating motion of the wheel.
+  vars:
+    - { name: tau, kind: range, min: TODO, max: TODO, step: TODO, unit: N m }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: rpm }
+    - { name: t2, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: Compute the magnitude of the friction torque. {_0}{_u}
+      answer: TODO
+      unit: N m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { tau: 4.7, t: 2.55, n: 120, t2: 121 }
+    parts:
+      - { id: answer, answer: 0.09905, unit: N m, source: P126 }

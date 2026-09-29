@@ -1,0 +1,69 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P72
+number: 72
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Figure shows a ballistic pendulum. Initially, the pendulum is at rest. The bullet strikes the
+  block horizontally and remains stuck in it. The impact of the bullet puts the block in motion,
+  causing it to swing upward to a height h. If the bullet has a mass of 15 g, and the block of mass
+  7.3 kg swings up to a height of 6.6 cm, what was the speed of the bullet before impact? The
+  gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (554.655 m/s)
+text: Figure shows a ballistic pendulum. Initially, the pendulum is at rest. The bullet strikes the
+  block horizontally and remains stuck in it. The impact of the bullet puts the block in motion,
+  causing it to swing upward to a height h. If the bullet has a mass of 15 g, and the block of mass
+  7.3 kg swings up to a height of 6.6 cm, what was the speed of the bullet before impact? The
+  gravitational acceleration is g = 9.8 m/s^2. (554.655 m/s)
+answer: { value: 554.655, unit: m/s, raw: 554.655 m/s }
+figures:
+  - { src: figures/unnamed_021_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_021_fr4U.png }
+literals:
+  - name: m
+    value: 15
+    unit: g
+    text: "15"
+    suggest: { min: 11, max: 20, step: 1 }
+  - name: m2
+    value: 7.3
+    unit: kg
+    text: "7.3"
+    suggest: { min: 5.1, max: 9.5, step: 0.1, decimals: 1 }
+  - name: h
+    value: 6.6
+    unit: cm
+    text: "6.6"
+    suggest: { min: 4.6, max: 8.6, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p072
+  source: { document: PHYS161_Exam2, labels: [ P72 ] }
+  section: Conservation of linear momentum
+  figure: { id: fig, src: figures/unnamed_021_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Figure shows a ballistic pendulum. Initially, the pendulum is at rest. The bullet strikes the
+    block horizontally and remains stuck in it. The impact of the bullet puts the block in motion,
+    causing it to swing upward to a height h. The gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        If the bullet has a mass of {m:unit}, and the block of mass {m2:unit} swings up to a height
+        of {h:unit}, what was the speed of the bullet before impact? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 15, m2: 7.3, h: 6.6, g: 9.8 }
+    parts:
+      - { id: answer, answer: 554.655, unit: m/s, source: P72 }

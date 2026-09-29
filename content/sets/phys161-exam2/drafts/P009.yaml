@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P9
+number: 9
+section: Work
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A farmer pulls a sled with firewood by a tractor a distance of 20 m along level ground. The
+  tractor exerts a constant 4700 N force at an angle of 34.2˚ above the horizontal as shown in
+  Figure below. There is a 3400 N friction force opposing the sled's motion. Find the total work
+  done by all the forces on the sled. (9745.5739818088 J)
+text: A farmer pulls a sled with firewood by a tractor a distance of 20 m along level ground. The
+  tractor exerts a constant 4700 N force at an angle of 34.2° above the horizontal as shown in
+  Figure below. There is a 3400 N friction force opposing the sled's motion. Find the total work
+  done by all the forces on the sled. (9745.5739818088 J)
+answer: { value: 9745.5739818088, unit: J, raw: 9745.5739818088 J }
+figures:
+  - { src: figures/unnamed_006_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_006_fr4U.png }
+literals:
+  - name: d
+    value: 20
+    unit: m
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: F
+    value: 4700
+    unit: N
+    text: "4700"
+    suggest: { min: 3290, max: 6110, step: 1 }
+  - name: theta
+    value: 34.2
+    unit: °
+    text: "34.2"
+    suggest: { min: 23.9, max: 44.5, step: 0.1, decimals: 1 }
+  - name: F2
+    value: 3400
+    unit: N
+    text: "3400"
+    suggest: { min: 2380, max: 4420, step: 1 }
+scenario:
+  id: phys161-exam2-p009
+  source: { document: PHYS161_Exam2, labels: [ P9 ] }
+  section: Work
+  figure: { id: fig, src: figures/unnamed_006_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A farmer pulls a sled with firewood by a tractor a distance of {d:unit} along level ground. The
+    tractor exerts a constant {F:unit} force at an angle of {theta}° above the horizontal as shown
+    in Figure below. There is a {F2:unit} friction force opposing the sled's motion. {@fig}
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the total work done by all the forces on the sled. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 20, F: 4700, theta: 34.2, F2: 3400 }
+    parts:
+      - { id: answer, answer: 9745.5739818088, unit: J, source: P9 }

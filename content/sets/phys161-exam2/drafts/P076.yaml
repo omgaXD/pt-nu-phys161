@@ -1,0 +1,55 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P76
+number: 76
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Two masses M<sub>1</sub> = 8 kg and M<sub>2</sub> = 4 kg collide elastically. The initial
+  velocity of the first mass M<sub>1</sub> is 5 m/s, whereas the second mass M<sub>2</sub> is
+  starting its motion only after the collision. Find the speed of the second mass after the
+  collision. (6.667 m/s)
+text: Two masses M_1 = 8 kg and M_2 = 4 kg collide elastically. The initial velocity of the first
+  mass M_1 is 5 m/s, whereas the second mass M_2 is starting its motion only after the collision.
+  Find the speed of the second mass after the collision. (6.667 m/s)
+answer: { value: 6.667, unit: m/s, raw: 6.667 m/s }
+figures: []
+literals:
+  - name: M1
+    value: 8
+    unit: kg
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: M2
+    value: 4
+    unit: kg
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: v
+    value: 5
+    unit: m/s
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+scenario:
+  id: phys161-exam2-p076
+  source: { document: PHYS161_Exam2, labels: [ P76 ] }
+  section: Conservation of linear momentum
+  narrative: >-
+    Two masses $M_{1}$ = {M1:unit} and $M_{2}$ = {M2:unit} collide elastically. The initial velocity
+    of the first mass $M_{1}$ is {v:unit}, whereas the second mass $M_{2}$ is starting its motion
+    only after the collision.
+  vars:
+    - { name: M1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: M2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the speed of the second mass after the collision. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { M1: 8, M2: 4, v: 5 }
+    parts:
+      - { id: answer, answer: 6.667, unit: m/s, source: P76 }

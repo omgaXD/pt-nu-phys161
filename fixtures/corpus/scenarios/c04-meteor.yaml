@@ -1,0 +1,24 @@
+# C4 — scientific notation and prefixed units (P18). The student must be able
+# to type 1.152e16; huge values display as a × 10^n.
+id: c04-meteor
+title: Kinetic energy of a meteor
+source: { document: PHYS161_Exam2, labels: [ P18 ] }
+section: Kinetic energy
+tags: [ kinetic-energy, scientific-notation ]
+narrative: >-
+  A meteor crashed into the earth. Measurements estimate that this meteor had a mass of {m:unit} and
+  hit the ground at {v:unit}.
+vars:
+  - { name: m, kind: range, min: 1e+8, max: 9.9e+8, step: 1e+7, sigfigs: 2, unit: kg }
+  - { name: v, kind: range, min: 10, max: 30, step: 1, unit: km/s }
+parts:
+  - id: kinetic-energy
+    prompt: "How much kinetic energy did this meteor deliver to the ground? {_0}{_u}"
+    answer: 0.5 * m * (v * 1000)^2
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 1.6e+8, v: 12 }
+  parts:
+    - { id: kinetic-energy, answer: 1.152e+16, unit: J, source: P18 }

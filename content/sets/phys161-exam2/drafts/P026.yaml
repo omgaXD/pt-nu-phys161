@@ -1,0 +1,70 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P26
+number: 26
+section: Power
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Electric engine pulls an 1800-kg block of concrete with a constant speed of 2.86 m/s up an
+  incline with an angle of inclination θ=21°. The coefficient of kinetic friction between the block
+  and the incline is 0.69. How much power must be supplied by the engine? The gravitational
+  acceleration is g = 9.8 m/s<sup>2</sup>. (50578.47 W)
+text: Electric engine pulls an 1800-kg block of concrete with a constant speed of 2.86 m/s up an
+  incline with an angle of inclination θ=21°. The coefficient of kinetic friction between the block
+  and the incline is 0.69. How much power must be supplied by the engine? The gravitational
+  acceleration is g = 9.8 m/s^2. (50578.47 W)
+answer: { value: 50578.47, unit: W, raw: 50578.47 W }
+figures:
+  - { src: figures/unnamed_029_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_029_fr4U.png }
+literals:
+  - name: m
+    value: 1800
+    unit: kg
+    text: "1800"
+    suggest: { min: 1260, max: 2340, step: 1 }
+  - name: v
+    value: 2.86
+    unit: m/s
+    text: "2.86"
+    suggest: { min: 2, max: 3.72, step: 0.01, decimals: 2 }
+  - name: theta
+    value: 21
+    unit: °
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: x
+    value: 0.69
+    text: "0.69"
+    suggest: { min: 0.48, max: 0.9, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p026
+  source: { document: PHYS161_Exam2, labels: [ P26 ] }
+  section: Power
+  figure: { id: fig, src: figures/unnamed_029_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Electric engine pulls an {m}-kg block of concrete with a constant speed of {v:unit} up an
+    incline with an angle of inclination θ={theta}°. The coefficient of kinetic friction between the
+    block and the incline is {x}. The gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: How much power must be supplied by the engine? {_0}{_u}
+      answer: TODO
+      unit: W
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1800, v: 2.86, theta: 21, x: 0.69, g: 9.8 }
+    parts:
+      - { id: answer, answer: 50578.47, unit: W, source: P26 }

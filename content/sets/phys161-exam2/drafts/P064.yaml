@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P64
+number: 64
+section: Impulse and collisions
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: When a gangster sprays Superman with 1.7 g bullets at a rate of 146 bullets/min, the bullets
+  embed themselves in Superman's chest, arriving at a speed of 445 m/s. Find the magnitude of the
+  average force exerted by the stream of bullets on Superman's chest. (1.84082 N)
+text: When a gangster sprays Superman with 1.7 g bullets at a rate of 146 bullets/min, the bullets
+  embed themselves in Superman's chest, arriving at a speed of 445 m/s. Find the magnitude of the
+  average force exerted by the stream of bullets on Superman's chest. (1.84082 N)
+answer: { value: 1.84082, unit: N, raw: 1.84082 N }
+figures: []
+literals:
+  - name: m
+    value: 1.7
+    unit: g
+    text: "1.7"
+    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
+  - name: x
+    value: 146
+    unit: bullets/min
+    text: "146"
+    suggest: { min: 102, max: 190, step: 1 }
+  - name: v
+    value: 445
+    unit: m/s
+    text: "445"
+    suggest: { min: 312, max: 579, step: 1 }
+scenario:
+  id: phys161-exam2-p064
+  source: { document: PHYS161_Exam2, labels: [ P64 ] }
+  section: Impulse and collisions
+  narrative: >-
+    When a gangster sprays Superman with {m:unit} bullets at a rate of {x:unit}, the bullets embed
+    themselves in Superman's chest, arriving at a speed of {v:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: bullets/min }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of the average force exerted by the stream of bullets on Superman's
+        chest. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1.7, x: 146, v: 445 }
+    parts:
+      - { id: answer, answer: 1.84082, unit: N, source: P64 }

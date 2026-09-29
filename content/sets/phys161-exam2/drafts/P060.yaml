@@ -1,0 +1,71 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P60
+number: 60
+section: Impulse and collisions
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A bungee jumper leaps off a bridge whose deck is 50 m above the water. Jumper mass is 72.6 kg,
+  the bungee cord is 22.5 m long, and the jumper falls to 7 m above the water before the bungee cord
+  pulls him back up. What is the magnitude of the impulse exerted on the bungee jumper while the
+  cord stretches? The gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (1524.6 kg m/s)
+text: A bungee jumper leaps off a bridge whose deck is 50 m above the water. Jumper mass is 72.6 kg,
+  the bungee cord is 22.5 m long, and the jumper falls to 7 m above the water before the bungee cord
+  pulls him back up. What is the magnitude of the impulse exerted on the bungee jumper while the
+  cord stretches? The gravitational acceleration is g = 9.8 m/s^2. (1524.6 kg m/s)
+answer: { value: 1524.6, unit: kg m/s, raw: 1524.6 kg m/s }
+figures: []
+literals:
+  - name: d
+    value: 50
+    unit: m
+    text: "50"
+    suggest: { min: 35, max: 65, step: 1 }
+  - name: m
+    value: 72.6
+    unit: kg
+    text: "72.6"
+    suggest: { min: 50.8, max: 94.4, step: 0.1, decimals: 1 }
+  - name: d2
+    value: 22.5
+    unit: m
+    text: "22.5"
+    suggest: { min: 15.7, max: 29.3, step: 0.1, decimals: 1 }
+  - name: L
+    value: 7
+    unit: m
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p060
+  source: { document: PHYS161_Exam2, labels: [ P60 ] }
+  section: Impulse and collisions
+  narrative: >-
+    A bungee jumper leaps off a bridge whose deck is {d:unit} above the water. Jumper mass is
+    {m:unit}, the bungee cord is {d2:unit} long, and the jumper falls to {L:unit} above the water
+    before the bungee cord pulls him back up. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the impulse exerted on the bungee jumper while the cord stretches?
+        {_0}{_u}
+      answer: TODO
+      unit: kg m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 50, m: 72.6, d2: 22.5, L: 7, g: 9.8 }
+    parts:
+      - { id: answer, answer: 1524.6, unit: kg m/s, source: P60 }

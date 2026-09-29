@@ -1,0 +1,89 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P39
+number: 39
+section: Energy conservation
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: At a construction site, a 63-kg bucket of concrete hangs from a light strong cable that passes
+  over a light friction-free pulley and is connected to an 80-kg box on a horizontal roof. The cable
+  pulls horizontally on the box, and a 48-kg bag of gravel rests on top of the box. The coefficients
+  of friction between the box and roof are μ<sub>s</sub> = 0.68 and μ<sub>k</sub> = 0.45. Suddenly a
+  worker picks up the bag of gravel. Find the speed of the bucket after it has descended 2 m, from
+  rest. The gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (2.721 m/s)
+text: At a construction site, a 63-kg bucket of concrete hangs from a light strong cable that passes
+  over a light friction-free pulley and is connected to an 80-kg box on a horizontal roof. The cable
+  pulls horizontally on the box, and a 48-kg bag of gravel rests on top of the box. The coefficients
+  of friction between the box and roof are μ_s = 0.68 and μ_k = 0.45. Suddenly a worker picks up the
+  bag of gravel. Find the speed of the bucket after it has descended 2 m, from rest. The
+  gravitational acceleration is g = 9.8 m/s^2. (2.721 m/s)
+answer: { value: 2.721, unit: m/s, raw: 2.721 m/s }
+figures:
+  - { src: figures/unnamed_003_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_003_fr4U.png }
+literals:
+  - name: m
+    value: 63
+    unit: kg
+    text: "63"
+    suggest: { min: 44, max: 82, step: 1 }
+  - name: m2
+    value: 80
+    unit: kg
+    text: "80"
+    suggest: { min: 56, max: 104, step: 1 }
+  - name: m3
+    value: 48
+    unit: kg
+    text: "48"
+    suggest: { min: 34, max: 62, step: 1 }
+  - name: mu_s
+    value: 0.68
+    text: "0.68"
+    suggest: { min: 0.48, max: 0.88, step: 0.01, decimals: 2 }
+  - name: mu_k
+    value: 0.45
+    text: "0.45"
+    suggest: { min: 0.32, max: 0.59, step: 0.01, decimals: 2 }
+  - name: d
+    value: 2
+    unit: m
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p039
+  source: { document: PHYS161_Exam2, labels: [ P39 ] }
+  section: Energy conservation
+  figure: { id: fig, src: figures/unnamed_003_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    At a construction site, a {m}-kg bucket of concrete hangs from a light strong cable that passes
+    over a light friction-free pulley and is connected to an {m2}-kg box on a horizontal roof. The
+    cable pulls horizontally on the box, and a {m3}-kg bag of gravel rests on top of the box. The
+    coefficients of friction between the box and roof are $\mu_{s}$ = {mu_s} and $\mu_{k}$ = {mu_k}.
+    Suddenly a worker picks up the bag of gravel. The gravitational acceleration is g = {g:unit}.
+    {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m3, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: mu_s, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: mu_k, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the speed of the bucket after it has descended {d:unit}, from rest. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 63, m2: 80, m3: 48, mu_s: 0.68, mu_k: 0.45, d: 2, g: 9.8 }
+    parts:
+      - { id: answer, answer: 2.721, unit: m/s, source: P39 }

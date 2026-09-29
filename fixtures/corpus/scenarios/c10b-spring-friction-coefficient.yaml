@@ -1,0 +1,37 @@
+# Companion to C10 (P50): a dimensionless coefficient as the answer.
+id: c10b-spring-friction-coefficient
+title: Coefficient of kinetic friction from a spring launch
+source: { document: PHYS161_Exam2, labels: [ P50 ] }
+section: Energy conservation
+tags: [ energy-conservation, friction, spring, dimensionless ]
+figure:
+  id: spring-block
+  src: figures/placeholder.svg
+  alt: >-
+    A block pressed against a compressed horizontal spring on a tabletop (1), and the same block
+    sliding along the table after leaving the spring (2).
+narrative: >-
+  A block with mass {m:unit} is forced against a horizontal spring of negligible mass, compressing
+  the spring a distance of {x:unit}. When released, the block moves on a horizontal tabletop for
+  {d:unit} before coming to rest. The spring constant $k$ is {k:unit}. {@fig}
+vars:
+  - { name: m, kind: range, min: 0.5, max: 2.0, step: 0.1, decimals: 1, unit: kg }
+  - { name: x, kind: range, min: 0.1, max: 0.3, step: 0.01, decimals: 2, unit: m }
+  - { name: d, kind: range, min: 0.5, max: 3.0, step: 0.1, decimals: 1, unit: m }
+  - { name: k, kind: range, min: 100, max: 300, step: 5, unit: N/m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: muk, expr: "k * x^2 / (2 * m * g * d)" }
+constraints:
+  - "muk > 0.05 and muk < 0.9" # a physically plausible coefficient
+parts:
+  - id: mu-k
+    prompt: >-
+      What is the coefficient of kinetic friction $\mu_k$ between the block and the table? {_0}
+    answer: muk
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1, x: 0.22, d: 1.8, k: 160, g: 9.8 }
+  parts:
+    - { id: mu-k, answer: 0.2195, source: P50 }

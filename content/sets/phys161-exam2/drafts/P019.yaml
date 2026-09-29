@@ -1,0 +1,46 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P19
+number: 19
+section: Kinetic energy
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: The mass of a proton is 1836 times the mass of an electron. An electron has kinetic energy
+  3.55×10<sup>−16</sup> J. If a proton has the same speed as the electron, what is its kinetic
+  energy? (6.5178E-13 J)
+text: The mass of a proton is 1836 times the mass of an electron. An electron has kinetic energy
+  3.55×10^-16 J. If a proton has the same speed as the electron, what is its kinetic energy?
+  (6.5178E-13 J)
+answer: { value: 6.5178e-13, unit: J, raw: 6.5178E-13 J }
+figures: []
+literals:
+  - name: ratio
+    value: 1836
+    text: "1836"
+    suggest: { min: 1285, max: 2387, step: 1 }
+  - name: E
+    value: 3.55e-16
+    unit: J
+    text: 3.55×10^-16
+    suggest: { min: 2.5e-16, max: 4.6e-16, step: 1e-17 }
+scenario:
+  id: phys161-exam2-p019
+  source: { document: PHYS161_Exam2, labels: [ P19 ] }
+  section: Kinetic energy
+  narrative: >-
+    The mass of a proton is {ratio} times the mass of an electron. An electron has kinetic energy
+    {E:unit}.
+  vars:
+    - { name: ratio, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  parts:
+    - id: answer
+      prompt: >-
+        If a proton has the same speed as the electron, what is its kinetic energy? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { ratio: 1836, E: 3.55e-16 }
+    parts:
+      - { id: answer, answer: 6.5178e-13, unit: J, source: P19 }

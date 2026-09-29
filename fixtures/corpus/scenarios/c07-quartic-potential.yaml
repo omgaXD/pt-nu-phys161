@@ -1,0 +1,36 @@
+# C7 — symbolic function in the prompt (P30, companion P31). Math markup in the
+# narrative, a unit with a power in the denominator (J/m^4), and a negative
+# coordinate.
+id: c07-quartic-potential
+title: Force and work from U(x) = αx⁴
+source: { document: PHYS161_Exam2, labels: [ P30, P31 ] }
+section: Potential energy
+tags: [ potential-energy, force, calculus ]
+narrative: >-
+  A force parallel to the x-axis acts on a particle moving along the x-axis. This force produces
+  potential energy given by $U(x) = \alpha x^4$, where $\alpha = {alpha:unit}$.
+vars:
+  - { name: alpha, kind: range, min: 1.0, max: 4.0, step: 0.1, decimals: 1, unit: J/m^4 }
+  - { name: x, kind: range, min: -0.9, max: -0.1, step: 0.1, decimals: 1, unit: m }
+  - { name: x1, kind: range, min: 1.0, max: 2.0, step: 0.1, decimals: 1, unit: m }
+  - { name: x2, kind: range, min: 0.1, max: 0.9, step: 0.1, decimals: 1, unit: m }
+parts:
+  - id: force-magnitude
+    prompt: "What is the force magnitude when the particle is at $x = {x}$ m? {_0}{_u}"
+    answer: abs(-4 * alpha * x^3)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: work
+    prompt: >-
+      How much work does this force do on the particle as it moves from $x = {x1}$ m to $x = {x2}$
+      m? {_0}{_u}
+    answer: alpha * (x1^4 - x2^4)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { alpha: 2.7, x: -0.2, x1: 1.3, x2: 0.2 }
+  parts:
+    - { id: force-magnitude, answer: 0.0864, unit: N, source: P30 }
+    - { id: work, answer: 7.4217, unit: J, source: P31, vars: { alpha: 2.6 } }

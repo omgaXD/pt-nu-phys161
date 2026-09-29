@@ -1,0 +1,71 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P134
+number: 134
+section: Angular momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Student with mass 64.1 kg walks slowly from the rim toward the center of a horizontal circular
+  platform with mass 76.3 kg and radius r = 2.9 m, rotating about a frictionless vertical axle. The
+  angular velocity of the system is 5.2 rad/s when the student is at the rim. Find the angular
+  velocity of the system when the student is 1.24 m from the center. (10.662 rad/s)
+text: Student with mass 64.1 kg walks slowly from the rim toward the center of a horizontal circular
+  platform with mass 76.3 kg and radius r = 2.9 m, rotating about a frictionless vertical axle. The
+  angular velocity of the system is 5.2 rad/s when the student is at the rim. Find the angular
+  velocity of the system when the student is 1.24 m from the center. (10.662 rad/s)
+answer: { value: 10.662, unit: rad/s, raw: 10.662 rad/s }
+figures:
+  - { src: figures/unnamed_020_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_020_fr4U.png }
+literals:
+  - name: m
+    value: 64.1
+    unit: kg
+    text: "64.1"
+    suggest: { min: 44.9, max: 83.3, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 76.3
+    unit: kg
+    text: "76.3"
+    suggest: { min: 53.4, max: 99.2, step: 0.1, decimals: 1 }
+  - name: r
+    value: 2.9
+    unit: m
+    text: "2.9"
+    suggest: { min: 2, max: 3.8, step: 0.1, decimals: 1 }
+  - name: omega
+    value: 5.2
+    unit: rad/s
+    text: "5.2"
+    suggest: { min: 3.6, max: 6.8, step: 0.1, decimals: 1 }
+  - name: d
+    value: 1.24
+    unit: m
+    text: "1.24"
+    suggest: { min: 0.87, max: 1.61, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam2-p134
+  source: { document: PHYS161_Exam2, labels: [ P134 ] }
+  section: Angular momentum
+  figure: { id: fig, src: figures/unnamed_020_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Student with mass {m:unit} walks slowly from the rim toward the center of a horizontal circular
+    platform with mass {m2:unit} and radius r = {r:unit}, rotating about a frictionless vertical
+    axle. The angular velocity of the system is {omega:unit} when the student is at the rim. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: omega, kind: range, min: TODO, max: TODO, step: TODO, unit: rad/s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the angular velocity of the system when the student is {d:unit} from the center.
+        {_0}{_u}
+      answer: TODO
+      unit: rad/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 64.1, m2: 76.3, r: 2.9, omega: 5.2, d: 1.24 }
+    parts:
+      - { id: answer, answer: 10.662, unit: rad/s, source: P134 }

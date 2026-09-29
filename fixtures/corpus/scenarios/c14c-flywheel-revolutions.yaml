@@ -1,0 +1,24 @@
+# Companion to C14 (P129): revolutions from rpm; the moment of inertia is a red
+# herring and the answer is a bare number.
+id: c14c-flywheel-revolutions
+title: Revolutions of a flywheel spinning up
+source: { document: PHYS161_Exam2, labels: [ P129 ] }
+section: Torque
+tags: [ rotation, kinematics, unit-conversion ]
+narrative: >-
+  The flywheel of an engine has a moment of inertia {I:unit} about its rotation axis. A constant
+  torque brings it up to an angular speed of {n:unit} in {t:unit}, starting from rest.
+vars:
+  - { name: I, kind: range, min: 2, max: 6, step: 0.1, decimals: 1, unit: kg m^2 }
+  - { name: n, kind: range, min: 100, max: 200, step: 1, unit: rpm }
+  - { name: t, kind: range, min: 4, max: 10, step: 0.5, decimals: 1, unit: s }
+parts:
+  - id: revolutions
+    prompt: "Through how many revolutions does the flywheel turn during this time? {_0}"
+    answer: 0.5 * (n / 60) * t
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { I: 3.6, n: 146, t: 7.5 }
+  parts:
+    - { id: revolutions, answer: 9.125, source: P129 }

@@ -1,0 +1,65 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P139
+number: 139
+section: Angular momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A uniform bar of length 3 m pivots about its center and, immediately after being struck,
+  rotates with angular velocity ω = 3.6 rad/s. A ball of mass 3 kg resting on the far end of the
+  bar, unattached to it, is launched straight up. How high above its starting point does that ball
+  rise? The gravitational acceleration is g = 9.8 m/s². (1.48776 m)
+text: A uniform bar of length 3 m pivots about its center and, immediately after being struck,
+  rotates with angular velocity ω = 3.6 rad/s. A ball of mass 3 kg resting on the far end of the
+  bar, unattached to it, is launched straight up. How high above its starting point does that ball
+  rise? The gravitational acceleration is g = 9.8 m/s^2. (1.48776 m)
+answer: { value: 1.48776, unit: m, raw: 1.48776 m }
+figures: []
+literals:
+  - name: L
+    value: 3
+    unit: m
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: omega
+    value: 3.6
+    unit: rad/s
+    text: "3.6"
+    suggest: { min: 2.5, max: 4.7, step: 0.1, decimals: 1 }
+  - name: m
+    value: 3
+    unit: kg
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p139
+  source: { document: PHYS161_Exam2, labels: [ P139 ] }
+  section: Angular momentum
+  narrative: >-
+    A uniform bar of length {L:unit} pivots about its center and, immediately after being struck,
+    rotates with angular velocity ω = {omega:unit}. A ball of mass {m:unit} resting on the far end
+    of the bar, unattached to it, is launched straight up. The gravitational acceleration is g =
+    {g:unit}.
+  vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: omega, kind: range, min: TODO, max: TODO, step: TODO, unit: rad/s }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        How high above its starting point does that ball rise? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { L: 3, omega: 3.6, m: 3, g: 9.8 }
+    parts:
+      - { id: answer, answer: 1.48776, unit: m, source: P139 }

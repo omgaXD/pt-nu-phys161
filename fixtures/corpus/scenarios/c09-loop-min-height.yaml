@@ -1,0 +1,35 @@
+# C9 — degenerate parameter (P54). The answer is exactly 2.5 R and independent
+# of g: g is declared (and asserted) but must not appear in the answer.
+id: c09-loop-min-height
+title: Minimum release height for a loop-the-loop
+source: { document: PHYS161_Exam2, labels: [ P54 ] }
+section: Energy conservation
+tags: [ energy-conservation, circular-motion ]
+figure:
+  id: loop
+  src: figures/placeholder.svg
+  alt: >-
+    A roller-coaster track descends from point A at height h into a vertical circular loop of radius
+    R. Point B is the top of the loop and point C is on its side.
+  overlays:
+    - { id: radius, x: 0.62, y: 0.55, text: "R = {R:unit}" }
+narrative: >-
+  A car in an amusement park ride rolls without friction around the track. It starts from rest at
+  point A at a height $h$ above the bottom of the loop. The radius of the loop is {R:unit}. {@fig}
+vars:
+  - { name: R, kind: range, min: 5, max: 30, step: 1, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: min-height
+    prompt: >-
+      What is the minimum value of $h$ such that the car moves around the loop without falling off
+      at the top (point B)? {_0}{_u}
+    answer: 2.5 * R
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { R: 14, g: 9.8 }
+  parts:
+    - { id: min-height, answer: 35, unit: m, source: P54 }

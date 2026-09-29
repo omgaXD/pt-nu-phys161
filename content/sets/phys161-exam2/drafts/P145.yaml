@@ -1,0 +1,71 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P145
+number: 145
+section: Angular momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A 620-g toy plane is flying horizontally at 2.25 m/s when it hits a stationary vertical bar l =
+  19 cm below the top. The bar is uniform, 0.95 m long, has a mass of 1.5 kg, and is hinged at its
+  base. What is the magnitude of the angular momentum of the plane about the hinge just before the
+  collision? (1.0602 kg m^2/s)
+text: A 620-g toy plane is flying horizontally at 2.25 m/s when it hits a stationary vertical bar l
+  = 19 cm below the top. The bar is uniform, 0.95 m long, has a mass of 1.5 kg, and is hinged at its
+  base. What is the magnitude of the angular momentum of the plane about the hinge just before the
+  collision? (1.0602 kg m^2/s)
+answer: { value: 1.0602, unit: kg m^2/s, raw: 1.0602 kg m^2/s }
+figures:
+  - { src: figures/unnamed_013_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_013_fr4U.png }
+literals:
+  - name: m
+    value: 620
+    unit: g
+    text: "620"
+    suggest: { min: 434, max: 806, step: 1 }
+  - name: v
+    value: 2.25
+    unit: m/s
+    text: "2.25"
+    suggest: { min: 1.58, max: 2.93, step: 0.01, decimals: 2 }
+  - name: l
+    value: 19
+    unit: cm
+    text: "19"
+    suggest: { min: 13, max: 25, step: 1 }
+  - name: d
+    value: 0.95
+    unit: m
+    text: "0.95"
+    suggest: { min: 0.66, max: 1.23, step: 0.01, decimals: 2 }
+  - name: m2
+    value: 1.5
+    unit: kg
+    text: "1.5"
+    suggest: { min: 1, max: 2, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p145
+  source: { document: PHYS161_Exam2, labels: [ P145 ] }
+  section: Angular momentum
+  figure: { id: fig, src: figures/unnamed_013_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A {m}-g toy plane is flying horizontally at {v:unit} when it hits a stationary vertical bar l =
+    {l:unit} below the top. The bar is uniform, {d:unit} long, has a mass of {m2:unit}, and is
+    hinged at its base. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: l, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the angular momentum of the plane about the hinge just before the
+        collision? {_0}{_u}
+      answer: TODO
+      unit: kg m^2/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 620, v: 2.25, l: 19, d: 0.95, m2: 1.5 }
+    parts:
+      - { id: answer, answer: 1.0602, unit: kg m^2/s, source: P145 }

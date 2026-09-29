@@ -1,0 +1,47 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P18
+number: 18
+section: Kinetic energy
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A meteor crashed into the earth. Measurements estimate that this meteor had a mass of
+  1.6×10<sup>8</sup> kg and hit the ground at 12 km/s. How much kinetic energy did this meteor
+  deliver to the ground? (1.152E+16 J)
+text: A meteor crashed into the earth. Measurements estimate that this meteor had a mass of 1.6×10^8
+  kg and hit the ground at 12 km/s. How much kinetic energy did this meteor deliver to the ground?
+  (1.152E+16 J)
+answer: { value: 11520000000000000, unit: J, raw: 1.152E+16 J }
+figures: []
+literals:
+  - name: m
+    value: 160000000
+    unit: kg
+    text: 1.6×10^8
+    suggest: { min: 112000000, max: 208000000, step: 1 }
+  - name: v
+    value: 12
+    unit: km/s
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+scenario:
+  id: phys161-exam2-p018
+  source: { document: PHYS161_Exam2, labels: [ P18 ] }
+  section: Kinetic energy
+  narrative: >-
+    A meteor crashed into the earth. Measurements estimate that this meteor had a mass of {m:unit}
+    and hit the ground at {v:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: km/s }
+  parts:
+    - id: answer
+      prompt: >-
+        How much kinetic energy did this meteor deliver to the ground? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 160000000, v: 12 }
+    parts:
+      - { id: answer, answer: 11520000000000000, unit: J, source: P18 }

@@ -1,0 +1,43 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P17
+number: 17
+section: Kinetic energy
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: In a gun, a 11 g bullet is accelerated from rest to a speed of 754 m/s. Find the work that is
+  done on the bullet. (3126.84 J)
+text: In a gun, a 11 g bullet is accelerated from rest to a speed of 754 m/s. Find the work that is
+  done on the bullet. (3126.84 J)
+answer: { value: 3126.84, unit: J, raw: 3126.84 J }
+figures: []
+literals:
+  - name: m
+    value: 11
+    unit: g
+    text: "11"
+    suggest: { min: 8, max: 14, step: 1 }
+  - name: v
+    value: 754
+    unit: m/s
+    text: "754"
+    suggest: { min: 528, max: 980, step: 1 }
+scenario:
+  id: phys161-exam2-p017
+  source: { document: PHYS161_Exam2, labels: [ P17 ] }
+  section: Kinetic energy
+  narrative: >-
+    In a gun, a {m:unit} bullet is accelerated from rest to a speed of {v:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: Find the work that is done on the bullet. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 11, v: 754 }
+    parts:
+      - { id: answer, answer: 3126.84, unit: J, source: P17 }

@@ -1,0 +1,69 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P67
+number: 67
+section: Impulse and collisions
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A steel ball with mass 59 g is dropped from a height of 2.5 m onto a horizontal steel slab. The
+  ball rebounds to a height of 1.6 m. If the ball is in contact with the slab for 2 ms, find the
+  magnitude of the average force on the ball during impact. The gravitational acceleration is g =
+  9.8 m/s<sup>2</sup> . (371.7 N)
+text: A steel ball with mass 59 g is dropped from a height of 2.5 m onto a horizontal steel slab.
+  The ball rebounds to a height of 1.6 m. If the ball is in contact with the slab for 2 ms, find the
+  magnitude of the average force on the ball during impact. The gravitational acceleration is g =
+  9.8 m/s^2 . (371.7 N)
+answer: { value: 371.7, unit: N, raw: 371.7 N }
+figures: []
+literals:
+  - name: m
+    value: 59
+    unit: g
+    text: "59"
+    suggest: { min: 41, max: 77, step: 1 }
+  - name: h
+    value: 2.5
+    unit: m
+    text: "2.5"
+    suggest: { min: 1.8, max: 3.3, step: 0.1, decimals: 1 }
+  - name: h2
+    value: 1.6
+    unit: m
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: t
+    value: 2
+    unit: ms
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p067
+  source: { document: PHYS161_Exam2, labels: [ P67 ] }
+  section: Impulse and collisions
+  narrative: >-
+    A steel ball with mass {m:unit} is dropped from a height of {h:unit} onto a horizontal steel
+    slab. The ball rebounds to a height of {h2:unit}. If the ball is in contact with the slab for
+    {t:unit}, find the magnitude of the average force on the ball during impact.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: h2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: ms }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: The gravitational acceleration is g = {g:unit} . {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 59, h: 2.5, h2: 1.6, t: 2, g: 9.8 }
+    parts:
+      - { id: answer, answer: 371.7, unit: N, source: P67 }

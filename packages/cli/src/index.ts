@@ -1,0 +1,12 @@
+export { runAgentTask } from './commands/agent-task.js';
+export { type CheckResult, runCheck } from './commands/check.js';
+export { runFmt } from './commands/fmt.js';
+export { type FuzzResult, fuzzScenario, runFuzz } from './commands/fuzz.js';
+export { runGen } from './commands/gen.js';
+export { runGroup } from './commands/group.js';
+export { importDocument, type ImportOptions, type ImportResult, runImport } from './commands/import.js';
+export { type LintFinding, lintSet, runLint } from './commands/lint.js';
+export { runVariants } from './commands/variants.js';
+export { type Context, createContext, memoryOutput, type Output } from './context.js';
+export { buildProgram, main } from './program.js';
+export { type Draft, DraftSchema, loadDrafts } from './import/draft.js';

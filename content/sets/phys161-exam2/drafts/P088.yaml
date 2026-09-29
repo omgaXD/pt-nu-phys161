@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P88
+number: 88
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: 4 coupled railroad cars roll along and couple with a 5th car, which is initially at rest. These
+  5 cars roll along and couple with a 6th car initially at rest. This process continues until the
+  speed of the final collection of railroad cars is 1/6 the speed of the initial 4 railroad cars.
+  All the cars are identical. Ignoring friction, how many cars are in the final collection? (24)
+text: 4 coupled railroad cars roll along and couple with a 5th car, which is initially at rest.
+  These 5 cars roll along and couple with a 6th car initially at rest. This process continues until
+  the speed of the final collection of railroad cars is 1/6 the speed of the initial 4 railroad
+  cars. All the cars are identical. Ignoring friction, how many cars are in the final collection?
+  (24)
+answer: { value: 24, raw: "24" }
+figures: []
+literals:
+  - name: x
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: x2
+    value: 5
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: x3
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: x4
+    value: 6
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: x5
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+scenario:
+  id: phys161-exam2-p088
+  source: { document: PHYS161_Exam2, labels: [ P88 ] }
+  section: Conservation of linear momentum
+  narrative: >-
+    {x} coupled railroad cars roll along and couple with a 5th car, which is initially at rest.
+    These {x2} cars roll along and couple with a 6th car initially at rest. This process continues
+    until the speed of the final collection of railroad cars is {x3}/{x4} the speed of the initial
+    {x5} railroad cars. All the cars are identical.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x4, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x5, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Ignoring friction, how many cars are in the final collection? {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 4, x2: 5, x3: 1, x4: 6, x5: 4 }
+    parts:
+      - { id: answer, answer: 24, source: P88 }

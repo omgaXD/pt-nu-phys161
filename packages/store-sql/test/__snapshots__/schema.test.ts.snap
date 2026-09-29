@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`@pt/store-sql schema shape > sets 1`] = `
+{
+  "columns": {
+    "description": {
+      "notNull": false,
+      "pk": false,
+      "type": "text",
+    },
+    "id": {
+      "notNull": true,
+      "pk": true,
+      "type": "text",
+    },
+    "scenario_order": {
+      "notNull": false,
+      "pk": false,
+      "type": "text",
+    },
+    "sections": {
+      "notNull": true,
+      "pk": false,
+      "type": "text",
+    },
+    "source_document": {
+      "notNull": false,
+      "pk": false,
+      "type": "text",
+    },
+    "title": {
+      "notNull": true,
+      "pk": false,
+      "type": "text",
+    },
+  },
+  "foreignKeys": [],
+  "indexes": [],
+  "name": "sets",
+  "primaryKeys": [],
+}
+`;

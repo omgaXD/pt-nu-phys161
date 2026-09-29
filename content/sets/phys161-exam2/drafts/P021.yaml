@@ -1,0 +1,46 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P21
+number: 21
+section: Kinetic energy
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: The mass of a proton is 1836 times the mass of an electron. A proton is traveling at speed
+  1×10<sup>6</sup> m/s. At what speed would an electron have the same kinetic energy as the proton?
+  (42848570.57 m/s)
+text: The mass of a proton is 1836 times the mass of an electron. A proton is traveling at speed
+  1×10^6 m/s. At what speed would an electron have the same kinetic energy as the proton?
+  (42848570.57 m/s)
+answer: { value: 42848570.57, unit: m/s, raw: 42848570.57 m/s }
+figures: []
+literals:
+  - name: ratio
+    value: 1836
+    text: "1836"
+    suggest: { min: 1285, max: 2387, step: 1 }
+  - name: v
+    value: 1000000
+    unit: m/s
+    text: 1×10^6
+    suggest: { min: 700000, max: 1300000, step: 1 }
+scenario:
+  id: phys161-exam2-p021
+  source: { document: PHYS161_Exam2, labels: [ P21 ] }
+  section: Kinetic energy
+  narrative: >-
+    The mass of a proton is {ratio} times the mass of an electron. A proton is traveling at speed
+    {v:unit}.
+  vars:
+    - { name: ratio, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        At what speed would an electron have the same kinetic energy as the proton? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { ratio: 1836, v: 1000000 }
+    parts:
+      - { id: answer, answer: 42848570.57, unit: m/s, source: P21 }

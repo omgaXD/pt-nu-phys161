@@ -1,0 +1,46 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P54
+number: 54
+section: Energy conservation
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A car in an amusement park ride rolls without friction around the track. It starts from rest at
+  point A at a height h above the bottom of the loop. Radius of the loop is 14 m. What is the
+  minimum value of h such that the car moves around the loop without falling off at the top (point
+  B?) (35 m)
+text: A car in an amusement park ride rolls without friction around the track. It starts from rest
+  at point A at a height h above the bottom of the loop. Radius of the loop is 14 m. What is the
+  minimum value of h such that the car moves around the loop without falling off at the top (point
+  B?) (35 m)
+answer: { value: 35, unit: m, raw: 35 m }
+figures:
+  - { src: figures/unnamed_027_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_027_fr4U.png }
+literals:
+  - name: r
+    value: 14
+    unit: m
+    text: "14"
+    suggest: { min: 10, max: 18, step: 1 }
+scenario:
+  id: phys161-exam2-p054
+  source: { document: PHYS161_Exam2, labels: [ P54 ] }
+  section: Energy conservation
+  figure: { id: fig, src: figures/unnamed_027_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A car in an amusement park ride rolls without friction around the track. It starts from rest at
+    point A at a height h above the bottom of the loop. Radius of the loop is {r:unit}. {@fig}
+  vars:
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the minimum value of h such that the car moves around the loop without falling off
+        at the top (point B?) {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { r: 14 }
+    parts:
+      - { id: answer, answer: 35, unit: m, source: P54 }

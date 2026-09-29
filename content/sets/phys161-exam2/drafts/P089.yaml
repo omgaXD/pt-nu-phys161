@@ -1,0 +1,59 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P89
+number: 89
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A 1250-kg blue convertible is traveling south, and a 1850-kg red SUV is traveling west. If the
+  total momentum of the system consisting of the two cars is 77000 kg ⋅ m/s directed at 30° west of
+  south, what is the speed of an SUV? (20.81 m/s)
+text: A 1250-kg blue convertible is traveling south, and a 1850-kg red SUV is traveling west. If the
+  total momentum of the system consisting of the two cars is 77000 kg ⋅ m/s directed at 30° west of
+  south, what is the speed of an SUV? (20.81 m/s)
+answer: { value: 20.81, unit: m/s, raw: 20.81 m/s }
+figures: []
+literals:
+  - name: m
+    value: 1250
+    unit: kg
+    text: "1250"
+    suggest: { min: 875, max: 1625, step: 1 }
+  - name: m2
+    value: 1850
+    unit: kg
+    text: "1850"
+    suggest: { min: 1295, max: 2405, step: 1 }
+  - name: x
+    value: 77000
+    unit: kg m/s
+    text: "77000"
+    suggest: { min: 53900, max: 100100, step: 1 }
+  - name: theta
+    value: 30
+    unit: °
+    text: "30"
+    suggest: { min: 21, max: 39, step: 1 }
+scenario:
+  id: phys161-exam2-p089
+  source: { document: PHYS161_Exam2, labels: [ P89 ] }
+  section: Conservation of linear momentum
+  narrative: >-
+    A {m}-kg blue convertible is traveling south, and a {m2}-kg red SUV is traveling west.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: kg m/s }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  parts:
+    - id: answer
+      prompt: >-
+        If the total momentum of the system consisting of the two cars is {x:unit} directed at
+        {theta}° west of south, what is the speed of an SUV? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1250, m2: 1850, x: 77000, theta: 30 }
+    parts:
+      - { id: answer, answer: 20.81, unit: m/s, source: P89 }

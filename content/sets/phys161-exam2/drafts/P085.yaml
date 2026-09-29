@@ -1,0 +1,61 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P85
+number: 85
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: An astronaut of total mass 107 kg, including her power pack, runs out of fuel while drifting at
+  3.4 m/s away from the International Space Station. She removes her 25 kg power pack and throws it
+  directly away from the Station at 4.8 m/s relative to the Station. What is her speed immediately
+  after the throw? (2.97317 m/s)
+text: An astronaut of total mass 107 kg, including her power pack, runs out of fuel while drifting
+  at 3.4 m/s away from the International Space Station. She removes her 25 kg power pack and throws
+  it directly away from the Station at 4.8 m/s relative to the Station. What is her speed
+  immediately after the throw? (2.97317 m/s)
+answer: { value: 2.97317, unit: m/s, raw: 2.97317 m/s }
+figures: []
+literals:
+  - name: m
+    value: 107
+    unit: kg
+    text: "107"
+    suggest: { min: 75, max: 139, step: 1 }
+  - name: v
+    value: 3.4
+    unit: m/s
+    text: "3.4"
+    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 25
+    unit: kg
+    text: "25"
+    suggest: { min: 18, max: 33, step: 1 }
+  - name: v2
+    value: 4.8
+    unit: m/s
+    text: "4.8"
+    suggest: { min: 3.4, max: 6.2, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p085
+  source: { document: PHYS161_Exam2, labels: [ P85 ] }
+  section: Conservation of linear momentum
+  narrative: >-
+    An astronaut of total mass {m:unit}, including her power pack, runs out of fuel while drifting
+    at {v:unit} away from the International Space Station. She removes her {m2:unit} power pack and
+    throws it directly away from the Station at {v2:unit} relative to the Station.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: What is her speed immediately after the throw? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 107, v: 3.4, m2: 25, v2: 4.8 }
+    parts:
+      - { id: answer, answer: 2.97317, unit: m/s, source: P85 }

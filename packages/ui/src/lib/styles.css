@@ -1,0 +1,55 @@
+/* @pt/ui base styles. Import once in the app: `import '@pt/ui/styles.css'`. */
+@import 'katex/dist/katex.min.css';
+
+:root {
+  --pt-bg: #ffffff;
+  --pt-fg: #1d2125;
+  --pt-muted: #5c636b;
+  --pt-border: #c3c8cf;
+  --pt-surface: #f5f6f8;
+  --pt-input-bg: #ffffff;
+  --pt-accent: #0f6cbf;
+  --pt-good: #1b6e2a;
+  --pt-good-bg: #e3f4e5;
+  --pt-warn: #7a5300;
+  --pt-warn-bg: #fff4d6;
+  --pt-bad: #b3261e;
+  --pt-bad-bg: #fbe4e2;
+  --pt-formulation-bg: #e7f3f5;
+  --pt-outcome-bg: #fcefdc;
+  --pt-nav-answered: #c8d6e5;
+  --pt-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --pt-bg: #16181b;
+    --pt-fg: #e6e8eb;
+    --pt-muted: #a0a7b0;
+    --pt-border: #3b4048;
+    --pt-surface: #1f2226;
+    --pt-input-bg: #111316;
+    --pt-accent: #5aa6ea;
+    --pt-good: #7fd08c;
+    --pt-good-bg: #173320;
+    --pt-warn: #f0c56a;
+    --pt-warn-bg: #3a2e10;
+    --pt-bad: #ff8a80;
+    --pt-bad-bg: #3d1a18;
+    --pt-formulation-bg: #1b2a2e;
+    --pt-outcome-bg: #33291a;
+    --pt-nav-answered: #2d3f55;
+  }
+}
+
+.pt-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

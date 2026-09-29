@@ -1,0 +1,74 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P51
+number: 51
+section: Energy conservation
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A block with mass 1.6 kg is forced against a horizontal spring of negligible mass, compressing
+  the spring a distance of 0.21 m. The spring constant k is 135 N/m. When released, the block moves
+  on a horizontal tabletop whose coefficient of kinetic friction with the block is 0.24. How far
+  does the block travel before coming to rest? The gravitational acceleration is g = 9.8 m/s².
+  (0.791016 m)
+text: A block with mass 1.6 kg is forced against a horizontal spring of negligible mass, compressing
+  the spring a distance of 0.21 m. The spring constant k is 135 N/m. When released, the block moves
+  on a horizontal tabletop whose coefficient of kinetic friction with the block is 0.24. How far
+  does the block travel before coming to rest? The gravitational acceleration is g = 9.8 m/s^2.
+  (0.791016 m)
+answer: { value: 0.791016, unit: m, raw: 0.791016 m }
+figures:
+  - { src: figures/unnamed_015_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_015_fr4U.png }
+literals:
+  - name: m
+    value: 1.6
+    unit: kg
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: d
+    value: 0.21
+    unit: m
+    text: "0.21"
+    suggest: { min: 0.15, max: 0.27, step: 0.01, decimals: 2 }
+  - name: k
+    value: 135
+    unit: N/m
+    text: "135"
+    suggest: { min: 95, max: 176, step: 1 }
+  - name: x
+    value: 0.24
+    text: "0.24"
+    suggest: { min: 0.17, max: 0.31, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p051
+  source: { document: PHYS161_Exam2, labels: [ P51 ] }
+  section: Energy conservation
+  figure: { id: fig, src: figures/unnamed_015_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A block with mass {m:unit} is forced against a horizontal spring of negligible mass, compressing
+    the spring a distance of {d:unit}. The spring constant k is {k:unit}. When released, the block
+    moves on a horizontal tabletop whose coefficient of kinetic friction with the block is {x}. The
+    gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        How far does the block travel before coming to rest? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1.6, d: 0.21, k: 135, x: 0.24, g: 9.8 }
+    parts:
+      - { id: answer, answer: 0.791016, unit: m, source: P51 }

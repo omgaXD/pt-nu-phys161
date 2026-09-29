@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P32
+number: 32
+section: Potential energy
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A single conservative force acts on a 5.00-kg particle. The equation F = (2x + 6) N describes
+  the force, where x is in meters. As the particle moves along the x axis from x = 1 m to x = 8 m,
+  calculate the change in the potential energy of the system. (-105 J)
+text: A single conservative force acts on a 5.00-kg particle. The equation F = (2x + 6) N describes
+  the force, where x is in meters. As the particle moves along the x axis from x = 1 m to x = 8 m,
+  calculate the change in the potential energy of the system. (-105 J)
+answer: { value: -105, unit: J, raw: -105 J }
+figures: []
+literals:
+  - name: m
+    value: 5
+    unit: kg
+    text: "5.00"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: F
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: x
+    value: 6
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: x2
+    value: 1
+    unit: m
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: x3
+    value: 8
+    unit: m
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+scenario:
+  id: phys161-exam2-p032
+  source: { document: PHYS161_Exam2, labels: [ P32 ] }
+  section: Potential energy
+  narrative: >-
+    A single conservative force acts on a {m}-kg particle. The equation F = ({F}x + {x}) N describes
+    the force, where x is in meters.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        As the particle moves along the x axis from x = {x2:unit} to x = {x3:unit}, calculate the
+        change in the potential energy of the system. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 5, F: 2, x: 6, x2: 1, x3: 8 }
+    parts:
+      - { id: answer, answer: -105, unit: J, source: P32 }

@@ -1,0 +1,28 @@
+# Companion to C12 (P114): synodic catch-up time, answered in days.
+id: c12c-mars-launch-window
+title: Launch window to Mars
+source: { document: PHYS161_Exam2, labels: [ P114 ] }
+section: Rotation
+tags: [ angular-velocity, orbits, units ]
+narrative: >-
+  A rocket is to be launched from earth to Mars, when earth and Mars are aligned along a straight
+  line from the sun. If Mars is now {phi}° ahead of earth in its orbit around the sun, when should
+  you launch the rocket? All planets orbit the sun in the same direction, 1 year on Mars is {ratio}
+  earth-years, and assume circular orbits for both planets.
+vars:
+  - { name: phi, kind: range, min: 20, max: 90, step: 1, unit: "°" }
+  - { name: ratio, kind: range, min: 1.5, max: 2.5, step: 0.1, decimals: 1 }
+derived:
+  - { name: year, expr: "365", unit: day }
+parts:
+  - id: wait-time
+    prompt: >-
+      Taking 1 year = {year} days, provide the answer in units of days. {_0}{_u}
+    answer: (phi / 360) * year * ratio / (ratio - 1)
+    unit: day
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { phi: 52, ratio: 1.9, year: 365 }
+  parts:
+    - { id: wait-time, answer: 111.30, unit: days, source: P114 }

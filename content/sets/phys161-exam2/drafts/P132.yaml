@@ -1,0 +1,73 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P132
+number: 132
+section: Torque
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Three forces are applied to a wheel as shown in Figure below. One force is perpendicular to the
+  rim |F<sub>1</sub>|= 10.8 N, the one makes a 48˚ angle with the radius |F<sub>2</sub>|= 15.7 N,
+  and the other one is tangent to the rim |F<sub>3</sub>|= 8 N. The magnitude of net torque on the
+  wheel due to these three forces for an axis perpendicular to the wheel and passing through its
+  center is 2.19 N·m. What is the radius of the wheel? (0.597 m)
+text: Three forces are applied to a wheel as shown in Figure below. One force is perpendicular to
+  the rim |F_1|= 10.8 N, the one makes a 48° angle with the radius |F_2|= 15.7 N, and the other one
+  is tangent to the rim |F_3|= 8 N. The magnitude of net torque on the wheel due to these three
+  forces for an axis perpendicular to the wheel and passing through its center is 2.19 N·m. What is
+  the radius of the wheel? (0.597 m)
+answer: { value: 0.597, unit: m, raw: 0.597 m }
+figures:
+  - { src: figures/unnamed_011_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_011_fr4U.png }
+literals:
+  - name: F1
+    value: 10.8
+    unit: N
+    text: "10.8"
+    suggest: { min: 7.6, max: 14, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 48
+    unit: °
+    text: "48"
+    suggest: { min: 34, max: 62, step: 1 }
+  - name: F2
+    value: 15.7
+    unit: N
+    text: "15.7"
+    suggest: { min: 11, max: 20.4, step: 0.1, decimals: 1 }
+  - name: F3
+    value: 8
+    unit: N
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: tau
+    value: 2.19
+    unit: N m
+    text: "2.19"
+    suggest: { min: 1.53, max: 2.85, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam2-p132
+  source: { document: PHYS161_Exam2, labels: [ P132 ] }
+  section: Torque
+  figure: { id: fig, src: figures/unnamed_011_fr4U.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Three forces are applied to a wheel as shown in Figure below. One force is perpendicular to the
+    rim |$F_{1}$|= {F1:unit}, the one makes a {theta}° angle with the radius |$F_{2}$|= {F2:unit},
+    and the other one is tangent to the rim |$F_{3}$|= {F3:unit}. The magnitude of net torque on the
+    wheel due to these three forces for an axis perpendicular to the wheel and passing through its
+    center is {tau:unit}. {@fig}
+  vars:
+    - { name: F1, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: F3, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: tau, kind: range, min: TODO, max: TODO, step: TODO, unit: N m }
+  parts:
+    - id: answer
+      prompt: What is the radius of the wheel? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F1: 10.8, theta: 48, F2: 15.7, F3: 8, tau: 2.19 }
+    parts:
+      - { id: answer, answer: 0.597, unit: m, source: P132 }

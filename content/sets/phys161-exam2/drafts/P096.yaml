@@ -1,0 +1,55 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P96
+number: 96
+section: Moment of Inertia
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A sphere consists of a solid wooden ball of uniform density 805 kg/m<sup>3</sup> and radius
+  0.225 m and is covered with a thin coating of lead foil with area density 19 kg/m<sup>2</sup>.
+  Calculate the moment of inertia of this sphere about an axis passing through its center. (1.1857
+  kg m^2)
+text: A sphere consists of a solid wooden ball of uniform density 805 kg/m^3 and radius 0.225 m and
+  is covered with a thin coating of lead foil with area density 19 kg/m^2. Calculate the moment of
+  inertia of this sphere about an axis passing through its center. (1.1857 kg m^2)
+answer: { value: 1.1857, unit: kg m^2, raw: 1.1857 kg m^2 }
+figures: []
+literals:
+  - name: rho
+    value: 805
+    unit: kg/m^3
+    text: "805"
+    suggest: { min: 564, max: 1047, step: 1 }
+  - name: r
+    value: 0.225
+    unit: m
+    text: "0.225"
+    suggest: { min: 0.158, max: 0.293, step: 0.001, decimals: 3 }
+  - name: sigma
+    value: 19
+    unit: kg/m^2
+    text: "19"
+    suggest: { min: 13, max: 25, step: 1 }
+scenario:
+  id: phys161-exam2-p096
+  source: { document: PHYS161_Exam2, labels: [ P96 ] }
+  section: Moment of Inertia
+  narrative: >-
+    A sphere consists of a solid wooden ball of uniform density {rho:unit} and radius {r:unit} and
+    is covered with a thin coating of lead foil with area density {sigma:unit}.
+  vars:
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: sigma, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the moment of inertia of this sphere about an axis passing through its center.
+        {_0}{_u}
+      answer: TODO
+      unit: kg m^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { rho: 805, r: 0.225, sigma: 19 }
+    parts:
+      - { id: answer, answer: 1.1857, unit: kg m^2, source: P96 }

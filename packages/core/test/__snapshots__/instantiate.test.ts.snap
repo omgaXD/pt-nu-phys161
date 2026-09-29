@@ -1,0 +1,111 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`determinism (M4) > pins a few full instances (readable diff when rendering changes) 1`] = `
+{
+  "figure": {
+    "alt": "A suitcase on a ramp inclined at angle θ above the horizontal, pulled up the ramp by a force F that acts parallel to the ramp surface.",
+    "id": "ramp",
+    "overlays": [
+      {
+        "anchor": "middle",
+        "html": "28°",
+        "id": "angle",
+        "x": 0.22,
+        "y": 0.78,
+      },
+    ],
+    "src": "figures/placeholder.svg",
+  },
+  "narrativeHtml": "A luggage handler pulls a 16-kg suitcase up a ramp inclined at 28° above the horizontal by a force <span class="pt-math" data-display="inline" data-tex="F">F</span> of magnitude 215 N that acts parallel to the ramp. The coefficient of kinetic friction between the ramp and the suitcase is <span class="pt-math" data-display="inline" data-tex="\\mu_k = 0.38">\\mu_k = 0.38</span>. The suitcase travels 4.2 m along the ramp. <span class="pt-figure" data-figure="ramp"></span>",
+  "parts": [
+    {
+      "answerType": "numeric",
+      "modelAnswer": 903,
+      "partId": "work-by-f",
+      "promptHtml": "Calculate the work done on the suitcase by the force <span class="pt-math" data-display="inline" data-tex="F">F</span>. <span class="pt-slot" data-slot="0" data-kind="combined"></span>",
+      "slots": [
+        {
+          "index": 0,
+          "kind": "combined",
+        },
+      ],
+      "unit": "J",
+    },
+    {
+      "answerType": "numeric",
+      "modelAnswer": -220.96010736620653,
+      "partId": "work-by-friction",
+      "promptHtml": "Calculate the work done on the suitcase by the friction force. <span class="pt-slot" data-slot="0" data-kind="combined"></span>",
+      "slots": [
+        {
+          "index": 0,
+          "kind": "combined",
+        },
+      ],
+      "unit": "J",
+    },
+    {
+      "answerType": "numeric",
+      "modelAnswer": 309.1751923882763,
+      "partId": "work-by-gravity",
+      "promptHtml": "Calculate the magnitude of the work done on the suitcase by the gravitational force. <span class="pt-slot" data-slot="0" data-kind="combined"></span>",
+      "slots": [
+        {
+          "index": 0,
+          "kind": "combined",
+        },
+      ],
+      "unit": "J",
+    },
+  ],
+  "scenarioId": "c03-luggage-ramp",
+  "seed": 42,
+  "values": {
+    "F": 215,
+    "N": 138.44618256027977,
+    "d": 4.2,
+    "g": 9.8,
+    "m": 16,
+    "mu": 0.38,
+    "theta": 28,
+  },
+}
+`;
+
+exports[`determinism (M4) > pins a few full instances (readable diff when rendering changes) 2`] = `
+{
+  "narrativeHtml": "A 3 kg object has a velocity of <span class="pt-math" data-display="inline" data-tex="\\left(2\\,\\hat{\\imath} + 4\\,\\hat{\\jmath}\\right)\\,\\text{m/s}">\\left(2\\,\\hat{\\imath} + 4\\,\\hat{\\jmath}\\right)\\,\\text{m/s}</span>.",
+  "parts": [
+    {
+      "answerType": "numeric",
+      "modelAnswer": 81,
+      "partId": "net-work",
+      "promptHtml": "What is the net work done on the object if its velocity changes to <span class="pt-math" data-display="inline" data-tex="\\left(5\\,\\hat{\\imath} - 7\\,\\hat{\\jmath}\\right)\\,\\text{m/s}">\\left(5\\,\\hat{\\imath} - 7\\,\\hat{\\jmath}\\right)\\,\\text{m/s}</span>? <span class="pt-slot" data-slot="0" data-kind="combined"></span>",
+      "slots": [
+        {
+          "index": 0,
+          "kind": "combined",
+        },
+      ],
+      "unit": "J",
+    },
+  ],
+  "scenarioId": "c06-vector-work",
+  "seed": 42,
+  "values": {
+    "m": 3,
+    "v1": [
+      2,
+      4,
+    ],
+    "v1x": 2,
+    "v1y": 4,
+    "v2": [
+      5,
+      -7,
+    ],
+    "v2x": 5,
+    "v2y": -7,
+  },
+}
+`;

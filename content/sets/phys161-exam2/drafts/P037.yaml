@@ -1,0 +1,67 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P37
+number: 37
+section: Energy conservation
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Two blocks with different mass are attached to either end of a light rope that passes over a
+  light, frictionless pulley that is suspended from the ceiling. The masses are released from rest,
+  and the more massive one starts to descend. After this block has descended 1.6 m, its speed is 3
+  m/s. If the total mass of the two blocks is 13 kg, what is the mass of the less massive block? The
+  gravitational acceleration is g = 9.8 m/s2. (4.635 kg)
+text: Two blocks with different mass are attached to either end of a light rope that passes over a
+  light, frictionless pulley that is suspended from the ceiling. The masses are released from rest,
+  and the more massive one starts to descend. After this block has descended 1.6 m, its speed is 3
+  m/s. If the total mass of the two blocks is 13 kg, what is the mass of the less massive block? The
+  gravitational acceleration is g = 9.8 m/s2. (4.635 kg)
+answer: { value: 4.635, unit: kg, raw: 4.635 kg }
+figures: []
+literals:
+  - name: d
+    value: 1.6
+    unit: m
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: v
+    value: 3
+    unit: m/s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: m
+    value: 13
+    unit: kg
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+  - name: g
+    value: 9.8
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p037
+  source: { document: PHYS161_Exam2, labels: [ P37 ] }
+  section: Energy conservation
+  narrative: >-
+    Two blocks with different mass are attached to either end of a light rope that passes over a
+    light, frictionless pulley that is suspended from the ceiling. The masses are released from
+    rest, and the more massive one starts to descend. After this block has descended {d:unit}, its
+    speed is {v:unit}. The gravitational acceleration is g = {g} m/s2.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  derived:
+    - { name: g, expr: "9.8" }
+  parts:
+    - id: answer
+      prompt: >-
+        If the total mass of the two blocks is {m:unit}, what is the mass of the less massive block?
+        {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 1.6, v: 3, m: 13, g: 9.8 }
+    parts:
+      - { id: answer, answer: 4.635, unit: kg, source: P37 }

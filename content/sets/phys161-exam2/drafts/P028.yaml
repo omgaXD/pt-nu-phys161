@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P28
+number: 28
+section: Power
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A waterfall 81 m high produces 43 MW of electrical power, assuming all the potential energy of
+  the water is converted into electric energy. What is the average rate of water fall (mass per unit
+  time)? The gravitational acceleration is g = 9.8 m/s². (54169.8 kg/s)
+text: A waterfall 81 m high produces 43 MW of electrical power, assuming all the potential energy of
+  the water is converted into electric energy. What is the average rate of water fall (mass per unit
+  time)? The gravitational acceleration is g = 9.8 m/s^2. (54169.8 kg/s)
+answer: { value: 54169.8, unit: kg/s, raw: 54169.8 kg/s }
+figures: []
+literals:
+  - name: d
+    value: 81
+    unit: m
+    text: "81"
+    suggest: { min: 57, max: 105, step: 1 }
+  - name: P
+    value: 43
+    unit: MW
+    text: "43"
+    suggest: { min: 30, max: 56, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p028
+  source: { document: PHYS161_Exam2, labels: [ P28 ] }
+  section: Power
+  narrative: >-
+    A waterfall {d:unit} high produces {P:unit} of electrical power, assuming all the potential
+    energy of the water is converted into electric energy. The gravitational acceleration is g =
+    {g:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: MW }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the average rate of water fall (mass per unit time)? {_0}{_u}
+      answer: TODO
+      unit: kg/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 81, P: 43, g: 9.8 }
+    parts:
+      - { id: answer, answer: 54169.8, unit: kg/s, source: P28 }

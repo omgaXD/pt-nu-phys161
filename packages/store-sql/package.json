@@ -1,0 +1,29 @@
+{
+  "name": "@pt/store-sql",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SQL (Drizzle + SQLite) ProblemRepository. Schema only; methods are stubbed.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "@pt/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pt/core": "workspace:*",
+    "drizzle-orm": "^0.45.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2"
+  }
+}

@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P7
+number: 7
+section: Work
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A woman steps on a bathroom scale containing a stiff spring. In equilibrium the spring is
+  compressed 1 cm under her weight. The total work done on the spring during the compression is 3.1
+  J. Find the woman's mass. The gravitational acceleration is g = 9.8 m/s<sup>2</sup>.
+  (63.265306122449 kg)
+text: A woman steps on a bathroom scale containing a stiff spring. In equilibrium the spring is
+  compressed 1 cm under her weight. The total work done on the spring during the compression is 3.1
+  J. Find the woman's mass. The gravitational acceleration is g = 9.8 m/s^2. (63.265306122449 kg)
+answer: { value: 63.265306122449, unit: kg, raw: 63.265306122449 kg }
+figures: []
+literals:
+  - name: d
+    value: 1
+    unit: cm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: E
+    value: 3.1
+    unit: J
+    text: "3.1"
+    suggest: { min: 2.2, max: 4, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p007
+  source: { document: PHYS161_Exam2, labels: [ P7 ] }
+  section: Work
+  narrative: >-
+    A woman steps on a bathroom scale containing a stiff spring. In equilibrium the spring is
+    compressed {d:unit} under her weight. The total work done on the spring during the compression
+    is {E:unit}. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Find the woman's mass. {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 1, E: 3.1, g: 9.8 }
+    parts:
+      - { id: answer, answer: 63.265306122449, unit: kg, source: P7 }

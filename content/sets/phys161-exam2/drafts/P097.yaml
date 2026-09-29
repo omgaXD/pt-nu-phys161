@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P97
+number: 97
+section: Moment of Inertia
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A thin uniform rod 68 cm long with mass 0.5 kg is bent at its center into a V shape, with a 70°
+  angle at its vertex. Find the moment of inertia of this V-shaped object about an axis
+  perpendicular to the plane of the V at its vertex. (0.01927 kg m^2)
+text: A thin uniform rod 68 cm long with mass 0.5 kg is bent at its center into a V shape, with a
+  70° angle at its vertex. Find the moment of inertia of this V-shaped object about an axis
+  perpendicular to the plane of the V at its vertex. (0.01927 kg m^2)
+answer: { value: 0.01927, unit: kg m^2, raw: 0.01927 kg m^2 }
+figures: []
+literals:
+  - name: d
+    value: 68
+    unit: cm
+    text: "68"
+    suggest: { min: 48, max: 88, step: 1 }
+  - name: m
+    value: 0.5
+    unit: kg
+    text: "0.5"
+    suggest: { min: 0.3, max: 0.7, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 70
+    unit: °
+    text: "70"
+    suggest: { min: 49, max: 91, step: 1 }
+scenario:
+  id: phys161-exam2-p097
+  source: { document: PHYS161_Exam2, labels: [ P97 ] }
+  section: Moment of Inertia
+  narrative: >-
+    A thin uniform rod {d:unit} long with mass {m:unit} is bent at its center into a V shape, with a
+    {theta}° angle at its vertex.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the moment of inertia of this V-shaped object about an axis perpendicular to the plane
+        of the V at its vertex. {_0}{_u}
+      answer: TODO
+      unit: kg m^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 68, m: 0.5, theta: 70 }
+    parts:
+      - { id: answer, answer: 0.01927, unit: kg m^2, source: P97 }

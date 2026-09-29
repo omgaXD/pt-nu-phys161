@@ -1,0 +1,46 @@
+{
+  "name": "@pt/core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Declarative problem representation, evaluation, units, instantiation and grading. Zero framework deps, zero I/O.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "@pt/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./testing": {
+      "@pt/source": "./src/testing/index.ts",
+      "types": "./dist/testing/index.d.ts",
+      "default": "./dist/testing/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "mathjs": "^15.2.0",
+    "pure-rand": "^8.4.2",
+    "zod": "^4.6.5"
+  },
+  "peerDependencies": {
+    "vitest": "*"
+  },
+  "peerDependenciesMeta": {
+    "vitest": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2",
+    "yaml": "^2.9.1"
+  }
+}

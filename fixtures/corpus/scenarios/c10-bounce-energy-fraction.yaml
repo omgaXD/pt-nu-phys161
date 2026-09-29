@@ -1,0 +1,24 @@
+# C10 — dimensionless answer (P71). No unit: the unit field must not render
+# and unitPenalty must not apply. Mass and height are red herrings.
+id: c10-bounce-energy-fraction
+title: Fraction of kinetic energy lost in a bounce
+source: { document: PHYS161_Exam2, labels: [ P71 ] }
+section: Impulse and collisions
+tags: [ energy, dimensionless ]
+narrative: >-
+  A rubber ball of mass {m:unit} is released from rest at a height of {h:unit} above the floor.
+  After its first bounce, it rises to {pct}% of its original height.
+vars:
+  - { name: m, kind: range, min: 0.3, max: 0.6, step: 0.05, decimals: 2, unit: kg }
+  - { name: h, kind: range, min: 1.5, max: 3.0, step: 0.1, decimals: 1, unit: m }
+  - { name: pct, kind: range, min: 50, max: 95, step: 1 }
+parts:
+  - id: fraction-lost
+    prompt: "What fraction of its kinetic energy does the ball lose during the bounce? {_0}"
+    answer: 1 - pct / 100
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 0.45, h: 2.4, pct: 84 }
+  parts:
+    - { id: fraction-lost, answer: 0.16, source: P71 }

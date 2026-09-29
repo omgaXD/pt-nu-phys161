@@ -1,0 +1,59 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P90
+number: 90
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A 1240-kg blue convertible is traveling south, and a 2000-kg red SUV is traveling west. If the
+  total momentum of the system consisting of the two cars is 68000 kg·m/s directed at 60° west of
+  south, what is the speed of the convertible? (27.4194 m/s)
+text: A 1240-kg blue convertible is traveling south, and a 2000-kg red SUV is traveling west. If the
+  total momentum of the system consisting of the two cars is 68000 kg·m/s directed at 60° west of
+  south, what is the speed of the convertible? (27.4194 m/s)
+answer: { value: 27.4194, unit: m/s, raw: 27.4194 m/s }
+figures: []
+literals:
+  - name: m
+    value: 1240
+    unit: kg
+    text: "1240"
+    suggest: { min: 868, max: 1612, step: 1 }
+  - name: m2
+    value: 2000
+    unit: kg
+    text: "2000"
+    suggest: { min: 1400, max: 2600, step: 1 }
+  - name: x
+    value: 68000
+    unit: kg m/s
+    text: "68000"
+    suggest: { min: 47600, max: 88400, step: 1 }
+  - name: theta
+    value: 60
+    unit: °
+    text: "60"
+    suggest: { min: 42, max: 78, step: 1 }
+scenario:
+  id: phys161-exam2-p090
+  source: { document: PHYS161_Exam2, labels: [ P90 ] }
+  section: Conservation of linear momentum
+  narrative: >-
+    A {m}-kg blue convertible is traveling south, and a {m2}-kg red SUV is traveling west.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: kg m/s }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  parts:
+    - id: answer
+      prompt: >-
+        If the total momentum of the system consisting of the two cars is {x:unit} directed at
+        {theta}° west of south, what is the speed of the convertible? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1240, m2: 2000, x: 68000, theta: 60 }
+    parts:
+      - { id: answer, answer: 27.4194, unit: m/s, source: P90 }

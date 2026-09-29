@@ -1,0 +1,58 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P23
+number: 23
+section: Kinetic energy
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A 4 kg object has a velocity of (2iˆ+ 2jˆ) m/s. What is the net work done on the object if its
+  velocity changes to (8iˆ + 5jˆ) m/s? (162 J)
+text: A 4 kg object has a velocity of (2î+ 2ĵ) m/s. What is the net work done on the object if its
+  velocity changes to (8î + 5ĵ) m/s? (162 J)
+answer: { value: 162, unit: J, raw: 162 J }
+figures: []
+literals:
+  - name: m
+    value: 4
+    unit: kg
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: vx
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: vy
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: vx2
+    value: 8
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: vy2
+    value: 5
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+scenario:
+  id: phys161-exam2-p023
+  source: { document: PHYS161_Exam2, labels: [ P23 ] }
+  section: Kinetic energy
+  narrative: A {m:unit} object has a velocity of ({vx}î+ {vy}ĵ) m/s.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: vx, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vx2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the net work done on the object if its velocity changes to ({vx2}î + {vy2}ĵ) m/s?
+        {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 4, vx: 2, vy: 2, vx2: 8, vy2: 5 }
+    parts:
+      - { id: answer, answer: 162, unit: J, source: P23 }

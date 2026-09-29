@@ -1,0 +1,42 @@
+# Reference corpus (PLAN.md §9): problems chosen to span the feature space.
+# Every scenario carries the source's literal values and printed answers;
+# `pt check --root fixtures` asserts they reproduce.
+id: corpus
+title: Reference corpus
+description: PHYS161 Exam 2 problems chosen to span the feature space (C1–C14 plus companions).
+source: { document: PHYS161_Exam2 }
+sections:
+  - Work
+  - Kinetic energy
+  - Power
+  - Potential energy
+  - Energy conservation
+  - Impulse and collisions
+  - Conservation of linear momentum
+  - Rocket propulsion
+  - Moment of Inertia
+  - Rotation
+  - Torque
+  - Angular momentum
+order:
+  - c01-push-work
+  - c02-angled-push
+  - c03-luggage-ramp
+  - c04-meteor
+  - c05-proton-momentum
+  - c06-vector-work
+  - c06b-sticking-collision-3d
+  - c07-quartic-potential
+  - c08-bucket-box-gravel
+  - c09-loop-min-height
+  - c10-bounce-energy-fraction
+  - c10b-spring-friction-coefficient
+  - c10c-rocket-payload-fraction
+  - c11-railroad-cars
+  - c12-two-density-earth
+  - c12b-wheel-radius-from-torque
+  - c12c-mars-launch-window
+  - c13-printing-roller
+  - c14-blender-revolutions
+  - c14b-flywheel-diameter
+  - c14c-flywheel-revolutions

@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P115
+number: 115
+section: Rotation
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A roller in a printing press turns through an angle θ(t) given by θ(t) = γt<sup>2</sup> -
+  βt<sup>3</sup>, where γ = 3.2 rad/s<sup>2</sup> and β = 0.43 rad/s<sup>3</sup>. Calculate the
+  angular velocity of the roller at t = 4 s. (4.96 rad/s)
+text: A roller in a printing press turns through an angle θ(t) given by θ(t) = γt^2 - βt^3, where γ
+  = 3.2 rad/s^2 and β = 0.43 rad/s^3. Calculate the angular velocity of the roller at t = 4 s. (4.96
+  rad/s)
+answer: { value: 4.96, unit: rad/s, raw: 4.96 rad/s }
+figures: []
+literals:
+  - name: gamma
+    value: 3.2
+    unit: rad/s^2
+    text: "3.2"
+    suggest: { min: 2.2, max: 4.2, step: 0.1, decimals: 1 }
+  - name: beta
+    value: 0.43
+    unit: rad/s^3
+    text: "0.43"
+    suggest: { min: 0.3, max: 0.56, step: 0.01, decimals: 2 }
+  - name: t
+    value: 4
+    unit: s
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+scenario:
+  id: phys161-exam2-p115
+  source: { document: PHYS161_Exam2, labels: [ P115 ] }
+  section: Rotation
+  narrative: >-
+    A roller in a printing press turns through an angle θ(t) given by θ(t) = γt^2 - βt^3, where γ =
+    {gamma:unit} and β = {beta:unit}.
+  vars:
+    - { name: gamma, kind: range, min: TODO, max: TODO, step: TODO, unit: rad/s^2 }
+    - { name: beta, kind: range, min: TODO, max: TODO, step: TODO, unit: rad/s^3 }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the angular velocity of the roller at t = {t:unit}. {_0}{_u}
+      answer: TODO
+      unit: rad/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { gamma: 3.2, beta: 0.43, t: 4 }
+    parts:
+      - { id: answer, answer: 4.96, unit: rad/s, source: P115 }

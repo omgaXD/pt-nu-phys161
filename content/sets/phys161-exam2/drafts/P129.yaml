@@ -1,0 +1,52 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P129
+number: 129
+section: Torque
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: The flywheel of an engine has a moment of inertia 3.6 kg·m² about its rotation axis. A constant
+  torque brings it up to an angular speed of 146 rev/min in 7.5 s, starting from rest. Through how
+  many revolutions does the flywheel turn during this time? (9.125)
+text: The flywheel of an engine has a moment of inertia 3.6 kg·m^2 about its rotation axis. A
+  constant torque brings it up to an angular speed of 146 rev/min in 7.5 s, starting from rest.
+  Through how many revolutions does the flywheel turn during this time? (9.125)
+answer: { value: 9.125, raw: "9.125" }
+figures: []
+literals:
+  - name: I
+    value: 3.6
+    unit: kg m^2
+    text: "3.6"
+    suggest: { min: 2.5, max: 4.7, step: 0.1, decimals: 1 }
+  - name: n
+    value: 146
+    unit: rpm
+    text: "146"
+    suggest: { min: 102, max: 190, step: 1 }
+  - name: t
+    value: 7.5
+    unit: s
+    text: "7.5"
+    suggest: { min: 5.3, max: 9.8, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p129
+  source: { document: PHYS161_Exam2, labels: [ P129 ] }
+  section: Torque
+  narrative: >-
+    The flywheel of an engine has a moment of inertia {I:unit} about its rotation axis. A constant
+    torque brings it up to an angular speed of {n:unit} in {t:unit}, starting from rest.
+  vars:
+    - { name: I, kind: range, min: TODO, max: TODO, step: TODO, unit: kg m^2 }
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: rpm }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        Through how many revolutions does the flywheel turn during this time? {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { I: 3.6, n: 146, t: 7.5 }
+    parts:
+      - { id: answer, answer: 9.125, source: P129 }

@@ -1,0 +1,68 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P84
+number: 84
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: An astronaut runs out of fuel in her power pack while drifting at 3 m/s away from the
+  International Space Station. Remembering what she learned in physics class she removes her 30 kg
+  power pack and throws it away at 4 m/s relative to the Station and in the direction away from the
+  Station. The mass of the astronaut plus space suit, minus the power pack, is 106 kg. Calculate the
+  new velocity of the astronaut relative to the Space Station. Take the direction towards the Space
+  Station as positive. (-2.717 m/s)
+text: An astronaut runs out of fuel in her power pack while drifting at 3 m/s away from the
+  International Space Station. Remembering what she learned in physics class she removes her 30 kg
+  power pack and throws it away at 4 m/s relative to the Station and in the direction away from the
+  Station. The mass of the astronaut plus space suit, minus the power pack, is 106 kg. Calculate the
+  new velocity of the astronaut relative to the Space Station. Take the direction towards the Space
+  Station as positive. (-2.717 m/s)
+answer: { value: -2.717, unit: m/s, raw: -2.717 m/s }
+figures: []
+literals:
+  - name: v
+    value: 3
+    unit: m/s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: m
+    value: 30
+    unit: kg
+    text: "30"
+    suggest: { min: 21, max: 39, step: 1 }
+  - name: v2
+    value: 4
+    unit: m/s
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: m2
+    value: 106
+    unit: kg
+    text: "106"
+    suggest: { min: 74, max: 138, step: 1 }
+scenario:
+  id: phys161-exam2-p084
+  source: { document: PHYS161_Exam2, labels: [ P84 ] }
+  section: Conservation of linear momentum
+  narrative: >-
+    An astronaut runs out of fuel in her power pack while drifting at {v:unit} away from the
+    International Space Station. Remembering what she learned in physics class she removes her
+    {m:unit} power pack and throws it away at {v2:unit} relative to the Station and in the direction
+    away from the Station. The mass of the astronaut plus space suit, minus the power pack, is
+    {m2:unit}. Take the direction towards the Space Station as positive.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the new velocity of the astronaut relative to the Space Station. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 3, m: 30, v2: 4, m2: 106 }
+    parts:
+      - { id: answer, answer: -2.717, unit: m/s, source: P84 }

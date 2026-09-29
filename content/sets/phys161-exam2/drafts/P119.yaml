@@ -1,0 +1,80 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P119
+number: 119
+section: Torque
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: Two point-like particles with masses m<sub>1</sub>=8.5 kg and m<sub>2</sub>=1.7 kg are attached
+  at the ends of a uniform rigid rod with mass M=9.8 kg and length L=1.5 m, rotating in the vertical
+  plane about a frictionless pivot through its center. What is the magnitude of the angular
+  acceleration of the system when the rod makes an angle of 32° with the horizontal? The
+  gravitational acceleration is g = 9.8 m/s². (5.595 rad/s^2)
+text: Two point-like particles with masses m_1=8.5 kg and m_2=1.7 kg are attached at the ends of a
+  uniform rigid rod with mass M=9.8 kg and length L=1.5 m, rotating in the vertical plane about a
+  frictionless pivot through its center. What is the magnitude of the angular acceleration of the
+  system when the rod makes an angle of 32° with the horizontal? The gravitational acceleration is g
+  = 9.8 m/s^2. (5.595 rad/s^2)
+answer: { value: 5.595, unit: rad/s^2, raw: 5.595 rad/s^2 }
+figures: []
+literals:
+  - name: m1
+    value: 8.5
+    unit: kg
+    text: "8.5"
+    suggest: { min: 5.9, max: 11.1, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 1.7
+    unit: kg
+    text: "1.7"
+    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
+  - name: M
+    value: 9.8
+    unit: kg
+    text: "9.8"
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+  - name: L
+    value: 1.5
+    unit: m
+    text: "1.5"
+    suggest: { min: 1, max: 2, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 32
+    unit: °
+    text: "32"
+    suggest: { min: 22, max: 42, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p119
+  source: { document: PHYS161_Exam2, labels: [ P119 ] }
+  section: Torque
+  narrative: >-
+    Two point-like particles with masses $m_{1}$={m1:unit} and $m_{2}$={m2:unit} are attached at the
+    ends of a uniform rigid rod with mass M={M:unit} and length L={L:unit}, rotating in the vertical
+    plane about a frictionless pivot through its center. The gravitational acceleration is g =
+    {g:unit}.
+  vars:
+    - { name: m1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the angular acceleration of the system when the rod makes an angle
+        of {theta}° with the horizontal? {_0}{_u}
+      answer: TODO
+      unit: rad/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m1: 8.5, m2: 1.7, M: 9.8, L: 1.5, theta: 32, g: 9.8 }
+    parts:
+      - { id: answer, answer: 5.595, unit: rad/s^2, source: P119 }

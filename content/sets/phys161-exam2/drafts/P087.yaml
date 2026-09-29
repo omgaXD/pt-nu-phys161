@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P87
+number: 87
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: In a volcanic eruption, a 2600-kg boulder is thrown vertically upward into the air. At its
+  highest point it suddenly explodes into two fragments, one being 3 times the mass of the other.
+  The lighter fragment starts out with only a horizontal velocity of 44.5 m/s. What is the
+  horizontal speed of the heavier fragment immediately after the explosion? (14.8333 m/s)
+text: In a volcanic eruption, a 2600-kg boulder is thrown vertically upward into the air. At its
+  highest point it suddenly explodes into two fragments, one being 3 times the mass of the other.
+  The lighter fragment starts out with only a horizontal velocity of 44.5 m/s. What is the
+  horizontal speed of the heavier fragment immediately after the explosion? (14.8333 m/s)
+answer: { value: 14.8333, unit: m/s, raw: 14.8333 m/s }
+figures: []
+literals:
+  - name: m
+    value: 2600
+    unit: kg
+    text: "2600"
+    suggest: { min: 1820, max: 3380, step: 1 }
+  - name: ratio
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: v
+    value: 44.5
+    unit: m/s
+    text: "44.5"
+    suggest: { min: 31.1, max: 57.9, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam2-p087
+  source: { document: PHYS161_Exam2, labels: [ P87 ] }
+  section: Conservation of linear momentum
+  narrative: >-
+    In a volcanic eruption, a {m}-kg boulder is thrown vertically upward into the air. At its
+    highest point it suddenly explodes into two fragments, one being {ratio} times the mass of the
+    other. The lighter fragment starts out with only a horizontal velocity of {v:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: ratio, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the horizontal speed of the heavier fragment immediately after the explosion?
+        {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 2600, ratio: 3, v: 44.5 }
+    parts:
+      - { id: answer, answer: 14.8333, unit: m/s, source: P87 }

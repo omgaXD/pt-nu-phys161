@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P62
+number: 62
+section: Impulse and collisions
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: A 330 g handball moving at a speed of 5.9 m/s strikes a wall head-on, perpendicular to its
+  surface, and bounces straight back with the same speed. It is in contact with the wall for 0.005
+  s. What is the magnitude of the average force exerted by the ball on the wall? (778.8 N)
+text: A 330 g handball moving at a speed of 5.9 m/s strikes a wall head-on, perpendicular to its
+  surface, and bounces straight back with the same speed. It is in contact with the wall for 0.005
+  s. What is the magnitude of the average force exerted by the ball on the wall? (778.8 N)
+answer: { value: 778.8, unit: N, raw: 778.8 N }
+figures: []
+literals:
+  - name: m
+    value: 330
+    unit: g
+    text: "330"
+    suggest: { min: 231, max: 429, step: 1 }
+  - name: v
+    value: 5.9
+    unit: m/s
+    text: "5.9"
+    suggest: { min: 4.1, max: 7.7, step: 0.1, decimals: 1 }
+  - name: t
+    value: 0.005
+    unit: s
+    text: "0.005"
+    suggest: { min: 0.003, max: 0.007, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam2-p062
+  source: { document: PHYS161_Exam2, labels: [ P62 ] }
+  section: Impulse and collisions
+  narrative: >-
+    A {m:unit} handball moving at a speed of {v:unit} strikes a wall head-on, perpendicular to its
+    surface, and bounces straight back with the same speed. It is in contact with the wall for
+    {t:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the average force exerted by the ball on the wall? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 330, v: 5.9, t: 0.005 }
+    parts:
+      - { id: answer, answer: 778.8, unit: N, source: P62 }

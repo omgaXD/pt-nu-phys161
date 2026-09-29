@@ -1,0 +1,58 @@
+# Draft imported from PHYS161_Exam2_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P86
+number: 86
+section: Conservation of linear momentum
+source: { document: PHYS161_Exam2, file: PHYS161_Exam2_new.docx.html }
+raw: In a volcanic eruption, a 2450-kg boulder is thrown vertically upward into the air. At its
+  highest point, it suddenly explodes due to trapped gas into two fragments, one being 3 times the
+  mass of the other. The lighter fragment starts out with only horizontal velocity and lands 350 m
+  directly north of the point of the explosion. How far from the explosion will the other fragment
+  land? Neglect any other air resistance. (116.67 m)
+text: In a volcanic eruption, a 2450-kg boulder is thrown vertically upward into the air. At its
+  highest point, it suddenly explodes due to trapped gas into two fragments, one being 3 times the
+  mass of the other. The lighter fragment starts out with only horizontal velocity and lands 350 m
+  directly north of the point of the explosion. How far from the explosion will the other fragment
+  land? Neglect any other air resistance. (116.67 m)
+answer: { value: 116.67, unit: m, raw: 116.67 m }
+figures: []
+literals:
+  - name: m
+    value: 2450
+    unit: kg
+    text: "2450"
+    suggest: { min: 1715, max: 3185, step: 1 }
+  - name: ratio
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: d
+    value: 350
+    unit: m
+    text: "350"
+    suggest: { min: 245, max: 455, step: 1 }
+scenario:
+  id: phys161-exam2-p086
+  source: { document: PHYS161_Exam2, labels: [ P86 ] }
+  section: Conservation of linear momentum
+  narrative: >-
+    In a volcanic eruption, a {m}-kg boulder is thrown vertically upward into the air. At its
+    highest point, it suddenly explodes due to trapped gas into two fragments, one being {ratio}
+    times the mass of the other. The lighter fragment starts out with only horizontal velocity and
+    lands {d:unit} directly north of the point of the explosion. Neglect any other air resistance.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: ratio, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        How far from the explosion will the other fragment land? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 2450, ratio: 3, d: 350 }
+    parts:
+      - { id: answer, answer: 116.67, unit: m, source: P86 }
