@@ -1,0 +1,37 @@
+# P47 — a stone leaves the top A of a frictionless hill of height h with speed v_A. Energy
+# conservation down to the foot B: ½ m v_B² = ½ m v_A² + m g h, so v_B = √(v_A² + 2 g h).
+# The mass is not needed. The figure prints only the symbols h and L (the rough stretch, the
+# spring and L belong to other questions on the same picture), so every parameter is randomized.
+id: phys161-e2-p047-stone-hill-speed
+title: Stone sliding down a frictionless hill
+source: { document: PHYS161_Exam2, labels: [ P47 ] }
+section: Energy conservation
+tags: [ energy-conservation, kinetic-energy ]
+figure:
+  id: hill
+  src: figures/unnamed_026_GNcJ.png
+  alt: >-
+    A stone at point A on top of a hill of height h m. The hill slopes down to point B at its foot,
+    a horizontal distance L m from below A. Beyond B, a rough horizontal surface leads to a spring
+    fixed to a wall on the right.
+narrative: >-
+  A {m:unit} stone slides down a snow-covered hill, leaving point A with a speed of {v:unit} as
+  shown in Figure below. There is no friction on the hill between points A and B. Height of the hill
+  is {h:unit}. The gravitational acceleration is $g = {g:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 15, max: 30, step: 1, unit: kg }
+  - { name: v, kind: range, min: 8, max: 16, step: 1, unit: m/s }
+  - { name: h, kind: range, min: 28, max: 52, step: 1, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: speed-at-b
+    prompt: "What is the speed of the stone when it reaches point B? {_0}{_u}"
+    answer: sqrt(v^2 + 2 * g * h)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 22, v: 12, h: 40, g: 9.8 }
+  parts:
+    - { id: speed-at-b, answer: 30.46, unit: m/s, source: P47 }

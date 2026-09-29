@@ -1,0 +1,46 @@
+# P58 — a block slides over a frictionless hill whose flat top is h₁ above the base and must clear
+# a pit whose far side is h₂ above the base, a horizontal distance d away. Leaving the top
+# horizontally it falls h₁ − h₂ in t = √(2 (h₁ − h₂) / g), so the least speed at the top is
+# v_top = d / t, i.e. v_top² = g d² / (2 (h₁ − h₂)). Energy conservation from the base:
+# v_base = √(v_top² + 2 g h₁). The mass is not needed. The figure prints only the symbols
+# h₁, h₂ and d, so every parameter is randomized.
+id: phys161-e2-p058-icy-hill-pit
+title: Minimum speed to clear a pit beyond an icy hill
+source: { document: PHYS161_Exam2, labels: [ P58 ] }
+section: Energy conservation
+tags: [ energy-conservation, projectile-motion ]
+figure:
+  id: icy-hill
+  src: figures/unnamed_009_GNcJ.png
+  alt: >-
+    A block on level ground at the left moves to the right toward a hill that rises to a flat top at
+    height h₁ above the base. Beyond the top the ground drops into a pit; the far side of the pit is
+    a lower plateau at height h₂ above the base, a horizontal distance d from the edge of the top.
+narrative: >-
+  A {m}-kg block slides over the smooth, icy hill. The top of the hill is horizontal and $h_1 =
+  {h1:unit}$ higher than its base. The gravitational acceleration is $g = {g:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 2.5, max: 5.0, step: 0.1, decimals: 1, unit: kg }
+  - { name: h1, kind: range, min: 65, max: 95, step: 1, unit: m }
+  - { name: h2, kind: range, min: 45, max: 70, step: 1, unit: m }
+  - { name: d, kind: range, min: 25, max: 50, step: 1, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: vtop, expr: "d * sqrt(g / (2 * (h1 - h2)))", unit: m/s }
+constraints:
+  # The far side is clearly lower than the top, and the jump does not need an absurd speed.
+  - "h1 - h2 >= 10 and h1 - h2 <= 35"
+parts:
+  - id: min-speed-at-base
+    prompt: >-
+      What minimum speed must the block have at the base of the hill so that it will not fall into
+      the pit on the far side of the hill that is $h_2 = {h2:unit}$ above the base? The distance
+      between the top and the far side pit is $d = {d:unit}$. {_0}{_u}
+    answer: sqrt(vtop^2 + 2 * g * h1)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m: 3.7, h1: 79, h2: 59, d: 38, g: 9.8 }
+  parts:
+    - { id: min-speed-at-base, answer: 43.614, unit: m/s, source: P58 }

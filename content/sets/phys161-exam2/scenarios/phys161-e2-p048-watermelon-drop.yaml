@@ -1,0 +1,35 @@
+# P48/P49 — a watermelon dropped from rest from a roof of height d, no air resistance. All the
+# potential energy becomes kinetic: K = m g d, and ½ m v² = m g d gives v = √(2 g d).
+# The base canonical values are P48's; P49 overrides them with its own.
+id: phys161-e2-p048-watermelon-drop
+title: Watermelon dropped from a roof
+source: { document: PHYS161_Exam2, labels: [ P48, P49 ] }
+section: Energy conservation
+tags: [ energy-conservation, free-fall, multi-part ]
+narrative: >-
+  A {m:unit} watermelon is dropped from rest from the roof of a {d:unit} tall building and feels no
+  appreciable air resistance. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 1.5, max: 5.0, step: 0.1, decimals: 1, unit: kg }
+  - { name: d, kind: range, min: 12, max: 30, step: 1, unit: m, label: building height }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: kinetic-energy
+    prompt: >-
+      Just before it strikes the ground, what is the watermelon's kinetic energy? {_0}{_u}
+    answer: m * g * d
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: speed
+    prompt: "Just before it strikes the ground, what is the watermelon's speed? {_0}{_u}"
+    answer: sqrt(2 * g * d)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 2.5, d: 19, g: 9.8 }
+  parts:
+    - { id: kinetic-energy, answer: 465.5, unit: J, source: P48 }
+    - { id: speed, answer: 21.2321, unit: m/s, source: P49, vars: { m: 3.7, d: 23 } }

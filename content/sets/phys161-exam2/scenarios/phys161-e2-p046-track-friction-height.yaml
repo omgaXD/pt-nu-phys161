@@ -1,0 +1,44 @@
+# P46 — a block released from height h on a track with frictionless curved ends and a rough flat
+# middle of length L. Crossing the flat part once, friction removes μ m g L:
+# m g h − μ m g L = m g h′, so h′ = h − μ L (the mass and g cancel; h is given in cm).
+# The figure prints only the symbols h and L, so every parameter is randomized.
+id: phys161-e2-p046-track-friction-height
+title: Block on a track with a rough flat section
+source: { document: PHYS161_Exam2, labels: [ P46 ] }
+section: Energy conservation
+tags: [ energy-conservation, friction ]
+figure:
+  id: track
+  src: figures/unnamed_025_GNcJ.png
+  alt: >-
+    A U-shaped track: a block sits at the top of the curved left end, a height h above the flat
+    central part; the flat part has length L and is followed by a curved right end rising to about
+    the same height.
+narrative: >-
+  The block of mass of {m:unit} is dropped from a height $h = {h:unit}$ on the left elevated end of
+  a small track with frictionless curved sections and a flat central part of $L = {L:unit}$ length,
+  where the coefficient of kinetic friction is {mu}. The gravitational acceleration is $g =
+  {g:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 0.25, max: 0.50, step: 0.01, decimals: 2, unit: kg }
+  - { name: h, kind: range, min: 48, max: 90, step: 1, unit: cm }
+  - { name: L, kind: range, min: 0.8, max: 1.6, step: 0.1, decimals: 1, unit: m }
+  - { name: mu, kind: range, min: 0.10, max: 0.20, step: 0.01, decimals: 2 }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  # The block crosses the rough part with energy to spare, so the answer is not a near-zero
+  # difference of h and μ L.
+  - "h / 100 - mu * L > 0.25 * h / 100"
+parts:
+  - id: max-height
+    prompt: >-
+      What is the highest point the block can be on the right elevated end of the track? {_0}{_u}
+    answer: h / 100 - mu * L
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 0.38, h: 69, L: 1.2, mu: 0.15, g: 9.8 }
+  parts:
+    - { id: max-height, answer: 0.51, unit: m, source: P46 }

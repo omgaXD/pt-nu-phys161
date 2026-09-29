@@ -1,0 +1,53 @@
+# P56/P57 — a rock with speed v at the foot of a rough hill inclined at θ slides up until it stops.
+# Over a distance s along the slope: ½ m v² = m g s sin θ + μ_k m g cos θ s, so
+# s = v² / (2 g (sin θ + μ_k cos θ)) and the height reached is s sin θ = v² / (2 g (1 + μ_k cot θ)).
+# μ_s (only in P56's wording) does not enter either answer. The base canonical values are P56's;
+# P57 overrides them with its own. Mass and μ_k carry no decimals so that 29 and 32.5 kg, 0.2 and
+# 0.19 print exactly as the source does.
+id: phys161-e2-p056-rock-rough-hill
+title: Rock sliding up a rough hill
+source: { document: PHYS161_Exam2, labels: [ P56, P57 ] }
+section: Energy conservation
+tags: [ energy-conservation, friction, incline, multi-part ]
+narrative: >-
+  A {m}-kg rock approaches the foot of a hill with a speed of {v:unit}. The hill slopes upward at a
+  constant angle of {theta}° above the horizontal. The coefficients of static and kinetic friction
+  between the hill and the rock are {mus} and {muk}, respectively. The gravitational acceleration is
+  $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 20, max: 40, step: 0.5, unit: kg }
+  - { name: v, kind: range, min: 10, max: 20, step: 1, unit: m/s }
+  - { name: theta, kind: range, min: 28, max: 50, step: 1, unit: "°" }
+  - { name: mus, kind: range, min: 0.60, max: 0.90, step: 0.01, decimals: 2 }
+  - { name: muk, kind: range, min: 0.10, max: 0.30, step: 0.01 }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: s, expr: "v^2 / (2 * g * (sin(rad(theta)) + muk * cos(rad(theta))))", unit: m }
+constraints:
+  - "mus > muk" # static friction exceeds kinetic friction
+parts:
+  - id: max-height
+    prompt: >-
+      Find the maximum height above the foot of the hill reached by the rock. {_0}{_u}
+    answer: s * sin(rad(theta))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: distance-along-incline
+    prompt: >-
+      Find the distance the rock travels along the incline before coming to a stop. {_0}{_u}
+    answer: s
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 29, v: 16, theta: 41, mus: 0.78, muk: 0.2, g: 9.8 }
+  parts:
+    - { id: max-height, answer: 10.618, unit: m, source: P56 }
+    - {
+        id: distance-along-incline,
+        answer: 10.0751,
+        unit: m,
+        source: P57,
+        vars: { m: 32.5, v: 12, theta: 35, muk: 0.19 }
+      }

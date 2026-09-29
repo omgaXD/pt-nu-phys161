@@ -1,0 +1,47 @@
+# P52/P53 — a ball dropped from h rebounds to a fraction p of its previous height each bounce.
+# The energy lost in a bounce is m g (height before − height after):
+# first bounce m g h (1 − p), second bounce m g h p (1 − p). The mass is given in grams.
+# The base canonical values are P52's; P53 overrides them with its own.
+id: phys161-e2-p052-ball-bounce-energy-loss
+title: Mechanical energy lost by a bouncing ball
+source: { document: PHYS161_Exam2, labels: [ P52, P53 ] }
+section: Energy conservation
+tags: [ energy-conservation, potential-energy, multi-part ]
+narrative: >-
+  A {m}-gram rubber ball is dropped from an initial height of {h:unit}, and on each bounce it
+  returns to {pct}% of its previous height. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 500, max: 900, step: 10, unit: g, label: ball mass }
+  - { name: h, kind: range, min: 1.50, max: 3.00, step: 0.05, decimals: 2, unit: m }
+  - { name: pct, kind: range, min: 55, max: 85, step: 1, label: rebound percentage }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: p, expr: "pct / 100" }
+parts:
+  - id: first-bounce-loss
+    prompt: >-
+      Find the amount (the absolute value) of the mechanical energy that the ball loses during its
+      first bounce. {_0}{_u}
+    answer: (m / 1000) * g * h * (1 - p)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: second-bounce-loss
+    prompt: >-
+      Find the amount (the absolute value) of the mechanical energy that the ball loses during its
+      second bounce. {_0}{_u}
+    answer: (m / 1000) * g * h * p * (1 - p)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 700, h: 2.25, pct: 70, g: 9.8 }
+  parts:
+    - { id: first-bounce-loss, answer: 4.6305, unit: J, source: P52 }
+    - {
+        id: second-bounce-loss,
+        answer: 4.36795,
+        unit: J,
+        source: P53,
+        vars: { m: 730, h: 2.65, pct: 64 }
+      }

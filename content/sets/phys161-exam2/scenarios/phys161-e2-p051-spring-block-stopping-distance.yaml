@@ -1,0 +1,44 @@
+# P51 — a block released from a spring compressed by x slides on a rough tabletop until it stops.
+# Friction acts over the whole path D measured from the release point, so ½ k x² = μ m g D and
+# D = k x² / (2 μ m g). This holds only if the block reaches the spring's natural length and leaves
+# it (D > x, i.e. k x > 2 μ m g); the constraint keeps a margin. The figure prints only the
+# symbols k, m and the stage labels 1 and 2, so every parameter is randomized.
+id: phys161-e2-p051-spring-block-stopping-distance
+title: Stopping distance of a spring-launched block
+source: { document: PHYS161_Exam2, labels: [ P51 ] }
+section: Energy conservation
+tags: [ energy-conservation, spring, friction ]
+figure:
+  id: spring-block
+  src: figures/unnamed_013_GNcJ.png
+  alt: >-
+    Stage 1: a block of mass m pressed against a compressed horizontal spring of force constant k
+    attached to a wall, with an arrow on the block pointing toward the wall. Stage 2: the same block
+    sliding to the right along the horizontal surface after leaving the spring.
+narrative: >-
+  A block with mass {m:unit} is forced against a horizontal spring of negligible mass, compressing
+  the spring a distance of {x:unit}. The spring constant $k$ is {k:unit}. When released, the block
+  moves on a horizontal tabletop whose coefficient of kinetic friction with the block is {mu}. The
+  gravitational acceleration is $g = {g:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 1.0, max: 2.2, step: 0.1, decimals: 1, unit: kg }
+  - { name: x, kind: range, min: 0.14, max: 0.28, step: 0.01, decimals: 2, unit: m }
+  - { name: k, kind: range, min: 100, max: 170, step: 5, unit: N/m }
+  - { name: mu, kind: range, min: 0.15, max: 0.33, step: 0.01, decimals: 2 }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: D, expr: "k * x^2 / (2 * mu * m * g)", unit: m }
+constraints:
+  # The block leaves the spring with at least a third of the stored energy (k x > 3 μ m g).
+  - "D > 1.5 * x"
+parts:
+  - id: stopping-distance
+    prompt: "How far does the block travel before coming to rest? {_0}{_u}"
+    answer: D
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1.6, x: 0.21, k: 135, mu: 0.24, g: 9.8 }
+  parts:
+    - { id: stopping-distance, answer: 0.791016, unit: m, source: P51 }
