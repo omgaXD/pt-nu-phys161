@@ -1,0 +1,79 @@
+# P22/P23/P24 — two spheres released from rest in deep space. Momentum stays zero,
+# m1 v1 = m2 v2, and energy conservation gives ½ m1 v1² + ½ m2 v2² = G m1 m2 (1/d2 − 1/d), so the
+# relative speed is v_rel = sqrt(2 G (m1 + m2) (1/d2 − 1/d)) (P23) and the lighter sphere moves at
+# v1 = m2 v_rel / (m1 + m2) (P22). The centre of mass stays at m2 d / (m1 + m2) from the initial
+# centre of m1; the spheres touch when their centres are 2r apart, at m2 (d − 2r) / (m1 + m2) + r
+# (P24, which does not need G). P24's radius clause is moved from the narrative into its prompt.
+# The base canonical values are P22's; P23 and P24 override them with their own numbers.
+id: phys161-e3-p022-spheres-deep-space
+title: Two spheres attracting each other in deep space
+source: { document: PHYS161_Exam3, labels: [ P22, P23, P24 ] }
+section: Gravitation
+tags: [ gravitation, energy-conservation, momentum-conservation, center-of-mass, multi-part ]
+narrative: >-
+  In deep space, two uniform spheres, one of mass {m1:unit} and the other with mass {m2:unit}, are
+  released from rest with their centers {d:unit} apart. They accelerate toward each other because of
+  their mutual gravitational attraction. Gravitational constant is {G:unit}.
+vars:
+  - { name: m1, kind: range, min: 15, max: 30, step: 1, unit: kg, label: lighter sphere mass }
+  - { name: m2, kind: range, min: 80, max: 140, step: 1, unit: kg, label: heavier sphere mass }
+  - { name: d, kind: range, min: 30, max: 55, step: 1, unit: m, label: initial separation }
+  - { name: d2, kind: range, min: 14, max: 30, step: 1, unit: m, label: later separation }
+  - {
+      name: r,
+      kind: range,
+      min: 0.10,
+      max: 0.20,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: sphere radius
+    }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+constraints:
+  - "d - d2 >= 5" # the spheres have clearly moved closer (no near-zero 1/d2 − 1/d)
+  - "d2 > 2 * r" # the spheres have not touched yet at the separation d2
+parts:
+  - id: speed-lighter
+    prompt: >-
+      Find the speed of the sphere with mass {m1:unit}, when their centers are {d2:unit} apart.
+      {_0}{_u}
+    answer: m2 * sqrt(2 * G * (1 / d2 - 1 / d) / (m1 + m2))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: relative-speed
+    prompt: >-
+      Find the magnitude of the relative velocity with which one sphere is approaching the other,
+      when their centers are {d2:unit} apart. {_0}{_u}
+    answer: sqrt(2 * G * (m1 + m2) * (1 / d2 - 1 / d))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: collision-point
+    prompt: >-
+      The two spheres have equal radii $r = {r:unit}$. How far from the initial position of the
+      center of the {m1:unit} sphere do the surfaces of the two spheres collide? {_0}{_u}
+    answer: m2 * (d - 2 * r) / (m1 + m2) + r
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m1: 24, m2: 107, d: 40, d2: 25, r: 0.15, G: 6.67e-11 }
+  parts:
+    - { id: speed-lighter, answer: 1.32285e-5, unit: m/s, source: P22 }
+    - {
+        id: relative-speed,
+        answer: 2.065e-5,
+        unit: m/s,
+        source: P23,
+        vars: { m1: 25, m2: 110, d: 38, d2: 20 }
+      }
+    - {
+        id: collision-point,
+        answer: 37.698,
+        unit: m,
+        source: P24,
+        vars: { m1: 20, m2: 105, d: 45, r: 0.15 }
+      }
