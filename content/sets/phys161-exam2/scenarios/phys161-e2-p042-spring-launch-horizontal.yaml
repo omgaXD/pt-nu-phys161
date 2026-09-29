@@ -1,0 +1,37 @@
+# P42 — a block launched by a compressed horizontal spring along a frictionless surface. All the
+# spring energy becomes kinetic energy: ½ k x² = ½ m v², so v = x √(k/m).
+# The figure prints only the symbols k, m and the stage labels 1 and 2, so every parameter is
+# randomized.
+id: phys161-e2-p042-spring-launch-horizontal
+title: Speed of a block launched by a spring
+source: { document: PHYS161_Exam2, labels: [ P42 ] }
+section: Energy conservation
+tags: [ energy-conservation, spring ]
+figure:
+  id: spring-block
+  src: figures/unnamed_GNcJ.png
+  alt: >-
+    Stage 1: a block of mass m pressed against a compressed horizontal spring of force constant k
+    attached to a wall, with an arrow on the block pointing toward the wall. Stage 2: the same block
+    sliding to the right along the horizontal surface after leaving the spring.
+narrative: >-
+  A {m:unit} block is pushed against a spring with negligible mass and force constant $k =
+  {k:unit}$, compressing it {x:unit} (1 in Figure below). When the block is released, it moves along
+  a frictionless surface (2 in Figure below). {@fig}
+vars:
+  - { name: m, kind: range, min: 1.5, max: 4.5, step: 0.1, decimals: 1, unit: kg }
+  - { name: k, kind: range, min: 300, max: 600, step: 10, unit: N/m }
+  - { name: x, kind: range, min: 0.16, max: 0.36, step: 0.01, decimals: 2, unit: m }
+parts:
+  - id: speed
+    prompt: >-
+      What is the speed of the block as it slides along the horizontal surface having left the
+      spring? {_0}{_u}
+    answer: x * sqrt(k / m)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 3, k: 450, x: 0.26 }
+  parts:
+    - { id: speed, answer: 3.184, unit: m/s, source: P42 }

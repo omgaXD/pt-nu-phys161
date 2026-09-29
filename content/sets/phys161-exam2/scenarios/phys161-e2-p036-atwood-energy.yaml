@@ -1,0 +1,47 @@
+# P36/P37 — Atwood machine released from rest. Energy conservation after the heavier block has
+# descended d: (m₁ − m₂) g d = ½ (m₁ + m₂) v². With M = m₁ + m₂ and r = v² / (2 g d):
+# m₁ = M (1 + r) / 2 and m₂ = M (1 − r) / 2. The base canonical values are P36's; P37
+# overrides the distance and speed with its own.
+id: phys161-e2-p036-atwood-energy
+title: Masses of an Atwood machine from its speed
+source: { document: PHYS161_Exam2, labels: [ P36, P37 ] }
+section: Energy conservation
+tags: [ energy-conservation, pulley, multi-part ]
+narrative: >-
+  Two blocks with different mass are attached to either end of a light rope that passes over a
+  light, frictionless pulley that is suspended from the ceiling. The masses are released from rest,
+  and the more massive one starts to descend. After this block has descended {d:unit}, its speed is
+  {v:unit}. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: d, kind: range, min: 1.0, max: 2.5, step: 0.1, decimals: 1, unit: m }
+  - { name: v, kind: range, min: 2.0, max: 4.0, step: 0.1, decimals: 1, unit: m/s }
+  - { name: M, kind: range, min: 8, max: 18, step: 1, unit: kg, label: total mass }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  # Acceleration as a fraction of g: (m₁ − m₂) / (m₁ + m₂).
+  - { name: r, expr: "v^2 / (2 * g * d)" }
+constraints:
+  # The blocks differ noticeably in mass, and the lighter one keeps a sensible share of M.
+  - "r > 0.1 and r < 0.6"
+parts:
+  - id: heavier-mass
+    prompt: >-
+      If the total mass of the two blocks is {M:unit}, what is the mass of the more massive block?
+      {_0}{_u}
+    answer: M * (1 + r) / 2
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: lighter-mass
+    prompt: >-
+      If the total mass of the two blocks is {M:unit}, what is the mass of the less massive block?
+      {_0}{_u}
+    answer: M * (1 - r) / 2
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { d: 1.4, v: 3.1, M: 13, g: 9.8 }
+  parts:
+    - { id: heavier-mass, answer: 8.776, unit: kg, source: P36 }
+    - { id: lighter-mass, answer: 4.635, unit: kg, source: P37, vars: { d: 1.6, v: 3 } }

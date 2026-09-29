@@ -1,0 +1,35 @@
+# P43 — a car coasting (no engine power) must reach the top of a hill of height h. Energy
+# conservation with zero speed at the top: ½ m v² = m g h, so v = √(2 g h).
+id: phys161-e2-p043-car-hill-speed
+title: Speed needed to coast up a hill
+source: { document: PHYS161_Exam2, labels: [ P43 ] }
+section: Energy conservation
+tags: [ energy-conservation, kinetic-energy ]
+narrative: >-
+  On the way up the hill, a car shows the sign of “fuel starvation”.
+vars:
+  - {
+      name: h,
+      kind: range,
+      min: 11.0,
+      max: 26.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: height
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: speed
+    prompt: >-
+      To reach the top of the hill of {h:unit} high, calculate how fast the car must be moving. The
+      gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: sqrt(2 * g * h)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { h: 18.5, g: 9.8 }
+  parts:
+    - { id: speed, answer: 19.04205871223, unit: m/s, source: P43 }

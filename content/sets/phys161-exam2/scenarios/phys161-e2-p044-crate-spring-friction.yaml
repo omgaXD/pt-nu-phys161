@@ -1,0 +1,45 @@
+# P44/P45 — a spring storing energy E launches a crate that slides a total distance D on a rough
+# horizontal surface. The constant friction force removes all of E over D, so f = E / D; at a
+# distance s from the start, ½ m v² = E − f s = E (1 − s/D), so v = √(2 E (1 − s/D) / m).
+# The base canonical values are P44's; P45 overrides the crate, spring energy and sliding
+# distance with its own and asks about a second position s₂.
+id: phys161-e2-p044-crate-spring-friction
+title: Crate launched by a spring slowing by friction
+source: { document: PHYS161_Exam2, labels: [ P44, P45 ] }
+section: Energy conservation
+tags: [ energy-conservation, spring, friction, multi-part ]
+narrative: >-
+  On a horizontal surface, a crate with mass {m:unit} is placed against a spring that stores
+  {E:unit} of energy. The spring is released, and the crate slides {D:unit} before coming to rest
+  due to friction.
+vars:
+  - { name: m, kind: range, min: 25, max: 60, step: 1, unit: kg }
+  - { name: E, kind: range, min: 300, max: 600, step: 10, unit: J, label: stored spring energy }
+  - { name: D, kind: range, min: 4.0, max: 8.0, step: 0.1, decimals: 1, unit: m }
+  - { name: s1, kind: range, min: 1.0, max: 3.5, step: 0.1, decimals: 1, unit: m }
+  - { name: s2, kind: range, min: 1.0, max: 3.5, step: 0.1, decimals: 1, unit: m }
+constraints:
+  # Both positions lie well before the stopping point, so the speed is not the square root of a
+  # near-zero difference; the two asked positions differ.
+  - "s1 < 0.6 * D and s2 < 0.6 * D"
+  - "s1 != s2"
+parts:
+  - id: speed-at-s1
+    prompt: >-
+      What is the speed of the crate when it is {s1:unit} from its initial position? {_0}{_u}
+    answer: sqrt(2 * E * (1 - s1 / D) / m)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: speed-at-s2
+    prompt: >-
+      What is the speed of the crate when it is {s2:unit} from its initial position? {_0}{_u}
+    answer: sqrt(2 * E * (1 - s2 / D) / m)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 37, E: 410, D: 5, s1: 2, s2: 2.1 }
+  parts:
+    - { id: speed-at-s1, answer: 3.647, unit: m/s, source: P44 }
+    - { id: speed-at-s2, answer: 3.60972, unit: m/s, source: P45, vars: { m: 47, E: 480, D: 5.8 } }

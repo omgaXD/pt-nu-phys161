@@ -1,0 +1,37 @@
+# P34/P35 — a force F(x) = a x² + b x (N, x in m) along the x axis. With U(0) = 0 the potential
+# energy is U(x) = −∫₀ˣ F dx = −(a x³/3 + b x²/2); the force magnitude is |F(x)|.
+# The base canonical values are P34's; P35 overrides the coefficients with its own and asks
+# about a second position x₂.
+id: phys161-e2-p034-quadratic-force-potential
+title: Potential energy of a quadratic force
+source: { document: PHYS161_Exam2, labels: [ P34, P35 ] }
+section: Potential energy
+tags: [ potential-energy, force, calculus, multi-part ]
+narrative: >-
+  A force $F$, measured in newtons, varies along the x-axis, with the distance measured in meters,
+  according to the following law: $F(x) = {a}x^2 + {b}x$.
+vars:
+  - { name: a, kind: range, min: 0.8, max: 2.0, step: 0.1, decimals: 1, unit: N/m^2 }
+  - { name: b, kind: range, min: 2, max: 6, step: 1, unit: N/m }
+  - { name: x1, kind: range, min: 4, max: 10, step: 1, unit: m }
+  - { name: x2, kind: range, min: 4, max: 10, step: 1, unit: m }
+parts:
+  - id: potential
+    prompt: >-
+      Find the potential energy $U(x)$ associated with this force at $x = {x1}$ m. Assume that $U(0)
+      = 0$. {_0}{_u}
+    answer: -(a * x1^3 / 3 + b * x1^2 / 2)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: force-magnitude
+    prompt: "Find the magnitude of this force at $x = {x2}$ m. {_0}{_u}"
+    answer: abs(a * x2^2 + b * x2)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { a: 1.3, b: 4, x1: 8, x2: 7 }
+  parts:
+    - { id: potential, answer: -349.867, unit: J, source: P34 }
+    - { id: force-magnitude, answer: 94.5, unit: N, source: P35, vars: { a: 1.5, b: 3 } }

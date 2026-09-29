@@ -1,0 +1,54 @@
+# P40/P41 — a block launched by a horizontal spring along a frictionless floor that runs into a
+# frictionless incline (see figure). Leaving the spring: ½ k x² = ½ m v², so v = x √(k/m).
+# Up the incline: ½ k x² = m g L sin θ, so L = k x² / (2 m g sin θ).
+# The figure prints only the symbols k, m and θ, so every parameter is randomized. The base
+# canonical values are P40's; P41 overrides them with its own numbers.
+id: phys161-e2-p040-spring-launch-incline
+title: Block launched by a spring up an incline
+source: { document: PHYS161_Exam2, labels: [ P40, P41 ] }
+section: Energy conservation
+tags: [ energy-conservation, spring, incline, multi-part ]
+figure:
+  id: spring-incline
+  src: figures/unnamed_024_GNcJ.png
+  alt: >-
+    A block of mass m pressed against a compressed horizontal spring of force constant k attached to
+    a wall on the left. An arrow on the block points toward the wall. To the right, the level floor
+    rises into an incline making an angle θ with the horizontal.
+narrative: >-
+  A {m:unit} block is pushed against a spring with negligible mass and force constant $k =
+  {k:unit}$, compressing it {x:unit}. When the block is released, it moves along a frictionless
+  incline with slope {theta:unit}. The gravitational acceleration is $g = {g:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 0.8, max: 2.5, step: 0.1, decimals: 1, unit: kg }
+  - { name: k, kind: range, min: 300, max: 650, step: 10, unit: N/m }
+  - { name: x, kind: range, min: 0.08, max: 0.16, step: 0.01, decimals: 2, unit: m }
+  - { name: theta, kind: range, min: 25, max: 45, step: 1, unit: "°" }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: distance-up-incline
+    prompt: >-
+      How far does the block travel up the incline before starting to slide back down? {_0}{_u}
+    answer: k * x^2 / (2 * m * g * sin(rad(theta)))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: speed-leaving-spring
+    prompt: >-
+      What is the speed of the block at the instant it loses contact with the spring? {_0}{_u}
+    answer: x * sqrt(k / m)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1, k: 480, x: 0.12, theta: 37, g: 9.8 }
+  parts:
+    - { id: distance-up-incline, answer: 0.586, unit: m, source: P40 }
+    - {
+        id: speed-leaving-spring,
+        answer: 1.55597,
+        unit: m/s,
+        source: P41,
+        vars: { m: 1.9, k: 460, x: 0.1, theta: 30 }
+      }
