@@ -1,0 +1,36 @@
+# P27 — all the potential energy of the falling water becomes electric energy, so the power is
+# the rate of potential-energy loss: P = (Δm/Δt) g h.
+id: phys161-e2-p027-waterfall-power
+title: Electrical power from a waterfall
+source: { document: PHYS161_Exam2, labels: [ P27 ] }
+section: Power
+tags: [ power, potential-energy ]
+narrative: >-
+  The average rate of water fall is {rate:unit}. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: h, kind: range, min: 40, max: 85, step: 1, unit: m, label: height }
+  - {
+      name: rate,
+      kind: range,
+      min: 3.5e+5,
+      max: 7.5e+5,
+      step: 1e+4,
+      sigfigs: 2,
+      unit: kg/s,
+      label: mass flow rate
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: power
+    prompt: >-
+      Calculate how much electrical power could be produced by a waterfall which is {h:unit} high,
+      if all the potential energy of the water were converted into electric energy. {_0}{_u}
+    answer: rate * g * h
+    unit: W
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { h: 62, rate: 5.4e+5 }
+  parts:
+    - { id: power, answer: 328104000, unit: W, source: P27 }

@@ -1,0 +1,26 @@
+# P28 — inverse of the waterfall power problem: all the potential energy of the falling water
+# becomes electric energy, P = (Δm/Δt) g h, so Δm/Δt = P / (g h). P is given in MW.
+id: phys161-e2-p028-waterfall-flow-rate
+title: Water flow rate of a waterfall power plant
+source: { document: PHYS161_Exam2, labels: [ P28 ] }
+section: Power
+tags: [ power, potential-energy ]
+narrative: >-
+  A waterfall {h:unit} high produces {P:unit} of electrical power, assuming all the potential energy
+  of the water is converted into electric energy. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: h, kind: range, min: 55, max: 110, step: 1, unit: m, label: height }
+  - { name: P, kind: range, min: 28, max: 60, step: 1, unit: MW, label: electrical power }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: flow-rate
+    prompt: "What is the average rate of water fall (mass per unit time)? {_0}{_u}"
+    answer: P * 1e6 / (g * h)
+    unit: kg/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { h: 81, P: 43 }
+  parts:
+    - { id: flow-rate, answer: 54169.8, unit: kg/s, source: P28 }

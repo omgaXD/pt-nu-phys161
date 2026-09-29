@@ -1,0 +1,51 @@
+# P15/P16/P17 — a bullet accelerated uniformly from rest to speed v over a barrel length d.
+# Work–energy: W = ½ m v² = F_avg d, so F_avg = m v² / (2d); uniform acceleration gives the
+# average speed v/2, so the time in the barrel is t = 2d / v (the mass is a red herring there).
+# Mass is given in g and distance in cm (formulas use kg and m). The base canonical values are
+# P15's; P16 and P17 override them with their own numbers.
+id: phys161-e2-p015-bullet-in-gun
+title: Bullet accelerated in a gun barrel
+source: { document: PHYS161_Exam2, labels: [ P15, P16, P17 ] }
+section: Kinetic energy
+tags: [ kinetic-energy, work-energy, kinematics, multi-part ]
+narrative: >-
+  In a gun, a {m:unit} bullet is accelerated uniformly from rest to a speed of {v:unit}.
+vars:
+  - { name: m, kind: range, min: 8, max: 20, step: 0.5, unit: g, label: bullet mass }
+  - { name: v, kind: range, min: 600, max: 900, step: 1, unit: m/s, label: muzzle speed }
+  - { name: d, kind: range, min: 30, max: 70, step: 0.5, unit: cm, label: barrel length }
+parts:
+  - id: average-force
+    prompt: >-
+      Assuming the bullet passes {d:unit} distance inside the gun, find the magnitude of the average
+      net force that acted on it. {_0}{_u}
+    answer: (m / 1000) * v^2 / (2 * d / 100)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: time-in-barrel
+    prompt: >-
+      Assuming the bullet travels {d:unit} inside the gun, find the time the bullet spends inside
+      the gun. {_0}{_u}
+    answer: 2 * (d / 100) / v
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: work
+    prompt: "Find the work that is done on the bullet. {_0}{_u}"
+    answer: 0.5 * (m / 1000) * v^2
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 11, v: 751, d: 37 }
+  parts:
+    - { id: average-force, answer: 8383.7986486486, unit: N, source: P15 }
+    - {
+        id: time-in-barrel,
+        answer: 0.00162698,
+        unit: s,
+        source: P16,
+        vars: { m: 17.5, v: 756, d: 61.5 }
+      }
+    - { id: work, answer: 3126.84, unit: J, source: P17, vars: { v: 754 } }

@@ -1,0 +1,41 @@
+# P25 — a professor in a desk chair on frictionless rollers is pushed a distance d up a ramp at
+# angle θ by a constant horizontal force F. Work–energy along the incline:
+# ½ m v₂² = ½ m v₁² + F d cos θ − m g d sin θ. The normal force does no work.
+id: phys161-e2-p025-professor-ramp
+title: Professor pushed up a ramp in a desk chair
+source: { document: PHYS161_Exam2, labels: [ P25 ] }
+section: Kinetic energy
+tags: [ work-energy, incline ]
+narrative: >-
+  A physics professor is pushed up a ramp inclined upward at {theta:unit} above the horizontal as he
+  sits in his desk chair that slides on frictionless rollers. The combined mass of the professor and
+  chair is {m:unit}. He is pushed {d:unit} along the incline by a group of students who together
+  exert a constant horizontal force of {F:unit}. The professor's speed at the bottom of the ramp is
+  {v1:unit}.
+vars:
+  - { name: theta, kind: range, min: 18, max: 34, step: 1, unit: "°" }
+  - { name: m, kind: range, min: 65, max: 110, step: 1, unit: kg }
+  - { name: d, kind: range, min: 1.8, max: 3.4, step: 0.1, decimals: 1, unit: m }
+  - { name: F, kind: range, min: 350, max: 650, step: 10, unit: N }
+  - { name: v1, kind: range, min: 1.7, max: 3.1, step: 0.1, decimals: 1, unit: m/s }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  # Net work of the push and gravity over the incline (normal force does no work).
+  - { name: W, expr: "(F * cos(rad(theta)) - m * g * sin(rad(theta))) * d", unit: J }
+constraints:
+  # The professor must still be moving up at the top of the ramp, with a margin so the answer
+  # is not the square root of a near-zero difference.
+  - "v1^2 + 2 * W / m > 1"
+parts:
+  - id: speed-at-top
+    prompt: >-
+      Find his speed at the top of the ramp. The gravitational acceleration is $g = {g:unit}$.
+      {_0}{_u}
+    answer: sqrt(v1^2 + 2 * W / m)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { theta: 26, m: 87, d: 2.6, F: 500, v1: 2.4 }
+  parts:
+    - { id: speed-at-top, answer: 3.206, unit: m/s, source: P25 }

@@ -1,0 +1,39 @@
+# P26 — an engine pulls a block up an incline at constant speed against gravity and kinetic
+# friction: F = m g (sin θ + μ_k cos θ), and the power is P = F v.
+# The figure prints only the symbol θ, so every parameter is randomized.
+id: phys161-e2-p026-engine-incline-power
+title: Power to pull a block up a rough incline
+source: { document: PHYS161_Exam2, labels: [ P26 ] }
+section: Power
+tags: [ power, friction, incline ]
+figure:
+  id: fig
+  src: figures/unnamed_031_GNcJ.png
+  alt: >-
+    A dark block on a dotted incline that rises from the lower left at angle θ to a flat top. A rope
+    runs from the block up along the incline, parallel to the surface, to a winch mounted at the top
+    edge of the slope.
+narrative: >-
+  Electric engine pulls an {m}-kg block of concrete with a constant speed of {v:unit} up an incline
+  with an angle of inclination θ={theta:unit}. The coefficient of kinetic friction between the block
+  and the incline is {mu}. {@fig}
+vars:
+  - { name: m, kind: range, min: 1300, max: 2300, step: 50, unit: kg }
+  - { name: v, kind: range, min: 2.00, max: 3.70, step: 0.01, decimals: 2, unit: m/s }
+  - { name: theta, kind: range, min: 15, max: 27, step: 1, unit: "°" }
+  - { name: mu, kind: range, min: 0.48, max: 0.90, step: 0.01, decimals: 2 }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: power
+    prompt: >-
+      How much power must be supplied by the engine? The gravitational acceleration is $g =
+      {g:unit}$. {_0}{_u}
+    answer: m * g * (sin(rad(theta)) + mu * cos(rad(theta))) * v
+    unit: W
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1800, v: 2.86, theta: 21, mu: 0.69 }
+  parts:
+    - { id: power, answer: 50578.47, unit: W, source: P26 }

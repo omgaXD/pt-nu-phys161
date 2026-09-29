@@ -1,0 +1,26 @@
+# P19 — a proton and an electron with the same speed: K = ½ m v², so the kinetic energies scale
+# with the masses, K_p = (m_p / m_e) K_e. The mass ratio 1836 is a physical constant.
+id: phys161-e2-p019-proton-same-speed-energy
+title: Proton with the same speed as an electron
+source: { document: PHYS161_Exam2, labels: [ P19 ] }
+section: Kinetic energy
+tags: [ kinetic-energy, small-magnitudes ]
+narrative: >-
+  The mass of a proton is {ratio} times the mass of an electron. An electron has kinetic energy
+  {Ke:unit}.
+vars:
+  - { name: Ke, kind: range, min: 2e-16, max: 5e-16, step: 1e-18, sigfigs: 3, unit: J }
+derived:
+  - { name: ratio, expr: "1836" }
+parts:
+  - id: proton-energy
+    prompt: >-
+      If a proton has the same speed as the electron, what is its kinetic energy? {_0}{_u}
+    answer: ratio * Ke
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { Ke: 3.55e-16 }
+  parts:
+    - { id: proton-energy, answer: 6.5178e-13, unit: J, source: P19 }

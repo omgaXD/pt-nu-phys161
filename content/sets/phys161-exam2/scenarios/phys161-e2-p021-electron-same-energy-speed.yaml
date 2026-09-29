@@ -1,0 +1,27 @@
+# P21 — an electron with the same kinetic energy as a proton moving at speed v_p:
+# ½ m_e v_e² = ½ m_p v_p², so v_e = v_p √(m_p / m_e). The mass ratio 1836 is a physical constant.
+# The proton speed stays at or below 1.4×10⁶ m/s so the electron stays well below light speed.
+id: phys161-e2-p021-electron-same-energy-speed
+title: Electron with the same kinetic energy as a proton
+source: { document: PHYS161_Exam2, labels: [ P21 ] }
+section: Kinetic energy
+tags: [ kinetic-energy ]
+narrative: >-
+  The mass of a proton is {ratio} times the mass of an electron. A proton is traveling at speed
+  {vp:unit}.
+vars:
+  - { name: vp, kind: range, min: 6e+5, max: 1.4e+6, step: 5e+4, unit: m/s, label: proton speed }
+derived:
+  - { name: ratio, expr: "1836" }
+parts:
+  - id: electron-speed
+    prompt: >-
+      At what speed would an electron have the same kinetic energy as the proton? {_0}{_u}
+    answer: vp * sqrt(ratio)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { vp: 1e+6 }
+  parts:
+    - { id: electron-speed, answer: 42848570.57, unit: m/s, source: P21 }

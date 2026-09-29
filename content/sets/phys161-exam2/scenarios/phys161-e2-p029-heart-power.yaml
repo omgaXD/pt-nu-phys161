@@ -1,0 +1,33 @@
+# P29 — the heart's daily work equals lifting the day's volume of blood a height h:
+# W = ρ V g h, and the average power is W / (1 day) = ρ V g h / 86400 s. The volume is given in
+# litres (1 L = 0.001 m³). The density of blood is a fixed property, kept as a constant.
+id: phys161-e2-p029-heart-power
+title: Power output of the human heart
+source: { document: PHYS161_Exam2, labels: [ P29 ] }
+section: Power
+tags: [ power, work, density ]
+narrative: >-
+  Each day the human heart takes in and discharges about {V:unit} of blood. Assume that the work
+  done by the heart is equal to the work required to lift this amount of blood a height equal to
+  {h:unit}. The density of blood is {rho:unit}.
+vars:
+  - { name: V, kind: range, min: 5000, max: 10000, step: 10, unit: L, label: daily blood volume }
+  - { name: h, kind: range, min: 1.30, max: 2.20, step: 0.01, decimals: 2, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: rho, expr: "1.05e3", unit: kg/m^3 }
+  - { name: day, expr: "24 * 3600", unit: s }
+parts:
+  - id: power
+    prompt: >-
+      What is the heart's power output in watts? The gravitational acceleration is $g = {g:unit}$. 1
+      liter = $0.001\ \text{m}^3$. {_0}{_u}
+    answer: rho * (V * 0.001) * g * h / day
+    unit: W
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { V: 7450, h: 1.77 }
+  parts:
+    - { id: power, answer: 1.571, unit: W, source: P29 }

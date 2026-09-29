@@ -1,0 +1,31 @@
+# P24 — magnitude of the change of momentum from two velocity vectors: |Δp| = m |v₂ − v₁|.
+# Components are independent integers; the initial and final component ranges do not overlap,
+# so the velocity always changes.
+id: phys161-e2-p024-momentum-change-vector
+title: Change of momentum from two velocity vectors
+source: { document: PHYS161_Exam2, labels: [ P24 ] }
+section: Kinetic energy
+tags: [ momentum, vectors ]
+narrative: >-
+  A {m:unit} object has a velocity of $\left({v1}\right)\,\text{m/s}$. Its velocity then changes to
+  $\left({v2}\right)\,\text{m/s}$.
+vars:
+  - { name: m, kind: range, min: 1, max: 5, step: 1, unit: kg }
+  - { name: v1x, kind: range, min: 1, max: 4, step: 1 }
+  - { name: v1y, kind: range, min: 1, max: 4, step: 1 }
+  - { name: v2x, kind: range, min: 5, max: 10, step: 1 }
+  - { name: v2y, kind: range, min: 5, max: 10, step: 1 }
+derived:
+  - { name: v1, expr: "[v1x, v1y]", unit: m/s }
+  - { name: v2, expr: "[v2x, v2y]", unit: m/s }
+parts:
+  - id: momentum-change
+    prompt: "What is the magnitude of the change in the object's momentum? {_0}{_u}"
+    answer: m * norm(v2 - v1)
+    unit: kg m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 2, v1x: 2, v1y: 1, v2x: 7, v2y: 8 }
+  parts:
+    - { id: momentum-change, answer: 17.2047, unit: kg m/s, source: P24 }
