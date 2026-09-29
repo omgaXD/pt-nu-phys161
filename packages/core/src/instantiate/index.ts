@@ -46,6 +46,7 @@ export interface InstancePart {
   unit?: string;
   answerType: AnswerType;
   integer?: boolean;
+  exactUnit?: boolean;
   hintHtml?: string;
   solutionHtml?: string;
 }
@@ -302,6 +303,7 @@ export function buildInstance(
     };
     if (p.unit !== undefined) part.unit = p.unit;
     if (p.integer) part.integer = true;
+    if (p.exactUnit) part.exactUnit = true;
     if (p.hint !== undefined) {
       part.hintHtml = render(p.hint, ctx, 'hint', { kind: 'template', field: 'hint', partId: p.id }).html;
     }

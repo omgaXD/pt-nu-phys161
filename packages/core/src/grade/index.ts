@@ -2,12 +2,27 @@ import { type AnswerErrorCode, validateAnswer } from '../expr/acceptance.js';
 import type { InstancePart, ProblemInstance } from '../instantiate/index.js';
 import { effectiveMark, effectiveTolerance, effectiveUnitPenalty } from '../schema/defaults.js';
 import type { AnswerType, Part, Scenario } from '../schema/scenario.js';
-import { areCompatible, DEFAULT_UNIT_TABLE, tryParseUnit } from '../units/index.js';
+import { areCompatible, DEFAULT_UNIT_TABLE, tryParseUnit, type UnitMap } from '../units/index.js';
 
 /** What a student submitted for one part: separate fields, or one combined field. */
 export type PartResponse = { value: string; unit?: string } | { combined: string };
 
 export type GradeErrorCode = AnswerErrorCode | 'no-response' | 'unit-syntax';
+
+/** What the answer inputs of one part hold. */
+export interface FieldContents {
+  /** The value field, or the whole "number unit" text in combined mode. */
+  value: string;
+  /** The separate unit field (empty in combined mode). */
+  unit: string;
+}
+
+/** Turn field contents into the response `gradePart` expects; blank fields are no response. */
+export function responseFromFields(part: Pick<InstancePart, 'slots'>, fields: FieldContents | undefined): PartResponse | undefined {
+  if (!fields || (fields.value.trim() === '' && fields.unit.trim() === '')) return undefined;
+  if (part.slots.some((s) => s.kind === 'combined')) return { combined: fields.value };
+  return { value: fields.value, unit: fields.unit };
+}
 
 export interface PartResult {
   partId: string;
@@ -49,7 +64,7 @@ export function splitCombinedAnswer(input: string, answerType: AnswerType = 'num
   for (let i = 1; i < s.length; i++) {
     const c = s[i]!;
     const prev = s[i - 1]!;
-    if (/[\p{L}µ°Ω]/u.test(c) && !/[\p{L}_]/u.test(prev)) candidates.push(i);
+    if (/[\p{L}µ°Ω%]/u.test(c) && !/[\p{L}_]/u.test(prev)) candidates.push(i);
   }
   for (const known of [true, false]) {
     for (const i of candidates) {
@@ -68,7 +83,22 @@ function normalizeResponse(response: PartResponse, answerType: AnswerType): { va
   return { value: response.value, unit: response.unit ?? '' };
 }
 
-type GradablePart = Pick<Part, 'id' | 'answerType' | 'unit' | 'integer' | 'tolerance' | 'unitPenalty'>;
+/** The part fields grading reads (a stored snapshot needs only these plus the model answer). */
+export type GradablePart = Pick<Part, 'id' | 'answerType' | 'unit' | 'integer' | 'tolerance' | 'unitPenalty' | 'exactUnit'>;
+
+/** Same components with the same exponents, in any order: `m s^-1` ≡ `m/s`, but `km/h` ≠ `m/s`. */
+function sameUnit(a: UnitMap, b: UnitMap): boolean {
+  const ea = Object.entries(a);
+  return ea.length === Object.keys(b).length && ea.every(([n, e]) => b[n] === e);
+}
+
+/** Conversion factor from the student's unit to the expected one, or false. */
+function unitFactor(student: string, part: GradablePart & { unit: string }): number | false {
+  if (!part.exactUnit) return areCompatible(student, part.unit);
+  const a = tryParseUnit(student);
+  const b = tryParseUnit(part.unit);
+  return a !== null && b !== null && sameUnit(a, b) ? 1 : false;
+}
 
 /** |value − model| within tolerance (§3.4); exact integer match for `integer` parts. */
 export function withinTolerance(value: number, model: number, part: Pick<Part, 'integer' | 'tolerance'>): boolean {
@@ -119,7 +149,7 @@ export function gradePart(
   base.studentUnit = unit;
 
   if (part.unit !== undefined) {
-    const factor = areCompatible(unit, part.unit);
+    const factor = unitFactor(unit, { ...part, unit: part.unit });
     if (factor !== false) {
       base.unitOk = true;
       base.conversionFactor = factor;

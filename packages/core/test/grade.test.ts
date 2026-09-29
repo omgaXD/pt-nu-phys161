@@ -6,6 +6,7 @@ import {
   type Part,
   type PartResponse,
   type ProblemInstance,
+  responseFromFields,
   type Scenario,
   splitCombinedAnswer,
   withinTolerance,
@@ -166,7 +167,42 @@ describe('splitCombinedAnswer', () => {
     ['42', '42', ''],
     ['1.5e3', '1.5e3', ''],
     ['12 widgets', '12', 'widgets'],
+    ['12%', '12', '%'],
+    ['12 %', '12', '%'],
+    ['300 K', '300', 'K'],
+    ['25 °C', '25', '°C'],
+    ['862.9 J/(kg K)', '862.9', 'J/(kg K)'],
   ])('%s → value %s, unit %s', (input, value, unit) => {
     expect(splitCombinedAnswer(input)).toEqual({ value, unit });
+  });
+});
+
+describe('exactUnit and percent', () => {
+  const part = (over: Partial<Part>): Part =>
+    ({ id: 'a', prompt: '', answerType: 'numeric', answer: '0', tolerance: {}, ...over }) as Part;
+
+  it('converts within a class by default, but not when exactUnit is set', () => {
+    const p = part({ unit: 'km/h' });
+    expect(gradePart(p, { modelAnswer: 72 }, { combined: '20 m/s' })).toMatchObject({ valueOk: true, unitOk: true, fraction: 1 });
+    const exact = part({ unit: 'km/h', exactUnit: true });
+    expect(gradePart(exact, { modelAnswer: 72 }, { combined: '20 m/s' })).toMatchObject({ unitOk: false, fraction: 0 });
+    expect(gradePart(exact, { modelAnswer: 72 }, { combined: '72 km/h' })).toMatchObject({ valueOk: true, unitOk: true, fraction: 1 });
+    // Same components in another order or spelling still count as exact.
+    expect(gradePart(part({ unit: 'm/s', exactUnit: true }), { modelAnswer: 3 }, { combined: '3 m s^-1' }).fraction).toBe(1);
+  });
+
+  it('grades percent answers', () => {
+    const p = part({ unit: '%' });
+    expect(gradePart(p, { modelAnswer: 12.5 }, { combined: '12.5%' }).fraction).toBe(1);
+    expect(gradePart(p, { modelAnswer: 12.5 }, { combined: '12.5' })).toMatchObject({ valueOk: true, unitOk: false, fraction: 0 });
+  });
+
+  it('turns field contents into responses', () => {
+    const combined = { slots: [{ index: 0, kind: 'combined' as const }] };
+    const separate = { slots: [{ index: 0, kind: 'value' as const }, { index: 0, kind: 'unit' as const }] };
+    expect(responseFromFields(combined, { value: '3 m', unit: '' })).toEqual({ combined: '3 m' });
+    expect(responseFromFields(separate, { value: '3', unit: 'm' })).toEqual({ value: '3', unit: 'm' });
+    expect(responseFromFields(separate, { value: ' ', unit: '' })).toBeUndefined();
+    expect(responseFromFields(separate, undefined)).toBeUndefined();
   });
 });

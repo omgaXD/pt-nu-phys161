@@ -131,6 +131,11 @@ export const PartSchema = z.strictObject({
   tolerance: ToleranceSchema.default({}),
   /** The answer is an exact integer; tolerance does not apply. */
   integer: z.boolean().optional(),
+  /**
+   * The unit must be written exactly as expected (same components, any order):
+   * no conversion within a dimension class. For "express the answer in km/h".
+   */
+  exactUnit: z.boolean().optional(),
   /** Weight within the scenario, default 1. */
   mark: z.number().positive().optional(),
   difficulty: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)]).optional(),

@@ -50,14 +50,26 @@ export const SI_CLASSES: readonly UnitClass[] = Object.freeze([
   { id: 'N', units: prefixed('N', 1, 'M k m µ n p f') },
   {
     id: 'J',
-    units: { ...prefixed('J', 1, 'k M G T P m µ n p f'), ...prefixed('eV', 1 / 6.24150947e18, 'k M G') },
+    units: {
+      ...prefixed('J', 1, 'k M G T P m µ n p f'),
+      ...prefixed('eV', 1 / 6.24150947e18, 'k M G'),
+      cal: 4.184,
+      kcal: 4184,
+    },
   },
   { id: 'W', units: prefixed('W', 1, 'k M G T P m µ n p f') },
-  { id: 'Pa', units: prefixed('Pa', 1, 'k M G T P') },
+  { id: 'Pa', units: { ...prefixed('Pa', 1, 'k M G T P'), atm: 101_325, bar: 1e5 } },
   // rpm is a rotational frequency: 1 rpm = 1/60 Hz.
   { id: 'Hz', units: { ...prefixed('Hz', 1, 'k M G T P E'), rpm: 1 / 60 } },
   { id: 'rad', units: { rad: 1, rev: 2 * Math.PI, '°': Math.PI / 180, deg: Math.PI / 180 } },
   { id: 'L', units: prefixed('L', 1e-3, 'm µ d c') },
+  // Thermodynamics. Celsius is its own class: an offset scale, never converted to K.
+  { id: 'K', units: prefixed('K', 1, 'm') },
+  { id: '°C', units: { '°C': 1 } },
+  { id: 'mol', units: prefixed('mol', 1, 'k m µ') },
+  // Logarithmic and relative "units" only match themselves (listed so they count as known).
+  { id: 'dB', units: { dB: 1 } },
+  { id: '%', units: { '%': 1 } },
 ]);
 
 export interface UnitTable {

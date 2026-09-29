@@ -30,7 +30,7 @@ export function normalizeUnitString(s: string): string {
     .trim();
 }
 
-const NAME_CHAR = /[\p{L}°Ω]/u;
+const NAME_CHAR = /[\p{L}°Ω%]/u;
 
 function fail(code: string, message: string, input: string): never {
   throw new UnitParseError(code, message, { input });

@@ -101,6 +101,34 @@ describe('areCompatible — deliberate consequences (§5)', () => {
     expect(areCompatible('m/s/s', 'm/s^2')).toBe(false); // unparseable is incompatible
   });
 
+  it('thermodynamics: K and °C never convert, atm/bar are pressures, cal is energy, mol has prefixes', () => {
+    expect(areCompatible('K', '°C')).toBe(false);
+    expect(areCompatible('mK', 'K')).toBeCloseTo(1e-3);
+    expect(areCompatible('°C', '°C')).toBe(1);
+    expect(parseUnit('°C')).toEqual({ '°C': 1 });
+    expect(areCompatible('atm', 'Pa')).toBe(101_325);
+    expect(areCompatible('bar', 'kPa')).toBe(100);
+    expect(areCompatible('kcal', 'J')).toBe(4184);
+    expect(areCompatible('J/(mol K)', 'J/mol K')).toBe(1);
+    expect(areCompatible('kJ/(kmol K)', 'J/(mol K)')).toBeCloseTo(1);
+    expect(areCompatible('W/(m K)', 'W/(m K)')).toBe(1);
+  });
+
+  it('percent and decibels are units that only match themselves', () => {
+    expect(parseUnit('%')).toEqual({ '%': 1 });
+    expect(areCompatible('%', '%')).toBe(1);
+    expect(areCompatible('%', '')).toBe(false);
+    expect(areCompatible('dB', 'dB')).toBe(1);
+    expect(DEFAULT_UNIT_TABLE.lookup('%')).toEqual({ classId: '%', factor: 1 });
+  });
+
+  it('leaves in and ha unknown, so they only match themselves (unit-conversion prompts)', () => {
+    expect(DEFAULT_UNIT_TABLE.lookup('in')).toBeUndefined();
+    expect(DEFAULT_UNIT_TABLE.lookup('ha')).toBeUndefined();
+    expect(areCompatible('in^3', 'in^3')).toBe(1);
+    expect(areCompatible('in^3', 'm^3')).toBe(false);
+  });
+
   it('has no name in two classes', () => {
     expect(() => createUnitTable([...SI_CLASSES, { id: 'x', units: { m: 1 } }])).toThrow(/more than one class/);
     expect(DEFAULT_UNIT_TABLE.lookup('kg')).toEqual({ classId: 'g', factor: 1 });
