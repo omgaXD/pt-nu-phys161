@@ -1,0 +1,36 @@
+# P66 — a ball dropped from h hits soft clay at v = √(2 g h) and stops without rebounding
+# (perfectly inelastic), so the impulse is J = m √(2 g h). Mass is given in g.
+id: phys161-e2-p066-steel-ball-clay
+title: Steel ball stopped by soft clay
+source: { document: PHYS161_Exam2, labels: [ P66 ] }
+section: Impulse and collisions
+tags: [ impulse, momentum ]
+narrative: >-
+  A steel ball with mass {m:unit} is dropped from a height of {h:unit} onto a horizontal slab of
+  soft clay, and it does not rebound. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 35, max: 70, step: 1, unit: g, label: ball mass }
+  - {
+      name: h,
+      kind: range,
+      min: 2.00,
+      max: 3.50,
+      step: 0.05,
+      decimals: 2,
+      unit: m,
+      label: drop height
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: impulse
+    prompt: >-
+      Calculate the magnitude of the impulse delivered to the ball during the impact. {_0}{_u}
+    answer: (m / 1000) * sqrt(2 * g * h)
+    unit: kg m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 51, h: 2.75, g: 9.8 }
+  parts:
+    - { id: impulse, answer: 0.374425, unit: kg m/s, source: P66 }

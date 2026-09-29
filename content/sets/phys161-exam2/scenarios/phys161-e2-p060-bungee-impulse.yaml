@@ -1,0 +1,52 @@
+# P60 — bungee jumper: free fall through the cord length L gives v = √(2 g L) when the cord goes
+# taut; the cord stretches until the jumper stops, so the impulse while it stretches is
+# |Δp| = m √(2 g L). The bridge height and the lowest point only fix that the cord does stretch.
+id: phys161-e2-p060-bungee-impulse
+title: Impulse on a bungee jumper
+source: { document: PHYS161_Exam2, labels: [ P60 ] }
+section: Impulse and collisions
+tags: [ impulse, momentum, free-fall ]
+narrative: >-
+  A bungee jumper leaps off a bridge whose deck is {H:unit} above the water. Jumper mass is
+  {m:unit}, the bungee cord is {L:unit} long, and the jumper falls to {hlow:unit} above the water
+  before the bungee cord pulls him back up. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: H, kind: range, min: 40, max: 60, step: 1, unit: m, label: bridge height }
+  - {
+      name: m,
+      kind: range,
+      min: 55,
+      max: 90,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: jumper mass
+    }
+  - {
+      name: L,
+      kind: range,
+      min: 18,
+      max: 27,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: cord length
+    }
+  - { name: hlow, kind: range, min: 4, max: 10, step: 1, unit: m, label: lowest height }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "H - hlow - L >= 5" # the cord goes taut and stretches well before the lowest point
+parts:
+  - id: impulse
+    prompt: >-
+      What is the magnitude of the impulse exerted on the bungee jumper while the cord stretches?
+      {_0}{_u}
+    answer: m * sqrt(2 * g * L)
+    unit: kg m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { H: 50, m: 72.6, L: 22.5, hlow: 7, g: 9.8 }
+  parts:
+    - { id: impulse, answer: 1524.6, unit: kg m/s, source: P60 }

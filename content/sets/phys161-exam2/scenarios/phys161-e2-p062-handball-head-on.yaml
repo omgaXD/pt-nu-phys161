@@ -1,0 +1,27 @@
+# P62 — a ball hits a wall head-on and bounces straight back with the same speed:
+# |Δp| = 2 m v, so F_avg = 2 m v / Δt. Mass is given in g.
+id: phys161-e2-p062-handball-head-on
+title: Handball bouncing straight off a wall
+source: { document: PHYS161_Exam2, labels: [ P62 ] }
+section: Impulse and collisions
+tags: [ impulse, momentum, average-force ]
+narrative: >-
+  A {m:unit} handball moving at a speed of {v:unit} strikes a wall head-on, perpendicular to its
+  surface, and bounces straight back with the same speed. It is in contact with the wall for
+  {t:unit}.
+vars:
+  - { name: m, kind: range, min: 250, max: 420, step: 1, unit: g, label: ball mass }
+  - { name: v, kind: range, min: 4.0, max: 7.5, step: 0.1, decimals: 1, unit: m/s }
+  - { name: t, kind: range, min: 0.003, max: 0.008, step: 0.001, decimals: 3, unit: s }
+parts:
+  - id: average-force
+    prompt: >-
+      What is the magnitude of the average force exerted by the ball on the wall? {_0}{_u}
+    answer: 2 * (m / 1000) * v / t
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 330, v: 5.9, t: 0.005 }
+  parts:
+    - { id: average-force, answer: 778.8, unit: N, source: P62 }

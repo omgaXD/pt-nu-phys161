@@ -1,0 +1,28 @@
+# P61 — a ball hits a wall at angle θ to the normal and leaves with the same speed at the same
+# angle: only the normal component reverses, |Δp| = 2 m v cos θ, so F_avg = 2 m v cos θ / Δt.
+# Mass is given in g.
+id: phys161-e2-p061-handball-angled-wall
+title: Handball bouncing off a wall at an angle
+source: { document: PHYS161_Exam2, labels: [ P61 ] }
+section: Impulse and collisions
+tags: [ impulse, momentum, average-force ]
+narrative: >-
+  A {m:unit} handball moving at a speed of {v:unit} strikes a wall at an angle of {theta}° to the
+  normal of the wall and then bounces off with the same speed at the same angle. It is in contact
+  with the wall for {t:unit}.
+vars:
+  - { name: m, kind: range, min: 250, max: 420, step: 1, unit: g, label: ball mass }
+  - { name: v, kind: range, min: 4.0, max: 6.5, step: 0.1, decimals: 1, unit: m/s }
+  - { name: theta, kind: range, min: 40, max: 70, step: 0.1, decimals: 1, unit: "°" }
+  - { name: t, kind: range, min: 0.003, max: 0.008, step: 0.001, decimals: 3, unit: s }
+parts:
+  - id: average-force
+    prompt: "What is the average force exerted by the ball on the wall? {_0}{_u}"
+    answer: 2 * (m / 1000) * v * cos(rad(theta)) / t
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 327, v: 5.2, theta: 54.7, t: 0.005 }
+  parts:
+    - { id: average-force, answer: 393.04, unit: N, source: P61 }

@@ -1,0 +1,35 @@
+# P63 — a stream of bullets bouncing back elastically (speed unchanged): each bullet delivers
+# 2 m v, and n bullets arrive per minute, so F_avg = 2 m v n / 60. Mass is given in g.
+id: phys161-e2-p063-superman-bullets-bounce
+title: Bullets bouncing off Superman
+source: { document: PHYS161_Exam2, labels: [ P63 ] }
+section: Impulse and collisions
+tags: [ impulse, momentum, average-force ]
+narrative: >-
+  When a gangster sprays Superman with {m:unit} bullets at a rate of {n} bullets/min, these bullets
+  simply bounce off Superman's chest with no change in speed of {v:unit}.
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 1.0,
+      max: 2.5,
+      step: 0.1,
+      decimals: 1,
+      unit: g,
+      label: bullet mass
+    }
+  - { name: n, kind: range, min: 100, max: 200, step: 1, label: bullets per minute }
+  - { name: v, kind: range, min: 300, max: 560, step: 5, unit: m/s, label: bullet speed }
+parts:
+  - id: average-force
+    prompt: >-
+      Find the average force exerted by the stream of bullets on Superman's chest. {_0}{_u}
+    answer: 2 * (m / 1000) * v * n / 60
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1.6, n: 146, v: 430 }
+  parts:
+    - { id: average-force, answer: 3.348, unit: N, source: P63 }

@@ -1,0 +1,67 @@
+# P65/P67 — a ball dropped from h hits the slab at v₁ = √(2 g h) (down) and rebounds to h₂, leaving
+# at v₂ = √(2 g h₂) (up), so the impulse is J = m (v₁ + v₂) and the average force over the contact
+# time Δt is J / Δt. Mass is given in g and the contact time in ms. The base canonical values are
+# P65's (which gives no contact time); P67 overrides them with its own numbers.
+id: phys161-e2-p065-steel-ball-rebound
+title: Steel ball rebounding from a steel slab
+source: { document: PHYS161_Exam2, labels: [ P65, P67 ] }
+section: Impulse and collisions
+tags: [ impulse, momentum, average-force, multi-part ]
+narrative: >-
+  A steel ball with mass {m:unit} is dropped from a height of {h:unit} onto a horizontal steel slab.
+  The ball rebounds to a height of {h2:unit}. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 35, max: 70, step: 1, unit: g, label: ball mass }
+  - {
+      name: h,
+      kind: range,
+      min: 2.0,
+      max: 3.2,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: drop height
+    }
+  - {
+      name: h2,
+      kind: range,
+      min: 1.0,
+      max: 2.2,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: rebound height
+    }
+  - { name: t, kind: range, min: 1, max: 3, step: 1, unit: ms, label: contact time }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: J, expr: "(m / 1000) * (sqrt(2 * g * h) + sqrt(2 * g * h2))", unit: kg m/s }
+constraints:
+  - "h2 <= 0.85 * h" # the ball loses energy in the bounce: it rebounds lower than it fell
+parts:
+  - id: impulse
+    prompt: >-
+      Calculate the magnitude of the impulse delivered to the ball during impact. {_0}{_u}
+    answer: J
+    unit: kg m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: average-force
+    prompt: >-
+      If the ball is in contact with the slab for {t:unit}, find the magnitude of the average force
+      on the ball during impact. {_0}{_u}
+    answer: J / (t / 1000)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 44, h: 2.5, h2: 1.5, t: 2, g: 9.8 }
+  parts:
+    - { id: impulse, answer: 0.547, unit: kg m/s, source: P65 }
+    - {
+        id: average-force,
+        answer: 371.7,
+        unit: N,
+        source: P67,
+        vars: { m: 59, h: 2.5, h2: 1.6, t: 2 }
+      }

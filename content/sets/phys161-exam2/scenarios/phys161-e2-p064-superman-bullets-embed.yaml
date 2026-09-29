@@ -1,0 +1,36 @@
+# P64 — a stream of bullets embedding themselves (perfectly inelastic, final speed 0): each bullet
+# delivers m v, and n bullets arrive per minute, so F_avg = m v n / 60. Mass is given in g.
+id: phys161-e2-p064-superman-bullets-embed
+title: Bullets embedding in Superman
+source: { document: PHYS161_Exam2, labels: [ P64 ] }
+section: Impulse and collisions
+tags: [ impulse, momentum, average-force ]
+narrative: >-
+  When a gangster sprays Superman with {m:unit} bullets at a rate of {n} bullets/min, the bullets
+  embed themselves in Superman's chest, arriving at a speed of {v:unit}.
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 1.0,
+      max: 2.5,
+      step: 0.1,
+      decimals: 1,
+      unit: g,
+      label: bullet mass
+    }
+  - { name: n, kind: range, min: 100, max: 200, step: 1, label: bullets per minute }
+  - { name: v, kind: range, min: 300, max: 560, step: 5, unit: m/s, label: bullet speed }
+parts:
+  - id: average-force
+    prompt: >-
+      Find the magnitude of the average force exerted by the stream of bullets on Superman's chest.
+      {_0}{_u}
+    answer: (m / 1000) * v * n / 60
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1.7, n: 146, v: 445 }
+  parts:
+    - { id: average-force, answer: 1.84082, unit: N, source: P64 }

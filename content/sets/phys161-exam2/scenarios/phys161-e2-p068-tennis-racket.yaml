@@ -1,0 +1,63 @@
+# P68/P69 — a constant net force F acts on a tennis ball for Δt: the impulse is J = F Δt
+# (|J| = |F| Δt), and the final velocity is v₂ = v₁ + J / m with m = W / g. The ball's weight
+# is given in N and the contact time in ms. Component signs follow the source: v₁ = vx î − vy ĵ,
+# F = −Fx î + Fy ĵ. The base canonical values are P68's; P69 overrides them with its own.
+id: phys161-e2-p068-tennis-racket
+title: Tennis ball struck by a racket
+source: { document: PHYS161_Exam2, labels: [ P68, P69 ] }
+section: Impulse and collisions
+tags: [ impulse, momentum, vectors, multi-part ]
+narrative: >-
+  Just before it is struck by a racket, a tennis ball weighing {W:unit} has a velocity of $\vec v =
+  {vx}\,\text{m/s}\;\hat{\imath} - {vy}\,\text{m/s}\;\hat{\jmath}$. During the {t:unit} that the
+  racket and ball are in contact, the net force on the ball is constant and equal to $\vec F =
+  -{Fx}\,\text{N}\;\hat{\imath} + {Fy}\,\text{N}\;\hat{\jmath}$. The gravitational acceleration is
+  $g = {g:unit}$.
+vars:
+  - {
+      name: W,
+      kind: range,
+      min: 0.50,
+      max: 0.85,
+      step: 0.01,
+      decimals: 2,
+      unit: N,
+      label: weight
+    }
+  - { name: vx, kind: range, min: 16, max: 28, step: 1, unit: m/s }
+  - { name: vy, kind: range, min: 2, max: 6, step: 1, unit: m/s }
+  - { name: t, kind: range, min: 3, max: 5, step: 1, unit: ms, label: contact time }
+  - { name: Fx, kind: range, min: 300, max: 480, step: 1, unit: N }
+  - { name: Fy, kind: range, min: 80, max: 140, step: 1, unit: N }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: mass, expr: "W / g", unit: kg }
+  - { name: J, expr: "[-Fx, Fy] * (t / 1000)", unit: N s }
+  - { name: v2, expr: "[vx, -vy] + J / mass", unit: m/s }
+constraints:
+  - "norm(v2) >= 3" # the final speed is not a near-cancellation of v₁ and J / m
+parts:
+  - id: impulse
+    prompt: >-
+      What is the magnitude of the impulse of the net force applied to the ball? {_0}{_u}
+    answer: norm(J)
+    unit: N s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: final-speed
+    prompt: "What is the magnitude of the final velocity of the ball? {_0}{_u}"
+    answer: norm(v2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { W: 0.7, vx: 24, vy: 3, t: 4, Fx: 382, Fy: 107, g: 9.8 }
+  parts:
+    - { id: impulse, answer: 1.5868, unit: N s, source: P68 }
+    - {
+        id: final-speed,
+        answer: 5.278,
+        unit: m/s,
+        source: P69,
+        vars: { W: 0.65, vx: 19, vy: 4, t: 4, Fx: 392, Fy: 108 }
+      }
