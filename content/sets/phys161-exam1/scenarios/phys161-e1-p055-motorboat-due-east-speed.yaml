@@ -1,0 +1,47 @@
+# P55 — the boat's velocity relative to the water (speed vb) plus the river's velocity (vr due
+# south) must point due east, so the boat heads upstream of east and its eastward speed relative
+# to the earth is √(vb² − vr²). Constraint: the boat must be faster than the current, with a
+# margin (otherwise it cannot travel due east).
+id: phys161-e1-p055-motorboat-due-east-speed
+title: Motorboat crossing a river due east
+source: { document: PHYS161_Exam1, labels: [ P55 ] }
+section: Kinematics of 2D straight line motion
+tags: [ kinematics, relative-velocity, vectors, constraints ]
+narrative: >-
+  A river flows due south with a speed of {vr:unit}. A man steers a motorboat across the river; the
+  speed of the boat relative to the water is {vb:unit}, and he steers so that he travels due east
+  relative to the earth.
+vars:
+  - {
+      name: vr,
+      kind: range,
+      min: 1.2,
+      max: 2.6,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: river speed
+    }
+  - {
+      name: vb,
+      kind: range,
+      min: 3,
+      max: 5.6,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: boat speed relative to the water
+    }
+constraints:
+  - "vb > vr + 1" # the boat can cancel the current with speed to spare
+parts:
+  - id: speed-relative-to-earth
+    prompt: "What is the magnitude of his velocity relative to the earth? {_0}{_u}"
+    answer: sqrt(vb^2 - vr^2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { vr: 1.9, vb: 4.3 }
+  parts:
+    - { id: speed-relative-to-earth, answer: 3.85746, unit: m/s, source: P55 }

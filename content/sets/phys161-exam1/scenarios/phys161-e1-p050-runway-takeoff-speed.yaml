@@ -1,0 +1,33 @@
+# P50 — the plane starts from rest and accelerates uniformly at a along the whole runway length d:
+# v² = 2 a d, so the speed reached at the end of the runway is v = √(2 a d).
+id: phys161-e1-p050-runway-takeoff-speed
+title: Takeoff speed on a short runway
+source: { document: PHYS161_Exam1, labels: [ P50 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, constant-acceleration ]
+narrative: >-
+  An airport for small planes has a runway of {d:unit} long. One kind of airplane that might use
+  this airfield can accelerate at {a:unit}.
+vars:
+  - { name: d, kind: range, min: 140, max: 260, step: 10, unit: m, label: runway length }
+  - {
+      name: a,
+      kind: range,
+      min: 1.2,
+      max: 2.4,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: acceleration
+    }
+parts:
+  - id: takeoff-speed
+    prompt: "Calculate the speed this airplane can reach before takeoff? {_0}{_u}"
+    answer: sqrt(2 * a * d)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { d: 200, a: 1.7 }
+  parts:
+    - { id: takeoff-speed, answer: 26.076809620811, unit: m/s, source: P50 }

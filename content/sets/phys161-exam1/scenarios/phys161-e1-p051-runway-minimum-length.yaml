@@ -1,0 +1,51 @@
+# P51 — the plane starts from rest and accelerates uniformly at a until it reaches the takeoff
+# speed v: v² = 2 a d, so the minimum runway length is d = v² / (2a).
+id: phys161-e1-p051-runway-minimum-length
+title: Minimum runway length for takeoff
+source: { document: PHYS161_Exam1, labels: [ P51 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, constant-acceleration ]
+figure:
+  id: fig
+  src: figures/unnamed_012_R6Ld.png
+  alt: >-
+    An airplane standing at the left end of a straight runway and the same airplane lifting off at
+    its right end; a double-headed arrow under the runway, marked with a question mark, spans the
+    unknown runway length.
+narrative: >-
+  One kind of airplane must reach a speed before takeoff of at least {v:unit}, and can accelerate at
+  {a:unit}. {@fig}
+vars:
+  - {
+      name: v,
+      kind: range,
+      min: 22,
+      max: 36,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: takeoff speed
+    }
+  - {
+      name: a,
+      kind: range,
+      min: 1.5,
+      max: 3,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: acceleration
+    }
+parts:
+  - id: runway-length
+    prompt: >-
+      What minimum length must the runway have in order for the airplane to be able to reach this
+      speed before takeoff? {_0}{_u}
+    answer: v^2 / (2 * a)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { v: 29.3, a: 2.2 }
+  parts:
+    - { id: runway-length, answer: 195.11136363636, unit: m, source: P51 }

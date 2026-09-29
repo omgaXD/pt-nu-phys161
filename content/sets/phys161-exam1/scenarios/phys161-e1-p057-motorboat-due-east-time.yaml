@@ -1,0 +1,48 @@
+# P57 — the boat (speed vb relative to the water) heads upstream of east so that its velocity
+# relative to the earth is due east despite the current vr due south; its speed over the ground
+# is √(vb² − vr²), so crossing a river of width d takes t = d / √(vb² − vr²). Constraint: the
+# boat must be faster than the current, with a margin (otherwise it cannot travel due east).
+id: phys161-e1-p057-motorboat-due-east-time
+title: Time to cross a river due east
+source: { document: PHYS161_Exam1, labels: [ P57 ] }
+section: Kinematics of 2D straight line motion
+tags: [ kinematics, relative-velocity, vectors, constraints ]
+narrative: >-
+  A river flows due south with a speed of {vr:unit} and is {d:unit} wide. A man steers a motorboat
+  so that his velocity relative to the earth is due east; the speed of the boat relative to the
+  water is {vb:unit}.
+vars:
+  - {
+      name: vr,
+      kind: range,
+      min: 1.5,
+      max: 3.1,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: river speed
+    }
+  - { name: d, kind: range, min: 700, max: 1300, step: 10, unit: m, label: river width }
+  - {
+      name: vb,
+      kind: range,
+      min: 3.4,
+      max: 6.2,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: boat speed relative to the water
+    }
+constraints:
+  - "vb > vr + 1" # the boat can cancel the current with speed to spare
+parts:
+  - id: crossing-time
+    prompt: "How much time is required to cross the river? {_0}{_u}"
+    answer: d / sqrt(vb^2 - vr^2)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { vr: 2.3, d: 1000, vb: 4.8 }
+  parts:
+    - { id: crossing-time, answer: 237.356, unit: s, source: P57 }

@@ -1,0 +1,45 @@
+# P53 — the car enters the intersection at speed v and accelerates uniformly at a across its
+# width d: d = v t + ½ a t². The physical root is the positive one, t = (√(v² + 2 a d) − v) / a
+# (the other root is negative); with v, a, d > 0 the discriminant is always positive, so no
+# constraint is needed.
+id: phys161-e1-p053-car-intersection-moving
+title: Car crossing an intersection already moving
+source: { document: PHYS161_Exam1, labels: [ P53 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, constant-acceleration, quadratic ]
+narrative: ""
+vars:
+  - { name: d, kind: range, min: 14, max: 28, step: 1, unit: m, label: intersection width }
+  - {
+      name: v,
+      kind: range,
+      min: 3.5,
+      max: 6.8,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: entry speed
+    }
+  - {
+      name: a,
+      kind: range,
+      min: 1.6,
+      max: 3.4,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: acceleration
+    }
+parts:
+  - id: crossing-time
+    prompt: >-
+      How long does it take a car to cross a {d:unit}-wide intersection if the car enters the
+      intersection already moving at {v:unit} and accelerates at a constant {a:unit}? {_0}{_u}
+    answer: (sqrt(v^2 + 2 * a * d) - v) / a
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { d: 21, v: 5.1, a: 2.5 }
+  parts:
+    - { id: crossing-time, answer: 2.53838, unit: s, source: P53 }

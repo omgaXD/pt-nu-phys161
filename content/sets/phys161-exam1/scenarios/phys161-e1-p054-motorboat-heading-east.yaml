@@ -1,0 +1,77 @@
+# P54/P56/P58 — east and south axes; the boat's velocity relative to the water is vb due east and
+# the river flows due south at vr, so relative to the earth the boat moves at (vb, −vr):
+# |v| = √(vb² + vr²) (P54). Only the eastward component carries it across a river of width d:
+# t = d / vb (P56), while the current carries it downstream by vr t = vr d / vb (P58).
+# Everything stays positive for every draw. The three source problems use different numbers: the
+# base canonical values are P56's, and the other two parts override them (P54 prints no width, so
+# it keeps the base value).
+id: phys161-e1-p054-motorboat-heading-east
+title: Motorboat steered due east across a river
+source: { document: PHYS161_Exam1, labels: [ P54, P56, P58 ] }
+section: Kinematics of 2D straight line motion
+tags: [ kinematics, relative-velocity, vectors, multi-part ]
+narrative: >-
+  A river flows due south with a speed of {vr:unit}. A man steers a motorboat across the river; his
+  velocity relative to the water is {vb:unit} due east. The river is {d:unit} wide.
+vars:
+  - {
+      name: vr,
+      kind: range,
+      min: 1.2,
+      max: 2.8,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: river speed
+    }
+  # Boat speeds are printed with one decimal (3.8, 3.3) except P56's "4"; one decimal throughout.
+  - {
+      name: vb,
+      kind: range,
+      min: 2.8,
+      max: 5,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: boat speed relative to the water
+    }
+  - { name: d, kind: range, min: 600, max: 1200, step: 10, unit: m, label: river width }
+derived:
+  - { name: tCross, expr: "d / vb", unit: s } # only the eastward velocity crosses the river
+parts:
+  - id: speed-relative-to-earth
+    prompt: "What is the magnitude of the velocity of man relative to the earth? {_0}{_u}"
+    answer: sqrt(vb^2 + vr^2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: crossing-time
+    prompt: "How much time is required to cross the river? {_0}{_u}"
+    answer: tCross
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: downstream-distance
+    prompt: "How far downstream from his starting point does he land? {_0}{_u}"
+    answer: vr * tCross
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { vr: 1.8, vb: 4, d: 970 }
+  parts:
+    - {
+        id: speed-relative-to-earth,
+        answer: 4.2047592083257,
+        unit: m/s,
+        source: P54,
+        vars: { vb: 3.8 }
+      }
+    - { id: crossing-time, answer: 242.5, unit: s, source: P56 }
+    - {
+        id: downstream-distance,
+        answer: 513.333,
+        unit: m,
+        source: P58,
+        vars: { vr: 2.2, vb: 3.3, d: 770 }
+      }
