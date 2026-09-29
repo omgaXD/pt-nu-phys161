@@ -51,4 +51,20 @@ export default ts.config(
       ],
     },
   },
+  {
+    // @pt/quiz is runner logic only: storage is injected, rendering lives in the app.
+    files: ['packages/quiz/src/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            { group: ['node:*', 'fs', 'path', 'os', 'child_process'], message: '@pt/quiz is I/O-free.' },
+            { group: ['svelte', 'svelte/*', '@sveltejs/*', 'katex'], message: '@pt/quiz is framework-free.' },
+            { group: ['@pt/ui', '@pt/cli', '@pt/store-*'], message: '@pt/quiz depends on @pt/core only.' },
+          ],
+        },
+      ],
+    },
+  },
 );

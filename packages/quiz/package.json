@@ -1,0 +1,33 @@
+{
+  "name": "@pt/quiz",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Quiz runner logic: configuration and presets, question selection, attempt state, mastery and storage. Framework-free, no I/O.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "@pt/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pt/core": "workspace:*",
+    "pure-rand": "^8.4.2",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2",
+    "yaml": "^2.9.1"
+  }
+}
