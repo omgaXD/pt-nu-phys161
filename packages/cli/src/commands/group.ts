@@ -65,7 +65,7 @@ export function groupDrafts(setId: string, drafts: readonly Draft[], threshold =
 
   const byFigure = new Map<string, number[]>();
   drafts.forEach((d, i) => {
-    for (const f of d.figures) byFigure.set(f.src, [...(byFigure.get(f.src) ?? []), i]);
+    for (const f of d.figures.filter((x) => x.role === undefined)) byFigure.set(f.src, [...(byFigure.get(f.src) ?? []), i]);
   });
   for (const [src, idx] of byFigure) for (const i of idx.slice(1)) note(idx[0]!, i, `shared figure ${src}`);
   for (let i = 0; i < n; i++) {
@@ -93,7 +93,7 @@ export function groupDrafts(setId: string, drafts: readonly Draft[], threshold =
     const members = idx.map((i) => drafts[i]!);
     const first = members[0]!;
     const last = members.at(-1)!;
-    const figs = new Set(members.flatMap((d) => d.figures.map((f) => f.src)));
+    const figs = new Set(members.flatMap((d) => d.figures.filter((f) => f.role === undefined).map((f) => f.src)));
     const labels = members.map((d) => d.label);
     groups.push({
       labels,

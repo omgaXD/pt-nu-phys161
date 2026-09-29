@@ -10,6 +10,11 @@ export interface SourceBlock {
   raw: string;
   /** `src` attributes of images inside the block, in order. */
   images: string[];
+  /**
+   * Images set inside running text (text on both sides), e.g. a symbol pasted
+   * as a picture: "the value of the [img]?". Also listed in `images`.
+   */
+  inlineImages?: string[];
 }
 
 type Shift = 'super' | 'sub' | null;
@@ -52,7 +57,8 @@ export function htmlToBlocks(html: string): SourceBlock[] {
   const blocks: SourceBlock[] = [];
 
   let skipDepth = 0;
-  let current: { kind: SourceBlock['kind']; runs: { text: string; shift: Shift }[]; images: string[] } | null = null;
+  type Open = { kind: SourceBlock['kind']; runs: { text: string; shift: Shift }[]; images: { src: string; at: number }[] };
+  let current: Open | null = null;
   const shiftStack: Shift[] = [];
   const tagStack: string[] = [];
 
@@ -62,8 +68,16 @@ export function htmlToBlocks(html: string): SourceBlock[] {
   };
   const flush = (): void => {
     if (!current) return;
-    const { text, raw } = joinRuns(current.runs);
-    if (text || current.images.length) blocks.push({ kind: current.kind, text, raw, images: current.images });
+    const { runs, images } = current;
+    const hasText = (from: number, to: number): boolean => runs.slice(from, to).some((r) => r.text.trim() !== '');
+    const inline = images.filter((i) => hasText(0, i.at) && hasText(i.at, runs.length));
+    // Keep a visible marker where an inline picture sat in the text.
+    const marked = [...runs];
+    for (const i of [...inline].reverse()) marked.splice(i.at, 0, { text: '[image]', shift: null });
+    const { text, raw } = joinRuns(marked);
+    if (text || images.length) {
+      blocks.push({ kind: current.kind, text, raw, images: images.map((i) => i.src), ...(inline.length > 0 && { inlineImages: inline.map((i) => i.src) }) });
+    }
     current = null;
   };
   const shiftNow = (): Shift => [...shiftStack].reverse().find((s) => s !== null) ?? null;
@@ -86,7 +100,7 @@ export function htmlToBlocks(html: string): SourceBlock[] {
         if (name === 'br') current?.runs.push({ text: '\n', shift: null });
         if (name === 'img' && attrs.src) {
           current ??= { kind: 'paragraph', runs: [], images: [] };
-          current.images.push(attrs.src);
+          current.images.push({ src: attrs.src, at: current.runs.length });
         }
       },
       ontext(text) {

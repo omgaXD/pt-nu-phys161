@@ -29,6 +29,9 @@ const INSTRUCTIONS = [
   'Physical constants (g = 9.8 m/s^2) go in `derived` as constants, not in `vars`.',
   'Write `answer` formulas using only the listed functions; use rad(theta) for degrees; solve(f(x) = ..., lo, hi) for inverse problems.',
   'Keep `canonical.vars` equal to the source values and `canonical.parts[].answer` equal to the printed answer — this is how the result is verified.',
+  'Give every `canonical.parts[]` entry a `source` label (P12…) and list exactly those labels in `source.labels`: one source problem per part (the drafts in `siblings` may merge into one multi-part scenario).',
+  'Set `exactUnit: true` on parts whose prompt asks for a specific unit ("express in km/h", "in cm^3"), so a converted unit is not accepted.',
+  'When there is a figure, look at the file under `figures[].src` (relative to the set directory) and describe it in `figure.alt`.',
   'If a random draw could change which physics applies (static vs kinetic friction, a root leaving its bracket), add `constraints`.',
   'Omit `unit` for dimensionless answers; set `integer: true` for counts.',
   'Describe the figure in `figure.alt` (required) when there is one.',
@@ -36,13 +39,17 @@ const INSTRUCTIONS = [
 ];
 
 function findDraft(root: string, label: string, setId?: string): { setId: string; draft: Draft; all: Draft[] } | undefined {
-  const sets = setId ? [setId] : existsSync(root) ? readdirSync(root) : [];
+  const sets = setId ? [setId] : existsSync(root) ? readdirSync(root).sort() : [];
+  const found: { setId: string; draft: Draft; all: Draft[] }[] = [];
   for (const s of sets) {
     const all = loadDrafts(root, s).map((d) => d.draft);
     const draft = all.find((d) => d.label.toLowerCase() === label.toLowerCase());
-    if (draft) return { setId: s, draft, all };
+    if (draft) found.push({ setId: s, draft, all });
   }
-  return undefined;
+  if (found.length > 1) {
+    throw new CliError(`${label} exists in several sets (${found.map((f) => f.setId).join(', ')}); pass --set <id>`);
+  }
+  return found[0];
 }
 
 /**

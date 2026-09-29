@@ -2,7 +2,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import { basename, dirname, extname, join, resolve } from 'node:path';
 import { parseSetDoc, toStorableSet } from '@pt/core';
 import { newDocumentText, type Pattern } from '@pt/store-fs';
-import { buildDraft, draftFileName } from '../import/draft.js';
+import { buildDraft, type Draft, draftFileName } from '../import/draft.js';
 import { htmlToBlocks, type SourceBlock } from '../import/html.js';
 import { markdownToBlocks } from '../import/markdown.js';
 import { splitProblems } from '../import/problems.js';
@@ -26,6 +26,8 @@ export interface ImportResult {
   imagesCopied: number;
   sections: string[];
   missingAnswers: string[];
+  /** Problems with a picture inside their text (needs a manual fix). */
+  inlineImages: string[];
 }
 
 async function readBlocks(file: string): Promise<SourceBlock[]> {
@@ -93,13 +95,17 @@ export async function importDocument(ctx: Context, file: string, opts: ImportOpt
     imagesCopied: 0,
     sections,
     missingAnswers: [],
+    inlineImages: [],
   };
   const copied = new Set<string>();
   let dataImages = 0;
 
   for (const p of problems) {
-    const figures: { src: string; original: string }[] = [];
-    for (const img of p.images) {
+    const figures: Draft['figures'] = [];
+    const roleOf = (img: string): Draft['figures'][number]['role'] =>
+      p.sectionImages?.includes(img) ? 'section' : p.inlineImages?.includes(img) ? 'inline' : undefined;
+    for (const img of [...(p.sectionImages ?? []), ...p.images]) {
+      const role = roleOf(img);
       const data = DATA_URI.exec(img);
       let name: string;
       if (data) {
@@ -109,7 +115,7 @@ export async function importDocument(ctx: Context, file: string, opts: ImportOpt
           writeFileSync(join(setDir, 'figures', name), Buffer.from(data[2]!, 'base64'));
           result.imagesCopied++;
         }
-        figures.push({ src: `figures/${name}`, original: '(embedded image)' });
+        figures.push({ src: `figures/${name}`, original: '(embedded image)', ...(role && { role }) });
         continue;
       }
       name = basename(decodeURIComponent(img));
@@ -120,10 +126,11 @@ export async function importDocument(ctx: Context, file: string, opts: ImportOpt
         copied.add(from);
         result.imagesCopied++;
       }
-      figures.push({ src: `figures/${name}`, original: img });
+      figures.push({ src: `figures/${name}`, original: img, ...(role && { role }) });
     }
-    if (figures.length > 0) result.withFigure++;
+    if (figures.some((f) => f.role === undefined)) result.withFigure++;
     if (!p.answer) result.missingAnswers.push(p.label);
+    if (p.inlineImages?.length) result.inlineImages.push(p.label);
 
     const draft = buildDraft(p, { setId: opts.set, document, file: basename(src), figures });
     const out = join(setDir, 'drafts', draftFileName(p.number));
@@ -151,6 +158,9 @@ export async function runImport(ctx: Context, file: string, opts: ImportOptions)
   o.out(`  ${r.withFigure} figure stub(s), ${r.imagesCopied} image(s) copied, ${r.sections.length} section(s)`);
   if (r.missingAnswers.length) {
     o.out(paint(o, 'yellow', `  ! no printed answer found for ${r.missingAnswers.join(', ')}`));
+  }
+  if (r.inlineImages.length) {
+    o.out(paint(o, 'yellow', `  ! picture inside the text of ${r.inlineImages.join(', ')} (shown as [image]; fix by hand)`));
   }
   o.out(`  drafts: ${join(ctx.root, opts.set, 'drafts')}`);
   return 0;

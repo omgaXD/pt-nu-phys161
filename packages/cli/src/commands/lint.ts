@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { diagnoseScenario, parseSetDoc, safeParseScenario, type Scenario, type SetDoc, tokenizeTemplate } from '@pt/core';
 import { parse as parseYaml } from 'yaml';
+import { loadDrafts } from '../import/draft.js';
 import { CliError, type Context, paint } from '../context.js';
 
 export interface LintFinding {
@@ -64,7 +65,7 @@ export function lintSet(root: string, setId: string): LintFinding[] {
   const scenarioFiles = listFiles(join(setDir, 'scenarios')).filter((f) => f.endsWith('.yaml')).sort();
   const referencedFigures = new Set<string>();
   const ids = new Map<string, string>();
-  const parsed: Scenario[] = [];
+  const parsed: { s: Scenario; file: string }[] = [];
 
   for (const file of scenarioFiles) {
     let raw: unknown;
@@ -113,13 +114,36 @@ export function lintSet(root: string, setId: string): LintFinding[] {
       for (const i of r.issues) add('error', 'schema', file, `${i.path.join('.') || '(root)'}: ${i.message}`);
       continue;
     }
-    parsed.push(r.value);
+    parsed.push({ s: r.value, file });
     for (const d of diagnoseScenario(r.value)) add(d.severity, d.code, file, `${d.path.join('.')}: ${d.message}`);
+  }
+
+  // Source labels (§2.4): each canonical part names the source problem it reproduces.
+  const drafts = loadDrafts(root, setId).map((d) => d.draft);
+  const draftLabels = new Set(drafts.map((d) => d.label));
+  for (const d of drafts) for (const f of d.figures) referencedFigures.add(f.src);
+  const claimed = new Map<string, string>();
+  for (const { s, file } of parsed) {
+    const partLabels = s.canonical.parts.flatMap((cp) => (cp.source !== undefined ? [cp.source] : []));
+    for (const label of new Set(partLabels)) {
+      if (draftLabels.size > 0 && !draftLabels.has(label)) add('error', 'label-unknown', file, `source label ${label} is not a problem of this set`);
+      const other = claimed.get(label);
+      if (other !== undefined && other !== s.id) add('error', 'label-conflict', file, `source label ${label} is also claimed by scenario "${other}"`);
+      claimed.set(label, s.id);
+    }
+    const listed = [...(s.source?.labels ?? [])].sort();
+    const fromParts = [...new Set(partLabels)].sort();
+    if (fromParts.length > 0 && listed.join() !== fromParts.join()) {
+      add('warning', 'labels-mismatch', file, `source.labels [${listed.join(', ')}] differ from the canonical parts' sources [${fromParts.join(', ')}]`);
+    }
+    if (s.source && set.source && s.source.document !== set.source.document) {
+      add('warning', 'document-mismatch', file, `source document "${s.source.document}" differs from the set's "${set.source.document}"`);
+    }
   }
 
   for (const f of listFiles(join(setDir, 'figures'))) {
     const ref = relative(setDir, f);
-    if (!referencedFigures.has(ref)) add('warning', 'figure-unreferenced', f, `figure ${ref} is not used by any scenario`);
+    if (!referencedFigures.has(ref)) add('warning', 'figure-unreferenced', f, `figure ${ref} is not used by any scenario or draft`);
   }
   if (set.order) {
     for (const id of ids.keys()) {

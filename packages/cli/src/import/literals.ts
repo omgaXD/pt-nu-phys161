@@ -1,3 +1,4 @@
+import { isReservedName } from '@pt/core';
 import { symbolToIdentifier } from './normalize.js';
 
 /** A numeric literal found in a problem statement: a draft variable. */
@@ -21,6 +22,36 @@ export interface Literal {
 /** Unit spellings found after numbers, longest first; value = canonical unit. */
 const UNITS: [RegExp, string][] = (
   [
+    ['kJ/ ?\\(?kg ?[·⋅*]? ?K\\)?', 'kJ/(kg K)'],
+    ['J/ ?\\(?kg ?[·⋅*]? ?K\\)?', 'J/(kg K)'],
+    ['J/ ?\\(?kg ?[·⋅*]? ?°C\\)?', 'J/(kg °C)'],
+    ['J/ ?\\(?mol ?[·⋅*]? ?K\\)?', 'J/(mol K)'],
+    ['W/ ?\\(?m ?[·⋅*]? ?K\\)?', 'W/(m K)'],
+    ['W/ ?\\(?m ?[·⋅*]? ?°C\\)?', 'W/(m °C)'],
+    ['1/K', '1/K'],
+    ['1/°C', '1/°C'],
+    ['1/mol', '1/mol'],
+    ['kJ/kg', 'kJ/kg'],
+    ['kJ/g', 'kJ/g'],
+    ['N/m\\^2', 'N/m^2'],
+    ['cycles/s', 'Hz'],
+    ['J/kg', 'J/kg'],
+    ['J/K', 'J/K'],
+    ['g/mol', 'g/mol'],
+    ['kg/mol', 'kg/mol'],
+    ['mol(?:es?)?', 'mol'],
+    ['atm', 'atm'],
+    ['kPa', 'kPa'],
+    ['MPa', 'MPa'],
+    ['Pa', 'Pa'],
+    ['°\\s?C', '°C'],
+    ['kHz', 'kHz'],
+    ['Hz', 'Hz'],
+    ['dB', 'dB'],
+    ['kcal', 'kcal'],
+    ['cal', 'cal'],
+    ['kJ', 'kJ'],
+    ['K', 'K'],
     ['kg ?[·⋅*]? ?m\\^2/s', 'kg m^2/s'],
     ['kg ?[·⋅*]? ?m\\^2', 'kg m^2'],
     ['kg ?[·⋅*]? ?m/s', 'kg m/s'],
@@ -33,6 +64,9 @@ const UNITS: [RegExp, string][] = (
     ['m/s\\^2', 'm/s^2'],
     ['m/s', 'm/s'],
     ['m\\^3', 'm^3'],
+    ['cm\\^3', 'cm^3'],
+    ['cm\\^2', 'cm^2'],
+    ['m\\^2', 'm^2'],
     ['cm', 'cm'],
     ['mm', 'mm'],
     ['km', 'km'],
@@ -59,6 +93,10 @@ const UNITS: [RegExp, string][] = (
     ['s', 's'],
     ['days?', 'day'],
     ['liters?', 'L'],
+    ['mL', 'mL'],
+    ['L', 'L'],
+    ['hours?', 'h'],
+    ['percent', '%'],
     ['bullets/min', 'bullets/min'],
     ['earth-years', 'yr'],
     ['m', 'm'],
@@ -68,7 +106,7 @@ const UNITS: [RegExp, string][] = (
 
 // Not glued to identifiers (P12, h1, M_1), exponents (s^2), unit denominators
 // (kg/m3) or function arguments (U(0)); "1/6" still yields both numbers.
-const NUMBER_RE = /(?<![\w^_.|\d])(?<![A-Za-z]\/)(?<![A-Za-z]\()([-+]?\d+(?:\.\d+)?)(?:\s*[×x]\s*10\^\(?([-+]?\d+)\)?|[eE]([-+]?\d+)(?![\w.]))?/g;
+const NUMBER_RE = /(?<![\w^_.|\d])(?<![A-Za-z]\/)(?<![A-Za-z]\()([-+]?\d+(?:\.\d+)?)(?:\s*[×x·⋅*]\s*10\^\(?([-+]?\d+)\)?|[eE]([-+]?\d+)(?![\w.]))?/g;
 
 const BY_UNIT: Record<string, string> = {
   kg: 'm',
@@ -102,13 +140,57 @@ const BY_UNIT: Record<string, string> = {
   'N m': 'tau',
   'kg m^2': 'I',
   L: 'V',
+  'm^3': 'V',
+  'cm^3': 'V',
+  'm^2': 'A',
+  'cm^2': 'A',
+  'J/(kg K)': 'c',
+  'J/(mol K)': 'C',
+  'W/(m K)': 'kc',
+  'kJ/kg': 'Lh',
+  'J/kg': 'Lh',
+  'J/K': 'S',
+  'g/mol': 'M',
+  'kg/mol': 'M',
+  mol: 'n',
+  atm: 'p',
+  Pa: 'p',
+  kPa: 'p',
+  MPa: 'p',
+  '°C': 'T',
+  K: 'T',
+  Hz: 'f',
+  kHz: 'f',
+  dB: 'beta',
+  kJ: 'E',
+  cal: 'Q',
+  kcal: 'Q',
+  'kJ/(kg K)': 'c',
+  'J/(kg °C)': 'c',
+  'W/(m °C)': 'kc',
+  'kJ/g': 'Lh',
+  'N/m^2': 'p',
+  '1/K': 'alpha',
+  '1/°C': 'alpha',
+  '1/mol': 'NA',
+  h: 't',
+  mL: 'V',
 };
 
-function suggest(value: number): Literal['suggest'] {
+/**
+ * Decimal places as written: "2.50" has 2 (String(2.5) would say 1), "300"
+ * has 0; undefined for scientific notation, whose precision is in sigfigs.
+ */
+export function writtenDecimals(text: string): number | undefined {
+  const m = /^[-+]?\d+(?:\.(\d+))?$/.exec(text.trim());
+  return m ? (m[1]?.length ?? 0) : undefined;
+}
+
+function suggest(value: number, written: string): Literal['suggest'] {
   const abs = Math.abs(value);
   if (abs === 0) return { min: 0, max: 1, step: 0.1, decimals: 1 };
   const text = String(abs);
-  const decimals = text.includes('e') ? undefined : (text.split('.')[1]?.length ?? 0);
+  const decimals = writtenDecimals(written) ?? (text.includes('e') ? undefined : (text.split('.')[1]?.length ?? 0));
   const exp = Math.floor(Math.log10(abs));
   const step = decimals !== undefined ? 10 ** -decimals : 10 ** (exp - 1);
   const lo = value * 0.7;
@@ -133,8 +215,11 @@ export function detectLiterals(question: string): Literal[] {
     return n === 1 ? base : `${base}${n}`;
   };
 
+  // End of the last literal's unit: numbers inside it ("1" in "1/K") are not literals.
+  let consumed = 0;
   for (const m of question.matchAll(NUMBER_RE)) {
     const start = m.index;
+    if (start < consumed) continue;
     const end = start + m[0].length;
     const after = question.slice(end);
     if (/^(st|nd|rd|th)\b/.test(after)) continue;
@@ -176,7 +261,9 @@ export function detectLiterals(question: string): Literal[] {
         name = /radius/.test(context) ? 'r' : /height|high|tall/.test(context) ? 'h' : /diameter/.test(context) ? 'D' : /long|length/.test(context) ? 'L' : 'd';
       } else name = (unit && BY_UNIT[unit]) || 'x';
     }
-    if (name === 'pi' || name === 'e') name = `${name}_val`;
+    if (isReservedName(name)) name = `${name}_val`;
+    const unitEnd = unit !== undefined && (spaced || unitLength > 0) && !after.startsWith('-') ? end + unitLength : undefined;
+    consumed = unitEnd ?? end;
     out.push({
       name: constant ? 'g' : unique(name),
       value,
@@ -184,9 +271,9 @@ export function detectLiterals(question: string): Literal[] {
       text: question.slice(start, end),
       start,
       end,
-      ...(unit !== undefined && (spaced || unitLength > 0) && !after.startsWith('-') && { unitEnd: end + unitLength }),
+      ...(unitEnd !== undefined && { unitEnd }),
       ...(constant && { constant: true }),
-      suggest: suggest(value),
+      suggest: suggest(value, question.slice(start, end)),
     });
   }
   return out;

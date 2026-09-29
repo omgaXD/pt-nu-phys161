@@ -170,6 +170,33 @@ describe('pt lint / fmt (M8)', () => {
     );
   });
 
+  it('checks source labels against the drafts and each other', async () => {
+    const root = mkdtempSync(join(tmpdir(), 'pt-lint-'));
+    temps.push(root);
+    expect((await pt('--root', root, 'import', join(dirname(fileURLToPath(import.meta.url)), 'fixtures/source.html'), '--set', 'demo')).code).toBe(0);
+    const scenario = (id: string, labels: string[], parts: string[], document = 'source'): string =>
+      `id: ${id}\nsource: { document: ${document}, labels: [ ${labels.join(', ')} ] }\nnarrative: A mass {m:unit}.\n` +
+      `vars:\n  - { name: m, kind: range, min: 1, max: 5, unit: kg }\n` +
+      `parts:\n  - id: p\n    prompt: "What is it? {_0}{_u}"\n    answer: m\n    unit: kg\n    tolerance: { rel: 0.01 }\n` +
+      `canonical:\n  vars: { m: 2 }\n  parts:\n${parts.map((l) => `    - { id: p, answer: 2, unit: kg, source: ${l} }`).join('\n')}\n`;
+    mkdirSync(join(root, 'demo', 'scenarios'));
+    writeFileSync(join(root, 'demo', 'scenarios', 'x.yaml'), scenario('x', ['P1'], ['P1']));
+    writeFileSync(join(root, 'demo', 'scenarios', 'y.yaml'), scenario('y', ['P1', 'P2'], ['P1', 'P99'], 'Other'));
+    const r = await pt('--root', root, 'lint', 'demo', '--json');
+    const codes = (JSON.parse(r.out) as { findings: { code: string; file: string }[] }).findings.map((f) => `${f.code} ${f.file}`);
+    expect(codes).toEqual(
+      expect.arrayContaining([
+        'label-conflict demo/scenarios/y.yaml',
+        'label-unknown demo/scenarios/y.yaml',
+        'labels-mismatch demo/scenarios/y.yaml',
+        'document-mismatch demo/scenarios/y.yaml',
+      ]),
+    );
+    expect(codes.filter((c) => c.endsWith('x.yaml'))).toEqual([]);
+    // Figures used by drafts are not "unreferenced".
+    expect(codes.filter((c) => c.startsWith('figure-unreferenced'))).toEqual([]);
+  });
+
   it('fmt --check passes on the corpus and fmt rewrites hand-formatted files', async () => {
     expect((await pt('--root', FIXTURES, 'fmt', '--check')).code).toBe(0);
     const root = tempCorpus();

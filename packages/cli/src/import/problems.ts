@@ -20,30 +20,77 @@ export interface SourceProblem {
   question: string;
   answer?: PrintedAnswer;
   images: string[];
+  /** Images set inside the running text (a symbol pasted as a picture). */
+  inlineImages?: string[];
+  /**
+   * Images that sat between a section heading and its first problem: a
+   * reference sheet for the whole section, not this problem's figure.
+   */
+  sectionImages?: string[];
 }
 
-const LABEL_RE = /^P(\d+)\.\s*/;
+/** `P12.`, and the `P.76.` / `P 76 .` variants some exports use. */
+export const LABEL_RE = /^P\.?\s*(\d+)\s*\.\s*/;
 
 /** Normalise a printed unit: "kg m^2", "N m", "days" → "day"… */
 export function normalizePrintedUnit(unit: string): string | undefined {
   const u = unit
     .replace(/[·⋅*]/g, ' ')
     .replace(/\s+/g, ' ')
+    .replace(/\/ /g, '/')
     .trim();
   if (!u) return undefined;
   return u;
 }
 
-/** Pull the trailing "(value unit)" off a problem statement. */
+/** Section heading text as a clean name: "Friction:" → "Friction", curly quotes → straight. */
+export function cleanSectionName(heading: string): string {
+  return heading
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201c\u201d]/g, '"')
+    .replace(/\s*:\s*$/, '')
+    .trim();
+}
+
+// A printed value: digit groups ("3 446 932.845"), a decimal comma ("0,00133459"),
+// or an ordinary number with optional exponent ("1.152E+16").
+const PRINTED_VALUE = /^([-+]?\d{1,3}(?: \d{3})+(?:\.\d+)?|[-+]?0,\d+|[-+]?\d[\d.]*(?:[eE][-+]?\d+)?)(?![\d,])\s*(.*)$/s;
+
+/**
+ * Pull the trailing "(value unit)" off a problem statement. The closing
+ * bracket may be followed by stray punctuation ("(6.8926 m).", "(45)]"), and
+ * the unit may itself contain brackets ("J/(kg K)").
+ */
 export function splitAnswer(text: string): { question: string; answer?: PrintedAnswer } {
-  const m = /\(\s*([-+]?\d[\d.]*(?:[eE][-+]?\d+)?)\s*([^()]*?)\s*\)\s*$/.exec(text);
+  const trimmed = text.replace(/[\s.\]]+$/, '');
+  if (!trimmed.endsWith(')')) return { question: text.trim() };
+  let depth = 0;
+  let open = -1;
+  for (let i = trimmed.length - 1; i >= 0; i--) {
+    const c = trimmed[i];
+    if (c === ')') depth++;
+    else if (c === '(' && --depth === 0) {
+      open = i;
+      break;
+    }
+  }
+  if (open < 0) return { question: text.trim() };
+  const inner = trimmed
+    .slice(open + 1, -1)
+    .replace(/\.\s*$/, '')
+    .trim();
+  const m = PRINTED_VALUE.exec(inner);
   if (!m) return { question: text.trim() };
-  const value = Number(m[1]);
+  const valueText = m[1]!;
+  const value = Number(valueText.replace(/ /g, '').replace(',', '.'));
   if (!Number.isFinite(value)) return { question: text.trim() };
-  const unit = normalizePrintedUnit(m[2]!);
+  const unitText = m[2]!.trim();
+  // The unit must look like a unit, not prose: "(24)" or "(24 cars)" are fine, "(3 of them)" is not.
+  if (unitText && !/^[\p{L}°%µΩ][\p{L}\d°%µΩ^/()·⋅*\s.-]*$/u.test(unitText)) return { question: text.trim() };
+  const unit = normalizePrintedUnit(unitText);
   return {
-    question: text.slice(0, m.index).trim(),
-    answer: { value, ...(unit !== undefined && { unit }), raw: `${m[1]}${m[2] ? ` ${m[2]}` : ''}`.trim() },
+    question: trimmed.slice(0, open).trim(),
+    answer: { value, ...(unit !== undefined && { unit }), raw: `${valueText}${unitText ? ` ${unitText}` : ''}` },
   };
 }
 
@@ -68,18 +115,23 @@ export function splitProblems(blocks: readonly SourceBlock[]): { problems: Sourc
     current = null;
   };
 
+  // Images between a heading and the section's first problem.
+  let pendingSectionImages: string[] = [];
+
   for (const b of blocks) {
-    if (b.kind === 'heading') {
+    const m = LABEL_RE.exec(b.text);
+    // A problem styled as a heading is still a problem.
+    if (b.kind === 'heading' && !m) {
       finish();
-      if (problems.length === 0 && section === undefined && title === undefined && sections.length === 0 && /exam|test|quiz|set|chapter/i.test(b.text)) {
-        title = b.text;
+      const name = cleanSectionName(b.text);
+      if (problems.length === 0 && section === undefined && title === undefined && sections.length === 0 && /exam|test|quiz|set|chapter/i.test(name)) {
+        title = name;
         continue;
       }
-      section = b.text;
+      section = name;
       if (!sections.includes(section)) sections.push(section);
       continue;
     }
-    const m = LABEL_RE.exec(b.text);
     if (m) {
       finish();
       current = {
@@ -87,10 +139,13 @@ export function splitProblems(blocks: readonly SourceBlock[]): { problems: Sourc
         number: Number(m[1]),
         ...(section !== undefined && { section }),
         text: b.text.slice(m[0].length),
-        raw: b.raw.replace(/^P\d+\.\s*/, ''),
+        raw: b.raw.replace(LABEL_RE, ''),
         question: '',
         images: [...b.images],
+        ...(b.inlineImages && { inlineImages: [...b.inlineImages] }),
+        ...(pendingSectionImages.length > 0 && { sectionImages: pendingSectionImages }),
       };
+      pendingSectionImages = [];
       continue;
     }
     if (current) {
@@ -99,6 +154,9 @@ export function splitProblems(blocks: readonly SourceBlock[]): { problems: Sourc
         current.raw = `${current.raw}\n${b.raw}`.trim();
       }
       current.images.push(...b.images);
+      if (b.inlineImages) (current.inlineImages ??= []).push(...b.inlineImages);
+    } else if (section !== undefined) {
+      pendingSectionImages.push(...b.images);
     }
   }
   finish();

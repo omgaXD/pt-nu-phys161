@@ -19,7 +19,20 @@ export const DraftSchema = z.object({
   raw: z.string(),
   text: z.string(),
   answer: z.object({ value: z.number(), unit: z.string().optional(), raw: z.string() }).optional(),
-  figures: z.array(z.object({ src: z.string(), original: z.string() })).default([]),
+  figures: z
+    .array(
+      z.object({
+        src: z.string(),
+        original: z.string(),
+        /**
+         * `section`: a reference sheet placed before the section's first problem;
+         * `inline`: a picture inside the running text (usually a symbol).
+         * Absent: the problem's own figure.
+         */
+        role: z.enum(['section', 'inline']).optional(),
+      }),
+    )
+    .default([]),
   literals: z.array(
     z.object({
       name: z.string(),
@@ -69,7 +82,9 @@ export function splitNarrative(text: string): { narrative: string; prompt: strin
   });
   if (q < 0) return { narrative: ss.slice(0, -1).join(' '), prompt: ss.at(-1) ?? '' };
   let end = q + 1;
-  while (end < ss.length && FOLLOW_UP.test(ss[end]!) && /answer|unit|radian|decimal|degree/i.test(ss[end]!)) end++;
+  // Instructions about the answer ("Provide the answer in radians."); template tokens like {x:unit} don't count.
+  const instructs = (s: string): boolean => FOLLOW_UP.test(s) && /answer|unit|radian|decimal|degree/i.test(s.replace(/\{[^}]*\}/g, ''));
+  while (end < ss.length && instructs(ss[end]!)) end++;
   return {
     narrative: [...ss.slice(0, q), ...ss.slice(end)].join(' '),
     prompt: ss.slice(q, end).join(' '),
@@ -92,16 +107,24 @@ const GREEK_TEX: Record<string, string> = {
   Δ: 'Delta',
 };
 
-/** Escape template syntax in source text; subscripted symbols (μ_k, M_1) become math. */
-function escapeTemplate(s: string): string {
-  return s
-    .replace(/\$/g, '\\$')
-    .replace(/\{/g, '(')
-    .replace(/\}/g, ')')
-    .replace(/(?<![\w\\])([A-Za-zα-ωΔ])_(\w+)/gu, (_m, head: string, sub: string) => {
-      const h = GREEK_TEX[head] ? `\\${GREEK_TEX[head]}` : head;
-      return `$${h}_{${sub}}$`;
-    });
+/**
+ * Escape template syntax in source text; subscripted symbols (μ_k, M_1) and
+ * leftover superscripts (x^4, 10^-5) become math.
+ */
+export function escapeTemplate(s: string): string {
+  return (
+    s
+      .replace(/\$/g, '\\$')
+      .replace(/\{/g, '(')
+      .replace(/\}/g, ')')
+      .replace(/(?<![\w\\])([A-Za-zα-ωΔ])_(\w+)/gu, (_m, head: string, sub: string) => {
+        const h = GREEK_TEX[head] ? `\\${GREEK_TEX[head]}` : head;
+        return `$${h}_{${sub}}$`;
+      })
+      .replace(/\^(\(([^()]*)\)|[-+]?[\w.]+)/g, (_m, all: string, inner: string | undefined) => `$^{${inner ?? all}}$`)
+      // "$M_{1}$$^{2}$" → "$M_{1}^{2}$" (two adjacent math runs would read as $$ display math).
+      .replace(/\$\$\^\{/g, '^{')
+  );
 }
 
 /** Replace each literal by a template token; "9.8 m/s^2" becomes {g:unit}. */
@@ -125,8 +148,8 @@ export interface BuildDraftOptions {
   setId: string;
   document: string;
   file: string;
-  /** Figure path relative to the set, when the problem has an image. */
-  figures: { src: string; original: string }[];
+  /** Figure paths relative to the set, when the problem has images. */
+  figures: Draft['figures'];
 }
 
 /** Build the draft (and its TODO scenario) for one source problem. */
@@ -135,7 +158,7 @@ export function buildDraft(p: SourceProblem, opts: BuildDraftOptions): Draft {
   const templ = templatize(p.question, literals);
   const { narrative, prompt } = splitNarrative(templ);
   const answer: PrintedAnswer | undefined = p.answer;
-  const figure = opts.figures[0];
+  const figure = opts.figures.find((f) => f.role === undefined);
 
   const vars = literals
     .filter((l) => !l.constant)

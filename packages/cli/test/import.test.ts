@@ -1,5 +1,5 @@
 import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
-import { homedir, tmpdir } from 'node:os';
+import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -8,11 +8,12 @@ import { groupDrafts } from '../src/commands/group.ts';
 import { buildAgentTask } from '../src/commands/agent-task.ts';
 import { importDocument } from '../src/commands/import.ts';
 import { createContext, main, memoryOutput } from '../src/index.ts';
-import { type Draft, loadDrafts, splitNarrative, templatize } from '../src/import/draft.ts';
+import { type Draft, escapeTemplate, loadDrafts, splitNarrative, templatize } from '../src/import/draft.ts';
 import { htmlToBlocks } from '../src/import/html.ts';
-import { detectLiterals } from '../src/import/literals.ts';
+import { detectLiterals, writtenDecimals } from '../src/import/literals.ts';
 import { normalizeText, symbolToIdentifier } from '../src/import/normalize.ts';
-import { splitAnswer, splitProblems } from '../src/import/problems.ts';
+import { cleanSectionName, splitAnswer, splitProblems } from '../src/import/problems.ts';
+import { tryParseUnit } from '@pt/core';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const FIX = join(HERE, 'fixtures');
@@ -89,6 +90,56 @@ describe('problem splitting', () => {
     expect(splitAnswer('Impulse? (1.5868 N·s)').answer).toMatchObject({ unit: 'N s' });
     expect(splitAnswer('No answer here.')).toEqual({ question: 'No answer here.' });
   });
+
+  it('reads the printed-answer spellings of Exams 1 and 4', () => {
+    const a = (s: string) => splitAnswer(s).answer;
+    expect(a('Find D. (6.8926 m).')).toEqual({ value: 6.8926, unit: 'm', raw: '6.8926 m' });
+    expect(a('What angle? (45)]')).toEqual({ value: 45, raw: '45' });
+    expect(a('Specific heat? (862.89099526066 J/(kg K))')).toMatchObject({ value: 862.89099526066, unit: 'J/(kg K)' });
+    expect(a('Specific heat? (327.54 J/ (kg K))')).toMatchObject({ unit: 'J/(kg K)' });
+    expect(a('Conductivity? (0.0406 W/(m K))')).toMatchObject({ unit: 'W/(m K)' });
+    expect(a('Mass? (0,00133459 kg)')).toMatchObject({ value: 0.00133459, unit: 'kg', raw: '0,00133459 kg' });
+    expect(a('Work? (3 446 932.845 J)')).toMatchObject({ value: 3446932.845, unit: 'J' });
+    expect(splitAnswer('Speed? (6.8926 m).').question).toBe('Speed?');
+    expect(a('Consider (see the figure)')).toBeUndefined();
+    for (const u of ['J/(kg K)', 'W/(m K)', 'J/mol K', '%', 'dB', 's^-1', 'in^3', 'hectares']) expect(tryParseUnit(u), u).not.toBeNull();
+  });
+
+  it('accepts P.76. labels and problems styled as headings; cleans section names', () => {
+    const html = `
+      <p class="title">Exam 4</p>
+      <p class="subtitle">Temperature and heat:</p>
+      <p>P1. First? (1 J)</p>
+      <p class="subtitle">P2. A problem styled as a subtitle? (2 J)</p>
+      <p class="subtitle">Newton’s 2nd law:</p>
+      <p>P.76. Dotted label? (3 J)</p>
+      <p>P 77 . Spaced label? (4 J)</p>`;
+    const { problems, sections, title } = splitProblems(htmlToBlocks(html));
+    expect(title).toBe('Exam 4');
+    expect(sections).toEqual(['Temperature and heat', "Newton's 2nd law"]);
+    expect(problems.map((p) => [p.label, p.section, p.answer?.value])).toEqual([
+      ['P1', 'Temperature and heat', 1],
+      ['P2', 'Temperature and heat', 2],
+      ['P76', "Newton's 2nd law", 3],
+      ['P77', "Newton's 2nd law", 4],
+    ]);
+    expect(problems[2]!.raw).toBe('Dotted label? (3 J)');
+    expect(cleanSectionName('Friction: ')).toBe('Friction');
+  });
+
+  it('keeps a section reference sheet off the first problem, and flags pictures inside text', () => {
+    const html = `
+      <p class="subtitle">Moment of Inertia</p>
+      <p><img src="table.png"></p>
+      <p>P94. Find I. (2 kg m^2)</p>
+      <p><img src="wheel.png"></p>
+      <p>P95. What is the value of the <img src="data:image/png;base64,AAAA"> here? (3 s^-1)</p>`;
+    const { problems } = splitProblems(htmlToBlocks(html));
+    expect(problems[0]).toMatchObject({ label: 'P94', images: ['wheel.png'], sectionImages: ['table.png'] });
+    expect(problems[1]!.inlineImages).toEqual(['data:image/png;base64,AAAA']);
+    expect(problems[1]!.text).toContain('value of the [image] here?');
+    expect(problems[1]!.answer).toMatchObject({ value: 3, unit: 's^-1' });
+  });
 });
 
 describe('literal detection', () => {
@@ -131,6 +182,37 @@ describe('literal detection', () => {
       ['x2', 6, null, false],
     ]);
     expect(lit('The proton is 1836 times heavier')).toEqual([['ratio', 1836, null, false]]);
+  });
+
+  it('names thermodynamics literals by unit and keeps "1" in 1/K out of the literals', () => {
+    expect(lit('The rail is 1028 m long at 16°C. The coefficient is 11.9×10^-6 1/K.')).toEqual([
+      ['d', 1028, 'm', false],
+      ['T', 16, '°C', false],
+      ['alpha', 11.9e-6, '1/K', false],
+    ]);
+    expect(lit('c = 862 J/ (kg K), 2.5 atm, 3 mol, 4.2 L, 440 Hz, 60 dB')).toEqual([
+      ['c', 862, 'J/(kg K)', false],
+      ['p', 2.5, 'atm', false],
+      ['n', 3, 'mol', false],
+      ['V', 4.2, 'L', false],
+      ['f', 440, 'Hz', false],
+      ['beta', 60, 'dB', false],
+    ]);
+    expect(lit('α = 1.2 · 10^-5 1/°C')).toEqual([['alpha', 1.2e-5, '1/°C', false]]);
+  });
+
+  it('never proposes a reserved name, and keeps written decimals', () => {
+    expect(lit('1 in = 2.54 cm')[1]).toEqual(['in_val', 2.54, 'cm', false]);
+    expect(detectLiterals('a 2.50 m rod')[0]!.suggest.decimals).toBe(2);
+    expect(writtenDecimals('2.50')).toBe(2);
+    expect(writtenDecimals('300')).toBe(0);
+    expect(writtenDecimals('1.6×10^8')).toBeUndefined();
+    expect(normalizeText('\u2374 = 1000 kg/m^3')).toBe('ρ = 1000 kg/m^3');
+  });
+
+  it('turns leftover superscripts into math, merging with a preceding subscript', () => {
+    expect(escapeTemplate('U(x) = α x^4 at 10^(-5)')).toBe('U(x) = α x$^{4}$ at 10$^{-5}$');
+    expect(escapeTemplate('M_1^2')).toBe('$M_{1}^{2}$');
   });
 
   it('templatizes: numbers become tokens, spaced units become {name:unit}, subscripts become math', () => {
@@ -209,14 +291,30 @@ describe('pt import (M9)', () => {
     expect(o.text()).toMatch(/2 figure stub\(s\), 1 image\(s\) copied, 2 section\(s\)/);
   });
 
-  const SOURCE = process.env.PT_SOURCE_HTML ?? join(homedir(), 'Documents/nu/phys161/PHYS161_Exam2_new.docx.html');
-  it.runIf(existsSync(SOURCE))('imports the real PHYS161 source: 150 drafts and ≥ 40 figure stubs', async () => {
+  // The real sources (extra/fixed/, committed with their images).
+  const SOURCES = join(HERE, '../../../extra/fixed');
+  const REAL = [
+    { file: 'PHYS161_Exam1_new.docx.html', problems: 150, sections: 11, figures: 41, inline: [] as string[] },
+    { file: 'PHYS161_Exam2_new.docx.html', problems: 150, sections: 12, figures: 42, inline: [] },
+    { file: 'PHYS161 Exam 3.html', problems: 105, sections: 4, figures: 15, inline: ['P51'] },
+    { file: 'PHYS161 Exam 4.html', problems: 99, sections: 4, figures: 12, inline: [] },
+  ];
+  it.runIf(existsSync(SOURCES)).each(REAL)('imports the real source $file', async (x) => {
     const root = tempRoot();
-    const r = await importDocument(createContext(root, memoryOutput()), SOURCE, { set: 'phys161-exam2', figures: false });
-    expect(r.drafts).toBe(150);
-    expect(r.written).toBe(150);
-    expect(r.withFigure).toBeGreaterThanOrEqual(40);
-    expect(r.sections).toHaveLength(12);
+    const r = await importDocument(createContext(root, memoryOutput()), join(SOURCES, x.file), { set: 'real', figures: false });
+    expect(r).toMatchObject({ drafts: x.problems, written: x.problems, withFigure: x.figures, missingAnswers: [], inlineImages: x.inline });
+    expect(r.sections).toHaveLength(x.sections);
+    for (const name of r.sections) expect(name).not.toMatch(/:$|\u2019|^P\.?\s*\d/);
+    const drafts = loadDrafts(root, 'real').map((d) => d.draft);
+    expect(drafts.map((d) => d.number)).toEqual(Array.from({ length: x.problems }, (_, i) => i + 1));
+    for (const d of drafts) {
+      if (d.answer?.unit !== undefined) expect(tryParseUnit(d.answer.unit), `${d.label} ${d.answer.unit}`).not.toBeNull();
+    }
+  });
+
+  const OLD_SOURCE = process.env.PT_SOURCE_HTML;
+  it.runIf(OLD_SOURCE !== undefined && existsSync(OLD_SOURCE))('imports a source given by PT_SOURCE_HTML', async () => {
+    const r = await importDocument(createContext(tempRoot(), memoryOutput()), OLD_SOURCE!, { set: 'env', figures: false });
     expect(r.missingAnswers).toEqual([]);
   });
 });
@@ -271,5 +369,14 @@ describe('pt group / agent-task (M9)', () => {
     const packet = JSON.parse(o.text()) as { task: string; canonical: { ok: boolean }; scenario: { id: string } };
     expect(packet).toMatchObject({ task: 'review-scenario', canonical: { ok: true }, scenario: { id: 'c08-bucket-box-gravel' } });
     expect(await main(['--root', FIXTURES_ROOT, 'agent-task', 'P999'], memoryOutput())).toBe(1);
+  });
+
+  it('refuses a label that exists in several sets unless --set picks one', async () => {
+    const root = tempRoot();
+    const ctx = createContext(root, memoryOutput());
+    await importDocument(ctx, join(FIX, 'source.html'), { set: 'a' });
+    await importDocument(ctx, join(FIX, 'source.html'), { set: 'b' });
+    await expect(buildAgentTask(ctx, 'P3')).rejects.toThrow(/several sets \(a, b\)/);
+    expect(await buildAgentTask(ctx, 'P3', { set: 'b' })).toMatchObject({ setId: 'b' });
   });
 });

@@ -35,6 +35,7 @@ export function normalizeText(s: string): string {
   return s
     .replace(/[\u00a0\u2009\u202f\t]/g, ' ')
     .replace(/[˚º]/g, '°')
+    .replace(/\u2374/g, 'ρ') // APL rho, used in some exports for density
     .replace(/[\u2212\u2013]/g, '-')
     .replace(/([ijk])\s*(?:\u02c6|\u0302)/g, (_m, c: string) => ({ i: 'î', j: 'ĵ', k: 'k\u0302' })[c]!)
     .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+/g, (run) => `^${[...run].map((c) => SUPERSCRIPT[c]).join('')}`)
