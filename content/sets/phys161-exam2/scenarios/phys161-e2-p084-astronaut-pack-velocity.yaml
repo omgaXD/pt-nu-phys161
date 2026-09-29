@@ -1,0 +1,39 @@
+# P84 — recoil of a drifting astronaut who throws her power pack (momentum along one line, the
+# direction towards the Station positive). Before: astronaut + pack at −v; after: the pack at −v2,
+# so (M + m)(−v) = m (−v2) + M V and V = (m v2 − (M + m) v) / M. M excludes the pack.
+# Constraints: the pack is thrown faster than the drift (away from her), and she still drifts
+# away from the Station (V < 0, clear of zero), as in the source.
+id: phys161-e2-p084-astronaut-pack-velocity
+title: Astronaut throws her power pack (velocity)
+source: { document: PHYS161_Exam2, labels: [ P84 ] }
+section: Conservation of linear momentum
+tags: [ momentum, recoil, explosion ]
+narrative: >-
+  An astronaut runs out of fuel in her power pack while drifting at {v:unit} away from the
+  International Space Station. Remembering what she learned in physics class she removes her
+  {m:unit} power pack and throws it away at {v2:unit} relative to the Station and in the direction
+  away from the Station. The mass of the astronaut plus space suit, minus the power pack, is
+  {M:unit}.
+vars:
+  - { name: v, kind: range, min: 2, max: 5, step: 1, unit: m/s, label: drift speed }
+  - { name: m, kind: range, min: 20, max: 40, step: 1, unit: kg, label: power pack mass }
+  - { name: v2, kind: range, min: 3, max: 8, step: 1, unit: m/s, label: pack speed }
+  - { name: M, kind: range, min: 85, max: 125, step: 1, unit: kg, label: astronaut mass }
+derived:
+  - { name: V, expr: "(m * v2 - (M + m) * v) / M", unit: m/s }
+constraints:
+  - "v2 > v" # the pack leaves faster than her drift: she pushes it away from herself
+  - "V <= -0.5" # she still drifts away from the Station
+parts:
+  - id: astronaut-velocity
+    prompt: >-
+      Calculate the new velocity of the astronaut relative to the Space Station. Take the direction
+      towards the Space Station as positive. {_0}{_u}
+    answer: V
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v: 3, m: 30, v2: 4, M: 106 }
+  parts:
+    - { id: astronaut-velocity, answer: -2.717, unit: m/s, source: P84 }

@@ -1,0 +1,53 @@
+# P85 — recoil of a drifting astronaut who throws her power pack directly away from the Station
+# (momentum along one line). Total mass m (pack included) drifts away at v; the pack m2 leaves
+# away at v2, so m v = m2 v2 + (m − m2) V and V = (m v − m2 v2) / (m − m2).
+# Constraints: the pack is thrown faster than the drift (away from her), and she still drifts
+# away from the Station (V > 0, clear of zero), as in the source.
+id: phys161-e2-p085-astronaut-pack-speed
+title: Astronaut throws her power pack (speed)
+source: { document: PHYS161_Exam2, labels: [ P85 ] }
+section: Conservation of linear momentum
+tags: [ momentum, recoil, explosion ]
+narrative: >-
+  An astronaut of total mass {m:unit}, including her power pack, runs out of fuel while drifting at
+  {v:unit} away from the International Space Station. She removes her {m2:unit} power pack and
+  throws it directly away from the Station at {v2:unit} relative to the Station.
+vars:
+  - { name: m, kind: range, min: 85, max: 130, step: 1, unit: kg, label: total mass }
+  - {
+      name: v,
+      kind: range,
+      min: 2.5,
+      max: 4.5,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: drift speed
+    }
+  - { name: m2, kind: range, min: 18, max: 35, step: 1, unit: kg, label: power pack mass }
+  - {
+      name: v2,
+      kind: range,
+      min: 3.8,
+      max: 6.5,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: pack speed
+    }
+derived:
+  - { name: V, expr: "(m * v - m2 * v2) / (m - m2)", unit: m/s }
+constraints:
+  - "v2 >= v + 0.5" # the pack leaves faster than her drift: she pushes it away from herself
+  - "V >= 0.5" # she still drifts away from the Station
+parts:
+  - id: astronaut-speed
+    prompt: "What is her speed immediately after the throw? {_0}{_u}"
+    answer: V
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 107, v: 3.4, m2: 25, v2: 4.8 }
+  parts:
+    - { id: astronaut-speed, answer: 2.97317, unit: m/s, source: P85 }

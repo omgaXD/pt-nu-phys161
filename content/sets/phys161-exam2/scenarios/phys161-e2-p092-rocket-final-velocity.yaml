@@ -1,0 +1,47 @@
+# P92 — rocket equation from rest with no external forces: v = u ln(m0 / mf). The payload is the
+# fraction p of the total mass and all the rest is fuel that is burnt, so m0 / mf = 100 / pct
+# (a mass ratio > 1 for every draw).
+id: phys161-e2-p092-rocket-final-velocity
+title: Rocket final velocity from its payload fraction
+source: { document: PHYS161_Exam2, labels: [ P92 ] }
+section: Rocket propulsion
+tags: [ rocket, logarithm ]
+narrative: >-
+  A rocket has a payload of {pct} percent of its total mass, the rest being fuel.
+vars:
+  - {
+      name: pct,
+      kind: range,
+      min: 4.0,
+      max: 10.0,
+      step: 0.5,
+      decimals: 1,
+      label: payload percentage
+    }
+  - {
+      name: u,
+      kind: range,
+      min: 2.5,
+      max: 4.5,
+      step: 0.1,
+      decimals: 1,
+      unit: km/s,
+      label: exhaust velocity
+    }
+derived:
+  - { name: R, expr: "100 / pct" }
+constraints:
+  - "R > 1" # the mass ratio m0 / mf exceeds 1
+parts:
+  - id: final-velocity
+    prompt: >-
+      If this rocket starts from rest and moves with no external forces acting on it, what is its
+      final velocity if the exhaust velocity of the gas is {u:unit}? {_0}{_u}
+    answer: u * ln(R)
+    unit: km/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { pct: 6.5, u: 4.1 }
+  parts:
+    - { id: final-velocity, answer: 11.2068, unit: km/s, source: P92 }

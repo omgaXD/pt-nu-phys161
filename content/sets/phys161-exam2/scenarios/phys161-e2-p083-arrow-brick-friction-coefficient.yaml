@@ -1,0 +1,47 @@
+# P83 — an arrow embeds in a brick at rest (perfectly inelastic): V = m v / (M + m). Kinetic
+# friction then stops the pair over the distance d: V² = 2 μ g d, so μ = V² / (2 g d).
+# Arrow mass is in g and the distance in cm. The constraint keeps μ a plausible coefficient of
+# kinetic friction.
+id: phys161-e2-p083-arrow-brick-friction-coefficient
+title: Friction coefficient from an arrow-struck brick
+source: { document: PHYS161_Exam2, labels: [ P83 ] }
+section: Conservation of linear momentum
+tags: [ momentum, inelastic-collision, friction ]
+narrative: >-
+  When an arrow of mass {m:unit} strikes the brick of mass {M:unit}, staying at rest on a horizontal
+  surface, the arrow gets stuck in the brick and they begin to move straight till they stop because
+  of the friction between the brick and the surface.
+vars:
+  - { name: m, kind: range, min: 200, max: 320, step: 10, unit: g, label: arrow mass }
+  - {
+      name: M,
+      kind: range,
+      min: 0.6,
+      max: 1.1,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: brick mass
+    }
+  - { name: v, kind: range, min: 38, max: 60, step: 1, unit: m/s, label: arrow speed }
+  - { name: d, kind: range, min: 2000, max: 3800, step: 10, unit: cm, label: sliding distance }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: V, expr: "(m / 1000) * v / (M + m / 1000)", unit: m/s }
+  - { name: mu, expr: "V^2 / (2 * g * d / 100)" }
+constraints:
+  - "mu >= 0.12 and mu <= 0.6" # a plausible coefficient of kinetic friction
+parts:
+  - id: friction-coefficient
+    prompt: >-
+      If the initial speed of the arrow before the strike was {v:unit} and the distance the block
+      with the arrow moved after the strike was {d:unit}, what was the coefficient of kinetic
+      friction between the brick and the surface. The gravitational acceleration is $g = {g:unit}$.
+      {_0}
+    answer: mu
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 260, M: 0.8, v: 49, d: 2880, g: 9.8 }
+  parts:
+    - { id: friction-coefficient, answer: 0.256, source: P83 }

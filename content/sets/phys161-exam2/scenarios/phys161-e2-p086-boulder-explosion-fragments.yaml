@@ -1,0 +1,51 @@
+# P86/P87 — a boulder at rest at the top of its flight explodes into two fragments with masses
+# in the ratio k : 1. Horizontal momentum is zero, so m v = (k m) V: the heavier fragment moves
+# the opposite way at V = v / k. Both fragments start with only horizontal velocity from the same
+# height, so they fall for the same time and the heavier one lands at d / k. The boulder mass does
+# not enter. Base canonical values are P86's; P87 overrides them with its own.
+id: phys161-e2-p086-boulder-explosion-fragments
+title: Exploding volcanic boulder
+source: { document: PHYS161_Exam2, labels: [ P86, P87 ] }
+section: Conservation of linear momentum
+tags: [ momentum, explosion, projectile, multi-part ]
+narrative: >-
+  In a volcanic eruption, a {m}-kg boulder is thrown vertically upward into the air. At its highest
+  point, it suddenly explodes due to trapped gas into two fragments, one being {k} times the mass of
+  the other.
+vars:
+  - { name: m, kind: range, min: 2000, max: 3000, step: 50, unit: kg, label: boulder mass }
+  - { name: k, kind: range, min: 2, max: 5, step: 1, label: mass ratio of the fragments }
+  - { name: d, kind: range, min: 250, max: 450, step: 10, unit: m, label: landing distance }
+  - {
+      name: v,
+      kind: range,
+      min: 30,
+      max: 60,
+      step: 0.5,
+      decimals: 1,
+      unit: m/s,
+      label: speed of the lighter fragment
+    }
+parts:
+  - id: heavier-landing-distance
+    prompt: >-
+      The lighter fragment starts out with only horizontal velocity and lands {d:unit} directly
+      north of the point of the explosion. How far from the explosion will the other fragment land?
+      Neglect any other air resistance. {_0}{_u}
+    answer: d / k
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: heavier-speed
+    prompt: >-
+      The lighter fragment starts out with only a horizontal velocity of {v:unit}. What is the
+      horizontal speed of the heavier fragment immediately after the explosion? {_0}{_u}
+    answer: v / k
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 2450, k: 3, d: 350, v: 44.5 }
+  parts:
+    - { id: heavier-landing-distance, answer: 116.67, unit: m, source: P86 }
+    - { id: heavier-speed, answer: 14.8333, unit: m/s, source: P87, vars: { m: 2600 } }

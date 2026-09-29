@@ -1,0 +1,73 @@
+# P89/P90/P91 — total momentum of two cars moving at right angles: the convertible (m1) carries
+# the south component and the SUV (m2) the west component of the total momentum p, which points
+# θ west of south: m1 v1 = p cos θ and m2 v2 = p sin θ. The three source problems use different
+# numbers: the base canonical values are P89's, and P90 and P91 override them with their own
+# (P90 and P91 ask the same question). The constraint keeps both cars at road speeds.
+id: phys161-e2-p089-convertible-suv-momentum
+title: Convertible and SUV total momentum
+source: { document: PHYS161_Exam2, labels: [ P89, P90, P91 ] }
+section: Conservation of linear momentum
+tags: [ momentum, vectors, multi-part ]
+narrative: >-
+  A {m1}-kg blue convertible is traveling south, and a {m2}-kg red SUV is traveling west.
+vars:
+  - { name: m1, kind: range, min: 1100, max: 1450, step: 10, unit: kg, label: convertible mass }
+  - { name: m2, kind: range, min: 1700, max: 2300, step: 50, unit: kg, label: SUV mass }
+  - {
+      name: p,
+      kind: range,
+      min: 60000,
+      max: 90000,
+      step: 1000,
+      unit: kg m/s,
+      label: total momentum
+    }
+  - { name: theta, kind: range, min: 25, max: 65, step: 5, unit: "°", label: angle west of south }
+derived:
+  - { name: v1, expr: "p * cos(rad(theta)) / m1", unit: m/s }
+  - { name: v2, expr: "p * sin(rad(theta)) / m2", unit: m/s }
+constraints:
+  - "v1 >= 10 and v1 <= 55 and v2 >= 10 and v2 <= 55" # both cars at road speeds
+parts:
+  - id: suv-speed
+    prompt: >-
+      If the total momentum of the system consisting of the two cars is {p} kg⋅m/s directed at
+      {theta}° west of south, what is the speed of an SUV? {_0}{_u}
+    answer: v2
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: convertible-speed
+    prompt: >-
+      If the total momentum of the system consisting of the two cars is {p} kg⋅m/s directed at
+      {theta}° west of south, what is the speed of the convertible? {_0}{_u}
+    answer: v1
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: blue-convertible-speed
+    prompt: >-
+      If the total momentum of the system consisting of the two cars is {p} kg⋅m/s directed at
+      {theta}° west of south, what is the speed of the blue convertible? {_0}{_u}
+    answer: v1
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m1: 1250, m2: 1850, p: 77000, theta: 30 }
+  parts:
+    - { id: suv-speed, answer: 20.81, unit: m/s, source: P89 }
+    - {
+        id: convertible-speed,
+        answer: 27.4194,
+        unit: m/s,
+        source: P90,
+        vars: { m1: 1240, m2: 2000, p: 68000, theta: 60 }
+      }
+    - {
+        id: blue-convertible-speed,
+        answer: 29.615,
+        unit: m/s,
+        source: P91,
+        vars: { m1: 1300, m2: 2150, p: 77000, theta: 60 }
+      }
