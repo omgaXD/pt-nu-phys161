@@ -1,0 +1,29 @@
+# P37 — take up as positive: the key passes height h moving up at v, so its height is
+# y(t) = h + v t − ½ g t² and it lands when y = 0. The physical root is the positive one,
+# t = (v + √(v² + 2 g h)) / g (the other root is negative); the discriminant is always positive,
+# so no constraint is needed. g as printed.
+id: phys161-e1-p037-key-thrown-up-time-to-ground
+title: Key thrown straight up from a bridge
+source: { document: PHYS161_Exam1, labels: [ P37 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, free-fall, quadratic ]
+narrative: >-
+  A metal key is thrown straight up from a bridge. On its way up it passes a point at height $h$ =
+  {h:unit} above the ground with a speed of {v:unit}. The gravitational acceleration is $g$ =
+  {g:unit}.
+vars:
+  - { name: h, kind: range, min: 32, max: 60, step: 1, unit: m, label: height above the ground }
+  - { name: v, kind: range, min: 10, max: 18, step: 1, unit: m/s, label: upward speed at h }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: time-to-ground
+    prompt: "How long after this moment will the key hit the ground? {_0}{_u}"
+    answer: (v + sqrt(v^2 + 2 * g * h)) / g
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { h: 46, v: 14 }
+  parts:
+    - { id: time-to-ground, answer: 4.80919, unit: s, source: P37 }

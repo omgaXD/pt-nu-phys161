@@ -1,0 +1,36 @@
+# P36 — take down as positive: the key passes height h moving down at v, so h = v t + ½ g t².
+# The physical (positive) root is t = (−v + √(v² + 2 g h)) / g; the discriminant v² + 2gh is
+# always positive and the root always positive, so no constraint is needed. g as printed.
+id: phys161-e1-p036-key-dropped-time-to-ground
+title: Key dropped from a bridge
+source: { document: PHYS161_Exam1, labels: [ P36 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, free-fall, quadratic ]
+narrative: >-
+  A metal key is dropped down from the bridge. When it passes by a height $h$ = {h:unit}, its speed
+  is {v:unit}. The gravitational acceleration is $g$ = {g:unit}.
+vars:
+  - { name: h, kind: range, min: 29, max: 55, step: 1, unit: m, label: height above the ground }
+  - {
+      name: v,
+      kind: range,
+      min: 14,
+      max: 25,
+      step: 0.5,
+      decimals: 1,
+      unit: m/s,
+      label: speed at h
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: time-to-ground
+    prompt: "How long after this moment the key will hit the ground? {_0}{_u}"
+    answer: (-v + sqrt(v^2 + 2 * g * h)) / g
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { h: 41, v: 19.5 }
+  parts:
+    - { id: time-to-ground, answer: 1.5211348322352, unit: s, source: P36 }

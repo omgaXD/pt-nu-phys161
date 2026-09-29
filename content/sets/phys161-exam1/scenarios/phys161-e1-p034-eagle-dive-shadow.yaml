@@ -1,0 +1,43 @@
+# P34/P35 — an eagle glides down at constant speed v, θ below the horizontal. With the Sun
+# overhead its shadow moves with the horizontal component: x = v cos θ · t (P34); the vertical
+# descent is y = v sin θ · t (P35). The speed is given in km/h and converted to m/s inside the
+# formulas. The two source problems use different numbers: the base canonical values are P34's,
+# and P35's part overrides them. The shared narrative keeps P34's "Sun directly overhead" clause.
+id: phys161-e1-p034-eagle-dive-shadow
+title: Eagle diving at a constant velocity
+source: { document: PHYS161_Exam1, labels: [ P34, P35 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, constant-velocity, components, unit-conversion, multi-part ]
+narrative: >-
+  When the Sun is directly overhead, an eagle flies toward the ground with a constant velocity of
+  {v:unit} at {theta}° below the horizontal line.
+vars:
+  - { name: v, kind: range, min: 9, max: 18, step: 1, unit: km/h, label: eagle speed }
+  - { name: theta, kind: range, min: 40, max: 72, step: 1, unit: "°", label: dive angle }
+  - { name: t, kind: range, min: 6, max: 15, step: 1, unit: s, label: elapsed time }
+derived:
+  - { name: msPerKmh, expr: "1000 / 3600" } # 1 km/h = 1/3.6 m/s
+parts:
+  - id: shadow-distance
+    prompt: "Calculate the distance its shadow traveled on the level ground in {t:unit}. {_0}{_u}"
+    answer: v * msPerKmh * cos(rad(theta)) * t
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: vertical-descent
+    prompt: "Calculate the vertical distance the eagle descends in {t:unit}. {_0}{_u}"
+    answer: v * msPerKmh * sin(rad(theta)) * t
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v: 13, theta: 58, t: 12 }
+  parts:
+    - { id: shadow-distance, answer: 22.9631681167722, unit: m, source: P34 }
+    - {
+        id: vertical-descent,
+        answer: 29.3535,
+        unit: m,
+        source: P35,
+        vars: { v: 14, theta: 57, t: 9 }
+      }

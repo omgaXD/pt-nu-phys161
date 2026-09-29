@@ -1,0 +1,61 @@
+# P30/P31/P32 — uniform acceleration from rest to v_max in t1, then constant speed until the
+# finish at total time T: d = ½ v_max t1 + v_max (T − t1), so v_max = d / (T − t1/2).
+# P30: a = v_max / t1 (first phase). P31: average over the whole race, v_max / T.
+# P32: distance in the first phase, ½ v_max t1.
+# The three source problems use different times: the base canonical values are P32's, and the
+# other two parts override them with their own. P30/P31 say "accelerated to his maximum in t1";
+# the shared narrative uses P32's fuller wording (uniformly, from rest), which their answers assume.
+id: phys161-e1-p030-sprinter-100m
+title: Sprinter accelerating in a 100-m race
+source: { document: PHYS161_Exam1, labels: [ P30, P31, P32 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, constant-acceleration, average-acceleration, multi-part ]
+narrative: >-
+  A world-class sprinter accelerates uniformly from rest to his maximum speed in {t1:unit}. He then
+  maintains this speed for the remainder of a {d}-m race, finishing with a total time of {T:unit}.
+vars:
+  # Source times are printed with mixed precision (3 s, 3.4 s; 9.7 s, 9.65 s): no fixed decimals,
+  # so each value prints with the digits it has.
+  - { name: t1, kind: range, min: 2.5, max: 4.5, step: 0.1, unit: s, label: acceleration time }
+  - { name: T, kind: range, min: 9.5, max: 10.5, step: 0.05, unit: s, label: total race time }
+  # The race is the standard 100 m; randomizing it would give odd race lengths. Kept fixed.
+  - { name: d, kind: choice, options: [ 100 ], unit: m, label: race length }
+derived:
+  - { name: vmax, expr: "d / (T - t1 / 2)", unit: m/s }
+parts:
+  - id: accel-first-phase
+    prompt: "What is the runner's average acceleration during the first {t1:unit}? {_0}{_u}"
+    answer: vmax / t1
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: accel-whole-race
+    prompt: "What is the runner's average acceleration for the entire race? {_0}{_u}"
+    answer: vmax / T
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: distance-first-phase
+    prompt: "What distance does the runner cover during the first {t1:unit}? {_0}{_u}"
+    answer: vmax * t1 / 2
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { t1: 3.4, T: 9.65, d: 100 }
+  parts:
+    - {
+        id: accel-first-phase,
+        answer: 4.0650406504,
+        unit: m/s^2,
+        source: P30,
+        vars: { t1: 3, T: 9.7 }
+      }
+    - {
+        id: accel-whole-race,
+        answer: 1.2786088735456,
+        unit: m/s^2,
+        source: P31,
+        vars: { t1: 4, T: 9.9 }
+      }
+    - { id: distance-first-phase, answer: 21.3836, unit: m, source: P32 }
