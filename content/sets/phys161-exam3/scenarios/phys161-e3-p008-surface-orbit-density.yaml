@@ -1,0 +1,35 @@
+# P8 — a grazing circular orbit (r = R) around a uniform planet: G M / R² = (2π / T)² R with
+# M = (4/3) π R³ ρ gives ρ = 3π / (G T²). The period is given in hours and converted inside
+# the formula.
+id: phys161-e3-p008-surface-orbit-density
+title: Planet density from a grazing orbit
+source: { document: PHYS161_Exam3, labels: [ P8 ] }
+section: Gravitation
+tags: [ gravitation, orbits, density, units ]
+narrative: >-
+  The period of the circular orbit of a satellite very close to the surface of a spherical planet is
+  {T:unit}. Gravitational constant is {G:unit}.
+vars:
+  - {
+      name: T,
+      kind: range,
+      min: 1.80,
+      max: 3.50,
+      step: 0.01,
+      decimals: 2,
+      unit: h,
+      label: period
+    }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: density
+    prompt: "Find the density of the planet assuming it is uniform. {_0}{_u}"
+    answer: 3 * pi / (G * (T * 3600)^2)
+    unit: kg/m^3
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { T: 2.65, G: 6.67e-11 }
+  parts:
+    - { id: density, answer: 1552.56, unit: kg/m^3, source: P8 }

@@ -1,0 +1,39 @@
+# P5 — five equal masses M at 0°, 45°, 90°, 135° and 180° on a semicircle of radius r, a mass m
+# at its centre. The horizontal pulls cancel in pairs; the vertical ones add up:
+# F = G M m / r² · (1 + 2 sin 45°) = (1 + √2) G M m / r².
+# The figure prints only symbols (M, m, x, y), so every parameter is randomized.
+id: phys161-e3-p005-semicircle-five-masses
+title: Five masses on a semicircle
+source: { document: PHYS161_Exam3, labels: [ P5 ] }
+section: Gravitation
+tags: [ gravitation, superposition, vectors ]
+figure:
+  id: semicircle-masses
+  src: figures/unnamed_007_LYNB.png
+  alt: >-
+    Five equal dark spheres labelled M lie equally spaced on a semicircular arc above the x-axis:
+    one at each end of the diameter on the x-axis, one at the top on the y-axis and one halfway
+    between the top and each end. A smaller light sphere labelled m sits at the origin, the centre
+    of the arc.
+narrative: >-
+  Figure shows five equal masses $M = {M:unit}$ equally spaced on the arc of a semicircle of radius
+  {r:unit}. A mass $m = {m:unit}$ is placed at the center of curvature of the arc. Gravitational
+  constant $G = {G:unit}$. {@fig}
+vars:
+  - { name: M, kind: range, min: 2, max: 5, step: 1, unit: kg }
+  - { name: r, kind: range, min: 2.5, max: 5.5, step: 0.1, decimals: 1, unit: m }
+  - { name: m, kind: range, min: 0.5, max: 2, step: 0.5, unit: kg }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: net-force
+    prompt: >-
+      What is the magnitude of the force on mass m due to the other five masses? {_0}{_u}
+    answer: (1 + sqrt(2)) * G * M * m / r^2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { M: 3, r: 3.9, m: 1, G: 6.67e-11 }
+  parts:
+    - { id: net-force, answer: 3.1761e-11, unit: N, source: P5 }
