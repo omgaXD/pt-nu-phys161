@@ -1,0 +1,65 @@
+# P37 — the spring drives both blocks together, with maximum acceleration a = k A / (M1 + M2) at
+# the turning points. Static friction alone accelerates the top block M1, so no slipping requires
+# a ≤ μs g, giving the largest amplitude A = μs g (M1 + M2) / k.
+id: phys161-e3-p037-stacked-blocks-max-amplitude
+title: Maximum amplitude of stacked blocks on a spring
+source: { document: PHYS161_Exam3, labels: [ P37 ] }
+section: Oscillations
+tags: [ oscillations, spring, static-friction, amplitude ]
+figure:
+  id: fig
+  src: figures/unnamed_004_LYNB.png
+  alt: >-
+    A brick wall on the left with a horizontal coil spring labelled k attached to it. The spring's
+    right end connects to a large block labelled M2 resting on the floor, and a smaller block
+    labelled M1 sits on top of M2.
+narrative: >-
+  A spring with spring constant $k = {k:unit}$ is connected to a pair of blocks with masses $M_{1} =
+  {M1:unit}$ and $M_{2} = {M2:unit}$ on a horizontal, frictionless surface, as shown in the Figure.
+  The coefficient of static friction between the two blocks is {mu}. {@fig}
+vars:
+  - { name: k, kind: range, min: 100, max: 200, step: 5, unit: N/m, label: spring constant }
+  - {
+      name: M1,
+      kind: range,
+      min: 0.4,
+      max: 1.2,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: top block mass
+    }
+  - {
+      name: M2,
+      kind: range,
+      min: 5.0,
+      max: 10.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: bottom block mass
+    }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.4,
+      max: 1.0,
+      step: 0.1,
+      decimals: 1,
+      label: coefficient of static friction
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: max-amplitude
+    prompt: >-
+      What is the maximum possible amplitude of the simple harmonic motion if no slippage is to
+      occur between the blocks? The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: mu * g * (M1 + M2) / k
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { k: 140, M1: 0.7, M2: 7.9, mu: 0.9, g: 9.8 }
+  parts:
+    - { id: max-amplitude, answer: 0.5418, unit: m, source: P37 }

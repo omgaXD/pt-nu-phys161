@@ -1,0 +1,56 @@
+# P44 — in a frame accelerating upward at a, the effective gravity is g + a, so the pendulum's
+# period is T = 2π sqrt(L / (g + a)). The ball's mass does not affect the answer.
+id: phys161-e3-p044-rocket-pendulum-period
+title: Pendulum in an accelerating rocket
+source: { document: PHYS161_Exam3, labels: [ P44 ] }
+section: Oscillations
+tags: [ oscillations, simple-pendulum, period, non-inertial-frame ]
+narrative: >-
+  A rocket is accelerating upward at {a:unit} from the launchpad on the earth. Inside a small
+  {m:unit} ball hangs from the ceiling by a light {L:unit} wire.
+vars:
+  - {
+      name: a,
+      kind: range,
+      min: 2.0,
+      max: 8.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: rocket acceleration
+    }
+  - {
+      name: m,
+      kind: range,
+      min: 1.0,
+      max: 3.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: ball mass
+    }
+  - {
+      name: L,
+      kind: range,
+      min: 0.8,
+      max: 2.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: wire length
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: period
+    prompt: >-
+      If the ball is displaced from the vertical and released, find the period of the resulting
+      swings of this pendulum. The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: 2 * pi * sqrt(L / (g + a))
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { a: 4.6, m: 1.8, L: 1.2, g: 9.8 }
+  parts:
+    - { id: period, answer: 1.8138, unit: s, source: P44 }

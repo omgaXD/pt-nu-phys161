@@ -1,0 +1,37 @@
+# P38 — the platform's largest downward acceleration, ω² A at the top of its motion, must not
+# exceed g for the rock to stay in contact; it just leaves when ω² A = g, i.e. at
+# f = (1 / 2π) sqrt(g / A). The amplitude is given in cm.
+id: phys161-e3-p038-vibrating-platform-rock
+title: Rock clattering on a vibrating platform
+source: { document: PHYS161_Exam3, labels: [ P38 ] }
+section: Oscillations
+tags: [ oscillations, simple-harmonic-motion, maximum-acceleration, frequency ]
+narrative: >-
+  Vibrational platform oscillates up and down at a controlled variable frequency with amplitude
+  {A:unit}. Suppose a small rock of unknown mass is placed on the platform.
+vars:
+  - {
+      name: A,
+      kind: range,
+      min: 7.0,
+      max: 16.0,
+      step: 0.1,
+      decimals: 1,
+      unit: cm,
+      label: amplitude
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: frequency
+    prompt: >-
+      At what frequency will the rock just begin to leave the surface so that it starts to clatter?
+      The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: sqrt(g / (A / 100)) / (2 * pi)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { A: 11.4, g: 9.8 }
+  parts:
+    - { id: frequency, answer: 1.4756, unit: Hz, source: P38 }
