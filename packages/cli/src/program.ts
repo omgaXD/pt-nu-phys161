@@ -88,9 +88,9 @@ export function buildProgram(output: Output = consoleOutput(), onExit: (code: nu
   program
     .command('fmt')
     .description('rewrite scenario files in canonical form (what the repository writes)')
-    .argument('[set]', 'set id (default: all)')
+    .argument('[targets...]', 'set ids or scenario ids (default: all)')
     .option('--check', 'report files that are not formatted; exit 1 if any')
-    .action(run((ctx, setId: string | undefined, opts) => runFmt(ctx, setId, opts)));
+    .action(run((ctx, targets: string[], opts) => runFmt(ctx, targets, opts)));
 
   program
     .command('import')

@@ -1,0 +1,30 @@
+# P7 — inverse problem: in equilibrium k x = m g, and the work done on the spring is
+# W = ½ k x² = ½ m g x, so m = 2 W / (g x). The compression is given in cm.
+# The constraint keeps the woman's mass in a plausible adult range.
+id: phys161-e2-p007-scale-spring-mass
+title: Mass from the work done compressing a bathroom-scale spring
+source: { document: PHYS161_Exam2, labels: [ P7 ] }
+section: Work
+tags: [ work, spring, hookes-law, inverse ]
+narrative: >-
+  A woman steps on a bathroom scale containing a stiff spring. In equilibrium the spring is
+  compressed {x:unit} under her weight. The total work done on the spring during the compression is
+  {W:unit}. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: x, kind: range, min: 0.7, max: 1.5, step: 0.1, unit: cm }
+  - { name: W, kind: range, min: 2.5, max: 4.5, step: 0.1, decimals: 1, unit: J }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "2 * W / (g * x / 100) > 40 and 2 * W / (g * x / 100) < 110" # a plausible adult mass
+parts:
+  - id: mass
+    prompt: "Find the woman's mass. {_0}{_u}"
+    answer: 2 * W / (g * x / 100)
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { x: 1, W: 3.1, g: 9.8 }
+  parts:
+    - { id: mass, answer: 63.265306122449, unit: kg, source: P7 }

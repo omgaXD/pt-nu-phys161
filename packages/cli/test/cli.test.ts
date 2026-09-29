@@ -206,6 +206,11 @@ describe('pt lint / fmt (M8)', () => {
     expect((await pt('--root', root, 'fmt')).code).toBe(0);
     expect(readFileSync(file, 'utf8')).toContain('tags: [ work, baseline ]');
     expect((await pt('--root', root, 'fmt', '--check')).code).toBe(0);
+    // Single scenarios by id; unknown targets are an error.
+    writeFileSync(file, readFileSync(file, 'utf8').replace('tags: [ work, baseline ]', 'tags: [work,   baseline]'));
+    expect((await pt('--root', root, 'fmt', '--check', 'c02-angled-push')).code).toBe(0);
+    expect((await pt('--root', root, 'fmt', 'c01-push-work')).out).toMatch(/1 file\(s\) checked, 1 formatted/);
+    expect((await pt('--root', root, 'fmt', 'nope')).code).toBe(1);
   });
 });
 

@@ -1,0 +1,33 @@
+# P11 — two equal forces, each at 45° on either side of the direction of motion; their
+# perpendicular components cancel, so W = 2 F d cos 45°.
+id: phys161-e2-p011-two-angled-forces
+title: Work by two equal forces at ±45° to the displacement
+source: { document: PHYS161_Exam2, labels: [ P11 ] }
+section: Work
+tags: [ work, trigonometry ]
+figure:
+  id: two-forces
+  src: figures/unnamed_012_GNcJ.png
+  alt: >-
+    An object shown as a dot with a dashed horizontal line of length d extending to the right. Two
+    force arrows F1 and F2 leave the object, F1 pointing up and to the right and F2 down and to the
+    right, each at 45° to the dashed line.
+narrative: >-
+  Two forces of equal magnitude {F:unit} move an object on a horizontal surface at a distance $d$ =
+  {d:unit}. {@fig}
+vars:
+  - { name: F, kind: range, min: 4, max: 12, step: 1, unit: N }
+  - { name: d, kind: range, min: 5.0, max: 12.0, step: 0.1, decimals: 1, unit: m }
+  # The figure prints the 45° angles, so the angle is fixed (a single-option choice).
+  - { name: alpha, kind: choice, options: [ 45 ], unit: "°", label: angle of each force (figure) }
+parts:
+  - id: work
+    prompt: "Determine the work required to push the object at this distance. {_0}{_u}"
+    answer: 2 * F * d * cos(rad(alpha))
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { F: 7, d: 8.5, alpha: 45 }
+  parts:
+    - { id: work, answer: 84.1457, unit: J, source: P11 }

@@ -1,0 +1,26 @@
+# P8 — in equilibrium k x = m g, so the work done on the spring during the compression is
+# W = ½ k x² = ½ m g x. The compression is given in cm.
+id: phys161-e2-p008-scale-spring-work
+title: Work done compressing a bathroom-scale spring
+source: { document: PHYS161_Exam2, labels: [ P8 ] }
+section: Work
+tags: [ work, spring, hookes-law ]
+narrative: >-
+  A woman of mass {m:unit} steps on a bathroom scale containing a stiff spring. In equilibrium the
+  spring is compressed {x:unit} under her weight. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 50.0, max: 100.0, step: 0.5, decimals: 1, unit: kg }
+  - { name: x, kind: range, min: 0.80, max: 2.00, step: 0.05, decimals: 2, unit: cm }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: work
+    prompt: "Find the total work done on the spring during the compression. {_0}{_u}"
+    answer: 0.5 * m * g * (x / 100)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 80.5, x: 1.35, g: 9.8 }
+  parts:
+    - { id: work, answer: 5.32508, unit: J, source: P8 }

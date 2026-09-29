@@ -1,0 +1,28 @@
+# P3 — work against gravity when lifting a mass between two heights: W = m g (h2 − h1).
+# h1 and h2 ranges do not overlap, so the mass is always lifted upward.
+id: phys161-e2-p003-lifting-mass
+title: Work lifting a mass between two heights
+source: { document: PHYS161_Exam2, labels: [ P3 ] }
+section: Work
+tags: [ work, gravity ]
+narrative: >-
+  The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 1.0, max: 3.0, step: 0.1, decimals: 1, unit: kg }
+  - { name: h1, kind: range, min: 0.2, max: 0.6, step: 0.1, decimals: 1, unit: m }
+  - { name: h2, kind: range, min: 1.0, max: 2.0, step: 0.1, decimals: 1, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: work
+    prompt: >-
+      Find the magnitude of work to be done lifting the mass of {m:unit} from height {h1:unit} up to
+      {h2:unit}. {_0}{_u}
+    answer: m * g * (h2 - h1)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 1.5, h1: 0.3, h2: 1.4, g: 9.8 }
+  parts:
+    - { id: work, answer: 16.17, unit: J, source: P3 }

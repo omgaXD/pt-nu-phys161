@@ -1,0 +1,38 @@
+# P4 — at constant speed on a frictionless surface the work done by F equals the gain in
+# gravitational potential energy from the bottom to the top of the half-cylinder: W = m g R.
+# The mass is given in grams (the formula converts to kg); the figure prints only symbols.
+id: phys161-e2-p004-half-cylinder-cord-work
+title: Work pulling a particle over a half-cylinder
+source: { document: PHYS161_Exam2, labels: [ P4 ] }
+section: Work
+tags: [ work, gravity, potential-energy ]
+figure:
+  id: half-cylinder
+  src: figures/unnamed_005_GNcJ.png
+  alt: >-
+    A half-cylinder of radius R resting on flat ground, seen end-on. A small particle of mass m sits
+    on its curved surface, with the radius to the particle making angle θ with the ground. A cord
+    attached to the particle runs along the curved surface over the top of the cylinder and is
+    pulled horizontally to the left by a force F.
+narrative: >-
+  A small particle of mass {m:unit} is pulled to the top of a frictionless half-cylinder of radius
+  {R:unit} by a cord that passes over the top of the cylinder as illustrated in Figure below. The
+  gravitational acceleration is $g = {g:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 250, max: 600, step: 10, unit: g }
+  - { name: R, kind: range, min: 0.5, max: 2.0, step: 0.1, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: work-by-f
+    prompt: >-
+      Find the work done by $F$ in moving the particle at constant speed from bottom to the top of
+      the half-cylinder. {_0}{_u}
+    answer: (m / 1000) * g * R
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 400, R: 1, g: 9.8 }
+  parts:
+    - { id: work-by-f, answer: 3.92, unit: J, source: P4 }

@@ -1,0 +1,31 @@
+# P6 — the hanging object fixes the spring constant, k = m g / x1; the work to stretch the
+# unloaded spring to x2 is then W = ½ k x2². Extensions are given in cm (formulas use metres).
+# The source uses the same number (4.5) for the mass and for x2; they are independent here.
+id: phys161-e2-p006-spring-stretch-work
+title: Work stretching a spring calibrated by a hanging mass
+source: { document: PHYS161_Exam2, labels: [ P6 ] }
+section: Work
+tags: [ work, spring, hookes-law ]
+narrative: >-
+  When a {m:unit} object is hung vertically on a certain light spring described by Hooke's law, the
+  spring stretches {x1:unit}. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 3.0, max: 6.0, step: 0.5, decimals: 1, unit: kg }
+  - { name: x1, kind: range, min: 1.0, max: 2.5, step: 0.1, decimals: 1, unit: cm }
+  - { name: x2, kind: range, min: 3.0, max: 6.0, step: 0.1, decimals: 1, unit: cm }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: k, expr: "m * g / (x1 / 100)", unit: N/m }
+parts:
+  - id: work
+    prompt: >-
+      If the {m:unit} object is removed, how much work must an external agent do to stretch the same
+      spring {x2:unit} from its unstretched position? {_0}{_u}
+    answer: 0.5 * k * (x2 / 100)^2
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 4.5, x1: 1.5, x2: 4.5, g: 9.8 }
+  parts:
+    - { id: work, answer: 2.97675, unit: J, source: P6 }

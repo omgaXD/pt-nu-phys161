@@ -1,0 +1,54 @@
+# P9/P10 — a tractor pulls a sled of firewood with a constant force F at angle θ above the
+# horizontal against a friction force f. Total work: W = (F cos θ − f) d; friction: W_f = −f d.
+# The base canonical values are P9's; P10 overrides them with its own numbers.
+# The figure prints only the symbol for the angle, so every parameter is randomized.
+id: phys161-e2-p009-tractor-sled
+title: Tractor pulling a sled of firewood
+source: { document: PHYS161_Exam2, labels: [ P9, P10 ] }
+section: Work
+tags: [ work, friction, trigonometry, multi-part ]
+figure:
+  id: tractor-sled
+  src: figures/unnamed_029_GNcJ.png
+  alt: >-
+    A tractor pulling a sled loaded with firewood logs along level ground by a chain. The chain runs
+    from the front of the sled up to the rear of the tractor, making an angle φ with a dashed
+    horizontal line.
+narrative: >-
+  A farmer pulls a sled with firewood by a tractor a distance of {d:unit} along level ground. The
+  tractor exerts a constant {F:unit} force at an angle of {theta:unit} above the horizontal as shown
+  in Figure below. There is a {f:unit} friction force opposing the sled's motion. {@fig}
+vars:
+  - { name: d, kind: range, min: 12, max: 30, step: 0.5, unit: m }
+  - { name: F, kind: range, min: 4000, max: 5500, step: 50, unit: N }
+  - { name: theta, kind: range, min: 25.0, max: 40.0, step: 0.1, decimals: 1, unit: "°" }
+  - { name: f, kind: range, min: 2800, max: 4000, step: 50, unit: N, label: friction force }
+constraints:
+  # The tractor's horizontal pull beats friction (positive total work), with a small margin so
+  # the total work is not a near-zero difference of large terms. P10's own numbers have a
+  # margin of about 1%, so the margin stays below that.
+  - "F * cos(rad(theta)) > 1.005 * f"
+parts:
+  - id: total-work
+    prompt: "Find the total work done by all the forces on the sled. {_0}{_u}"
+    answer: (F * cos(rad(theta)) - f) * d
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: work-by-friction
+    prompt: "Find the work done by the friction force on the sled. {_0}{_u}"
+    answer: -f * d
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { d: 20, F: 4700, theta: 34.2, f: 3400 }
+  parts:
+    - { id: total-work, answer: 9745.5739818088, unit: J, source: P9 }
+    - {
+        id: work-by-friction,
+        answer: -73125,
+        unit: J,
+        source: P10,
+        vars: { d: 19.5, F: 4350, theta: 29.5, f: 3750 }
+      }

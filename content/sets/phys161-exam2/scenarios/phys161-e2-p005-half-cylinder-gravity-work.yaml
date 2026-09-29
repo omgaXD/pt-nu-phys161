@@ -1,0 +1,36 @@
+# P5 — work done by gravity as the particle rises from the bottom to the top of the
+# half-cylinder (a height R): W_g = −m g R. The figure prints only symbols.
+id: phys161-e2-p005-half-cylinder-gravity-work
+title: Work by gravity on a particle pulled over a half-cylinder
+source: { document: PHYS161_Exam2, labels: [ P5 ] }
+section: Work
+tags: [ work, gravity, sign-convention ]
+figure:
+  id: half-cylinder
+  src: figures/unnamed_017_GNcJ.png
+  alt: >-
+    A half-cylinder of radius R resting on flat ground, seen end-on. A small particle of mass m sits
+    on its curved surface, with the radius to the particle making angle θ with the ground. A cord
+    attached to the particle runs along the curved surface over the top of the cylinder and is
+    pulled horizontally to the left by a force F.
+narrative: >-
+  A small particle of mass {m:unit} is pulled at constant speed to the top of a frictionless
+  half-cylinder of radius {R:unit} by a cord that passes over the top of the cylinder. The
+  gravitational acceleration is $g = {g:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 0.3, max: 1.2, step: 0.1, decimals: 1, unit: kg }
+  - { name: R, kind: range, min: 1.00, max: 2.00, step: 0.05, decimals: 2, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: work-by-gravity
+    prompt: >-
+      Find the work done by gravity on the particle as it moves from the bottom to the top. {_0}{_u}
+    answer: -m * g * R
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 0.6, R: 1.55, g: 9.8 }
+  parts:
+    - { id: work-by-gravity, answer: -9.114, unit: J, source: P5 }
