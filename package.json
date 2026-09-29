@@ -13,7 +13,9 @@
     "lint": "eslint .",
     "pt": "node packages/cli/dist/bin.js",
     "check:corpus": "node packages/cli/dist/bin.js check --root fixtures",
-    "studio": "pnpm --filter @pt/studio dev"
+    "studio": "pnpm --filter @pt/studio dev",
+    "quiz": "pnpm --filter @pt/quiz-app dev",
+    "bundle": "node packages/cli/dist/bin.js bundle --out apps/quiz/static/content --strict"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.0",

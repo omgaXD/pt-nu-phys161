@@ -25,6 +25,8 @@ jobs:
       - run: pnpm pt check --root fixtures
       - run: pnpm pt check --root content/sets
       - run: pnpm pt lint corpus --root fixtures
+      # Every source problem is playable (authored or fixed) and the content is consistent.
+      - run: pnpm pt coverage --root content/sets --strict
 
   studio-e2e:
     runs-on: ubuntu-latest
@@ -40,3 +42,18 @@ jobs:
       - run: pnpm -r build
       - run: pnpm --filter @pt/studio exec playwright install --with-deps chromium
       - run: pnpm --filter @pt/studio test:e2e
+
+  quiz-e2e:
+    runs-on: ubuntu-latest
+    needs: build-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm -r build
+      - run: pnpm --filter @pt/quiz-app exec playwright install --with-deps chromium
+      - run: pnpm --filter @pt/quiz-app test:e2e

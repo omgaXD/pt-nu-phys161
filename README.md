@@ -2,20 +2,21 @@
 
 Building blocks for randomized physics problems (see [PLAN.md](PLAN.md)): a declarative
 problem format, a deterministic evaluation core, storage adapters, an authoring CLI, a
-Svelte 5 component library, and **Studio**, a local problem editor.
-
-The quiz/exam runner is deliberately not here yet. Everything below is built so that adding
-it later is assembly, not redesign.
+Svelte 5 component library, **Studio** (a local problem editor) and **Quiz**, a static,
+Moodle-style quiz runner over the PHYS161 Exams 1–4.
 
 ```
 packages/core       @pt/core       schema, expressions, units, instantiation, grading, repository interface (no I/O, no framework)
 packages/store-fs   @pt/store-fs   YAML-on-disk ProblemRepository (comment-preserving, byte-stable writes)
 packages/store-sql  @pt/store-sql  Drizzle/SQLite schema + stubbed SqlRepository
-packages/cli        @pt/cli        the `pt` binary: check, gen, fuzz, variants, lint, fmt, import, group, agent-task
-packages/ui         @pt/ui         Svelte 5 components (KaTeX math, answer fields, results, shell, editors)
+packages/cli        @pt/cli        the `pt` binary: check, gen, fuzz, variants, lint, fmt, import, group, agent-task, coverage, bundle
+packages/quiz       @pt/quiz       quiz logic: configuration + presets, selection, attempt state machine, mastery, storage (no framework, no I/O)
+packages/ui         @pt/ui         Svelte 5 components (KaTeX math, answer fields, results, shell, editors) + Moodle theme
 apps/studio                        SvelteKit editor (+ /dev component gallery)
-content/sets/                      authored content (phys161-exam2: 150 imported drafts)
+apps/quiz                          static SvelteKit quiz runner (adapter-static)
+content/sets/                      PHYS161 Exams 1–4: imported drafts, figures, authored scenarios
 fixtures/corpus/                   the reference corpus — the integration test suite
+extra/fixed/                       the exam source documents (Google Docs HTML + images), input to `pt import`
 ```
 
 ## Quick start
@@ -30,13 +31,15 @@ pnpm lint
 pnpm -r typecheck
 pnpm pt check --root fixtures   # every corpus problem reproduces its printed answer
 pnpm studio           # http://localhost:5173
+pnpm quiz             # the quiz runner (bundles content/sets first)
 ```
 
-Studio browser tests (Playwright, Chromium):
+Browser tests (Playwright, Chromium):
 
 ```bash
 pnpm --filter @pt/studio exec playwright install chromium
 pnpm --filter @pt/studio test:e2e
+pnpm --filter @pt/quiz-app test:e2e
 ```
 
 ## The problem format
@@ -60,15 +63,37 @@ generated problems changed identity.
 ## Authoring workflow
 
 ```bash
-pt import source.html --set phys161-exam2 --document PHYS161_Exam2   # 150 drafts + figure stubs
+pt import "extra/fixed/PHYS161 Exam 3.html" --set phys161-exam3 --document PHYS161_Exam3 --title "PHYS161 Exam 3"
 pt group phys161-exam2            # proposed multi-part scenarios (shared figure / similar text)
-pt agent-task P12                 # JSON packet for an LLM: source, literals, answer, schema, rules
+pt agent-task P12 --set phys161-exam2   # JSON packet for an LLM: source, literals, answer, schema, rules
 # … write content/sets/phys161-exam2/scenarios/<id>.yaml (by hand, by agent, or in Studio) …
 pt check                          # schema + diagnostics + canonical check (exit 1 on failure)
 pt fuzz <id> -n 500               # NaN/∞, unsatisfiable constraints, magnitude band, rejection rate
-pt lint phys161-exam2             # alt text, tolerances, figures, ids, slots, canonical blocks
+pt lint phys161-exam2             # alt text, tolerances, figures, ids, slots, canonical blocks, source labels
 pt fmt                            # rewrite files in the canonical form the repository writes
+pt coverage [set] [--strict]      # per source problem: authored (randomized), fixed (source values) or missing
+pt bundle --out <dir> [--strict]  # the quiz app's static content: index.json, sets/<id>.json, figures
 ```
+
+### Fixed problems and the authoring loop
+
+A draft becomes playable before anyone writes its formula: `pt bundle` (and `pt coverage`)
+turn every draft with a printed answer into a **fixed** scenario — each variable pinned to its
+printed value (as a one-option `choice`, with the precision the source printed), the printed
+answer as the formula, `exactUnit` for "express in …" prompts, `integer` for counts. An
+**authored** scenario replaces it as soon as one of its `canonical.parts[].source` labels names
+the problem. Randomizing the four exams is therefore incremental, one section at a time:
+
+```bash
+pt group phys161-exam1                        # families of problems that share a situation
+pt agent-task P12 --set phys161-exam1         # packet for an LLM (or a person)
+# … write content/sets/phys161-exam1/scenarios/<id>.yaml …
+pt check <id> && pt fuzz <id> -n 500          # reproduces the printed answers; no failures
+pt lint phys161-exam1 && pt coverage phys161-exam1 --strict   # labels moved from fixed to authored
+```
+
+Problems that share a situation (the `pt group` clusters, plus each authored scenario's labels)
+form a **family**; a sampled quiz never draws two problems of one family.
 
 `pt` resolves scenarios by id through the repository (`--root`, env `PT_ROOT`, default
 `content/sets`) or accepts a path to a YAML file. Every command has `--json` for agents.
@@ -89,7 +114,48 @@ pt fmt                            # rewrite files in the canonical form the repo
 Storage is chosen by `PT_STORE=fs|memory` (default `fs`). Roots come from `PT_ROOT` (a path
 list); by default Studio shows `content/sets` and `fixtures` together.
 
+## Quiz
+
+`apps/quiz` is a static site (no server, no accounts): `pt bundle` writes the content to
+`apps/quiz/static/content/` (git-ignored), and instantiation and grading run in the browser.
+Attempts, history and progress live in the browser's `localStorage`. Build with
+`pnpm --filter @pt/quiz-app build`; set `BASE_PATH=/<sub-path>` to serve it from a sub-path.
+The GitHub Pages workflow (`.github/workflows/pages.yml`) runs only when started by hand: a
+deployed site shows every problem and answer to anyone with the URL.
+
+- **Start page:** one configuration model (sets and sections, randomized or source numbers,
+  include not-yet-randomized problems, skip solved ones, all or a sample of N spread uniformly /
+  across sections / across sets, source or shuffled order, immediate or deferred feedback, tries,
+  a "Show correct answer" button, a time limit, a seed) with three presets that set it in one
+  click — **Ordered** (every problem in order, Check after each), **Exam** (7 problems from
+  different sections, 40 minutes, marks at the end) and **Chaotic** (Ordered, shuffled). Any edit
+  shows *Custom*. *Copy link* encodes the configuration and seed: the same link reproduces the
+  same questions and numbers.
+- **Attempt:** Moodle's layout — one question per page, the question card, a quiz navigation
+  block, a sticky `Time left 0:39:59` timer that submits at the deadline (also after a reload),
+  flags, Check / tries / Show correct answer in immediate mode, a summary page with *Submit all
+  and finish*, and a review with marks, a grade out of 10, feedback and the correct answers.
+- **Progress:** the attempt in progress survives reloads; finished attempts are listed with
+  their reviews; solved problems are remembered per source problem (`set/label`, so solving a
+  fixed problem still counts once it is randomized).
+
+`@pt/quiz` holds all of this logic (no Svelte, no DOM) and is unit-tested; `apps/quiz` is the
+UI. Each question's numbers come from `hash(attempt seed, set/label)`, so they do not depend on
+its position in the quiz.
+
 ## Decisions, deviations and additions (relative to PLAN.md)
+
+- **Attempts keep snapshots.** An attempt stores each question's rendered instance (trimmed to
+  its part) when it is first shown. This is the one deliberate exception to "never persist
+  generated values" (§0.3): it is a record of what the student saw, so rebuilding the content
+  (a corrected formula) never changes a question someone is answering or reviewing. The seed
+  remains the identity; the snapshot is a cache of it.
+- **Units:** `K`, `°C` (never converted to `K`), `mol`, `atm`/`bar` (pressure), `cal`/`kcal`
+  (energy), `dB` and `%` are known; `Part.exactUnit` forbids conversion ("express in km/h").
+- **Import:** the four PHYS161 sources import cleanly (`P.76.` labels, problems styled as
+  headings, answers like `(0,00133459 kg)`, `(3 446 932.845 J)`, `(862.9 J/(kg K))`,
+  `(45)]`); section reference sheets and pictures inside text are recorded as figure roles.
+  Exam 3 P51 has its symbol as a picture and needs a hand fix before it is playable.
 
 - **mathjs is the parser only.** Expressions are parsed by a mathjs instance built from the
   parse factory alone (so `evaluate`, `import`, `createUnit` etc. do not exist in it), then
@@ -125,12 +191,12 @@ list); by default Studio shows `content/sets` and `fixtures` together.
   for scenarios. Each draft keeps the raw source (`<sup>`/`<sub>` preserved), the normalised
   text, the printed answer, detected literals with suggested ranges, and a TODO scenario.
 - **Corpus:** the 14 problems (C1–C14) plus 7 companions the plan cites (P50, P80, P93, P98,
-  P114, P129, P132). Figures use a placeholder asset with real alt text. The real images are
-  in `content/sets/phys161-exam2/figures/`, copied by `pt import`.
+  P114, P129, P132). Figures use a placeholder asset with real alt text. The same 21 scenarios
+  are also Exam 2's first authored content (`content/sets/phys161-exam2/scenarios/`,
+  `phys161-e2-*`, with the real figures).
 
 ## Deferred (recorded, not resolved)
 
 Persistence backend (FS now; the SQL schema is ready and the conformance suite defines done),
-quiz/exam modes and scoring policy, KaTeX vs MathJax, an `algebraic` answer type, figure
-sourcing, and i18n (core returns error codes, and `@pt/ui` maps them to overridable English
+KaTeX vs MathJax, an `algebraic` answer type, and i18n (core returns error codes, and `@pt/ui` maps them to overridable English
 messages).
