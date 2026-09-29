@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@pt/core": "workspace:*",
+    "@pt/quiz": "workspace:*",
     "@pt/store-fs": "workspace:*",
     "commander": "^15.0.0",
     "htmlparser2": "^12.0.0",

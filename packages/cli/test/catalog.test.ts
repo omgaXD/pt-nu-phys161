@@ -1,8 +1,9 @@
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { gradePart, instantiate } from '@pt/core';
+import { gradePart, instantiate, parseScenario } from '@pt/core';
+import { BundleIndexSchema, BundleSetSchema } from '@pt/quiz';
 import { afterEach, describe, expect, it } from 'vitest';
 import { buildSetCatalog } from '../src/bundle/catalog.ts';
 import { importDocument } from '../src/commands/import.ts';
@@ -186,5 +187,60 @@ describe('set catalog / pt coverage', () => {
     expect(r.ok).toBe(true);
     expect(r.sets[0]!.labels).toMatchObject({ P1: 'fixed', P3: 'authored ramp-friction#friction' });
     expect(r.sets[0]!.sections.find((s) => s.section === 'Work')!.authored).toBe(1);
+  });
+});
+
+describe('pt bundle', () => {
+  function readJson(path: string): unknown {
+    return JSON.parse(readFileSync(path, 'utf8'));
+  }
+
+  it('writes the index, one file per set and the figures; authored beats fixed', async () => {
+    const root = await demoRoot();
+    writeScenario(root, 'ramp-friction', authored('ramp-friction', ['P3']));
+    const out = join(root, '..', `${root.split('/').pop()}-out`);
+    temps.push(out);
+    const o = memoryOutput();
+    expect(await main(['--root', root, 'bundle', '--out', out, '--strict'], o)).toBe(0);
+    expect(o.text()).toMatch(/demo: 7 question\(s\) \(1 randomized, 6 source values\)/);
+
+    const index = BundleIndexSchema.parse(readJson(join(out, 'index.json')));
+    expect(index.sets).toEqual([
+      expect.objectContaining({ id: 'demo', questions: 7, authored: 1, fixed: 6, missing: 0 }),
+    ]);
+    expect(index.sets[0]!.sections.map((s) => [s.id, s.questions, s.authored])).toEqual([
+      ['work', 4, 1],
+      ['kinetic-energy', 3, 0],
+    ]);
+    const set = BundleSetSchema.parse(readJson(join(out, 'sets', 'demo.json')));
+    expect(set.questions.find((q) => q.label === 'P3')).toMatchObject({ kind: 'authored', scenarioId: 'ramp-friction' });
+    expect(Object.keys(set.scenarios)).not.toContain('fixed.demo-p003');
+    for (const [id, { scenario }] of Object.entries(set.scenarios)) expect(parseScenario(scenario).id).toBe(id);
+    // Figures of the scenarios in use are copied.
+    expect(readdirSync(join(out, 'assets', 'demo', 'figures'))).toEqual(['ramp.png']);
+  });
+
+  it('is byte-stable and versions content', async () => {
+    const root = await demoRoot();
+    const a = join(root, 'out-a');
+    const b = join(root, 'out-b');
+    await main(['--root', root, 'bundle', '--out', a], memoryOutput());
+    await main(['--root', root, 'bundle', '--out', b], memoryOutput());
+    expect(readFileSync(join(a, 'sets', 'demo.json'), 'utf8')).toBe(readFileSync(join(b, 'sets', 'demo.json'), 'utf8'));
+    const v1 = BundleIndexSchema.parse(readJson(join(a, 'index.json'))).version;
+    writeScenario(root, 'ramp-friction', authored('ramp-friction', ['P3']));
+    await main(['--root', root, 'bundle', '--out', a], memoryOutput());
+    expect(BundleIndexSchema.parse(readJson(join(a, 'index.json'))).version).not.toBe(v1);
+  });
+
+  it('--strict fails on inconsistent content; --no-fixed bundles authored problems only', async () => {
+    const root = await demoRoot();
+    writeScenario(root, 'a', authored('a', ['P3']));
+    writeScenario(root, 'b', authored('b', ['P3']));
+    const out = join(root, 'out');
+    expect(await main(['--root', root, 'bundle', '--out', out, '--strict'], memoryOutput())).toBe(1);
+    expect(await main(['--root', root, 'bundle', '--out', out, '--no-fixed'], memoryOutput())).toBe(0);
+    expect(BundleSetSchema.parse(readJson(join(out, 'sets', 'demo.json'))).questions.map((q) => q.label)).toEqual(['P3']);
+    expect(await main(['--root', root, 'bundle', 'nope', '--out', out], memoryOutput())).toBe(1);
   });
 });

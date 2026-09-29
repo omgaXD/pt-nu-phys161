@@ -1,4 +1,5 @@
 export { runAgentTask } from './commands/agent-task.js';
+export { type BundleResult, runBundle, writeBundle } from './commands/bundle.js';
 export { type CheckResult, runCheck } from './commands/check.js';
 export { runCoverage, type SetCoverage, summarizeCoverage } from './commands/coverage.js';
 export { buildSetCatalog, type CatalogQuestion, type SetCatalog } from './bundle/catalog.js';

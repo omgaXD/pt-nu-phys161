@@ -1,30 +1,9 @@
 import { checkCanonical, diagnoseScenario, instantiate, type Scenario, type SetDoc } from '@pt/core';
+import type { CatalogQuestion, SectionReference } from '@pt/quiz';
 import type { FsRepository } from '@pt/store-fs';
 import { groupDrafts } from '../commands/group.js';
 import { type Draft, loadDrafts } from '../import/draft.js';
 import { type FixedFailure, fixedScenarioFromDraft } from '../import/fixed.js';
-
-/**
- * One playable question: a source problem (`label`) answered by one part of
- * an authored scenario, or by the draft's fixed-values fallback.
- */
-export interface CatalogQuestion {
-  /** `${setId}/${label}`: stable across authoring (fixed → authored). */
-  key: string;
-  setId: string;
-  label: string;
-  number: number;
-  section?: string;
-  kind: 'authored' | 'fixed';
-  scenarioId: string;
-  partId: string;
-  /**
-   * Problems that are variants of one situation share a family (the drafts
-   * `pt group` clusters, merged with each authored scenario's labels). A
-   * sampled draw takes at most one question per family.
-   */
-  family: string;
-}
 
 export interface MissingProblem {
   label: string;
@@ -59,11 +38,7 @@ export const STRICT_ISSUES: ReadonlySet<CatalogIssueCode> = new Set([
   'unknown-label',
 ]);
 
-export interface SectionReference {
-  section: string;
-  src: string;
-  alt: string;
-}
+export type { CatalogQuestion, SectionReference };
 
 export interface SetCatalog {
   set: SetDoc;

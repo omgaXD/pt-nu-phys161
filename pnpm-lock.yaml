@@ -90,6 +90,9 @@ importers:
       '@pt/core':
         specifier: workspace:*
         version: link:../core
+      '@pt/quiz':
+        specifier: workspace:*
+        version: link:../quiz
       '@pt/store-fs':
         specifier: workspace:*
         version: link:../store-fs

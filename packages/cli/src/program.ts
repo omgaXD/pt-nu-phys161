@@ -1,5 +1,6 @@
 import { Command, InvalidArgumentError } from 'commander';
 import { runAgentTask } from './commands/agent-task.js';
+import { runBundle } from './commands/bundle.js';
 import { runCheck } from './commands/check.js';
 import { runCoverage } from './commands/coverage.js';
 import { runFmt } from './commands/fmt.js';
@@ -117,6 +118,16 @@ export function buildProgram(output: Output = consoleOutput(), onExit: (code: nu
     .option('--strict', 'exit 1 on inconsistent content (broken files, failing checks, label conflicts, orphan parts)')
     .option('--json', 'machine-readable output')
     .action(run((ctx, setId: string | undefined, opts) => runCoverage(ctx, setId, opts)));
+
+  program
+    .command('bundle')
+    .description('write the quiz app content: index.json, sets/<id>.json and figures')
+    .argument('[sets...]', 'set ids (default: all)')
+    .requiredOption('--out <dir>', 'output directory')
+    .option('--no-fixed', 'leave out problems without an authored scenario')
+    .option('--strict', 'exit 1 on inconsistent content (broken files, failing checks, label conflicts, orphan parts)')
+    .option('--json', 'machine-readable output')
+    .action(run((ctx, ids: string[], opts) => runBundle(ctx, ids, opts)));
 
   program
     .command('agent-task')
