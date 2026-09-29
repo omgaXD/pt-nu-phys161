@@ -1,0 +1,49 @@
+# P39 — take up as positive: at cutoff the lander is at height h moving up at v0, so its height is
+# y(t) = h + v0 t − ½ g t² and it touches down when y = 0. The physical root is the positive one,
+# t = (v0 + √(v0² + 2 g h)) / g (the other root is negative); the discriminant is always positive,
+# so no constraint is needed. The Moon's g as printed (1.62).
+id: phys161-e1-p039-lunar-lander-time-to-touchdown
+title: Lunar lander moving up at engine cutoff
+source: { document: PHYS161_Exam1, labels: [ P39 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, free-fall, quadratic ]
+narrative: >-
+  A lunar lander is making its descent to Moon Base. The engine is cut off when the lander is
+  {h:unit} above the surface and has an upward speed of {v0:unit}. With the engine off, the lander
+  is in free fall.
+vars:
+  - {
+      name: h,
+      kind: range,
+      min: 6,
+      max: 11,
+      step: 0.5,
+      decimals: 1,
+      unit: m,
+      label: height at engine cutoff
+    }
+  - {
+      name: v0,
+      kind: range,
+      min: 0.3,
+      max: 0.6,
+      step: 0.05,
+      decimals: 2,
+      unit: m/s,
+      label: upward speed at cutoff
+    }
+derived:
+  - { name: g, expr: "1.62", unit: m/s^2 } # gravitational acceleration on the Moon, as printed
+parts:
+  - id: time-to-touchdown
+    prompt: >-
+      How long after the engine cutoff does the lander touch the surface? The acceleration due to
+      gravity on the Moon is {g:unit}. {_0}{_u}
+    answer: (v0 + sqrt(v0^2 + 2 * g * h)) / g
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { h: 8.5, v0: 0.45 }
+  parts:
+    - { id: time-to-touchdown, answer: 3.52908, unit: s, source: P39 }

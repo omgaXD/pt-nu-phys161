@@ -1,0 +1,39 @@
+# P38 — take down as positive: the lander falls from height d with initial downward speed v0 and
+# constant acceleration g (Moon), so v² = v0² + 2 g d and the touchdown speed is √(v0² + 2 g d).
+# The radicand is always positive, so no constraint is needed. The Moon's g as printed (1.6).
+id: phys161-e1-p038-lunar-lander-impact-speed
+title: Lunar lander falling to the surface
+source: { document: PHYS161_Exam1, labels: [ P38 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, free-fall, constant-acceleration ]
+narrative: >-
+  A lunar lander is making its descent to Moon Base. The engine is cut off when the lander is
+  {d:unit} above the surface and has a downward speed of {v0:unit}. With the engine off, the lander
+  is in free fall.
+vars:
+  - { name: d, kind: range, min: 2, max: 6, step: 1, unit: m, label: height at engine cutoff }
+  - {
+      name: v0,
+      kind: range,
+      min: 0.3,
+      max: 1.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: downward speed at cutoff
+    }
+derived:
+  - { name: g, expr: "1.6", unit: m/s^2 } # gravitational acceleration on the Moon, as printed
+parts:
+  - id: touchdown-speed
+    prompt: >-
+      What is the speed of the lander just before it touches the surface? The acceleration due to
+      gravity on the moon is {g:unit}. {_0}{_u}
+    answer: sqrt(v0^2 + 2 * g * d)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { d: 3, v0: 0.6 }
+  parts:
+    - { id: touchdown-speed, answer: 3.1559467676119, unit: m/s, source: P38 }

@@ -1,0 +1,62 @@
+# P44 — walk d1 at v1, then run d2 at v2 in the same direction: the average speed is the total
+# distance over the total time, (d1 + d2) / (d1/v1 + d2/v2).
+id: phys161-e1-p044-walk-run-average-speed
+title: Average speed of a walk followed by a run
+source: { document: PHYS161_Exam1, labels: [ P44 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, average-speed ]
+narrative: >-
+  A person walks {d1:unit} at a speed of {v1:unit} and then runs {d2:unit} at a speed of {v2:unit}
+  along a straight track.
+vars:
+  - {
+      name: d1,
+      kind: range,
+      min: 60,
+      max: 120,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: walking distance
+    }
+  - {
+      name: v1,
+      kind: range,
+      min: 0.9,
+      max: 1.6,
+      step: 0.01,
+      decimals: 2,
+      unit: m/s,
+      label: walking speed
+    }
+  - {
+      name: d2,
+      kind: range,
+      min: 170,
+      max: 320,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: running distance
+    }
+  - {
+      name: v2,
+      kind: range,
+      min: 3.5,
+      max: 6.5,
+      step: 0.01,
+      decimals: 2,
+      unit: m/s,
+      label: running speed
+    }
+parts:
+  - id: average-speed
+    prompt: "Compute the average speed. {_0}{_u}"
+    answer: (d1 + d2) / (d1 / v1 + d2 / v2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { d1: 88.1, v1: 1.22, d2: 244.2, v2: 5.05 }
+  parts:
+    - { id: average-speed, answer: 2.7560855863193, unit: m/s, source: P44 }

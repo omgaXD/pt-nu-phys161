@@ -1,0 +1,47 @@
+# P40/P41 — east is positive, constant acceleration a from t = 0, when the motorcyclist is x0 east
+# of the signpost moving east at v0: x(t) = x0 + v0 t + ½ a t² (P40), v(t) = v0 + a t (P41).
+# Everything stays positive for every draw. The two source problems use different numbers: the
+# base canonical values are P40's, and P41's part overrides them (its x0 does not enter the answer).
+id: phys161-e1-p040-motorcyclist-signpost
+title: Motorcyclist accelerating past a city-limits signpost
+source: { document: PHYS161_Exam1, labels: [ P40, P41 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, constant-acceleration, multi-part ]
+narrative: >-
+  A motorcyclist heading east through a small city accelerates after he passes the signpost marking
+  the city limits. His acceleration is a constant {a:unit}. At time $t$ = 0 he is {x0:unit} east of
+  the signpost, moving east at {v0:unit}.
+vars:
+  - {
+      name: a,
+      kind: range,
+      min: 2.5,
+      max: 5.5,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: acceleration
+    }
+  # Source positions are printed with mixed precision (4.5 m, 5 m): no fixed decimals, so each
+  # value prints with the digits it has.
+  - { name: x0, kind: range, min: 3, max: 7, step: 0.5, unit: m, label: position at t = 0 }
+  - { name: v0, kind: range, min: 10, max: 20, step: 1, unit: m/s, label: velocity at t = 0 }
+  - { name: t, kind: range, min: 2, max: 5, step: 1, unit: s, label: time asked about }
+parts:
+  - id: position
+    prompt: "Find his position with respect to the signpost at time $t$ = {t:unit}. {_0}{_u}"
+    answer: x0 + v0 * t + a * t^2 / 2
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: velocity
+    prompt: "Find his velocity at time $t$ = {t:unit}. {_0}{_u}"
+    answer: v0 + a * t
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { a: 3.9, x0: 4.5, v0: 14, t: 3 }
+  parts:
+    - { id: position, answer: 64.05, unit: m, source: P40 }
+    - { id: velocity, answer: 28.9, unit: m/s, source: P41, vars: { a: 4.3, x0: 5, v0: 16 } }

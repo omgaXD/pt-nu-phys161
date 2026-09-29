@@ -1,0 +1,42 @@
+# P42 — uniform deceleration of magnitude a for time t over distance d. Running the motion
+# backwards from the final speed v: d = v t + ½ a t², so v = (d − ½ a t²) / t = d/t − ½ a t.
+# Constraint: the particle is still moving forward at the end (it slows down the whole time and
+# never reverses), i.e. v > 0 with a margin.
+id: phys161-e1-p042-particle-slowing-final-speed
+title: Final speed of a decelerating particle
+source: { document: PHYS161_Exam1, labels: [ P42 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, constant-acceleration, constraints ]
+narrative: >-
+  A particle slows down with an acceleration of {a:unit} for {t:unit} moving straight for {d:unit}
+  long.
+vars:
+  - {
+      name: a,
+      kind: range,
+      min: 1.2,
+      max: 2.4,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: deceleration magnitude
+    }
+  - { name: t, kind: range, min: 3.5, max: 6, step: 0.1, decimals: 1, unit: s, label: duration }
+  - { name: d, kind: range, min: 40, max: 70, step: 1, unit: m, label: distance covered }
+derived:
+  - { name: v, expr: "d / t - a * t / 2", unit: m/s } # final speed
+constraints:
+  # The particle must still be moving at the end of the distance (no stop and reversal); keep a
+  # margin so the final speed is not a tiny difference of two large terms.
+  - "v > 1"
+parts:
+  - id: final-speed
+    prompt: "Find the speed of the particle at the end of the distance. {_0}{_u}"
+    answer: d / t - a * t / 2
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { a: 1.8, t: 4.9, d: 55 }
+  parts:
+    - { id: final-speed, answer: 6.8144897959184, unit: m/s, source: P42 }

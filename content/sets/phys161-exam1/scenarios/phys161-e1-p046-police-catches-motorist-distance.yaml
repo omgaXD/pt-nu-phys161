@@ -1,0 +1,41 @@
+# P46 — the motorist moves at constant v, the officer starts from rest at the corner with constant
+# acceleration a at the same instant: v t = ½ a t² gives the catch-up time t = 2v/a (the non-zero
+# root, always positive), and the distance from the corner is d = v t = 2v²/a. The speed limit is
+# data the answer does not use.
+id: phys161-e1-p046-police-catches-motorist-distance
+title: Police motorcycle catching a speeding motorist
+source: { document: PHYS161_Exam1, labels: [ P46 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, constant-acceleration, pursuit ]
+narrative: >-
+  A motorist traveling with a constant speed of {v:unit} passes a school-crossing corner, where the
+  speed limit is {vLimit:unit}. Just as the motorist passes, a police officer on a motorcycle at the
+  corner starts off in pursuit with constant acceleration of {a:unit}.
+vars:
+  - { name: v, kind: range, min: 13, max: 24, step: 1, unit: m/s, label: motorist speed }
+  - { name: vLimit, kind: range, min: 8, max: 14, step: 1, unit: m/s, label: speed limit }
+  - {
+      name: a,
+      kind: range,
+      min: 3,
+      max: 6,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: officer acceleration
+    }
+constraints:
+  - "v > vLimit + 2" # the motorist is clearly speeding, as in the source
+parts:
+  - id: catch-up-distance
+    prompt: >-
+      What is the distance they have traveled from the corner to the point where the officer catches
+      up with the motorist? {_0}{_u}
+    answer: 2 * v^2 / a
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v: 18, vLimit: 11, a: 4.4 }
+  parts:
+    - { id: catch-up-distance, answer: 147.27272727273, unit: m, source: P46 }

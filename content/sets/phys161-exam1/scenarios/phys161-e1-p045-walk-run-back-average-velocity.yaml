@@ -1,0 +1,65 @@
+# P45 — walk d1 at v1, then run back d2 at v2 in the opposite direction: the net displacement is
+# d2 − d1 (back past the start) and the average velocity has magnitude
+# |d1 − d2| / (d1/v1 + d2/v2). The ranges keep d2 well above d1 (as in the source), so the
+# displacement is never a near-zero difference.
+id: phys161-e1-p045-walk-run-back-average-velocity
+title: Average velocity of a walk and a run back
+source: { document: PHYS161_Exam1, labels: [ P45 ] }
+section: Kinematics of 1D motion
+tags: [ kinematics, average-velocity, displacement ]
+narrative: >-
+  A person walks {d1:unit} at a speed of {v1:unit} along a straight track and then immediately runs
+  back along the same track, in the opposite direction, a distance of {d2:unit} at a speed of
+  {v2:unit}.
+vars:
+  - {
+      name: d1,
+      kind: range,
+      min: 65,
+      max: 125,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: walking distance
+    }
+  - {
+      name: v1,
+      kind: range,
+      min: 0.95,
+      max: 1.7,
+      step: 0.01,
+      decimals: 2,
+      unit: m/s,
+      label: walking speed
+    }
+  - {
+      name: d2,
+      kind: range,
+      min: 165,
+      max: 280,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: running distance
+    }
+  - {
+      name: v2,
+      kind: range,
+      min: 3.5,
+      max: 6.5,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: running speed
+    }
+parts:
+  - id: average-velocity
+    prompt: "Compute the magnitude of the average velocity for the whole trip. {_0}{_u}"
+    answer: abs(d1 - d2) / (d1 / v1 + d2 / v2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { d1: 94.3, v1: 1.33, d2: 218.5, v2: 4.9 }
+  parts:
+    - { id: average-velocity, answer: 1.07538, unit: m/s, source: P45 }
