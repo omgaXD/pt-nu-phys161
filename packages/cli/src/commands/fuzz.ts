@@ -5,7 +5,11 @@ export interface FuzzOptions {
   n?: number;
   start?: number;
   json?: boolean;
-  /** Answers outside [1/band, band] in magnitude are flagged. Default 1e30. */
+  /**
+   * Answers more than `band` times larger or smaller in magnitude than the
+   * part's printed (canonical) answer are flagged. Default 1e6. Parts without
+   * a canonical answer use the absolute band [1e-30, 1e30].
+   */
   band?: number;
 }
 
@@ -41,7 +45,14 @@ export interface FuzzResult {
 export function fuzzScenario(s: Scenario, opts: FuzzOptions = {}): FuzzResult {
   const n = opts.n ?? 500;
   const start = opts.start ?? 0;
-  const band = opts.band ?? 1e30;
+  const band = opts.band ?? 1e6;
+  // The printed answer sets the scale: 10^39 J is sane for binary stars, not for a push.
+  const scale = new Map(
+    s.parts.map((p) => {
+      const ref = Math.abs(s.canonical.parts.find((c) => c.id === p.id)?.answer ?? 0);
+      return [p.id, ref > 0 ? { lo: ref / band, hi: ref * band } : { lo: 1e-30, hi: 1e30 }];
+    }),
+  );
   const failures: FuzzResult['failures'] = [];
   const rejections: Record<string, number> = {};
   const distinct = new Set<string>();
@@ -66,7 +77,7 @@ export function fuzzScenario(s: Scenario, opts: FuzzOptions = {}): FuzzResult {
         st.min = Math.min(st.min, x);
         st.max = Math.max(st.max, x);
         if (x === 0) st.zeros++;
-        else if (Math.abs(x) > band || Math.abs(x) < 1 / band) st.outOfBand++;
+        else if (Math.abs(x) > scale.get(p.partId)!.hi || Math.abs(x) < scale.get(p.partId)!.lo) st.outOfBand++;
         if (p.integer && Math.abs(x - Math.round(x)) > 1e-9 * Math.max(1, Math.abs(x))) st.nonInteger++;
       }
     } catch (e) {

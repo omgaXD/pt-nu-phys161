@@ -110,6 +110,23 @@ describe('pt gen / variants / fuzz (M8)', () => {
     expect(Object.keys(j.rejections).every((k) => k.startsWith('constraint #'))).toBe(true);
   });
 
+  it('fuzz judges magnitudes against the printed answer, not an absolute band', async () => {
+    const root = tempCorpus();
+    const file = join(root, 'stars.yaml');
+    const scenario = (answer: string, printed: number): string =>
+      `id: stars\nnarrative: Two stars of mass {m:unit}.\n` +
+      `vars:\n  - { name: m, kind: range, min: 1e30, max: 3e30, step: 1e29, sigfigs: 2, unit: kg }\n` +
+      `parts:\n  - id: e\n    prompt: "Energy? {_0}{_u}"\n    answer: "${answer}"\n    unit: J\n    tolerance: { rel: 0.01 }\n` +
+      `canonical:\n  vars: { m: 2e30 }\n  parts: [ { id: e, answer: ${printed}, unit: J } ]\n`;
+    writeFileSync(file, scenario('6.67e-11 * m^2 / 2e11', 1.334e39));
+    expect((await pt('fuzz', file, '-n', '50')).code).toBe(0);
+    // A formula that explodes for some draws is still caught.
+    writeFileSync(file, scenario('6.67e-11 * m^2 / 2e11 / (m - 2.55e30)^8 * (2e30 - 2.55e30)^8', 1.334e39));
+    const r = await pt('fuzz', file, '-n', '200');
+    expect(r.code).toBe(1);
+    expect(r.out).toMatch(/out of band/);
+  });
+
   it('fuzz fails on unsatisfiable constraints and non-integer integer answers', async () => {
     const root = tempCorpus();
     const file = join(root, 'corpus/scenarios/c11-railroad-cars.yaml');
