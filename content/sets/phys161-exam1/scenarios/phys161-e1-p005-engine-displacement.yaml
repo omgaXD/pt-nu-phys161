@@ -1,0 +1,29 @@
+# P5 — volume conversion in³ → L: V (in³) · (2.54 cm/in)³ / 1000 cm³/L.
+# The conversion factors printed in the text are fixed constants (derived); only the engine
+# displacement is randomized. The answer must be given in L (exactUnit).
+id: phys161-e1-p005-engine-displacement
+title: Engine displacement in liters
+source: { document: PHYS161_Exam1, labels: [ P5 ] }
+section: Units
+tags: [ units, unit-conversion, volume ]
+narrative: >-
+  A powerful engine has a displacement of {V} cubic inches.
+vars:
+  - { name: V, kind: range, min: 200, max: 420, step: 1, label: displacement in cubic inches }
+derived:
+  - { name: cm3PerL, expr: "1000" } # 1 L = 1000 cm³
+  - { name: cmPerIn, expr: "2.54" } # 1 in = 2.54 cm
+parts:
+  - id: volume-l
+    prompt: >-
+      Express this displacement in liters (L) by using conversions 1 L = 1000 cm$^{3}$ and 1 in =
+      2.54 cm. {_0}{_u}
+    answer: V * cmPerIn^3 / cm3PerL
+    unit: L
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { V: 305 }
+  parts:
+    - { id: volume-l, answer: 4.998, unit: L, source: P5 }

@@ -1,0 +1,26 @@
+# P2 — a critical mass m of fissionable material forms a sphere of radius r:
+# ρ = m / ((4/3)πr³). The mass is converted from kg to g and the radius is already in cm,
+# so the density comes out in g/cm³, the unit the prompt asks for (exactUnit).
+id: phys161-e1-p002-critical-mass-density
+title: Density from a critical-mass sphere
+source: { document: PHYS161_Exam1, labels: [ P2 ] }
+section: Units
+tags: [ units, density, sphere-volume ]
+narrative: >-
+  The critical mass of some fissionable material is about {m:unit}, and at critical mass it forms a
+  sphere of radius {r:unit}.
+vars:
+  - { name: m, kind: range, min: 4, max: 8, step: 1, unit: kg, label: critical mass }
+  - { name: r, kind: range, min: 4.5, max: 8.5, step: 0.1, decimals: 1, unit: cm, label: radius }
+parts:
+  - id: density
+    prompt: "What is the density of this element? Give the answer in g/cm$^{3}$. {_0}{_u}"
+    answer: m * 1000 / (4 / 3 * pi * r^3)
+    unit: g/cm^3
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 6, r: 6.4 }
+  parts:
+    - { id: density, answer: 5.46415, unit: g/cm^3, source: P2 }

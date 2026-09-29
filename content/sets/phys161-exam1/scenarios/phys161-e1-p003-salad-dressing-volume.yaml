@@ -1,0 +1,31 @@
+# P3 — volume conversion L → in³: V (L) · 1000 cm³/L / (2.54 cm/in)³.
+# The conversion factors printed in the text are fixed constants (derived); only the bottle
+# volume is randomized. The answer must be given in in³ (exactUnit).
+id: phys161-e1-p003-salad-dressing-volume
+title: Salad dressing volume in cubic inches
+source: { document: PHYS161_Exam1, labels: [ P3 ] }
+section: Units
+tags: [ units, unit-conversion, volume ]
+narrative: >-
+  According to the label on a bottle of salad dressing, the volume of the contents is {V:unit}.
+vars:
+  # The source prints one decimal (0.3 L), which leaves only a handful of values in range; a
+  # 0.01 L grid gives more variants that still read like bottle labels (0.25 L, 0.37 L).
+  - { name: V, kind: range, min: 0.2, max: 0.5, step: 0.01, unit: L, label: volume }
+derived:
+  - { name: cm3PerL, expr: "1000" } # 1 L = 1000 cm³
+  - { name: cmPerIn, expr: "2.54" } # 1 in = 2.54 cm
+parts:
+  - id: volume-in3
+    prompt: >-
+      Using the conversions 1 L = 1000 cm$^{3}$ and 1 in = 2.54 cm, express this volume in cubic
+      inches. {_0}{_u}
+    answer: V * cm3PerL / cmPerIn^3
+    unit: in^3
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { V: 0.3 }
+  parts:
+    - { id: volume-in3, answer: 18.307, unit: in^3, source: P3 }

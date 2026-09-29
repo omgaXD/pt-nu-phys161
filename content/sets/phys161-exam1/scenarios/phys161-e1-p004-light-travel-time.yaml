@@ -1,0 +1,29 @@
+# P4 — time for light to cross a distance d given in feet: t = d · 0.3048 m/ft / c, in ns.
+# The speed of light and the foot conversion printed in the text are fixed constants (derived);
+# only the distance is randomized. The answer must be given in ns (exactUnit).
+id: phys161-e1-p004-light-travel-time
+title: Light travel time over a few feet
+source: { document: PHYS161_Exam1, labels: [ P4 ] }
+section: Units
+tags: [ units, unit-conversion, speed-of-light ]
+narrative: >-
+  The speed of light is $v = 3\times10^{8}$ m/s, 1 ft = 0.3048 m.
+vars:
+  # The source's 2 ft is a small integer, which leaves only a couple of values in range; a 0.1 ft
+  # grid gives more variants. Distance in feet (ft is not in the unit table, so it is plain text).
+  - { name: d, kind: range, min: 1, max: 4, step: 0.1, label: distance in ft }
+derived:
+  - { name: c, expr: "3e8", unit: m/s } # speed of light as printed
+  - { name: mPerFt, expr: "0.3048" } # 1 ft = 0.3048 m
+parts:
+  - id: time-ns
+    prompt: "How many nanoseconds (ns) does it take light to travel {d} ft in a vacuum? {_0}{_u}"
+    answer: d * mPerFt / c * 1e9
+    unit: ns
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { d: 2 }
+  parts:
+    - { id: time-ns, answer: 2.032, unit: ns, source: P4 }

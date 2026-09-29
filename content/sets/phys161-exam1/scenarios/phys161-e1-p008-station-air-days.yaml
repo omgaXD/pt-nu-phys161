@@ -1,0 +1,31 @@
+# P8 — days until the astronauts have breathed the station's internal volume:
+# t = (4/3)πr³ / (N · V_breath · f · 1440 min/day). The breath volume is in cm³ and is converted
+# to m³ (10⁻⁶) inside the formula. The answer is a number of days (no unit field).
+id: phys161-e1-p008-station-air-days
+title: Days to breathe a space station's volume
+source: { document: PHYS161_Exam1, labels: [ P8 ] }
+section: Units
+tags: [ units, unit-conversion, sphere-volume, rates ]
+narrative: >-
+  {N} astronauts are in a spherical space station whose internal radius is {r:unit}. Each of them
+  breathes about {Vb:unit} of air with each breath, at {f} breaths per minute.
+vars:
+  - { name: N, kind: range, min: 2, max: 6, step: 1, label: number of astronauts }
+  - { name: r, kind: range, min: 4, max: 8, step: 0.5, unit: m, label: internal radius }
+  - { name: Vb, kind: range, min: 350, max: 650, step: 10, unit: cm^3, label: volume per breath }
+  - { name: f, kind: range, min: 6, max: 12, step: 1, label: breaths per minute }
+derived:
+  - { name: minPerDay, expr: "24 * 60" }
+  - { name: m3PerCm3, expr: "1e-6" }
+parts:
+  - id: days
+    prompt: >-
+      After how many days will the astronauts have breathed a total volume of air equal to the
+      internal volume of the station? {_0}
+    answer: (4 / 3 * pi * r^3) / (N * Vb * m3PerCm3 * f * minPerDay)
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { N: 4, r: 6, Vb: 520, f: 8 }
+  parts:
+    - { id: days, answer: 37.7595, source: P8 }

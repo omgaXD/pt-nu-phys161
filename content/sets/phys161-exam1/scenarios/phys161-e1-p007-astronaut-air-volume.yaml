@@ -1,0 +1,33 @@
+# P7 — total air breathed: V_tot = N · V_breath · f · (1440 min/day) · t. The breath volume is in
+# cm³ and is converted to m³ (10⁻⁶) inside the formula; the answer must be given in m³ (exactUnit).
+# The station being spherical plays no role here.
+id: phys161-e1-p007-astronaut-air-volume
+title: Air breathed by astronauts
+source: { document: PHYS161_Exam1, labels: [ P7 ] }
+section: Units
+tags: [ units, unit-conversion, volume, rates ]
+narrative: >-
+  {N} astronauts are in a spherical space station.
+vars:
+  - { name: N, kind: range, min: 2, max: 6, step: 1, label: number of astronauts }
+  - { name: Vb, kind: range, min: 350, max: 650, step: 10, unit: cm^3, label: volume per breath }
+  - { name: t, kind: range, min: 40, max: 100, step: 1, unit: days, label: time }
+  - { name: f, kind: range, min: 8, max: 16, step: 1, label: breaths per minute }
+derived:
+  - { name: minPerDay, expr: "24 * 60" }
+  - { name: m3PerCm3, expr: "1e-6" }
+parts:
+  - id: air-volume
+    prompt: >-
+      If, as is typical, each of them breathes about {Vb:unit} of air with each breath, what volume
+      of air (in cubic meters) do these astronauts breathe in {t:unit}? Assume {f} breaths per
+      minute. {_0}{_u}
+    answer: N * Vb * m3PerCm3 * f * minPerDay * t
+    unit: m^3
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { N: 2, Vb: 500, t: 69, f: 10 }
+  parts:
+    - { id: air-volume, answer: 993.6, unit: m^3, source: P7 }
