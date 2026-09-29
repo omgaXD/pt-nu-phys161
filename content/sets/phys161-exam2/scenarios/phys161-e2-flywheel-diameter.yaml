@@ -1,0 +1,31 @@
+# Seeded from fixtures/corpus/scenarios/c14b-flywheel-diameter.yaml (c14b-flywheel-diameter).
+
+# Companion to C14 (P98): rpm → rad/s and MJ → J inside the formula.
+id: phys161-e2-flywheel-diameter
+title: Diameter of an energy-storage flywheel
+source: { document: PHYS161_Exam2, labels: [ P98 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, rotational-energy, unit-conversion ]
+narrative: >-
+  A flywheel is made of iron (density {rho:unit}) in the shape of a {t}-cm-thick uniform disk.
+vars:
+  - { name: t, kind: range, min: 5, max: 15, step: 0.5, decimals: 1 }
+  - { name: E, kind: range, min: 5, max: 20, step: 1, unit: MJ }
+  - { name: n, kind: range, min: 60, max: 120, step: 5, unit: rpm }
+derived:
+  - { name: rho, expr: "7800", unit: kg/m^3 }
+  - { name: omega, expr: "n * 2 * pi / 60", unit: rad/s }
+parts:
+  - id: diameter
+    prompt: >-
+      What would the diameter of such a disk need to be if it is to store {E:unit} of kinetic energy
+      when spinning at {n:unit} about an axis perpendicular to the disk at its center? {_0}{_u}
+    # E = ½ I ω², I = ½ M r², M = ρ π r² t  ⇒  r = (4E / (ρ π t ω²))^(1/4)
+    answer: 2 * (4 * E * 1e6 / (rho * pi * (t / 100) * omega^2))^(1/4)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { rho: 7800, t: 11, E: 10, n: 85 }
+  parts:
+    - { id: diameter, answer: 7.399, unit: m, source: P98 }

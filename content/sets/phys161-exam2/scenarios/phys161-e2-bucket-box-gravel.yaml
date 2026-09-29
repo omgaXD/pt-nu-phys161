@@ -1,0 +1,62 @@
+# Seeded from fixtures/corpus/scenarios/c08-bucket-box-gravel.yaml (c08-bucket-box-gravel).
+
+# C8 — branch-dependent physics (P38/P39). With the gravel the box must stay at
+# rest (static friction = bucket weight); without it the box must slide
+# (kinetic friction, energy conservation). Randomizing the masses can silently
+# flip either branch — the constraints keep every variant on the branch the
+# answer formulas assume.
+id: phys161-e2-bucket-box-gravel
+title: Bucket, box and gravel on a roof
+source: { document: PHYS161_Exam2, labels: [ P38, P39 ] }
+section: Energy conservation
+tags: [ friction, energy-conservation, constraints ]
+figure:
+  id: bucket-box
+  src: figures/unnamed_002_GNcJ.png
+  alt: >-
+    A box with a bag of gravel on top sits on a horizontal roof. A cable runs horizontally from the
+    box over a pulley at the roof edge and down to a hanging bucket of concrete. The roof surface is
+    labelled with the coefficients of static and kinetic friction.
+narrative: >-
+  At a construction site, a {mb}-kg bucket of concrete hangs from a light strong cable that passes
+  over a light friction-free pulley and is connected to a {M}-kg box on a horizontal roof. The cable
+  pulls horizontally on the box, and a {mg}-kg bag of gravel rests on top of the box. The
+  coefficients of friction between the box and roof are $\mu_s = {mus}$ and $\mu_k = {muk}$. {@fig}
+vars:
+  - { name: mb, kind: range, min: 50, max: 75, step: 1, unit: kg, label: bucket mass }
+  - { name: M, kind: range, min: 70, max: 95, step: 1, unit: kg, label: box mass }
+  - { name: mg, kind: range, min: 30, max: 60, step: 1, unit: kg, label: gravel mass }
+  - { name: mus, kind: range, min: 0.60, max: 0.80, step: 0.01, decimals: 2 }
+  - { name: muk, kind: range, min: 0.30, max: 0.50, step: 0.01, decimals: 2 }
+  - { name: h, kind: range, min: 1, max: 3, step: 0.5, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "mb < mus * (M + mg)" # with the gravel, static friction holds the box
+  - "mb > mus * M" # without the gravel, the box slides
+parts:
+  - id: friction-at-rest
+    prompt: "Find the magnitude of the friction force that the roof exerts on the box. {_0}{_u}"
+    answer: mb * g
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: speed-after-descent
+    prompt: >-
+      Suddenly a worker picks up the bag of gravel. Find the speed of the bucket after it has
+      descended {h:unit} from rest. {_0}{_u}
+    answer: sqrt(2 * g * h * (mb - muk * M) / (mb + M))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { mb: 62, M: 84, mg: 48, mus: 0.68, muk: 0.43, h: 2, g: 9.8 }
+  parts:
+    - { id: friction-at-rest, answer: 607.6, unit: N, source: P38 }
+    - {
+        id: speed-after-descent,
+        answer: 2.721,
+        unit: m/s,
+        source: P39,
+        vars: { mb: 63, M: 80, muk: 0.45 }
+      }

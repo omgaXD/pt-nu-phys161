@@ -1,0 +1,28 @@
+# Seeded from fixtures/corpus/scenarios/c11-railroad-cars.yaml (c11-railroad-cars).
+
+# C11 — integer / discrete answer (P88). The answer is an exact integer:
+# `integer: true` makes 23.9 wrong no matter the tolerance. n0 starts at 3 so
+# the ordinals n0+1 and n0+2 always take "th".
+id: phys161-e2-railroad-cars
+title: Railroad cars coupling one at a time
+source: { document: PHYS161_Exam2, labels: [ P88 ] }
+section: Conservation of linear momentum
+tags: [ momentum, inelastic-collision, integer ]
+narrative: >-
+  {n0} coupled railroad cars roll along and couple with a {= n0 + 1}th car, which is initially at
+  rest. These {= n0 + 1} cars roll along and couple with a {= n0 + 2}th car initially at rest. This
+  process continues until the speed of the final collection of railroad cars is $1/{k}$ the speed of
+  the initial {n0} railroad cars. All the cars are identical.
+vars:
+  - { name: n0, kind: range, min: 3, max: 8, step: 1 }
+  - { name: k, kind: range, min: 2, max: 9, step: 1 }
+parts:
+  - id: car-count
+    prompt: "Ignoring friction, how many cars are in the final collection? {_0}"
+    answer: n0 * k
+    integer: true
+    difficulty: 2
+canonical:
+  vars: { n0: 4, k: 6 }
+  parts:
+    - { id: car-count, answer: 24, source: P88 }

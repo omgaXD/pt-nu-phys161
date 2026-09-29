@@ -1,0 +1,36 @@
+# Seeded from fixtures/corpus/scenarios/c12-two-density-earth.yaml (c12-two-density-earth).
+
+# C12 — inverse problem requiring root-finding (P95). The inner radius is found
+# with solve(); constraints guarantee the root is bracketed by [0, R].
+id: phys161-e2-two-density-earth
+title: Inner radius of a two-density Earth
+source: { document: PHYS161_Exam2, labels: [ P95 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, root-finding ]
+narrative: >-
+  Assume a simple non-uniform model of Earth's density with an inner spherical region of density
+  {rho_in:unit} and an outer (spherical shell) region of density {rho_out:unit}. Take the radius of
+  the Earth as {R:unit} and its moment of inertia as {I:unit}.
+vars:
+  - { name: rho_in, kind: range, min: 5500, max: 7000, step: 100, unit: kg/m^3 }
+  - { name: rho_out, kind: range, min: 3500, max: 5000, step: 100, unit: kg/m^3 }
+  - { name: R, kind: range, min: 6e+6, max: 6.4e+6, step: 1e+4, sigfigs: 3, unit: m }
+  - { name: I, kind: range, min: 6e+37, max: 9.9e+37, step: 1e+36, sigfigs: 2, unit: kg m^2 }
+derived:
+  # I of a uniform sphere of density ρ and radius r is (8π/15) ρ r^5.
+  - { name: k, expr: "8 * pi / 15" }
+constraints:
+  - "k * rho_out * R^5 < I" # the root lies above r = 0 ...
+  - "I < k * rho_in * R^5" # ... and below r = R
+maxSampleAttempts: 1000
+parts:
+  - id: inner-radius
+    prompt: "Calculate the radius of the inner region. {_0}{_u}"
+    answer: "solve(f(r) = k * (rho_in * r^5 + rho_out * (R^5 - r^5)) - I, 0, R)"
+    unit: m
+    tolerance: { rel: 0.001 }
+    difficulty: 5
+canonical:
+  vars: { rho_in: 6200, rho_out: 4300, R: 6110000, I: 8.5e+37 }
+  parts:
+    - { id: inner-radius, answer: 5945403.82, unit: m, source: P95 }

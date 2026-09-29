@@ -1,0 +1,72 @@
+# Seeded from fixtures/corpus/scenarios/c03-luggage-ramp.yaml (c03-luggage-ramp).
+
+# C3 — multi-part scenario with a shared figure (P12/P13/P14).
+# The three source problems use different numbers: the base canonical values
+# are P14's, and the other two parts override them with their own.
+id: phys161-e2-luggage-ramp
+title: Luggage pulled up a ramp
+source: { document: PHYS161_Exam2, labels: [ P12, P13, P14 ] }
+section: Work
+tags: [ work, friction, incline, multi-part ]
+figure:
+  id: ramp
+  src: figures/unnamed_004_GNcJ.png
+  alt: >-
+    A suitcase on a ramp inclined at angle θ above the horizontal, pulled up the ramp by a force F
+    that acts parallel to the ramp surface.
+narrative: >-
+  A luggage handler pulls a {m}-kg suitcase up a ramp inclined at {theta}° above the horizontal by a
+  force $F$ of magnitude {F} N that acts parallel to the ramp. The coefficient of kinetic friction
+  between the ramp and the suitcase is $\mu_k = {mu}$. The suitcase travels {d:unit} along the ramp.
+  {@fig}
+vars:
+  - { name: m, kind: range, min: 14, max: 30, step: 1, unit: kg }
+  - { name: theta, kind: range, min: 22, max: 36, step: 1, unit: "°" }
+  - { name: F, kind: range, min: 150, max: 220, step: 5, unit: N }
+  - { name: mu, kind: range, min: 0.25, max: 0.45, step: 0.01, decimals: 2 }
+  - { name: d, kind: range, min: 2.5, max: 5.0, step: 0.1, decimals: 1, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: N, expr: "m * g * cos(theta * pi / 180)", unit: N }
+constraints:
+  - "F > m * g * sin(theta * pi / 180) + mu * N" # must actually move up the ramp
+parts:
+  - id: work-by-f
+    prompt: "Calculate the work done on the suitcase by the force $F$. {_0}{_u}"
+    answer: F * d
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: work-by-friction
+    prompt: "Calculate the work done on the suitcase by the friction force. {_0}{_u}"
+    answer: -mu * N * d
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: work-by-gravity
+    prompt: >-
+      Calculate the magnitude of the work done on the suitcase by the gravitational force. {_0}{_u}
+    answer: m * g * sin(theta * pi / 180) * d
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 18, theta: 31, F: 170, mu: 0.32, d: 4.1, g: 9.8 }
+  parts:
+    # P12's suitcase would not move up the ramp under F alone (it is already
+    # moving); `pt check` reports that as a constraint warning.
+    - {
+        id: work-by-f,
+        answer: 511.5,
+        unit: J,
+        source: P12,
+        vars: { m: 24, theta: 29, F: 165, mu: 0.36, d: 3.1 }
+      }
+    - {
+        id: work-by-friction,
+        answer: -190.796,
+        unit: J,
+        source: P13,
+        vars: { m: 18, theta: 28, F: 195, mu: 0.35, d: 3.5 }
+      }
+    - { id: work-by-gravity, answer: 372.49613729795, unit: J, source: P14 }

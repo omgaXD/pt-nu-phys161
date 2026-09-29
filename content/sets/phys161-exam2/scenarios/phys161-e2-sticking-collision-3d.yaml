@@ -1,0 +1,36 @@
+# Seeded from fixtures/corpus/scenarios/c06b-sticking-collision-3d.yaml (c06b-sticking-collision-3d).
+
+# Companion to C6 (P80): 3-D velocity vectors, perfectly inelastic collision.
+id: phys161-e2-sticking-collision-3d
+title: Two objects stick together in 3-D
+source: { document: PHYS161_Exam2, labels: [ P80 ] }
+section: Conservation of linear momentum
+tags: [ momentum, vectors, inelastic-collision ]
+narrative: >-
+  An object of mass {m1:unit} has an initial velocity of $\left({v1}\right)\,\text{m/s}$. It
+  collides with and sticks to another object of mass {m2:unit} moving with an initial velocity of
+  $\left({v2}\right)\,\text{m/s}$ (here $\hat{\imath}$, $\hat{\jmath}$ and $\hat{k}$ are unit
+  vectors along the x-, y- and z-axis respectively).
+vars:
+  - { name: m1, kind: range, min: 300, max: 900, step: 10, unit: g }
+  - { name: m2, kind: range, min: 300, max: 900, step: 10, unit: g }
+  - { name: v1x, kind: range, min: -5, max: 5, step: 0.1, decimals: 1 }
+  - { name: v1y, kind: range, min: -5, max: 5, step: 0.1, decimals: 1 }
+  - { name: v2x, kind: range, min: -6, max: 6, step: 0.1, decimals: 1 }
+  - { name: v2y, kind: range, min: -6, max: 6, step: 0.1, decimals: 1 }
+  - { name: v2z, kind: range, min: 0.5, max: 4, step: 0.1, decimals: 1 }
+derived:
+  - { name: v1, expr: "[v1x, v1y, 0]", unit: m/s }
+  - { name: v2, expr: "[v2x, v2y, v2z]", unit: m/s }
+  - { name: vf, expr: "(m1 * v1 + m2 * v2) / (m1 + m2)", unit: m/s }
+parts:
+  - id: final-speed
+    prompt: "Find the magnitude of the speed of the composite object. {_0}{_u}"
+    answer: norm(vf)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m1: 520, m2: 880, v1x: -2.6, v1y: 1.1, v2x: 5.5, v2y: 2.3, v2z: 2.9 }
+  parts:
+    - { id: final-speed, answer: 3.601, unit: m/s, source: P80 }

@@ -1,0 +1,26 @@
+# Seeded from fixtures/corpus/scenarios/c10c-rocket-payload-fraction.yaml (c10c-rocket-payload-fraction).
+
+# Companion to C10 (P93): dimensionless answer from an exponential.
+id: phys161-e2-rocket-payload-fraction
+title: Rocket payload fraction
+source: { document: PHYS161_Exam2, labels: [ P93 ] }
+section: Rocket propulsion
+tags: [ rocket, dimensionless, exponential ]
+narrative: >-
+  A rocket starts from rest and moves with no external forces acting on it. The exhaust velocity of
+  the gas is {u:unit}.
+vars:
+  - { name: u, kind: range, min: 2.5, max: 4.5, step: 0.1, decimals: 1, unit: km/s }
+  - { name: v, kind: range, min: 6, max: 12, step: 0.1, decimals: 1, unit: km/s }
+parts:
+  - id: payload-fraction
+    prompt: >-
+      What fraction of the rocket's total mass can be payload if its final velocity is to be
+      {v:unit}? {_0}
+    answer: exp(-v / u)
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { u: 3.9, v: 11.7 }
+  parts:
+    - { id: payload-fraction, answer: 0.0497871, source: P93 }

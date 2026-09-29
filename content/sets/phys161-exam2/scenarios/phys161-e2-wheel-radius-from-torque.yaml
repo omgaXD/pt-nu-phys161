@@ -1,0 +1,42 @@
+# Seeded from fixtures/corpus/scenarios/c12b-wheel-radius-from-torque.yaml (c12b-wheel-radius-from-torque).
+
+# Companion to C12 (P132): solve for a geometric quantity from a net torque.
+# F1 is radial (no torque); F2 (at θ to the radius) and F3 (tangent) turn the
+# wheel in opposite senses.
+id: phys161-e2-wheel-radius-from-torque
+title: Wheel radius from the net torque of three forces
+source: { document: PHYS161_Exam2, labels: [ P132 ] }
+section: Torque
+tags: [ torque, inverse-problem ]
+figure:
+  id: wheel-forces
+  src: figures/unnamed_008_GNcJ.png
+  alt: >-
+    A wheel of radius R with three forces: F1 pushes straight down toward the centre at the top of
+    the rim, F2 acts at the upper right of the rim at angle θ to the extended radius, and F3 acts
+    upward, tangent to the rim at its right side.
+narrative: >-
+  Three forces are applied to a wheel as shown in the figure. One force is perpendicular to the rim,
+  $|F_1| = {F1}$ N; one makes a {theta}° angle with the radius, $|F_2| = {F2}$ N; and the other is
+  tangent to the rim, $|F_3| = {F3}$ N. The magnitude of the net torque on the wheel due to these
+  three forces, for an axis perpendicular to the wheel and passing through its centre, is
+  {tau:unit}. {@fig}
+vars:
+  - { name: F1, kind: range, min: 5, max: 15, step: 0.1, decimals: 1, unit: N }
+  - { name: theta, kind: range, min: 30, max: 70, step: 1, unit: "°" }
+  - { name: F2, kind: range, min: 10, max: 20, step: 0.1, decimals: 1, unit: N }
+  - { name: F3, kind: range, min: 4, max: 12, step: 0.1, decimals: 1, unit: N }
+  - { name: tau, kind: range, min: 1, max: 5, step: 0.01, decimals: 2, unit: N m }
+constraints:
+  - "abs(F3 - F2 * sin(rad(theta))) > 1" # avoid a near-zero lever arm sum
+parts:
+  - id: radius
+    prompt: "What is the radius of the wheel? {_0}{_u}"
+    answer: tau / abs(F3 - F2 * sin(rad(theta)))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { F1: 10.8, theta: 48, F2: 15.7, F3: 8, tau: 2.19 }
+  parts:
+    - { id: radius, answer: 0.597, unit: m, source: P132 }

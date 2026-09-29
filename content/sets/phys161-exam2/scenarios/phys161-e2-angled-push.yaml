@@ -1,0 +1,36 @@
+# Seeded from fixtures/corpus/scenarios/c02-angled-push.yaml (c02-angled-push).
+
+# C2 — trigonometry and sign conventions (P2). Degrees → radians; "below the
+# horizontal" must not flip the sign of the work.
+id: phys161-e2-angled-push
+title: Work by a force angled below the horizontal
+source: { document: PHYS161_Exam2, labels: [ P2 ] }
+section: Work
+tags: [ work, trigonometry ]
+narrative: >-
+  A mass of {m:unit} is pushed a distance of {d:unit} along a horizontal frictionless surface by a
+  force of {F:unit} directed at an angle of {theta:unit} below the horizontal.
+vars:
+  - { name: m, kind: range, min: 10, max: 50, step: 1, unit: kg, label: mass (red herring) }
+  - { name: d, kind: range, min: 1, max: 5, step: 0.1, decimals: 1, unit: m }
+  - { name: F, kind: range, min: 40, max: 100, step: 1, unit: N }
+  - {
+      name: theta,
+      kind: range,
+      min: 10,
+      max: 40,
+      step: 1,
+      unit: "°",
+      label: angle below horizontal
+    }
+parts:
+  - id: work
+    prompt: "Determine the work done by the force. {_0}{_u}"
+    answer: F * d * cos(rad(theta))
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 25, d: 3.4, F: 73, theta: 20 }
+  parts:
+    - { id: work, answer: 233.232, unit: J, source: P2 }

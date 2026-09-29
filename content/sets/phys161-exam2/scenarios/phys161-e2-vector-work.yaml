@@ -1,0 +1,36 @@
+# Seeded from fixtures/corpus/scenarios/c06-vector-work.yaml (c06-vector-work).
+
+# C6 — vectors in the prompt, scalar answer (P23). Components are independent
+# random variables; the prompt renders unit-vector notation.
+id: phys161-e2-vector-work
+title: Net work from a change of velocity vector
+source: { document: PHYS161_Exam2, labels: [ P23 ] }
+section: Kinetic energy
+tags: [ kinetic-energy, vectors, work-energy ]
+narrative: >-
+  A {m:unit} object has a velocity of $\left({v1}\right)\,\text{m/s}$.
+vars:
+  - { name: m, kind: range, min: 1, max: 10, step: 1, unit: kg }
+  - { name: v1x, kind: range, min: -5, max: 5, step: 1 }
+  - { name: v1y, kind: range, min: -5, max: 5, step: 1 }
+  - { name: v2x, kind: range, min: -9, max: 9, step: 1 }
+  - { name: v2y, kind: range, min: -9, max: 9, step: 1 }
+derived:
+  - { name: v1, expr: "[v1x, v1y]", unit: m/s }
+  - { name: v2, expr: "[v2x, v2y]", unit: m/s }
+constraints:
+  - "norm(v1) > 0"
+  - "dot(v2, v2) != dot(v1, v1)"
+parts:
+  - id: net-work
+    prompt: >-
+      What is the net work done on the object if its velocity changes to
+      $\left({v2}\right)\,\text{m/s}$? {_0}{_u}
+    answer: 0.5 * m * (dot(v2, v2) - dot(v1, v1))
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 4, v1x: 2, v1y: 2, v2x: 8, v2y: 5 }
+  parts:
+    - { id: net-work, answer: 162, unit: J, source: P23 }
