@@ -1,0 +1,58 @@
+# P15/P16/P17 — the two vectors of the figure: A points along −y, B makes 30.0° with +y
+# (toward +x). With A = A (0, −1) and B = B (sin 30°, cos 30°):
+#   |A + B| = √(A² + B² − 2AB cos 30°),  |A − B| = √(A² + B² + 2AB cos 30°),
+#   B_x = B sin 30°.
+# The 30.0° angle is printed in the figure, so it is fixed (a single-option choice).
+# The base canonical values are P15's; P16 (B = 11 m) and P17 (B = 7 m) override B.
+id: phys161-e1-p015-vector-sum-difference
+title: Sum, difference and x-component of two vectors in a figure
+source: { document: PHYS161_Exam1, labels: [ P15, P16, P17 ] }
+section: Vectors
+tags: [ vectors, vector-addition, components, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_020_R6Ld.png
+  alt: >-
+    A vertical y axis and a horizontal x axis meeting at the origin O. Vector A starts at O and
+    points straight down along the negative y axis. Vector B starts at O and points up and to the
+    right, making an angle of 30.0° with the positive y axis.
+narrative: >-
+  Vector $\vec{A}$ is {A:unit} and vector $\vec{B}$ is {B:unit} long, see image below. {@fig}
+vars:
+  - { name: A, kind: range, min: 4, max: 10, step: 1, unit: m, label: length of A }
+  - { name: B, kind: range, min: 6, max: 15, step: 1, unit: m, label: length of B }
+  # The figure prints the 30.0° angle between B and the +y axis, so it is fixed.
+  - { name: phi, kind: choice, options: [ 30 ], unit: "°", label: angle of B from +y (figure) }
+derived:
+  - { name: vecA, expr: "[0, -A]", unit: m }
+  - { name: vecB, expr: "[B * sin(rad(phi)), B * cos(rad(phi))]", unit: m }
+parts:
+  - id: sum-magnitude
+    prompt: >-
+      For the vectors $\vec{A}$ and $\vec{B}$, find the magnitude of the vector sum $\vec{A} +
+      \vec{B}$. {_0}{_u}
+    answer: norm(vecA + vecB)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: difference-magnitude
+    prompt: >-
+      For the vectors $\vec{A}$ and $\vec{B}$, find the magnitude of the vector difference $\vec{A}
+      - \vec{B}$. {_0}{_u}
+    answer: norm(vecA - vecB)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: b-x-component
+    prompt: >-
+      Find the x-component of the vector $\vec{B} = x\,\hat{\imath} + y\,\hat{\jmath}$. {_0}{_u}
+    answer: B * sin(rad(phi))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { A: 7, B: 12, phi: 30 }
+  parts:
+    - { id: sum-magnitude, answer: 6.8926, unit: m, source: P15 }
+    - { id: difference-magnitude, answer: 17.418, unit: m, source: P16, vars: { B: 11 } }
+    - { id: b-x-component, answer: 3.5, unit: m, source: P17, vars: { B: 7 } }

@@ -1,0 +1,25 @@
+# P18 — magnitude of a 3-D vector from its components: |B| = √(Bx² + By² + Bz²).
+# The components are independent integers ≥ 2 (positive, as in the source; no "1î" terms).
+id: phys161-e1-p018-vector-magnitude-3d
+title: Magnitude of a vector from its components
+source: { document: PHYS161_Exam1, labels: [ P18 ] }
+section: Vectors
+tags: [ vectors, magnitude, components ]
+narrative: >-
+  Given vector $\vec{B} = {B}$.
+vars:
+  - { name: Bx, kind: range, min: 2, max: 6, step: 1 }
+  - { name: By, kind: range, min: 2, max: 5, step: 1 }
+  - { name: Bz, kind: range, min: 2, max: 6, step: 1 }
+derived:
+  - { name: B, expr: "[Bx, By, Bz]" }
+parts:
+  - id: magnitude
+    prompt: "Find its magnitude. {_0}"
+    answer: norm(B)
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { Bx: 3, By: 2, Bz: 3 }
+  parts:
+    - { id: magnitude, answer: 4.6904, source: P18 }

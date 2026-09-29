@@ -1,0 +1,36 @@
+# P21 — scalar product of the figure's vectors: A · B = A B cos(θB − θA), with A at 53.0°
+# and B at 130.0° counterclockwise from +x (77.0° apart, so A · B > 0).
+# Both angles are printed in the figure, so they are fixed (single-option choices).
+id: phys161-e1-p021-scalar-product-figure
+title: Scalar product of two vectors in a figure
+source: { document: PHYS161_Exam1, labels: [ P21 ] }
+section: Vectors
+tags: [ vectors, scalar-product ]
+figure:
+  id: fig
+  src: figures/unnamed_021_R6Ld.png
+  alt: >-
+    x and y axes with the unit vectors î and ĵ drawn at the origin. Vector A starts at the origin
+    and points up and to the right at 53.0° above the positive x axis. Vector B starts at the origin
+    and points up and to the left; an arc from the positive x axis marks its direction as 130.0°
+    counterclockwise from the positive x axis.
+narrative: >-
+  Consider the two vectors in the figure below. The magnitudes of the vectors are $A = {A}$ and $B =
+  {B}$. {@fig}
+vars:
+  - { name: A, kind: range, min: 4, max: 10, step: 1, label: magnitude of A }
+  - { name: B, kind: range, min: 8, max: 16, step: 1, label: magnitude of B }
+  # The figure prints both directions (53.0° and 130.0° from +x), so they are fixed.
+  - { name: thetaA, kind: choice, options: [ 53 ], unit: "°", label: direction of A (figure) }
+  - { name: thetaB, kind: choice, options: [ 130 ], unit: "°", label: direction of B (figure) }
+parts:
+  - id: scalar-product
+    prompt: >-
+      Find the scalar product $\vec{A} \cdot \vec{B}$ of the two vectors in the figure. {_0}
+    answer: A * B * cos(rad(thetaB - thetaA))
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { A: 7, B: 12, thetaA: 53, thetaB: 130 }
+  parts:
+    - { id: scalar-product, answer: 18.8959, source: P21 }

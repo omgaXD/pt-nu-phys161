@@ -1,0 +1,34 @@
+# P20 — scalar projection of D on the direction of E: |D · E| / |E|.
+# Components are independent integers whose signs match the source (D and E both (+, +, −)),
+# so every product Di Ei is positive: D · E > 0 and the projection never vanishes.
+# (The source prints the negative z-components as "+ -7k̂"; here they render as "− 7k̂".)
+id: phys161-e1-p020-scalar-projection
+title: Component of one displacement along another
+source: { document: PHYS161_Exam1, labels: [ P20 ] }
+section: Vectors
+tags: [ vectors, scalar-product, projection ]
+narrative: >-
+  Given the two displacements $\vec{D} = \left({D}\right)\,\text{m}$ and $\vec{E} =
+  \left({E}\right)\,\text{m}$.
+vars:
+  - { name: Dx, kind: range, min: 3, max: 7, step: 1 }
+  - { name: Dy, kind: range, min: 4, max: 10, step: 1 }
+  - { name: Dz, kind: range, min: -10, max: -4, step: 1 }
+  - { name: Ex, kind: range, min: 3, max: 7, step: 1 }
+  - { name: Ey, kind: range, min: 2, max: 5, step: 1 }
+  - { name: Ez, kind: range, min: -9, max: -3, step: 1 }
+derived:
+  - { name: D, expr: "[Dx, Dy, Dz]", unit: m }
+  - { name: E, expr: "[Ex, Ey, Ez]", unit: m }
+parts:
+  - id: projection
+    prompt: >-
+      Find the magnitude of the component of $\vec{D}$ along the direction of $\vec{E}$. {_0}{_u}
+    answer: abs(dot(D, E)) / norm(E)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { Dx: 5, Dy: 7, Dz: -7, Ex: 5, Ey: 3, Ez: -6 }
+  parts:
+    - { id: projection, answer: 10.518, unit: m, source: P20 }
