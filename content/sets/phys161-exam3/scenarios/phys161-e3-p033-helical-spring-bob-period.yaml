@@ -1,0 +1,37 @@
+# P33 — the first mass m1 stretches the spring by d, so k = m1 g / d (d in cm, masses in g). The
+# new bob m2 then oscillates with period T = 2π sqrt(m2 / k) = 2π sqrt(m2 d / (m1 g)).
+id: phys161-e3-p033-helical-spring-bob-period
+title: Period of a bob on a calibrated vertical spring
+source: { document: PHYS161_Exam3, labels: [ P33 ] }
+section: Oscillations
+tags: [ oscillations, spring, hookes-law, period ]
+narrative: >-
+  A light vertically mounted helical spring is stretched by {d:unit} by a mass of {m1:unit} hang at
+  spring's end. This mass is then replaced with a new {m2:unit} bob that is set into simple harmonic
+  motion. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - {
+      name: d,
+      kind: range,
+      min: 4.5,
+      max: 9.5,
+      step: 0.1,
+      decimals: 1,
+      unit: cm,
+      label: stretch
+    }
+  - { name: m1, kind: range, min: 120, max: 230, step: 1, unit: g, label: first mass }
+  - { name: m2, kind: range, min: 330, max: 620, step: 1, unit: g, label: bob mass }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: period
+    prompt: "Calculate its period. {_0}{_u}"
+    answer: 2 * pi * sqrt((m2 / 1000) * (d / 100) / ((m1 / 1000) * g))
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { d: 6.9, m1: 171, m2: 476, g: 9.8 }
+  parts:
+    - { id: period, answer: 0.8796, unit: s, source: P33 }

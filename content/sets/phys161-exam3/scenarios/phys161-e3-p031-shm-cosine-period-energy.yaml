@@ -1,0 +1,52 @@
+# P31/P32 — simple harmonic motion x = A cos(ωt + φ), all quantities in SI units (printed as
+# bare numbers). Period T = 2π / ω (P31); with Hooke's law k = m ω², the total energy is
+# E = ½ k A² = ½ m ω² A² (P32, m given in g). The phase φ affects neither answer.
+# The base canonical values are P31's; P32 overrides them with its own.
+id: phys161-e3-p031-shm-cosine-period-energy
+title: Simple harmonic motion from its position formula
+source: { document: PHYS161_Exam3, labels: [ P31, P32 ] }
+section: Oscillations
+tags: [ oscillations, simple-harmonic-motion, period, energy, multi-part ]
+narrative: >-
+  A body oscillates in a simple harmonic motion with its position described by the following
+  formula: $x = A\cos(\omega t + \varphi)$, where $A = {A}$, $\omega = {omega}$, and $\varphi =
+  {phi}$. Assume all quantities are given in SI units.
+vars:
+  - { name: A, kind: range, min: 5.0, max: 11.0, step: 0.1, decimals: 1, label: amplitude }
+  - {
+      name: omega,
+      kind: range,
+      min: 0.8,
+      max: 1.6,
+      step: 0.001,
+      decimals: 3,
+      label: angular frequency
+    }
+  - { name: phi, kind: range, min: 0.2, max: 0.4, step: 0.001, decimals: 3, label: initial phase }
+  - { name: m, kind: range, min: 550, max: 1050, step: 10, unit: g, label: mass }
+parts:
+  - id: period
+    prompt: "Calculate the period of oscillations. {_0}{_u}"
+    answer: 2 * pi / omega
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: total-energy
+    prompt: >-
+      Assuming the oscillations are governed by Hooke's law and the body's mass is {m:unit},
+      calculate the total energy of the oscillator. {_0}{_u}
+    answer: 0.5 * (m / 1000) * omega^2 * A^2
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { A: 8.2, omega: 1.127, phi: 0.288, m: 790 }
+  parts:
+    - { id: period, answer: 5.575, unit: s, source: P31 }
+    - {
+        id: total-energy,
+        answer: 49.28,
+        unit: J,
+        source: P32,
+        vars: { A: 8.1, omega: 1.379, phi: 0.337, m: 790 }
+      }

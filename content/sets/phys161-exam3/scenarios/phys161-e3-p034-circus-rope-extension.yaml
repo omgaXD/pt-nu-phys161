@@ -1,0 +1,29 @@
+# P34 — the rope acts as a spring with k = m ω² = 4π² m / T², so the static extension is
+# x = m g / k = g T² / (4π²). The performer's mass cancels, but it is part of the problem's data.
+id: phys161-e3-p034-circus-rope-extension
+title: Extension of a circus performer's elastic rope
+source: { document: PHYS161_Exam3, labels: [ P34 ] }
+section: Oscillations
+tags: [ oscillations, spring, hookes-law, period, equilibrium ]
+narrative: >-
+  Circus performer of mass {m:unit} oscillates up and down at the end of a long elastic rope at a
+  rate of once every {T:unit}. The elastic rope obeys Hooke's Law. The gravitational acceleration is
+  $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 55, max: 100, step: 1, unit: kg, label: performer's mass }
+  - { name: T, kind: range, min: 4.0, max: 7.0, step: 0.1, decimals: 1, unit: s, label: period }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: extension
+    prompt: >-
+      By how much is the rope extended beyond its unloaded length when the performer hangs at rest?
+      {_0}{_u}
+    answer: g * T^2 / (4 * pi^2)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 77, T: 5.5, g: 9.8 }
+  parts:
+    - { id: extension, answer: 7.5091662226928, unit: m, source: P34 }

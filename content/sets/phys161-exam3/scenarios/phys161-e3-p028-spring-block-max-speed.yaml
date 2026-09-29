@@ -1,0 +1,42 @@
+# P28 — a block released from rest at x0 oscillates with amplitude A = x0, so its maximum speed
+# (at the equilibrium position) is v_max = ω A = A sqrt(k / m).
+id: phys161-e3-p028-spring-block-max-speed
+title: Maximum speed of a block on a horizontal spring
+source: { document: PHYS161_Exam3, labels: [ P28 ] }
+section: Oscillations
+tags: [ oscillations, spring, simple-harmonic-motion, maximum-speed ]
+figure:
+  id: spring-block
+  src: figures/unnamed_LYNB.png
+  alt: >-
+    A horizontal spring labelled k is fixed at its left end to a hatched vertical wall; its right
+    end is attached to a block labelled m resting on a horizontal line, which ends in an arrow
+    pointing to the right.
+narrative: >-
+  A spring is mounted horizontally, with its left end fixed. A block of mass $m = {m:unit}$ is
+  attached to the free end, pulled toward the right and released from rest at $x = {x0:unit}$. Force
+  constant of the spring is $k = {k:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 0.2, max: 0.5, step: 0.1, decimals: 1, unit: kg, label: mass }
+  - {
+      name: x0,
+      kind: range,
+      min: 0.01,
+      max: 0.04,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: release position
+    }
+  - { name: k, kind: range, min: 110, max: 200, step: 1, unit: N/m, label: force constant }
+parts:
+  - id: max-speed
+    prompt: "Find the maximum velocity attained by the oscillating block. {_0}{_u}"
+    answer: x0 * sqrt(k / m)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 0.3, x0: 0.02, k: 152 }
+  parts:
+    - { id: max-speed, answer: 0.4502, unit: m/s, source: P28 }
