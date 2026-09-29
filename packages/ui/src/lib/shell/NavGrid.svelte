@@ -9,7 +9,8 @@
 
   let { items, onSelect, label = 'Question navigation' }: Props = $props();
 
-  const stateOf = (i: NavItem): string => (i.answered ? 'answered' : 'unanswered');
+  const stateOf = (i: NavItem): string => i.outcome ?? (i.answered ? 'answered' : 'unanswered');
+  const spoken = (i: NavItem): string => (i.outcome ? `, ${i.outcome}` : i.answered ? ', answered' : ', not answered');
 </script>
 
 <nav class="pt-nav-grid" aria-label={label}>
@@ -21,7 +22,8 @@
       class:current={item.current}
       data-state={stateOf(item)}
       aria-current={item.current ? 'step' : undefined}
-      aria-label="{item.label}{item.answered ? ', answered' : ', not answered'}{item.flagged ? ', flagged' : ''}"
+      aria-label="{item.label}{spoken(item)}{item.flagged ? ', flagged' : ''}"
+      title={item.title}
       onclick={() => onSelect?.(item.id)}
     >
       {item.label}
@@ -47,6 +49,18 @@
   }
   .answered {
     background: var(--pt-nav-answered, #c8d6e5);
+  }
+  .correct {
+    background: var(--pt-good-bg, #e3f4e5);
+    border-color: var(--pt-good, #1b6e2a);
+  }
+  .partial {
+    background: var(--pt-warn-bg, #fff4d6);
+    border-color: var(--pt-warn, #7a5300);
+  }
+  .incorrect {
+    background: var(--pt-bad-bg, #fbe4e2);
+    border-color: var(--pt-bad, #b3261e);
   }
   .current {
     outline: 2px solid var(--pt-accent, #0f6cbf);

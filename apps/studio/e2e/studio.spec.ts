@@ -202,7 +202,11 @@ test('the /dev gallery renders every component against the corpus (M10)', async 
   await expect(page.locator('.pt-canonical-panel header[data-status="pass"]')).toHaveCount(1);
   await expect(page.locator('.pt-canonical-panel header[data-status="fail"]')).toHaveCount(1);
   await expect(page.locator('[data-overlay="angle"]').first()).toHaveText('31°');
-  await expect(page.getByRole('timer')).toBeVisible();
+  await expect(page.getByRole('timer')).toHaveCount(2);
+  const themed = page.getByTestId('moodle-theme');
+  await expect(themed.getByRole('timer')).toHaveText(/^\s*0:0[45]:\d\d\s*$/);
+  await expect(themed.locator('.que .info h3.no .qno')).toHaveText('1');
+  await expect(page.getByRole('navigation', { name: 'Review navigation' }).getByRole('button', { name: '1, correct' })).toHaveAttribute('data-state', 'correct');
 });
 
 test('serves figure assets through the repository', async ({ request }) => {

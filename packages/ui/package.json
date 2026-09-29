@@ -13,11 +13,13 @@
       "svelte": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./styles.css": "./src/lib/styles.css"
+    "./styles.css": "./src/lib/styles.css",
+    "./themes/moodle.css": "./src/lib/themes/moodle.css"
   },
   "files": [
     "dist",
-    "src/lib/styles.css"
+    "src/lib/styles.css",
+    "src/lib/themes"
   ],
   "sideEffects": [
     "**/*.css"

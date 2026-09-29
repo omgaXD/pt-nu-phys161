@@ -1,0 +1,308 @@
+/*
+ * Moodle (Boost) look for @pt/ui components. Everything is scoped under
+ * `.pt-theme-moodle`, so importing this file changes nothing until an element
+ * opts in. Selectors are one class deeper than the components' own scoped
+ * styles, so they win without !important.
+ *
+ * Reference: a saved NU Moodle 5 quiz attempt (Boost theme, Bootstrap 5).
+ */
+
+.pt-theme-moodle {
+  /* Light palette only: Moodle has no dark mode. */
+  --pt-bg: #ffffff;
+  --pt-fg: #1d2125;
+  --pt-muted: #6a737b;
+  --pt-border: #8f959e;
+  --pt-surface: #f8f9fa;
+  --pt-input-bg: #ffffff;
+  --pt-accent: #0d6efd;
+  --pt-good: #177a4c;
+  --pt-good-bg: #dff4d8;
+  --pt-warn: #997404;
+  --pt-warn-bg: #fcefdc;
+  --pt-bad: #c6303e;
+  --pt-bad-bg: #ffdddd;
+  --pt-formulation-bg: #e7fafe;
+  --pt-outcome-bg: #fff6da;
+  --pt-nav-answered: #dee2e6;
+  --pt-primary: #0d6efd;
+  --pt-primary-hover: #0b5ed7;
+  --pt-navy: #24346c;
+
+  color: var(--pt-fg);
+  background: var(--pt-bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ---- Question card (.que) ------------------------------------------------ */
+
+.pt-theme-moodle .que.pt-question-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0 auto 1.8em;
+}
+.pt-theme-moodle .que.pt-question-card .info {
+  flex: 0 0 7em;
+  width: 7em;
+  padding: 0.5em;
+  background: #f8f9fa;
+  border: 1px solid #cad0d7;
+  border-radius: 2px;
+  font-size: 1rem;
+}
+.pt-theme-moodle .que .info h3.no {
+  margin: 0;
+  font-size: 0.8em;
+  font-weight: 400;
+  line-height: 1.2;
+}
+.pt-theme-moodle .que .info h3.no .qno {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.pt-theme-moodle .que .info > div {
+  margin-top: 0.7em;
+  font-size: 0.8em;
+}
+.pt-theme-moodle .que.pt-question-card .formulation {
+  padding: 1rem;
+  background: #e7fafe;
+  border: 1px solid #b6effb;
+  border-radius: 0.375rem;
+  color: #032830;
+}
+.pt-theme-moodle .que.pt-question-card .outcome {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background: #fff6da;
+  border: 1px solid #ffecb5;
+  border-radius: 0.375rem;
+  color: #664d03;
+}
+.pt-theme-moodle .que.correct .outcome {
+  background: #dff4d8;
+  border-color: #b7e2a8;
+  color: #0f5132;
+}
+.pt-theme-moodle .que.incorrect .outcome,
+.pt-theme-moodle .que.notanswered .outcome {
+  background: #f8d7da;
+  border-color: #f1aeb5;
+  color: #58151c;
+}
+@media (max-width: 767.98px) {
+  .pt-theme-moodle .que.pt-question-card {
+    flex-direction: column;
+  }
+  .pt-theme-moodle .que.pt-question-card .info {
+    width: auto;
+    flex-basis: auto;
+    align-self: stretch;
+  }
+}
+
+/* ---- Answer field (qtype_formulas "Numeric and unit") ------------------- */
+
+.pt-theme-moodle .pt-answer-field input {
+  width: 200px;
+  min-width: 0;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #1d2125;
+  background: #fff;
+  border: 1px solid #8f959e;
+  border-radius: 0.5rem;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+.pt-theme-moodle .pt-answer-field input:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.pt-theme-moodle .pt-answer-field.invalid input {
+  border-color: #dc3545;
+  box-shadow: none;
+}
+.pt-theme-moodle .pt-answer-field .pt-answer-preview:not(:empty) {
+  margin-top: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  background: #eef;
+  border: 1px solid #88c;
+  border-radius: 3px;
+  color: #1d2125;
+}
+.pt-theme-moodle .pt-answer-field input:disabled {
+  background: #e9ecef;
+}
+
+/* ---- Quiz navigation buttons (.qnbutton) -------------------------------- */
+
+.pt-theme-moodle .pt-nav-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item {
+  position: relative;
+  width: 30px;
+  min-height: 0;
+  height: 40px;
+  padding: 1px 0 0;
+  overflow: hidden;
+  border: 1px solid #8f959e;
+  border-radius: 3px;
+  background: #fff;
+  color: #1d2125;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  vertical-align: top;
+}
+/* The bottom half is the "traffic light". */
+.pt-theme-moodle .pt-nav-grid .pt-nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 19px;
+  background: transparent;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.answered::before {
+  background: #dee2e6;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.correct {
+  border-color: #177a4c;
+  background: #fff;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.correct::before {
+  background: #177a4c;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.partial {
+  border-color: #997404;
+  background: #fff;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.partial::before {
+  background: #f0ad4e;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.incorrect {
+  border-color: #c6303e;
+  background: #fff;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.incorrect::before {
+  background: #c6303e;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.current {
+  outline: none;
+  box-shadow: inset 0 0 0 2px #1d2125;
+  font-weight: 700;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.flagged::after {
+  top: 0;
+  right: 0;
+  border-width: 0 9px 9px 0;
+  border-color: transparent #ca3120 transparent transparent;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item:hover {
+  background: #f5f5f5;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.35);
+}
+
+/* ---- Timer ("Time left 0:39:59") ------------------------------------------ */
+
+.pt-theme-moodle .pt-countdown {
+  font-weight: 400;
+  color: inherit;
+}
+.pt-theme-moodle .pt-countdown.low {
+  font-weight: 700;
+}
+
+/* ---- Feedback ------------------------------------------------------------ */
+
+.pt-theme-moodle .pt-part-feedback {
+  font-size: 0.95em;
+}
+
+/* ---- Buttons (Bootstrap 5) ------------------------------------------------ */
+
+.pt-theme-moodle .btn {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font: inherit;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+.pt-theme-moodle .btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+}
+.pt-theme-moodle .btn:disabled,
+.pt-theme-moodle .btn[aria-disabled='true'] {
+  opacity: 0.65;
+  pointer-events: none;
+}
+.pt-theme-moodle .btn-primary {
+  color: #fff;
+  background: #0d6efd;
+  border-color: #0d6efd;
+}
+.pt-theme-moodle .btn-primary:hover {
+  background: #0b5ed7;
+  border-color: #0a58ca;
+}
+.pt-theme-moodle .btn-secondary {
+  color: #1d2125;
+  background: #ced4da;
+  border-color: #ced4da;
+}
+.pt-theme-moodle .btn-secondary:hover {
+  background: #b8bfc6;
+  border-color: #b1b9c0;
+}
+.pt-theme-moodle .btn-outline-secondary {
+  color: #1d2125;
+  background: transparent;
+  border-color: #8f959e;
+}
+.pt-theme-moodle .btn-outline-secondary:hover {
+  background: #e9ecef;
+}
+.pt-theme-moodle .btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8203125rem;
+  border-radius: 0.4rem;
+}
+
+/* ---- Links ---------------------------------------------------------------- */
+
+.pt-theme-moodle a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+.pt-theme-moodle a:hover {
+  color: #0a58ca;
+  text-decoration: underline;
+}

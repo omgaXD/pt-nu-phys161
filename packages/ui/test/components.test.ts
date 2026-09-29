@@ -278,6 +278,37 @@ describe('shell primitives', () => {
     expect(onSelect).toHaveBeenCalledWith('c');
   });
 
+  it('CountdownTimer shows Moodle H:MM:SS and exposes urgency below the warning threshold', async () => {
+    vi.useFakeTimers();
+    let t = 5_000_000;
+    render(CountdownTimer, { endsAt: t + 40 * 60_000 - 1_000, now: () => t, interval: 100, format: 'hms', warnBelowMs: 100_000 });
+    const timer = screen.getByRole('timer');
+    expect(timer).toHaveTextContent('0:39:59');
+    expect(timer).not.toHaveClass('low');
+    expect(timer.style.getPropertyValue('--pt-urgency')).toBe('0.000');
+    t += 40 * 60_000 - 51_000;
+    await vi.advanceTimersByTimeAsync(100);
+    expect(timer).toHaveTextContent('0:00:50');
+    expect(timer).toHaveClass('low');
+    expect(timer.style.getPropertyValue('--pt-urgency')).toBe('0.500');
+  });
+
+  it('NavGrid shows review outcomes and tooltips', () => {
+    render(NavGrid, {
+      items: [
+        { id: 'a', label: '1', answered: true, outcome: 'correct', title: 'Question 1 - Correct' },
+        { id: 'b', label: '2', outcome: 'partial' },
+        { id: 'c', label: '3', outcome: 'incorrect', flagged: true },
+      ],
+    });
+    const [a, b, c] = screen.getAllByRole('button');
+    expect(a).toHaveAttribute('data-state', 'correct');
+    expect(a).toHaveAttribute('title', 'Question 1 - Correct');
+    expect(a).toHaveAccessibleName('1, correct');
+    expect(b).toHaveAttribute('data-state', 'partial');
+    expect(c).toHaveAccessibleName('3, incorrect, flagged');
+  });
+
   it('FlagToggle toggles', async () => {
     const onchange = vi.fn();
     render(FlagToggle, { onchange });

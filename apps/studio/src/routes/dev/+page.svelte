@@ -21,6 +21,7 @@
     UnitField,
     VariableTable,
   } from '@pt/ui';
+  import '@pt/ui/themes/moodle.css';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -127,6 +128,42 @@
     ]}
     onSelect={(id) => (current = id)}
   />
+  <h3>NavGrid — review outcomes</h3>
+  <NavGrid
+    label="Review navigation"
+    items={[
+      { id: 'r1', label: '1', outcome: 'correct', title: 'Question 1 - Correct' },
+      { id: 'r2', label: '2', outcome: 'partial' },
+      { id: 'r3', label: '3', outcome: 'incorrect', flagged: true },
+      { id: 'r4', label: '4' },
+    ]}
+  />
+
+  <h2>Moodle theme (<code>@pt/ui/themes/moodle.css</code>)</h2>
+  <div class="pt-theme-moodle themed" data-testid="moodle-theme">
+    <QuestionCard state="answersaved">
+      {#snippet header()}
+        <h3 class="no">Question <span class="qno">1</span></h3>
+        <div class="state">Answer saved</div>
+        <div class="grade">Marked out of 1.00</div>
+        <FlagToggle />
+      {/snippet}
+      <ProblemBody instance={c1i} />
+    </QuestionCard>
+    <p>Time left <CountdownTimer {endsAt} format="hms" warnBelowMs={100_000} /></p>
+    <NavGrid
+      label="Themed navigation"
+      items={[
+        { id: 't1', label: '1', answered: true },
+        { id: 't2', label: '2', current: true },
+        { id: 't3', label: '3', flagged: true },
+        { id: 't4', label: '4', outcome: 'correct' },
+        { id: 't5', label: '5', outcome: 'partial' },
+        { id: 't6', label: '6', outcome: 'incorrect' },
+      ]}
+    />
+    <p><button class="btn btn-primary" type="button">Next page</button> <button class="btn btn-secondary" type="button">Previous page</button></p>
+  </div>
 </section>
 
 <section id="editor">
@@ -183,5 +220,9 @@
   }
   .toc {
     font-size: 0.9em;
+  }
+  .themed {
+    padding: 1rem;
+    max-width: 60rem;
   }
 </style>
