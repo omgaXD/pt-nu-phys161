@@ -104,6 +104,22 @@
   }
 }
 
+/* ---- Figures: natural size, like images in Moodle question text ---------- */
+
+.pt-theme-moodle .pt-figure {
+  max-width: 100%;
+}
+/* Without overlays there is nothing to keep in place, so the image need not scale. */
+.pt-theme-moodle .pt-figure .pt-figure-frame:not(:has(.pt-figure-overlays)) {
+  container-type: normal;
+  width: fit-content;
+  max-width: 100%;
+}
+.pt-theme-moodle .pt-figure .pt-figure-frame:not(:has(.pt-figure-overlays)) img {
+  width: auto;
+  max-width: 100%;
+}
+
 /* ---- Answer field (qtype_formulas "Numeric and unit") ------------------- */
 
 .pt-theme-moodle .pt-answer-field input {
@@ -150,6 +166,9 @@
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item {
   position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
   width: 30px;
   min-height: 0;
   height: 40px;

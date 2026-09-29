@@ -1,0 +1,34 @@
+{
+  "name": "@pt/quiz-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static quiz runner (SvelteKit, adapter-static): start page with presets, Moodle-style attempt, summary and review.",
+  "type": "module",
+  "scripts": {
+    "bundle": "node ../../packages/cli/dist/bin.js --root ../../content/sets bundle --out static/content --strict",
+    "dev": "pnpm run bundle && vite dev",
+    "build": "pnpm run bundle && vite build",
+    "preview": "vite preview",
+    "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@pt/core": "workspace:*",
+    "@pt/quiz": "workspace:*",
+    "@pt/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@pt/cli": "workspace:*",
+    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/kit": "^2.70.3",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@types/node": "^24.19.0",
+    "svelte": "^5.57.1",
+    "svelte-check": "^4.7.6",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
+  }
+}
