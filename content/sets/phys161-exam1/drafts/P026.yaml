@@ -1,0 +1,49 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P26
+number: 26
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Vector A has a magnitude of 7.5 units and is in the direction of the +x-axis. Vector B has
+  magnitude of 17.5 units and lies in the xy-plane, making an angle of 53° with the +x-axis. Find
+  the magnitude of the scalar product A · B. (78.9882)
+text: Vector A has a magnitude of 7.5 units and is in the direction of the +x-axis. Vector B has
+  magnitude of 17.5 units and lies in the xy-plane, making an angle of 53° with the +x-axis. Find
+  the magnitude of the scalar product A · B. (78.9882)
+answer: { value: 78.9882, raw: "78.9882" }
+figures: []
+literals:
+  - name: x
+    value: 7.5
+    text: "7.5"
+    suggest: { min: 5.3, max: 9.8, step: 0.1, decimals: 1 }
+  - name: x2
+    value: 17.5
+    text: "17.5"
+    suggest: { min: 12.3, max: 22.8, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 53
+    unit: °
+    text: "53"
+    suggest: { min: 37, max: 69, step: 1 }
+scenario:
+  id: phys161-exam1-p026
+  source: { document: PHYS161_Exam1, labels: [ P26 ] }
+  section: Vectors
+  narrative: >-
+    Vector A has a magnitude of {x} units and is in the direction of the +x-axis. Vector B has
+    magnitude of {x2} units and lies in the xy-plane, making an angle of {theta}° with the +x-axis.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  parts:
+    - id: answer
+      prompt: Find the magnitude of the scalar product A · B. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 7.5, x2: 17.5, theta: 53 }
+    parts:
+      - { id: answer, answer: 78.9882, source: P26 }

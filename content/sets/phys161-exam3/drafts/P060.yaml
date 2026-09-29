@@ -1,0 +1,53 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P60
+number: 60
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Calculate the wavelength of a sea animal’s echolocation wave, if the frequencies of
+  echolocation wave is 105000 Hz. Density of the sea water is 1.025×10<sup>3</sup> kg/m<sup>3</sup>.
+  Bulk modulus of water B<sub>w</sub> = 2.0×10<sup>9</sup> N/m<sup>2</sup>. (0.0133 m)
+text: Calculate the wavelength of a sea animal’s echolocation wave, if the frequencies of
+  echolocation wave is 105000 Hz. Density of the sea water is 1.025×10^3 kg/m^3. Bulk modulus of
+  water B_w = 2.0×10^9 N/m^2. (0.0133 m)
+answer: { value: 0.0133, unit: m, raw: 0.0133 m }
+figures: []
+literals:
+  - name: f
+    value: 105000
+    unit: Hz
+    text: "105000"
+    suggest: { min: 73500, max: 136500, step: 1 }
+  - name: rho
+    value: 1025
+    unit: kg/m^3
+    text: 1.025×10^3
+    suggest: { min: 718, max: 1333, step: 1 }
+  - name: Bw
+    value: 2000000000
+    unit: N/m^2
+    text: 2.0×10^9
+    suggest: { min: 1400000000, max: 2600000000, step: 1 }
+scenario:
+  id: phys161-exam3-p060
+  source: { document: PHYS161_Exam3, labels: [ P60 ] }
+  section: Waves
+  narrative: >-
+    Density of the sea water is {rho:unit}. Bulk modulus of water $B_{w}$ = {Bw:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: Bw, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the wavelength of a sea animal’s echolocation wave, if the frequencies of
+        echolocation wave is {f:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 105000, rho: 1025, Bw: 2000000000 }
+    parts:
+      - { id: answer, answer: 0.0133, unit: m, source: P60 }

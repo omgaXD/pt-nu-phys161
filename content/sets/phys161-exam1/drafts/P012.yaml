@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P12
+number: 12
+section: Uncertainty
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A rectangular piece of aluminum is 8.55 ± 0.02 cm long and 2.7 ± 0.01 cm wide. If the perimeter
+  is written in P ± δP format, find the maximum possible uncertainty in the perimeter δP. (0.06 cm)
+text: A rectangular piece of aluminum is 8.55 ± 0.02 cm long and 2.7 ± 0.01 cm wide. If the
+  perimeter is written in P ± δP format, find the maximum possible uncertainty in the perimeter δP.
+  (0.06 cm)
+answer: { value: 0.06, unit: cm, raw: 0.06 cm }
+figures: []
+literals:
+  - name: x
+    value: 8.55
+    text: "8.55"
+    suggest: { min: 5.99, max: 11.12, step: 0.01, decimals: 2 }
+  - name: d
+    value: 0.02
+    unit: cm
+    text: "0.02"
+    suggest: { min: 0.01, max: 0.03, step: 0.01, decimals: 2 }
+  - name: x2
+    value: 2.7
+    text: "2.7"
+    suggest: { min: 1.9, max: 3.5, step: 0.1, decimals: 1 }
+  - name: L
+    value: 0.01
+    unit: cm
+    text: "0.01"
+    suggest: { min: 0.01, max: 0.01, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam1-p012
+  source: { document: PHYS161_Exam1, labels: [ P12 ] }
+  section: Uncertainty
+  narrative: >-
+    A rectangular piece of aluminum is {x} ± {d:unit} long and {x2} ± {L:unit} wide.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: >-
+        If the perimeter is written in P ± δP format, find the maximum possible uncertainty in the
+        perimeter δP. {_0}{_u}
+      answer: TODO
+      unit: cm
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 8.55, d: 0.02, x2: 2.7, L: 0.01 }
+    parts:
+      - { id: answer, answer: 0.06, unit: cm, source: P12 }

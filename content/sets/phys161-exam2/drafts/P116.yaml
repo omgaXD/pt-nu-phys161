@@ -34,8 +34,8 @@ scenario:
   source: { document: PHYS161_Exam2, labels: [ P116 ] }
   section: Rotation
   narrative: >-
-    A roller in a printing press turns through an angle θ(t) given by θ(t) = γ t^2 - β t^3, where γ
-    = {gamma:unit} and β = {beta:unit}.
+    A roller in a printing press turns through an angle θ(t) given by θ(t) = γ t$^{2}$ - β t$^{3}$,
+    where γ = {gamma:unit} and β = {beta:unit}.
   vars:
     - { name: gamma, kind: range, min: TODO, max: TODO, step: TODO, unit: rad/s^2 }
     - { name: beta, kind: range, min: TODO, max: TODO, step: TODO, unit: rad/s^3 }

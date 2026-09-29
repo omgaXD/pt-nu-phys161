@@ -1,0 +1,75 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P40
+number: 40
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An automobile tire has a volume of 0.151 m<sup>3</sup> on a cold day when the temperature of
+  the air in the tire is 5°C and the pressure is 2.2 atm. After the car is driven on the highway,
+  the temperature of the air in the tires has risen to 41°C and the volume has risen to 0.16
+  m<sup>3</sup>. What then is the pressure? Normal atmosphere pressure P<sub>0</sub> = 101325 Pa.
+  (237604.27904795 Pa)
+text: An automobile tire has a volume of 0.151 m^3 on a cold day when the temperature of the air in
+  the tire is 5°C and the pressure is 2.2 atm. After the car is driven on the highway, the
+  temperature of the air in the tires has risen to 41°C and the volume has risen to 0.16 m^3. What
+  then is the pressure? Normal atmosphere pressure P_0 = 101325 Pa. (237604.27904795 Pa)
+answer: { value: 237604.27904795, unit: Pa, raw: 237604.27904795 Pa }
+figures: []
+literals:
+  - name: V
+    value: 0.151
+    unit: m^3
+    text: "0.151"
+    suggest: { min: 0.106, max: 0.196, step: 0.001, decimals: 3 }
+  - name: T
+    value: 5
+    unit: °C
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: p
+    value: 2.2
+    unit: atm
+    text: "2.2"
+    suggest: { min: 1.5, max: 2.9, step: 0.1, decimals: 1 }
+  - name: T2
+    value: 41
+    unit: °C
+    text: "41"
+    suggest: { min: 29, max: 53, step: 1 }
+  - name: V2
+    value: 0.16
+    unit: m^3
+    text: "0.16"
+    suggest: { min: 0.11, max: 0.21, step: 0.01, decimals: 2 }
+  - name: P0
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+scenario:
+  id: phys161-exam4-p040
+  source: { document: PHYS161_Exam4, labels: [ P40 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    An automobile tire has a volume of {V:unit} on a cold day when the temperature of the air in the
+    tire is {T:unit} and the pressure is {p:unit}. After the car is driven on the highway, the
+    temperature of the air in the tires has risen to {T2:unit} and the volume has risen to
+    {V2:unit}. Normal atmosphere pressure $P_{0}$ = {P0:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: P0, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+  parts:
+    - id: answer
+      prompt: What then is the pressure? {_0}{_u}
+      answer: TODO
+      unit: Pa
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 0.151, T: 5, p: 2.2, T2: 41, V2: 0.16, P0: 101325 }
+    parts:
+      - { id: answer, answer: 237604.27904795, unit: Pa, source: P40 }

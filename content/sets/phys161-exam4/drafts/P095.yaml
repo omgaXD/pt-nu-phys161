@@ -1,0 +1,53 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P95
+number: 95
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A Carnot engine has CO<sub>2</sub> as its working substance. The gas is to have a maximum
+  temperature of 491°C. With a heat input of 440 J per cycle, you want 290 J of useful work. Find
+  the temperature of the cold reservoir. Answer in kelvins (K). (260.45 K)
+text: A Carnot engine has CO_2 as its working substance. The gas is to have a maximum temperature of
+  491°C. With a heat input of 440 J per cycle, you want 290 J of useful work. Find the temperature
+  of the cold reservoir. Answer in kelvins (K). (260.45 K)
+answer: { value: 260.45, unit: K, raw: 260.45 K }
+figures: []
+literals:
+  - name: T
+    value: 491
+    unit: °C
+    text: "491"
+    suggest: { min: 344, max: 638, step: 1 }
+  - name: E
+    value: 440
+    unit: J
+    text: "440"
+    suggest: { min: 308, max: 572, step: 1 }
+  - name: E2
+    value: 290
+    unit: J
+    text: "290"
+    suggest: { min: 203, max: 377, step: 1 }
+scenario:
+  id: phys161-exam4-p095
+  source: { document: PHYS161_Exam4, labels: [ P95 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A Carnot engine has CO_2 as its working substance. The gas is to have a maximum temperature of
+    {T:unit}. With a heat input of {E:unit} per cycle, you want {E2:unit} of useful work. Answer in
+    kelvins (K).
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: E2, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  parts:
+    - id: answer
+      prompt: Find the temperature of the cold reservoir. {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 491, E: 440, E2: 290 }
+    parts:
+      - { id: answer, answer: 260.45, unit: K, source: P95 }

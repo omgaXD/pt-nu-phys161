@@ -1,0 +1,53 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P76
+number: 76
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A Carnot engine operates between a hot reservoir at 495 K and a cold reservoir at 305 K. If it
+  absorbs 494 J of heat per cycle at the hot reservoir, how much work per cycle does it deliver?
+  (189.61616161616 J)
+text: A Carnot engine operates between a hot reservoir at 495 K and a cold reservoir at 305 K. If it
+  absorbs 494 J of heat per cycle at the hot reservoir, how much work per cycle does it deliver?
+  (189.61616161616 J)
+answer: { value: 189.61616161616, unit: J, raw: 189.61616161616 J }
+figures: []
+literals:
+  - name: T
+    value: 495
+    unit: K
+    text: "495"
+    suggest: { min: 347, max: 644, step: 1 }
+  - name: T2
+    value: 305
+    unit: K
+    text: "305"
+    suggest: { min: 214, max: 397, step: 1 }
+  - name: E
+    value: 494
+    unit: J
+    text: "494"
+    suggest: { min: 346, max: 642, step: 1 }
+scenario:
+  id: phys161-exam4-p076
+  source: { document: PHYS161_Exam4, labels: [ P76 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A Carnot engine operates between a hot reservoir at {T:unit} and a cold reservoir at {T2:unit}.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  parts:
+    - id: answer
+      prompt: >-
+        If it absorbs {E:unit} of heat per cycle at the hot reservoir, how much work per cycle does
+        it deliver? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 495, T2: 305, E: 494 }
+    parts:
+      - { id: answer, answer: 189.61616161616, unit: J, source: P76 }

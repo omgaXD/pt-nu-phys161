@@ -1,0 +1,70 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P72
+number: 72
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  A gas undergoes two processes. In the first, the volume remains constant at 0.19 m<sup>3</sup>
+
+  and the pressure increases from 1.7×10<sup>5</sup> Pa to 5×10<sup>5</sup> Pa. The second process
+  is a compression to a volume of 0.09 m<sup>3</sup> at a constant pressure of 5×10<sup>5</sup> Pa.
+  Find the magnitude of total work done on the gas during both processes. (50000 J)
+text: A gas undergoes two processes. In the first, the volume remains constant at 0.19 m^3 and the
+  pressure increases from 1.7×10^5 Pa to 5×10^5 Pa. The second process is a compression to a volume
+  of 0.09 m^3 at a constant pressure of 5×10^5 Pa. Find the magnitude of total work done on the gas
+  during both processes. (50000 J)
+answer: { value: 50000, unit: J, raw: 50000 J }
+figures: []
+literals:
+  - name: V
+    value: 0.19
+    unit: m^3
+    text: "0.19"
+    suggest: { min: 0.13, max: 0.25, step: 0.01, decimals: 2 }
+  - name: p
+    value: 170000
+    unit: Pa
+    text: 1.7×10^5
+    suggest: { min: 119000, max: 221000, step: 1 }
+  - name: p2
+    value: 500000
+    unit: Pa
+    text: 5×10^5
+    suggest: { min: 350000, max: 650000, step: 1 }
+  - name: V2
+    value: 0.09
+    unit: m^3
+    text: "0.09"
+    suggest: { min: 0.06, max: 0.12, step: 0.01, decimals: 2 }
+  - name: p3
+    value: 500000
+    unit: Pa
+    text: 5×10^5
+    suggest: { min: 350000, max: 650000, step: 1 }
+scenario:
+  id: phys161-exam4-p072
+  source: { document: PHYS161_Exam4, labels: [ P72 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    A gas undergoes two processes. In the first, the volume remains constant at {V:unit} and the
+    pressure increases from {p:unit} to {p2:unit}. The second process is a compression to a volume
+    of {V2:unit} at a constant pressure of {p3:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: p3, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of total work done on the gas during both processes. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 0.19, p: 170000, p2: 500000, V2: 0.09, p3: 500000 }
+    parts:
+      - { id: answer, answer: 50000, unit: J, source: P72 }

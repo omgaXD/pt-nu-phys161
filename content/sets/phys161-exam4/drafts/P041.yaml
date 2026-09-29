@@ -1,0 +1,88 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P41
+number: 41
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  Calculate the number of molecules in the air in one breath, with a volume of 490 mL, 16°C and 1.02
+  atm. Boltzmann's constant k<sub>B</sub> = 1.38⋅10<sup>−23</sup> J/K.
+
+  1 atm = 101325 Pa
+
+  1 L = 0.001 m<sup>3</sup>
+
+  (1.2698E+22)
+text: Calculate the number of molecules in the air in one breath, with a volume of 490 mL, 16°C and
+  1.02 atm. Boltzmann's constant k_B = 1.38⋅10^-23 J/K. 1 atm = 101325 Pa 1 L = 0.001 m^3
+  (1.2698E+22)
+answer: { value: 1.2698e+22, raw: "1.2698E+22" }
+figures: []
+literals:
+  - name: V
+    value: 490
+    unit: mL
+    text: "490"
+    suggest: { min: 343, max: 637, step: 1 }
+  - name: T
+    value: 16
+    unit: °C
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: p
+    value: 1.02
+    unit: atm
+    text: "1.02"
+    suggest: { min: 0.71, max: 1.33, step: 0.01, decimals: 2 }
+  - name: kB
+    value: 1.38e-23
+    unit: J/K
+    text: 1.38⋅10^-23
+    suggest: { min: 1e-23, max: 1.8e-23, step: 1e-24 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p041
+  source: { document: PHYS161_Exam4, labels: [ P41 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    Boltzmann's constant $k_{B}$ = {kB:unit}. {p2:unit} = {atm:unit} {V2:unit} = {L:unit}
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: mL }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: kB, kind: range, min: TODO, max: TODO, step: TODO, unit: J/K }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the number of molecules in the air in one breath, with a volume of {V:unit},
+        {T:unit} and {p:unit}. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 490, T: 16, p: 1.02, kB: 1.38e-23, p2: 1, atm: 101325, V2: 1, L: 0.001 }
+    parts:
+      - { id: answer, answer: 1.2698e+22, source: P41 }

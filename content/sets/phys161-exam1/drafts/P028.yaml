@@ -1,0 +1,51 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P28
+number: 28
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Two vectors A and B have magnitudes A = 6.5 and B = 19. Their vector product is A × B = 9î +
+  13ĵ. What is the magnitude of their scalar product A · B? (122.484)
+text: Two vectors A and B have magnitudes A = 6.5 and B = 19. Their vector product is A × B = 9î +
+  13ĵ. What is the magnitude of their scalar product A · B? (122.484)
+answer: { value: 122.484, raw: "122.484" }
+figures: []
+literals:
+  - name: A
+    value: 6.5
+    text: "6.5"
+    suggest: { min: 4.5, max: 8.5, step: 0.1, decimals: 1 }
+  - name: B
+    value: 19
+    text: "19"
+    suggest: { min: 13, max: 25, step: 1 }
+  - name: B2
+    value: 9
+    text: "9"
+    suggest: { min: 6, max: 12, step: 1 }
+  - name: vy
+    value: 13
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+scenario:
+  id: phys161-exam1-p028
+  source: { document: PHYS161_Exam1, labels: [ P28 ] }
+  section: Vectors
+  narrative: >-
+    Two vectors A and B have magnitudes A = {A} and B = {B}. Their vector product is A × B = {B2}î +
+    {vy}ĵ.
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: B, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: B2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: What is the magnitude of their scalar product A · B? {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 6.5, B: 19, B2: 9, vy: 13 }
+    parts:
+      - { id: answer, answer: 122.484, source: P28 }

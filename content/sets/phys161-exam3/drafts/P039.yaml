@@ -1,0 +1,43 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P39
+number: 39
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Find the frequency of a simple pendulum 53 cm long at a location where g = 9.47
+  m/s<sup>2</sup>. (0.673 Hz)
+text: Find the frequency of a simple pendulum 53 cm long at a location where g = 9.47 m/s^2. (0.673 Hz)
+answer: { value: 0.673, unit: Hz, raw: 0.673 Hz }
+figures: []
+literals:
+  - name: d
+    value: 53
+    unit: cm
+    text: "53"
+    suggest: { min: 37, max: 69, step: 1 }
+  - name: g
+    value: 9.47
+    unit: m/s^2
+    text: "9.47"
+    suggest: { min: 6.63, max: 12.31, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam3-p039
+  source: { document: PHYS161_Exam3, labels: [ P39 ] }
+  section: Oscillations
+  narrative: ""
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: g, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the frequency of a simple pendulum {d:unit} long at a location where g = {g:unit}.
+        {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 53, g: 9.47 }
+    parts:
+      - { id: answer, answer: 0.673, unit: Hz, source: P39 }

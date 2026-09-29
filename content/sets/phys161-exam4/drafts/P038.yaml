@@ -1,0 +1,90 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P38
+number: 38
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A flask with a volume of 1.4 L, provided with a stopcock, contains ethane gas at 290 K and
+  atmospheric pressure 1.01325×10<sup>5</sup> Pa. The molar mass of ethane is 30.1 g/mol. The system
+  is warmed to a temperature of 385 K, with the stopcock open to the atmosphere. The stopcock is
+  then closed, and the flask is cooled to its original temperature. Find the mass of ethane
+  remaining in the flask. 1 L = 0.001 m<sup>3</sup>. The universal gas constant is R = 8.31 J/(mol
+  K). (0,00133459 kg)
+text: A flask with a volume of 1.4 L, provided with a stopcock, contains ethane gas at 290 K and
+  atmospheric pressure 1.01325×10^5 Pa. The molar mass of ethane is 30.1 g/mol. The system is warmed
+  to a temperature of 385 K, with the stopcock open to the atmosphere. The stopcock is then closed,
+  and the flask is cooled to its original temperature. Find the mass of ethane remaining in the
+  flask. 1 L = 0.001 m^3. The universal gas constant is R = 8.31 J/(mol K). (0,00133459 kg)
+answer: { value: 0.00133459, unit: kg, raw: "0,00133459 kg" }
+figures: []
+literals:
+  - name: V
+    value: 1.4
+    unit: L
+    text: "1.4"
+    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
+  - name: T
+    value: 290
+    unit: K
+    text: "290"
+    suggest: { min: 203, max: 377, step: 1 }
+  - name: p
+    value: 101325
+    unit: Pa
+    text: 1.01325×10^5
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: M
+    value: 30.1
+    unit: g/mol
+    text: "30.1"
+    suggest: { min: 21.1, max: 39.1, step: 0.1, decimals: 1 }
+  - name: T2
+    value: 385
+    unit: K
+    text: "385"
+    suggest: { min: 270, max: 501, step: 1 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p038
+  source: { document: PHYS161_Exam4, labels: [ P38 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    A flask with a volume of {V:unit}, provided with a stopcock, contains ethane gas at {T:unit} and
+    atmospheric pressure {p:unit}. The molar mass of ethane is {M:unit}. The system is warmed to a
+    temperature of {T2:unit}, with the stopcock open to the atmosphere. The stopcock is then closed,
+    and the flask is cooled to its original temperature. The universal gas constant is R = {R:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the mass of ethane remaining in the flask. {V2:unit} = {L:unit}. {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 1.4, T: 290, p: 101325, M: 30.1, T2: 385, V2: 1, L: 0.001, R: 8.31 }
+    parts:
+      - { id: answer, answer: 0.00133459, unit: kg, source: P38 }

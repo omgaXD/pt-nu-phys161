@@ -1,0 +1,65 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P60
+number: 60
+section: Kinematics of projectile motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: To start an avalanche on a mountain slope, an artillery shell is fired with an initial velocity
+  of 301 m/s at 61° above the horizontal. It explodes on the mountainside 41 s after firing. What is
+  the vertical distance of the shell where it explodes relative to its firing point? The
+  gravitational acceleration is g = 9.8 m/s². (2556.7818058073 m)
+text: To start an avalanche on a mountain slope, an artillery shell is fired with an initial
+  velocity of 301 m/s at 61° above the horizontal. It explodes on the mountainside 41 s after
+  firing. What is the vertical distance of the shell where it explodes relative to its firing point?
+  The gravitational acceleration is g = 9.8 m/s^2. (2556.7818058073 m)
+answer: { value: 2556.7818058073, unit: m, raw: 2556.7818058073 m }
+figures: []
+literals:
+  - name: v
+    value: 301
+    unit: m/s
+    text: "301"
+    suggest: { min: 211, max: 391, step: 1 }
+  - name: theta
+    value: 61
+    unit: °
+    text: "61"
+    suggest: { min: 43, max: 79, step: 1 }
+  - name: t
+    value: 41
+    unit: s
+    text: "41"
+    suggest: { min: 29, max: 53, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p060
+  source: { document: PHYS161_Exam1, labels: [ P60 ] }
+  section: Kinematics of projectile motion
+  narrative: >-
+    To start an avalanche on a mountain slope, an artillery shell is fired with an initial velocity
+    of {v:unit} at {theta}° above the horizontal. It explodes on the mountainside {t:unit} after
+    firing. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the vertical distance of the shell where it explodes relative to its firing point?
+        {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 301, theta: 61, t: 41, g: 9.8 }
+    parts:
+      - { id: answer, answer: 2556.7818058073, unit: m, source: P60 }

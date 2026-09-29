@@ -1,0 +1,54 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P81
+number: 81
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: As the train passes the crossing, the receiver at the crossing notices how the sound of the
+  train's whistle changes, with frequency decreasing from 547 Hz on approach to 475 Hz on departure.
+  Using 333 m/s for the speed of sound in air, calculate the speed of the train. (23.46 m/s)
+text: As the train passes the crossing, the receiver at the crossing notices how the sound of the
+  train's whistle changes, with frequency decreasing from 547 Hz on approach to 475 Hz on departure.
+  Using 333 m/s for the speed of sound in air, calculate the speed of the train. (23.46 m/s)
+answer: { value: 23.46, unit: m/s, raw: 23.46 m/s }
+figures: []
+literals:
+  - name: f
+    value: 547
+    unit: Hz
+    text: "547"
+    suggest: { min: 383, max: 711, step: 1 }
+  - name: f2
+    value: 475
+    unit: Hz
+    text: "475"
+    suggest: { min: 333, max: 618, step: 1 }
+  - name: v
+    value: 333
+    unit: m/s
+    text: "333"
+    suggest: { min: 233, max: 433, step: 1 }
+scenario:
+  id: phys161-exam3-p081
+  source: { document: PHYS161_Exam3, labels: [ P81 ] }
+  section: Sound
+  narrative: >-
+    As the train passes the crossing, the receiver at the crossing notices how the sound of the
+    train's whistle changes, with frequency decreasing from {f:unit} on approach to {f2:unit} on
+    departure.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Using {v:unit} for the speed of sound in air, calculate the speed of the train. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 547, f2: 475, v: 333 }
+    parts:
+      - { id: answer, answer: 23.46, unit: m/s, source: P81 }

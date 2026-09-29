@@ -15,7 +15,7 @@ text: A car in an amusement park ride rolls without friction around a vertical l
   acceleration is g = 9.8 m/s^2. (28.8617 m/s)
 answer: { value: 28.8617, unit: m/s, raw: 28.8617 m/s }
 figures:
-  - { src: figures/unnamed_010_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_010_fr4U.png }
+  - { src: figures/unnamed_015_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_015_GNcJ.png }
 literals:
   - name: r
     value: 17
@@ -32,7 +32,7 @@ scenario:
   id: phys161-exam2-p055
   source: { document: PHYS161_Exam2, labels: [ P55 ] }
   section: Energy conservation
-  figure: { id: fig, src: figures/unnamed_010_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_015_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A car in an amusement park ride rolls without friction around a vertical loop of radius
     {r:unit}. It starts from rest at the minimum height that allows it to maintain contact with the

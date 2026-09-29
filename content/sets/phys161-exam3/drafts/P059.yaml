@@ -1,0 +1,56 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P59
+number: 59
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Two megaphones at distance x = 6.17 m to each other are driven in phase by the same amplifier.
+  A listener is located directly in front of one of the megaphones at point A at distance L = 3.95
+  m. The speed of sound can be taken as 349.8 m/s. What is the second-lowest frequency for which
+  there is a minimum signal? (155.417 Hz)
+text: Two megaphones at distance x = 6.17 m to each other are driven in phase by the same amplifier.
+  A listener is located directly in front of one of the megaphones at point A at distance L = 3.95
+  m. The speed of sound can be taken as 349.8 m/s. What is the second-lowest frequency for which
+  there is a minimum signal? (155.417 Hz)
+answer: { value: 155.417, unit: Hz, raw: 155.417 Hz }
+figures: []
+literals:
+  - name: x
+    value: 6.17
+    unit: m
+    text: "6.17"
+    suggest: { min: 4.32, max: 8.02, step: 0.01, decimals: 2 }
+  - name: L
+    value: 3.95
+    unit: m
+    text: "3.95"
+    suggest: { min: 2.77, max: 5.14, step: 0.01, decimals: 2 }
+  - name: v
+    value: 349.8
+    unit: m/s
+    text: "349.8"
+    suggest: { min: 244.9, max: 454.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p059
+  source: { document: PHYS161_Exam3, labels: [ P59 ] }
+  section: Waves
+  narrative: >-
+    Two megaphones at distance x = {x:unit} to each other are driven in phase by the same amplifier.
+    A listener is located directly in front of one of the megaphones at point A at distance L =
+    {L:unit}. The speed of sound can be taken as {v:unit}.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the second-lowest frequency for which there is a minimum signal? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 6.17, L: 3.95, v: 349.8 }
+    parts:
+      - { id: answer, answer: 155.417, unit: Hz, source: P59 }

@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P102
+number: 102
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A cord exerts a force F = 12 N at an angle θ=34° above the horizontal to a block of mass 5 kg,
+  pulling the block along a horizontal frictionless floor. What is the magnitude of the normal force
+  exerted on the mass by the floor? The gravitational acceleration is g = 9.8 m/s². (42.2897 N)
+text: A cord exerts a force F = 12 N at an angle θ=34° above the horizontal to a block of mass 5 kg,
+  pulling the block along a horizontal frictionless floor. What is the magnitude of the normal force
+  exerted on the mass by the floor? The gravitational acceleration is g = 9.8 m/s^2. (42.2897 N)
+answer: { value: 42.2897, unit: N, raw: 42.2897 N }
+figures:
+  - { src: figures/unnamed_003_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_003_R6Ld.png }
+literals:
+  - name: F
+    value: 12
+    unit: N
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: theta
+    value: 34
+    unit: °
+    text: "34"
+    suggest: { min: 24, max: 44, step: 1 }
+  - name: m
+    value: 5
+    unit: kg
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p102
+  source: { document: PHYS161_Exam1, labels: [ P102 ] }
+  section: Newton's 2nd law
+  figure: { id: fig, src: figures/unnamed_003_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A cord exerts a force F = {F:unit} at an angle θ={theta}° above the horizontal to a block of
+    mass {m:unit}, pulling the block along a horizontal frictionless floor. The gravitational
+    acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the normal force exerted on the mass by the floor? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 12, theta: 34, m: 5, g: 9.8 }
+    parts:
+      - { id: answer, answer: 42.2897, unit: N, source: P102 }

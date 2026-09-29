@@ -1,0 +1,36 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P17
+number: 17
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Vector B is 7 m long, see image below. Find the x-component of the vector B = xi + yj. (3.5 m)
+text: Vector B is 7 m long, see image below. Find the x-component of the vector B = xi + yj. (3.5 m)
+answer: { value: 3.5, unit: m, raw: 3.5 m }
+figures:
+  - { src: figures/unnamed_020_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_020_R6Ld.png }
+literals:
+  - name: d
+    value: 7
+    unit: m
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+scenario:
+  id: phys161-exam1-p017
+  source: { document: PHYS161_Exam1, labels: [ P17 ] }
+  section: Vectors
+  figure: { id: fig, src: figures/unnamed_020_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: Vector B is {d:unit} long, see image below. {@fig}
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: Find the x-component of the vector B = xi + yj. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 7 }
+    parts:
+      - { id: answer, answer: 3.5, unit: m, source: P17 }

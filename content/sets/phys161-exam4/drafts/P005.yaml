@@ -1,0 +1,63 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P5
+number: 5
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A railroad rail made of steel is 1028 m long and it is fastened securely at both ends when the
+  temperature is 16°C. As the temperature increases, the rail begins to buckle upwards, taking the
+  shape of an isosceles triangle. How high is this buckle when the temperature is 34°C? Assume that
+  the coefficient of linear expansion for steel is 11.9×10<sup>−6</sup> 1/K. (10.638682550015 m)
+text: A railroad rail made of steel is 1028 m long and it is fastened securely at both ends when the
+  temperature is 16°C. As the temperature increases, the rail begins to buckle upwards, taking the
+  shape of an isosceles triangle. How high is this buckle when the temperature is 34°C? Assume that
+  the coefficient of linear expansion for steel is 11.9×10^-6 1/K. (10.638682550015 m)
+answer: { value: 10.638682550015, unit: m, raw: 10.638682550015 m }
+figures: []
+literals:
+  - name: d
+    value: 1028
+    unit: m
+    text: "1028"
+    suggest: { min: 720, max: 1336, step: 1 }
+  - name: T
+    value: 16
+    unit: °C
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: T2
+    value: 34
+    unit: °C
+    text: "34"
+    suggest: { min: 24, max: 44, step: 1 }
+  - name: alpha
+    value: 0.0000119
+    unit: 1/K
+    text: 11.9×10^-6
+    suggest: { min: 0.0000083, max: 0.0000155, step: 1e-7, decimals: 7 }
+scenario:
+  id: phys161-exam4-p005
+  source: { document: PHYS161_Exam4, labels: [ P5 ] }
+  section: Temperature and heat
+  narrative: >-
+    A railroad rail made of steel is {d:unit} long and it is fastened securely at both ends when the
+    temperature is {T:unit}. As the temperature increases, the rail begins to buckle upwards, taking
+    the shape of an isosceles triangle. Assume that the coefficient of linear expansion for steel is
+    {alpha:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/K }
+  parts:
+    - id: answer
+      prompt: >-
+        How high is this buckle when the temperature is {T2:unit}? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 1028, T: 16, T2: 34, alpha: 0.0000119 }
+    parts:
+      - { id: answer, answer: 10.638682550015, unit: m, source: P5 }

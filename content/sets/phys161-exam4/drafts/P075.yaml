@@ -1,0 +1,125 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P75
+number: 75
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  Determine the change in internal energy of 1.6 L of water at 100°C when it is fully boiled from
+  liquid to gas, which results in 1607 L of steam at 100°C. Assume the process is done at
+  atmospheric pressure P = 1 atm. Latent heat of vaporization of water is Lv = 2256 kJ/kg. Density
+  of water ⍴=1000 kg/m<sup>3</sup>.
+
+  1 atm = 101325 Pa,
+
+  1 L = 0.001 m<sup>3</sup>.
+
+  (3 446 932.845 J)
+text: Determine the change in internal energy of 1.6 L of water at 100°C when it is fully boiled
+  from liquid to gas, which results in 1607 L of steam at 100°C. Assume the process is done at
+  atmospheric pressure P = 1 atm. Latent heat of vaporization of water is Lv = 2256 kJ/kg. Density
+  of water ρ=1000 kg/m^3. 1 atm = 101325 Pa, 1 L = 0.001 m^3. (3 446 932.845 J)
+answer: { value: 3446932.845, unit: J, raw: 3 446 932.845 J }
+figures: []
+literals:
+  - name: V
+    value: 1.6
+    unit: L
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: T
+    value: 100
+    unit: °C
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: V2
+    value: 1607
+    unit: L
+    text: "1607"
+    suggest: { min: 1125, max: 2089, step: 1 }
+  - name: T2
+    value: 100
+    unit: °C
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: P
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: Lv
+    value: 2256
+    unit: kJ/kg
+    text: "2256"
+    suggest: { min: 1579, max: 2933, step: 1 }
+  - name: rho
+    value: 1000
+    unit: kg/m^3
+    text: "1000"
+    suggest: { min: 700, max: 1300, step: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V3
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p075
+  source: { document: PHYS161_Exam4, labels: [ P75 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    Assume the process is done at atmospheric pressure P = {P:unit}. Latent heat of vaporization of
+    water is Lv = {Lv:unit}. Density of water ρ={rho:unit}. {p:unit} = {atm:unit}, {V3:unit} =
+    {L:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: Lv, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V3, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        Determine the change in internal energy of {V:unit} of water at {T:unit} when it is fully
+        boiled from liquid to gas, which results in {V2:unit} of steam at {T2:unit}. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars:
+      {
+        V: 1.6,
+        T: 100,
+        V2: 1607,
+        T2: 100,
+        P: 1,
+        Lv: 2256,
+        rho: 1000,
+        p: 1,
+        atm: 101325,
+        V3: 1,
+        L: 0.001
+      }
+    parts:
+      - { id: answer, answer: 3446932.845, unit: J, source: P75 }

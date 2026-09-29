@@ -1,0 +1,82 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P96
+number: 96
+section: Friction
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: >-
+  Figure shows a block with mass m<sub>1</sub> = 26.2 kg on a horizontal surface, connected to a
+  m<sub>2</sub>
+
+  = 4.3 kg block by a massless string. The pulley is massless and frictionless. A force of 302.2 N
+  acts on m<sub>1</sub> at an angle of 30.9º. The coefficient of kinetic friction between
+  m<sub>1</sub> and the surface is 0.17. Determine the upward acceleration of m<sub>2</sub>. Take
+  gravitational acceleration g = 9.8 m/s<sup>2</sup>. (6.55 m/s<sup>2</sup>)
+text: Figure shows a block with mass m_1 = 26.2 kg on a horizontal surface, connected to a m_2 = 4.3
+  kg block by a massless string. The pulley is massless and frictionless. A force of 302.2 N acts on
+  m_1 at an angle of 30.9°. The coefficient of kinetic friction between m_1 and the surface is 0.17.
+  Determine the upward acceleration of m_2. Take gravitational acceleration g = 9.8 m/s^2. (6.55
+  m/s^2)
+answer: { value: 6.55, unit: m/s^2, raw: 6.55 m/s^2 }
+figures:
+  - { src: figures/unnamed_023_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_023_R6Ld.png }
+literals:
+  - name: m1
+    value: 26.2
+    unit: kg
+    text: "26.2"
+    suggest: { min: 18.3, max: 34.1, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 4.3
+    unit: kg
+    text: "4.3"
+    suggest: { min: 3, max: 5.6, step: 0.1, decimals: 1 }
+  - name: F
+    value: 302.2
+    unit: N
+    text: "302.2"
+    suggest: { min: 211.5, max: 392.9, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 30.9
+    unit: °
+    text: "30.9"
+    suggest: { min: 21.6, max: 40.2, step: 0.1, decimals: 1 }
+  - name: x
+    value: 0.17
+    text: "0.17"
+    suggest: { min: 0.12, max: 0.22, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p096
+  source: { document: PHYS161_Exam1, labels: [ P96 ] }
+  section: Friction
+  figure: { id: fig, src: figures/unnamed_023_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Figure shows a block with mass $m_{1}$ = {m1:unit} on a horizontal surface, connected to a
+    $m_{2}$ = {m2:unit} block by a massless string. The pulley is massless and frictionless. A force
+    of {F:unit} acts on $m_{1}$ at an angle of {theta}°. The coefficient of kinetic friction between
+    $m_{1}$ and the surface is {x}. Take gravitational acceleration g = {g:unit}. {@fig}
+  vars:
+    - { name: m1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Determine the upward acceleration of $m_{2}$. {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m1: 26.2, m2: 4.3, F: 302.2, theta: 30.9, x: 0.17, g: 9.8 }
+    parts:
+      - { id: answer, answer: 6.55, unit: m/s^2, source: P96 }

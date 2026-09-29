@@ -1,0 +1,74 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P39
+number: 39
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A sample of 0.155 kg of xenon is contained in a rigid metal cylinder, big enough that the xenon
+  can be modeled as an ideal monatomic gas, at a temperature of 22°C. The cylinder is moved outside
+  on a hot summer day. As the xenon comes into equilibrium by reaching the temperature of its
+  surrounding, 284 J of heat is conducted to it through the cylinder walls. What is the equilibrium
+  temperature? Ignore the expansion of the metal cylinder. The universal gas constant is R = 8.31
+  J/(mol K). Answer in kelvins (K). Molar mass of xenon M = 131.3 g/mol. (314.4500789 K)
+text: A sample of 0.155 kg of xenon is contained in a rigid metal cylinder, big enough that the
+  xenon can be modeled as an ideal monatomic gas, at a temperature of 22°C. The cylinder is moved
+  outside on a hot summer day. As the xenon comes into equilibrium by reaching the temperature of
+  its surrounding, 284 J of heat is conducted to it through the cylinder walls. What is the
+  equilibrium temperature? Ignore the expansion of the metal cylinder. The universal gas constant is
+  R = 8.31 J/(mol K). Answer in kelvins (K). Molar mass of xenon M = 131.3 g/mol. (314.4500789 K)
+answer: { value: 314.4500789, unit: K, raw: 314.4500789 K }
+figures: []
+literals:
+  - name: m
+    value: 0.155
+    unit: kg
+    text: "0.155"
+    suggest: { min: 0.109, max: 0.202, step: 0.001, decimals: 3 }
+  - name: T
+    value: 22
+    unit: °C
+    text: "22"
+    suggest: { min: 15, max: 29, step: 1 }
+  - name: E
+    value: 284
+    unit: J
+    text: "284"
+    suggest: { min: 199, max: 369, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+  - name: M
+    value: 131.3
+    unit: g/mol
+    text: "131.3"
+    suggest: { min: 91.9, max: 170.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam4-p039
+  source: { document: PHYS161_Exam4, labels: [ P39 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    A sample of {m:unit} of xenon is contained in a rigid metal cylinder, big enough that the xenon
+    can be modeled as an ideal monatomic gas, at a temperature of {T:unit}. The cylinder is moved
+    outside on a hot summer day. As the xenon comes into equilibrium by reaching the temperature of
+    its surrounding, {E:unit} of heat is conducted to it through the cylinder walls. Ignore the
+    expansion of the metal cylinder. The universal gas constant is R = {R:unit}. Answer in kelvins
+    (K). Molar mass of xenon M = {M:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+  parts:
+    - id: answer
+      prompt: What is the equilibrium temperature? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 0.155, T: 22, E: 284, R: 8.31, M: 131.3 }
+    parts:
+      - { id: answer, answer: 314.4500789, unit: K, source: P39 }

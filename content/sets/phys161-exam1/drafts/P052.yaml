@@ -1,0 +1,45 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P52
+number: 52
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: How long does it take a car to cross a 25 m-wide intersection after the light turns green, if
+  the car accelerates from rest at a constant acceleration of 2.4 m/s<sup>2</sup>? (4.5643546458764
+  s)
+text: How long does it take a car to cross a 25 m-wide intersection after the light turns green, if
+  the car accelerates from rest at a constant acceleration of 2.4 m/s^2? (4.5643546458764 s)
+answer: { value: 4.5643546458764, unit: s, raw: 4.5643546458764 s }
+figures: []
+literals:
+  - name: d
+    value: 25
+    unit: m
+    text: "25"
+    suggest: { min: 18, max: 33, step: 1 }
+  - name: a
+    value: 2.4
+    unit: m/s^2
+    text: "2.4"
+    suggest: { min: 1.7, max: 3.1, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p052
+  source: { document: PHYS161_Exam1, labels: [ P52 ] }
+  section: Kinematics of 1D motion
+  narrative: ""
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        How long does it take a car to cross a {d:unit}-wide intersection after the light turns
+        green, if the car accelerates from rest at a constant acceleration of {a:unit}? {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 25, a: 2.4 }
+    parts:
+      - { id: answer, answer: 4.5643546458764, unit: s, source: P52 }

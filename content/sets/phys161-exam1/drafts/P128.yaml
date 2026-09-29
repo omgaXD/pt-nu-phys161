@@ -1,0 +1,61 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P128
+number: 128
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: >-
+  A block with mass m<sub>1</sub> = 150 kg is placed on an inclined plane with slope angle α = 29°
+  and is connected to a second hanging block with mass m<sub>2</sub> by a cord passing over a small,
+  frictionless pulley. The coefficient of kinetic friction is 0.076. Find the mass m<sub>2</sub> for
+  which block m<sub>1</sub>
+
+  moves down the plane at constant speed once it is set in motion. (62.750 kg)
+text: A block with mass m_1 = 150 kg is placed on an inclined plane with slope angle α = 29° and is
+  connected to a second hanging block with mass m_2 by a cord passing over a small, frictionless
+  pulley. The coefficient of kinetic friction is 0.076. Find the mass m_2 for which block m_1 moves
+  down the plane at constant speed once it is set in motion. (62.750 kg)
+answer: { value: 62.75, unit: kg, raw: 62.750 kg }
+figures:
+  - { src: figures/unnamed_018_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_018_R6Ld.png }
+literals:
+  - name: m1
+    value: 150
+    unit: kg
+    text: "150"
+    suggest: { min: 105, max: 195, step: 1 }
+  - name: alpha
+    value: 29
+    unit: °
+    text: "29"
+    suggest: { min: 20, max: 38, step: 1 }
+  - name: x
+    value: 0.076
+    text: "0.076"
+    suggest: { min: 0.053, max: 0.099, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam1-p128
+  source: { document: PHYS161_Exam1, labels: [ P128 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_018_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A block with mass $m_{1}$ = {m1:unit} is placed on an inclined plane with slope angle α =
+    {alpha}° and is connected to a second hanging block with mass $m_{2}$ by a cord passing over a
+    small, frictionless pulley. The coefficient of kinetic friction is {x}. {@fig}
+  vars:
+    - { name: m1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the mass $m_{2}$ for which block $m_{1}$ moves down the plane at constant speed once it
+        is set in motion. {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m1: 150, alpha: 29, x: 0.076 }
+    parts:
+      - { id: answer, answer: 62.75, unit: kg, source: P128 }

@@ -35,7 +35,7 @@ scenario:
   section: Potential energy
   narrative: >-
     A force parallel to the x-axis acts on a particle moving along the x-axis. This force produces
-    potential energy given by U(x) = α x^4, where α = {alpha:unit}.
+    potential energy given by U(x) = α x$^{4}$, where α = {alpha:unit}.
   vars:
     - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: J/m^4 }
     - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }

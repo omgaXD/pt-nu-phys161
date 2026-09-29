@@ -1,0 +1,86 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P62
+number: 62
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A cylinder with a frictionless, movable piston contains a quantity of helium gas. Initially the
+  gas is at a pressure of 0.94×10<sup>5</sup> Pa, has a temperature of 299 K, and occupies a volume
+  of 1.46 L. The gas then is heated and the piston is allowed to move to keep the temperature equal
+  to 299 K. This continues until the pressure reaches 2.36× 10<sup>4</sup> Pa. Assume that the gas
+  may be treated as ideal. Find the volume of the gas at the end of the process. 1 L = 0.001
+  m<sup>3</sup>(0.0058152542372881 m^3)
+text: A cylinder with a frictionless, movable piston contains a quantity of helium gas. Initially
+  the gas is at a pressure of 0.94×10^5 Pa, has a temperature of 299 K, and occupies a volume of
+  1.46 L. The gas then is heated and the piston is allowed to move to keep the temperature equal to
+  299 K. This continues until the pressure reaches 2.36× 10^4 Pa. Assume that the gas may be treated
+  as ideal. Find the volume of the gas at the end of the process. 1 L = 0.001 m^3(0.0058152542372881
+  m^3)
+answer: { value: 0.0058152542372881, unit: m^3, raw: 0.0058152542372881 m^3 }
+figures: []
+literals:
+  - name: p
+    value: 94000
+    unit: Pa
+    text: 0.94×10^5
+    suggest: { min: 65800, max: 122200, step: 1 }
+  - name: T
+    value: 299
+    unit: K
+    text: "299"
+    suggest: { min: 209, max: 389, step: 1 }
+  - name: V
+    value: 1.46
+    unit: L
+    text: "1.46"
+    suggest: { min: 1.02, max: 1.9, step: 0.01, decimals: 2 }
+  - name: T2
+    value: 299
+    unit: K
+    text: "299"
+    suggest: { min: 209, max: 389, step: 1 }
+  - name: p2
+    value: 23600
+    unit: Pa
+    text: 2.36× 10^4
+    suggest: { min: 16520, max: 30680, step: 1 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p062
+  source: { document: PHYS161_Exam4, labels: [ P62 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    A cylinder with a frictionless, movable piston contains a quantity of helium gas. Initially the
+    gas is at a pressure of {p:unit}, has a temperature of {T:unit}, and occupies a volume of
+    {V:unit}. The gas then is heated and the piston is allowed to move to keep the temperature equal
+    to {T2:unit}. This continues until the pressure reaches {p2:unit}. Assume that the gas may be
+    treated as ideal.
+  vars:
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the volume of the gas at the end of the process. {V2:unit} = {L:unit} {_0}{_u}
+      answer: TODO
+      unit: m^3
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { p: 94000, T: 299, V: 1.46, T2: 299, p2: 23600, V2: 1, L: 0.001 }
+    parts:
+      - { id: answer, answer: 0.0058152542372881, unit: m^3, source: P62 }

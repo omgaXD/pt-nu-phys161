@@ -33,7 +33,7 @@ scenario:
   section: Potential energy
   narrative: >-
     A force F, measured in newtons, varies along the x-axis, with the distance measured in meters,
-    according to the following law: F(x) = {x}x^2 + {x2}x.
+    according to the following law: F(x) = {x}x$^{2}$ + {x2}x.
   vars:
     - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
     - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }

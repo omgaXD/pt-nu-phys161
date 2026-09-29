@@ -1,0 +1,61 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P87
+number: 87
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An ideal engine extracts 10800 J of heat from its hot reservoir while operating between 225 K
+  and 525 K. The work from the engine goes into an ideal refrigerator which extracts 4400 J of heat
+  from its cold reservoir. Find the coefficient of performance of the ideal refrigerator.
+  (0.71296296296296)
+text: An ideal engine extracts 10800 J of heat from its hot reservoir while operating between 225 K
+  and 525 K. The work from the engine goes into an ideal refrigerator which extracts 4400 J of heat
+  from its cold reservoir. Find the coefficient of performance of the ideal refrigerator.
+  (0.71296296296296)
+answer: { value: 0.71296296296296, raw: "0.71296296296296" }
+figures: []
+literals:
+  - name: E
+    value: 10800
+    unit: J
+    text: "10800"
+    suggest: { min: 7560, max: 14040, step: 1 }
+  - name: T
+    value: 225
+    unit: K
+    text: "225"
+    suggest: { min: 158, max: 293, step: 1 }
+  - name: T2
+    value: 525
+    unit: K
+    text: "525"
+    suggest: { min: 368, max: 683, step: 1 }
+  - name: E2
+    value: 4400
+    unit: J
+    text: "4400"
+    suggest: { min: 3080, max: 5720, step: 1 }
+scenario:
+  id: phys161-exam4-p087
+  source: { document: PHYS161_Exam4, labels: [ P87 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    An ideal engine extracts {E:unit} of heat from its hot reservoir while operating between
+    {T:unit} and {T2:unit}. The work from the engine goes into an ideal refrigerator which extracts
+    {E2:unit} of heat from its cold reservoir.
+  vars:
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: E2, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the coefficient of performance of the ideal refrigerator. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { E: 10800, T: 225, T2: 525, E2: 4400 }
+    parts:
+      - { id: answer, answer: 0.71296296296296, source: P87 }

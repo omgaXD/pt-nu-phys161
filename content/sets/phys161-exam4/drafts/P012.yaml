@@ -1,0 +1,65 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P12
+number: 12
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: You are given a sample of metal and asked to determine its specific heat. You weigh the sample
+  and find that its weight is 26.4 N. You carefully add 1.5×10<sup>4</sup> J of heat energy to the
+  sample and find that its temperature rises by 17°C. What is the sample's specific heat? The
+  gravitational acceleration is g = 9.8 m/s<sup>2</sup>. Answer in J/ (kg K). (327.54010695187 J/
+  (kg K))
+text: You are given a sample of metal and asked to determine its specific heat. You weigh the sample
+  and find that its weight is 26.4 N. You carefully add 1.5×10^4 J of heat energy to the sample and
+  find that its temperature rises by 17°C. What is the sample's specific heat? The gravitational
+  acceleration is g = 9.8 m/s^2. Answer in J/ (kg K). (327.54010695187 J/ (kg K))
+answer: { value: 327.54010695187, unit: J/(kg K), raw: 327.54010695187 J/ (kg K) }
+figures: []
+literals:
+  - name: F
+    value: 26.4
+    unit: N
+    text: "26.4"
+    suggest: { min: 18.5, max: 34.3, step: 0.1, decimals: 1 }
+  - name: E
+    value: 15000
+    unit: J
+    text: 1.5×10^4
+    suggest: { min: 10500, max: 19500, step: 1 }
+  - name: T
+    value: 17
+    unit: °C
+    text: "17"
+    suggest: { min: 12, max: 22, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam4-p012
+  source: { document: PHYS161_Exam4, labels: [ P12 ] }
+  section: Temperature and heat
+  narrative: >-
+    You are given a sample of metal and asked to determine its specific heat. You weigh the sample
+    and find that its weight is {F:unit}. You carefully add {E:unit} of heat energy to the sample
+    and find that its temperature rises by {T:unit}. The gravitational acceleration is g = {g:unit}.
+    Answer in J/ (kg K).
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: What is the sample's specific heat? {_0}{_u}
+      answer: TODO
+      unit: J/(kg K)
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 26.4, E: 15000, T: 17, g: 9.8 }
+    parts:
+      - { id: answer, answer: 327.54010695187, unit: J/(kg K), source: P12 }

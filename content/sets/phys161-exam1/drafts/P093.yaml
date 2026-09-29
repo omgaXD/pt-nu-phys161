@@ -1,0 +1,70 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P93
+number: 93
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A car of mass m = 1200 kg travels around a circular, banked road of radius R = 80 m. The road
+  is inclined at an angle θ above the horizontal, as shown in the figure. The car travels at a
+  constant speed of v = 20 m/s. Assume that friction between the tires and the road is negligible.
+  Determine the required banking angle θ (in radians) so that the car can travel around the curve
+  without relying on friction. The gravitational acceleration is g = 9.8 m/s². ( 0.47177751 rad)
+text: A car of mass m = 1200 kg travels around a circular, banked road of radius R = 80 m. The road
+  is inclined at an angle θ above the horizontal, as shown in the figure. The car travels at a
+  constant speed of v = 20 m/s. Assume that friction between the tires and the road is negligible.
+  Determine the required banking angle θ (in radians) so that the car can travel around the curve
+  without relying on friction. The gravitational acceleration is g = 9.8 m/s^2. ( 0.47177751 rad)
+answer: { value: 0.47177751, unit: rad, raw: 0.47177751 rad }
+figures:
+  - { src: figures/unnamed_010_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_010_R6Ld.png }
+literals:
+  - name: m
+    value: 1200
+    unit: kg
+    text: "1200"
+    suggest: { min: 840, max: 1560, step: 1 }
+  - name: R
+    value: 80
+    unit: m
+    text: "80"
+    suggest: { min: 56, max: 104, step: 1 }
+  - name: v
+    value: 20
+    unit: m/s
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p093
+  source: { document: PHYS161_Exam1, labels: [ P93 ] }
+  section: Circular motion
+  figure: { id: fig, src: figures/unnamed_010_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A car of mass m = {m:unit} travels around a circular, banked road of radius R = {R:unit}. The
+    road is inclined at an angle θ above the horizontal, as shown in the figure. The car travels at
+    a constant speed of v = {v:unit}. Assume that friction between the tires and the road is
+    negligible. The gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Determine the required banking angle θ (in radians) so that the car can travel around the
+        curve without relying on friction. {_0}{_u}
+      answer: TODO
+      unit: rad
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1200, R: 80, v: 20, g: 9.8 }
+    parts:
+      - { id: answer, answer: 0.47177751, unit: rad, source: P93 }

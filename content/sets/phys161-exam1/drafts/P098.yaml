@@ -1,0 +1,75 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P98
+number: 98
+section: Friction
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A force of magnitude 46.5 N is applied at an angle of 27° above the horizontal to a block of
+  mass 4.7 kg resting on a horizontal surface. Taking the coefficient of kinetic friction between
+  the block and the surface equal to 0.1, calculate the speed of the block 2.8 s after it starts
+  moving. Take the gravitational acceleration g = 9.8 m/s². (23.1964 m/s)
+text: A force of magnitude 46.5 N is applied at an angle of 27° above the horizontal to a block of
+  mass 4.7 kg resting on a horizontal surface. Taking the coefficient of kinetic friction between
+  the block and the surface equal to 0.1, calculate the speed of the block 2.8 s after it starts
+  moving. Take the gravitational acceleration g = 9.8 m/s^2. (23.1964 m/s)
+answer: { value: 23.1964, unit: m/s, raw: 23.1964 m/s }
+figures: []
+literals:
+  - name: F
+    value: 46.5
+    unit: N
+    text: "46.5"
+    suggest: { min: 32.5, max: 60.5, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 27
+    unit: °
+    text: "27"
+    suggest: { min: 19, max: 35, step: 1 }
+  - name: m
+    value: 4.7
+    unit: kg
+    text: "4.7"
+    suggest: { min: 3.3, max: 6.1, step: 0.1, decimals: 1 }
+  - name: x
+    value: 0.1
+    text: "0.1"
+    suggest: { min: 0.1, max: 0.1, step: 0.1, decimals: 1 }
+  - name: t
+    value: 2.8
+    unit: s
+    text: "2.8"
+    suggest: { min: 2, max: 3.6, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p098
+  source: { document: PHYS161_Exam1, labels: [ P98 ] }
+  section: Friction
+  narrative: >-
+    A force of magnitude {F:unit} is applied at an angle of {theta}° above the horizontal to a block
+    of mass {m:unit} resting on a horizontal surface. Taking the coefficient of kinetic friction
+    between the block and the surface equal to {x}, calculate the speed of the block {t:unit} after
+    it starts moving.
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Take the gravitational acceleration g = {g:unit}. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 46.5, theta: 27, m: 4.7, x: 0.1, t: 2.8, g: 9.8 }
+    parts:
+      - { id: answer, answer: 23.1964, unit: m/s, source: P98 }

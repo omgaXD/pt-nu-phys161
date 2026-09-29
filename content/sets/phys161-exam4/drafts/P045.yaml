@@ -1,0 +1,59 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P45
+number: 45
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A vacuum system can achieve a pressure of 1.9×10<sup>−7</sup> N/m<sup>2</sup> at 25°C. How many
+  molecules are there in a cubic centimeter at given pressure and temperature? Avogadro's number
+  N<sub>A</sub> = 6.022×10<sup>23</sup> 1/mol. The universal gas constant is R = 8.31 J/(mol K).
+  Answer without units. (46180487)
+text: A vacuum system can achieve a pressure of 1.9×10^-7 N/m^2 at 25°C. How many molecules are
+  there in a cubic centimeter at given pressure and temperature? Avogadro's number N_A = 6.022×10^23
+  1/mol. The universal gas constant is R = 8.31 J/(mol K). Answer without units. (46180487)
+answer: { value: 46180487, raw: "46180487" }
+figures: []
+literals:
+  - name: p
+    value: 1.9e-7
+    unit: N/m^2
+    text: 1.9×10^-7
+    suggest: { min: 1.3e-7, max: 2.5e-7, step: 1e-8 }
+  - name: T
+    value: 25
+    unit: °C
+    text: "25"
+    suggest: { min: 18, max: 33, step: 1 }
+  - name: NA
+    value: 6.022e+23
+    unit: 1/mol
+    text: 6.022×10^23
+    suggest: { min: 4.2e+23, max: 7.8e+23, step: 1e+22 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p045
+  source: { document: PHYS161_Exam4, labels: [ P45 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    A vacuum system can achieve a pressure of {p:unit} at {T:unit}. Avogadro's number $N_{A}$ =
+    {NA:unit}. The universal gas constant is R = {R:unit}. Answer without units.
+  vars:
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m^2 }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: NA, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        How many molecules are there in a cubic centimeter at given pressure and temperature? {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { p: 1.9e-7, T: 25, NA: 6.022e+23, R: 8.31 }
+    parts:
+      - { id: answer, answer: 46180487, source: P45 }

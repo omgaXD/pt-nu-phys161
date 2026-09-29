@@ -1,0 +1,64 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P50
+number: 50
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: What is the pressure inside a 39 L container holding 108 kg of argon gas at 26°C? Molar mass of
+  argon is M<sub>Ar</sub> = 40 g/mol. The universal gas constant is R = 8.31 J/(mol K).
+  (172103296.1538 Pa)
+text: What is the pressure inside a 39 L container holding 108 kg of argon gas at 26°C? Molar mass
+  of argon is M_Ar = 40 g/mol. The universal gas constant is R = 8.31 J/(mol K). (172103296.1538 Pa)
+answer: { value: 172103296.1538, unit: Pa, raw: 172103296.1538 Pa }
+figures: []
+literals:
+  - name: V
+    value: 39
+    unit: L
+    text: "39"
+    suggest: { min: 27, max: 51, step: 1 }
+  - name: m
+    value: 108
+    unit: kg
+    text: "108"
+    suggest: { min: 76, max: 140, step: 1 }
+  - name: T
+    value: 26
+    unit: °C
+    text: "26"
+    suggest: { min: 18, max: 34, step: 1 }
+  - name: MAr
+    value: 40
+    unit: g/mol
+    text: "40"
+    suggest: { min: 28, max: 52, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p050
+  source: { document: PHYS161_Exam4, labels: [ P50 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    Molar mass of argon is $M_{Ar}$ = {MAr:unit}. The universal gas constant is R = {R:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: MAr, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the pressure inside a {V:unit} container holding {m:unit} of argon gas at {T:unit}?
+        {_0}{_u}
+      answer: TODO
+      unit: Pa
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 39, m: 108, T: 26, MAr: 40, R: 8.31 }
+    parts:
+      - { id: answer, answer: 172103296.1538, unit: Pa, source: P50 }

@@ -1,0 +1,61 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P14
+number: 14
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: >-
+  Calculate the force of gravity of a 16 kg block resting on the earth. Mass of Earth is ME
+
+  = 5.97 × 10<sup>24</sup> kg. The radius of the Earth is RE = 6.38 × 10<sup>6</sup> m.
+  Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (156.5 N)
+text: Calculate the force of gravity of a 16 kg block resting on the earth. Mass of Earth is ME =
+  5.97 × 10^24 kg. The radius of the Earth is RE = 6.38 × 10^6 m. Gravitational constant is 6.67 ×
+  10^-11N⋅ m^2 /kg^2. (156.5 N)
+answer: { value: 156.5, unit: N, raw: 156.5 N }
+figures: []
+literals:
+  - name: m
+    value: 16
+    unit: kg
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: ME
+    value: 5.97e+24
+    unit: kg
+    text: 5.97 × 10^24
+    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+  - name: RE
+    value: 6380000
+    unit: m
+    text: 6.38 × 10^6
+    suggest: { min: 4466000, max: 8294000, step: 1 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+scenario:
+  id: phys161-exam3-p014
+  source: { document: PHYS161_Exam3, labels: [ P14 ] }
+  section: Gravitation
+  narrative: >-
+    Mass of Earth is ME = {ME:unit}. The radius of the Earth is RE = {RE:unit}. Gravitational
+    constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: ME, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: RE, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the force of gravity of a {m:unit} block resting on the earth. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 16, ME: 5.97e+24, RE: 6380000, F: 6.67e-11 }
+    parts:
+      - { id: answer, answer: 156.5, unit: N, source: P14 }

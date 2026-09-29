@@ -1,0 +1,84 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P8
+number: 8
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  A physics student wants to cool 0.25 kg of water, initially at 22°C, by adding ice initially at
+  -16°C. How much ice should she add so that the final temperature will be 0°C with all the ice
+  melted if the heat capacity of the container may be neglected?
+
+  Latent heat of fusion for water is 334 kJ/kg.
+
+  Specific heat of water is 4186 J/(kg K).
+
+  Specific heat of ice is 2100 J/(kg K).
+
+  (0.062630576713819 kg)
+text: A physics student wants to cool 0.25 kg of water, initially at 22°C, by adding ice initially
+  at -16°C. How much ice should she add so that the final temperature will be 0°C with all the ice
+  melted if the heat capacity of the container may be neglected? Latent heat of fusion for water is
+  334 kJ/kg. Specific heat of water is 4186 J/(kg K). Specific heat of ice is 2100 J/(kg K).
+  (0.062630576713819 kg)
+answer: { value: 0.062630576713819, unit: kg, raw: 0.062630576713819 kg }
+figures: []
+literals:
+  - name: m
+    value: 0.25
+    unit: kg
+    text: "0.25"
+    suggest: { min: 0.18, max: 0.33, step: 0.01, decimals: 2 }
+  - name: T
+    value: 22
+    unit: °C
+    text: "22"
+    suggest: { min: 15, max: 29, step: 1 }
+  - name: T2
+    value: -16
+    unit: °C
+    text: "-16"
+    suggest: { min: -21, max: -11, step: 1 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+  - name: c
+    value: 4186
+    unit: J/(kg K)
+    text: "4186"
+    suggest: { min: 2930, max: 5442, step: 1 }
+  - name: c2
+    value: 2100
+    unit: J/(kg K)
+    text: "2100"
+    suggest: { min: 1470, max: 2730, step: 1 }
+scenario:
+  id: phys161-exam4-p008
+  source: { document: PHYS161_Exam4, labels: [ P8 ] }
+  section: Temperature and heat
+  narrative: >-
+    A physics student wants to cool {m:unit} of water, initially at {T:unit}, by adding ice
+    initially at {T2:unit}. Latent heat of fusion for water is {Lh:unit}. Specific heat of water is
+    {c:unit}. Specific heat of ice is {c2:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: c2, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+  parts:
+    - id: answer
+      prompt: >-
+        How much ice should she add so that the final temperature will be 0°C with all the ice
+        melted if the heat capacity of the container may be neglected? {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 0.25, T: 22, T2: -16, Lh: 334, c: 4186, c2: 2100 }
+    parts:
+      - { id: answer, answer: 0.062630576713819, unit: kg, source: P8 }

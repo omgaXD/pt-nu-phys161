@@ -1,0 +1,63 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P44
+number: 44
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A rocket is accelerating upward at 4.6 m/s<sup>2</sup> from the launchpad on the earth. Inside
+  a small 1.8 kg ball hangs from the ceiling by a light 1.2 m wire. If the ball is displaced from
+  the vertical and released, find the period of the resulting swings of this pendulum. The
+  gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (1.8138 s)
+text: A rocket is accelerating upward at 4.6 m/s^2 from the launchpad on the earth. Inside a small
+  1.8 kg ball hangs from the ceiling by a light 1.2 m wire. If the ball is displaced from the
+  vertical and released, find the period of the resulting swings of this pendulum. The gravitational
+  acceleration is g = 9.8 m/s^2. (1.8138 s)
+answer: { value: 1.8138, unit: s, raw: 1.8138 s }
+figures: []
+literals:
+  - name: a
+    value: 4.6
+    unit: m/s^2
+    text: "4.6"
+    suggest: { min: 3.2, max: 6, step: 0.1, decimals: 1 }
+  - name: m
+    value: 1.8
+    unit: kg
+    text: "1.8"
+    suggest: { min: 1.3, max: 2.3, step: 0.1, decimals: 1 }
+  - name: d
+    value: 1.2
+    unit: m
+    text: "1.2"
+    suggest: { min: 0.8, max: 1.6, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p044
+  source: { document: PHYS161_Exam3, labels: [ P44 ] }
+  section: Oscillations
+  narrative: >-
+    A rocket is accelerating upward at {a:unit} from the launchpad on the earth. Inside a small
+    {m:unit} ball hangs from the ceiling by a light {d:unit} wire. If the ball is displaced from the
+    vertical and released, find the period of the resulting swings of this pendulum.
+  vars:
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: The gravitational acceleration is g = {g:unit}. {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { a: 4.6, m: 1.8, d: 1.2, g: 9.8 }
+    parts:
+      - { id: answer, answer: 1.8138, unit: s, source: P44 }

@@ -17,7 +17,7 @@ text: Three forces are applied to a wheel as shown in Figure below. One force is
   the radius of the wheel? (0.597 m)
 answer: { value: 0.597, unit: m, raw: 0.597 m }
 figures:
-  - { src: figures/unnamed_011_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_011_fr4U.png }
+  - { src: figures/unnamed_008_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_008_GNcJ.png }
 literals:
   - name: F1
     value: 10.8
@@ -48,7 +48,7 @@ scenario:
   id: phys161-exam2-p132
   source: { document: PHYS161_Exam2, labels: [ P132 ] }
   section: Torque
-  figure: { id: fig, src: figures/unnamed_011_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_008_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     Three forces are applied to a wheel as shown in Figure below. One force is perpendicular to the
     rim |$F_{1}$|= {F1:unit}, the one makes a {theta}° angle with the radius |$F_{2}$|= {F2:unit},

@@ -1,0 +1,60 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P47
+number: 47
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A storage tank at pressure of 104712 Pa contains 26.2 kg of diatomic nitrogen. What is the
+  pressure if an additional 32.9 kg of nitrogen is added without changing the temperature? Molar
+  mass of diatomic nitrogen is M<sub>N2</sub> = 28 g/mol. (236201.49618321 Pa)
+text: A storage tank at pressure of 104712 Pa contains 26.2 kg of diatomic nitrogen. What is the
+  pressure if an additional 32.9 kg of nitrogen is added without changing the temperature? Molar
+  mass of diatomic nitrogen is M_N2 = 28 g/mol. (236201.49618321 Pa)
+answer: { value: 236201.49618321, unit: Pa, raw: 236201.49618321 Pa }
+figures: []
+literals:
+  - name: p
+    value: 104712
+    unit: Pa
+    text: "104712"
+    suggest: { min: 73298, max: 136126, step: 1 }
+  - name: m
+    value: 26.2
+    unit: kg
+    text: "26.2"
+    suggest: { min: 18.3, max: 34.1, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 32.9
+    unit: kg
+    text: "32.9"
+    suggest: { min: 23, max: 42.8, step: 0.1, decimals: 1 }
+  - name: MN2
+    value: 28
+    unit: g/mol
+    text: "28"
+    suggest: { min: 20, max: 36, step: 1 }
+scenario:
+  id: phys161-exam4-p047
+  source: { document: PHYS161_Exam4, labels: [ P47 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    A storage tank at pressure of {p:unit} contains {m:unit} of diatomic nitrogen. Molar mass of
+    diatomic nitrogen is $M_{N2}$ = {MN2:unit}.
+  vars:
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: MN2, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the pressure if an additional {m2:unit} of nitrogen is added without changing the
+        temperature? {_0}{_u}
+      answer: TODO
+      unit: Pa
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { p: 104712, m: 26.2, m2: 32.9, MN2: 28 }
+    parts:
+      - { id: answer, answer: 236201.49618321, unit: Pa, source: P47 }

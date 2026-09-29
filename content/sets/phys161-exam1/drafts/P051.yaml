@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P51
+number: 51
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: One kind of airplane must reach a speed before takeoff of at least 29.3 m/s, and can accelerate
+  at 2.2 m/s<sup>2</sup>. What minimum length must the runway have in order for the airplane to be
+  able to reach this speed before takeoff? (195.11136363636 m)
+text: One kind of airplane must reach a speed before takeoff of at least 29.3 m/s, and can
+  accelerate at 2.2 m/s^2. What minimum length must the runway have in order for the airplane to be
+  able to reach this speed before takeoff? (195.11136363636 m)
+answer: { value: 195.11136363636, unit: m, raw: 195.11136363636 m }
+figures:
+  - { src: figures/unnamed_012_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_012_R6Ld.png }
+literals:
+  - name: v
+    value: 29.3
+    unit: m/s
+    text: "29.3"
+    suggest: { min: 20.5, max: 38.1, step: 0.1, decimals: 1 }
+  - name: a
+    value: 2.2
+    unit: m/s^2
+    text: "2.2"
+    suggest: { min: 1.5, max: 2.9, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p051
+  source: { document: PHYS161_Exam1, labels: [ P51 ] }
+  section: Kinematics of 1D motion
+  figure: { id: fig, src: figures/unnamed_012_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    One kind of airplane must reach a speed before takeoff of at least {v:unit}, and can accelerate
+    at {a:unit}. {@fig}
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What minimum length must the runway have in order for the airplane to be able to reach this
+        speed before takeoff? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 29.3, a: 2.2 }
+    parts:
+      - { id: answer, answer: 195.11136363636, unit: m, source: P51 }

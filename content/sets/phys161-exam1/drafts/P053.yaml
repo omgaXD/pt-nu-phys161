@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P53
+number: 53
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: How long does it take a car to cross a 21 m-wide intersection if the car enters the
+  intersection already moving at 5.1 m/s and accelerates at a constant 2.5 m/s²? (2.53838 s)
+text: How long does it take a car to cross a 21 m-wide intersection if the car enters the
+  intersection already moving at 5.1 m/s and accelerates at a constant 2.5 m/s^2? (2.53838 s)
+answer: { value: 2.53838, unit: s, raw: 2.53838 s }
+figures: []
+literals:
+  - name: d
+    value: 21
+    unit: m
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: v
+    value: 5.1
+    unit: m/s
+    text: "5.1"
+    suggest: { min: 3.6, max: 6.6, step: 0.1, decimals: 1 }
+  - name: a
+    value: 2.5
+    unit: m/s^2
+    text: "2.5"
+    suggest: { min: 1.8, max: 3.3, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p053
+  source: { document: PHYS161_Exam1, labels: [ P53 ] }
+  section: Kinematics of 1D motion
+  narrative: ""
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        How long does it take a car to cross a {d:unit}-wide intersection if the car enters the
+        intersection already moving at {v:unit} and accelerates at a constant {a:unit}? {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 21, v: 5.1, a: 2.5 }
+    parts:
+      - { id: answer, answer: 2.53838, unit: s, source: P53 }

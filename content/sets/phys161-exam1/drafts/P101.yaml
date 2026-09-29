@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P101
+number: 101
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A cord exerts a force F = 5 N at an angle θ=45° above the horizontal to a block of mass 5 kg,
+  pulling the block along a horizontal frictionless floor. What is the magnitude of the acceleration
+  of the block? (0.70710 m/s^2)
+text: A cord exerts a force F = 5 N at an angle θ=45° above the horizontal to a block of mass 5 kg,
+  pulling the block along a horizontal frictionless floor. What is the magnitude of the acceleration
+  of the block? (0.70710 m/s^2)
+answer: { value: 0.7071, unit: m/s^2, raw: 0.70710 m/s^2 }
+figures: []
+literals:
+  - name: F
+    value: 5
+    unit: N
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: theta
+    value: 45
+    unit: °
+    text: "45"
+    suggest: { min: 31, max: 59, step: 1 }
+  - name: m
+    value: 5
+    unit: kg
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+scenario:
+  id: phys161-exam1-p101
+  source: { document: PHYS161_Exam1, labels: [ P101 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    A cord exerts a force F = {F:unit} at an angle θ={theta}° above the horizontal to a block of
+    mass {m:unit}, pulling the block along a horizontal frictionless floor.
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the acceleration of the block? {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 5, theta: 45, m: 5 }
+    parts:
+      - { id: answer, answer: 0.7071, unit: m/s^2, source: P101 }

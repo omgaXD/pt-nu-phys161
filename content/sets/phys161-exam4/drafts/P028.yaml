@@ -1,0 +1,53 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P28
+number: 28
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Consider a gas mixture of Helium and Oxygen molecules assuming O<sub>2</sub> is diatomic. The
+  root-mean-square velocity for the O<sub>2</sub> molecules is 435 m/s. Find v<sub>rms</sub> for the
+  Helium atoms. Molar mass of helium is 4 g/mol, molar mass of oxygen is 32 g/mol. (1230.365799 m/s)
+text: Consider a gas mixture of Helium and Oxygen molecules assuming O_2 is diatomic. The
+  root-mean-square velocity for the O_2 molecules is 435 m/s. Find v_rms for the Helium atoms. Molar
+  mass of helium is 4 g/mol, molar mass of oxygen is 32 g/mol. (1230.365799 m/s)
+answer: { value: 1230.365799, unit: m/s, raw: 1230.365799 m/s }
+figures: []
+literals:
+  - name: v
+    value: 435
+    unit: m/s
+    text: "435"
+    suggest: { min: 305, max: 566, step: 1 }
+  - name: M
+    value: 4
+    unit: g/mol
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: M2
+    value: 32
+    unit: g/mol
+    text: "32"
+    suggest: { min: 22, max: 42, step: 1 }
+scenario:
+  id: phys161-exam4-p028
+  source: { document: PHYS161_Exam4, labels: [ P28 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    Consider a gas mixture of Helium and Oxygen molecules assuming $O_{2}$ is diatomic. The
+    root-mean-square velocity for the $O_{2}$ molecules is {v:unit}. Molar mass of helium is
+    {M:unit}, molar mass of oxygen is {M2:unit}.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: M2, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+  parts:
+    - id: answer
+      prompt: Find $v_{rms}$ for the Helium atoms. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 435, M: 4, M2: 32 }
+    parts:
+      - { id: answer, answer: 1230.365799, unit: m/s, source: P28 }

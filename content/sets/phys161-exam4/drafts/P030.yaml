@@ -1,0 +1,79 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P30
+number: 30
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  A spherical 19.3-liters balloon contains 16-mol of oxygen gas at a pressure of 202000 Pa. Find the
+  average translational kinetic energy of an oxygen molecule in the balloon.
+
+  The universal gas constant is R = 8.31 J/(mol K).
+
+  Boltzmann constant k<sub>B</sub> = 1.38×10<sup>−23</sup> J/K.
+
+  Avogadro's number N<sub>A</sub> = 6.022×10<sup>23</sup> 1/mol. (6.0693083693125E-22 J)
+text: A spherical 19.3-liters balloon contains 16-mol of oxygen gas at a pressure of 202000 Pa. Find
+  the average translational kinetic energy of an oxygen molecule in the balloon. The universal gas
+  constant is R = 8.31 J/(mol K). Boltzmann constant k_B = 1.38×10^-23 J/K. Avogadro's number N_A =
+  6.022×10^23 1/mol. (6.0693083693125E-22 J)
+answer: { value: 6.0693083693125e-22, unit: J, raw: 6.0693083693125E-22 J }
+figures: []
+literals:
+  - name: V
+    value: 19.3
+    unit: L
+    text: "19.3"
+    suggest: { min: 13.5, max: 25.1, step: 0.1, decimals: 1 }
+  - name: n
+    value: 16
+    unit: mol
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: p
+    value: 202000
+    unit: Pa
+    text: "202000"
+    suggest: { min: 141400, max: 262600, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+  - name: kB
+    value: 1.38e-23
+    unit: J/K
+    text: 1.38×10^-23
+    suggest: { min: 1e-23, max: 1.8e-23, step: 1e-24 }
+  - name: NA
+    value: 6.022e+23
+    unit: 1/mol
+    text: 6.022×10^23
+    suggest: { min: 4.2e+23, max: 7.8e+23, step: 1e+22 }
+scenario:
+  id: phys161-exam4-p030
+  source: { document: PHYS161_Exam4, labels: [ P30 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    A spherical {V}-liters balloon contains {n}-mol of oxygen gas at a pressure of {p:unit}. The
+    universal gas constant is R = {R:unit}. Boltzmann constant $k_{B}$ = {kB:unit}. Avogadro's
+    number $N_{A}$ = {NA:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: kB, kind: range, min: TODO, max: TODO, step: TODO, unit: J/K }
+    - { name: NA, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/mol }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the average translational kinetic energy of an oxygen molecule in the balloon. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 19.3, n: 16, p: 202000, R: 8.31, kB: 1.38e-23, NA: 6.022e+23 }
+    parts:
+      - { id: answer, answer: 6.0693083693125e-22, unit: J, source: P30 }

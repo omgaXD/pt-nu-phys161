@@ -1,0 +1,50 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P31
+number: 31
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: "A body oscillates in a simple harmonic motion with its position described by the following
+  formula: x=Acos(ωt+φ), where A=8.2, ω=1.127, and φ=0.288. Assume all quantities are given in SI
+  units. Calculate the period of oscillations. (5.575 s)"
+text: "A body oscillates in a simple harmonic motion with its position described by the following
+  formula: x=Acos(ωt+φ), where A=8.2, ω=1.127, and φ=0.288. Assume all quantities are given in SI
+  units. Calculate the period of oscillations. (5.575 s)"
+answer: { value: 5.575, unit: s, raw: 5.575 s }
+figures: []
+literals:
+  - name: A
+    value: 8.2
+    text: "8.2"
+    suggest: { min: 5.7, max: 10.7, step: 0.1, decimals: 1 }
+  - name: omega
+    value: 1.127
+    text: "1.127"
+    suggest: { min: 0.789, max: 1.465, step: 0.001, decimals: 3 }
+  - name: phi
+    value: 0.288
+    text: "0.288"
+    suggest: { min: 0.202, max: 0.374, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam3-p031
+  source: { document: PHYS161_Exam3, labels: [ P31 ] }
+  section: Oscillations
+  narrative: >-
+    A body oscillates in a simple harmonic motion with its position described by the following
+    formula: x=Acos(ωt+φ), where A={A}, ω={omega}, and φ={phi}. Assume all quantities are given in
+    SI units.
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: omega, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: phi, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: Calculate the period of oscillations. {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 8.2, omega: 1.127, phi: 0.288 }
+    parts:
+      - { id: answer, answer: 5.575, unit: s, source: P31 }

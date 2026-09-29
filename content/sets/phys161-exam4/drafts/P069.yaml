@@ -1,0 +1,99 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P69
+number: 69
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  In a cylinder sealed with a piston, you rapidly compress 2.4 L of N<sub>2</sub> gas initially at
+  0.92 atm pressure and 3°C to half its original volume. Assume N<sub>2</sub> behaves like an ideal
+  gas. Assume the compression is adiabatic, γ = 1.4. If you now cool the gas back to 3°C without
+  changing the pressure, what is its final volume?
+
+  1 atm = 101325 Pa
+
+  1 L = 0.001 m<sup>3</sup>
+
+  (0.00090942993990624 m^3)
+text: In a cylinder sealed with a piston, you rapidly compress 2.4 L of N_2 gas initially at 0.92
+  atm pressure and 3°C to half its original volume. Assume N_2 behaves like an ideal gas. Assume the
+  compression is adiabatic, γ = 1.4. If you now cool the gas back to 3°C without changing the
+  pressure, what is its final volume? 1 atm = 101325 Pa 1 L = 0.001 m^3 (0.00090942993990624 m^3)
+answer: { value: 0.00090942993990624, unit: m^3, raw: 0.00090942993990624 m^3 }
+figures: []
+literals:
+  - name: V
+    value: 2.4
+    unit: L
+    text: "2.4"
+    suggest: { min: 1.7, max: 3.1, step: 0.1, decimals: 1 }
+  - name: p
+    value: 0.92
+    unit: atm
+    text: "0.92"
+    suggest: { min: 0.64, max: 1.2, step: 0.01, decimals: 2 }
+  - name: T
+    value: 3
+    unit: °C
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: gamma
+    value: 1.4
+    text: "1.4"
+    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
+  - name: T2
+    value: 3
+    unit: °C
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p069
+  source: { document: PHYS161_Exam4, labels: [ P69 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    In a cylinder sealed with a piston, you rapidly compress {V:unit} of $N_{2}$ gas initially at
+    {p:unit} pressure and {T:unit} to half its original volume. Assume $N_{2}$ behaves like an ideal
+    gas. Assume the compression is adiabatic, γ = {gamma}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: gamma, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        If you now cool the gas back to {T2:unit} without changing the pressure, what is its final
+        volume? {p2:unit} = {atm:unit} {V2:unit} = {L:unit} {_0}{_u}
+      answer: TODO
+      unit: m^3
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 2.4, p: 0.92, T: 3, gamma: 1.4, T2: 3, p2: 1, atm: 101325, V2: 1, L: 0.001 }
+    parts:
+      - { id: answer, answer: 0.00090942993990624, unit: m^3, source: P69 }

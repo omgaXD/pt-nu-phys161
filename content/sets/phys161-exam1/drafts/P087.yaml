@@ -1,0 +1,65 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P87
+number: 87
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A ball of 0.35 kg is attached at the end of a cord and revolves in a vertical circle of radius
+  1.75 m. The cord will break if the tension in it exceeds 75 N. What is the maximum speed the ball
+  can have at the lowest point of the circle without breaking the cord? Take the gravitational
+  acceleration g = 9.8 m/s². (18.9169 m/s)
+text: A ball of 0.35 kg is attached at the end of a cord and revolves in a vertical circle of radius
+  1.75 m. The cord will break if the tension in it exceeds 75 N. What is the maximum speed the ball
+  can have at the lowest point of the circle without breaking the cord? Take the gravitational
+  acceleration g = 9.8 m/s^2. (18.9169 m/s)
+answer: { value: 18.9169, unit: m/s, raw: 18.9169 m/s }
+figures: []
+literals:
+  - name: m
+    value: 0.35
+    unit: kg
+    text: "0.35"
+    suggest: { min: 0.24, max: 0.45, step: 0.01, decimals: 2 }
+  - name: r
+    value: 1.75
+    unit: m
+    text: "1.75"
+    suggest: { min: 1.22, max: 2.28, step: 0.01, decimals: 2 }
+  - name: F
+    value: 75
+    unit: N
+    text: "75"
+    suggest: { min: 53, max: 98, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p087
+  source: { document: PHYS161_Exam1, labels: [ P87 ] }
+  section: Circular motion
+  narrative: >-
+    A ball of {m:unit} is attached at the end of a cord and revolves in a vertical circle of radius
+    {r:unit}. The cord will break if the tension in it exceeds {F:unit}. Take the gravitational
+    acceleration g = {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the maximum speed the ball can have at the lowest point of the circle without
+        breaking the cord? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 0.35, r: 1.75, F: 75, g: 9.8 }
+    parts:
+      - { id: answer, answer: 18.9169, unit: m/s, source: P87 }

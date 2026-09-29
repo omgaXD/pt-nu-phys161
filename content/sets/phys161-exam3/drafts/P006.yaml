@@ -1,0 +1,77 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P6
+number: 6
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Spherical hollow is made in a lead sphere of radius R = 12.4 cm such that its surface touches
+  the outside surface of a lead sphere and passes through its center as shown in the figure below.
+  The mass of the sphere before hollowing was M = 24.8 kg. Find the magnitude of the gravitational
+  force between the hollowed-out lead sphere and a small sphere of mass m = 2.4 kg, located at
+  distance d = 0.75 m from the center of the lead sphere. Gravitational constant is 6.67 ×
+  10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (6.305E-9 N)
+text: Spherical hollow is made in a lead sphere of radius R = 12.4 cm such that its surface touches
+  the outside surface of a lead sphere and passes through its center as shown in the figure below.
+  The mass of the sphere before hollowing was M = 24.8 kg. Find the magnitude of the gravitational
+  force between the hollowed-out lead sphere and a small sphere of mass m = 2.4 kg, located at
+  distance d = 0.75 m from the center of the lead sphere. Gravitational constant is 6.67 × 10^-11N⋅
+  m^2 /kg^2. (6.305E-9 N)
+answer: { value: 6.305e-9, unit: N, raw: 6.305E-9 N }
+figures:
+  - { src: figures/unnamed_006_LYNB.png, original: PHYS161%20Exam%203_files/unnamed_006_LYNB.png }
+literals:
+  - name: R
+    value: 12.4
+    unit: cm
+    text: "12.4"
+    suggest: { min: 8.7, max: 16.1, step: 0.1, decimals: 1 }
+  - name: M
+    value: 24.8
+    unit: kg
+    text: "24.8"
+    suggest: { min: 17.4, max: 32.2, step: 0.1, decimals: 1 }
+  - name: m
+    value: 2.4
+    unit: kg
+    text: "2.4"
+    suggest: { min: 1.7, max: 3.1, step: 0.1, decimals: 1 }
+  - name: d
+    value: 0.75
+    unit: m
+    text: "0.75"
+    suggest: { min: 0.52, max: 0.98, step: 0.01, decimals: 2 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+scenario:
+  id: phys161-exam3-p006
+  source: { document: PHYS161_Exam3, labels: [ P6 ] }
+  section: Gravitation
+  figure: { id: fig, src: figures/unnamed_006_LYNB.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Spherical hollow is made in a lead sphere of radius R = {R:unit} such that its surface touches
+    the outside surface of a lead sphere and passes through its center as shown in the figure below.
+    The mass of the sphere before hollowing was M = {M:unit}. Gravitational constant is {F:unit}⋅
+    m$^{2}$ /kg$^{2}$. {@fig}
+  vars:
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of the gravitational force between the hollowed-out lead sphere and a
+        small sphere of mass m = {m:unit}, located at distance d = {d:unit} from the center of the
+        lead sphere. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { R: 12.4, M: 24.8, m: 2.4, d: 0.75, F: 6.67e-11 }
+    parts:
+      - { id: answer, answer: 6.305e-9, unit: N, source: P6 }

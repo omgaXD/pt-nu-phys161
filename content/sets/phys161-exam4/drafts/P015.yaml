@@ -1,0 +1,58 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P15
+number: 15
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A cube made of brass, with an edge length of 44 cm, is heated from 44.5°C to 56.5°C. Calculate
+  the increase of the cube's surface area. Assume that the coefficient of linear expansion for brass
+  is 19 × 10<sup>−6</sup> 1/K. (0.0005296896 m^2)
+text: A cube made of brass, with an edge length of 44 cm, is heated from 44.5°C to 56.5°C. Calculate
+  the increase of the cube's surface area. Assume that the coefficient of linear expansion for brass
+  is 19 × 10^-6 1/K. (0.0005296896 m^2)
+answer: { value: 0.0005296896, unit: m^2, raw: 0.0005296896 m^2 }
+figures: []
+literals:
+  - name: L
+    value: 44
+    unit: cm
+    text: "44"
+    suggest: { min: 31, max: 57, step: 1 }
+  - name: T
+    value: 44.5
+    unit: °C
+    text: "44.5"
+    suggest: { min: 31.1, max: 57.9, step: 0.1, decimals: 1 }
+  - name: T2
+    value: 56.5
+    unit: °C
+    text: "56.5"
+    suggest: { min: 39.5, max: 73.5, step: 0.1, decimals: 1 }
+  - name: alpha
+    value: 0.000019
+    unit: 1/K
+    text: 19 × 10^-6
+    suggest: { min: 0.000013, max: 0.000025, step: 0.000001, decimals: 6 }
+scenario:
+  id: phys161-exam4-p015
+  source: { document: PHYS161_Exam4, labels: [ P15 ] }
+  section: Temperature and heat
+  narrative: >-
+    A cube made of brass, with an edge length of {L:unit}, is heated from {T:unit} to {T2:unit}.
+    Assume that the coefficient of linear expansion for brass is {alpha:unit}.
+  vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/K }
+  parts:
+    - id: answer
+      prompt: Calculate the increase of the cube's surface area. {_0}{_u}
+      answer: TODO
+      unit: m^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { L: 44, T: 44.5, T2: 56.5, alpha: 0.000019 }
+    parts:
+      - { id: answer, answer: 0.0005296896, unit: m^2, source: P15 }

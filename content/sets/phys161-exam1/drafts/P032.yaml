@@ -1,0 +1,60 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P32
+number: 32
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A world-class sprinter accelerates uniformly from rest to his maximum speed in 3.4 s. He then
+  maintains this speed for the remainder of a 100-m race, finishing with a total time of 9.65 s.
+  What distance does the runner cover during the first 3.4 s? (21.3836 m)
+text: A world-class sprinter accelerates uniformly from rest to his maximum speed in 3.4 s. He then
+  maintains this speed for the remainder of a 100-m race, finishing with a total time of 9.65 s.
+  What distance does the runner cover during the first 3.4 s? (21.3836 m)
+answer: { value: 21.3836, unit: m, raw: 21.3836 m }
+figures: []
+literals:
+  - name: t
+    value: 3.4
+    unit: s
+    text: "3.4"
+    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+  - name: d
+    value: 100
+    unit: m
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: t2
+    value: 9.65
+    unit: s
+    text: "9.65"
+    suggest: { min: 6.76, max: 12.55, step: 0.01, decimals: 2 }
+  - name: t3
+    value: 3.4
+    unit: s
+    text: "3.4"
+    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p032
+  source: { document: PHYS161_Exam1, labels: [ P32 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A world-class sprinter accelerates uniformly from rest to his maximum speed in {t:unit}. He then
+    maintains this speed for the remainder of a {d}-m race, finishing with a total time of
+    {t2:unit}.
+  vars:
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: t2, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: t3, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        What distance does the runner cover during the first {t3:unit}? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { t: 3.4, d: 100, t2: 9.65, t3: 3.4 }
+    parts:
+      - { id: answer, answer: 21.3836, unit: m, source: P32 }

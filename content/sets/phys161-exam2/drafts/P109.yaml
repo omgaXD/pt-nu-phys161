@@ -43,7 +43,7 @@ scenario:
   narrative: >-
     A solid wheel undergoes a constant angular acceleration starting from rest at t = 0 s. When
     t={t:unit}, the angular velocity of the wheel is {omega:unit}. The acceleration continues until
-    t={t2:unit}, when the acceleration abruptly changes to 0 rad/s^2.
+    t={t2:unit}, when the acceleration abruptly changes to 0 rad/s$^{2}$.
   vars:
     - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
     - { name: omega, kind: range, min: TODO, max: TODO, step: TODO, unit: rad/s }

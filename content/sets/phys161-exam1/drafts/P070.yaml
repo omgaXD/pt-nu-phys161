@@ -1,0 +1,57 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P70
+number: 70
+section: Kinematics of projectile motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+  off the counter and strikes the floor xᶠ = 2.04 m from the base of the counter. The height of the
+  counter is yᵢ = 87 cm. At what angle below the horizontal does the mug strike the floor? Give the
+  answer in degrees. The gravitational acceleration is g = 9.8 m/s². (40.4622)
+text: In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+  off the counter and strikes the floor xᶠ = 2.04 m from the base of the counter. The height of the
+  counter is yᵢ = 87 cm. At what angle below the horizontal does the mug strike the floor? Give the
+  answer in degrees. The gravitational acceleration is g = 9.8 m/s^2. (40.4622)
+answer: { value: 40.4622, raw: "40.4622" }
+figures: []
+literals:
+  - name: d
+    value: 2.04
+    unit: m
+    text: "2.04"
+    suggest: { min: 1.43, max: 2.65, step: 0.01, decimals: 2 }
+  - name: h
+    value: 87
+    unit: cm
+    text: "87"
+    suggest: { min: 61, max: 113, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p070
+  source: { document: PHYS161_Exam1, labels: [ P70 ] }
+  section: Kinematics of projectile motion
+  narrative: >-
+    In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+    off the counter and strikes the floor xᶠ = {d:unit} from the base of the counter. The height of
+    the counter is yᵢ = {h:unit}. At what angle below the horizontal does the mug strike the floor?
+    The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Give the answer in degrees. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 2.04, h: 87, g: 9.8 }
+    parts:
+      - { id: answer, answer: 40.4622, source: P70 }

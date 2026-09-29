@@ -1,0 +1,62 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P23
+number: 23
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Find the angle (in radians) between the two vectors A = (4iˆ+ 5jˆ+ 3kˆ) and B = ( -2iˆ + 1jˆ -
+  4kˆ). (2.0521 rad)
+text: Find the angle (in radians) between the two vectors A = (4î+ 5ĵ+ 3k̂) and B = ( -2î + 1ĵ -
+  4k̂). (2.0521 rad)
+answer: { value: 2.0521, unit: rad, raw: 2.0521 rad }
+figures: []
+literals:
+  - name: A
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: vy
+    value: 5
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: vz
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: B
+    value: -2
+    text: "-2"
+    suggest: { min: -3, max: -1, step: 1 }
+  - name: vy2
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: vz2
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+scenario:
+  id: phys161-exam1-p023
+  source: { document: PHYS161_Exam1, labels: [ P23 ] }
+  section: Vectors
+  narrative: ""
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: B, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the angle (in radians) between the two vectors A = ({A}î+ {vy}ĵ+ {vz}k̂) and B = ( {B}î
+        + {vy2}ĵ - {vz2}k̂). {_0}{_u}
+      answer: TODO
+      unit: rad
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 4, vy: 5, vz: 3, B: -2, vy2: 1, vz2: 4 }
+    parts:
+      - { id: answer, answer: 2.0521, unit: rad, source: P23 }

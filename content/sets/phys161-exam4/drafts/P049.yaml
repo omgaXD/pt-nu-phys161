@@ -1,0 +1,71 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P49
+number: 49
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Calculate how much time in average it would take an oxygen molecule at 12°C to move back and
+  forth across a 6-m-long room 40 times, passing in total 240 m distance. Molar mass of oxygen is 32
+  g/mol. The universal gas constant is R = 8.31 J/(mol K). (0.50933399254989 s)
+text: Calculate how much time in average it would take an oxygen molecule at 12°C to move back and
+  forth across a 6-m-long room 40 times, passing in total 240 m distance. Molar mass of oxygen is 32
+  g/mol. The universal gas constant is R = 8.31 J/(mol K). (0.50933399254989 s)
+answer: { value: 0.50933399254989, unit: s, raw: 0.50933399254989 s }
+figures: []
+literals:
+  - name: T
+    value: 12
+    unit: °C
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: d
+    value: 6
+    unit: m
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: ratio
+    value: 40
+    text: "40"
+    suggest: { min: 28, max: 52, step: 1 }
+  - name: d2
+    value: 240
+    unit: m
+    text: "240"
+    suggest: { min: 168, max: 312, step: 1 }
+  - name: M
+    value: 32
+    unit: g/mol
+    text: "32"
+    suggest: { min: 22, max: 42, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p049
+  source: { document: PHYS161_Exam4, labels: [ P49 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    Molar mass of oxygen is {M:unit}. The universal gas constant is R = {R:unit}.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: ratio, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate how much time in average it would take an oxygen molecule at {T:unit} to move back
+        and forth across a {d}-m-long room {ratio} times, passing in total {d2:unit} distance.
+        {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 12, d: 6, ratio: 40, d2: 240, M: 32, R: 8.31 }
+    parts:
+      - { id: answer, answer: 0.50933399254989, unit: s, source: P49 }

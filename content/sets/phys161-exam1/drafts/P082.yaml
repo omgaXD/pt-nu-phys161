@@ -1,0 +1,47 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P82
+number: 82
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A car passes over a rise in the roadway such that the top of the rise is shaped like a circle
+  of radius 580 m. The car moves at a constant speed of 38 km/h. What is the magnitude of the total
+  acceleration of the car at the moment it is at the top of the rise? (0.192103 m/s^2)
+text: A car passes over a rise in the roadway such that the top of the rise is shaped like a circle
+  of radius 580 m. The car moves at a constant speed of 38 km/h. What is the magnitude of the total
+  acceleration of the car at the moment it is at the top of the rise? (0.192103 m/s^2)
+answer: { value: 0.192103, unit: m/s^2, raw: 0.192103 m/s^2 }
+figures: []
+literals:
+  - name: r
+    value: 580
+    unit: m
+    text: "580"
+    suggest: { min: 406, max: 754, step: 1 }
+  - name: x
+    value: 38
+    text: "38"
+    suggest: { min: 27, max: 49, step: 1 }
+scenario:
+  id: phys161-exam1-p082
+  source: { document: PHYS161_Exam1, labels: [ P82 ] }
+  section: Circular motion
+  narrative: >-
+    A car passes over a rise in the roadway such that the top of the rise is shaped like a circle of
+    radius {r:unit}. The car moves at a constant speed of {x} km/h.
+  vars:
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the total acceleration of the car at the moment it is at the top of
+        the rise? {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { r: 580, x: 38 }
+    parts:
+      - { id: answer, answer: 0.192103, unit: m/s^2, source: P82 }

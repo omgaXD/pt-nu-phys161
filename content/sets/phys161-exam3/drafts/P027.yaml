@@ -1,0 +1,67 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P27
+number: 27
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A spring is mounted horizontally, with its left end fixed. A spring balance attached to the
+  free end and pulled toward the right indicates that the stretching force is proportional to the
+  displacement, and a force of 6 N causes a displacement of 0.05 m. We replace the spring balance
+  with a 0.6 kg block, pull it 0.01 m to the right along a frictionless surface, and release it from
+  rest. Find the period of the resulting oscillation. (0.444 s)
+text: A spring is mounted horizontally, with its left end fixed. A spring balance attached to the
+  free end and pulled toward the right indicates that the stretching force is proportional to the
+  displacement, and a force of 6 N causes a displacement of 0.05 m. We replace the spring balance
+  with a 0.6 kg block, pull it 0.01 m to the right along a frictionless surface, and release it from
+  rest. Find the period of the resulting oscillation. (0.444 s)
+answer: { value: 0.444, unit: s, raw: 0.444 s }
+figures:
+  - { src: figures/unnamed_LYNB.png, original: PHYS161%20Exam%203_files/unnamed_LYNB.png }
+literals:
+  - name: F
+    value: 6
+    unit: N
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: d
+    value: 0.05
+    unit: m
+    text: "0.05"
+    suggest: { min: 0.03, max: 0.07, step: 0.01, decimals: 2 }
+  - name: m
+    value: 0.6
+    unit: kg
+    text: "0.6"
+    suggest: { min: 0.4, max: 0.8, step: 0.1, decimals: 1 }
+  - name: d2
+    value: 0.01
+    unit: m
+    text: "0.01"
+    suggest: { min: 0.01, max: 0.01, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam3-p027
+  source: { document: PHYS161_Exam3, labels: [ P27 ] }
+  section: Oscillations
+  figure: { id: fig, src: figures/unnamed_LYNB.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A spring is mounted horizontally, with its left end fixed. A spring balance attached to the free
+    end and pulled toward the right indicates that the stretching force is proportional to the
+    displacement, and a force of {F:unit} causes a displacement of {d:unit}. We replace the spring
+    balance with a {m:unit} block, pull it {d2:unit} to the right along a frictionless surface, and
+    release it from rest. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: Find the period of the resulting oscillation. {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 6, d: 0.05, m: 0.6, d2: 0.01 }
+    parts:
+      - { id: answer, answer: 0.444, unit: s, source: P27 }

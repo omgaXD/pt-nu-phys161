@@ -17,7 +17,7 @@ text: A uniform, 8.6-kg spherical shell 72 cm in diameter has four small 1.6-kg 
   positive direction. (-0.2021 N m)
 answer: { value: -0.2021, unit: N m, raw: -0.2021 N m }
 figures:
-  - { src: figures/unnamed_007_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_007_fr4U.png }
+  - { src: figures/unnamed_010_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_010_GNcJ.png }
 literals:
   - name: m
     value: 8.6
@@ -53,7 +53,7 @@ scenario:
   id: phys161-exam2-p130
   source: { document: PHYS161_Exam2, labels: [ P130 ] }
   section: Torque
-  figure: { id: fig, src: figures/unnamed_007_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_010_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A uniform, {m}-kg spherical shell {d:unit} in diameter has four small {m2}-kg masses attached to
     its outer surface and equally spaced around it. This combination is spinning about an axis

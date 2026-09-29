@@ -1,0 +1,45 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P66
+number: 66
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A string on a certain guitar of the length of 52 cm vibrates at a fundamental frequency of 262
+  Hz. Calculate the speed of the transverse waves on the string. (272.48 m/s)
+text: A string on a certain guitar of the length of 52 cm vibrates at a fundamental frequency of 262
+  Hz. Calculate the speed of the transverse waves on the string. (272.48 m/s)
+answer: { value: 272.48, unit: m/s, raw: 272.48 m/s }
+figures: []
+literals:
+  - name: L
+    value: 52
+    unit: cm
+    text: "52"
+    suggest: { min: 36, max: 68, step: 1 }
+  - name: f
+    value: 262
+    unit: Hz
+    text: "262"
+    suggest: { min: 183, max: 341, step: 1 }
+scenario:
+  id: phys161-exam3-p066
+  source: { document: PHYS161_Exam3, labels: [ P66 ] }
+  section: Waves
+  narrative: >-
+    A string on a certain guitar of the length of {L:unit} vibrates at a fundamental frequency of
+    {f:unit}.
+  vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the speed of the transverse waves on the string. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { L: 52, f: 262 }
+    parts:
+      - { id: answer, answer: 272.48, unit: m/s, source: P66 }

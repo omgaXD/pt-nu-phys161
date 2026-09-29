@@ -1,0 +1,83 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P11
+number: 11
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A metal container of mass 7.9 kg contains 15.3 kg of water. A 1.68-kg piece of the same metal,
+  initially at a temperature of 184°C, is dropped into the water. The container and the water
+  initially have a temperature of 14.4°C and the final temperature of the entire system is 17.8°C.
+  Calculate the specific heat of the metal in units J/(kg K). Specific heat of water is 4186
+  J/(kg·°C). (862.89099526066 J/(kg K))
+text: A metal container of mass 7.9 kg contains 15.3 kg of water. A 1.68-kg piece of the same metal,
+  initially at a temperature of 184°C, is dropped into the water. The container and the water
+  initially have a temperature of 14.4°C and the final temperature of the entire system is 17.8°C.
+  Calculate the specific heat of the metal in units J/(kg K). Specific heat of water is 4186
+  J/(kg·°C). (862.89099526066 J/(kg K))
+answer: { value: 862.89099526066, unit: J/(kg K), raw: 862.89099526066 J/(kg K) }
+figures: []
+literals:
+  - name: m
+    value: 7.9
+    unit: kg
+    text: "7.9"
+    suggest: { min: 5.5, max: 10.3, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 15.3
+    unit: kg
+    text: "15.3"
+    suggest: { min: 10.7, max: 19.9, step: 0.1, decimals: 1 }
+  - name: m3
+    value: 1.68
+    unit: kg
+    text: "1.68"
+    suggest: { min: 1.18, max: 2.18, step: 0.01, decimals: 2 }
+  - name: T
+    value: 184
+    unit: °C
+    text: "184"
+    suggest: { min: 129, max: 239, step: 1 }
+  - name: T2
+    value: 14.4
+    unit: °C
+    text: "14.4"
+    suggest: { min: 10.1, max: 18.7, step: 0.1, decimals: 1 }
+  - name: T3
+    value: 17.8
+    unit: °C
+    text: "17.8"
+    suggest: { min: 12.5, max: 23.1, step: 0.1, decimals: 1 }
+  - name: c
+    value: 4186
+    unit: J/(kg °C)
+    text: "4186"
+    suggest: { min: 2930, max: 5442, step: 1 }
+scenario:
+  id: phys161-exam4-p011
+  source: { document: PHYS161_Exam4, labels: [ P11 ] }
+  section: Temperature and heat
+  narrative: >-
+    A metal container of mass {m:unit} contains {m2:unit} of water. A {m3}-kg piece of the same
+    metal, initially at a temperature of {T:unit}, is dropped into the water. The container and the
+    water initially have a temperature of {T2:unit} and the final temperature of the entire system
+    is {T3:unit}. Specific heat of water is {c:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m3, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T3, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg °C) }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the specific heat of the metal in units J/(kg K). {_0}{_u}
+      answer: TODO
+      unit: J/(kg K)
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 7.9, m2: 15.3, m3: 1.68, T: 184, T2: 14.4, T3: 17.8, c: 4186 }
+    parts:
+      - { id: answer, answer: 862.89099526066, unit: J/(kg K), source: P11 }

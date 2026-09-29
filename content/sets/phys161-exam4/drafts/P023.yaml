@@ -1,0 +1,47 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P23
+number: 23
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A person produces heat at the rate of about 117 W when at rest. At what rate must water
+  evaporate from the body to get rid of all this energy? Ignore heat transfer by other methods.
+  Latent heat of vaporization for water is 2.430 kJ/g. Answer in g/s. (0.048148 g/s)
+text: A person produces heat at the rate of about 117 W when at rest. At what rate must water
+  evaporate from the body to get rid of all this energy? Ignore heat transfer by other methods.
+  Latent heat of vaporization for water is 2.430 kJ/g. Answer in g/s. (0.048148 g/s)
+answer: { value: 0.048148, unit: g/s, raw: 0.048148 g/s }
+figures: []
+literals:
+  - name: P
+    value: 117
+    unit: W
+    text: "117"
+    suggest: { min: 82, max: 152, step: 1 }
+  - name: Lh
+    value: 2.43
+    unit: kJ/g
+    text: "2.430"
+    suggest: { min: 1.701, max: 3.159, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p023
+  source: { document: PHYS161_Exam4, labels: [ P23 ] }
+  section: Temperature and heat
+  narrative: >-
+    A person produces heat at the rate of about {P:unit} when at rest. Ignore heat transfer by other
+    methods. Latent heat of vaporization for water is {Lh:unit}. Answer in g/s.
+  vars:
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/g }
+  parts:
+    - id: answer
+      prompt: >-
+        At what rate must water evaporate from the body to get rid of all this energy? {_0}{_u}
+      answer: TODO
+      unit: g/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { P: 117, Lh: 2.43 }
+    parts:
+      - { id: answer, answer: 0.048148, unit: g/s, source: P23 }

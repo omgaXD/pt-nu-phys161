@@ -1,0 +1,98 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P2
+number: 2
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  A 0.2 kg aluminum bowl holding 0.8 kg of soup at 21 ˚C is placed in a freezer. What is the final
+  temperature, if 360 kJ of energy is transferred from the bowl and soup, assuming the soup’s
+  thermal properties are the same as that of water? Answer in Kelvin (K).
+
+  Specific heat of ice is 2090 J/(kg K)
+
+  Specific heat of water is 4186 J/ (kg K)
+
+  Specific heat of aluminum is 900 J/ (kg K)
+
+  Latent heat of fusion for water is 334 kJ/kg
+
+  (262.90539956803 K)
+text: A 0.2 kg aluminum bowl holding 0.8 kg of soup at 21 °C is placed in a freezer. What is the
+  final temperature, if 360 kJ of energy is transferred from the bowl and soup, assuming the soup’s
+  thermal properties are the same as that of water? Answer in Kelvin (K). Specific heat of ice is
+  2090 J/(kg K) Specific heat of water is 4186 J/ (kg K) Specific heat of aluminum is 900 J/ (kg K)
+  Latent heat of fusion for water is 334 kJ/kg (262.90539956803 K)
+answer: { value: 262.90539956803, unit: K, raw: 262.90539956803 K }
+figures: []
+literals:
+  - name: m
+    value: 0.2
+    unit: kg
+    text: "0.2"
+    suggest: { min: 0.1, max: 0.3, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 0.8
+    unit: kg
+    text: "0.8"
+    suggest: { min: 0.6, max: 1, step: 0.1, decimals: 1 }
+  - name: T
+    value: 21
+    unit: °C
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: E
+    value: 360
+    unit: kJ
+    text: "360"
+    suggest: { min: 252, max: 468, step: 1 }
+  - name: c
+    value: 2090
+    unit: J/(kg K)
+    text: "2090"
+    suggest: { min: 1463, max: 2717, step: 1 }
+  - name: c2
+    value: 4186
+    unit: J/(kg K)
+    text: "4186"
+    suggest: { min: 2930, max: 5442, step: 1 }
+  - name: c3
+    value: 900
+    unit: J/(kg K)
+    text: "900"
+    suggest: { min: 630, max: 1170, step: 1 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+scenario:
+  id: phys161-exam4-p002
+  source: { document: PHYS161_Exam4, labels: [ P2 ] }
+  section: Temperature and heat
+  narrative: >-
+    A {m:unit} aluminum bowl holding {m2:unit} of soup at {T:unit} is placed in a freezer. Answer in
+    Kelvin (K). Specific heat of ice is {c:unit} Specific heat of water is {c2:unit} Specific heat
+    of aluminum is {c3:unit} Latent heat of fusion for water is {Lh:unit}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: c2, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: c3, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the final temperature, if {E:unit} of energy is transferred from the bowl and soup,
+        assuming the soup’s thermal properties are the same as that of water? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 0.2, m2: 0.8, T: 21, E: 360, c: 2090, c2: 4186, c3: 900, Lh: 334 }
+    parts:
+      - { id: answer, answer: 262.90539956803, unit: K, source: P2 }

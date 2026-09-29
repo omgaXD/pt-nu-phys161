@@ -1,0 +1,68 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P46
+number: 46
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: If the root-mean-square speed of oxygen molecules inside a refrigerator of volume 617 L is 445
+  m/s, what is the partial pressure of the oxygen? There are 5.57 moles of oxygen in the
+  refrigerator, and the molar mass of oxygen is 32 g/mol. The universal gas constant is R = 8.31
+  J/(mol K). (19068.598595354 Pa)
+text: If the root-mean-square speed of oxygen molecules inside a refrigerator of volume 617 L is 445
+  m/s, what is the partial pressure of the oxygen? There are 5.57 moles of oxygen in the
+  refrigerator, and the molar mass of oxygen is 32 g/mol. The universal gas constant is R = 8.31
+  J/(mol K). (19068.598595354 Pa)
+answer: { value: 19068.598595354, unit: Pa, raw: 19068.598595354 Pa }
+figures: []
+literals:
+  - name: V
+    value: 617
+    unit: L
+    text: "617"
+    suggest: { min: 432, max: 802, step: 1 }
+  - name: v
+    value: 445
+    unit: m/s
+    text: "445"
+    suggest: { min: 312, max: 579, step: 1 }
+  - name: n
+    value: 5.57
+    unit: mol
+    text: "5.57"
+    suggest: { min: 3.9, max: 7.24, step: 0.01, decimals: 2 }
+  - name: M
+    value: 32
+    unit: g/mol
+    text: "32"
+    suggest: { min: 22, max: 42, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p046
+  source: { document: PHYS161_Exam4, labels: [ P46 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    There are {n:unit} of oxygen in the refrigerator, and the molar mass of oxygen is {M:unit}. The
+    universal gas constant is R = {R:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        If the root-mean-square speed of oxygen molecules inside a refrigerator of volume {V:unit}
+        is {v:unit}, what is the partial pressure of the oxygen? {_0}{_u}
+      answer: TODO
+      unit: Pa
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 617, v: 445, n: 5.57, M: 32, R: 8.31 }
+    parts:
+      - { id: answer, answer: 19068.598595354, unit: Pa, source: P46 }

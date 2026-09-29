@@ -1,0 +1,56 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P4
+number: 4
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Figure shows how a bar with a crack at its center buckles upward as a result of a temperature
+  rise of 30.5°C. If the fixed distance L = 18.3 m and the coefficient of linear expansion is
+  3.4×10<sup>−4</sup> 1/K, find the distance x to which the center rises. (1.32114 m)
+text: Figure shows how a bar with a crack at its center buckles upward as a result of a temperature
+  rise of 30.5°C. If the fixed distance L = 18.3 m and the coefficient of linear expansion is
+  3.4×10^-4 1/K, find the distance x to which the center rises. (1.32114 m)
+answer: { value: 1.32114, unit: m, raw: 1.32114 m }
+figures:
+  - { src: figures/unnamed_005_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_005_xiMS.png }
+literals:
+  - name: T
+    value: 30.5
+    unit: °C
+    text: "30.5"
+    suggest: { min: 21.3, max: 39.6, step: 0.1, decimals: 1 }
+  - name: L
+    value: 18.3
+    unit: m
+    text: "18.3"
+    suggest: { min: 12.8, max: 23.8, step: 0.1, decimals: 1 }
+  - name: alpha
+    value: 0.00034
+    unit: 1/K
+    text: 3.4×10^-4
+    suggest: { min: 0.00024, max: 0.00044, step: 0.00001, decimals: 5 }
+scenario:
+  id: phys161-exam4-p004
+  source: { document: PHYS161_Exam4, labels: [ P4 ] }
+  section: Temperature and heat
+  figure: { id: fig, src: figures/unnamed_005_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Figure shows how a bar with a crack at its center buckles upward as a result of a temperature
+    rise of {T:unit}. {@fig}
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/K }
+  parts:
+    - id: answer
+      prompt: >-
+        If the fixed distance L = {L:unit} and the coefficient of linear expansion is {alpha:unit},
+        find the distance x to which the center rises. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 30.5, L: 18.3, alpha: 0.00034 }
+    parts:
+      - { id: answer, answer: 1.32114, unit: m, source: P4 }

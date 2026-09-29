@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P105
+number: 105
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: The weight of an astronaut plus his space suit on the Moon is 198 N. The acceleration due to
+  gravity on the surface of the Moon is 1.62 m/s². What is the mass of the suited astronaut on the
+  Earth, where the gravitational acceleration is g = 9.8 m/s²? (122.222 kg)
+text: The weight of an astronaut plus his space suit on the Moon is 198 N. The acceleration due to
+  gravity on the surface of the Moon is 1.62 m/s^2. What is the mass of the suited astronaut on the
+  Earth, where the gravitational acceleration is g = 9.8 m/s^2? (122.222 kg)
+answer: { value: 122.222, unit: kg, raw: 122.222 kg }
+figures: []
+literals:
+  - name: F
+    value: 198
+    unit: N
+    text: "198"
+    suggest: { min: 139, max: 257, step: 1 }
+  - name: a
+    value: 1.62
+    unit: m/s^2
+    text: "1.62"
+    suggest: { min: 1.13, max: 2.11, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p105
+  source: { document: PHYS161_Exam1, labels: [ P105 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    The weight of an astronaut plus his space suit on the Moon is {F:unit}. The acceleration due to
+    gravity on the surface of the Moon is {a:unit}.
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the mass of the suited astronaut on the Earth, where the gravitational acceleration
+        is g = {g:unit}? {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 198, a: 1.62, g: 9.8 }
+    parts:
+      - { id: answer, answer: 122.222, unit: kg, source: P105 }

@@ -1,0 +1,58 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P13
+number: 13
+section: Uncertainty
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A chocolate cookie is a circular disk with a diameter of 8.60 ± 0.03 cm and a thickness of
+  0.080 ± 0.003 cm. If the volume is in V ± δV format, find the maximum possible uncertainty in the
+  volume δV. (0.2066875 cm^3)
+text: A chocolate cookie is a circular disk with a diameter of 8.60 ± 0.03 cm and a thickness of
+  0.080 ± 0.003 cm. If the volume is in V ± δV format, find the maximum possible uncertainty in the
+  volume δV. (0.2066875 cm^3)
+answer: { value: 0.2066875, unit: cm^3, raw: 0.2066875 cm^3 }
+figures: []
+literals:
+  - name: x
+    value: 8.6
+    text: "8.60"
+    suggest: { min: 6.02, max: 11.18, step: 0.01, decimals: 2 }
+  - name: D
+    value: 0.03
+    unit: cm
+    text: "0.03"
+    suggest: { min: 0.02, max: 0.04, step: 0.01, decimals: 2 }
+  - name: x2
+    value: 0.08
+    text: "0.080"
+    suggest: { min: 0.056, max: 0.104, step: 0.001, decimals: 3 }
+  - name: d
+    value: 0.003
+    unit: cm
+    text: "0.003"
+    suggest: { min: 0.002, max: 0.004, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam1-p013
+  source: { document: PHYS161_Exam1, labels: [ P13 ] }
+  section: Uncertainty
+  narrative: >-
+    A chocolate cookie is a circular disk with a diameter of {x} ± {D:unit} and a thickness of {x2}
+    ± {d:unit}.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: D, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: >-
+        If the volume is in V ± δV format, find the maximum possible uncertainty in the volume δV.
+        {_0}{_u}
+      answer: TODO
+      unit: cm^3
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 8.6, D: 0.03, x2: 0.08, d: 0.003 }
+    parts:
+      - { id: answer, answer: 0.2066875, unit: cm^3, source: P13 }

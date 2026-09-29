@@ -1,0 +1,67 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P19
+number: 19
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Given the two displacements D = (8iˆ + 10jˆ- 10kˆ) m and E = (5iˆ- 3jˆ+ 7kˆ) m, find the
+  magnitude of the displacement 2D - E. (37.13489 m)
+text: Given the two displacements D = (8î + 10ĵ- 10k̂) m and E = (5î- 3ĵ+ 7k̂) m, find the magnitude
+  of the displacement 2D - E. (37.13489 m)
+answer: { value: 37.13489, unit: m, raw: 37.13489 m }
+figures: []
+literals:
+  - name: D
+    value: 8
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: vy
+    value: 10
+    text: "10"
+    suggest: { min: 7, max: 13, step: 1 }
+  - name: vz
+    value: 10
+    text: "10"
+    suggest: { min: 7, max: 13, step: 1 }
+  - name: E
+    value: 5
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: vy2
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: vz2
+    value: 7
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+  - name: x
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+scenario:
+  id: phys161-exam1-p019
+  source: { document: PHYS161_Exam1, labels: [ P19 ] }
+  section: Vectors
+  narrative: ""
+  vars:
+    - { name: D, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Given the two displacements D = ({D}î + {vy}ĵ- {vz}k̂) m and E = ({E}î- {vy2}ĵ+ {vz2}k̂) m,
+        find the magnitude of the displacement {x}D - E. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { D: 8, vy: 10, vz: 10, E: 5, vy2: 3, vz2: 7, x: 2 }
+    parts:
+      - { id: answer, answer: 37.13489, unit: m, source: P19 }

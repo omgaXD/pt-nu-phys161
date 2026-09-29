@@ -13,7 +13,7 @@ text: A 3.3-kg block slides over a smooth, icy hill. The top of the hill is hori
   at the top of the hill? The gravitational acceleration is g = 9.8 m/s^2. (39.9981 m/s)
 answer: { value: 39.9981, unit: m/s, raw: 39.9981 m/s }
 figures:
-  - { src: figures/unnamed_022_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_022_fr4U.png }
+  - { src: figures/unnamed_007_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_007_GNcJ.png }
 literals:
   - name: m
     value: 3.3
@@ -40,7 +40,7 @@ scenario:
   id: phys161-exam2-p059
   source: { document: PHYS161_Exam2, labels: [ P59 ] }
   section: Energy conservation
-  figure: { id: fig, src: figures/unnamed_022_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_007_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A {m}-kg block slides over a smooth, icy hill. The top of the hill is horizontal and {d:unit}
     higher than its base. The block has a speed of {v:unit} at the base of the hill. The

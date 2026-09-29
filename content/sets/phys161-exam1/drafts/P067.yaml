@@ -1,0 +1,63 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P67
+number: 67
+section: Kinematics of projectile motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: During a fireworks display, a shell is shot into the air with an initial speed of 83 m/s at an
+  angle of 75° above the horizontal. The fuse is timed to ignite the shell 3 s after launch.
+  Calculate the height at which the shell explodes. The gravitational acceleration is g = 9.8 m/s².
+  (196.416 m)
+text: During a fireworks display, a shell is shot into the air with an initial speed of 83 m/s at an
+  angle of 75° above the horizontal. The fuse is timed to ignite the shell 3 s after launch.
+  Calculate the height at which the shell explodes. The gravitational acceleration is g = 9.8 m/s^2.
+  (196.416 m)
+answer: { value: 196.416, unit: m, raw: 196.416 m }
+figures: []
+literals:
+  - name: v
+    value: 83
+    unit: m/s
+    text: "83"
+    suggest: { min: 58, max: 108, step: 1 }
+  - name: theta
+    value: 75
+    unit: °
+    text: "75"
+    suggest: { min: 53, max: 98, step: 1 }
+  - name: t
+    value: 3
+    unit: s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p067
+  source: { document: PHYS161_Exam1, labels: [ P67 ] }
+  section: Kinematics of projectile motion
+  narrative: >-
+    During a fireworks display, a shell is shot into the air with an initial speed of {v:unit} at an
+    angle of {theta}° above the horizontal. The fuse is timed to ignite the shell {t:unit} after
+    launch. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Calculate the height at which the shell explodes. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 83, theta: 75, t: 3, g: 9.8 }
+    parts:
+      - { id: answer, answer: 196.416, unit: m, source: P67 }

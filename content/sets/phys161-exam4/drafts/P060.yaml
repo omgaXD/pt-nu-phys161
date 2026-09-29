@@ -1,0 +1,93 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P60
+number: 60
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  PV diagram is shown below. Calculate the work done by the gas in the quasi-static processes
+  represented by the ADCBA cycle path.
+
+  p<sub>1</sub> = 1 atm, p<sub>2</sub> = 5 atm, V<sub>1</sub> = 1 L, V<sub>2</sub> = 5 L
+
+  1 atm = 101325 Pa
+
+  1 L = 0.001 m<sup>3</sup>
+
+  (1621.2 J)
+text: PV diagram is shown below. Calculate the work done by the gas in the quasi-static processes
+  represented by the ADCBA cycle path. p_1 = 1 atm, p_2 = 5 atm, V_1 = 1 L, V_2 = 5 L 1 atm = 101325
+  Pa 1 L = 0.001 m^3 (1621.2 J)
+answer: { value: 1621.2, unit: J, raw: 1621.2 J }
+figures:
+  - { src: figures/unnamed_004_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_004_xiMS.png }
+literals:
+  - name: p1
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: p2
+    value: 5
+    unit: atm
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: V1
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: V2
+    value: 5
+    unit: L
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p060
+  source: { document: PHYS161_Exam4, labels: [ P60 ] }
+  section: 1st Law of Thermodynamics
+  figure: { id: fig, src: figures/unnamed_004_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: PV diagram is shown below. {@fig}
+  vars:
+    - { name: p1, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: V1, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the work done by the gas in the quasi-static processes represented by the ADCBA
+        cycle path. $p_{1}$ = {p1:unit}, $p_{2}$ = {p2:unit}, $V_{1}$ = {V1:unit}, $V_{2}$ =
+        {V2:unit} {p:unit} = {atm:unit} {V:unit} = {L:unit} {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { p1: 1, p2: 5, V1: 1, V2: 5, p: 1, atm: 101325, V: 1, L: 0.001 }
+    parts:
+      - { id: answer, answer: 1621.2, unit: J, source: P60 }

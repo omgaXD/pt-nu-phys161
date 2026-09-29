@@ -1,0 +1,63 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P91
+number: 91
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A block of mass m = 1.4 kg is moving with constant speed v = 2 m/s in a circle of radius r =
+  0.19 m on a frictionless table. The block is attached to a hanging mass M by a cord passing
+  through a hole in the table. Find the mass M that stays at rest. Take the gravitational
+  acceleration g = 9.8 m/s². (3.00752 kg)
+text: A block of mass m = 1.4 kg is moving with constant speed v = 2 m/s in a circle of radius r =
+  0.19 m on a frictionless table. The block is attached to a hanging mass M by a cord passing
+  through a hole in the table. Find the mass M that stays at rest. Take the gravitational
+  acceleration g = 9.8 m/s^2. (3.00752 kg)
+answer: { value: 3.00752, unit: kg, raw: 3.00752 kg }
+figures: []
+literals:
+  - name: m
+    value: 1.4
+    unit: kg
+    text: "1.4"
+    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
+  - name: v
+    value: 2
+    unit: m/s
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: r
+    value: 0.19
+    unit: m
+    text: "0.19"
+    suggest: { min: 0.13, max: 0.25, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p091
+  source: { document: PHYS161_Exam1, labels: [ P91 ] }
+  section: Circular motion
+  narrative: >-
+    A block of mass m = {m:unit} is moving with constant speed v = {v:unit} in a circle of radius r
+    = {r:unit} on a frictionless table. The block is attached to a hanging mass M by a cord passing
+    through a hole in the table. Take the gravitational acceleration g = {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Find the mass M that stays at rest. {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1.4, v: 2, r: 0.19, g: 9.8 }
+    parts:
+      - { id: answer, answer: 3.00752, unit: kg, source: P91 }

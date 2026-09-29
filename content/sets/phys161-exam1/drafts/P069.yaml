@@ -1,0 +1,58 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P69
+number: 69
+section: Kinematics of projectile motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+  off the counter and strikes the floor xᶠ = 1.26 m from the base of the counter. The height of the
+  counter is yᵢ = 82 cm. What is the magnitude of the velocity with which the mug strikes the floor?
+  The gravitational acceleration is g = 9.8 m/s². (5.05558 m/s)
+text: In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+  off the counter and strikes the floor xᶠ = 1.26 m from the base of the counter. The height of the
+  counter is yᵢ = 82 cm. What is the magnitude of the velocity with which the mug strikes the floor?
+  The gravitational acceleration is g = 9.8 m/s^2. (5.05558 m/s)
+answer: { value: 5.05558, unit: m/s, raw: 5.05558 m/s }
+figures: []
+literals:
+  - name: d
+    value: 1.26
+    unit: m
+    text: "1.26"
+    suggest: { min: 0.88, max: 1.64, step: 0.01, decimals: 2 }
+  - name: h
+    value: 82
+    unit: cm
+    text: "82"
+    suggest: { min: 57, max: 107, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p069
+  source: { document: PHYS161_Exam1, labels: [ P69 ] }
+  section: Kinematics of projectile motion
+  narrative: >-
+    In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+    off the counter and strikes the floor xᶠ = {d:unit} from the base of the counter. The height of
+    the counter is yᵢ = {h:unit}. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the velocity with which the mug strikes the floor? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 1.26, h: 82, g: 9.8 }
+    parts:
+      - { id: answer, answer: 5.05558, unit: m/s, source: P69 }

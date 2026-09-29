@@ -19,7 +19,7 @@ text: A block of mass m = 2.3 kg has just struck and stuck to the lower end of a
   9.8 m/s^2. (0.276355 rad)
 answer: { value: 0.276355, unit: rad, raw: 0.276355 rad }
 figures:
-  - { src: figures/unnamed_004_fr4U.gif, original: PHYS161_Exam2_new.docx_files/unnamed_004_fr4U.gif }
+  - { src: figures/unnamed_004_GNcJ.gif, original: PHYS161_Exam2_new.docx_files/unnamed_004_GNcJ.gif }
 literals:
   - name: m
     value: 2.3
@@ -51,7 +51,7 @@ scenario:
   id: phys161-exam2-p137
   source: { document: PHYS161_Exam2, labels: [ P137 ] }
   section: Angular momentum
-  figure: { id: fig, src: figures/unnamed_004_fr4U.gif, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_004_GNcJ.gif, alt: "TODO: describe the figure" }
   narrative: >-
     A block of mass m = {m:unit} has just struck and stuck to the lower end of a uniform vertical
     rod of mass M = {M:unit} and length l = {l:unit} that hangs from a frictionless pivot O at its

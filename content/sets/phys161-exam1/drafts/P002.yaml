@@ -1,0 +1,46 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P2
+number: 2
+section: Units
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: The critical mass of some fissionable material is about 6 kg, and at critical mass it forms a
+  sphere of radius 6.4 cm. What is the density of this element? Give the answer in g/cm³. (5.46415
+  g/cm^3)
+text: The critical mass of some fissionable material is about 6 kg, and at critical mass it forms a
+  sphere of radius 6.4 cm. What is the density of this element? Give the answer in g/cm^3. (5.46415
+  g/cm^3)
+answer: { value: 5.46415, unit: g/cm^3, raw: 5.46415 g/cm^3 }
+figures: []
+literals:
+  - name: m
+    value: 6
+    unit: kg
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: r
+    value: 6.4
+    unit: cm
+    text: "6.4"
+    suggest: { min: 4.5, max: 8.3, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p002
+  source: { document: PHYS161_Exam1, labels: [ P2 ] }
+  section: Units
+  narrative: >-
+    The critical mass of some fissionable material is about {m:unit}, and at critical mass it forms
+    a sphere of radius {r:unit}. What is the density of this element?
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: Give the answer in g/cm$^{3}$. {_0}{_u}
+      answer: TODO
+      unit: g/cm^3
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 6, r: 6.4 }
+    parts:
+      - { id: answer, answer: 5.46415, unit: g/cm^3, source: P2 }

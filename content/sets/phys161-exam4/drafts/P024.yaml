@@ -1,0 +1,77 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P24
+number: 24
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A major source of heat loss from a house in cold weather is through the windows. Calculate the
+  rate of heat flow through a glass window 2 m × 1.3 m in A area and d = 3.4 mm thick, if the
+  temperatures at the inner and outer surfaces are T<sub>1</sub> = 16°C and T<sub>2</sub> = 13°C,
+  respectively. Thermal conductivity of the glass k = 0.84 W / (m ⋅°C). (1927 J/s)
+text: A major source of heat loss from a house in cold weather is through the windows. Calculate the
+  rate of heat flow through a glass window 2 m × 1.3 m in A area and d = 3.4 mm thick, if the
+  temperatures at the inner and outer surfaces are T_1 = 16°C and T_2 = 13°C, respectively. Thermal
+  conductivity of the glass k = 0.84 W / (m ⋅°C). (1927 J/s)
+answer: { value: 1927, unit: J/s, raw: 1927 J/s }
+figures:
+  - { src: figures/unnamed_008_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_008_xiMS.png }
+literals:
+  - name: d
+    value: 2
+    unit: m
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: d2
+    value: 1.3
+    unit: m
+    text: "1.3"
+    suggest: { min: 0.9, max: 1.7, step: 0.1, decimals: 1 }
+  - name: d3
+    value: 3.4
+    unit: mm
+    text: "3.4"
+    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+  - name: T1
+    value: 16
+    unit: °C
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: T2
+    value: 13
+    unit: °C
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+  - name: k
+    value: 0.84
+    unit: W
+    text: "0.84"
+    suggest: { min: 0.59, max: 1.09, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p024
+  source: { document: PHYS161_Exam4, labels: [ P24 ] }
+  section: Temperature and heat
+  figure: { id: fig, src: figures/unnamed_008_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A major source of heat loss from a house in cold weather is through the windows. Thermal
+    conductivity of the glass k = {k:unit} / (m ⋅°C). {@fig}
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d3, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: T1, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the rate of heat flow through a glass window {d:unit} × {d2:unit} in A area and d
+        = {d3:unit} thick, if the temperatures at the inner and outer surfaces are $T_{1}$ =
+        {T1:unit} and $T_{2}$ = {T2:unit}, respectively. {_0}{_u}
+      answer: TODO
+      unit: J/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 2, d2: 1.3, d3: 3.4, T1: 16, T2: 13, k: 0.84 }
+    parts:
+      - { id: answer, answer: 1927, unit: J/s, source: P24 }

@@ -1,0 +1,55 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P55
+number: 55
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A 11.8-kg object oscillates at the end of a vertical spring that has a spring constant of 3.2 ×
+  10<sup>4</sup> N/m. The effect of air resistance is represented by the damping coefficient b = 3.6
+  N ⋅ s/m. By what percentage does the amplitude of the oscillation decrease in each cycle? (1.8237
+  %)
+text: A 11.8-kg object oscillates at the end of a vertical spring that has a spring constant of 3.2
+  × 10^4 N/m. The effect of air resistance is represented by the damping coefficient b = 3.6 N ⋅
+  s/m. By what percentage does the amplitude of the oscillation decrease in each cycle? (1.8237 %)
+answer: { value: 1.8237, unit: "%", raw: 1.8237 % }
+figures: []
+literals:
+  - name: m
+    value: 11.8
+    unit: kg
+    text: "11.8"
+    suggest: { min: 8.3, max: 15.3, step: 0.1, decimals: 1 }
+  - name: k
+    value: 32000
+    unit: N/m
+    text: 3.2 × 10^4
+    suggest: { min: 22400, max: 41600, step: 1 }
+  - name: b
+    value: 3.6
+    unit: N
+    text: "3.6"
+    suggest: { min: 2.5, max: 4.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p055
+  source: { document: PHYS161_Exam3, labels: [ P55 ] }
+  section: Oscillations
+  narrative: >-
+    A {m}-kg object oscillates at the end of a vertical spring that has a spring constant of
+    {k:unit}. The effect of air resistance is represented by the damping coefficient b = {b:unit} ⋅
+    s/m.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: b, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        By what percentage does the amplitude of the oscillation decrease in each cycle? {_0}{_u}
+      answer: TODO
+      unit: "%"
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 11.8, k: 32000, b: 3.6 }
+    parts:
+      - { id: answer, answer: 1.8237, unit: "%", source: P55 }

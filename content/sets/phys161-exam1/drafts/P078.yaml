@@ -1,0 +1,62 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P78
+number: 78
+section: Kinematics of 2D and 3D motion in vectors form
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A particle starts from the origin at t = 0 with an initial velocity having an x component of -3
+  m/s and a y component of -5 m/s. The particle moves in the xy plane with an x component of
+  acceleration only, given by a<sub>x</sub> = 5.2 m/s<sup>2</sup>. Determine the distance from the
+  origin at t = 6 s. (81.334863373587 m)
+text: A particle starts from the origin at t = 0 with an initial velocity having an x component of
+  -3 m/s and a y component of -5 m/s. The particle moves in the xy plane with an x component of
+  acceleration only, given by a_x = 5.2 m/s^2. Determine the distance from the origin at t = 6 s.
+  (81.334863373587 m)
+answer: { value: 81.334863373587, unit: m, raw: 81.334863373587 m }
+figures: []
+literals:
+  - name: v
+    value: -3
+    unit: m/s
+    text: "-3"
+    suggest: { min: -4, max: -2, step: 1 }
+  - name: v2
+    value: -5
+    unit: m/s
+    text: "-5"
+    suggest: { min: -6, max: -3, step: 1 }
+  - name: ax
+    value: 5.2
+    unit: m/s^2
+    text: "5.2"
+    suggest: { min: 3.6, max: 6.8, step: 0.1, decimals: 1 }
+  - name: t
+    value: 6
+    unit: s
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+scenario:
+  id: phys161-exam1-p078
+  source: { document: PHYS161_Exam1, labels: [ P78 ] }
+  section: Kinematics of 2D and 3D motion in vectors form
+  narrative: >-
+    A particle starts from the origin at t = 0 with an initial velocity having an x component of
+    {v:unit} and a y component of {v2:unit}. The particle moves in the xy plane with an x component
+    of acceleration only, given by $a_{x}$ = {ax:unit}.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: ax, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        Determine the distance from the origin at t = {t:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: -3, v2: -5, ax: 5.2, t: 6 }
+    parts:
+      - { id: answer, answer: 81.334863373587, unit: m, source: P78 }

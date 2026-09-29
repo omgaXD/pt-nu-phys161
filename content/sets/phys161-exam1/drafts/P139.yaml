@@ -1,0 +1,69 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P139
+number: 139
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A window washer pushes his scrub brush up a vertical window with a constant upward acceleration
+  of 1 m/s² by applying a force F at an angle α = 53.8° above the horizontal. The brush weighs 10.5
+  N and the coefficient of kinetic friction is μₖ = 0.17. Calculate the magnitude of the force F.
+  The gravitational acceleration is g = 9.8 m/s². (16.3772 N)
+text: A window washer pushes his scrub brush up a vertical window with a constant upward
+  acceleration of 1 m/s^2 by applying a force F at an angle α = 53.8° above the horizontal. The
+  brush weighs 10.5 N and the coefficient of kinetic friction is μₖ = 0.17. Calculate the magnitude
+  of the force F. The gravitational acceleration is g = 9.8 m/s^2. (16.3772 N)
+answer: { value: 16.3772, unit: N, raw: 16.3772 N }
+figures: []
+literals:
+  - name: a
+    value: 1
+    unit: m/s^2
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: alpha
+    value: 53.8
+    unit: °
+    text: "53.8"
+    suggest: { min: 37.7, max: 69.9, step: 0.1, decimals: 1 }
+  - name: F
+    value: 10.5
+    unit: N
+    text: "10.5"
+    suggest: { min: 7.3, max: 13.7, step: 0.1, decimals: 1 }
+  - name: x
+    value: 0.17
+    text: "0.17"
+    suggest: { min: 0.12, max: 0.22, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p139
+  source: { document: PHYS161_Exam1, labels: [ P139 ] }
+  section: Application of Newton's laws
+  narrative: >-
+    A window washer pushes his scrub brush up a vertical window with a constant upward acceleration
+    of {a:unit} by applying a force F at an angle α = {alpha}° above the horizontal. The brush
+    weighs {F:unit} and the coefficient of kinetic friction is μₖ = {x}. The gravitational
+    acceleration is g = {g:unit}.
+  vars:
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Calculate the magnitude of the force F. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { a: 1, alpha: 53.8, F: 10.5, x: 0.17, g: 9.8 }
+    parts:
+      - { id: answer, answer: 16.3772, unit: N, source: P139 }

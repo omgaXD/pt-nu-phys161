@@ -1,0 +1,58 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P92
+number: 92
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A ball suspended from a pivot on a string of length L = 88 cm revolves in a horizontal plane
+  with constant speed v. The string maintains an angle of θ = 14º with respect to the vertical. Find
+  v taking gravitational acceleration g = 9.8 m/s<sup>2</sup>. (0.721 m/s)
+text: A ball suspended from a pivot on a string of length L = 88 cm revolves in a horizontal plane
+  with constant speed v. The string maintains an angle of θ = 14° with respect to the vertical. Find
+  v taking gravitational acceleration g = 9.8 m/s^2. (0.721 m/s)
+answer: { value: 0.721, unit: m/s, raw: 0.721 m/s }
+figures:
+  - { src: figures/unnamed_016_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_016_R6Ld.png }
+literals:
+  - name: L
+    value: 88
+    unit: cm
+    text: "88"
+    suggest: { min: 62, max: 114, step: 1 }
+  - name: theta
+    value: 14
+    unit: °
+    text: "14"
+    suggest: { min: 10, max: 18, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p092
+  source: { document: PHYS161_Exam1, labels: [ P92 ] }
+  section: Circular motion
+  figure: { id: fig, src: figures/unnamed_016_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A ball suspended from a pivot on a string of length L = {L:unit} revolves in a horizontal plane
+    with constant speed v. The string maintains an angle of θ = {theta}° with respect to the
+    vertical. {@fig}
+  vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find v taking gravitational acceleration g = {g:unit}. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { L: 88, theta: 14, g: 9.8 }
+    parts:
+      - { id: answer, answer: 0.721, unit: m/s, source: P92 }

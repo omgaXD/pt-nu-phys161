@@ -1,0 +1,57 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P80
+number: 80
+section: Kinematics of 2D and 3D motion in vectors form
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A spaceship is traveling at a constant velocity of v = 275î m/s when its engines fire up,
+  giving it constant acceleration a = -2.2î + 9k̂ m/s². What is the magnitude of the spaceship's
+  displacement 3 s after the engines fired? (816.106 m)
+text: A spaceship is traveling at a constant velocity of v = 275î m/s when its engines fire up,
+  giving it constant acceleration a = -2.2î + 9k̂ m/s^2. What is the magnitude of the spaceship's
+  displacement 3 s after the engines fired? (816.106 m)
+answer: { value: 816.106, unit: m, raw: 816.106 m }
+figures: []
+literals:
+  - name: v
+    value: 275
+    text: "275"
+    suggest: { min: 193, max: 358, step: 1 }
+  - name: a
+    value: -2.2
+    text: "-2.2"
+    suggest: { min: -2.9, max: -1.5, step: 0.1, decimals: 1 }
+  - name: vz
+    value: 9
+    text: "9"
+    suggest: { min: 6, max: 12, step: 1 }
+  - name: t
+    value: 3
+    unit: s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+scenario:
+  id: phys161-exam1-p080
+  source: { document: PHYS161_Exam1, labels: [ P80 ] }
+  section: Kinematics of 2D and 3D motion in vectors form
+  narrative: >-
+    A spaceship is traveling at a constant velocity of v = {v}î m/s when its engines fire up, giving
+    it constant acceleration a = {a}î + {vz}k̂ m/s$^{2}$.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the spaceship's displacement {t:unit} after the engines fired?
+        {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 275, a: -2.2, vz: 9, t: 3 }
+    parts:
+      - { id: answer, answer: 816.106, unit: m, source: P80 }

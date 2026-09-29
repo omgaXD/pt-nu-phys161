@@ -1,0 +1,72 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P51
+number: 51
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Let 29.2 J of heat be added to a particular real gas. As a result, its volume changes from 42.6
+  to 69.3 cm<sup>3</sup> while the pressure remains constant at 1.0 atm. Find the molar specific
+  heat at constant volume. The standard atmosphere pressure is 101325 Pa. Universal gas constant is
+  8.31 J/(mol K). (81.382473601189 J/mol K)
+text: Let 29.2 J of heat be added to a particular real gas. As a result, its volume changes from
+  42.6 to 69.3 cm^3 while the pressure remains constant at 1.0 atm. Find the molar specific heat at
+  constant volume. The standard atmosphere pressure is 101325 Pa. Universal gas constant is 8.31
+  J/(mol K). (81.382473601189 J/mol K)
+answer: { value: 81.382473601189, unit: J/mol K, raw: 81.382473601189 J/mol K }
+figures: []
+literals:
+  - name: E
+    value: 29.2
+    unit: J
+    text: "29.2"
+    suggest: { min: 20.4, max: 38, step: 0.1, decimals: 1 }
+  - name: x
+    value: 42.6
+    text: "42.6"
+    suggest: { min: 29.8, max: 55.4, step: 0.1, decimals: 1 }
+  - name: V
+    value: 69.3
+    unit: cm^3
+    text: "69.3"
+    suggest: { min: 48.5, max: 90.1, step: 0.1, decimals: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1.0"
+    suggest: { min: 0.7, max: 1.3, step: 0.1, decimals: 1 }
+  - name: p2
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: C
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p051
+  source: { document: PHYS161_Exam4, labels: [ P51 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    Let {E:unit} of heat be added to a particular real gas. As a result, its volume changes from {x}
+    to {V:unit} while the pressure remains constant at {p:unit}. The standard atmosphere pressure is
+    {p2:unit}. Universal gas constant is {C:unit}.
+  vars:
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: C, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: Find the molar specific heat at constant volume. {_0}{_u}
+      answer: TODO
+      unit: J/mol K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { E: 29.2, x: 42.6, V: 69.3, p: 1, p2: 101325, C: 8.31 }
+    parts:
+      - { id: answer, answer: 81.382473601189, unit: J/mol K, source: P51 }

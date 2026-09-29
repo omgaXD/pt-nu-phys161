@@ -1,0 +1,62 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P68
+number: 68
+section: Kinematics of projectile motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+  off the counter and strikes the floor x<sub>f</sub> = 1.49 m from the base of the counter. If the
+  height of the counter is y<sub>i</sub> = 85 cm, what is the magnitude of the velocity with which
+  the mug left the counter? The gravitational acceleration is g = 9.8 m/s<sup>2</sup>.
+  (3.5774604860727 m/s)
+text: In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+  off the counter and strikes the floor x_f = 1.49 m from the base of the counter. If the height of
+  the counter is y_i = 85 cm, what is the magnitude of the velocity with which the mug left the
+  counter? The gravitational acceleration is g = 9.8 m/s^2. (3.5774604860727 m/s)
+answer: { value: 3.5774604860727, unit: m/s, raw: 3.5774604860727 m/s }
+figures:
+  - { src: figures/unnamed_002_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_002_R6Ld.png }
+literals:
+  - name: xf
+    value: 1.49
+    unit: m
+    text: "1.49"
+    suggest: { min: 1.04, max: 1.94, step: 0.01, decimals: 2 }
+  - name: yi
+    value: 85
+    unit: cm
+    text: "85"
+    suggest: { min: 59, max: 111, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p068
+  source: { document: PHYS161_Exam1, labels: [ P68 ] }
+  section: Kinematics of projectile motion
+  figure: { id: fig, src: figures/unnamed_002_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    In a local café, a customer slides an empty mug down the counter for a refill. The mug slides
+    off the counter and strikes the floor $x_{f}$ = {xf:unit} from the base of the counter. The
+    gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: xf, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: yi, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        If the height of the counter is $y_{i}$ = {yi:unit}, what is the magnitude of the velocity
+        with which the mug left the counter? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { xf: 1.49, yi: 85, g: 9.8 }
+    parts:
+      - { id: answer, answer: 3.5774604860727, unit: m/s, source: P68 }

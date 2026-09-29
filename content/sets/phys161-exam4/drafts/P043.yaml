@@ -1,0 +1,43 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P43
+number: 43
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Find the mass of a molecule of the gas with molar mass 32 g/mol. Avogadro's number
+  N<sub>A</sub> = 6.022×10<sup>23</sup> 1/mol. (5.3138492195284E-26 kg)
+text: Find the mass of a molecule of the gas with molar mass 32 g/mol. Avogadro's number N_A =
+  6.022×10^23 1/mol. (5.3138492195284E-26 kg)
+answer: { value: 5.3138492195284e-26, unit: kg, raw: 5.3138492195284E-26 kg }
+figures: []
+literals:
+  - name: M
+    value: 32
+    unit: g/mol
+    text: "32"
+    suggest: { min: 22, max: 42, step: 1 }
+  - name: NA
+    value: 6.022e+23
+    unit: 1/mol
+    text: 6.022×10^23
+    suggest: { min: 4.2e+23, max: 7.8e+23, step: 1e+22 }
+scenario:
+  id: phys161-exam4-p043
+  source: { document: PHYS161_Exam4, labels: [ P43 ] }
+  section: Kinetic Theory of Gases
+  narrative: Avogadro's number $N_{A}$ = {NA:unit}.
+  vars:
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: NA, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/mol }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the mass of a molecule of the gas with molar mass {M:unit}. {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { M: 32, NA: 6.022e+23 }
+    parts:
+      - { id: answer, answer: 5.3138492195284e-26, unit: kg, source: P43 }

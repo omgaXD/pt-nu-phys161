@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P35
+number: 35
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: An eagle flies toward the ground with a constant velocity of 14 km/h at 57° below the
+  horizontal line. Calculate the vertical distance the eagle descends in 9 s. (29.3535 m)
+text: An eagle flies toward the ground with a constant velocity of 14 km/h at 57° below the
+  horizontal line. Calculate the vertical distance the eagle descends in 9 s. (29.3535 m)
+answer: { value: 29.3535, unit: m, raw: 29.3535 m }
+figures: []
+literals:
+  - name: x
+    value: 14
+    text: "14"
+    suggest: { min: 10, max: 18, step: 1 }
+  - name: theta
+    value: 57
+    unit: °
+    text: "57"
+    suggest: { min: 40, max: 74, step: 1 }
+  - name: t
+    value: 9
+    unit: s
+    text: "9"
+    suggest: { min: 6, max: 12, step: 1 }
+scenario:
+  id: phys161-exam1-p035
+  source: { document: PHYS161_Exam1, labels: [ P35 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    An eagle flies toward the ground with a constant velocity of {x} km/h at {theta}° below the
+    horizontal line.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the vertical distance the eagle descends in {t:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 14, theta: 57, t: 9 }
+    parts:
+      - { id: answer, answer: 29.3535, unit: m, source: P35 }

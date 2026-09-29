@@ -1,0 +1,68 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P17
+number: 17
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A student makes a cup of coffee by first placing a 180-W electric immersion heater in 1.7 kg of
+  water. How much time is required to raise the temperature from 20°C to 80°C? Assume that all of
+  the heater's power goes into heating the water. Specific heat of water is 4186 J/ (kg K).
+  (2372.0666666667 s)
+text: A student makes a cup of coffee by first placing a 180-W electric immersion heater in 1.7 kg
+  of water. How much time is required to raise the temperature from 20°C to 80°C? Assume that all of
+  the heater's power goes into heating the water. Specific heat of water is 4186 J/ (kg K).
+  (2372.0666666667 s)
+answer: { value: 2372.0666666667, unit: s, raw: 2372.0666666667 s }
+figures: []
+literals:
+  - name: P
+    value: 180
+    unit: W
+    text: "180"
+    suggest: { min: 126, max: 234, step: 1 }
+  - name: m
+    value: 1.7
+    unit: kg
+    text: "1.7"
+    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
+  - name: T
+    value: 20
+    unit: °C
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: T2
+    value: 80
+    unit: °C
+    text: "80"
+    suggest: { min: 56, max: 104, step: 1 }
+  - name: c
+    value: 4186
+    unit: J/(kg K)
+    text: "4186"
+    suggest: { min: 2930, max: 5442, step: 1 }
+scenario:
+  id: phys161-exam4-p017
+  source: { document: PHYS161_Exam4, labels: [ P17 ] }
+  section: Temperature and heat
+  narrative: >-
+    A student makes a cup of coffee by first placing a {P}-W electric immersion heater in {m:unit}
+    of water. Assume that all of the heater's power goes into heating the water. Specific heat of
+    water is {c:unit}.
+  vars:
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+  parts:
+    - id: answer
+      prompt: >-
+        How much time is required to raise the temperature from {T:unit} to {T2:unit}? {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { P: 180, m: 1.7, T: 20, T2: 80, c: 4186 }
+    parts:
+      - { id: answer, answer: 2372.0666666667, unit: s, source: P17 }

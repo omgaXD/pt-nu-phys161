@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P49
+number: 49
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A motorist traveling with a constant speed of 18 m/s passes a school-crossing corner. Just as
+  the motorist passes, a police officer on a motorcycle at the corner starts off in pursuit with
+  constant acceleration of 4.8 m/s². What is the maximum distance by which the motorist gets ahead
+  of the officer? (33.75 m)
+text: A motorist traveling with a constant speed of 18 m/s passes a school-crossing corner. Just as
+  the motorist passes, a police officer on a motorcycle at the corner starts off in pursuit with
+  constant acceleration of 4.8 m/s^2. What is the maximum distance by which the motorist gets ahead
+  of the officer? (33.75 m)
+answer: { value: 33.75, unit: m, raw: 33.75 m }
+figures: []
+literals:
+  - name: v
+    value: 18
+    unit: m/s
+    text: "18"
+    suggest: { min: 13, max: 23, step: 1 }
+  - name: a
+    value: 4.8
+    unit: m/s^2
+    text: "4.8"
+    suggest: { min: 3.4, max: 6.2, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p049
+  source: { document: PHYS161_Exam1, labels: [ P49 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A motorist traveling with a constant speed of {v:unit} passes a school-crossing corner. Just as
+    the motorist passes, a police officer on a motorcycle at the corner starts off in pursuit with
+    constant acceleration of {a:unit}.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the maximum distance by which the motorist gets ahead of the officer? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 18, a: 4.8 }
+    parts:
+      - { id: answer, answer: 33.75, unit: m, source: P49 }

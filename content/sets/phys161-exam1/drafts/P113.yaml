@@ -1,0 +1,61 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P113
+number: 113
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: There is a banana at the top of a 10 m long rope. A monkey of mass m = 10.4 kg starts from rest
+  at the bottom and climbs to the banana in 2.7 s with constant acceleration. What is the tension in
+  the rope? The gravitational acceleration is g = 9.8 m/s². (130.452 N)
+text: There is a banana at the top of a 10 m long rope. A monkey of mass m = 10.4 kg starts from
+  rest at the bottom and climbs to the banana in 2.7 s with constant acceleration. What is the
+  tension in the rope? The gravitational acceleration is g = 9.8 m/s^2. (130.452 N)
+answer: { value: 130.452, unit: N, raw: 130.452 N }
+figures: []
+literals:
+  - name: d
+    value: 10
+    unit: m
+    text: "10"
+    suggest: { min: 7, max: 13, step: 1 }
+  - name: m
+    value: 10.4
+    unit: kg
+    text: "10.4"
+    suggest: { min: 7.3, max: 13.5, step: 0.1, decimals: 1 }
+  - name: t
+    value: 2.7
+    unit: s
+    text: "2.7"
+    suggest: { min: 1.9, max: 3.5, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p113
+  source: { document: PHYS161_Exam1, labels: [ P113 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    There is a banana at the top of a {d:unit} long rope. A monkey of mass m = {m:unit} starts from
+    rest at the bottom and climbs to the banana in {t:unit} with constant acceleration. The
+    gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: What is the tension in the rope? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 10, m: 10.4, t: 2.7, g: 9.8 }
+    parts:
+      - { id: answer, answer: 130.452, unit: N, source: P113 }

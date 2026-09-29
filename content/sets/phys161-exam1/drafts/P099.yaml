@@ -1,0 +1,65 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P99
+number: 99
+section: Friction
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Figure shows two blocks with masses m<sub>1</sub> = 20.6 kg and m<sub>2</sub> = 61.2 kg; the
+  blocks are free to move. The surface beneath m<sub>2</sub> is frictionless and the coefficient of
+  static friction between the blocks is 0.36. Find the minimal force F required to hold
+  m<sub>1</sub> against m<sub>2</sub>? The gravitational acceleration is g = 9.8 m/s². (749.53631 N)
+text: Figure shows two blocks with masses m_1 = 20.6 kg and m_2 = 61.2 kg; the blocks are free to
+  move. The surface beneath m_2 is frictionless and the coefficient of static friction between the
+  blocks is 0.36. Find the minimal force F required to hold m_1 against m_2? The gravitational
+  acceleration is g = 9.8 m/s^2. (749.53631 N)
+answer: { value: 749.53631, unit: N, raw: 749.53631 N }
+figures:
+  - { src: figures/unnamed_009_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_009_R6Ld.png }
+literals:
+  - name: m1
+    value: 20.6
+    unit: kg
+    text: "20.6"
+    suggest: { min: 14.4, max: 26.8, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 61.2
+    unit: kg
+    text: "61.2"
+    suggest: { min: 42.8, max: 79.6, step: 0.1, decimals: 1 }
+  - name: x
+    value: 0.36
+    text: "0.36"
+    suggest: { min: 0.25, max: 0.47, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p099
+  source: { document: PHYS161_Exam1, labels: [ P99 ] }
+  section: Friction
+  figure: { id: fig, src: figures/unnamed_009_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Figure shows two blocks with masses $m_{1}$ = {m1:unit} and $m_{2}$ = {m2:unit}; the blocks are
+    free to move. The surface beneath $m_{2}$ is frictionless and the coefficient of static friction
+    between the blocks is {x}. The gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the minimal force F required to hold $m_{1}$ against $m_{2}$? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m1: 20.6, m2: 61.2, x: 0.36, g: 9.8 }
+    parts:
+      - { id: answer, answer: 749.53631, unit: N, source: P99 }

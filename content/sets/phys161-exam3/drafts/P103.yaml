@@ -1,0 +1,48 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P103
+number: 103
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: >-
+  The sound source of a ship's sonar system operates at a frequency of 22 kHz. The speed of sound in
+  water is 1471 m/s. What is the wavelength of the waves emitted by the source?
+
+  (0.06686 m)
+text: The sound source of a ship's sonar system operates at a frequency of 22 kHz. The speed of
+  sound in water is 1471 m/s. What is the wavelength of the waves emitted by the source? (0.06686 m)
+answer: { value: 0.06686, unit: m, raw: 0.06686 m }
+figures: []
+literals:
+  - name: f
+    value: 22
+    unit: kHz
+    text: "22"
+    suggest: { min: 15, max: 29, step: 1 }
+  - name: v
+    value: 1471
+    unit: m/s
+    text: "1471"
+    suggest: { min: 1030, max: 1912, step: 1 }
+scenario:
+  id: phys161-exam3-p103
+  source: { document: PHYS161_Exam3, labels: [ P103 ] }
+  section: Sound
+  narrative: >-
+    The sound source of a ship's sonar system operates at a frequency of {f:unit}. The speed of
+    sound in water is {v:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the wavelength of the waves emitted by the source? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 22, v: 1471 }
+    parts:
+      - { id: answer, answer: 0.06686, unit: m, source: P103 }

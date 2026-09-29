@@ -1,0 +1,61 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P45
+number: 45
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A 12-kg mass is traveling to the right with a speed of 1.6 m/s on a smooth horizontal surface
+  when it collides with and sticks to a second 12-kg mass that is initially at rest but is attached
+  to a light spring with force constant 88 N/m. Find the amplitude of the subsequent oscillations.
+  (0.41779 m)
+text: A 12-kg mass is traveling to the right with a speed of 1.6 m/s on a smooth horizontal surface
+  when it collides with and sticks to a second 12-kg mass that is initially at rest but is attached
+  to a light spring with force constant 88 N/m. Find the amplitude of the subsequent oscillations.
+  (0.41779 m)
+answer: { value: 0.41779, unit: m, raw: 0.41779 m }
+figures: []
+literals:
+  - name: m
+    value: 12
+    unit: kg
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: v
+    value: 1.6
+    unit: m/s
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 12
+    unit: kg
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: k
+    value: 88
+    unit: N/m
+    text: "88"
+    suggest: { min: 62, max: 114, step: 1 }
+scenario:
+  id: phys161-exam3-p045
+  source: { document: PHYS161_Exam3, labels: [ P45 ] }
+  section: Oscillations
+  narrative: >-
+    A {m}-kg mass is traveling to the right with a speed of {v:unit} on a smooth horizontal surface
+    when it collides with and sticks to a second {m2}-kg mass that is initially at rest but is
+    attached to a light spring with force constant {k:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+  parts:
+    - id: answer
+      prompt: Find the amplitude of the subsequent oscillations. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 12, v: 1.6, m2: 12, k: 88 }
+    parts:
+      - { id: answer, answer: 0.41779, unit: m, source: P45 }

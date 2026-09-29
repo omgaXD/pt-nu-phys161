@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P79
+number: 79
+section: Kinematics of 2D and 3D motion in vectors form
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A spaceship is traveling at a constant velocity of v =255i m/s when its engines fire up, giving
+  it constant acceleration a =−2i +12k m/s<sup>2</sup>. What is the magnitude of the spaceship's
+  velocity 3 s after the engines fired? (251.58895047279 m/s)
+text: A spaceship is traveling at a constant velocity of v =255i m/s when its engines fire up,
+  giving it constant acceleration a =-2i +12k m/s^2. What is the magnitude of the spaceship's
+  velocity 3 s after the engines fired? (251.58895047279 m/s)
+answer: { value: 251.58895047279, unit: m/s, raw: 251.58895047279 m/s }
+figures: []
+literals:
+  - name: v
+    value: 255
+    text: "255"
+    suggest: { min: 179, max: 332, step: 1 }
+  - name: a
+    value: -2
+    text: "-2"
+    suggest: { min: -3, max: -1, step: 1 }
+  - name: vz
+    value: 12
+    text: "+12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: t
+    value: 3
+    unit: s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+scenario:
+  id: phys161-exam1-p079
+  source: { document: PHYS161_Exam1, labels: [ P79 ] }
+  section: Kinematics of 2D and 3D motion in vectors form
+  narrative: >-
+    A spaceship is traveling at a constant velocity of v ={v}i m/s when its engines fire up, giving
+    it constant acceleration a ={a}i {vz}k m/s$^{2}$.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the spaceship's velocity {t:unit} after the engines fired? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 255, a: -2, vz: 12, t: 3 }
+    parts:
+      - { id: answer, answer: 251.58895047279, unit: m/s, source: P79 }

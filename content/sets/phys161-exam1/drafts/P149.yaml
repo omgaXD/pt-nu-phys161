@@ -1,0 +1,71 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P149
+number: 149
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A 74-kg person rides in a 23-kg cart moving at 12 m/s at the top of a hill that is in the shape
+  of an arc of a circle with a radius of 44 m. Determine the maximum speed that the cart may travel
+  at the top of the hill without losing contact with the surface. The gravitational acceleration is
+  g = 9.8 m/s<sup>2</sup>. (20.765 m/s)
+text: A 74-kg person rides in a 23-kg cart moving at 12 m/s at the top of a hill that is in the
+  shape of an arc of a circle with a radius of 44 m. Determine the maximum speed that the cart may
+  travel at the top of the hill without losing contact with the surface. The gravitational
+  acceleration is g = 9.8 m/s^2. (20.765 m/s)
+answer: { value: 20.765, unit: m/s, raw: 20.765 m/s }
+figures: []
+literals:
+  - name: m
+    value: 74
+    unit: kg
+    text: "74"
+    suggest: { min: 52, max: 96, step: 1 }
+  - name: m2
+    value: 23
+    unit: kg
+    text: "23"
+    suggest: { min: 16, max: 30, step: 1 }
+  - name: v
+    value: 12
+    unit: m/s
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: r
+    value: 44
+    unit: m
+    text: "44"
+    suggest: { min: 31, max: 57, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p149
+  source: { document: PHYS161_Exam1, labels: [ P149 ] }
+  section: Application of Newton's laws
+  narrative: >-
+    A {m}-kg person rides in a {m2}-kg cart moving at {v:unit} at the top of a hill that is in the
+    shape of an arc of a circle with a radius of {r:unit}. The gravitational acceleration is g =
+    {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Determine the maximum speed that the cart may travel at the top of the hill without losing
+        contact with the surface. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 74, m2: 23, v: 12, r: 44, g: 9.8 }
+    parts:
+      - { id: answer, answer: 20.765, unit: m/s, source: P149 }

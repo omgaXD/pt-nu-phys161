@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P106
+number: 106
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: The driver in the car with a mass of 1300 kg applies the brakes when the car is moving at 90
+  km/h, and the car comes to rest after traveling 65 m. What is the magnitude of the net force on
+  the car causing its deceleration of the motion? (6250 N)
+text: The driver in the car with a mass of 1300 kg applies the brakes when the car is moving at 90
+  km/h, and the car comes to rest after traveling 65 m. What is the magnitude of the net force on
+  the car causing its deceleration of the motion? (6250 N)
+answer: { value: 6250, unit: N, raw: 6250 N }
+figures: []
+literals:
+  - name: m
+    value: 1300
+    unit: kg
+    text: "1300"
+    suggest: { min: 910, max: 1690, step: 1 }
+  - name: x
+    value: 90
+    text: "90"
+    suggest: { min: 63, max: 117, step: 1 }
+  - name: d
+    value: 65
+    unit: m
+    text: "65"
+    suggest: { min: 46, max: 85, step: 1 }
+scenario:
+  id: phys161-exam1-p106
+  source: { document: PHYS161_Exam1, labels: [ P106 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    The driver in the car with a mass of {m:unit} applies the brakes when the car is moving at {x}
+    km/h, and the car comes to rest after traveling {d:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the net force on the car causing its deceleration of the motion?
+        {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1300, x: 90, d: 65 }
+    parts:
+      - { id: answer, answer: 6250, unit: N, source: P106 }

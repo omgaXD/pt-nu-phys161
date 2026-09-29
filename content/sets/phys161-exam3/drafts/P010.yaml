@@ -1,0 +1,69 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P10
+number: 10
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Calculate the initial speed of the object of mass 3 kg launched from the Earth’s surface and
+  reaching the speed of 13800 m/s at a very far distance from the Earth. Neglect atmospheric
+  friction and the rotation of the Earth. The Earth’s radius and mass are 6371 km and 5.97×
+  10<sup>24</sup> kg, respectively. Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅
+  m<sup>2</sup> /kg<sup>2</sup>. (17760.73 m/s)
+text: Calculate the initial speed of the object of mass 3 kg launched from the Earth’s surface and
+  reaching the speed of 13800 m/s at a very far distance from the Earth. Neglect atmospheric
+  friction and the rotation of the Earth. The Earth’s radius and mass are 6371 km and 5.97× 10^24
+  kg, respectively. Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (17760.73 m/s)
+answer: { value: 17760.73, unit: m/s, raw: 17760.73 m/s }
+figures: []
+literals:
+  - name: m
+    value: 3
+    unit: kg
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: v
+    value: 13800
+    unit: m/s
+    text: "13800"
+    suggest: { min: 9660, max: 17940, step: 1 }
+  - name: r
+    value: 6371
+    unit: km
+    text: "6371"
+    suggest: { min: 4460, max: 8282, step: 1 }
+  - name: m2
+    value: 5.97e+24
+    unit: kg
+    text: 5.97× 10^24
+    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+scenario:
+  id: phys161-exam3-p010
+  source: { document: PHYS161_Exam3, labels: [ P10 ] }
+  section: Gravitation
+  narrative: >-
+    Neglect atmospheric friction and the rotation of the Earth. The Earth’s radius and mass are
+    {r:unit} and {m2:unit}, respectively. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the initial speed of the object of mass {m:unit} launched from the Earth’s surface
+        and reaching the speed of {v:unit} at a very far distance from the Earth. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 3, v: 13800, r: 6371, m2: 5.97e+24, F: 6.67e-11 }
+    parts:
+      - { id: answer, answer: 17760.73, unit: m/s, source: P10 }

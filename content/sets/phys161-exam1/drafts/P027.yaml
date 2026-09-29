@@ -1,0 +1,52 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P27
+number: 27
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Two vectors A and B have magnitude A = 6 and B = 18. Their vector product is A ×B = 8iˆ + 8jˆ.
+  What is the angle (in radians) between A and B? (0.104949 rad)
+text: Two vectors A and B have magnitude A = 6 and B = 18. Their vector product is A ×B = 8î + 8ĵ.
+  What is the angle (in radians) between A and B? (0.104949 rad)
+answer: { value: 0.104949, unit: rad, raw: 0.104949 rad }
+figures: []
+literals:
+  - name: A
+    value: 6
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: B
+    value: 18
+    text: "18"
+    suggest: { min: 13, max: 23, step: 1 }
+  - name: B2
+    value: 8
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: vy
+    value: 8
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+scenario:
+  id: phys161-exam1-p027
+  source: { document: PHYS161_Exam1, labels: [ P27 ] }
+  section: Vectors
+  narrative: >-
+    Two vectors A and B have magnitude A = {A} and B = {B}. Their vector product is A ×B = {B2}î +
+    {vy}ĵ.
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: B, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: B2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: What is the angle (in radians) between A and B? {_0}{_u}
+      answer: TODO
+      unit: rad
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 6, B: 18, B2: 8, vy: 8 }
+    parts:
+      - { id: answer, answer: 0.104949, unit: rad, source: P27 }

@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P132
+number: 132
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Block A weighs 74 N. The coefficient of static friction between the block and the surface on
+  which it rests is 0.24. Angle of the cord with horizontal is α = 45°. Find the maximum weight w
+  for which the system will remain in equilibrium. (17.76 N)
+text: Block A weighs 74 N. The coefficient of static friction between the block and the surface on
+  which it rests is 0.24. Angle of the cord with horizontal is α = 45°. Find the maximum weight w
+  for which the system will remain in equilibrium. (17.76 N)
+answer: { value: 17.76, unit: N, raw: 17.76 N }
+figures:
+  - { src: figures/unnamed_013_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_013_R6Ld.png }
+literals:
+  - name: F
+    value: 74
+    unit: N
+    text: "74"
+    suggest: { min: 52, max: 96, step: 1 }
+  - name: x
+    value: 0.24
+    text: "0.24"
+    suggest: { min: 0.17, max: 0.31, step: 0.01, decimals: 2 }
+  - name: alpha
+    value: 45
+    unit: °
+    text: "45"
+    suggest: { min: 31, max: 59, step: 1 }
+scenario:
+  id: phys161-exam1-p132
+  source: { document: PHYS161_Exam1, labels: [ P132 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_013_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Block A weighs {F:unit}. The coefficient of static friction between the block and the surface on
+    which it rests is {x}. Angle of the cord with horizontal is α = {alpha}°. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the maximum weight w for which the system will remain in equilibrium. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 74, x: 0.24, alpha: 45 }
+    parts:
+      - { id: answer, answer: 17.76, unit: N, source: P132 }

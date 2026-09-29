@@ -1,0 +1,59 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P30
+number: 30
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A world-class sprinter accelerated to his maximum in 3 s. He then maintains this speed for the
+  remainder of a 100-m race, finishing with a total time of 9.7 s. What is the runner's average
+  acceleration during the first 3 s? (4.0650406504 m/s^2)
+text: A world-class sprinter accelerated to his maximum in 3 s. He then maintains this speed for the
+  remainder of a 100-m race, finishing with a total time of 9.7 s. What is the runner's average
+  acceleration during the first 3 s? (4.0650406504 m/s^2)
+answer: { value: 4.0650406504, unit: m/s^2, raw: 4.0650406504 m/s^2 }
+figures: []
+literals:
+  - name: t
+    value: 3
+    unit: s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: d
+    value: 100
+    unit: m
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: t2
+    value: 9.7
+    unit: s
+    text: "9.7"
+    suggest: { min: 6.8, max: 12.6, step: 0.1, decimals: 1 }
+  - name: t3
+    value: 3
+    unit: s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+scenario:
+  id: phys161-exam1-p030
+  source: { document: PHYS161_Exam1, labels: [ P30 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A world-class sprinter accelerated to his maximum in {t:unit}. He then maintains this speed for
+    the remainder of a {d}-m race, finishing with a total time of {t2:unit}.
+  vars:
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: t2, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: t3, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the runner's average acceleration during the first {t3:unit}? {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { t: 3, d: 100, t2: 9.7, t3: 3 }
+    parts:
+      - { id: answer, answer: 4.0650406504, unit: m/s^2, source: P30 }

@@ -17,7 +17,7 @@ text: A block with mass 1.6 kg is forced against a horizontal spring of negligib
   (0.791016 m)
 answer: { value: 0.791016, unit: m, raw: 0.791016 m }
 figures:
-  - { src: figures/unnamed_015_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_015_fr4U.png }
+  - { src: figures/unnamed_013_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_013_GNcJ.png }
 literals:
   - name: m
     value: 1.6
@@ -48,7 +48,7 @@ scenario:
   id: phys161-exam2-p051
   source: { document: PHYS161_Exam2, labels: [ P51 ] }
   section: Energy conservation
-  figure: { id: fig, src: figures/unnamed_015_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_013_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A block with mass {m:unit} is forced against a horizontal spring of negligible mass, compressing
     the spring a distance of {d:unit}. The spring constant k is {k:unit}. When released, the block

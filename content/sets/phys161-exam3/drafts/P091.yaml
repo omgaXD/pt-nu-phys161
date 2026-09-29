@@ -1,0 +1,76 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P91
+number: 91
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: The sound from a trumpet radiates uniformly in all directions. At a distance of 7 m from the
+  trumpet the sound intensity level is 70 dB. What is the pressure amplitude at this distance? The
+  air density at 20˚C is 1.2 kg/m<sup>3</sup> and speed of sound is 343 m/s.
+  I<sub>0</sub>=10<sup>−12</sup> W/m<sup>2</sup>. (0.0907 Pa)
+text: The sound from a trumpet radiates uniformly in all directions. At a distance of 7 m from the
+  trumpet the sound intensity level is 70 dB. What is the pressure amplitude at this distance? The
+  air density at 20°C is 1.2 kg/m^3 and speed of sound is 343 m/s. I_0=10^-12 W/m^2. (0.0907 Pa)
+answer: { value: 0.0907, unit: Pa, raw: 0.0907 Pa }
+figures: []
+literals:
+  - name: d
+    value: 7
+    unit: m
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+  - name: beta
+    value: 70
+    unit: dB
+    text: "70"
+    suggest: { min: 49, max: 91, step: 1 }
+  - name: T
+    value: 20
+    unit: °C
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: rho
+    value: 1.2
+    unit: kg/m^3
+    text: "1.2"
+    suggest: { min: 0.8, max: 1.6, step: 0.1, decimals: 1 }
+  - name: v
+    value: 343
+    unit: m/s
+    text: "343"
+    suggest: { min: 240, max: 446, step: 1 }
+  - name: I0
+    value: 10
+    text: "10"
+    suggest: { min: 7, max: 13, step: 1 }
+  - name: x
+    value: 12
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+scenario:
+  id: phys161-exam3-p091
+  source: { document: PHYS161_Exam3, labels: [ P91 ] }
+  section: Sound
+  narrative: >-
+    The sound from a trumpet radiates uniformly in all directions. At a distance of {d:unit} from
+    the trumpet the sound intensity level is {beta:unit}. The air density at {T:unit} is {rho:unit}
+    and speed of sound is {v:unit}. $I_{0}$={I0}^-{x} W/m$^{2}$.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: beta, kind: range, min: TODO, max: TODO, step: TODO, unit: dB }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: I0, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: What is the pressure amplitude at this distance? {_0}{_u}
+      answer: TODO
+      unit: Pa
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 7, beta: 70, T: 20, rho: 1.2, v: 343, I0: 10, x: 12 }
+    parts:
+      - { id: answer, answer: 0.0907, unit: Pa, source: P91 }

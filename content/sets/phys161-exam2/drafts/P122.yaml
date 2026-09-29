@@ -15,7 +15,7 @@ text: A 54-kg grindstone is a solid disk 0.6 m in diameter, spinning at 35.5 rad
   of the stone and its bearings. How long does it take the grindstone to come to rest? (2.90552 s)
 answer: { value: 2.90552, unit: s, raw: 2.90552 s }
 figures:
-  - { src: figures/unnamed_025_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_025_fr4U.png }
+  - { src: figures/unnamed_021_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_021_GNcJ.png }
 literals:
   - name: m
     value: 54
@@ -50,7 +50,7 @@ scenario:
   id: phys161-exam2-p122
   source: { document: PHYS161_Exam2, labels: [ P122 ] }
   section: Torque
-  figure: { id: fig, src: figures/unnamed_025_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_021_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A {m}-kg grindstone is a solid disk {d:unit} in diameter, spinning at {omega:unit}. You press an
     ax down on the rim with a normal force of {F:unit}. The coefficient of kinetic friction between

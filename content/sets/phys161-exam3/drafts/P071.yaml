@@ -1,0 +1,60 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P71
+number: 71
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: One string of a certain musical instrument is 55 cm long and has a mass of 8.5 g. It is being
+  played in a room where the speed of sound is 344 m/s. To what tension must you adjust the string
+  so that, when vibrating in its second overtone, it produces sound of wavelength 3.4 m? (21.2695 N)
+text: One string of a certain musical instrument is 55 cm long and has a mass of 8.5 g. It is being
+  played in a room where the speed of sound is 344 m/s. To what tension must you adjust the string
+  so that, when vibrating in its second overtone, it produces sound of wavelength 3.4 m? (21.2695 N)
+answer: { value: 21.2695, unit: N, raw: 21.2695 N }
+figures: []
+literals:
+  - name: d
+    value: 55
+    unit: cm
+    text: "55"
+    suggest: { min: 39, max: 72, step: 1 }
+  - name: m
+    value: 8.5
+    unit: g
+    text: "8.5"
+    suggest: { min: 5.9, max: 11.1, step: 0.1, decimals: 1 }
+  - name: v
+    value: 344
+    unit: m/s
+    text: "344"
+    suggest: { min: 241, max: 447, step: 1 }
+  - name: L
+    value: 3.4
+    unit: m
+    text: "3.4"
+    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p071
+  source: { document: PHYS161_Exam3, labels: [ P71 ] }
+  section: Waves
+  narrative: >-
+    One string of a certain musical instrument is {d:unit} long and has a mass of {m:unit}. It is
+    being played in a room where the speed of sound is {v:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        To what tension must you adjust the string so that, when vibrating in its second overtone,
+        it produces sound of wavelength {L:unit}? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 55, m: 8.5, v: 344, L: 3.4 }
+    parts:
+      - { id: answer, answer: 21.2695, unit: N, source: P71 }

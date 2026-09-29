@@ -1,0 +1,66 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P147
+number: 147
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A 73-kg skydiver falling in a spread-eagle position has a drag coefficient of C = 0.8 and
+  reaches a terminal velocity of 45.5 m/s. The density of air is ρ = 1.17 kg/m³. What is the
+  skydiver's cross-sectional area? The gravitational acceleration is g = 9.8 m/s². (0.738381 m^2)
+text: A 73-kg skydiver falling in a spread-eagle position has a drag coefficient of C = 0.8 and
+  reaches a terminal velocity of 45.5 m/s. The density of air is ρ = 1.17 kg/m^3. What is the
+  skydiver's cross-sectional area? The gravitational acceleration is g = 9.8 m/s^2. (0.738381 m^2)
+answer: { value: 0.738381, unit: m^2, raw: 0.738381 m^2 }
+figures: []
+literals:
+  - name: m
+    value: 73
+    unit: kg
+    text: "73"
+    suggest: { min: 51, max: 95, step: 1 }
+  - name: C
+    value: 0.8
+    text: "0.8"
+    suggest: { min: 0.6, max: 1, step: 0.1, decimals: 1 }
+  - name: v
+    value: 45.5
+    unit: m/s
+    text: "45.5"
+    suggest: { min: 31.8, max: 59.2, step: 0.1, decimals: 1 }
+  - name: rho
+    value: 1.17
+    unit: kg/m^3
+    text: "1.17"
+    suggest: { min: 0.82, max: 1.52, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p147
+  source: { document: PHYS161_Exam1, labels: [ P147 ] }
+  section: Application of Newton's laws
+  narrative: >-
+    A {m}-kg skydiver falling in a spread-eagle position has a drag coefficient of C = {C} and
+    reaches a terminal velocity of {v:unit}. The density of air is ρ = {rho:unit}. The gravitational
+    acceleration is g = {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: C, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: What is the skydiver's cross-sectional area? {_0}{_u}
+      answer: TODO
+      unit: m^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 73, C: 0.8, v: 45.5, rho: 1.17, g: 9.8 }
+    parts:
+      - { id: answer, answer: 0.738381, unit: m^2, source: P147 }

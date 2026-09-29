@@ -1,0 +1,62 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P20
+number: 20
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Given the two displacements D = (5î + 7ĵ + -7k̂) m and E = (5î + 3ĵ + -6k̂) m, find the
+  magnitude of the component of D along the direction of E. (10.518 m)
+text: Given the two displacements D = (5î + 7ĵ + -7k̂) m and E = (5î + 3ĵ + -6k̂) m, find the
+  magnitude of the component of D along the direction of E. (10.518 m)
+answer: { value: 10.518, unit: m, raw: 10.518 m }
+figures: []
+literals:
+  - name: D
+    value: 5
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: vy
+    value: 7
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+  - name: vz
+    value: -7
+    text: "-7"
+    suggest: { min: -9, max: -5, step: 1 }
+  - name: E
+    value: 5
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: vy2
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: vz2
+    value: -6
+    text: "-6"
+    suggest: { min: -8, max: -4, step: 1 }
+scenario:
+  id: phys161-exam1-p020
+  source: { document: PHYS161_Exam1, labels: [ P20 ] }
+  section: Vectors
+  narrative: ""
+  vars:
+    - { name: D, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Given the two displacements D = ({D}î + {vy}ĵ + {vz}k̂) m and E = ({E}î + {vy2}ĵ + {vz2}k̂)
+        m, find the magnitude of the component of D along the direction of E. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { D: 5, vy: 7, vz: -7, E: 5, vy2: 3, vz2: -6 }
+    parts:
+      - { id: answer, answer: 10.518, unit: m, source: P20 }

@@ -15,7 +15,7 @@ text: The block of mass of 0.38 kg is dropped from a height h=69 cm on the left 
   elevated end of the track? The gravitational acceleration is g = 9.8 m/s^2. (0.51 m)
 answer: { value: 0.51, unit: m, raw: 0.51 m }
 figures:
-  - { src: figures/unnamed_028_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_028_fr4U.png }
+  - { src: figures/unnamed_025_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_025_GNcJ.png }
 literals:
   - name: m
     value: 0.38
@@ -46,7 +46,7 @@ scenario:
   id: phys161-exam2-p046
   source: { document: PHYS161_Exam2, labels: [ P46 ] }
   section: Energy conservation
-  figure: { id: fig, src: figures/unnamed_028_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_025_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     The block of mass of {m:unit} is dropped from a height h={h:unit} on the left elevated end of a
     small track with frictionless curved sections and a flat central part of L={L:unit} length,

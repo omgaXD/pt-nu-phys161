@@ -1,0 +1,48 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P26
+number: 26
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A 54 cm simple pendulum makes 30 complete swings in 54 seconds on an unknown planet. What is
+  the gravitational acceleration of the planet? (6.5797 m/s^2)
+text: A 54 cm simple pendulum makes 30 complete swings in 54 seconds on an unknown planet. What is
+  the gravitational acceleration of the planet? (6.5797 m/s^2)
+answer: { value: 6.5797, unit: m/s^2, raw: 6.5797 m/s^2 }
+figures: []
+literals:
+  - name: d
+    value: 54
+    unit: cm
+    text: "54"
+    suggest: { min: 38, max: 70, step: 1 }
+  - name: x
+    value: 30
+    text: "30"
+    suggest: { min: 21, max: 39, step: 1 }
+  - name: x2
+    value: 54
+    text: "54"
+    suggest: { min: 38, max: 70, step: 1 }
+scenario:
+  id: phys161-exam3-p026
+  source: { document: PHYS161_Exam3, labels: [ P26 ] }
+  section: Oscillations
+  narrative: >-
+    A {d:unit} simple pendulum makes {x} complete swings in {x2} seconds on an unknown planet.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the gravitational acceleration of the planet? {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 54, x: 30, x2: 54 }
+    parts:
+      - { id: answer, answer: 6.5797, unit: m/s^2, source: P26 }

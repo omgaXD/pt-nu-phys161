@@ -1,0 +1,62 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P72
+number: 72
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: One string of a certain musical instrument is 60 cm long and has a mass of 9.5 g. It is being
+  played in a room where the speed of sound is 344 m/s. What frequency sound does this string
+  produce in its fundamental mode of vibration, if when vibrating in its second overtone, it
+  produces sound of wavelength 3.7 cm? (3099.099 Hz)
+text: One string of a certain musical instrument is 60 cm long and has a mass of 9.5 g. It is being
+  played in a room where the speed of sound is 344 m/s. What frequency sound does this string
+  produce in its fundamental mode of vibration, if when vibrating in its second overtone, it
+  produces sound of wavelength 3.7 cm? (3099.099 Hz)
+answer: { value: 3099.099, unit: Hz, raw: 3099.099 Hz }
+figures: []
+literals:
+  - name: d
+    value: 60
+    unit: cm
+    text: "60"
+    suggest: { min: 42, max: 78, step: 1 }
+  - name: m
+    value: 9.5
+    unit: g
+    text: "9.5"
+    suggest: { min: 6.6, max: 12.3, step: 0.1, decimals: 1 }
+  - name: v
+    value: 344
+    unit: m/s
+    text: "344"
+    suggest: { min: 241, max: 447, step: 1 }
+  - name: L
+    value: 3.7
+    unit: cm
+    text: "3.7"
+    suggest: { min: 2.6, max: 4.8, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p072
+  source: { document: PHYS161_Exam3, labels: [ P72 ] }
+  section: Waves
+  narrative: >-
+    One string of a certain musical instrument is {d:unit} long and has a mass of {m:unit}. It is
+    being played in a room where the speed of sound is {v:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: >-
+        What frequency sound does this string produce in its fundamental mode of vibration, if when
+        vibrating in its second overtone, it produces sound of wavelength {L:unit}? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 60, m: 9.5, v: 344, L: 3.7 }
+    parts:
+      - { id: answer, answer: 3099.099, unit: Hz, source: P72 }

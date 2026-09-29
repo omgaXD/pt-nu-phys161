@@ -1,0 +1,69 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P96
+number: 96
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A Carnot engine has CO<sub>2</sub> as its working substance. The gas is to have a maximum
+  temperature of 496°C. With a heat input of 420 J per cycle, you want 290 J of useful work. For how
+  many cycles must this engine run to melt completely a 12 kg block of ice originally at 0°C, using
+  only the heat rejected by the engine. Heat of fusion of water is 334 kJ/kg. Answer without units.
+  (30830.769)
+text: A Carnot engine has CO_2 as its working substance. The gas is to have a maximum temperature of
+  496°C. With a heat input of 420 J per cycle, you want 290 J of useful work. For how many cycles
+  must this engine run to melt completely a 12 kg block of ice originally at 0°C, using only the
+  heat rejected by the engine. Heat of fusion of water is 334 kJ/kg. Answer without units.
+  (30830.769)
+answer: { value: 30830.769, raw: "30830.769" }
+figures: []
+literals:
+  - name: T
+    value: 496
+    unit: °C
+    text: "496"
+    suggest: { min: 347, max: 645, step: 1 }
+  - name: E
+    value: 420
+    unit: J
+    text: "420"
+    suggest: { min: 294, max: 546, step: 1 }
+  - name: E2
+    value: 290
+    unit: J
+    text: "290"
+    suggest: { min: 203, max: 377, step: 1 }
+  - name: m
+    value: 12
+    unit: kg
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+scenario:
+  id: phys161-exam4-p096
+  source: { document: PHYS161_Exam4, labels: [ P96 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A Carnot engine has CO_2 as its working substance. The gas is to have a maximum temperature of
+    {T:unit}. With a heat input of {E:unit} per cycle, you want {E2:unit} of useful work. For how
+    many cycles must this engine run to melt completely a {m:unit} block of ice originally at 0°C,
+    using only the heat rejected by the engine. Heat of fusion of water is {Lh:unit}.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: E2, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: Answer without units. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 496, E: 420, E2: 290, m: 12, Lh: 334 }
+    parts:
+      - { id: answer, answer: 30830.769, source: P96 }

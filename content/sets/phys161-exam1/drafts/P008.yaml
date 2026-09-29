@@ -1,0 +1,59 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P8
+number: 8
+section: Units
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: 4 astronauts are in a spherical space station whose internal radius is 6 m. Each of them
+  breathes about 520 cm³ of air with each breath, at 8 breaths per minute. After how many days will
+  the astronauts have breathed a total volume of air equal to the internal volume of the station?
+  (37.7595)
+text: 4 astronauts are in a spherical space station whose internal radius is 6 m. Each of them
+  breathes about 520 cm^3 of air with each breath, at 8 breaths per minute. After how many days will
+  the astronauts have breathed a total volume of air equal to the internal volume of the station?
+  (37.7595)
+answer: { value: 37.7595, raw: "37.7595" }
+figures: []
+literals:
+  - name: x
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: r
+    value: 6
+    unit: m
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: V
+    value: 520
+    unit: cm^3
+    text: "520"
+    suggest: { min: 364, max: 676, step: 1 }
+  - name: x2
+    value: 8
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+scenario:
+  id: phys161-exam1-p008
+  source: { document: PHYS161_Exam1, labels: [ P8 ] }
+  section: Units
+  narrative: >-
+    {x} astronauts are in a spherical space station whose internal radius is {r:unit}. Each of them
+    breathes about {V:unit} of air with each breath, at {x2} breaths per minute.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        After how many days will the astronauts have breathed a total volume of air equal to the
+        internal volume of the station? {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 4, r: 6, V: 520, x2: 8 }
+    parts:
+      - { id: answer, answer: 37.7595, source: P8 }

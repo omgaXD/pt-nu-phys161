@@ -1,0 +1,139 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P42
+number: 42
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  Calculate the density of 510 mL air under 1.04 atm pressure at 0°C. In terms of molar fraction,
+  air contains 78% N<sub>2</sub>, 21% O<sub>2</sub>, and 1% Ar molecules. Molar masses:
+  M<sub>N2</sub> = 28 g/mol, M<sub>O2</sub> = 32 g/mol, and M<sub>Ar</sub> = 40 g/mol. The universal
+  gas constant is R = 8.31 J/(mol K).
+
+  1 atm = 101325 Pa
+
+  1 L = 0.001 m<sup>3</sup>
+
+  (1.3451937424789 kg/m^3)
+text: "Calculate the density of 510 mL air under 1.04 atm pressure at 0°C. In terms of molar
+  fraction, air contains 78% N_2, 21% O_2, and 1% Ar molecules. Molar masses: M_N2 = 28 g/mol, M_O2
+  = 32 g/mol, and M_Ar = 40 g/mol. The universal gas constant is R = 8.31 J/(mol K). 1 atm = 101325
+  Pa 1 L = 0.001 m^3 (1.3451937424789 kg/m^3)"
+answer: { value: 1.3451937424789, unit: kg/m^3, raw: 1.3451937424789 kg/m^3 }
+figures: []
+literals:
+  - name: V
+    value: 510
+    unit: mL
+    text: "510"
+    suggest: { min: 357, max: 663, step: 1 }
+  - name: p
+    value: 1.04
+    unit: atm
+    text: "1.04"
+    suggest: { min: 0.73, max: 1.35, step: 0.01, decimals: 2 }
+  - name: pct
+    value: 78
+    unit: "%"
+    text: "78"
+    suggest: { min: 55, max: 101, step: 1 }
+  - name: pct2
+    value: 21
+    unit: "%"
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: pct3
+    value: 1
+    unit: "%"
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: MN2
+    value: 28
+    unit: g/mol
+    text: "28"
+    suggest: { min: 20, max: 36, step: 1 }
+  - name: MO2
+    value: 32
+    unit: g/mol
+    text: "32"
+    suggest: { min: 22, max: 42, step: 1 }
+  - name: MAr
+    value: 40
+    unit: g/mol
+    text: "40"
+    suggest: { min: 28, max: 52, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p042
+  source: { document: PHYS161_Exam4, labels: [ P42 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    In terms of molar fraction, air contains {pct}% $N_{2}$, {pct2}% $O_{2}$, and {pct3}% Ar
+    molecules. Molar masses: $M_{N2}$ = {MN2:unit}, $M_{O2}$ = {MO2:unit}, and $M_{Ar}$ =
+    {MAr:unit}. The universal gas constant is R = {R:unit}. {p2:unit} = {atm:unit} {V2:unit} =
+    {L:unit}
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: mL }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: pct2, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: pct3, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: MN2, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: MO2, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: MAr, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the density of {V:unit} air under {p:unit} pressure at 0°C. {_0}{_u}
+      answer: TODO
+      unit: kg/m^3
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars:
+      {
+        V: 510,
+        p: 1.04,
+        pct: 78,
+        pct2: 21,
+        pct3: 1,
+        MN2: 28,
+        MO2: 32,
+        MAr: 40,
+        R: 8.31,
+        p2: 1,
+        atm: 101325,
+        V2: 1,
+        L: 0.001
+      }
+    parts:
+      - { id: answer, answer: 1.3451937424789, unit: kg/m^3, source: P42 }

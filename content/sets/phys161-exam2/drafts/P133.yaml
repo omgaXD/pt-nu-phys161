@@ -17,7 +17,7 @@ text: A solid cylinder of mass 17.9 kg and radius 0.15 m is mounted on a fixed v
   the bullet strikes and adheres to the surface of the cylinder? (1.981 rad/s)
 answer: { value: 1.981, unit: rad/s, raw: 1.981 rad/s }
 figures:
-  - { src: figures/unnamed_014_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_014_fr4U.png }
+  - { src: figures/unnamed_011_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_011_GNcJ.png }
 literals:
   - name: m
     value: 17.9
@@ -48,7 +48,7 @@ scenario:
   id: phys161-exam2-p133
   source: { document: PHYS161_Exam2, labels: [ P133 ] }
   section: Angular momentum
-  figure: { id: fig, src: figures/unnamed_014_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_011_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A solid cylinder of mass {m:unit} and radius {r:unit} is mounted on a fixed vertical axis that
     runs through its center of mass. A bullet of mass {m2:unit} is fired with a velocity of {v:unit}

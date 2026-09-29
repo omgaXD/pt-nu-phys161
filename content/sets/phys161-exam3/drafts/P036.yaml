@@ -1,0 +1,48 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P36
+number: 36
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
+  motion with amplitude of 0.57 mm. If the tip passes its equilibrium position with a speed of 1.538
+  m/s, what is the frequency of vibration? (429.439 Hz)
+text: The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
+  motion with amplitude of 0.57 mm. If the tip passes its equilibrium position with a speed of 1.538
+  m/s, what is the frequency of vibration? (429.439 Hz)
+answer: { value: 429.439, unit: Hz, raw: 429.439 Hz }
+figures: []
+literals:
+  - name: d
+    value: 0.57
+    unit: mm
+    text: "0.57"
+    suggest: { min: 0.4, max: 0.74, step: 0.01, decimals: 2 }
+  - name: v
+    value: 1.538
+    unit: m/s
+    text: "1.538"
+    suggest: { min: 1.077, max: 1.999, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam3-p036
+  source: { document: PHYS161_Exam3, labels: [ P36 ] }
+  section: Oscillations
+  narrative: >-
+    The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
+    motion with amplitude of {d:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        If the tip passes its equilibrium position with a speed of {v:unit}, what is the frequency
+        of vibration? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 0.57, v: 1.538 }
+    parts:
+      - { id: answer, answer: 429.439, unit: Hz, source: P36 }

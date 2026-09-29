@@ -1,0 +1,65 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P12
+number: 12
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: >-
+  Initial speed of an object projected away from the surface of Earth is 1.9×10^4
+
+  m/s. Find the object's speed when it is very far from the Earth. Neglect atmospheric friction and
+  the rotation of the Earth. The Earth’s radius and mass are 6371 km and 5.97× 10<sup>24</sup> kg,
+  respectively. Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>.
+  (15366.47 m/s)
+text: Initial speed of an object projected away from the surface of Earth is 1.9×10^4 m/s. Find the
+  object's speed when it is very far from the Earth. Neglect atmospheric friction and the rotation
+  of the Earth. The Earth’s radius and mass are 6371 km and 5.97× 10^24 kg, respectively.
+  Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (15366.47 m/s)
+answer: { value: 15366.47, unit: m/s, raw: 15366.47 m/s }
+figures: []
+literals:
+  - name: v
+    value: 19000
+    unit: m/s
+    text: 1.9×10^4
+    suggest: { min: 13300, max: 24700, step: 1 }
+  - name: r
+    value: 6371
+    unit: km
+    text: "6371"
+    suggest: { min: 4460, max: 8282, step: 1 }
+  - name: m
+    value: 5.97e+24
+    unit: kg
+    text: 5.97× 10^24
+    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+scenario:
+  id: phys161-exam3-p012
+  source: { document: PHYS161_Exam3, labels: [ P12 ] }
+  section: Gravitation
+  narrative: >-
+    Initial speed of an object projected away from the surface of Earth is {v:unit}. Neglect
+    atmospheric friction and the rotation of the Earth. The Earth’s radius and mass are {r:unit} and
+    {m:unit}, respectively. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the object's speed when it is very far from the Earth. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 19000, r: 6371, m: 5.97e+24, F: 6.67e-11 }
+    parts:
+      - { id: answer, answer: 15366.47, unit: m/s, source: P12 }

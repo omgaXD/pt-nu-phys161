@@ -17,7 +17,7 @@ text: A luggage handler pulls a 18-kg suitcase up a ramp inclined at 31° above 
   gravitational acceleration is g = 9.8 m/s^2. (372.49613729795 J)
 answer: { value: 372.49613729795, unit: J, raw: 372.49613729795 J }
 figures:
-  - { src: figures/unnamed_018_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_018_fr4U.png }
+  - { src: figures/unnamed_004_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_004_GNcJ.png }
 literals:
   - name: m
     value: 18
@@ -53,7 +53,7 @@ scenario:
   id: phys161-exam2-p014
   source: { document: PHYS161_Exam2, labels: [ P14 ] }
   section: Work
-  figure: { id: fig, src: figures/unnamed_018_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_004_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A luggage handler pulls a {m}-kg suitcase up a ramp inclined at {theta}° above the horizontal by
     a force F of magnitude {F:unit} that acts parallel to the ramp. The coefficient of kinetic

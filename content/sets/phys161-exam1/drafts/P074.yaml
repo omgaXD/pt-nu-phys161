@@ -1,0 +1,61 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P74
+number: 74
+section: Kinematics of 2D and 3D motion in vectors form
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A fish swimming in a horizontal plane has velocity v<sub>i</sub>= -3i + 3j m/s at a point in
+  the ocean. After the fish swims with constant acceleration for 26 s, its velocity is v =-2i + 8j
+  m/s. What is the magnitude of the acceleration? (0.19611613513818 m/s^2)
+text: A fish swimming in a horizontal plane has velocity v_i= -3i + 3j m/s at a point in the ocean.
+  After the fish swims with constant acceleration for 26 s, its velocity is v =-2i + 8j m/s. What is
+  the magnitude of the acceleration? (0.19611613513818 m/s^2)
+answer: { value: 0.19611613513818, unit: m/s^2, raw: 0.19611613513818 m/s^2 }
+figures: []
+literals:
+  - name: vi
+    value: -3
+    text: "-3"
+    suggest: { min: -4, max: -2, step: 1 }
+  - name: vy
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: t
+    value: 26
+    unit: s
+    text: "26"
+    suggest: { min: 18, max: 34, step: 1 }
+  - name: v
+    value: -2
+    text: "-2"
+    suggest: { min: -3, max: -1, step: 1 }
+  - name: vy2
+    value: 8
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+scenario:
+  id: phys161-exam1-p074
+  source: { document: PHYS161_Exam1, labels: [ P74 ] }
+  section: Kinematics of 2D and 3D motion in vectors form
+  narrative: >-
+    A fish swimming in a horizontal plane has velocity $v_{i}$= {vi}i + {vy}j m/s at a point in the
+    ocean. After the fish swims with constant acceleration for {t:unit}, its velocity is v ={v}i +
+    {vy2}j m/s.
+  vars:
+    - { name: vi, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: What is the magnitude of the acceleration? {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { vi: -3, vy: 3, t: 26, v: -2, vy2: 8 }
+    parts:
+      - { id: answer, answer: 0.19611613513818, unit: m/s^2, source: P74 }

@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P44
+number: 44
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A person walks 88.1 m at a speed of 1.22 m/s and then runs 244.2 m at a speed of 5.05 m/s along
+  a straight track. Compute the average speed. (2.7560855863193 m/s)
+text: A person walks 88.1 m at a speed of 1.22 m/s and then runs 244.2 m at a speed of 5.05 m/s
+  along a straight track. Compute the average speed. (2.7560855863193 m/s)
+answer: { value: 2.7560855863193, unit: m/s, raw: 2.7560855863193 m/s }
+figures: []
+literals:
+  - name: d
+    value: 88.1
+    unit: m
+    text: "88.1"
+    suggest: { min: 61.7, max: 114.5, step: 0.1, decimals: 1 }
+  - name: v
+    value: 1.22
+    unit: m/s
+    text: "1.22"
+    suggest: { min: 0.85, max: 1.59, step: 0.01, decimals: 2 }
+  - name: d2
+    value: 244.2
+    unit: m
+    text: "244.2"
+    suggest: { min: 170.9, max: 317.5, step: 0.1, decimals: 1 }
+  - name: v2
+    value: 5.05
+    unit: m/s
+    text: "5.05"
+    suggest: { min: 3.53, max: 6.57, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam1-p044
+  source: { document: PHYS161_Exam1, labels: [ P44 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A person walks {d:unit} at a speed of {v:unit} and then runs {d2:unit} at a speed of {v2:unit}
+    along a straight track.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: Compute the average speed. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 88.1, v: 1.22, d2: 244.2, v2: 5.05 }
+    parts:
+      - { id: answer, answer: 2.7560855863193, unit: m/s, source: P44 }

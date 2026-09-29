@@ -1,0 +1,56 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P96
+number: 96
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Two guitarists attempt to play the same note of wavelength 7.3 cm at the same time, but one of
+  the instruments is slightly out of tune and plays a note of wavelength 7.32 cm instead. What is
+  the frequency of the beat these musicians hear when they play together? The speed of sound in air
+  is v = 344 m/s. (12.875 Hz)
+text: Two guitarists attempt to play the same note of wavelength 7.3 cm at the same time, but one of
+  the instruments is slightly out of tune and plays a note of wavelength 7.32 cm instead. What is
+  the frequency of the beat these musicians hear when they play together? The speed of sound in air
+  is v = 344 m/s. (12.875 Hz)
+answer: { value: 12.875, unit: Hz, raw: 12.875 Hz }
+figures: []
+literals:
+  - name: L
+    value: 7.3
+    unit: cm
+    text: "7.3"
+    suggest: { min: 5.1, max: 9.5, step: 0.1, decimals: 1 }
+  - name: L2
+    value: 7.32
+    unit: cm
+    text: "7.32"
+    suggest: { min: 5.12, max: 9.52, step: 0.01, decimals: 2 }
+  - name: v
+    value: 344
+    unit: m/s
+    text: "344"
+    suggest: { min: 241, max: 447, step: 1 }
+scenario:
+  id: phys161-exam3-p096
+  source: { document: PHYS161_Exam3, labels: [ P96 ] }
+  section: Sound
+  narrative: >-
+    Two guitarists attempt to play the same note of wavelength {L:unit} at the same time, but one of
+    the instruments is slightly out of tune and plays a note of wavelength {L2:unit} instead. The
+    speed of sound in air is v = {v:unit}.
+  vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: L2, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the frequency of the beat these musicians hear when they play together? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { L: 7.3, L2: 7.32, v: 344 }
+    parts:
+      - { id: answer, answer: 12.875, unit: Hz, source: P96 }

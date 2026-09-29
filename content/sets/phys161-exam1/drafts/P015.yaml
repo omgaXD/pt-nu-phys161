@@ -1,0 +1,47 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P15
+number: 15
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: |-
+  For the vectors A and B, find the magnitude of the vector sum A + B.
+  Vector A is 7 m and vector B is 12 m long. (6.8926 m).
+text: For the vectors A and B, find the magnitude of the vector sum A + B. Vector A is 7 m and
+  vector B is 12 m long. (6.8926 m).
+answer: { value: 6.8926, unit: m, raw: 6.8926 m }
+figures:
+  - { src: figures/unnamed_020_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_020_R6Ld.png }
+literals:
+  - name: d
+    value: 7
+    unit: m
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+  - name: d2
+    value: 12
+    unit: m
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+scenario:
+  id: phys161-exam1-p015
+  source: { document: PHYS161_Exam1, labels: [ P15 ] }
+  section: Vectors
+  figure: { id: fig, src: figures/unnamed_020_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    For the vectors A and B, find the magnitude of the vector sum A + B. {@fig}
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        Vector A is {d:unit} and vector B is {d2:unit} long. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 7, d2: 12 }
+    parts:
+      - { id: answer, answer: 6.8926, unit: m, source: P15 }

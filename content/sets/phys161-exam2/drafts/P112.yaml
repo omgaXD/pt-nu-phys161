@@ -15,7 +15,7 @@ text: A spherically symmetric object with radius R = 0.3 m and mass M = 2.3 kg s
   coming to rest? The gravitational acceleration is g = 9.8 m/s^2. (0.277806 m)
 answer: { value: 0.277806, unit: m, raw: 0.277806 m }
 figures:
-  - { src: figures/unnamed_003_fr4U.gif, original: PHYS161_Exam2_new.docx_files/unnamed_003_fr4U.gif }
+  - { src: figures/unnamed_GNcJ.gif, original: PHYS161_Exam2_new.docx_files/unnamed_GNcJ.gif }
 literals:
   - name: R
     value: 0.3
@@ -47,7 +47,7 @@ scenario:
   id: phys161-exam2-p112
   source: { document: PHYS161_Exam2, labels: [ P112 ] }
   section: Rotation
-  figure: { id: fig, src: figures/unnamed_003_fr4U.gif, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_GNcJ.gif, alt: "TODO: describe the figure" }
   narrative: >-
     A spherically symmetric object with radius R = {R:unit} and mass M = {M:unit} slides without
     friction across a horizontal floor with velocity V = {V:unit}. It then slides up a frictionless

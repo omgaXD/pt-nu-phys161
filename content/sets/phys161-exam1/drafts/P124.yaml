@@ -1,0 +1,61 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P124
+number: 124
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A worker lifts a weight of 380 N using the arrangement of pulleys shown in the figure, by
+  pulling down on a rope with a force F. Find the magnitude of the force F if the weight is lifted
+  with a constant upward acceleration of 2.1 m/s². Assume that the rope, pulleys, and chains all
+  have negligible weight. The gravitational acceleration is g = 9.8 m/s². (230.714 N)
+text: A worker lifts a weight of 380 N using the arrangement of pulleys shown in the figure, by
+  pulling down on a rope with a force F. Find the magnitude of the force F if the weight is lifted
+  with a constant upward acceleration of 2.1 m/s^2. Assume that the rope, pulleys, and chains all
+  have negligible weight. The gravitational acceleration is g = 9.8 m/s^2. (230.714 N)
+answer: { value: 230.714, unit: N, raw: 230.714 N }
+figures:
+  - { src: figures/unnamed_015_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_015_R6Ld.png }
+literals:
+  - name: F
+    value: 380
+    unit: N
+    text: "380"
+    suggest: { min: 266, max: 494, step: 1 }
+  - name: a
+    value: 2.1
+    unit: m/s^2
+    text: "2.1"
+    suggest: { min: 1.5, max: 2.7, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p124
+  source: { document: PHYS161_Exam1, labels: [ P124 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_015_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A worker lifts a weight of {F:unit} using the arrangement of pulleys shown in the figure, by
+    pulling down on a rope with a force F. Assume that the rope, pulleys, and chains all have
+    negligible weight. The gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of the force F if the weight is lifted with a constant upward
+        acceleration of {a:unit}. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 380, a: 2.1, g: 9.8 }
+    parts:
+      - { id: answer, answer: 230.714, unit: N, source: P124 }

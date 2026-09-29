@@ -1,0 +1,54 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P57
+number: 57
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: It takes 400 J of work to compress quasi-statically 0.8 moles of an ideal gas to one-fifth its
+  volume. Calculate the temperature of the gas, assuming it remains constant during the compression.
+  The universal gas constant is R = 8.31 J/(mol K). (37.384773439206 K)
+text: It takes 400 J of work to compress quasi-statically 0.8 moles of an ideal gas to one-fifth its
+  volume. Calculate the temperature of the gas, assuming it remains constant during the compression.
+  The universal gas constant is R = 8.31 J/(mol K). (37.384773439206 K)
+answer: { value: 37.384773439206, unit: K, raw: 37.384773439206 K }
+figures: []
+literals:
+  - name: E
+    value: 400
+    unit: J
+    text: "400"
+    suggest: { min: 280, max: 520, step: 1 }
+  - name: n
+    value: 0.8
+    unit: mol
+    text: "0.8"
+    suggest: { min: 0.6, max: 1, step: 0.1, decimals: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p057
+  source: { document: PHYS161_Exam4, labels: [ P57 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    It takes {E:unit} of work to compress quasi-statically {n:unit} of an ideal gas to one-fifth its
+    volume. The universal gas constant is R = {R:unit}.
+  vars:
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the temperature of the gas, assuming it remains constant during the compression.
+        {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { E: 400, n: 0.8, R: 8.31 }
+    parts:
+      - { id: answer, answer: 37.384773439206, unit: K, source: P57 }

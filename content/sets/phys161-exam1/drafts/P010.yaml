@@ -1,0 +1,46 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P10
+number: 10
+section: Uncertainty
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A train travels 770 km from Berlin to Paris and then overshoots the end of the track. If the
+  relative error in the total distance covered must not exceed 3.6×10⁻⁶, what is the largest
+  overshoot that is acceptable? Give the answer in meters. (2.772 m)
+text: A train travels 770 km from Berlin to Paris and then overshoots the end of the track. If the
+  relative error in the total distance covered must not exceed 3.6×10^-6, what is the largest
+  overshoot that is acceptable? Give the answer in meters. (2.772 m)
+answer: { value: 2.772, unit: m, raw: 2.772 m }
+figures: []
+literals:
+  - name: d
+    value: 770
+    unit: km
+    text: "770"
+    suggest: { min: 539, max: 1001, step: 1 }
+  - name: x
+    value: 0.0000036
+    text: 3.6×10^-6
+    suggest: { min: 0.0000025, max: 0.0000047, step: 1e-7, decimals: 7 }
+scenario:
+  id: phys161-exam1-p010
+  source: { document: PHYS161_Exam1, labels: [ P10 ] }
+  section: Uncertainty
+  narrative: >-
+    A train travels {d:unit} from Berlin to Paris and then overshoots the end of the track. If the
+    relative error in the total distance covered must not exceed {x}, what is the largest overshoot
+    that is acceptable?
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: Give the answer in meters. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 770, x: 0.0000036 }
+    parts:
+      - { id: answer, answer: 2.772, unit: m, source: P10 }

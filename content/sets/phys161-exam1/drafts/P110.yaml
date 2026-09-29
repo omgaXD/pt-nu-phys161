@@ -1,0 +1,81 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P110
+number: 110
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: "A force F lifts vertically a chain consisting of five links, each of mass 0.55 kg, numbered as
+  in the figure: link 1 at the bottom and link 5 at the top. The chain is lifted with a constant
+  acceleration of magnitude a = 2.3 m/s². What is the magnitude of the force that link 4 exerts on
+  link 3? The gravitational acceleration is g = 9.8 m/s². (19.965 N)"
+text: "A force F lifts vertically a chain consisting of five links, each of mass 0.55 kg, numbered
+  as in the figure: link 1 at the bottom and link 5 at the top. The chain is lifted with a constant
+  acceleration of magnitude a = 2.3 m/s^2. What is the magnitude of the force that link 4 exerts on
+  link 3? The gravitational acceleration is g = 9.8 m/s^2. (19.965 N)"
+answer: { value: 19.965, unit: N, raw: 19.965 N }
+figures:
+  - { src: figures/unnamed_024_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_024_R6Ld.png }
+literals:
+  - name: m
+    value: 0.55
+    unit: kg
+    text: "0.55"
+    suggest: { min: 0.39, max: 0.72, step: 0.01, decimals: 2 }
+  - name: x
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: x2
+    value: 5
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: a
+    value: 2.3
+    unit: m/s^2
+    text: "2.3"
+    suggest: { min: 1.6, max: 3, step: 0.1, decimals: 1 }
+  - name: x3
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: x4
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p110
+  source: { document: PHYS161_Exam1, labels: [ P110 ] }
+  section: Newton's 2nd law
+  figure: { id: fig, src: figures/unnamed_024_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A force F lifts vertically a chain consisting of five links, each of mass {m:unit}, numbered as
+    in the figure: link {x} at the bottom and link {x2} at the top. The chain is lifted with a
+    constant acceleration of magnitude a = {a:unit}. The gravitational acceleration is g = {g:unit}.
+    {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x4, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the force that link {x3} exerts on link {x4}? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 0.55, x: 1, x2: 5, a: 2.3, x3: 4, x4: 3, g: 9.8 }
+    parts:
+      - { id: answer, answer: 19.965, unit: N, source: P110 }

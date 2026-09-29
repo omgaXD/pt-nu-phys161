@@ -1,0 +1,55 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P36
+number: 36
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A metal key is dropped down from the bridge. When it passes by a height h = 41 m, its speed is
+  19.5 m/s. How long after this moment the key will hit the ground? The gravitational acceleration
+  is g = 9.8 m/s<sup>2</sup>. (1.5211348322352 s)
+text: A metal key is dropped down from the bridge. When it passes by a height h = 41 m, its speed is
+  19.5 m/s. How long after this moment the key will hit the ground? The gravitational acceleration
+  is g = 9.8 m/s^2. (1.5211348322352 s)
+answer: { value: 1.5211348322352, unit: s, raw: 1.5211348322352 s }
+figures: []
+literals:
+  - name: h
+    value: 41
+    unit: m
+    text: "41"
+    suggest: { min: 29, max: 53, step: 1 }
+  - name: v
+    value: 19.5
+    unit: m/s
+    text: "19.5"
+    suggest: { min: 13.6, max: 25.4, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p036
+  source: { document: PHYS161_Exam1, labels: [ P36 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A metal key is dropped down from the bridge. When it passes by a height h = {h:unit}, its speed
+    is {v:unit}. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        How long after this moment the key will hit the ground? {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { h: 41, v: 19.5, g: 9.8 }
+    parts:
+      - { id: answer, answer: 1.5211348322352, unit: s, source: P36 }

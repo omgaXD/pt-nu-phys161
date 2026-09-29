@@ -1,0 +1,50 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P94
+number: 94
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: What is the entropy change of 222 g of steam at 100°C when it condenses to water at the same
+  temperature? Heat of fusion of water is 2256 kJ/kg. (-1342.7131367292 J/K)
+text: What is the entropy change of 222 g of steam at 100°C when it condenses to water at the same
+  temperature? Heat of fusion of water is 2256 kJ/kg. (-1342.7131367292 J/K)
+answer: { value: -1342.7131367292, unit: J/K, raw: -1342.7131367292 J/K }
+figures: []
+literals:
+  - name: m
+    value: 222
+    unit: g
+    text: "222"
+    suggest: { min: 155, max: 289, step: 1 }
+  - name: T
+    value: 100
+    unit: °C
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: Lh
+    value: 2256
+    unit: kJ/kg
+    text: "2256"
+    suggest: { min: 1579, max: 2933, step: 1 }
+scenario:
+  id: phys161-exam4-p094
+  source: { document: PHYS161_Exam4, labels: [ P94 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: Heat of fusion of water is {Lh:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the entropy change of {m:unit} of steam at {T:unit} when it condenses to water at
+        the same temperature? {_0}{_u}
+      answer: TODO
+      unit: J/K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 222, T: 100, Lh: 2256 }
+    parts:
+      - { id: answer, answer: -1342.7131367292, unit: J/K, source: P94 }

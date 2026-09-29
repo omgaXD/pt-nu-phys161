@@ -1,0 +1,62 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P25
+number: 25
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: The space station makes 15.45 revolutions per day in its orbit around the earth. Assuming a
+  circular orbit, how high is this satellite above the surface of the earth? The radius of Earth is
+  6.371×10<sup>6</sup> m. Mass of Earth is 5.972×10<sup>24</sup> kg. The gravitational constant is
+  6.6743 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (438451.032 m)
+text: The space station makes 15.45 revolutions per day in its orbit around the earth. Assuming a
+  circular orbit, how high is this satellite above the surface of the earth? The radius of Earth is
+  6.371×10^6 m. Mass of Earth is 5.972×10^24 kg. The gravitational constant is 6.6743 × 10^-11N⋅ m^2
+  /kg^2. (438451.032 m)
+answer: { value: 438451.032, unit: m, raw: 438451.032 m }
+figures: []
+literals:
+  - name: x
+    value: 15.45
+    unit: rev
+    text: "15.45"
+    suggest: { min: 10.82, max: 20.09, step: 0.01, decimals: 2 }
+  - name: r
+    value: 6371000
+    unit: m
+    text: 6.371×10^6
+    suggest: { min: 4459700, max: 8282300, step: 1 }
+  - name: m
+    value: 5.972e+24
+    unit: kg
+    text: 5.972×10^24
+    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+  - name: F
+    value: 6.6743e-11
+    unit: N
+    text: 6.6743 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+scenario:
+  id: phys161-exam3-p025
+  source: { document: PHYS161_Exam3, labels: [ P25 ] }
+  section: Gravitation
+  narrative: >-
+    The space station makes {x:unit} per day in its orbit around the earth. The radius of Earth is
+    {r:unit}. Mass of Earth is {m:unit}. The gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: rev }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Assuming a circular orbit, how high is this satellite above the surface of the earth?
+        {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 15.45, r: 6371000, m: 5.972e+24, F: 6.6743e-11 }
+    parts:
+      - { id: answer, answer: 438451.032, unit: m, source: P25 }

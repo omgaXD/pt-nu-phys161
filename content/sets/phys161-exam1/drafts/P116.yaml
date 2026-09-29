@@ -1,0 +1,52 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P116
+number: 116
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: An elevator accelerating upward carries a man standing on a weighing scale indicating
+  F<sub>1</sub> = 678.9 N. The scale reads F<sub>2</sub> = 767.3 N when the man picks up a 8.6 kg
+  box. Find the man's mass. (66.0468 kg)
+text: An elevator accelerating upward carries a man standing on a weighing scale indicating F_1 =
+  678.9 N. The scale reads F_2 = 767.3 N when the man picks up a 8.6 kg box. Find the man's mass.
+  (66.0468 kg)
+answer: { value: 66.0468, unit: kg, raw: 66.0468 kg }
+figures: []
+literals:
+  - name: F1
+    value: 678.9
+    unit: N
+    text: "678.9"
+    suggest: { min: 475.2, max: 882.6, step: 0.1, decimals: 1 }
+  - name: F2
+    value: 767.3
+    unit: N
+    text: "767.3"
+    suggest: { min: 537.1, max: 997.5, step: 0.1, decimals: 1 }
+  - name: m
+    value: 8.6
+    unit: kg
+    text: "8.6"
+    suggest: { min: 6, max: 11.2, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p116
+  source: { document: PHYS161_Exam1, labels: [ P116 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    An elevator accelerating upward carries a man standing on a weighing scale indicating $F_{1}$ =
+    {F1:unit}. The scale reads $F_{2}$ = {F2:unit} when the man picks up a {m:unit} box.
+  vars:
+    - { name: F1, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  parts:
+    - id: answer
+      prompt: Find the man's mass. {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F1: 678.9, F2: 767.3, m: 8.6 }
+    parts:
+      - { id: answer, answer: 66.0468, unit: kg, source: P116 }

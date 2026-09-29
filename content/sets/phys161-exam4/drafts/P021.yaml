@@ -1,0 +1,97 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P21
+number: 21
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: "Rods of copper, brass, and steel are welded together to form a Y-shaped figure. The
+  cross-sectional area of each rod is 1.8 cm<sup>2</sup>. The free end of the copper rod is
+  maintained at 100°C, and the free ends of the brass and steel rods at 0°C. Assume there is no heat
+  loss from the surfaces of the rods. The lengths of the rods are: copper, 11 cm; brass, 21 cm;
+  steel, 23 cm. What is the temperature of the junction point? Answer in Kelvins (K). Thermal
+  conductivity of the copper is 390 W/(m °C). Thermal conductivity of the steel is 50 W/(m °C).
+  Thermal conductivity of the brass is 130 W/(m °C). (353.9114729 K)"
+text: "Rods of copper, brass, and steel are welded together to form a Y-shaped figure. The
+  cross-sectional area of each rod is 1.8 cm^2. The free end of the copper rod is maintained at
+  100°C, and the free ends of the brass and steel rods at 0°C. Assume there is no heat loss from the
+  surfaces of the rods. The lengths of the rods are: copper, 11 cm; brass, 21 cm; steel, 23 cm. What
+  is the temperature of the junction point? Answer in Kelvins (K). Thermal conductivity of the
+  copper is 390 W/(m °C). Thermal conductivity of the steel is 50 W/(m °C). Thermal conductivity of
+  the brass is 130 W/(m °C). (353.9114729 K)"
+answer: { value: 353.9114729, unit: K, raw: 353.9114729 K }
+figures:
+  - { src: figures/unnamed_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_xiMS.png }
+literals:
+  - name: A
+    value: 1.8
+    unit: cm^2
+    text: "1.8"
+    suggest: { min: 1.3, max: 2.3, step: 0.1, decimals: 1 }
+  - name: T
+    value: 100
+    unit: °C
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: d
+    value: 11
+    unit: cm
+    text: "11"
+    suggest: { min: 8, max: 14, step: 1 }
+  - name: d2
+    value: 21
+    unit: cm
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: d3
+    value: 23
+    unit: cm
+    text: "23"
+    suggest: { min: 16, max: 30, step: 1 }
+  - name: kc
+    value: 390
+    unit: W/(m °C)
+    text: "390"
+    suggest: { min: 273, max: 507, step: 1 }
+  - name: kc2
+    value: 50
+    unit: W/(m °C)
+    text: "50"
+    suggest: { min: 35, max: 65, step: 1 }
+  - name: kc3
+    value: 130
+    unit: W/(m °C)
+    text: "130"
+    suggest: { min: 91, max: 169, step: 1 }
+scenario:
+  id: phys161-exam4-p021
+  source: { document: PHYS161_Exam4, labels: [ P21 ] }
+  section: Temperature and heat
+  figure: { id: fig, src: figures/unnamed_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Rods of copper, brass, and steel are welded together to form a Y-shaped figure. The
+    cross-sectional area of each rod is {A:unit}. The free end of the copper rod is maintained at
+    {T:unit}, and the free ends of the brass and steel rods at 0°C. Assume there is no heat loss
+    from the surfaces of the rods. The lengths of the rods are: copper, {d:unit}; brass, {d2:unit};
+    steel, {d3:unit}. Answer in Kelvins (K). Thermal conductivity of the copper is {kc:unit}.
+    Thermal conductivity of the steel is {kc2:unit}. Thermal conductivity of the brass is
+    {kc3:unit}. {@fig}
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^2 }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: d3, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: kc, kind: range, min: TODO, max: TODO, step: TODO, unit: W/(m °C) }
+    - { name: kc2, kind: range, min: TODO, max: TODO, step: TODO, unit: W/(m °C) }
+    - { name: kc3, kind: range, min: TODO, max: TODO, step: TODO, unit: W/(m °C) }
+  parts:
+    - id: answer
+      prompt: What is the temperature of the junction point? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 1.8, T: 100, d: 11, d2: 21, d3: 23, kc: 390, kc2: 50, kc3: 130 }
+    parts:
+      - { id: answer, answer: 353.9114729, unit: K, source: P21 }

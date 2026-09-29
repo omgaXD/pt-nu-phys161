@@ -1,0 +1,65 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P31
+number: 31
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Find the root mean square speed of argon atom in an 8.1 liter container filled with 1.6 mol of
+  argon gas at pressure of 4.7 atm. Molar mass of argon is 39.948 g/mol. The standard atmosphere
+  pressure is 101325 Pa. (425.50322889891 m/s)
+text: Find the root mean square speed of argon atom in an 8.1 liter container filled with 1.6 mol of
+  argon gas at pressure of 4.7 atm. Molar mass of argon is 39.948 g/mol. The standard atmosphere
+  pressure is 101325 Pa. (425.50322889891 m/s)
+answer: { value: 425.50322889891, unit: m/s, raw: 425.50322889891 m/s }
+figures: []
+literals:
+  - name: V
+    value: 8.1
+    unit: L
+    text: "8.1"
+    suggest: { min: 5.7, max: 10.5, step: 0.1, decimals: 1 }
+  - name: n
+    value: 1.6
+    unit: mol
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: p
+    value: 4.7
+    unit: atm
+    text: "4.7"
+    suggest: { min: 3.3, max: 6.1, step: 0.1, decimals: 1 }
+  - name: M
+    value: 39.948
+    unit: g/mol
+    text: "39.948"
+    suggest: { min: 27.964, max: 51.932, step: 0.001, decimals: 3 }
+  - name: p2
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+scenario:
+  id: phys161-exam4-p031
+  source: { document: PHYS161_Exam4, labels: [ P31 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    Molar mass of argon is {M:unit}. The standard atmosphere pressure is {p2:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the root mean square speed of argon atom in an {V:unit} container filled with {n:unit}
+        of argon gas at pressure of {p:unit}. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 8.1, n: 1.6, p: 4.7, M: 39.948, p2: 101325 }
+    parts:
+      - { id: answer, answer: 425.50322889891, unit: m/s, source: P31 }

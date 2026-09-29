@@ -1,0 +1,76 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P64
+number: 64
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: One-half mole of a monatomic ideal gas is taken from state a to state c. If P<sub>a</sub> =
+  4.15×10<sup>5</sup> Pa, P<sub>b</sub> = 1.95×10<sup>5</sup> Pa, V<sub>a</sub> = 0.0019
+  m<sup>3</sup>, V<sub>b</sub> = 0.0028 m<sup>3</sup>, and V<sub>c</sub> = 0.0041 m<sup>3</sup>,
+  calculate the final temperature of the gas. The universal gas constant is R = 8.31 J/(mol K).
+  (192.41877256318 K)
+text: One-half mole of a monatomic ideal gas is taken from state a to state c. If P_a = 4.15×10^5
+  Pa, P_b = 1.95×10^5 Pa, V_a = 0.0019 m^3, V_b = 0.0028 m^3, and V_c = 0.0041 m^3, calculate the
+  final temperature of the gas. The universal gas constant is R = 8.31 J/(mol K). (192.41877256318
+  K)
+answer: { value: 192.41877256318, unit: K, raw: 192.41877256318 K }
+figures:
+  - { src: figures/unnamed_006_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_006_xiMS.png }
+literals:
+  - name: Pa
+    value: 415000
+    unit: Pa
+    text: 4.15×10^5
+    suggest: { min: 290500, max: 539500, step: 1 }
+  - name: Pb
+    value: 195000
+    unit: Pa
+    text: 1.95×10^5
+    suggest: { min: 136500, max: 253500, step: 1 }
+  - name: Va
+    value: 0.0019
+    unit: m^3
+    text: "0.0019"
+    suggest: { min: 0.0013, max: 0.0025, step: 0.0001, decimals: 4 }
+  - name: Vb
+    value: 0.0028
+    unit: m^3
+    text: "0.0028"
+    suggest: { min: 0.002, max: 0.0036, step: 0.0001, decimals: 4 }
+  - name: Vc
+    value: 0.0041
+    unit: m^3
+    text: "0.0041"
+    suggest: { min: 0.0029, max: 0.0053, step: 0.0001, decimals: 4 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p064
+  source: { document: PHYS161_Exam4, labels: [ P64 ] }
+  section: 1st Law of Thermodynamics
+  figure: { id: fig, src: figures/unnamed_006_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    One-half mole of a monatomic ideal gas is taken from state a to state c. If $P_{a}$ = {Pa:unit},
+    $P_{b}$ = {Pb:unit}, $V_{a}$ = {Va:unit}, $V_{b}$ = {Vb:unit}, and $V_{c}$ = {Vc:unit},
+    calculate the final temperature of the gas. {@fig}
+  vars:
+    - { name: Pa, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Pb, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Va, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: Vb, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: Vc, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: The universal gas constant is R = {R:unit}. {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { Pa: 415000, Pb: 195000, Va: 0.0019, Vb: 0.0028, Vc: 0.0041, R: 8.31 }
+    parts:
+      - { id: answer, answer: 192.41877256318, unit: K, source: P64 }

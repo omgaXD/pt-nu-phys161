@@ -1,0 +1,95 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P63
+number: 63
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A cylinder with a frictionless, movable piston contains a quantity of helium gas. Initially the
+  gas is at a pressure of 0.92×10<sup>5</sup> Pa, has a temperature of 303 K, and occupies a volume
+  of 1.23 L. The gas then undergoes two processes. In the first, the gas is heated and the piston is
+  allowed to move to keep the temperature equal to 303 K. This continues until the pressure reaches
+  2.06×10<sup>4</sup> Pa. In the second process, the gas is compressed at constant pressure until it
+  returns to its original volume 1.23 L. Assume that the gas may be treated as ideal. Find the
+  temperature at the end of the second process. 1 L = 0.001 m<sup>3</sup>(67.845652173913 K)
+text: A cylinder with a frictionless, movable piston contains a quantity of helium gas. Initially
+  the gas is at a pressure of 0.92×10^5 Pa, has a temperature of 303 K, and occupies a volume of
+  1.23 L. The gas then undergoes two processes. In the first, the gas is heated and the piston is
+  allowed to move to keep the temperature equal to 303 K. This continues until the pressure reaches
+  2.06×10^4 Pa. In the second process, the gas is compressed at constant pressure until it returns
+  to its original volume 1.23 L. Assume that the gas may be treated as ideal. Find the temperature
+  at the end of the second process. 1 L = 0.001 m^3(67.845652173913 K)
+answer: { value: 67.845652173913, unit: K, raw: 67.845652173913 K }
+figures: []
+literals:
+  - name: p
+    value: 92000
+    unit: Pa
+    text: 0.92×10^5
+    suggest: { min: 64400, max: 119600, step: 1 }
+  - name: T
+    value: 303
+    unit: K
+    text: "303"
+    suggest: { min: 212, max: 394, step: 1 }
+  - name: V
+    value: 1.23
+    unit: L
+    text: "1.23"
+    suggest: { min: 0.86, max: 1.6, step: 0.01, decimals: 2 }
+  - name: T2
+    value: 303
+    unit: K
+    text: "303"
+    suggest: { min: 212, max: 394, step: 1 }
+  - name: p2
+    value: 20600
+    unit: Pa
+    text: 2.06×10^4
+    suggest: { min: 14420, max: 26780, step: 1 }
+  - name: V2
+    value: 1.23
+    unit: L
+    text: "1.23"
+    suggest: { min: 0.86, max: 1.6, step: 0.01, decimals: 2 }
+  - name: V3
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p063
+  source: { document: PHYS161_Exam4, labels: [ P63 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    A cylinder with a frictionless, movable piston contains a quantity of helium gas. Initially the
+    gas is at a pressure of {p:unit}, has a temperature of {T:unit}, and occupies a volume of
+    {V:unit}. The gas then undergoes two processes. In the first, the gas is heated and the piston
+    is allowed to move to keep the temperature equal to {T2:unit}. This continues until the pressure
+    reaches {p2:unit}. In the second process, the gas is compressed at constant pressure until it
+    returns to its original volume {V2:unit}. Assume that the gas may be treated as ideal.
+  vars:
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: V3, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the temperature at the end of the second process. {V3:unit} = {L:unit} {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { p: 92000, T: 303, V: 1.23, T2: 303, p2: 20600, V2: 1.23, V3: 1, L: 0.001 }
+    parts:
+      - { id: answer, answer: 67.845652173913, unit: K, source: P63 }

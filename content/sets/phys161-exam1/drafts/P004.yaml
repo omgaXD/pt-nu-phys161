@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P4
+number: 4
+section: Units
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: How many nanoseconds (ns) does it take light to travel 2 ft in a vacuum? The speed of light is
+  v = 3x10<sup>8</sup> m/s, 1 ft = 0.3048 m. (2.032 ns)
+text: How many nanoseconds (ns) does it take light to travel 2 ft in a vacuum? The speed of light is
+  v = 3x10^8 m/s, 1 ft = 0.3048 m. (2.032 ns)
+answer: { value: 2.032, unit: ns, raw: 2.032 ns }
+figures: []
+literals:
+  - name: x
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: v
+    value: 300000000
+    unit: m/s
+    text: 3x10^8
+    suggest: { min: 210000000, max: 390000000, step: 1 }
+  - name: x2
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: ft
+    value: 0.3048
+    unit: m
+    text: "0.3048"
+    suggest: { min: 0.2134, max: 0.3962, step: 0.0001, decimals: 4 }
+scenario:
+  id: phys161-exam1-p004
+  source: { document: PHYS161_Exam1, labels: [ P4 ] }
+  section: Units
+  narrative: The speed of light is v = {v:unit}, {x2} ft = {ft:unit}.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: ft, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        How many nanoseconds (ns) does it take light to travel {x} ft in a vacuum? {_0}{_u}
+      answer: TODO
+      unit: ns
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 2, v: 300000000, x2: 1, ft: 0.3048 }
+    parts:
+      - { id: answer, answer: 2.032, unit: ns, source: P4 }

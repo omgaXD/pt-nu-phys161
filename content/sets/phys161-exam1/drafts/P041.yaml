@@ -1,0 +1,59 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P41
+number: 41
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A motorcyclist heading east through a small city accelerates after he passes the signpost
+  marking the city limits. His acceleration is a constant 4.3 m/s<sup>2</sup>. At time t = 0 he is 5
+  m east of the signpost, moving east at 16 m/s. Find his velocity at time t = 3 s. (28.9 m/s)
+text: A motorcyclist heading east through a small city accelerates after he passes the signpost
+  marking the city limits. His acceleration is a constant 4.3 m/s^2. At time t = 0 he is 5 m east of
+  the signpost, moving east at 16 m/s. Find his velocity at time t = 3 s. (28.9 m/s)
+answer: { value: 28.9, unit: m/s, raw: 28.9 m/s }
+figures: []
+literals:
+  - name: a
+    value: 4.3
+    unit: m/s^2
+    text: "4.3"
+    suggest: { min: 3, max: 5.6, step: 0.1, decimals: 1 }
+  - name: d
+    value: 5
+    unit: m
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: v
+    value: 16
+    unit: m/s
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: t
+    value: 3
+    unit: s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+scenario:
+  id: phys161-exam1-p041
+  source: { document: PHYS161_Exam1, labels: [ P41 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A motorcyclist heading east through a small city accelerates after he passes the signpost
+    marking the city limits. His acceleration is a constant {a:unit}. At time t = 0 he is {d:unit}
+    east of the signpost, moving east at {v:unit}.
+  vars:
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: Find his velocity at time t = {t:unit}. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { a: 4.3, d: 5, v: 16, t: 3 }
+    parts:
+      - { id: answer, answer: 28.9, unit: m/s, source: P41 }

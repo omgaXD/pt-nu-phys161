@@ -1,0 +1,56 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P97
+number: 97
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A Carnot engine whose low-temperature reservoir is at -90°C has an efficiency of 25%.The
+  efficiency is to be increased to 50%. By how many kelvins must the temperature of the
+  high-temperature reservoir be increased if the temperature of the low-temperature reservoir
+  remains constant? (122 K)
+text: A Carnot engine whose low-temperature reservoir is at -90°C has an efficiency of 25%.The
+  efficiency is to be increased to 50%. By how many kelvins must the temperature of the
+  high-temperature reservoir be increased if the temperature of the low-temperature reservoir
+  remains constant? (122 K)
+answer: { value: 122, unit: K, raw: 122 K }
+figures: []
+literals:
+  - name: T
+    value: -90
+    unit: °C
+    text: "-90"
+    suggest: { min: -117, max: -63, step: 1 }
+  - name: pct
+    value: 25
+    unit: "%"
+    text: "25"
+    suggest: { min: 18, max: 33, step: 1 }
+  - name: pct2
+    value: 50
+    unit: "%"
+    text: "50"
+    suggest: { min: 35, max: 65, step: 1 }
+scenario:
+  id: phys161-exam4-p097
+  source: { document: PHYS161_Exam4, labels: [ P97 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A Carnot engine whose low-temperature reservoir is at {T:unit} has an efficiency of {pct}%.The
+    efficiency is to be increased to {pct2}%.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: pct2, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+  parts:
+    - id: answer
+      prompt: >-
+        By how many kelvins must the temperature of the high-temperature reservoir be increased if
+        the temperature of the low-temperature reservoir remains constant? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: -90, pct: 25, pct2: 50 }
+    parts:
+      - { id: answer, answer: 122, unit: K, source: P97 }

@@ -1,0 +1,60 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P5
+number: 5
+section: Units
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A powerful engine has a displacement of 305 cubic inches. Express this displacement in liters
+  (L) by using conversions 1 L = 1000 cm<sup>3</sup> and 1 in = 2.54 cm. (4.998 L)
+text: A powerful engine has a displacement of 305 cubic inches. Express this displacement in liters
+  (L) by using conversions 1 L = 1000 cm^3 and 1 in = 2.54 cm. (4.998 L)
+answer: { value: 4.998, unit: L, raw: 4.998 L }
+figures: []
+literals:
+  - name: x
+    value: 305
+    text: "305"
+    suggest: { min: 214, max: 397, step: 1 }
+  - name: V
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 1000
+    unit: cm^3
+    text: "1000"
+    suggest: { min: 700, max: 1300, step: 1 }
+  - name: x2
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: in_val
+    value: 2.54
+    unit: cm
+    text: "2.54"
+    suggest: { min: 1.78, max: 3.3, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam1-p005
+  source: { document: PHYS161_Exam1, labels: [ P5 ] }
+  section: Units
+  narrative: A powerful engine has a displacement of {x} cubic inches.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: in_val, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: >-
+        Express this displacement in liters (L) by using conversions {V:unit} = {L:unit} and {x2} in
+        = {in_val:unit}. {_0}{_u}
+      answer: TODO
+      unit: L
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 305, V: 1, L: 1000, x2: 1, in_val: 2.54 }
+    parts:
+      - { id: answer, answer: 4.998, unit: L, source: P5 }

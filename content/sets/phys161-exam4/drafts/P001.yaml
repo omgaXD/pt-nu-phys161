@@ -1,0 +1,64 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P1
+number: 1
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Assuming that the human body is 100 percent efficient in converting consumed food energy into
+  work and heat at the rate of 97 W, calculate how many kilocalories of food energy a human needs
+  per 24 hours. 1 kcal = 4.186 kJ. (2002.1022455805)
+text: Assuming that the human body is 100 percent efficient in converting consumed food energy into
+  work and heat at the rate of 97 W, calculate how many kilocalories of food energy a human needs
+  per 24 hours. 1 kcal = 4.186 kJ. (2002.1022455805)
+answer: { value: 2002.1022455805, raw: "2002.1022455805" }
+figures: []
+literals:
+  - name: pct
+    value: 100
+    unit: "%"
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: P
+    value: 97
+    unit: W
+    text: "97"
+    suggest: { min: 68, max: 126, step: 1 }
+  - name: t
+    value: 24
+    unit: h
+    text: "24"
+    suggest: { min: 17, max: 31, step: 1 }
+  - name: Q
+    value: 1
+    unit: kcal
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: kcal
+    value: 4.186
+    unit: kJ
+    text: "4.186"
+    suggest: { min: 2.93, max: 5.442, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p001
+  source: { document: PHYS161_Exam4, labels: [ P1 ] }
+  section: Temperature and heat
+  narrative: ""
+  vars:
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: h }
+    - { name: Q, kind: range, min: TODO, max: TODO, step: TODO, unit: kcal }
+    - { name: kcal, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ }
+  parts:
+    - id: answer
+      prompt: >-
+        Assuming that the human body is {pct:unit} efficient in converting consumed food energy into
+        work and heat at the rate of {P:unit}, calculate how many kilocalories of food energy a
+        human needs per {t:unit}. {Q:unit} = {kcal:unit}. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { pct: 100, P: 97, t: 24, Q: 1, kcal: 4.186 }
+    parts:
+      - { id: answer, answer: 2002.1022455805, source: P1 }

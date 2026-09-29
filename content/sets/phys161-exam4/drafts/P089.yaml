@@ -1,0 +1,46 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P89
+number: 89
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Three moles of an ideal gas undergo a reversible isothermal compression at 22°C. During this
+  compression, 1550 J of work is done on the gas. What is the change in entropy of the gas?
+  (-5.2542372881356 J/K)
+text: Three moles of an ideal gas undergo a reversible isothermal compression at 22°C. During this
+  compression, 1550 J of work is done on the gas. What is the change in entropy of the gas?
+  (-5.2542372881356 J/K)
+answer: { value: -5.2542372881356, unit: J/K, raw: -5.2542372881356 J/K }
+figures: []
+literals:
+  - name: T
+    value: 22
+    unit: °C
+    text: "22"
+    suggest: { min: 15, max: 29, step: 1 }
+  - name: E
+    value: 1550
+    unit: J
+    text: "1550"
+    suggest: { min: 1085, max: 2015, step: 1 }
+scenario:
+  id: phys161-exam4-p089
+  source: { document: PHYS161_Exam4, labels: [ P89 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    Three moles of an ideal gas undergo a reversible isothermal compression at {T:unit}. During this
+    compression, {E:unit} of work is done on the gas.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  parts:
+    - id: answer
+      prompt: What is the change in entropy of the gas? {_0}{_u}
+      answer: TODO
+      unit: J/K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 22, E: 1550 }
+    parts:
+      - { id: answer, answer: -5.2542372881356, unit: J/K, source: P89 }

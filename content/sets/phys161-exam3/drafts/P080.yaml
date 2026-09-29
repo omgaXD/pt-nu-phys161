@@ -1,0 +1,52 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P80
+number: 80
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A musician tunes the string of her instrument to a fundamental frequency of 74 Hz. The
+  vibrating portion of the string is 0.66 m long and has a mass of 14.7 g. With what tension must
+  the musician stretch it? (212.51 N)
+text: A musician tunes the string of her instrument to a fundamental frequency of 74 Hz. The
+  vibrating portion of the string is 0.66 m long and has a mass of 14.7 g. With what tension must
+  the musician stretch it? (212.51 N)
+answer: { value: 212.51, unit: N, raw: 212.51 N }
+figures: []
+literals:
+  - name: f
+    value: 74
+    unit: Hz
+    text: "74"
+    suggest: { min: 52, max: 96, step: 1 }
+  - name: d
+    value: 0.66
+    unit: m
+    text: "0.66"
+    suggest: { min: 0.46, max: 0.86, step: 0.01, decimals: 2 }
+  - name: m
+    value: 14.7
+    unit: g
+    text: "14.7"
+    suggest: { min: 10.3, max: 19.1, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p080
+  source: { document: PHYS161_Exam3, labels: [ P80 ] }
+  section: Waves
+  narrative: >-
+    A musician tunes the string of her instrument to a fundamental frequency of {f:unit}. The
+    vibrating portion of the string is {d:unit} long and has a mass of {m:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+  parts:
+    - id: answer
+      prompt: With what tension must the musician stretch it? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 74, d: 0.66, m: 14.7 }
+    parts:
+      - { id: answer, answer: 212.51, unit: N, source: P80 }

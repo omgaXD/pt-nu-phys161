@@ -1,0 +1,58 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P91
+number: 91
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A student immerses one end of a copper rod in boiling water at 100°C and the other end in an
+  ice-water mixture at 0°C. The sides of the rod are insulated. After steady-state conditions have
+  been achieved in the rod, 0.16 kg of ice melts in a certain time interval. For this time interval,
+  find the entropy change of the ice-water mixture. Heat of fusion of water is 334 kJ/kg.
+  (195.75091575092 J/K)
+text: A student immerses one end of a copper rod in boiling water at 100°C and the other end in an
+  ice-water mixture at 0°C. The sides of the rod are insulated. After steady-state conditions have
+  been achieved in the rod, 0.16 kg of ice melts in a certain time interval. For this time interval,
+  find the entropy change of the ice-water mixture. Heat of fusion of water is 334 kJ/kg.
+  (195.75091575092 J/K)
+answer: { value: 195.75091575092, unit: J/K, raw: 195.75091575092 J/K }
+figures: []
+literals:
+  - name: T
+    value: 100
+    unit: °C
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: m
+    value: 0.16
+    unit: kg
+    text: "0.16"
+    suggest: { min: 0.11, max: 0.21, step: 0.01, decimals: 2 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+scenario:
+  id: phys161-exam4-p091
+  source: { document: PHYS161_Exam4, labels: [ P91 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A student immerses one end of a copper rod in boiling water at {T:unit} and the other end in an
+    ice-water mixture at 0°C. The sides of the rod are insulated. After steady-state conditions have
+    been achieved in the rod, {m:unit} of ice melts in a certain time interval. For this time
+    interval, find the entropy change of the ice-water mixture.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: Heat of fusion of water is {Lh:unit}. {_0}{_u}
+      answer: TODO
+      unit: J/K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 100, m: 0.16, Lh: 334 }
+    parts:
+      - { id: answer, answer: 195.75091575092, unit: J/K, source: P91 }

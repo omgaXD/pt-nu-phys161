@@ -15,7 +15,7 @@ text: A 1.9 kg block is pushed against a spring with negligible mass and force c
   gravitational acceleration is g = 9.8 m/s^2. (1.55597 m/s)
 answer: { value: 1.55597, unit: m/s, raw: 1.55597 m/s }
 figures:
-  - { src: figures/unnamed_008_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_008_fr4U.png }
+  - { src: figures/unnamed_022_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_022_GNcJ.png }
 literals:
   - name: m
     value: 1.9
@@ -47,7 +47,7 @@ scenario:
   id: phys161-exam2-p041
   source: { document: PHYS161_Exam2, labels: [ P41 ] }
   section: Energy conservation
-  figure: { id: fig, src: figures/unnamed_008_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_022_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A {m:unit} block is pushed against a spring with negligible mass and force constant k =
     {k:unit}, compressing it {d:unit}. When the block is released, it moves along a frictionless

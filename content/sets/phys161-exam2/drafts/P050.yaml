@@ -17,7 +17,7 @@ text: A block with mass 1 kg is forced against a horizontal spring of negligible
   (0.2195)
 answer: { value: 0.2195, raw: "0.2195" }
 figures:
-  - { src: figures/unnamed_024_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_024_fr4U.png }
+  - { src: figures/unnamed_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_GNcJ.png }
 literals:
   - name: m
     value: 1
@@ -49,7 +49,7 @@ scenario:
   id: phys161-exam2-p050
   source: { document: PHYS161_Exam2, labels: [ P50 ] }
   section: Energy conservation
-  figure: { id: fig, src: figures/unnamed_024_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A block with mass {m:unit} is forced against a horizontal spring of negligible mass, compressing
     the spring a distance of {d:unit}. When released, the block moves on a horizontal tabletop for

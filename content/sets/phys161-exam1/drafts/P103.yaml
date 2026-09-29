@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P103
+number: 103
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A rod exerts a force F = 10.5 N at an angle θ = 47° below the horizontal on a block of mass 5
+  kg, pushing the block along a horizontal frictionless floor. What is the magnitude of the normal
+  force exerted on the block by the floor? The gravitational acceleration is g = 9.8 m/s². (56.6792
+  N)
+text: A rod exerts a force F = 10.5 N at an angle θ = 47° below the horizontal on a block of mass 5
+  kg, pushing the block along a horizontal frictionless floor. What is the magnitude of the normal
+  force exerted on the block by the floor? The gravitational acceleration is g = 9.8 m/s^2. (56.6792
+  N)
+answer: { value: 56.6792, unit: N, raw: 56.6792 N }
+figures: []
+literals:
+  - name: F
+    value: 10.5
+    unit: N
+    text: "10.5"
+    suggest: { min: 7.3, max: 13.7, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 47
+    unit: °
+    text: "47"
+    suggest: { min: 33, max: 61, step: 1 }
+  - name: m
+    value: 5
+    unit: kg
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p103
+  source: { document: PHYS161_Exam1, labels: [ P103 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    A rod exerts a force F = {F:unit} at an angle θ = {theta}° below the horizontal on a block of
+    mass {m:unit}, pushing the block along a horizontal frictionless floor. The gravitational
+    acceleration is g = {g:unit}.
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the normal force exerted on the block by the floor? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 10.5, theta: 47, m: 5, g: 9.8 }
+    parts:
+      - { id: answer, answer: 56.6792, unit: N, source: P103 }

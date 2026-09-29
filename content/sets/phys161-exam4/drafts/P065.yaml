@@ -1,0 +1,69 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P65
+number: 65
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: One-half mole of a monatomic ideal gas is taken from state a to state c. If P<sub>a</sub> =
+  4.05×10<sup>5</sup> Pa, P<sub>b</sub> = 2.15×10<sup>5</sup> Pa, V<sub>a</sub> = 0.0021
+  m<sup>3</sup>, V<sub>b</sub> = 0.003 m<sup>3</sup>, and V<sub>c</sub> = 0.0041 m<sup>3</sup>,
+  calculate the work done on (or by) the gas as it moves from state a to state c. (515.5 J)
+text: One-half mole of a monatomic ideal gas is taken from state a to state c. If P_a = 4.05×10^5
+  Pa, P_b = 2.15×10^5 Pa, V_a = 0.0021 m^3, V_b = 0.003 m^3, and V_c = 0.0041 m^3, calculate the
+  work done on (or by) the gas as it moves from state a to state c. (515.5 J)
+answer: { value: 515.5, unit: J, raw: 515.5 J }
+figures:
+  - { src: figures/unnamed_006_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_006_xiMS.png }
+literals:
+  - name: Pa
+    value: 405000
+    unit: Pa
+    text: 4.05×10^5
+    suggest: { min: 283500, max: 526500, step: 1 }
+  - name: Pb
+    value: 215000
+    unit: Pa
+    text: 2.15×10^5
+    suggest: { min: 150500, max: 279500, step: 1 }
+  - name: Va
+    value: 0.0021
+    unit: m^3
+    text: "0.0021"
+    suggest: { min: 0.0015, max: 0.0027, step: 0.0001, decimals: 4 }
+  - name: Vb
+    value: 0.003
+    unit: m^3
+    text: "0.003"
+    suggest: { min: 0.002, max: 0.004, step: 0.001, decimals: 3 }
+  - name: Vc
+    value: 0.0041
+    unit: m^3
+    text: "0.0041"
+    suggest: { min: 0.0029, max: 0.0053, step: 0.0001, decimals: 4 }
+scenario:
+  id: phys161-exam4-p065
+  source: { document: PHYS161_Exam4, labels: [ P65 ] }
+  section: 1st Law of Thermodynamics
+  figure: { id: fig, src: figures/unnamed_006_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    One-half mole of a monatomic ideal gas is taken from state a to state c. {@fig}
+  vars:
+    - { name: Pa, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Pb, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Va, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: Vb, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: Vc, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        If $P_{a}$ = {Pa:unit}, $P_{b}$ = {Pb:unit}, $V_{a}$ = {Va:unit}, $V_{b}$ = {Vb:unit}, and
+        $V_{c}$ = {Vc:unit}, calculate the work done on (or by) the gas as it moves from state a to
+        state c. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { Pa: 405000, Pb: 215000, Va: 0.0021, Vb: 0.003, Vc: 0.0041 }
+    parts:
+      - { id: answer, answer: 515.5, unit: J, source: P65 }

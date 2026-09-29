@@ -1,0 +1,90 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P13
+number: 13
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  How much energy must be removed when 164 g of steam, at a temperature of 147°C, is cooled and
+  frozen into 164 g of ice at 0°C? Provide an absolute value.
+
+  Specific heat of steam is 2.1 kJ/(kg K).
+
+  Specific heat of water is 4186 J/ (kg K).
+
+  Latent heat of vaporization for water is 2256 kJ/kg.
+
+  Latent heat of fusion for water is 334 kJ/kg.
+
+  (509597.2 J)
+text: How much energy must be removed when 164 g of steam, at a temperature of 147°C, is cooled and
+  frozen into 164 g of ice at 0°C? Provide an absolute value. Specific heat of steam is 2.1 kJ/(kg
+  K). Specific heat of water is 4186 J/ (kg K). Latent heat of vaporization for water is 2256 kJ/kg.
+  Latent heat of fusion for water is 334 kJ/kg. (509597.2 J)
+answer: { value: 509597.2, unit: J, raw: 509597.2 J }
+figures: []
+literals:
+  - name: m
+    value: 164
+    unit: g
+    text: "164"
+    suggest: { min: 115, max: 213, step: 1 }
+  - name: T
+    value: 147
+    unit: °C
+    text: "147"
+    suggest: { min: 103, max: 191, step: 1 }
+  - name: m2
+    value: 164
+    unit: g
+    text: "164"
+    suggest: { min: 115, max: 213, step: 1 }
+  - name: c
+    value: 2.1
+    unit: kJ/(kg K)
+    text: "2.1"
+    suggest: { min: 1.5, max: 2.7, step: 0.1, decimals: 1 }
+  - name: c2
+    value: 4186
+    unit: J/(kg K)
+    text: "4186"
+    suggest: { min: 2930, max: 5442, step: 1 }
+  - name: Lh
+    value: 2256
+    unit: kJ/kg
+    text: "2256"
+    suggest: { min: 1579, max: 2933, step: 1 }
+  - name: Lh2
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+scenario:
+  id: phys161-exam4-p013
+  source: { document: PHYS161_Exam4, labels: [ P13 ] }
+  section: Temperature and heat
+  narrative: >-
+    Provide an absolute value. Specific heat of steam is {c:unit}. Specific heat of water is
+    {c2:unit}. Latent heat of vaporization for water is {Lh:unit}. Latent heat of fusion for water
+    is {Lh2:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/(kg K) }
+    - { name: c2, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+    - { name: Lh2, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: >-
+        How much energy must be removed when {m:unit} of steam, at a temperature of {T:unit}, is
+        cooled and frozen into {m2:unit} of ice at 0°C? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 164, T: 147, m2: 164, c: 2.1, c2: 4186, Lh: 2256, Lh2: 334 }
+    parts:
+      - { id: answer, answer: 509597.2, unit: J, source: P13 }

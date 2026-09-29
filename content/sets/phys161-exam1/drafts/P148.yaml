@@ -1,0 +1,71 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P148
+number: 148
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A 74-kg person rides in a 33-kg cart moving at 11 m/s at the top of a hill that is in the shape
+  of an arc of a circle with a radius of 39 m. What is the apparent weight of the person as the cart
+  passes over the top of the hill? The gravitational acceleration is g = 9.8 m/s<sup>2</sup>.
+  (495.61 N)
+text: A 74-kg person rides in a 33-kg cart moving at 11 m/s at the top of a hill that is in the
+  shape of an arc of a circle with a radius of 39 m. What is the apparent weight of the person as
+  the cart passes over the top of the hill? The gravitational acceleration is g = 9.8 m/s^2. (495.61
+  N)
+answer: { value: 495.61, unit: N, raw: 495.61 N }
+figures: []
+literals:
+  - name: m
+    value: 74
+    unit: kg
+    text: "74"
+    suggest: { min: 52, max: 96, step: 1 }
+  - name: m2
+    value: 33
+    unit: kg
+    text: "33"
+    suggest: { min: 23, max: 43, step: 1 }
+  - name: v
+    value: 11
+    unit: m/s
+    text: "11"
+    suggest: { min: 8, max: 14, step: 1 }
+  - name: r
+    value: 39
+    unit: m
+    text: "39"
+    suggest: { min: 27, max: 51, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p148
+  source: { document: PHYS161_Exam1, labels: [ P148 ] }
+  section: Application of Newton's laws
+  narrative: >-
+    A {m}-kg person rides in a {m2}-kg cart moving at {v:unit} at the top of a hill that is in the
+    shape of an arc of a circle with a radius of {r:unit}. The gravitational acceleration is g =
+    {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the apparent weight of the person as the cart passes over the top of the hill?
+        {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 74, m2: 33, v: 11, r: 39, g: 9.8 }
+    parts:
+      - { id: answer, answer: 495.61, unit: N, source: P148 }

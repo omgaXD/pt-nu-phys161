@@ -1,0 +1,43 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P44
+number: 44
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A large organic molecule has a mass of 1.3×10<sup>−21</sup> kg. What is the molar mass of this
+  compound? Avogadro's number N<sub>A</sub> = 6.022×10<sup>23</sup> 1/mol. (782.86 kg/mol)
+text: A large organic molecule has a mass of 1.3×10^-21 kg. What is the molar mass of this compound?
+  Avogadro's number N_A = 6.022×10^23 1/mol. (782.86 kg/mol)
+answer: { value: 782.86, unit: kg/mol, raw: 782.86 kg/mol }
+figures: []
+literals:
+  - name: m
+    value: 1.3e-21
+    unit: kg
+    text: 1.3×10^-21
+    suggest: { min: 9e-22, max: 1.7e-21, step: 1e-22 }
+  - name: NA
+    value: 6.022e+23
+    unit: 1/mol
+    text: 6.022×10^23
+    suggest: { min: 4.2e+23, max: 7.8e+23, step: 1e+22 }
+scenario:
+  id: phys161-exam4-p044
+  source: { document: PHYS161_Exam4, labels: [ P44 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    A large organic molecule has a mass of {m:unit}. Avogadro's number $N_{A}$ = {NA:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: NA, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/mol }
+  parts:
+    - id: answer
+      prompt: What is the molar mass of this compound? {_0}{_u}
+      answer: TODO
+      unit: kg/mol
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1.3e-21, NA: 6.022e+23 }
+    parts:
+      - { id: answer, answer: 782.86, unit: kg/mol, source: P44 }

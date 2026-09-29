@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P31
+number: 31
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A world-class sprinter accelerated to his maximum in 4 s. He then maintains this speed for the
+  remainder of a 100-m race, finishing with a total time of 9.9 s. What is the runner's average
+  acceleration for the entire race? (1.2786088735456 m/s^2)
+text: A world-class sprinter accelerated to his maximum in 4 s. He then maintains this speed for the
+  remainder of a 100-m race, finishing with a total time of 9.9 s. What is the runner's average
+  acceleration for the entire race? (1.2786088735456 m/s^2)
+answer: { value: 1.2786088735456, unit: m/s^2, raw: 1.2786088735456 m/s^2 }
+figures: []
+literals:
+  - name: t
+    value: 4
+    unit: s
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: d
+    value: 100
+    unit: m
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: t2
+    value: 9.9
+    unit: s
+    text: "9.9"
+    suggest: { min: 6.9, max: 12.9, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p031
+  source: { document: PHYS161_Exam1, labels: [ P31 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A world-class sprinter accelerated to his maximum in {t:unit}. He then maintains this speed for
+    the remainder of a {d}-m race, finishing with a total time of {t2:unit}.
+  vars:
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: t2, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the runner's average acceleration for the entire race? {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { t: 4, d: 100, t2: 9.9 }
+    parts:
+      - { id: answer, answer: 1.2786088735456, unit: m/s^2, source: P31 }

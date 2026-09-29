@@ -1,0 +1,61 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P24
+number: 24
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Given the two vectors A = (5î + 2ĵ + 3k̂) and B = (-4î + 4ĵ + -3k̂), find the magnitude of
+  their vector product A × B. (33.4215)
+text: Given the two vectors A = (5î + 2ĵ + 3k̂) and B = (-4î + 4ĵ + -3k̂), find the magnitude of
+  their vector product A × B. (33.4215)
+answer: { value: 33.4215, raw: "33.4215" }
+figures: []
+literals:
+  - name: A
+    value: 5
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: vy
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: vz
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: B
+    value: -4
+    text: "-4"
+    suggest: { min: -5, max: -3, step: 1 }
+  - name: vy2
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: vz2
+    value: -3
+    text: "-3"
+    suggest: { min: -4, max: -2, step: 1 }
+scenario:
+  id: phys161-exam1-p024
+  source: { document: PHYS161_Exam1, labels: [ P24 ] }
+  section: Vectors
+  narrative: ""
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: B, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Given the two vectors A = ({A}î + {vy}ĵ + {vz}k̂) and B = ({B}î + {vy2}ĵ + {vz2}k̂), find
+        the magnitude of their vector product A × B. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 5, vy: 2, vz: 3, B: -4, vy2: 4, vz2: -3 }
+    parts:
+      - { id: answer, answer: 33.4215, source: P24 }

@@ -1,0 +1,67 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P144
+number: 144
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A small remote-control car with mass 2.2 kg moves at a constant speed of v = 12.7 m/s in a
+  vertical circle inside a hollow metal cylinder that has a radius of 4 m. What is the magnitude of
+  the normal force exerted on the car by the walls of the cylinder at point B? The gravitational
+  acceleration is g = 9.8 m/s<sup>2</sup>. (67.1495 N)
+text: A small remote-control car with mass 2.2 kg moves at a constant speed of v = 12.7 m/s in a
+  vertical circle inside a hollow metal cylinder that has a radius of 4 m. What is the magnitude of
+  the normal force exerted on the car by the walls of the cylinder at point B? The gravitational
+  acceleration is g = 9.8 m/s^2. (67.1495 N)
+answer: { value: 67.1495, unit: N, raw: 67.1495 N }
+figures:
+  - { src: figures/unnamed_014_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_014_R6Ld.png }
+literals:
+  - name: m
+    value: 2.2
+    unit: kg
+    text: "2.2"
+    suggest: { min: 1.5, max: 2.9, step: 0.1, decimals: 1 }
+  - name: v
+    value: 12.7
+    unit: m/s
+    text: "12.7"
+    suggest: { min: 8.9, max: 16.5, step: 0.1, decimals: 1 }
+  - name: r
+    value: 4
+    unit: m
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p144
+  source: { document: PHYS161_Exam1, labels: [ P144 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_014_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A small remote-control car with mass {m:unit} moves at a constant speed of v = {v:unit} in a
+    vertical circle inside a hollow metal cylinder that has a radius of {r:unit}. The gravitational
+    acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the normal force exerted on the car by the walls of the cylinder at
+        point B? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 2.2, v: 12.7, r: 4, g: 9.8 }
+    parts:
+      - { id: answer, answer: 67.1495, unit: N, source: P144 }

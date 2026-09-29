@@ -1,0 +1,65 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P112
+number: 112
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: There is a banana at the top of a 9.12 m long rope. A monkey of mass m=10.9 kg starts to climb
+  up to reach a banana. The rope will snap if the tension exceeds 134.07 N. Calculate the least
+  amount of time the monkey could take to reach the banana without breaking the rope. The
+  gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (2.70111 s)
+text: There is a banana at the top of a 9.12 m long rope. A monkey of mass m=10.9 kg starts to climb
+  up to reach a banana. The rope will snap if the tension exceeds 134.07 N. Calculate the least
+  amount of time the monkey could take to reach the banana without breaking the rope. The
+  gravitational acceleration is g = 9.8 m/s^2. (2.70111 s)
+answer: { value: 2.70111, unit: s, raw: 2.70111 s }
+figures: []
+literals:
+  - name: d
+    value: 9.12
+    unit: m
+    text: "9.12"
+    suggest: { min: 6.38, max: 11.86, step: 0.01, decimals: 2 }
+  - name: m
+    value: 10.9
+    unit: kg
+    text: "10.9"
+    suggest: { min: 7.6, max: 14.2, step: 0.1, decimals: 1 }
+  - name: F
+    value: 134.07
+    unit: N
+    text: "134.07"
+    suggest: { min: 93.85, max: 174.29, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p112
+  source: { document: PHYS161_Exam1, labels: [ P112 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    There is a banana at the top of a {d:unit} long rope. A monkey of mass m={m:unit} starts to
+    climb up to reach a banana. The rope will snap if the tension exceeds {F:unit}. The
+    gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the least amount of time the monkey could take to reach the banana without
+        breaking the rope. {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 9.12, m: 10.9, F: 134.07, g: 9.8 }
+    parts:
+      - { id: answer, answer: 2.70111, unit: s, source: P112 }

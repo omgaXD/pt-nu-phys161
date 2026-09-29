@@ -1,0 +1,64 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P20
+number: 20
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  A 100 kg weight is hanging from the ceiling by a thin copper wire. In its fundamental mode, this
+  wire vibrates at the frequency 429 Hz. You then increase the temperature of the wire by 29°
+
+  C. Find the magnitude of the change of fundamental frequency. Coefficient of linear expansion of
+  copper is 1.7×10<sup>−5</sup> 1/°C. (0.1057485 Hz)
+text: A 100 kg weight is hanging from the ceiling by a thin copper wire. In its fundamental mode,
+  this wire vibrates at the frequency 429 Hz. You then increase the temperature of the wire by 29°
+  C. Find the magnitude of the change of fundamental frequency. Coefficient of linear expansion of
+  copper is 1.7×10^-5 1/°C. (0.1057485 Hz)
+answer: { value: 0.1057485, unit: Hz, raw: 0.1057485 Hz }
+figures: []
+literals:
+  - name: m
+    value: 100
+    unit: kg
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: f
+    value: 429
+    unit: Hz
+    text: "429"
+    suggest: { min: 300, max: 558, step: 1 }
+  - name: T
+    value: 29
+    unit: °C
+    text: "29"
+    suggest: { min: 20, max: 38, step: 1 }
+  - name: alpha
+    value: 0.000017
+    unit: 1/°C
+    text: 1.7×10^-5
+    suggest: { min: 0.000012, max: 0.000022, step: 0.000001, decimals: 6 }
+scenario:
+  id: phys161-exam4-p020
+  source: { document: PHYS161_Exam4, labels: [ P20 ] }
+  section: Temperature and heat
+  narrative: >-
+    A {m:unit} weight is hanging from the ceiling by a thin copper wire. In its fundamental mode,
+    this wire vibrates at the frequency {f:unit}. You then increase the temperature of the wire by
+    {T:unit}. Coefficient of linear expansion of copper is {alpha:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/°C }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of the change of fundamental frequency. {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 100, f: 429, T: 29, alpha: 0.000017 }
+    parts:
+      - { id: answer, answer: 0.1057485, unit: Hz, source: P20 }

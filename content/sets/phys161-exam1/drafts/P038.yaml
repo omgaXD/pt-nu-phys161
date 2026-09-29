@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P38
+number: 38
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A lunar lander is making its descent to Moon Base. The engine is cut off when the lander is 3 m
+  above the surface and has a downward speed of 0.6 m/s. With the engine off, the lander is in free
+  fall. What is the speed of the lander just before it touches the surface? The acceleration due to
+  gravity on the moon is 1.6 m/s<sup>2</sup>. (3.1559467676119 m/s)
+text: A lunar lander is making its descent to Moon Base. The engine is cut off when the lander is 3
+  m above the surface and has a downward speed of 0.6 m/s. With the engine off, the lander is in
+  free fall. What is the speed of the lander just before it touches the surface? The acceleration
+  due to gravity on the moon is 1.6 m/s^2. (3.1559467676119 m/s)
+answer: { value: 3.1559467676119, unit: m/s, raw: 3.1559467676119 m/s }
+figures: []
+literals:
+  - name: d
+    value: 3
+    unit: m
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: v
+    value: 0.6
+    unit: m/s
+    text: "0.6"
+    suggest: { min: 0.4, max: 0.8, step: 0.1, decimals: 1 }
+  - name: a
+    value: 1.6
+    unit: m/s^2
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p038
+  source: { document: PHYS161_Exam1, labels: [ P38 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A lunar lander is making its descent to Moon Base. The engine is cut off when the lander is
+    {d:unit} above the surface and has a downward speed of {v:unit}. With the engine off, the lander
+    is in free fall. The acceleration due to gravity on the moon is {a:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the speed of the lander just before it touches the surface? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 3, v: 0.6, a: 1.6 }
+    parts:
+      - { id: answer, answer: 3.1559467676119, unit: m/s, source: P38 }

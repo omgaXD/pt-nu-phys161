@@ -1,0 +1,69 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P146
+number: 146
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Find the terminal velocity of a 72-kg skydiver falling in a spread-eagle position. Assume the
+  density of air is ρ = 1.21 kg/m<sup>3</sup>, a skydiver descending in a spread-eagle position has
+  a cross-sectional area of A = 0.7 m<sup>2</sup> and a drag coefficient of C = 1. The gravitational
+  acceleration is g = 9.8 m/s<sup>2</sup>. (40.818 m/s)
+text: Find the terminal velocity of a 72-kg skydiver falling in a spread-eagle position. Assume the
+  density of air is ρ = 1.21 kg/m^3, a skydiver descending in a spread-eagle position has a
+  cross-sectional area of A = 0.7 m^2 and a drag coefficient of C = 1. The gravitational
+  acceleration is g = 9.8 m/s^2. (40.818 m/s)
+answer: { value: 40.818, unit: m/s, raw: 40.818 m/s }
+figures: []
+literals:
+  - name: m
+    value: 72
+    unit: kg
+    text: "72"
+    suggest: { min: 50, max: 94, step: 1 }
+  - name: rho
+    value: 1.21
+    unit: kg/m^3
+    text: "1.21"
+    suggest: { min: 0.85, max: 1.57, step: 0.01, decimals: 2 }
+  - name: A
+    value: 0.7
+    unit: m^2
+    text: "0.7"
+    suggest: { min: 0.5, max: 0.9, step: 0.1, decimals: 1 }
+  - name: C
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p146
+  source: { document: PHYS161_Exam1, labels: [ P146 ] }
+  section: Application of Newton's laws
+  narrative: >-
+    Assume the density of air is ρ = {rho:unit}, a skydiver descending in a spread-eagle position
+    has a cross-sectional area of A = {A:unit} and a drag coefficient of C = {C}. The gravitational
+    acceleration is g = {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO, unit: m^2 }
+    - { name: C, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the terminal velocity of a {m}-kg skydiver falling in a spread-eagle position. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 72, rho: 1.21, A: 0.7, C: 1, g: 9.8 }
+    parts:
+      - { id: answer, answer: 40.818, unit: m/s, source: P146 }

@@ -17,7 +17,7 @@ text: A 58-kg grindstone is a solid disk 0.5 m in diameter. You press an ax down
   bring the stone from rest to 140 rev/min in 7 s? (69.99 N)
 answer: { value: 69.99, unit: N, raw: 69.99 N }
 figures:
-  - { src: figures/unnamed_025_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_025_fr4U.png }
+  - { src: figures/unnamed_021_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_021_GNcJ.png }
 literals:
   - name: m
     value: 58
@@ -62,7 +62,7 @@ scenario:
   id: phys161-exam2-p121
   source: { document: PHYS161_Exam2, labels: [ P121 ] }
   section: Torque
-  figure: { id: fig, src: figures/unnamed_025_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_021_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A {m}-kg grindstone is a solid disk {d:unit} in diameter. You press an ax down on the rim with a
     normal force of {F:unit}. The coefficient of kinetic friction between the blade and the stone is

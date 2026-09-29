@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P137
+number: 137
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A window washer pushes his scrub brush up a vertical window at constant speed by applying a
+  force F at an angle α = 58.8°. The brush weighs 14 N and the coefficient of kinetic friction is
+  μ<sub>k</sub> = 0.17. Calculate the magnitude of the force F. (18.245804831566 N)
+text: A window washer pushes his scrub brush up a vertical window at constant speed by applying a
+  force F at an angle α = 58.8°. The brush weighs 14 N and the coefficient of kinetic friction is
+  μ_k = 0.17. Calculate the magnitude of the force F. (18.245804831566 N)
+answer: { value: 18.245804831566, unit: N, raw: 18.245804831566 N }
+figures:
+  - { src: figures/unnamed_019_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_019_R6Ld.png }
+literals:
+  - name: alpha
+    value: 58.8
+    unit: °
+    text: "58.8"
+    suggest: { min: 41.2, max: 76.4, step: 0.1, decimals: 1 }
+  - name: F
+    value: 14
+    unit: N
+    text: "14"
+    suggest: { min: 10, max: 18, step: 1 }
+  - name: mu_k
+    value: 0.17
+    text: "0.17"
+    suggest: { min: 0.12, max: 0.22, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam1-p137
+  source: { document: PHYS161_Exam1, labels: [ P137 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_019_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A window washer pushes his scrub brush up a vertical window at constant speed by applying a
+    force F at an angle α = {alpha}°. The brush weighs {F:unit} and the coefficient of kinetic
+    friction is $\mu_{k}$ = {mu_k}. {@fig}
+  vars:
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: mu_k, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: Calculate the magnitude of the force F. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { alpha: 58.8, F: 14, mu_k: 0.17 }
+    parts:
+      - { id: answer, answer: 18.245804831566, unit: N, source: P137 }

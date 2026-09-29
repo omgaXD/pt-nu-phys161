@@ -1,0 +1,46 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P80
+number: 80
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A block of ice with a mass of 237 g at 0°C is placed in a large lake. The temperature of the
+  lake is just slightly higher than 0°C, and the ice melts. What is the entropy change of the lake?
+  Heat of fusion of water is 334 kJ/kg. (-289.95604395604 J/K)
+text: A block of ice with a mass of 237 g at 0°C is placed in a large lake. The temperature of the
+  lake is just slightly higher than 0°C, and the ice melts. What is the entropy change of the lake?
+  Heat of fusion of water is 334 kJ/kg. (-289.95604395604 J/K)
+answer: { value: -289.95604395604, unit: J/K, raw: -289.95604395604 J/K }
+figures: []
+literals:
+  - name: m
+    value: 237
+    unit: g
+    text: "237"
+    suggest: { min: 166, max: 308, step: 1 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+scenario:
+  id: phys161-exam4-p080
+  source: { document: PHYS161_Exam4, labels: [ P80 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A block of ice with a mass of {m:unit} at 0°C is placed in a large lake. The temperature of the
+    lake is just slightly higher than 0°C, and the ice melts. Heat of fusion of water is {Lh:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: What is the entropy change of the lake? {_0}{_u}
+      answer: TODO
+      unit: J/K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 237, Lh: 334 }
+    parts:
+      - { id: answer, answer: -289.95604395604, unit: J/K, source: P80 }

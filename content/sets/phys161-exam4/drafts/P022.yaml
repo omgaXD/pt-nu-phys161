@@ -1,0 +1,75 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P22
+number: 22
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  A polystyrene foam icebox has a total area of 0.94 m<sup>2</sup> and walls with an average
+  thickness of 2 cm. The box contains ice, water, and canned beverages at 0°C. The inside of the box
+  is kept cold by melting ice. How much ice melts in one day if the icebox is kept in the trunk of a
+  car at 27°C?
+
+  Thermal conductivity of polystyrene foam is k = 0.010 W/ (m°C). Latent heat of fusion of water is
+  334 kJ/kg. (3.2826826347305 kg)
+text: A polystyrene foam icebox has a total area of 0.94 m^2 and walls with an average thickness of
+  2 cm. The box contains ice, water, and canned beverages at 0°C. The inside of the box is kept cold
+  by melting ice. How much ice melts in one day if the icebox is kept in the trunk of a car at 27°C?
+  Thermal conductivity of polystyrene foam is k = 0.010 W/ (m°C). Latent heat of fusion of water is
+  334 kJ/kg. (3.2826826347305 kg)
+answer: { value: 3.2826826347305, unit: kg, raw: 3.2826826347305 kg }
+figures: []
+literals:
+  - name: A
+    value: 0.94
+    unit: m^2
+    text: "0.94"
+    suggest: { min: 0.66, max: 1.22, step: 0.01, decimals: 2 }
+  - name: d
+    value: 2
+    unit: cm
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: T
+    value: 27
+    unit: °C
+    text: "27"
+    suggest: { min: 19, max: 35, step: 1 }
+  - name: k
+    value: 0.01
+    unit: W/(m °C)
+    text: "0.010"
+    suggest: { min: 0.007, max: 0.013, step: 0.001, decimals: 3 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+scenario:
+  id: phys161-exam4-p022
+  source: { document: PHYS161_Exam4, labels: [ P22 ] }
+  section: Temperature and heat
+  narrative: >-
+    A polystyrene foam icebox has a total area of {A:unit} and walls with an average thickness of
+    {d:unit}. The box contains ice, water, and canned beverages at 0°C. The inside of the box is
+    kept cold by melting ice. Thermal conductivity of polystyrene foam is k = {k:unit}. Latent heat
+    of fusion of water is {Lh:unit}.
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO, unit: m^2 }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: W/(m °C) }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: >-
+        How much ice melts in one day if the icebox is kept in the trunk of a car at {T:unit}?
+        {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 0.94, d: 2, T: 27, k: 0.01, Lh: 334 }
+    parts:
+      - { id: answer, answer: 3.2826826347305, unit: kg, source: P22 }

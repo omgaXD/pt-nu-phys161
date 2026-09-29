@@ -1,0 +1,75 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P71
+number: 71
+section: Kinematics of 2D and 3D motion in vectors form
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A rocket moves in the xy- plane. The rocket's acceleration has components a<sub>x</sub>(t) =
+  αt<sup>2</sup> and a<sub>y</sub>(t) = β - γt, where α = 2.4 m/s<sup>4</sup>, β = 9
+  m/s<sup>2</sup>, and γ = 1.6 m/s<sup>3</sup>. At t = 0 the rocket is at the origin and has
+  velocity v<sub>0</sub>=v<sub>0x</sub>i +v<sub>0y</sub>j, with v<sub>0x</sub> = 1.3 m/s and
+  v<sub>0y</sub> = 5 m/s. Calculate the position of the rocket along the vertical axis at t = 7 s.
+  (164.03333333333 m)
+text: A rocket moves in the xy- plane. The rocket's acceleration has components a_x(t) = αt^2 and
+  a_y(t) = β - γt, where α = 2.4 m/s^4, β = 9 m/s^2, and γ = 1.6 m/s^3. At t = 0 the rocket is at
+  the origin and has velocity v_0=v_0xi +v_0yj, with v_0x = 1.3 m/s and v_0y = 5 m/s. Calculate the
+  position of the rocket along the vertical axis at t = 7 s. (164.03333333333 m)
+answer: { value: 164.03333333333, unit: m, raw: 164.03333333333 m }
+figures: []
+literals:
+  - name: alpha
+    value: 2.4
+    text: "2.4"
+    suggest: { min: 1.7, max: 3.1, step: 0.1, decimals: 1 }
+  - name: beta
+    value: 9
+    unit: m/s^2
+    text: "9"
+    suggest: { min: 6, max: 12, step: 1 }
+  - name: gamma
+    value: 1.6
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: v0x
+    value: 1.3
+    unit: m/s
+    text: "1.3"
+    suggest: { min: 0.9, max: 1.7, step: 0.1, decimals: 1 }
+  - name: v0y
+    value: 5
+    unit: m/s
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: t
+    value: 7
+    unit: s
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+scenario:
+  id: phys161-exam1-p071
+  source: { document: PHYS161_Exam1, labels: [ P71 ] }
+  section: Kinematics of 2D and 3D motion in vectors form
+  narrative: >-
+    A rocket moves in the xy- plane. The rocket's acceleration has components $a_{x}$(t) = αt$^{2}$
+    and $a_{y}$(t) = β - γt, where α = {alpha} m/s$^{4}$, β = {beta:unit}, and γ = {gamma}
+    m/s$^{3}$. At t = 0 the rocket is at the origin and has velocity $v_{0}$=$v_{0xi}$ +$v_{0yj}$,
+    with $v_{0x}$ = {v0x:unit} and $v_{0y}$ = {v0y:unit}.
+  vars:
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: beta, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: gamma, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v0x, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: v0y, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the position of the rocket along the vertical axis at t = {t:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { alpha: 2.4, beta: 9, gamma: 1.6, v0x: 1.3, v0y: 5, t: 7 }
+    parts:
+      - { id: answer, answer: 164.03333333333, unit: m, source: P71 }

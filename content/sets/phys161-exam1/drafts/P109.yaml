@@ -1,0 +1,61 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P109
+number: 109
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A force F lifts vertically a chain consisting of five links, each of mass 0.1 kg. The chain is
+  lifted with a constant acceleration of magnitude a = 2.1 m/s<sup>2</sup>. Find the magnitude of
+  the force |F| that must be exerted on the top link to achieve this acceleration? The gravitational
+  acceleration is g = 9.8 m/s<sup>2</sup>. (5.95 N)
+text: A force F lifts vertically a chain consisting of five links, each of mass 0.1 kg. The chain is
+  lifted with a constant acceleration of magnitude a = 2.1 m/s^2. Find the magnitude of the force
+  |F| that must be exerted on the top link to achieve this acceleration? The gravitational
+  acceleration is g = 9.8 m/s^2. (5.95 N)
+answer: { value: 5.95, unit: N, raw: 5.95 N }
+figures:
+  - { src: figures/unnamed_024_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_024_R6Ld.png }
+literals:
+  - name: m
+    value: 0.1
+    unit: kg
+    text: "0.1"
+    suggest: { min: 0.1, max: 0.1, step: 0.1, decimals: 1 }
+  - name: a
+    value: 2.1
+    unit: m/s^2
+    text: "2.1"
+    suggest: { min: 1.5, max: 2.7, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p109
+  source: { document: PHYS161_Exam1, labels: [ P109 ] }
+  section: Newton's 2nd law
+  figure: { id: fig, src: figures/unnamed_024_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A force F lifts vertically a chain consisting of five links, each of mass {m:unit}. The chain is
+    lifted with a constant acceleration of magnitude a = {a:unit}. The gravitational acceleration is
+    g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of the force |F| that must be exerted on the top link to achieve this
+        acceleration? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 0.1, a: 2.1, g: 9.8 }
+    parts:
+      - { id: answer, answer: 5.95, unit: N, source: P109 }

@@ -1,0 +1,63 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P77
+number: 77
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A continuous succession of sinusoidal wave pulses are produced at one end of a very long string
+  and travel along the length of the string. The wave has frequency 64 Hz, amplitude 3 mm, and
+  wavelength 0.51 m. How long does it take the wave to travel a distance of 8 m along the length of
+  the string? (0.245 s)
+text: A continuous succession of sinusoidal wave pulses are produced at one end of a very long
+  string and travel along the length of the string. The wave has frequency 64 Hz, amplitude 3 mm,
+  and wavelength 0.51 m. How long does it take the wave to travel a distance of 8 m along the length
+  of the string? (0.245 s)
+answer: { value: 0.245, unit: s, raw: 0.245 s }
+figures: []
+literals:
+  - name: f
+    value: 64
+    unit: Hz
+    text: "64"
+    suggest: { min: 45, max: 83, step: 1 }
+  - name: d
+    value: 3
+    unit: mm
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: L
+    value: 0.51
+    unit: m
+    text: "0.51"
+    suggest: { min: 0.36, max: 0.66, step: 0.01, decimals: 2 }
+  - name: d2
+    value: 8
+    unit: m
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+scenario:
+  id: phys161-exam3-p077
+  source: { document: PHYS161_Exam3, labels: [ P77 ] }
+  section: Waves
+  narrative: >-
+    A continuous succession of sinusoidal wave pulses are produced at one end of a very long string
+    and travel along the length of the string. The wave has frequency {f:unit}, amplitude {d:unit},
+    and wavelength {L:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        How long does it take the wave to travel a distance of {d2:unit} along the length of the
+        string? {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 64, d: 3, L: 0.51, d2: 8 }
+    parts:
+      - { id: answer, answer: 0.245, unit: s, source: P77 }

@@ -1,0 +1,47 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P50
+number: 50
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: An airport for small planes has a runway of 200 m long. One kind of airplane that might use
+  this airfield can accelerate at 1.7 m/s<sup>2</sup>. Calculate the speed this airplane can reach
+  before takeoff? (26.076809620811 m/s)
+text: An airport for small planes has a runway of 200 m long. One kind of airplane that might use
+  this airfield can accelerate at 1.7 m/s^2. Calculate the speed this airplane can reach before
+  takeoff? (26.076809620811 m/s)
+answer: { value: 26.076809620811, unit: m/s, raw: 26.076809620811 m/s }
+figures: []
+literals:
+  - name: d
+    value: 200
+    unit: m
+    text: "200"
+    suggest: { min: 140, max: 260, step: 1 }
+  - name: a
+    value: 1.7
+    unit: m/s^2
+    text: "1.7"
+    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p050
+  source: { document: PHYS161_Exam1, labels: [ P50 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    An airport for small planes has a runway of {d:unit} long. One kind of airplane that might use
+    this airfield can accelerate at {a:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the speed this airplane can reach before takeoff? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 200, a: 1.7 }
+    parts:
+      - { id: answer, answer: 26.076809620811, unit: m/s, source: P50 }

@@ -1,0 +1,68 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P90
+number: 90
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: >-
+  A block of mass m= 1 kg is moving with constant speed in a circle with radius r=0.18
+
+  m on a frictionless table. The block is attached to 1.5 kg mass, M, by a cord through a hole in
+  the table. Find the speed with which m must move for M to stay at rest. Take gravitational
+  acceleration g = 9.8 m/s<sup>2</sup>. (1.627 m/s)
+text: A block of mass m= 1 kg is moving with constant speed in a circle with radius r=0.18 m on a
+  frictionless table. The block is attached to 1.5 kg mass, M, by a cord through a hole in the
+  table. Find the speed with which m must move for M to stay at rest. Take gravitational
+  acceleration g = 9.8 m/s^2. (1.627 m/s)
+answer: { value: 1.627, unit: m/s, raw: 1.627 m/s }
+figures:
+  - { src: figures/unnamed_017_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_017_R6Ld.png }
+literals:
+  - name: m
+    value: 1
+    unit: kg
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: r
+    value: 0.18
+    unit: m
+    text: "0.18"
+    suggest: { min: 0.13, max: 0.23, step: 0.01, decimals: 2 }
+  - name: m2
+    value: 1.5
+    unit: kg
+    text: "1.5"
+    suggest: { min: 1, max: 2, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p090
+  source: { document: PHYS161_Exam1, labels: [ P90 ] }
+  section: Circular motion
+  figure: { id: fig, src: figures/unnamed_017_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A block of mass m= {m:unit} is moving with constant speed in a circle with radius r={r:unit} on
+    a frictionless table. The block is attached to {m2:unit} mass, M, by a cord through a hole in
+    the table. Take gravitational acceleration g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the speed with which m must move for M to stay at rest. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1, r: 0.18, m2: 1.5, g: 9.8 }
+    parts:
+      - { id: answer, answer: 1.627, unit: m/s, source: P90 }

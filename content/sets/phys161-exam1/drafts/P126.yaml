@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P126
+number: 126
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A clothesline has a mass of 840 g, and each end makes an angle of 73° with the vertical. What
+  is the tension at each end of the clothesline? The gravitational acceleration is g = 9.8 m/s².
+  (14.078 N)
+text: A clothesline has a mass of 840 g, and each end makes an angle of 73° with the vertical. What
+  is the tension at each end of the clothesline? The gravitational acceleration is g = 9.8 m/s^2.
+  (14.078 N)
+answer: { value: 14.078, unit: N, raw: 14.078 N }
+figures: []
+literals:
+  - name: m
+    value: 840
+    unit: g
+    text: "840"
+    suggest: { min: 588, max: 1092, step: 1 }
+  - name: theta
+    value: 73
+    unit: °
+    text: "73"
+    suggest: { min: 51, max: 95, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p126
+  source: { document: PHYS161_Exam1, labels: [ P126 ] }
+  section: Application of Newton's laws
+  narrative: >-
+    A clothesline has a mass of {m:unit}, and each end makes an angle of {theta}° with the vertical.
+    The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: What is the tension at each end of the clothesline? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 840, theta: 73, g: 9.8 }
+    parts:
+      - { id: answer, answer: 14.078, unit: N, source: P126 }

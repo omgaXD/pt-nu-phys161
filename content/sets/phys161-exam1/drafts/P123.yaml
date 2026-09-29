@@ -1,0 +1,43 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P123
+number: 123
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A worker lifts a weight of 440 N by pulling down on a rope with a force F. Find the magnitude
+  of the force F if the weight is lifted at a constant speed. Assume that the rope, pulleys, and
+  chains all have negligible weights. (220 N)
+text: A worker lifts a weight of 440 N by pulling down on a rope with a force F. Find the magnitude
+  of the force F if the weight is lifted at a constant speed. Assume that the rope, pulleys, and
+  chains all have negligible weights. (220 N)
+answer: { value: 220, unit: N, raw: 220 N }
+figures:
+  - { src: figures/unnamed_015_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_015_R6Ld.png }
+literals:
+  - name: F
+    value: 440
+    unit: N
+    text: "440"
+    suggest: { min: 308, max: 572, step: 1 }
+scenario:
+  id: phys161-exam1-p123
+  source: { document: PHYS161_Exam1, labels: [ P123 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_015_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A worker lifts a weight of {F:unit} by pulling down on a rope with a force F. Assume that the
+    rope, pulleys, and chains all have negligible weights. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of the force F if the weight is lifted at a constant speed. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 440 }
+    parts:
+      - { id: answer, answer: 220, unit: N, source: P123 }

@@ -15,7 +15,7 @@ text: A uniform, 7.3-kg spherical shell 69 cm in diameter has four small 1.6-kg 
   combination about this axis? (0.960135 kg m^2)
 answer: { value: 0.960135, unit: kg m^2, raw: 0.960135 kg m^2 }
 figures:
-  - { src: figures/unnamed_023_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_023_fr4U.png }
+  - { src: figures/unnamed_016_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_016_GNcJ.png }
 literals:
   - name: m
     value: 7.3
@@ -36,7 +36,7 @@ scenario:
   id: phys161-exam2-p131
   source: { document: PHYS161_Exam2, labels: [ P131 ] }
   section: Torque
-  figure: { id: fig, src: figures/unnamed_023_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_016_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A uniform, {m}-kg spherical shell {d:unit} in diameter has four small {m2}-kg masses attached to
     its outer surface and equally spaced around it. This combination spins about an axis running

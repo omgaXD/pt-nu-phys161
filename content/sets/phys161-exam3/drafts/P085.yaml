@@ -1,0 +1,62 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P85
+number: 85
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Calculate the sound intensity level in decibels for a sound wave traveling in air at 339 m/s
+  and having a pressure amplitude of 0.82 Pa. Air density is 1.29 kg/m<sup>3</sup>.
+  I<sub>0</sub>=10<sup>−12</sup> W/m<sup>2</sup> (88.858 dB)
+text: Calculate the sound intensity level in decibels for a sound wave traveling in air at 339 m/s
+  and having a pressure amplitude of 0.82 Pa. Air density is 1.29 kg/m^3. I_0=10^-12 W/m^2 (88.858
+  dB)
+answer: { value: 88.858, unit: dB, raw: 88.858 dB }
+figures: []
+literals:
+  - name: v
+    value: 339
+    unit: m/s
+    text: "339"
+    suggest: { min: 237, max: 441, step: 1 }
+  - name: p
+    value: 0.82
+    unit: Pa
+    text: "0.82"
+    suggest: { min: 0.57, max: 1.07, step: 0.01, decimals: 2 }
+  - name: rho
+    value: 1.29
+    unit: kg/m^3
+    text: "1.29"
+    suggest: { min: 0.9, max: 1.68, step: 0.01, decimals: 2 }
+  - name: I0
+    value: 10
+    text: "10"
+    suggest: { min: 7, max: 13, step: 1 }
+  - name: x
+    value: 12
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+scenario:
+  id: phys161-exam3-p085
+  source: { document: PHYS161_Exam3, labels: [ P85 ] }
+  section: Sound
+  narrative: Air density is {rho:unit}. $I_{0}$={I0}^-{x} W/m$^{2}$
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: I0, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the sound intensity level in decibels for a sound wave traveling in air at
+        {v:unit} and having a pressure amplitude of {p:unit}. {_0}{_u}
+      answer: TODO
+      unit: dB
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 339, p: 0.82, rho: 1.29, I0: 10, x: 12 }
+    parts:
+      - { id: answer, answer: 88.858, unit: dB, source: P85 }

@@ -1,0 +1,73 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P6
+number: 6
+section: Units
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A square field measuring 100 m by 100 m has an area of 1 hectare. An acre has an area of 43600
+  ft<sup>2</sup>. If a country lot has an area of 12 acres, what is the area in hectares? 1 ft =
+  0.3048 m. Use "hectares" for units in the answer. (4.86 hectares)
+text: A square field measuring 100 m by 100 m has an area of 1 hectare. An acre has an area of 43600
+  ft^2. If a country lot has an area of 12 acres, what is the area in hectares? 1 ft = 0.3048 m. Use
+  "hectares" for units in the answer. (4.86 hectares)
+answer: { value: 4.86, unit: hectares, raw: 4.86 hectares }
+figures: []
+literals:
+  - name: d
+    value: 100
+    unit: m
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: d2
+    value: 100
+    unit: m
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: x
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: x2
+    value: 43600
+    text: "43600"
+    suggest: { min: 30520, max: 56680, step: 1 }
+  - name: x3
+    value: 12
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: x4
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: ft
+    value: 0.3048
+    unit: m
+    text: "0.3048"
+    suggest: { min: 0.2134, max: 0.3962, step: 0.0001, decimals: 4 }
+scenario:
+  id: phys161-exam1-p006
+  source: { document: PHYS161_Exam1, labels: [ P6 ] }
+  section: Units
+  narrative: >-
+    A square field measuring {d:unit} by {d2:unit} has an area of {x} hectare. An acre has an area
+    of {x2} ft$^{2}$. If a country lot has an area of {x3} acres, what is the area in hectares? {x4}
+    ft = {ft:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x4, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: ft, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: Use "hectares" for units in the answer. {_0}{_u}
+      answer: TODO
+      unit: hectares
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 100, d2: 100, x: 1, x2: 43600, x3: 12, x4: 1, ft: 0.3048 }
+    parts:
+      - { id: answer, answer: 4.86, unit: hectares, source: P6 }

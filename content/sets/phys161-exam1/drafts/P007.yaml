@@ -1,0 +1,57 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P7
+number: 7
+section: Units
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: 2 astronauts are in a spherical space station. If, as is typical, each of them breathes about
+  500 cm<sup>3</sup> of air with each breath, what volume of air (in cubic meters) do these
+  astronauts breathe in 69 days? Assume 10 breaths per minute. (993.6 m^3)
+text: 2 astronauts are in a spherical space station. If, as is typical, each of them breathes about
+  500 cm^3 of air with each breath, what volume of air (in cubic meters) do these astronauts breathe
+  in 69 days? Assume 10 breaths per minute. (993.6 m^3)
+answer: { value: 993.6, unit: m^3, raw: 993.6 m^3 }
+figures: []
+literals:
+  - name: x
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: V
+    value: 500
+    unit: cm^3
+    text: "500"
+    suggest: { min: 350, max: 650, step: 1 }
+  - name: t
+    value: 69
+    unit: day
+    text: "69"
+    suggest: { min: 48, max: 90, step: 1 }
+  - name: x2
+    value: 10
+    text: "10"
+    suggest: { min: 7, max: 13, step: 1 }
+scenario:
+  id: phys161-exam1-p007
+  source: { document: PHYS161_Exam1, labels: [ P7 ] }
+  section: Units
+  narrative: >-
+    {x} astronauts are in a spherical space station. Assume {x2} breaths per minute.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: day }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        If, as is typical, each of them breathes about {V:unit} of air with each breath, what volume
+        of air (in cubic meters) do these astronauts breathe in {t:unit}? {_0}{_u}
+      answer: TODO
+      unit: m^3
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 2, V: 500, t: 69, x2: 10 }
+    parts:
+      - { id: answer, answer: 993.6, unit: m^3, source: P7 }

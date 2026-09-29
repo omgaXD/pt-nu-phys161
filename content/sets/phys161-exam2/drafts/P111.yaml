@@ -17,7 +17,7 @@ text: Spherically symmetric object with radius R = 0.39 m and mass M = 2.1 kg ro
   its center of mass. The gravitational acceleration is g = 9.8 m/s^2. (3.542 kg m^2)
 answer: { value: 3.542, unit: kg m^2, raw: 3.542 kg m^2 }
 figures:
-  - { src: figures/unnamed_026_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_026_fr4U.png }
+  - { src: figures/unnamed_006_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_006_GNcJ.png }
 literals:
   - name: R
     value: 0.39
@@ -54,7 +54,7 @@ scenario:
   id: phys161-exam2-p111
   source: { document: PHYS161_Exam2, labels: [ P111 ] }
   section: Rotation
-  figure: { id: fig, src: figures/unnamed_026_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_006_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     Spherically symmetric object with radius R = {R:unit} and mass M = {M:unit} rolls without
     slipping across a horizontal floor with velocity V = {V:unit}. It then rolls up an incline with

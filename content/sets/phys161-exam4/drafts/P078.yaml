@@ -1,0 +1,47 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P78
+number: 78
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: The maximum possible efficiency of a heat engine which exhausts its heat at a temperature of
+  31°C is 57 percent. What is the minimum value of the temperature at which the engine takes in
+  heat? (706.977 K)
+text: The maximum possible efficiency of a heat engine which exhausts its heat at a temperature of
+  31°C is 57 percent. What is the minimum value of the temperature at which the engine takes in
+  heat? (706.977 K)
+answer: { value: 706.977, unit: K, raw: 706.977 K }
+figures: []
+literals:
+  - name: T
+    value: 31
+    unit: °C
+    text: "31"
+    suggest: { min: 22, max: 40, step: 1 }
+  - name: pct
+    value: 57
+    unit: "%"
+    text: "57"
+    suggest: { min: 40, max: 74, step: 1 }
+scenario:
+  id: phys161-exam4-p078
+  source: { document: PHYS161_Exam4, labels: [ P78 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    The maximum possible efficiency of a heat engine which exhausts its heat at a temperature of
+    {T:unit} is {pct:unit}.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the minimum value of the temperature at which the engine takes in heat? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 31, pct: 57 }
+    parts:
+      - { id: answer, answer: 706.977, unit: K, source: P78 }

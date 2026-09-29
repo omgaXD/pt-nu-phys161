@@ -1,0 +1,44 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P84
+number: 84
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Calculate the wavelength of sound at the higher extreme of the audible range 20 kHz, when the
+  speed of sound in air is 336 m/s. (0.0168 m)
+text: Calculate the wavelength of sound at the higher extreme of the audible range 20 kHz, when the
+  speed of sound in air is 336 m/s. (0.0168 m)
+answer: { value: 0.0168, unit: m, raw: 0.0168 m }
+figures: []
+literals:
+  - name: f
+    value: 20
+    unit: kHz
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: v
+    value: 336
+    unit: m/s
+    text: "336"
+    suggest: { min: 235, max: 437, step: 1 }
+scenario:
+  id: phys161-exam3-p084
+  source: { document: PHYS161_Exam3, labels: [ P84 ] }
+  section: Sound
+  narrative: ""
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the wavelength of sound at the higher extreme of the audible range {f:unit}, when
+        the speed of sound in air is {v:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 20, v: 336 }
+    parts:
+      - { id: answer, answer: 0.0168, unit: m, source: P84 }

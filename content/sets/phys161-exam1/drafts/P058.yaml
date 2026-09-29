@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P58
+number: 58
+section: Kinematics of 2D straight line motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A river flows due south with a speed of 2.2 m/s. A man steers a motorboat across the river; his
+  velocity relative to the water is 3.3 m/s due east. The river is 770 m wide. How far downstream
+  from his starting point does he land? (513.333 m)
+text: A river flows due south with a speed of 2.2 m/s. A man steers a motorboat across the river;
+  his velocity relative to the water is 3.3 m/s due east. The river is 770 m wide. How far
+  downstream from his starting point does he land? (513.333 m)
+answer: { value: 513.333, unit: m, raw: 513.333 m }
+figures: []
+literals:
+  - name: v
+    value: 2.2
+    unit: m/s
+    text: "2.2"
+    suggest: { min: 1.5, max: 2.9, step: 0.1, decimals: 1 }
+  - name: v2
+    value: 3.3
+    unit: m/s
+    text: "3.3"
+    suggest: { min: 2.3, max: 4.3, step: 0.1, decimals: 1 }
+  - name: d
+    value: 770
+    unit: m
+    text: "770"
+    suggest: { min: 539, max: 1001, step: 1 }
+scenario:
+  id: phys161-exam1-p058
+  source: { document: PHYS161_Exam1, labels: [ P58 ] }
+  section: Kinematics of 2D straight line motion
+  narrative: >-
+    A river flows due south with a speed of {v:unit}. A man steers a motorboat across the river; his
+    velocity relative to the water is {v2:unit} due east. The river is {d:unit} wide.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        How far downstream from his starting point does he land? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 2.2, v2: 3.3, d: 770 }
+    parts:
+      - { id: answer, answer: 513.333, unit: m, source: P58 }

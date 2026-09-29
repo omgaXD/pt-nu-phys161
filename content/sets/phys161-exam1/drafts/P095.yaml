@@ -1,0 +1,66 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P95
+number: 95
+section: Friction
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Figure shows a block with mass m₁ = 4 kg on a horizontal surface, connected by a massless
+  string over a massless frictionless pulley to a hanging mass m₂ = 2.8 kg. The coefficient of
+  kinetic friction between m₁ and the surface is 0.31. Calculate the magnitude of the acceleration
+  of the blocks. The gravitational acceleration is g = 9.8 m/s². (2.24824 m/s^2)
+text: Figure shows a block with mass m_1 = 4 kg on a horizontal surface, connected by a massless
+  string over a massless frictionless pulley to a hanging mass m_2 = 2.8 kg. The coefficient of
+  kinetic friction between m_1 and the surface is 0.31. Calculate the magnitude of the acceleration
+  of the blocks. The gravitational acceleration is g = 9.8 m/s^2. (2.24824 m/s^2)
+answer: { value: 2.24824, unit: m/s^2, raw: 2.24824 m/s^2 }
+figures:
+  - { src: figures/unnamed_006_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_006_R6Ld.png }
+literals:
+  - name: m1
+    value: 4
+    unit: kg
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: m2
+    value: 2.8
+    unit: kg
+    text: "2.8"
+    suggest: { min: 2, max: 3.6, step: 0.1, decimals: 1 }
+  - name: x
+    value: 0.31
+    text: "0.31"
+    suggest: { min: 0.22, max: 0.4, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p095
+  source: { document: PHYS161_Exam1, labels: [ P95 ] }
+  section: Friction
+  figure: { id: fig, src: figures/unnamed_006_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Figure shows a block with mass $m_{1}$ = {m1:unit} on a horizontal surface, connected by a
+    massless string over a massless frictionless pulley to a hanging mass $m_{2}$ = {m2:unit}. The
+    coefficient of kinetic friction between $m_{1}$ and the surface is {x}. The gravitational
+    acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the magnitude of the acceleration of the blocks. {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m1: 4, m2: 2.8, x: 0.31, g: 9.8 }
+    parts:
+      - { id: answer, answer: 2.24824, unit: m/s^2, source: P95 }

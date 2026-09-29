@@ -1,0 +1,53 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P73
+number: 73
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: 8.3 moles of an ideal monatomic gas expand adiabatically, performing 9200 J of work in the
+  process. What is the magnitude of change in temperature of the gas during this expansion? The
+  universal gas constant is R = 8.31 J/(mol K). (88.923685113499 K)
+text: 8.3 moles of an ideal monatomic gas expand adiabatically, performing 9200 J of work in the
+  process. What is the magnitude of change in temperature of the gas during this expansion? The
+  universal gas constant is R = 8.31 J/(mol K). (88.923685113499 K)
+answer: { value: 88.923685113499, unit: K, raw: 88.923685113499 K }
+figures: []
+literals:
+  - name: n
+    value: 8.3
+    unit: mol
+    text: "8.3"
+    suggest: { min: 5.8, max: 10.8, step: 0.1, decimals: 1 }
+  - name: E
+    value: 9200
+    unit: J
+    text: "9200"
+    suggest: { min: 6440, max: 11960, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p073
+  source: { document: PHYS161_Exam4, labels: [ P73 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    {n:unit} of an ideal monatomic gas expand adiabatically, performing {E:unit} of work in the
+    process. The universal gas constant is R = {R:unit}.
+  vars:
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of change in temperature of the gas during this expansion? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { n: 8.3, E: 9200, R: 8.31 }
+    parts:
+      - { id: answer, answer: 88.923685113499, unit: K, source: P73 }

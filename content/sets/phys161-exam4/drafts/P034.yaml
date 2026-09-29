@@ -1,0 +1,45 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P34
+number: 34
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Find the temperature of the ideal gas with the average translational kinetic energy of a
+  molecule 7.6×10<sup>−21</sup> J. Boltzmann constant k<sub>B</sub> = 1.38×10<sup>-23</sup> J/K.
+  (367.14975845411 K)
+text: Find the temperature of the ideal gas with the average translational kinetic energy of a
+  molecule 7.6×10^-21 J. Boltzmann constant k_B = 1.38×10^-23 J/K. (367.14975845411 K)
+answer: { value: 367.14975845411, unit: K, raw: 367.14975845411 K }
+figures: []
+literals:
+  - name: E
+    value: 7.6e-21
+    unit: J
+    text: 7.6×10^-21
+    suggest: { min: 5.3e-21, max: 9.9e-21, step: 1e-22 }
+  - name: kB
+    value: 1.38e-23
+    unit: J/K
+    text: 1.38×10^-23
+    suggest: { min: 1e-23, max: 1.8e-23, step: 1e-24 }
+scenario:
+  id: phys161-exam4-p034
+  source: { document: PHYS161_Exam4, labels: [ P34 ] }
+  section: Kinetic Theory of Gases
+  narrative: Boltzmann constant $k_{B}$ = {kB:unit}.
+  vars:
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: kB, kind: range, min: TODO, max: TODO, step: TODO, unit: J/K }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the temperature of the ideal gas with the average translational kinetic energy of a
+        molecule {E:unit}. {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { E: 7.6e-21, kB: 1.38e-23 }
+    parts:
+      - { id: answer, answer: 367.14975845411, unit: K, source: P34 }

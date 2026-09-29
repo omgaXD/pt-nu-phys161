@@ -1,0 +1,70 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P29
+number: 29
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: On a 44 km bike ride, the first 22 km were covered at an average speed of 12 km/h. What must
+  the average speed over the next 22 km be to have your average speed for the total 44 km be 6 km/h?
+  Use "km/h" units in the answer. (4 km/h)
+text: On a 44 km bike ride, the first 22 km were covered at an average speed of 12 km/h. What must
+  the average speed over the next 22 km be to have your average speed for the total 44 km be 6 km/h?
+  Use "km/h" units in the answer. (4 km/h)
+answer: { value: 4, unit: km/h, raw: 4 km/h }
+figures: []
+literals:
+  - name: d
+    value: 44
+    unit: km
+    text: "44"
+    suggest: { min: 31, max: 57, step: 1 }
+  - name: d2
+    value: 22
+    unit: km
+    text: "22"
+    suggest: { min: 15, max: 29, step: 1 }
+  - name: x
+    value: 12
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: d3
+    value: 22
+    unit: km
+    text: "22"
+    suggest: { min: 15, max: 29, step: 1 }
+  - name: d4
+    value: 44
+    unit: km
+    text: "44"
+    suggest: { min: 31, max: 57, step: 1 }
+  - name: x2
+    value: 6
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+scenario:
+  id: phys161-exam1-p029
+  source: { document: PHYS161_Exam1, labels: [ P29 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    On a {d:unit} bike ride, the first {d2:unit} were covered at an average speed of {x} km/h. Use
+    "km/h" units in the answer.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d3, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: d4, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        What must the average speed over the next {d3:unit} be to have your average speed for the
+        total {d4:unit} be {x2} km/h? {_0}{_u}
+      answer: TODO
+      unit: km/h
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 44, d2: 22, x: 12, d3: 22, d4: 44, x2: 6 }
+    parts:
+      - { id: answer, answer: 4, unit: km/h, source: P29 }

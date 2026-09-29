@@ -1,0 +1,55 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P11
+number: 11
+section: Uncertainty
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A rectangular piece of aluminum is 5.70 ± 0.01 cm long and 1.80 ± 0.01 cm wide. If the area is
+  in A ± δA format. Find the maximum possible uncertainty in the area δA. (0.075 cm^2)
+text: A rectangular piece of aluminum is 5.70 ± 0.01 cm long and 1.80 ± 0.01 cm wide. If the area is
+  in A ± δA format. Find the maximum possible uncertainty in the area δA. (0.075 cm^2)
+answer: { value: 0.075, unit: cm^2, raw: 0.075 cm^2 }
+figures: []
+literals:
+  - name: x
+    value: 5.7
+    text: "5.70"
+    suggest: { min: 3.99, max: 7.41, step: 0.01, decimals: 2 }
+  - name: d
+    value: 0.01
+    unit: cm
+    text: "0.01"
+    suggest: { min: 0.01, max: 0.01, step: 0.01, decimals: 2 }
+  - name: x2
+    value: 1.8
+    text: "1.80"
+    suggest: { min: 1.26, max: 2.34, step: 0.01, decimals: 2 }
+  - name: L
+    value: 0.01
+    unit: cm
+    text: "0.01"
+    suggest: { min: 0.01, max: 0.01, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam1-p011
+  source: { document: PHYS161_Exam1, labels: [ P11 ] }
+  section: Uncertainty
+  narrative: >-
+    A rectangular piece of aluminum is {x} ± {d:unit} long and {x2} ± {L:unit} wide. If the area is
+    in A ± δA format.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the maximum possible uncertainty in the area δA. {_0}{_u}
+      answer: TODO
+      unit: cm^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 5.7, d: 0.01, x2: 1.8, L: 0.01 }
+    parts:
+      - { id: answer, answer: 0.075, unit: cm^2, source: P11 }

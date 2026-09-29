@@ -1,0 +1,43 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P21
+number: 21
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Find the scalar product A ⋅ B of the two vectors in figure below. The magnitudes of the vectors
+  are A = 7 and B = 12. (18.8959)
+text: Find the scalar product A ⋅ B of the two vectors in figure below. The magnitudes of the
+  vectors are A = 7 and B = 12. (18.8959)
+answer: { value: 18.8959, raw: "18.8959" }
+figures:
+  - { src: figures/unnamed_021_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_021_R6Ld.png }
+literals:
+  - name: A
+    value: 7
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+  - name: B
+    value: 12
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+scenario:
+  id: phys161-exam1-p021
+  source: { document: PHYS161_Exam1, labels: [ P21 ] }
+  section: Vectors
+  figure: { id: fig, src: figures/unnamed_021_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    The magnitudes of the vectors are A = {A} and B = {B}. {@fig}
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: B, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the scalar product A ⋅ B of the two vectors in figure below. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 7, B: 12 }
+    parts:
+      - { id: answer, answer: 18.8959, source: P21 }

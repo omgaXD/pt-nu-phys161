@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P119
+number: 119
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: The friction is very small for ice skating and can be neglected. Find the acceleration
+  magnitude of an ice dancer A of mass 53.3 kg pushing his partner B of mass 66.4 kg with the force
+  58.5 N. (1.09756 m/s^2)
+text: The friction is very small for ice skating and can be neglected. Find the acceleration
+  magnitude of an ice dancer A of mass 53.3 kg pushing his partner B of mass 66.4 kg with the force
+  58.5 N. (1.09756 m/s^2)
+answer: { value: 1.09756, unit: m/s^2, raw: 1.09756 m/s^2 }
+figures: []
+literals:
+  - name: m
+    value: 53.3
+    unit: kg
+    text: "53.3"
+    suggest: { min: 37.3, max: 69.3, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 66.4
+    unit: kg
+    text: "66.4"
+    suggest: { min: 46.5, max: 86.3, step: 0.1, decimals: 1 }
+  - name: F
+    value: 58.5
+    unit: N
+    text: "58.5"
+    suggest: { min: 40.9, max: 76, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p119
+  source: { document: PHYS161_Exam1, labels: [ P119 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    The friction is very small for ice skating and can be neglected.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the acceleration magnitude of an ice dancer A of mass {m:unit} pushing his partner B of
+        mass {m2:unit} with the force {F:unit}. {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 53.3, m2: 66.4, F: 58.5 }
+    parts:
+      - { id: answer, answer: 1.09756, unit: m/s^2, source: P119 }

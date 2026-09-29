@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P141
+number: 141
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: >-
+  A hammer is hanging by a light rope from the ceiling of a bus. The ceiling of the bus is parallel
+  to the roadway. The bus is traveling in a straight line on a horizontal street. You observe that
+  the hammer hangs at rest with respect to the bus when the angle between the rope and the ceiling
+  of the bus is 69°. What is the acceleration of the bus? The gravitational acceleration is g
+
+  = 9.8 m/s<sup>2</sup>. (3.7618675 m/s^2)
+text: A hammer is hanging by a light rope from the ceiling of a bus. The ceiling of the bus is
+  parallel to the roadway. The bus is traveling in a straight line on a horizontal street. You
+  observe that the hammer hangs at rest with respect to the bus when the angle between the rope and
+  the ceiling of the bus is 69°. What is the acceleration of the bus? The gravitational acceleration
+  is g = 9.8 m/s^2. (3.7618675 m/s^2)
+answer: { value: 3.7618675, unit: m/s^2, raw: 3.7618675 m/s^2 }
+figures: []
+literals:
+  - name: theta
+    value: 69
+    unit: °
+    text: "69"
+    suggest: { min: 48, max: 90, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p141
+  source: { document: PHYS161_Exam1, labels: [ P141 ] }
+  section: Application of Newton's laws
+  narrative: >-
+    A hammer is hanging by a light rope from the ceiling of a bus. The ceiling of the bus is
+    parallel to the roadway. The bus is traveling in a straight line on a horizontal street. You
+    observe that the hammer hangs at rest with respect to the bus when the angle between the rope
+    and the ceiling of the bus is {theta}°. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: What is the acceleration of the bus? {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { theta: 69, g: 9.8 }
+    parts:
+      - { id: answer, answer: 3.7618675, unit: m/s^2, source: P141 }

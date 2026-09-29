@@ -1,0 +1,56 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P98
+number: 98
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A Carnot engine whose low-temperature reservoir is at -70°C has an efficiency of 25%.The
+  efficiency is to be increased to 50%. By how many kelvins must the temperature of the
+  low-temperature reservoir be decreased if the temperature of the high-temperature reservoir
+  remains constant? Find the magnitude of the temperature change. (67.667 K)
+text: A Carnot engine whose low-temperature reservoir is at -70°C has an efficiency of 25%.The
+  efficiency is to be increased to 50%. By how many kelvins must the temperature of the
+  low-temperature reservoir be decreased if the temperature of the high-temperature reservoir
+  remains constant? Find the magnitude of the temperature change. (67.667 K)
+answer: { value: 67.667, unit: K, raw: 67.667 K }
+figures: []
+literals:
+  - name: T
+    value: -70
+    unit: °C
+    text: "-70"
+    suggest: { min: -91, max: -49, step: 1 }
+  - name: pct
+    value: 25
+    unit: "%"
+    text: "25"
+    suggest: { min: 18, max: 33, step: 1 }
+  - name: pct2
+    value: 50
+    unit: "%"
+    text: "50"
+    suggest: { min: 35, max: 65, step: 1 }
+scenario:
+  id: phys161-exam4-p098
+  source: { document: PHYS161_Exam4, labels: [ P98 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A Carnot engine whose low-temperature reservoir is at {T:unit} has an efficiency of {pct}%.The
+    efficiency is to be increased to {pct2}%. By how many kelvins must the temperature of the
+    low-temperature reservoir be decreased if the temperature of the high-temperature reservoir
+    remains constant?
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: pct2, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+  parts:
+    - id: answer
+      prompt: Find the magnitude of the temperature change. {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: -70, pct: 25, pct2: 50 }
+    parts:
+      - { id: answer, answer: 67.667, unit: K, source: P98 }

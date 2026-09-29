@@ -14,8 +14,9 @@ text: A rocket has a payload of 6.5 percent of its total mass, the rest being fu
 answer: { value: 11.2068, unit: km/s, raw: 11.2068 km/s }
 figures: []
 literals:
-  - name: x
+  - name: pct
     value: 6.5
+    unit: "%"
     text: "6.5"
     suggest: { min: 4.5, max: 8.5, step: 0.1, decimals: 1 }
   - name: v
@@ -28,9 +29,9 @@ scenario:
   source: { document: PHYS161_Exam2, labels: [ P92 ] }
   section: Rocket propulsion
   narrative: >-
-    A rocket has a payload of {x} percent of its total mass, the rest being fuel.
+    A rocket has a payload of {pct:unit} of its total mass, the rest being fuel.
   vars:
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
     - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: km/s }
   parts:
     - id: answer
@@ -41,6 +42,6 @@ scenario:
       unit: km/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { x: 6.5, v: 4.1 }
+    vars: { pct: 6.5, v: 4.1 }
     parts:
       - { id: answer, answer: 11.2068, unit: km/s, source: P92 }

@@ -1,0 +1,62 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P7
+number: 7
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Two spherical masses are located on the x-axis, the first at the origin with M<sub>1</sub>=11.2
+  kg, and the second M<sub>2</sub>=42 kg at position x=48.1 m. The third sphere with
+  M<sub>3</sub>=19.8 kg is placed on x-axis such that M<sub>3</sub> experiences no net gravitational
+  force due to M<sub>1</sub> and M<sub>2</sub>. Calculate the position of M<sub>3</sub>. (16.38 m)
+text: Two spherical masses are located on the x-axis, the first at the origin with M_1=11.2 kg, and
+  the second M_2=42 kg at position x=48.1 m. The third sphere with M_3=19.8 kg is placed on x-axis
+  such that M_3 experiences no net gravitational force due to M_1 and M_2. Calculate the position of
+  M_3. (16.38 m)
+answer: { value: 16.38, unit: m, raw: 16.38 m }
+figures: []
+literals:
+  - name: M1
+    value: 11.2
+    unit: kg
+    text: "11.2"
+    suggest: { min: 7.8, max: 14.6, step: 0.1, decimals: 1 }
+  - name: M2
+    value: 42
+    unit: kg
+    text: "42"
+    suggest: { min: 29, max: 55, step: 1 }
+  - name: x
+    value: 48.1
+    unit: m
+    text: "48.1"
+    suggest: { min: 33.7, max: 62.5, step: 0.1, decimals: 1 }
+  - name: M3
+    value: 19.8
+    unit: kg
+    text: "19.8"
+    suggest: { min: 13.9, max: 25.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p007
+  source: { document: PHYS161_Exam3, labels: [ P7 ] }
+  section: Gravitation
+  narrative: >-
+    Two spherical masses are located on the x-axis, the first at the origin with $M_{1}$={M1:unit},
+    and the second $M_{2}$={M2:unit} at position x={x:unit}. The third sphere with $M_{3}$={M3:unit}
+    is placed on x-axis such that $M_{3}$ experiences no net gravitational force due to $M_{1}$ and
+    $M_{2}$.
+  vars:
+    - { name: M1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: M2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: M3, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  parts:
+    - id: answer
+      prompt: Calculate the position of $M_{3}$. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { M1: 11.2, M2: 42, x: 48.1, M3: 19.8 }
+    parts:
+      - { id: answer, answer: 16.38, unit: m, source: P7 }

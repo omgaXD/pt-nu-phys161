@@ -1,0 +1,78 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P26
+number: 26
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An insulated cylindrical cup contains 0.393 kg of water at 88°C. Some ice at 0°C is placed into
+  the cup. When the system reaches thermal equilibrium, the final temperature will be 0°C with all
+  the ice melted. Calculate by how much the water level will be higher compared to that before
+  adding the ice. The internal radius of the cup is 5.5 cm. Specific heat of water is 4186J/ (kg K).
+  Latent heat of fusion for water is 334 kJ/kg. Density of water is 1 g/cm<sup>3</sup>.
+  (0.045609228711262 m)
+text: An insulated cylindrical cup contains 0.393 kg of water at 88°C. Some ice at 0°C is placed
+  into the cup. When the system reaches thermal equilibrium, the final temperature will be 0°C with
+  all the ice melted. Calculate by how much the water level will be higher compared to that before
+  adding the ice. The internal radius of the cup is 5.5 cm. Specific heat of water is 4186J/ (kg K).
+  Latent heat of fusion for water is 334 kJ/kg. Density of water is 1 g/cm^3. (0.045609228711262 m)
+answer: { value: 0.045609228711262, unit: m, raw: 0.045609228711262 m }
+figures: []
+literals:
+  - name: m
+    value: 0.393
+    unit: kg
+    text: "0.393"
+    suggest: { min: 0.275, max: 0.511, step: 0.001, decimals: 3 }
+  - name: T
+    value: 88
+    unit: °C
+    text: "88"
+    suggest: { min: 62, max: 114, step: 1 }
+  - name: r
+    value: 5.5
+    unit: cm
+    text: "5.5"
+    suggest: { min: 3.8, max: 7.2, step: 0.1, decimals: 1 }
+  - name: c
+    value: 4186
+    unit: J/(kg K)
+    text: "4186"
+    suggest: { min: 2930, max: 5442, step: 1 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+  - name: x
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+scenario:
+  id: phys161-exam4-p026
+  source: { document: PHYS161_Exam4, labels: [ P26 ] }
+  section: Temperature and heat
+  narrative: >-
+    An insulated cylindrical cup contains {m:unit} of water at {T:unit}. Some ice at 0°C is placed
+    into the cup. When the system reaches thermal equilibrium, the final temperature will be 0°C
+    with all the ice melted. The internal radius of the cup is {r:unit}. Specific heat of water is
+    {c:unit}. Latent heat of fusion for water is {Lh:unit}. Density of water is {x} g/cm$^{3}$.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate by how much the water level will be higher compared to that before adding the ice.
+        {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 0.393, T: 88, r: 5.5, c: 4186, Lh: 334, x: 1 }
+    parts:
+      - { id: answer, answer: 0.045609228711262, unit: m, source: P26 }

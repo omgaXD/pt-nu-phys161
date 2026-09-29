@@ -1,0 +1,67 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P32
+number: 32
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Calculate the total kinetic energy content of 0.71 moles of a monatomic ideal gas at a
+  temperature of 483 K. Boltzmann constant k<sub>B</sub> = 1.38×10<sup>−23</sup> J/K. Avogadro's
+  number N<sub>A</sub> = 6.022×10<sup>23</sup> 1/mol. The universal gas constant is R = 8.31 J/(mol
+  K). (4274.62245 J)
+text: Calculate the total kinetic energy content of 0.71 moles of a monatomic ideal gas at a
+  temperature of 483 K. Boltzmann constant k_B = 1.38×10^-23 J/K. Avogadro's number N_A =
+  6.022×10^23 1/mol. The universal gas constant is R = 8.31 J/(mol K). (4274.62245 J)
+answer: { value: 4274.62245, unit: J, raw: 4274.62245 J }
+figures: []
+literals:
+  - name: n
+    value: 0.71
+    unit: mol
+    text: "0.71"
+    suggest: { min: 0.5, max: 0.92, step: 0.01, decimals: 2 }
+  - name: T
+    value: 483
+    unit: K
+    text: "483"
+    suggest: { min: 338, max: 628, step: 1 }
+  - name: kB
+    value: 1.38e-23
+    unit: J/K
+    text: 1.38×10^-23
+    suggest: { min: 1e-23, max: 1.8e-23, step: 1e-24 }
+  - name: NA
+    value: 6.022e+23
+    unit: 1/mol
+    text: 6.022×10^23
+    suggest: { min: 4.2e+23, max: 7.8e+23, step: 1e+22 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p032
+  source: { document: PHYS161_Exam4, labels: [ P32 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    Boltzmann constant $k_{B}$ = {kB:unit}. Avogadro's number $N_{A}$ = {NA:unit}. The universal gas
+    constant is R = {R:unit}.
+  vars:
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: kB, kind: range, min: TODO, max: TODO, step: TODO, unit: J/K }
+    - { name: NA, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the total kinetic energy content of {n:unit} of a monatomic ideal gas at a
+        temperature of {T:unit}. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { n: 0.71, T: 483, kB: 1.38e-23, NA: 6.022e+23, R: 8.31 }
+    parts:
+      - { id: answer, answer: 4274.62245, unit: J, source: P32 }

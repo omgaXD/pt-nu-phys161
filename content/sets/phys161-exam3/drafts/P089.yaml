@@ -1,0 +1,50 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P89
+number: 89
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: An organ pipe has two successive harmonics with frequencies 582 Hz and 776 Hz. What is the
+  length of the pipe? Speed of sound in air is 344 m/s. (0.8866 m)
+text: An organ pipe has two successive harmonics with frequencies 582 Hz and 776 Hz. What is the
+  length of the pipe? Speed of sound in air is 344 m/s. (0.8866 m)
+answer: { value: 0.8866, unit: m, raw: 0.8866 m }
+figures: []
+literals:
+  - name: f
+    value: 582
+    unit: Hz
+    text: "582"
+    suggest: { min: 407, max: 757, step: 1 }
+  - name: f2
+    value: 776
+    unit: Hz
+    text: "776"
+    suggest: { min: 543, max: 1009, step: 1 }
+  - name: v
+    value: 344
+    unit: m/s
+    text: "344"
+    suggest: { min: 241, max: 447, step: 1 }
+scenario:
+  id: phys161-exam3-p089
+  source: { document: PHYS161_Exam3, labels: [ P89 ] }
+  section: Sound
+  narrative: >-
+    An organ pipe has two successive harmonics with frequencies {f:unit} and {f2:unit}. Speed of
+    sound in air is {v:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: What is the length of the pipe? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 582, f2: 776, v: 344 }
+    parts:
+      - { id: answer, answer: 0.8866, unit: m, source: P89 }

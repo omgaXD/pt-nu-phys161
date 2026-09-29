@@ -1,0 +1,69 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P24
+number: 24
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: In deep space, two uniform spheres, one of mass 20 kg and the other with mass 105 kg, of equal
+  radii r = 0.15 m, are released from rest with their centers 45 m apart. They accelerate toward
+  each other because of their mutual gravitational attraction. How far from the initial position of
+  the center of the 20 kg sphere do the surfaces of the two spheres collide? (37.698 m)
+text: In deep space, two uniform spheres, one of mass 20 kg and the other with mass 105 kg, of equal
+  radii r = 0.15 m, are released from rest with their centers 45 m apart. They accelerate toward
+  each other because of their mutual gravitational attraction. How far from the initial position of
+  the center of the 20 kg sphere do the surfaces of the two spheres collide? (37.698 m)
+answer: { value: 37.698, unit: m, raw: 37.698 m }
+figures: []
+literals:
+  - name: m
+    value: 20
+    unit: kg
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: m2
+    value: 105
+    unit: kg
+    text: "105"
+    suggest: { min: 74, max: 137, step: 1 }
+  - name: r
+    value: 0.15
+    unit: m
+    text: "0.15"
+    suggest: { min: 0.11, max: 0.2, step: 0.01, decimals: 2 }
+  - name: d
+    value: 45
+    unit: m
+    text: "45"
+    suggest: { min: 31, max: 59, step: 1 }
+  - name: m3
+    value: 20
+    unit: kg
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+scenario:
+  id: phys161-exam3-p024
+  source: { document: PHYS161_Exam3, labels: [ P24 ] }
+  section: Gravitation
+  narrative: >-
+    In deep space, two uniform spheres, one of mass {m:unit} and the other with mass {m2:unit}, of
+    equal radii r = {r:unit}, are released from rest with their centers {d:unit} apart. They
+    accelerate toward each other because of their mutual gravitational attraction.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m3, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  parts:
+    - id: answer
+      prompt: >-
+        How far from the initial position of the center of the {m3:unit} sphere do the surfaces of
+        the two spheres collide? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 20, m2: 105, r: 0.15, d: 45, m3: 20 }
+    parts:
+      - { id: answer, answer: 37.698, unit: m, source: P24 }

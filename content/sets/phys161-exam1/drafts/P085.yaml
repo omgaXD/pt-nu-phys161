@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P85
+number: 85
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A bucket of water is whirled around a vertical circle of radius 68 cm. What is the maximum
+  period of revolution the bucket can have if the water is not to spill out of the upside-down
+  bucket at the top of the circle? Take the gravitational acceleration g = 9.8 m/s². (1.65509 s)
+text: A bucket of water is whirled around a vertical circle of radius 68 cm. What is the maximum
+  period of revolution the bucket can have if the water is not to spill out of the upside-down
+  bucket at the top of the circle? Take the gravitational acceleration g = 9.8 m/s^2. (1.65509 s)
+answer: { value: 1.65509, unit: s, raw: 1.65509 s }
+figures: []
+literals:
+  - name: r
+    value: 68
+    unit: cm
+    text: "68"
+    suggest: { min: 48, max: 88, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p085
+  source: { document: PHYS161_Exam1, labels: [ P85 ] }
+  section: Circular motion
+  narrative: >-
+    A bucket of water is whirled around a vertical circle of radius {r:unit}. Take the gravitational
+    acceleration g = {g:unit}.
+  vars:
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the maximum period of revolution the bucket can have if the water is not to spill
+        out of the upside-down bucket at the top of the circle? {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { r: 68, g: 9.8 }
+    parts:
+      - { id: answer, answer: 1.65509, unit: s, source: P85 }

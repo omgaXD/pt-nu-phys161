@@ -1,0 +1,49 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P85
+number: 85
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An output of an engine with efficiency of 15% is 243 W. It works at 13 cycles/s. How much work
+  is done in each cycle? (18.692307692308 J)
+text: An output of an engine with efficiency of 15% is 243 W. It works at 13 cycles/s. How much work
+  is done in each cycle? (18.692307692308 J)
+answer: { value: 18.692307692308, unit: J, raw: 18.692307692308 J }
+figures: []
+literals:
+  - name: pct
+    value: 15
+    unit: "%"
+    text: "15"
+    suggest: { min: 11, max: 20, step: 1 }
+  - name: P
+    value: 243
+    unit: W
+    text: "243"
+    suggest: { min: 170, max: 316, step: 1 }
+  - name: f
+    value: 13
+    unit: Hz
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+scenario:
+  id: phys161-exam4-p085
+  source: { document: PHYS161_Exam4, labels: [ P85 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    An output of an engine with efficiency of {pct}% is {P:unit}. It works at {f:unit}.
+  vars:
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+  parts:
+    - id: answer
+      prompt: How much work is done in each cycle? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { pct: 15, P: 243, f: 13 }
+    parts:
+      - { id: answer, answer: 18.692307692308, unit: J, source: P85 }

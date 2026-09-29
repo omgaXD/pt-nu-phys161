@@ -1,0 +1,78 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P54
+number: 54
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An ideal monatomic gas expands reversibly from 1 m<sup>3</sup> to 2.7 m<sup>3</sup> at a
+  constant pressure of 1.82 atm and initial temperature of 278 K. The standard atmosphere pressure
+  is 1 atm = 101325 Pa. Gas constant is R = 8.31 J/(mol K). Find the number of moles of gas.
+  (79.82559800535 mol)
+text: An ideal monatomic gas expands reversibly from 1 m^3 to 2.7 m^3 at a constant pressure of 1.82
+  atm and initial temperature of 278 K. The standard atmosphere pressure is 1 atm = 101325 Pa. Gas
+  constant is R = 8.31 J/(mol K). Find the number of moles of gas. (79.82559800535 mol)
+answer: { value: 79.82559800535, unit: mol, raw: 79.82559800535 mol }
+figures: []
+literals:
+  - name: V
+    value: 1
+    unit: m^3
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: V2
+    value: 2.7
+    unit: m^3
+    text: "2.7"
+    suggest: { min: 1.9, max: 3.5, step: 0.1, decimals: 1 }
+  - name: p
+    value: 1.82
+    unit: atm
+    text: "1.82"
+    suggest: { min: 1.27, max: 2.37, step: 0.01, decimals: 2 }
+  - name: T
+    value: 278
+    unit: K
+    text: "278"
+    suggest: { min: 195, max: 361, step: 1 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p054
+  source: { document: PHYS161_Exam4, labels: [ P54 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    An ideal monatomic gas expands reversibly from {V:unit} to {V2:unit} at a constant pressure of
+    {p:unit} and initial temperature of {T:unit}. The standard atmosphere pressure is {p2:unit} =
+    {atm:unit}. Gas constant is R = {R:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: Find the number of moles of gas. {_0}{_u}
+      answer: TODO
+      unit: mol
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 1, V2: 2.7, p: 1.82, T: 278, p2: 1, atm: 101325, R: 8.31 }
+    parts:
+      - { id: answer, answer: 79.82559800535, unit: mol, source: P54 }

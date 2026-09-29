@@ -1,0 +1,43 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P9
+number: 9
+section: Uncertainty
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: If a train travels 970 km from Berlin to Paris and then overshoots the end of the track by 5 m,
+  what is the relative error in the total distance covered? (0.0000051546)
+text: If a train travels 970 km from Berlin to Paris and then overshoots the end of the track by 5
+  m, what is the relative error in the total distance covered? (0.0000051546)
+answer: { value: 0.0000051546, raw: "0.0000051546" }
+figures: []
+literals:
+  - name: d
+    value: 970
+    unit: km
+    text: "970"
+    suggest: { min: 679, max: 1261, step: 1 }
+  - name: d2
+    value: 5
+    unit: m
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+scenario:
+  id: phys161-exam1-p009
+  source: { document: PHYS161_Exam1, labels: [ P9 ] }
+  section: Uncertainty
+  narrative: ""
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        If a train travels {d:unit} from Berlin to Paris and then overshoots the end of the track by
+        {d2:unit}, what is the relative error in the total distance covered? {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 970, d2: 5 }
+    parts:
+      - { id: answer, answer: 0.0000051546, source: P9 }

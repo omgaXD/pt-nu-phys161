@@ -1,0 +1,44 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P48
+number: 48
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: The root-mean-square speed of molecules in a gas at 20°C is to be increased by 3%. To what
+  temperature must it be raised? Answer in kelvins (K). (311 K)
+text: The root-mean-square speed of molecules in a gas at 20°C is to be increased by 3%. To what
+  temperature must it be raised? Answer in kelvins (K). (311 K)
+answer: { value: 311, unit: K, raw: 311 K }
+figures: []
+literals:
+  - name: T
+    value: 20
+    unit: °C
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: pct
+    value: 3
+    unit: "%"
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+scenario:
+  id: phys161-exam4-p048
+  source: { document: PHYS161_Exam4, labels: [ P48 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    The root-mean-square speed of molecules in a gas at {T:unit} is to be increased by {pct}%.
+    Answer in kelvins (K).
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+  parts:
+    - id: answer
+      prompt: To what temperature must it be raised? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 20, pct: 3 }
+    parts:
+      - { id: answer, answer: 311, unit: K, source: P48 }

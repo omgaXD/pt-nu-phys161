@@ -1,0 +1,52 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P82
+number: 82
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A man walks down a long hall carrying a tuning fork vibrating at 431 Hz, so that the sound
+  reflects from the closed end of the hall. If the man hears 3 beats per second, how fast is the man
+  walking? Use the velocity of sound of 340 m/s.(1.179 m/s)
+text: A man walks down a long hall carrying a tuning fork vibrating at 431 Hz, so that the sound
+  reflects from the closed end of the hall. If the man hears 3 beats per second, how fast is the man
+  walking? Use the velocity of sound of 340 m/s.(1.179 m/s)
+answer: { value: 1.179, unit: m/s, raw: 1.179 m/s }
+figures: []
+literals:
+  - name: f
+    value: 431
+    unit: Hz
+    text: "431"
+    suggest: { min: 302, max: 560, step: 1 }
+  - name: x
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: v
+    value: 340
+    unit: m/s
+    text: "340"
+    suggest: { min: 238, max: 442, step: 1 }
+scenario:
+  id: phys161-exam3-p082
+  source: { document: PHYS161_Exam3, labels: [ P82 ] }
+  section: Sound
+  narrative: >-
+    A man walks down a long hall carrying a tuning fork vibrating at {f:unit}, so that the sound
+    reflects from the closed end of the hall. Use the velocity of sound of {v:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        If the man hears {x} beats per second, how fast is the man walking? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 431, x: 3, v: 340 }
+    parts:
+      - { id: answer, answer: 1.179, unit: m/s, source: P82 }

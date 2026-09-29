@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P88
+number: 88
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A bicycle accelerates uniformly along a circular path at a flat horizontal surface. Bicycle is
+  initially at rest and the tangential acceleration is 1.2 m/s<sup>2</sup>. The bicycle makes one
+  half of the circle before it skids off the circular path. Calculate coefficient of static friction
+  between the bicycle and the surface taking gravitational acceleration g = 9.8 m/s<sup>2</sup>.
+  (0.779)
+text: A bicycle accelerates uniformly along a circular path at a flat horizontal surface. Bicycle is
+  initially at rest and the tangential acceleration is 1.2 m/s^2. The bicycle makes one half of the
+  circle before it skids off the circular path. Calculate coefficient of static friction between the
+  bicycle and the surface taking gravitational acceleration g = 9.8 m/s^2. (0.779)
+answer: { value: 0.779, raw: "0.779" }
+figures: []
+literals:
+  - name: a
+    value: 1.2
+    unit: m/s^2
+    text: "1.2"
+    suggest: { min: 0.8, max: 1.6, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p088
+  source: { document: PHYS161_Exam1, labels: [ P88 ] }
+  section: Circular motion
+  narrative: >-
+    A bicycle accelerates uniformly along a circular path at a flat horizontal surface. Bicycle is
+    initially at rest and the tangential acceleration is {a:unit}. The bicycle makes one half of the
+    circle before it skids off the circular path.
+  vars:
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate coefficient of static friction between the bicycle and the surface taking
+        gravitational acceleration g = {g:unit}. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { a: 1.2, g: 9.8 }
+    parts:
+      - { id: answer, answer: 0.779, source: P88 }

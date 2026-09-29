@@ -1,0 +1,144 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P99
+number: 99
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A heat engine takes 0.3 mol of a diatomic ideal gas around the cycle shown in PV-diagram.
+  Process 1 → 2 is at constant volume, process 2 → 3 is adiabatic, and process 3 → 1 is at a
+  constant pressure of 1 atm. The value of γ for this gas is 1.4. Find the net heat flow into the
+  engine in one cycle. T<sub>1</sub> = 297 K, T<sub>2</sub> = 603 K and T<sub>3</sub> = 498 K. The
+  universal gas constant is R = 8.31 J/(mol K). 1 atm = 101325 Pa. (153.3195 J)
+text: A heat engine takes 0.3 mol of a diatomic ideal gas around the cycle shown in PV-diagram.
+  Process 1 → 2 is at constant volume, process 2 → 3 is adiabatic, and process 3 → 1 is at a
+  constant pressure of 1 atm. The value of γ for this gas is 1.4. Find the net heat flow into the
+  engine in one cycle. T_1 = 297 K, T_2 = 603 K and T_3 = 498 K. The universal gas constant is R =
+  8.31 J/(mol K). 1 atm = 101325 Pa. (153.3195 J)
+answer: { value: 153.3195, unit: J, raw: 153.3195 J }
+figures:
+  - { src: figures/unnamed_002_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_002_xiMS.png }
+literals:
+  - name: n
+    value: 0.3
+    unit: mol
+    text: "0.3"
+    suggest: { min: 0.2, max: 0.4, step: 0.1, decimals: 1 }
+  - name: x
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: x2
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: x3
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: x4
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: x5
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: x6
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: x7
+    value: 1.4
+    text: "1.4"
+    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
+  - name: T1
+    value: 297
+    unit: K
+    text: "297"
+    suggest: { min: 208, max: 386, step: 1 }
+  - name: T2
+    value: 603
+    unit: K
+    text: "603"
+    suggest: { min: 422, max: 784, step: 1 }
+  - name: T3
+    value: 498
+    unit: K
+    text: "498"
+    suggest: { min: 349, max: 647, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+scenario:
+  id: phys161-exam4-p099
+  source: { document: PHYS161_Exam4, labels: [ P99 ] }
+  section: 2nd Law of Thermodynamics
+  figure: { id: fig, src: figures/unnamed_002_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A heat engine takes {n:unit} of a diatomic ideal gas around the cycle shown in PV-diagram.
+    Process {x} → {x2} is at constant volume, process {x3} → {x4} is adiabatic, and process {x5} →
+    {x6} is at a constant pressure of {p:unit}. The value of γ for this gas is {x7}. The universal
+    gas constant is R = {R:unit}. {p2:unit} = {atm:unit}. {@fig}
+  vars:
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x4, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x5, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x6, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: x7, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: T1, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: T3, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the net heat flow into the engine in one cycle. $T_{1}$ = {T1:unit}, $T_{2}$ =
+        {T2:unit} and $T_{3}$ = {T3:unit}. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars:
+      {
+        n: 0.3,
+        x: 1,
+        x2: 2,
+        x3: 2,
+        x4: 3,
+        x5: 3,
+        x6: 1,
+        p: 1,
+        x7: 1.4,
+        T1: 297,
+        T2: 603,
+        T3: 498,
+        R: 8.31,
+        p2: 1,
+        atm: 101325
+      }
+    parts:
+      - { id: answer, answer: 153.3195, unit: J, source: P99 }

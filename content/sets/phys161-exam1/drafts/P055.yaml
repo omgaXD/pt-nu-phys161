@@ -1,0 +1,48 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P55
+number: 55
+section: Kinematics of 2D straight line motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A river flows due south with a speed of 1.9 m/s. A man steers a motorboat across the river; the
+  speed of the boat relative to the water is 4.3 m/s, and he steers so that he travels due east
+  relative to the earth. What is the magnitude of his velocity relative to the earth? (3.85746 m/s)
+text: A river flows due south with a speed of 1.9 m/s. A man steers a motorboat across the river;
+  the speed of the boat relative to the water is 4.3 m/s, and he steers so that he travels due east
+  relative to the earth. What is the magnitude of his velocity relative to the earth? (3.85746 m/s)
+answer: { value: 3.85746, unit: m/s, raw: 3.85746 m/s }
+figures: []
+literals:
+  - name: v
+    value: 1.9
+    unit: m/s
+    text: "1.9"
+    suggest: { min: 1.3, max: 2.5, step: 0.1, decimals: 1 }
+  - name: v2
+    value: 4.3
+    unit: m/s
+    text: "4.3"
+    suggest: { min: 3, max: 5.6, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p055
+  source: { document: PHYS161_Exam1, labels: [ P55 ] }
+  section: Kinematics of 2D straight line motion
+  narrative: >-
+    A river flows due south with a speed of {v:unit}. A man steers a motorboat across the river; the
+    speed of the boat relative to the water is {v2:unit}, and he steers so that he travels due east
+    relative to the earth.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of his velocity relative to the earth? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 1.9, v2: 4.3 }
+    parts:
+      - { id: answer, answer: 3.85746, unit: m/s, source: P55 }

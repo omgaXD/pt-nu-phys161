@@ -1,0 +1,53 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P38
+number: 38
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Vibrational platform oscillates up and down at a controlled variable frequency with amplitude
+  11.4 cm. Suppose a small rock of unknown mass is placed on the platform. At what frequency will
+  the rock just begin to leave the surface so that it starts to clatter? The gravitational
+  acceleration is g = 9.8 m/s<sup>2</sup> (1.4756 Hz)
+text: Vibrational platform oscillates up and down at a controlled variable frequency with amplitude
+  11.4 cm. Suppose a small rock of unknown mass is placed on the platform. At what frequency will
+  the rock just begin to leave the surface so that it starts to clatter? The gravitational
+  acceleration is g = 9.8 m/s^2 (1.4756 Hz)
+answer: { value: 1.4756, unit: Hz, raw: 1.4756 Hz }
+figures: []
+literals:
+  - name: d
+    value: 11.4
+    unit: cm
+    text: "11.4"
+    suggest: { min: 8, max: 14.8, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p038
+  source: { document: PHYS161_Exam3, labels: [ P38 ] }
+  section: Oscillations
+  narrative: >-
+    Vibrational platform oscillates up and down at a controlled variable frequency with amplitude
+    {d:unit}. Suppose a small rock of unknown mass is placed on the platform. The gravitational
+    acceleration is g = {g:unit}
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        At what frequency will the rock just begin to leave the surface so that it starts to
+        clatter? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 11.4, g: 9.8 }
+    parts:
+      - { id: answer, answer: 1.4756, unit: Hz, source: P38 }

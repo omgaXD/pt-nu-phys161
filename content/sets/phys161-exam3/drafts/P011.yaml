@@ -1,0 +1,61 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P11
+number: 11
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Three identical stars of mass 5.27×10<sup>24</sup> kg are located at the vertices of an
+  equilateral triangle with side 6930 km. At what speed must they move if they all revolve under the
+  influence of one another's gravitational force in a circular orbit circumscribing the triangle
+  while still preserving the equilateral triangle? Gravitational constant is 6.67 ×
+  10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (7121.99 m/s)
+text: Three identical stars of mass 5.27×10^24 kg are located at the vertices of an equilateral
+  triangle with side 6930 km. At what speed must they move if they all revolve under the influence
+  of one another's gravitational force in a circular orbit circumscribing the triangle while still
+  preserving the equilateral triangle? Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (7121.99
+  m/s)
+answer: { value: 7121.99, unit: m/s, raw: 7121.99 m/s }
+figures:
+  - { src: figures/unnamed_005_LYNB.png, original: PHYS161%20Exam%203_files/unnamed_005_LYNB.png }
+literals:
+  - name: m
+    value: 5.27e+24
+    unit: kg
+    text: 5.27×10^24
+    suggest: { min: 3.7e+24, max: 6.9e+24, step: 1e+23 }
+  - name: d
+    value: 6930
+    unit: km
+    text: "6930"
+    suggest: { min: 4851, max: 9009, step: 1 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+scenario:
+  id: phys161-exam3-p011
+  source: { document: PHYS161_Exam3, labels: [ P11 ] }
+  section: Gravitation
+  figure: { id: fig, src: figures/unnamed_005_LYNB.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Three identical stars of mass {m:unit} are located at the vertices of an equilateral triangle
+    with side {d:unit}. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        At what speed must they move if they all revolve under the influence of one another's
+        gravitational force in a circular orbit circumscribing the triangle while still preserving
+        the equilateral triangle? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 5.27e+24, d: 6930, F: 6.67e-11 }
+    parts:
+      - { id: answer, answer: 7121.99, unit: m/s, source: P11 }

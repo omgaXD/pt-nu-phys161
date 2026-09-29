@@ -1,0 +1,75 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P61
+number: 61
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  Three moles of an ideal gas are taken around the cycle acba. For this gas, C<sub>p</sub> = 29.1
+  J/(mol⋅K). Process ac is at constant pressure, process ba is at constant volume, and process cb
+
+  is adiabatic. The temperatures of the gas in states a, c and b are T<sub>a</sub> = 298 K,
+  T<sub>c</sub> = 489 K, and T<sub>b</sub> = 598 K. Calculate the magnitude of the total work for
+  the cycle. The universal gas constant is R = 8.31 J/(mol K). (2036.7 J)
+text: Three moles of an ideal gas are taken around the cycle acba. For this gas, C_p = 29.1
+  J/(mol⋅K). Process ac is at constant pressure, process ba is at constant volume, and process cb is
+  adiabatic. The temperatures of the gas in states a, c and b are T_a = 298 K, T_c = 489 K, and T_b
+  = 598 K. Calculate the magnitude of the total work for the cycle. The universal gas constant is R
+  = 8.31 J/(mol K). (2036.7 J)
+answer: { value: 2036.7, unit: J, raw: 2036.7 J }
+figures:
+  - { src: figures/unnamed_009_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_009_xiMS.png }
+literals:
+  - name: Cp
+    value: 29.1
+    unit: J/(mol K)
+    text: "29.1"
+    suggest: { min: 20.4, max: 37.8, step: 0.1, decimals: 1 }
+  - name: Ta
+    value: 298
+    unit: K
+    text: "298"
+    suggest: { min: 209, max: 387, step: 1 }
+  - name: Tc
+    value: 489
+    unit: K
+    text: "489"
+    suggest: { min: 342, max: 636, step: 1 }
+  - name: Tb
+    value: 598
+    unit: K
+    text: "598"
+    suggest: { min: 419, max: 777, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p061
+  source: { document: PHYS161_Exam4, labels: [ P61 ] }
+  section: 1st Law of Thermodynamics
+  figure: { id: fig, src: figures/unnamed_009_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Three moles of an ideal gas are taken around the cycle acba. For this gas, $C_{p}$ = {Cp:unit}.
+    Process ac is at constant pressure, process ba is at constant volume, and process cb is
+    adiabatic. The temperatures of the gas in states a, c and b are $T_{a}$ = {Ta:unit}, $T_{c}$ =
+    {Tc:unit}, and $T_{b}$ = {Tb:unit}. The universal gas constant is R = {R:unit}. {@fig}
+  vars:
+    - { name: Cp, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: Ta, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: Tc, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: Tb, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the magnitude of the total work for the cycle. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { Cp: 29.1, Ta: 298, Tc: 489, Tb: 598, R: 8.31 }
+    parts:
+      - { id: answer, answer: 2036.7, unit: J, source: P61 }

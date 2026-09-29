@@ -1,0 +1,51 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P88
+number: 88
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A coal power plant consumes 140000 kg of coal per hour and produces 300 MW of power. If the
+  heat of combustion of coal is 30 MJ/kg, what is the efficiency of the power plant?
+  (0.25714285714286)
+text: A coal power plant consumes 140000 kg of coal per hour and produces 300 MW of power. If the
+  heat of combustion of coal is 30 MJ/kg, what is the efficiency of the power plant?
+  (0.25714285714286)
+answer: { value: 0.25714285714286, raw: "0.25714285714286" }
+figures: []
+literals:
+  - name: m
+    value: 140000
+    unit: kg
+    text: "140000"
+    suggest: { min: 98000, max: 182000, step: 1 }
+  - name: P
+    value: 300
+    unit: MW
+    text: "300"
+    suggest: { min: 210, max: 390, step: 1 }
+  - name: x
+    value: 30
+    text: "30"
+    suggest: { min: 21, max: 39, step: 1 }
+scenario:
+  id: phys161-exam4-p088
+  source: { document: PHYS161_Exam4, labels: [ P88 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A coal power plant consumes {m:unit} of coal per hour and produces {P:unit} of power.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: MW }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        If the heat of combustion of coal is {x} MJ/kg, what is the efficiency of the power plant?
+        {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 140000, P: 300, x: 30 }
+    parts:
+      - { id: answer, answer: 0.25714285714286, source: P88 }

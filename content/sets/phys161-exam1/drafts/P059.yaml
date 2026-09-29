@@ -1,0 +1,57 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P59
+number: 59
+section: Kinematics of projectile motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: To start an avalanche on a mountain slope, an artillery shell is fired with an initial velocity
+  of 291 m/s at 57° above the horizontal. It explodes on the mountainside 46 s after firing. What is
+  the horizontal coordinate of the shell where it explodes relative to its firing point?
+  (7290.5381227112 m)
+text: To start an avalanche on a mountain slope, an artillery shell is fired with an initial
+  velocity of 291 m/s at 57° above the horizontal. It explodes on the mountainside 46 s after
+  firing. What is the horizontal coordinate of the shell where it explodes relative to its firing
+  point? (7290.5381227112 m)
+answer: { value: 7290.5381227112, unit: m, raw: 7290.5381227112 m }
+figures: []
+literals:
+  - name: v
+    value: 291
+    unit: m/s
+    text: "291"
+    suggest: { min: 204, max: 378, step: 1 }
+  - name: theta
+    value: 57
+    unit: °
+    text: "57"
+    suggest: { min: 40, max: 74, step: 1 }
+  - name: t
+    value: 46
+    unit: s
+    text: "46"
+    suggest: { min: 32, max: 60, step: 1 }
+scenario:
+  id: phys161-exam1-p059
+  source: { document: PHYS161_Exam1, labels: [ P59 ] }
+  section: Kinematics of projectile motion
+  narrative: >-
+    To start an avalanche on a mountain slope, an artillery shell is fired with an initial velocity
+    of {v:unit} at {theta}° above the horizontal. It explodes on the mountainside {t:unit} after
+    firing.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the horizontal coordinate of the shell where it explodes relative to its firing
+        point? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 291, theta: 57, t: 46 }
+    parts:
+      - { id: answer, answer: 7290.5381227112, unit: m, source: P59 }

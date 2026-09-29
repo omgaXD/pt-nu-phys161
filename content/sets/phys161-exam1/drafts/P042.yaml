@@ -1,0 +1,51 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P42
+number: 42
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A particle slows down with an acceleration of 1.8 m/s<sup>2</sup> for 4.9 s moving straight for
+  55 m long. Find the speed of the particle at the end of the distance. (6.8144897959184 m/s)
+text: A particle slows down with an acceleration of 1.8 m/s^2 for 4.9 s moving straight for 55 m
+  long. Find the speed of the particle at the end of the distance. (6.8144897959184 m/s)
+answer: { value: 6.8144897959184, unit: m/s, raw: 6.8144897959184 m/s }
+figures: []
+literals:
+  - name: a
+    value: 1.8
+    unit: m/s^2
+    text: "1.8"
+    suggest: { min: 1.3, max: 2.3, step: 0.1, decimals: 1 }
+  - name: t
+    value: 4.9
+    unit: s
+    text: "4.9"
+    suggest: { min: 3.4, max: 6.4, step: 0.1, decimals: 1 }
+  - name: d
+    value: 55
+    unit: m
+    text: "55"
+    suggest: { min: 39, max: 72, step: 1 }
+scenario:
+  id: phys161-exam1-p042
+  source: { document: PHYS161_Exam1, labels: [ P42 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A particle slows down with an acceleration of {a:unit} for {t:unit} moving straight for {d:unit}
+    long.
+  vars:
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the speed of the particle at the end of the distance. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { a: 1.8, t: 4.9, d: 55 }
+    parts:
+      - { id: answer, answer: 6.8144897959184, unit: m/s, source: P42 }

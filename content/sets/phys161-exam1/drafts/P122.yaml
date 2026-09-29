@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P122
+number: 122
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Two ropes are connected to a steel cable that supports a hanging weight of 3850 N. The ropes
+  make angles of 60° and 40° with the ceiling, as shown in the figure. Determine the tension in the
+  rope that makes the 40° angle with the ceiling. Ignore the weight of the ropes and the steel
+  cable. (1954.7 N)
+text: Two ropes are connected to a steel cable that supports a hanging weight of 3850 N. The ropes
+  make angles of 60° and 40° with the ceiling, as shown in the figure. Determine the tension in the
+  rope that makes the 40° angle with the ceiling. Ignore the weight of the ropes and the steel
+  cable. (1954.7 N)
+answer: { value: 1954.7, unit: N, raw: 1954.7 N }
+figures:
+  - { src: figures/unnamed_007_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_007_R6Ld.png }
+literals:
+  - name: F
+    value: 3850
+    unit: N
+    text: "3850"
+    suggest: { min: 2695, max: 5005, step: 1 }
+  - name: theta
+    value: 60
+    unit: °
+    text: "60"
+    suggest: { min: 42, max: 78, step: 1 }
+  - name: theta2
+    value: 40
+    unit: °
+    text: "40"
+    suggest: { min: 28, max: 52, step: 1 }
+  - name: theta3
+    value: 40
+    unit: °
+    text: "40"
+    suggest: { min: 28, max: 52, step: 1 }
+scenario:
+  id: phys161-exam1-p122
+  source: { document: PHYS161_Exam1, labels: [ P122 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_007_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Two ropes are connected to a steel cable that supports a hanging weight of {F:unit}. The ropes
+    make angles of {theta}° and {theta2}° with the ceiling, as shown in the figure. Ignore the
+    weight of the ropes and the steel cable. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: theta2, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: theta3, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  parts:
+    - id: answer
+      prompt: >-
+        Determine the tension in the rope that makes the {theta3}° angle with the ceiling. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 3850, theta: 60, theta2: 40, theta3: 40 }
+    parts:
+      - { id: answer, answer: 1954.7, unit: N, source: P122 }

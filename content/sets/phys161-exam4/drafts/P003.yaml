@@ -1,0 +1,62 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P3
+number: 3
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Assume that a bridge is built from steel as a single, continuous structure, 143 m long. Taking
+  the coefficient of thermal expansion of steel equal to 10.5×10<sup>−6</sup> 1/K, calculate by how
+  much the length of the bridge changes between the coldest winter day (-26°C) and the hottest
+  summer day (+35°C)? (0.0915915 m)
+text: Assume that a bridge is built from steel as a single, continuous structure, 143 m long. Taking
+  the coefficient of thermal expansion of steel equal to 10.5×10^-6 1/K, calculate by how much the
+  length of the bridge changes between the coldest winter day (-26°C) and the hottest summer day
+  (+35°C)? (0.0915915 m)
+answer: { value: 0.0915915, unit: m, raw: 0.0915915 m }
+figures: []
+literals:
+  - name: d
+    value: 143
+    unit: m
+    text: "143"
+    suggest: { min: 100, max: 186, step: 1 }
+  - name: alpha
+    value: 0.0000105
+    unit: 1/K
+    text: 10.5×10^-6
+    suggest: { min: 0.0000074, max: 0.0000137, step: 1e-7, decimals: 7 }
+  - name: T
+    value: -26
+    unit: °C
+    text: "-26"
+    suggest: { min: -34, max: -18, step: 1 }
+  - name: T2
+    value: 35
+    unit: °C
+    text: "+35"
+    suggest: { min: 25, max: 46, step: 1 }
+scenario:
+  id: phys161-exam4-p003
+  source: { document: PHYS161_Exam4, labels: [ P3 ] }
+  section: Temperature and heat
+  narrative: >-
+    Assume that a bridge is built from steel as a single, continuous structure, {d:unit} long.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/K }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+  parts:
+    - id: answer
+      prompt: >-
+        Taking the coefficient of thermal expansion of steel equal to {alpha:unit}, calculate by how
+        much the length of the bridge changes between the coldest winter day ({T:unit}) and the
+        hottest summer day ({T2:unit})? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 143, alpha: 0.0000105, T: -26, T2: 35 }
+    parts:
+      - { id: answer, answer: 0.0915915, unit: m, source: P3 }

@@ -1,0 +1,87 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P19
+number: 19
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  A metal rod A that is 38 cm long expands by 0.065 cm when its temperature is raised from 0°C to
+  100°C. A rod B of a different metal and of the same length expands by 0.025 cm for the same rise
+  in temperature. A third rod, also 38 cm long, is made up of pieces of each of the above metals
+  placed end to end and expands 0.05 cm between 0°C and 100°C. Find L<sub>A</sub>
+
+  the length of the portion of metal A in the third rod. (0.2375 m)
+text: A metal rod A that is 38 cm long expands by 0.065 cm when its temperature is raised from 0°C
+  to 100°C. A rod B of a different metal and of the same length expands by 0.025 cm for the same
+  rise in temperature. A third rod, also 38 cm long, is made up of pieces of each of the above
+  metals placed end to end and expands 0.05 cm between 0°C and 100°C. Find L_A the length of the
+  portion of metal A in the third rod. (0.2375 m)
+answer: { value: 0.2375, unit: m, raw: 0.2375 m }
+figures:
+  - { src: figures/unnamed_003_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_003_xiMS.png }
+literals:
+  - name: d
+    value: 38
+    unit: cm
+    text: "38"
+    suggest: { min: 27, max: 49, step: 1 }
+  - name: L
+    value: 0.065
+    unit: cm
+    text: "0.065"
+    suggest: { min: 0.046, max: 0.085, step: 0.001, decimals: 3 }
+  - name: T
+    value: 100
+    unit: °C
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: L2
+    value: 0.025
+    unit: cm
+    text: "0.025"
+    suggest: { min: 0.017, max: 0.033, step: 0.001, decimals: 3 }
+  - name: d2
+    value: 38
+    unit: cm
+    text: "38"
+    suggest: { min: 27, max: 49, step: 1 }
+  - name: d3
+    value: 0.05
+    unit: cm
+    text: "0.05"
+    suggest: { min: 0.03, max: 0.07, step: 0.01, decimals: 2 }
+  - name: T2
+    value: 100
+    unit: °C
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+scenario:
+  id: phys161-exam4-p019
+  source: { document: PHYS161_Exam4, labels: [ P19 ] }
+  section: Temperature and heat
+  figure: { id: fig, src: figures/unnamed_003_xiMS.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A metal rod A that is {d:unit} long expands by {L:unit} when its temperature is raised from 0°C
+    to {T:unit}. A rod B of a different metal and of the same length expands by {L2:unit} for the
+    same rise in temperature. A third rod, also {d2:unit} long, is made up of pieces of each of the
+    above metals placed end to end and expands {d3:unit} between 0°C and {T2:unit}. {@fig}
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: L2, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: d3, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+  parts:
+    - id: answer
+      prompt: >-
+        Find $L_{A}$ the length of the portion of metal A in the third rod. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 38, L: 0.065, T: 100, L2: 0.025, d2: 38, d3: 0.05, T2: 100 }
+    parts:
+      - { id: answer, answer: 0.2375, unit: m, source: P19 }

@@ -121,7 +121,7 @@ export function escapeTemplate(s: string): string {
         const h = GREEK_TEX[head] ? `\\${GREEK_TEX[head]}` : head;
         return `$${h}_{${sub}}$`;
       })
-      .replace(/\^(\(([^()]*)\)|[-+]?[\w.]+)/g, (_m, all: string, inner: string | undefined) => `$^{${inner ?? all}}$`)
+      .replace(/\^(\(([^()]*)\)|[-+]?\w+(?:\.\d+)?)/g, (_m, all: string, inner: string | undefined) => `$^{${inner ?? all}}$`)
       // "$M_{1}$$^{2}$" → "$M_{1}^{2}$" (two adjacent math runs would read as $$ display math).
       .replace(/\$\$\^\{/g, '^{')
   );

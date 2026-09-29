@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P84
+number: 84
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A bucket of water whirls around a vertical circle of radius 79.3 cm. What is the minimum speed
+  that the bucket must have at the top of its circular motion if the water is not to spill out of
+  the upside-down bucket? Take the gravitational acceleration g = 9.8 m/s<sup>2</sup>. (2.788 m/s)
+text: A bucket of water whirls around a vertical circle of radius 79.3 cm. What is the minimum speed
+  that the bucket must have at the top of its circular motion if the water is not to spill out of
+  the upside-down bucket? Take the gravitational acceleration g = 9.8 m/s^2. (2.788 m/s)
+answer: { value: 2.788, unit: m/s, raw: 2.788 m/s }
+figures: []
+literals:
+  - name: r
+    value: 79.3
+    unit: cm
+    text: "79.3"
+    suggest: { min: 55.5, max: 103.1, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p084
+  source: { document: PHYS161_Exam1, labels: [ P84 ] }
+  section: Circular motion
+  narrative: >-
+    A bucket of water whirls around a vertical circle of radius {r:unit}. Take the gravitational
+    acceleration g = {g:unit}.
+  vars:
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the minimum speed that the bucket must have at the top of its circular motion if the
+        water is not to spill out of the upside-down bucket? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { r: 79.3, g: 9.8 }
+    parts:
+      - { id: answer, answer: 2.788, unit: m/s, source: P84 }

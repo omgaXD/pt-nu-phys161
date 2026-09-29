@@ -1,0 +1,74 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P16
+number: 16
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An aluminum tea kettle with mass 1.5 kg and containing 1.6 kg of water is placed on a stove. If
+  no heat is lost to the surroundings, how much heat must be added to raise the temperature from
+  21°C to 77°C? Specific heat of aluminum is 910 J/(kg K), Specific heat of water is 4186 J/ (kg K).
+  (451505.6 J)
+text: An aluminum tea kettle with mass 1.5 kg and containing 1.6 kg of water is placed on a stove.
+  If no heat is lost to the surroundings, how much heat must be added to raise the temperature from
+  21°C to 77°C? Specific heat of aluminum is 910 J/(kg K), Specific heat of water is 4186 J/ (kg K).
+  (451505.6 J)
+answer: { value: 451505.6, unit: J, raw: 451505.6 J }
+figures: []
+literals:
+  - name: m
+    value: 1.5
+    unit: kg
+    text: "1.5"
+    suggest: { min: 1, max: 2, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 1.6
+    unit: kg
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: T
+    value: 21
+    unit: °C
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: T2
+    value: 77
+    unit: °C
+    text: "77"
+    suggest: { min: 54, max: 100, step: 1 }
+  - name: c
+    value: 910
+    unit: J/(kg K)
+    text: "910"
+    suggest: { min: 637, max: 1183, step: 1 }
+  - name: c2
+    value: 4186
+    unit: J/(kg K)
+    text: "4186"
+    suggest: { min: 2930, max: 5442, step: 1 }
+scenario:
+  id: phys161-exam4-p016
+  source: { document: PHYS161_Exam4, labels: [ P16 ] }
+  section: Temperature and heat
+  narrative: >-
+    An aluminum tea kettle with mass {m:unit} and containing {m2:unit} of water is placed on a
+    stove. Specific heat of aluminum is {c:unit}, Specific heat of water is {c2:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: c2, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+  parts:
+    - id: answer
+      prompt: >-
+        If no heat is lost to the surroundings, how much heat must be added to raise the temperature
+        from {T:unit} to {T2:unit}? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1.5, m2: 1.6, T: 21, T2: 77, c: 910, c2: 4186 }
+    parts:
+      - { id: answer, answer: 451505.6, unit: J, source: P16 }

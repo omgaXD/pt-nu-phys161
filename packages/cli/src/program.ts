@@ -1,6 +1,7 @@
 import { Command, InvalidArgumentError } from 'commander';
 import { runAgentTask } from './commands/agent-task.js';
 import { runCheck } from './commands/check.js';
+import { runCoverage } from './commands/coverage.js';
 import { runFmt } from './commands/fmt.js';
 import { runFuzz } from './commands/fuzz.js';
 import { runGen } from './commands/gen.js';
@@ -108,6 +109,14 @@ export function buildProgram(output: Output = consoleOutput(), onExit: (code: nu
     .option('--threshold <x>', 'narrative similarity threshold 0..1', Number, 0.6)
     .option('--json', 'machine-readable output')
     .action(run((ctx, setId: string, opts) => runGroup(ctx, setId, opts)));
+
+  program
+    .command('coverage')
+    .description('which source problems are playable: authored (randomized), fixed (source values) or missing')
+    .argument('[set]', 'set id (default: all)')
+    .option('--strict', 'exit 1 on inconsistent content (broken files, failing checks, label conflicts, orphan parts)')
+    .option('--json', 'machine-readable output')
+    .action(run((ctx, setId: string | undefined, opts) => runCoverage(ctx, setId, opts)));
 
   program
     .command('agent-task')

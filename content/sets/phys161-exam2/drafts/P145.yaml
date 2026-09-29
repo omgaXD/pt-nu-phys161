@@ -15,7 +15,7 @@ text: A 620-g toy plane is flying horizontally at 2.25 m/s when it hits a statio
   collision? (1.0602 kg m^2/s)
 answer: { value: 1.0602, unit: kg m^2/s, raw: 1.0602 kg m^2/s }
 figures:
-  - { src: figures/unnamed_013_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_013_fr4U.png }
+  - { src: figures/unnamed_032_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_032_GNcJ.png }
 literals:
   - name: m
     value: 620
@@ -46,7 +46,7 @@ scenario:
   id: phys161-exam2-p145
   source: { document: PHYS161_Exam2, labels: [ P145 ] }
   section: Angular momentum
-  figure: { id: fig, src: figures/unnamed_013_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_032_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     A {m}-g toy plane is flying horizontally at {v:unit} when it hits a stationary vertical bar l =
     {l:unit} below the top. The bar is uniform, {d:unit} long, has a mass of {m2:unit}, and is

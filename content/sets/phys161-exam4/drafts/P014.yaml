@@ -1,0 +1,60 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P14
+number: 14
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A machinist bores a hole of diameter 1.5 cm in a steel plate at a temperature of 21°C. What is
+  the cross-sectional area of the hole when the temperature of the plate is increased to 176°C?
+  Linear coefficient of expansion for steel is 1.2 · 10<sup>-5</sup> 1/°C. (0.0001773719650 m^2)
+text: A machinist bores a hole of diameter 1.5 cm in a steel plate at a temperature of 21°C. What is
+  the cross-sectional area of the hole when the temperature of the plate is increased to 176°C?
+  Linear coefficient of expansion for steel is 1.2 · 10^-5 1/°C. (0.0001773719650 m^2)
+answer: { value: 0.000177371965, unit: m^2, raw: 0.0001773719650 m^2 }
+figures: []
+literals:
+  - name: D
+    value: 1.5
+    unit: cm
+    text: "1.5"
+    suggest: { min: 1, max: 2, step: 0.1, decimals: 1 }
+  - name: T
+    value: 21
+    unit: °C
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: T2
+    value: 176
+    unit: °C
+    text: "176"
+    suggest: { min: 123, max: 229, step: 1 }
+  - name: alpha
+    value: 0.000012
+    unit: 1/°C
+    text: 1.2 · 10^-5
+    suggest: { min: 0.000008, max: 0.000016, step: 0.000001, decimals: 6 }
+scenario:
+  id: phys161-exam4-p014
+  source: { document: PHYS161_Exam4, labels: [ P14 ] }
+  section: Temperature and heat
+  narrative: >-
+    A machinist bores a hole of diameter {D:unit} in a steel plate at a temperature of {T:unit}.
+    Linear coefficient of expansion for steel is {alpha:unit}.
+  vars:
+    - { name: D, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/°C }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the cross-sectional area of the hole when the temperature of the plate is increased
+        to {T2:unit}? {_0}{_u}
+      answer: TODO
+      unit: m^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { D: 1.5, T: 21, T2: 176, alpha: 0.000012 }
+    parts:
+      - { id: answer, answer: 0.000177371965, unit: m^2, source: P14 }

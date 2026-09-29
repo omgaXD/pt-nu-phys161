@@ -1,0 +1,46 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P1
+number: 1
+section: Units
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: The critical mass of some fissionable material is about 6 kg. This element has a density of
+  19.8 g/cm<sup>3</sup>. What would be the radius of a sphere of this material that has a critical
+  mass? (0.04167 m)
+text: The critical mass of some fissionable material is about 6 kg. This element has a density of
+  19.8 g/cm^3. What would be the radius of a sphere of this material that has a critical mass?
+  (0.04167 m)
+answer: { value: 0.04167, unit: m, raw: 0.04167 m }
+figures: []
+literals:
+  - name: m
+    value: 6
+    unit: kg
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: x
+    value: 19.8
+    text: "19.8"
+    suggest: { min: 13.9, max: 25.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p001
+  source: { document: PHYS161_Exam1, labels: [ P1 ] }
+  section: Units
+  narrative: >-
+    The critical mass of some fissionable material is about {m:unit}. This element has a density of
+    {x} g/cm$^{3}$.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        What would be the radius of a sphere of this material that has a critical mass? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 6, x: 19.8 }
+    parts:
+      - { id: answer, answer: 0.04167, unit: m, source: P1 }

@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P125
+number: 125
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: The clothesline has a mass 600 g, and each end makes an angle 16° with horizontal. What is the
+  tension at each end of the clothesline? The gravitational acceleration is g = 9.8 m/s<sup>2</sup>.
+  (10.666 N)
+text: The clothesline has a mass 600 g, and each end makes an angle 16° with horizontal. What is the
+  tension at each end of the clothesline? The gravitational acceleration is g = 9.8 m/s^2. (10.666
+  N)
+answer: { value: 10.666, unit: N, raw: 10.666 N }
+figures:
+  - { src: figures/unnamed_022_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_022_R6Ld.png }
+literals:
+  - name: m
+    value: 600
+    unit: g
+    text: "600"
+    suggest: { min: 420, max: 780, step: 1 }
+  - name: theta
+    value: 16
+    unit: °
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p125
+  source: { document: PHYS161_Exam1, labels: [ P125 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_022_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    The clothesline has a mass {m:unit}, and each end makes an angle {theta}° with horizontal. The
+    gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: What is the tension at each end of the clothesline? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 600, theta: 16, g: 9.8 }
+    parts:
+      - { id: answer, answer: 10.666, unit: N, source: P125 }

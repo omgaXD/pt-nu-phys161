@@ -1,0 +1,54 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P77
+number: 77
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A Carnot engine operates between a hot reservoir at 390 K and a cold reservoir at 260 K. If the
+  same engine working in reverse functions as a refrigerator between the same two reservoirs how
+  much work per cycle must be supplied to remove 1000 J of heat from the cold reservoir? (500 J)
+text: A Carnot engine operates between a hot reservoir at 390 K and a cold reservoir at 260 K. If
+  the same engine working in reverse functions as a refrigerator between the same two reservoirs how
+  much work per cycle must be supplied to remove 1000 J of heat from the cold reservoir? (500 J)
+answer: { value: 500, unit: J, raw: 500 J }
+figures: []
+literals:
+  - name: T
+    value: 390
+    unit: K
+    text: "390"
+    suggest: { min: 273, max: 507, step: 1 }
+  - name: T2
+    value: 260
+    unit: K
+    text: "260"
+    suggest: { min: 182, max: 338, step: 1 }
+  - name: E
+    value: 1000
+    unit: J
+    text: "1000"
+    suggest: { min: 700, max: 1300, step: 1 }
+scenario:
+  id: phys161-exam4-p077
+  source: { document: PHYS161_Exam4, labels: [ P77 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A Carnot engine operates between a hot reservoir at {T:unit} and a cold reservoir at {T2:unit}.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  parts:
+    - id: answer
+      prompt: >-
+        If the same engine working in reverse functions as a refrigerator between the same two
+        reservoirs how much work per cycle must be supplied to remove {E:unit} of heat from the cold
+        reservoir? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 390, T2: 260, E: 1000 }
+    parts:
+      - { id: answer, answer: 500, unit: J, source: P77 }

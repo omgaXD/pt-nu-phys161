@@ -1,0 +1,50 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P86
+number: 86
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An ideal engine extracts 10500 J of heat from its hot reservoir while operating between 230 K
+  and 575 K. Find the work done by an ideal engine. (6300 J)
+text: An ideal engine extracts 10500 J of heat from its hot reservoir while operating between 230 K
+  and 575 K. Find the work done by an ideal engine. (6300 J)
+answer: { value: 6300, unit: J, raw: 6300 J }
+figures: []
+literals:
+  - name: E
+    value: 10500
+    unit: J
+    text: "10500"
+    suggest: { min: 7350, max: 13650, step: 1 }
+  - name: T
+    value: 230
+    unit: K
+    text: "230"
+    suggest: { min: 161, max: 299, step: 1 }
+  - name: T2
+    value: 575
+    unit: K
+    text: "575"
+    suggest: { min: 403, max: 748, step: 1 }
+scenario:
+  id: phys161-exam4-p086
+  source: { document: PHYS161_Exam4, labels: [ P86 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    An ideal engine extracts {E:unit} of heat from its hot reservoir while operating between
+    {T:unit} and {T2:unit}.
+  vars:
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+  parts:
+    - id: answer
+      prompt: Find the work done by an ideal engine. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { E: 10500, T: 230, T2: 575 }
+    parts:
+      - { id: answer, answer: 6300, unit: J, source: P86 }

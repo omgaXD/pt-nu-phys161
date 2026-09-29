@@ -1,0 +1,44 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P83
+number: 83
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Calculate the wavelength of sound at the lower extreme of the audible range 20 Hz, when the
+  speed of sound in air is 332 m/s. (16.6 m)
+text: Calculate the wavelength of sound at the lower extreme of the audible range 20 Hz, when the
+  speed of sound in air is 332 m/s. (16.6 m)
+answer: { value: 16.6, unit: m, raw: 16.6 m }
+figures: []
+literals:
+  - name: f
+    value: 20
+    unit: Hz
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: v
+    value: 332
+    unit: m/s
+    text: "332"
+    suggest: { min: 232, max: 432, step: 1 }
+scenario:
+  id: phys161-exam3-p083
+  source: { document: PHYS161_Exam3, labels: [ P83 ] }
+  section: Sound
+  narrative: ""
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the wavelength of sound at the lower extreme of the audible range {f:unit}, when
+        the speed of sound in air is {v:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 20, v: 332 }
+    parts:
+      - { id: answer, answer: 16.6, unit: m, source: P83 }

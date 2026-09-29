@@ -1,0 +1,72 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P69
+number: 69
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: A transverse harmonic wave with an amplitude of 2 mm and wavelength of 1.65 m travels from left
+  to right along a long, horizontal, stretched string with a speed of 29 m/s. Take the origin at the
+  left end of the undisturbed string. At time t = 0 s the left end of the string has its maximum
+  upward displacement. Find the magnitude of transverse displacement of a particle 1.4 m to the
+  right of the origin at time t = 0.0595 s. (0.0006505 m)
+text: A transverse harmonic wave with an amplitude of 2 mm and wavelength of 1.65 m travels from
+  left to right along a long, horizontal, stretched string with a speed of 29 m/s. Take the origin
+  at the left end of the undisturbed string. At time t = 0 s the left end of the string has its
+  maximum upward displacement. Find the magnitude of transverse displacement of a particle 1.4 m to
+  the right of the origin at time t = 0.0595 s. (0.0006505 m)
+answer: { value: 0.0006505, unit: m, raw: 0.0006505 m }
+figures: []
+literals:
+  - name: d
+    value: 2
+    unit: mm
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: L
+    value: 1.65
+    unit: m
+    text: "1.65"
+    suggest: { min: 1.15, max: 2.15, step: 0.01, decimals: 2 }
+  - name: v
+    value: 29
+    unit: m/s
+    text: "29"
+    suggest: { min: 20, max: 38, step: 1 }
+  - name: d2
+    value: 1.4
+    unit: m
+    text: "1.4"
+    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
+  - name: t
+    value: 0.0595
+    unit: s
+    text: "0.0595"
+    suggest: { min: 0.0416, max: 0.0774, step: 0.0001, decimals: 4 }
+scenario:
+  id: phys161-exam3-p069
+  source: { document: PHYS161_Exam3, labels: [ P69 ] }
+  section: Waves
+  narrative: >-
+    A transverse harmonic wave with an amplitude of {d:unit} and wavelength of {L:unit} travels from
+    left to right along a long, horizontal, stretched string with a speed of {v:unit}. Take the
+    origin at the left end of the undisturbed string. At time t = 0 s the left end of the string has
+    its maximum upward displacement.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of transverse displacement of a particle {d2:unit} to the right of the
+        origin at time t = {t:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 2, L: 1.65, v: 29, d2: 1.4, t: 0.0595 }
+    parts:
+      - { id: answer, answer: 0.0006505, unit: m, source: P69 }

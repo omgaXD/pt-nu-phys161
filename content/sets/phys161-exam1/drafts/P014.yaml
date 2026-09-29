@@ -1,0 +1,58 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P14
+number: 14
+section: Uncertainty
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A chocolate cookie is a circular disk with a diameter of 9.6 ± 0.03 cm and a thickness of 0.1 ±
+  0.002 cm. If the area of its top circular face is written in A ± δA format, find the maximum
+  possible uncertainty in that area δA. (0.452389 cm^2)
+text: A chocolate cookie is a circular disk with a diameter of 9.6 ± 0.03 cm and a thickness of 0.1
+  ± 0.002 cm. If the area of its top circular face is written in A ± δA format, find the maximum
+  possible uncertainty in that area δA. (0.452389 cm^2)
+answer: { value: 0.452389, unit: cm^2, raw: 0.452389 cm^2 }
+figures: []
+literals:
+  - name: x
+    value: 9.6
+    text: "9.6"
+    suggest: { min: 6.7, max: 12.5, step: 0.1, decimals: 1 }
+  - name: D
+    value: 0.03
+    unit: cm
+    text: "0.03"
+    suggest: { min: 0.02, max: 0.04, step: 0.01, decimals: 2 }
+  - name: x2
+    value: 0.1
+    text: "0.1"
+    suggest: { min: 0.1, max: 0.1, step: 0.1, decimals: 1 }
+  - name: d
+    value: 0.002
+    unit: cm
+    text: "0.002"
+    suggest: { min: 0.001, max: 0.003, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam1-p014
+  source: { document: PHYS161_Exam1, labels: [ P14 ] }
+  section: Uncertainty
+  narrative: >-
+    A chocolate cookie is a circular disk with a diameter of {x} ± {D:unit} and a thickness of {x2}
+    ± {d:unit}.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: D, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: >-
+        If the area of its top circular face is written in A ± δA format, find the maximum possible
+        uncertainty in that area δA. {_0}{_u}
+      answer: TODO
+      unit: cm^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 9.6, D: 0.03, x2: 0.1, d: 0.002 }
+    parts:
+      - { id: answer, answer: 0.452389, unit: cm^2, source: P14 }

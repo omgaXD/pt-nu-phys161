@@ -1,0 +1,62 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P40
+number: 40
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A motorcyclist heading east through a small city accelerates after he passes the signpost
+  marking the city limits. His acceleration is a constant 3.9 m/s<sup>2</sup>. At time t = 0 he is
+  4.5 m east of the signpost, moving east at 14 m/s. Find his position with respect to the signpost
+  at time t = 3 s. (64.05 m)
+text: A motorcyclist heading east through a small city accelerates after he passes the signpost
+  marking the city limits. His acceleration is a constant 3.9 m/s^2. At time t = 0 he is 4.5 m east
+  of the signpost, moving east at 14 m/s. Find his position with respect to the signpost at time t =
+  3 s. (64.05 m)
+answer: { value: 64.05, unit: m, raw: 64.05 m }
+figures: []
+literals:
+  - name: a
+    value: 3.9
+    unit: m/s^2
+    text: "3.9"
+    suggest: { min: 2.7, max: 5.1, step: 0.1, decimals: 1 }
+  - name: d
+    value: 4.5
+    unit: m
+    text: "4.5"
+    suggest: { min: 3.1, max: 5.9, step: 0.1, decimals: 1 }
+  - name: v
+    value: 14
+    unit: m/s
+    text: "14"
+    suggest: { min: 10, max: 18, step: 1 }
+  - name: t
+    value: 3
+    unit: s
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+scenario:
+  id: phys161-exam1-p040
+  source: { document: PHYS161_Exam1, labels: [ P40 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    A motorcyclist heading east through a small city accelerates after he passes the signpost
+    marking the city limits. His acceleration is a constant {a:unit}. At time t = 0 he is {d:unit}
+    east of the signpost, moving east at {v:unit}.
+  vars:
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        Find his position with respect to the signpost at time t = {t:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { a: 3.9, d: 4.5, v: 14, t: 3 }
+    parts:
+      - { id: answer, answer: 64.05, unit: m, source: P40 }

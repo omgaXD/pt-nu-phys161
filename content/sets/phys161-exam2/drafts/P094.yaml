@@ -12,7 +12,12 @@ text: A stick of length 1.3 m is held vertically with one end on the floor and i
   fall. Find the speed of the other end when it hits the floor, assuming that the end on the floor
   does not slip. The gravitational acceleration is g = 9.8 m/s^2. (6.182 m/s)
 answer: { value: 6.182, unit: m/s, raw: 6.182 m/s }
-figures: []
+figures:
+  - {
+      src: figures/unnamed_030_GNcJ.png,
+      original: PHYS161_Exam2_new.docx_files/unnamed_030_GNcJ.png,
+      role: section
+    }
 literals:
   - name: L
     value: 1.3

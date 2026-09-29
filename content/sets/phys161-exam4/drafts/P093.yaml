@@ -1,0 +1,65 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P93
+number: 93
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A system consisting of 23 mol of a monatomic ideal gas is cooled at constant pressure from a
+  volume 48 L to 11 L. The initial temperature was 293 K. What is the change in entropy of the gas?
+  The universal gas constant is R = 8.31 J/(mol K). (-703.9823 J/K)
+text: A system consisting of 23 mol of a monatomic ideal gas is cooled at constant pressure from a
+  volume 48 L to 11 L. The initial temperature was 293 K. What is the change in entropy of the gas?
+  The universal gas constant is R = 8.31 J/(mol K). (-703.9823 J/K)
+answer: { value: -703.9823, unit: J/K, raw: -703.9823 J/K }
+figures: []
+literals:
+  - name: n
+    value: 23
+    unit: mol
+    text: "23"
+    suggest: { min: 16, max: 30, step: 1 }
+  - name: V
+    value: 48
+    unit: L
+    text: "48"
+    suggest: { min: 34, max: 62, step: 1 }
+  - name: V2
+    value: 11
+    unit: L
+    text: "11"
+    suggest: { min: 8, max: 14, step: 1 }
+  - name: T
+    value: 293
+    unit: K
+    text: "293"
+    suggest: { min: 205, max: 381, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p093
+  source: { document: PHYS161_Exam4, labels: [ P93 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A system consisting of {n:unit} of a monatomic ideal gas is cooled at constant pressure from a
+    volume {V:unit} to {V2:unit}. The initial temperature was {T:unit}. The universal gas constant
+    is R = {R:unit}.
+  vars:
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: What is the change in entropy of the gas? {_0}{_u}
+      answer: TODO
+      unit: J/K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { n: 23, V: 48, V2: 11, T: 293, R: 8.31 }
+    parts:
+      - { id: answer, answer: -703.9823, unit: J/K, source: P93 }

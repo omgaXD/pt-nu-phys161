@@ -1,0 +1,45 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P121
+number: 121
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Two ropes are connected to a steel cable that supports a hanging weight. If the maximum tension
+  either rope can sustain without breaking is 4200 N, determine the maximum value of the hanging
+  weight that those ropes can safely support. Ignore the weight of the ropes and the steel cable.
+  (5399.518 N)
+text: Two ropes are connected to a steel cable that supports a hanging weight. If the maximum
+  tension either rope can sustain without breaking is 4200 N, determine the maximum value of the
+  hanging weight that those ropes can safely support. Ignore the weight of the ropes and the steel
+  cable. (5399.518 N)
+answer: { value: 5399.518, unit: N, raw: 5399.518 N }
+figures:
+  - { src: figures/unnamed_007_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_007_R6Ld.png }
+literals:
+  - name: F
+    value: 4200
+    unit: N
+    text: "4200"
+    suggest: { min: 2940, max: 5460, step: 1 }
+scenario:
+  id: phys161-exam1-p121
+  source: { document: PHYS161_Exam1, labels: [ P121 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_007_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Two ropes are connected to a steel cable that supports a hanging weight. If the maximum tension
+    either rope can sustain without breaking is {F:unit}, determine the maximum value of the hanging
+    weight that those ropes can safely support. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: Ignore the weight of the ropes and the steel cable. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 4200 }
+    parts:
+      - { id: answer, answer: 5399.518, unit: N, source: P121 }

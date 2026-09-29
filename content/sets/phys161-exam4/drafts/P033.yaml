@@ -1,0 +1,53 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P33
+number: 33
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: The escape velocity from Planet X is 2.6 km/s. At what temperature would hydrogen molecules
+  (molar mass is equal to 2.016 g/mol) have a root-mean-square velocity equal to the Planet X's
+  escape velocity? The universal gas constant is R = 8.31 J/(mol K). (546.65703971119 K)
+text: The escape velocity from Planet X is 2.6 km/s. At what temperature would hydrogen molecules
+  (molar mass is equal to 2.016 g/mol) have a root-mean-square velocity equal to the Planet X's
+  escape velocity? The universal gas constant is R = 8.31 J/(mol K). (546.65703971119 K)
+answer: { value: 546.65703971119, unit: K, raw: 546.65703971119 K }
+figures: []
+literals:
+  - name: v
+    value: 2.6
+    unit: km/s
+    text: "2.6"
+    suggest: { min: 1.8, max: 3.4, step: 0.1, decimals: 1 }
+  - name: M
+    value: 2.016
+    unit: g/mol
+    text: "2.016"
+    suggest: { min: 1.411, max: 2.621, step: 0.001, decimals: 3 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p033
+  source: { document: PHYS161_Exam4, labels: [ P33 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    The escape velocity from Planet X is {v:unit}. The universal gas constant is R = {R:unit}.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: km/s }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        At what temperature would hydrogen molecules (molar mass is equal to {M:unit}) have a
+        root-mean-square velocity equal to the Planet X's escape velocity? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 2.6, M: 2.016, R: 8.31 }
+    parts:
+      - { id: answer, answer: 546.65703971119, unit: K, source: P33 }

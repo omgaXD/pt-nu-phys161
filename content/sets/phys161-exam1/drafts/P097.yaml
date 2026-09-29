@@ -1,0 +1,68 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P97
+number: 97
+section: Friction
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A force of magnitude 23.2 N is applied in the horizontal direction to a block of mass 4.4 kg
+  placed on the horizontal surface. Taking the coefficient of kinetic friction between the block and
+  the surface equal 0.15, calculate the speed of the block 2.5 seconds after it started moving. Take
+  gravitational acceleration g = 9.8 m/s<sup>2</sup>. (9.507 m/s)
+text: A force of magnitude 23.2 N is applied in the horizontal direction to a block of mass 4.4 kg
+  placed on the horizontal surface. Taking the coefficient of kinetic friction between the block and
+  the surface equal 0.15, calculate the speed of the block 2.5 seconds after it started moving. Take
+  gravitational acceleration g = 9.8 m/s^2. (9.507 m/s)
+answer: { value: 9.507, unit: m/s, raw: 9.507 m/s }
+figures: []
+literals:
+  - name: F
+    value: 23.2
+    unit: N
+    text: "23.2"
+    suggest: { min: 16.2, max: 30.2, step: 0.1, decimals: 1 }
+  - name: m
+    value: 4.4
+    unit: kg
+    text: "4.4"
+    suggest: { min: 3.1, max: 5.7, step: 0.1, decimals: 1 }
+  - name: x
+    value: 0.15
+    text: "0.15"
+    suggest: { min: 0.11, max: 0.2, step: 0.01, decimals: 2 }
+  - name: x2
+    value: 2.5
+    text: "2.5"
+    suggest: { min: 1.8, max: 3.3, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p097
+  source: { document: PHYS161_Exam1, labels: [ P97 ] }
+  section: Friction
+  narrative: >-
+    A force of magnitude {F:unit} is applied in the horizontal direction to a block of mass {m:unit}
+    placed on the horizontal surface. Taking the coefficient of kinetic friction between the block
+    and the surface equal {x}, calculate the speed of the block {x2} seconds after it started
+    moving.
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Take gravitational acceleration g = {g:unit}. {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 23.2, m: 4.4, x: 0.15, x2: 2.5, g: 9.8 }
+    parts:
+      - { id: answer, answer: 9.507, unit: m/s, source: P97 }

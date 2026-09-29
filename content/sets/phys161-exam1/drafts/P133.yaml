@@ -1,0 +1,57 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P133
+number: 133
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Block A weighs 62 N and rests on a horizontal surface. The angle of the cord with the
+  horizontal is α = 58°. The weight w is 17.5 N and the system is in equilibrium. What is the
+  minimum coefficient of static friction between block A and the surface on which it rests?
+  (0.176374)
+text: Block A weighs 62 N and rests on a horizontal surface. The angle of the cord with the
+  horizontal is α = 58°. The weight w is 17.5 N and the system is in equilibrium. What is the
+  minimum coefficient of static friction between block A and the surface on which it rests?
+  (0.176374)
+answer: { value: 0.176374, raw: "0.176374" }
+figures:
+  - { src: figures/unnamed_013_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_013_R6Ld.png }
+literals:
+  - name: F
+    value: 62
+    unit: N
+    text: "62"
+    suggest: { min: 43, max: 81, step: 1 }
+  - name: alpha
+    value: 58
+    unit: °
+    text: "58"
+    suggest: { min: 41, max: 75, step: 1 }
+  - name: F2
+    value: 17.5
+    unit: N
+    text: "17.5"
+    suggest: { min: 12.3, max: 22.8, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p133
+  source: { document: PHYS161_Exam1, labels: [ P133 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_013_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Block A weighs {F:unit} and rests on a horizontal surface. The angle of the cord with the
+    horizontal is α = {alpha}°. The weight w is {F2:unit} and the system is in equilibrium. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the minimum coefficient of static friction between block A and the surface on which
+        it rests? {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 62, alpha: 58, F2: 17.5 }
+    parts:
+      - { id: answer, answer: 0.176374, source: P133 }

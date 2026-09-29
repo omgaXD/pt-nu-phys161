@@ -1,0 +1,60 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P82
+number: 82
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  A 4 kg piece of lead at a temperature of 320 ˚C is placed in a lake whose temperature is 14 ˚C.
+  Determine the entropy change of the lead piece.
+
+  Specific heat of the lead is c<sub>lead</sub> = 128 J/(kg K). (-371.56 J/K)
+text: A 4 kg piece of lead at a temperature of 320 °C is placed in a lake whose temperature is 14
+  °C. Determine the entropy change of the lead piece. Specific heat of the lead is c_lead = 128
+  J/(kg K). (-371.56 J/K)
+answer: { value: -371.56, unit: J/K, raw: -371.56 J/K }
+figures: []
+literals:
+  - name: m
+    value: 4
+    unit: kg
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: T
+    value: 320
+    unit: °C
+    text: "320"
+    suggest: { min: 224, max: 416, step: 1 }
+  - name: T2
+    value: 14
+    unit: °C
+    text: "14"
+    suggest: { min: 10, max: 18, step: 1 }
+  - name: clead
+    value: 128
+    unit: J/(kg K)
+    text: "128"
+    suggest: { min: 90, max: 166, step: 1 }
+scenario:
+  id: phys161-exam4-p082
+  source: { document: PHYS161_Exam4, labels: [ P82 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A {m:unit} piece of lead at a temperature of {T:unit} is placed in a lake whose temperature is
+    {T2:unit}. Specific heat of the lead is $c_{lead}$ = {clead:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: clead, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+  parts:
+    - id: answer
+      prompt: Determine the entropy change of the lead piece. {_0}{_u}
+      answer: TODO
+      unit: J/K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 4, T: 320, T2: 14, clead: 128 }
+    parts:
+      - { id: answer, answer: -371.56, unit: J/K, source: P82 }

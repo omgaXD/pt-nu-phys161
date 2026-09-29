@@ -1,0 +1,49 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P25
+number: 25
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Vector A has a magnitude of 3 units and is in the direction of the +x-axis. Vector B has
+  magnitude of 14 units and lies in the xy-plane, making an angle of 60° with the +x-axis. Find the
+  magnitude of the vector product A × B. (36.3731)
+text: Vector A has a magnitude of 3 units and is in the direction of the +x-axis. Vector B has
+  magnitude of 14 units and lies in the xy-plane, making an angle of 60° with the +x-axis. Find the
+  magnitude of the vector product A × B. (36.3731)
+answer: { value: 36.3731, raw: "36.3731" }
+figures: []
+literals:
+  - name: x
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: x2
+    value: 14
+    text: "14"
+    suggest: { min: 10, max: 18, step: 1 }
+  - name: theta
+    value: 60
+    unit: °
+    text: "60"
+    suggest: { min: 42, max: 78, step: 1 }
+scenario:
+  id: phys161-exam1-p025
+  source: { document: PHYS161_Exam1, labels: [ P25 ] }
+  section: Vectors
+  narrative: >-
+    Vector A has a magnitude of {x} units and is in the direction of the +x-axis. Vector B has
+    magnitude of {x2} units and lies in the xy-plane, making an angle of {theta}° with the +x-axis.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  parts:
+    - id: answer
+      prompt: Find the magnitude of the vector product A × B. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 3, x2: 14, theta: 60 }
+    parts:
+      - { id: answer, answer: 36.3731, source: P25 }

@@ -11,7 +11,7 @@ text: Two forces of equal magnitude 7 N move an object on a horizontal surface a
   m. Determine the work required to push the object at this distance. (84.1457 J)
 answer: { value: 84.1457, unit: J, raw: 84.1457 J }
 figures:
-  - { src: figures/unnamed_012_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_012_fr4U.png }
+  - { src: figures/unnamed_012_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_012_GNcJ.png }
 literals:
   - name: F
     value: 7
@@ -27,7 +27,7 @@ scenario:
   id: phys161-exam2-p011
   source: { document: PHYS161_Exam2, labels: [ P11 ] }
   section: Work
-  figure: { id: fig, src: figures/unnamed_012_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_012_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     Two forces of equal magnitude {F:unit} move an object on a horizontal surface at a distance d =
     {d:unit}. {@fig}

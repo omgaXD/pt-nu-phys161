@@ -1,0 +1,61 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P29
+number: 29
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Consider a gas mixture of Helium and Oxygen molecules assuming O<sub>2</sub> is diatomic. The
+  root-mean-square velocity for the O<sub>2</sub> molecules is 485 m/s. Molar mass of helium is 4
+  g/mol, molar mass of oxygen is 32 g/mol. The universal gas constant is R = 8.31 J/(mol K). Find
+  the temperature of the gas in Kelvin. (301.93341355796 K)
+text: Consider a gas mixture of Helium and Oxygen molecules assuming O_2 is diatomic. The
+  root-mean-square velocity for the O_2 molecules is 485 m/s. Molar mass of helium is 4 g/mol, molar
+  mass of oxygen is 32 g/mol. The universal gas constant is R = 8.31 J/(mol K). Find the temperature
+  of the gas in Kelvin. (301.93341355796 K)
+answer: { value: 301.93341355796, unit: K, raw: 301.93341355796 K }
+figures: []
+literals:
+  - name: v
+    value: 485
+    unit: m/s
+    text: "485"
+    suggest: { min: 340, max: 631, step: 1 }
+  - name: M
+    value: 4
+    unit: g/mol
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: M2
+    value: 32
+    unit: g/mol
+    text: "32"
+    suggest: { min: 22, max: 42, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p029
+  source: { document: PHYS161_Exam4, labels: [ P29 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    Consider a gas mixture of Helium and Oxygen molecules assuming $O_{2}$ is diatomic. The
+    root-mean-square velocity for the $O_{2}$ molecules is {v:unit}. Molar mass of helium is
+    {M:unit}, molar mass of oxygen is {M2:unit}. The universal gas constant is R = {R:unit}.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: M2, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: Find the temperature of the gas in Kelvin. {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 485, M: 4, M2: 32, R: 8.31 }
+    parts:
+      - { id: answer, answer: 301.93341355796, unit: K, source: P29 }

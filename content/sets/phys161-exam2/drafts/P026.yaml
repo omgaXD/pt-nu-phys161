@@ -15,7 +15,7 @@ text: Electric engine pulls an 1800-kg block of concrete with a constant speed o
   acceleration is g = 9.8 m/s^2. (50578.47 W)
 answer: { value: 50578.47, unit: W, raw: 50578.47 W }
 figures:
-  - { src: figures/unnamed_029_fr4U.png, original: PHYS161_Exam2_new.docx_files/unnamed_029_fr4U.png }
+  - { src: figures/unnamed_031_GNcJ.png, original: PHYS161_Exam2_new.docx_files/unnamed_031_GNcJ.png }
 literals:
   - name: m
     value: 1800
@@ -46,7 +46,7 @@ scenario:
   id: phys161-exam2-p026
   source: { document: PHYS161_Exam2, labels: [ P26 ] }
   section: Power
-  figure: { id: fig, src: figures/unnamed_029_fr4U.png, alt: "TODO: describe the figure" }
+  figure: { id: fig, src: figures/unnamed_031_GNcJ.png, alt: "TODO: describe the figure" }
   narrative: >-
     Electric engine pulls an {m}-kg block of concrete with a constant speed of {v:unit} up an
     incline with an angle of inclination θ={theta}°. The coefficient of kinetic friction between the

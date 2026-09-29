@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P83
+number: 83
+section: Circular motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A car of mass 1430 kg starts from rest on a horizontal circular track of radius 61 m. Its speed
+  is increased uniformly and in 49 seconds it makes it a full circle. What was the net force acting
+  on the car at the moment when it completed the first semicircle? (2905 N)
+text: A car of mass 1430 kg starts from rest on a horizontal circular track of radius 61 m. Its
+  speed is increased uniformly and in 49 seconds it makes it a full circle. What was the net force
+  acting on the car at the moment when it completed the first semicircle? (2905 N)
+answer: { value: 2905, unit: N, raw: 2905 N }
+figures: []
+literals:
+  - name: m
+    value: 1430
+    unit: kg
+    text: "1430"
+    suggest: { min: 1001, max: 1859, step: 1 }
+  - name: r
+    value: 61
+    unit: m
+    text: "61"
+    suggest: { min: 43, max: 79, step: 1 }
+  - name: x
+    value: 49
+    text: "49"
+    suggest: { min: 34, max: 64, step: 1 }
+scenario:
+  id: phys161-exam1-p083
+  source: { document: PHYS161_Exam1, labels: [ P83 ] }
+  section: Circular motion
+  narrative: >-
+    A car of mass {m:unit} starts from rest on a horizontal circular track of radius {r:unit}. Its
+    speed is increased uniformly and in {x} seconds it makes it a full circle.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        What was the net force acting on the car at the moment when it completed the first
+        semicircle? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 1430, r: 61, x: 49 }
+    parts:
+      - { id: answer, answer: 2905, unit: N, source: P83 }

@@ -1,0 +1,84 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P27
+number: 27
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An air bubble at the bottom of a lake 27 m deep has a volume of 1.4 cm<sup>3</sup>. If the
+  temperature at the bottom is 5.5°C and the top 17.5°C, what is the radius of the bubble just
+  before it reaches the surface? Normal atmosphere pressure P<sub>0</sub> = 101325 Pa. Density of
+  water ρ<sub>water</sub> = 997 kg/m<sup>3</sup>. Gravitational acceleration g = 9.8
+  m/s<sup>2</sup>. (0.010790234882701 m)
+text: An air bubble at the bottom of a lake 27 m deep has a volume of 1.4 cm^3. If the temperature
+  at the bottom is 5.5°C and the top 17.5°C, what is the radius of the bubble just before it reaches
+  the surface? Normal atmosphere pressure P_0 = 101325 Pa. Density of water ρ_water = 997 kg/m^3.
+  Gravitational acceleration g = 9.8 m/s^2. (0.010790234882701 m)
+answer: { value: 0.010790234882701, unit: m, raw: 0.010790234882701 m }
+figures: []
+literals:
+  - name: d
+    value: 27
+    unit: m
+    text: "27"
+    suggest: { min: 19, max: 35, step: 1 }
+  - name: V
+    value: 1.4
+    unit: cm^3
+    text: "1.4"
+    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
+  - name: T
+    value: 5.5
+    unit: °C
+    text: "5.5"
+    suggest: { min: 3.8, max: 7.2, step: 0.1, decimals: 1 }
+  - name: T2
+    value: 17.5
+    unit: °C
+    text: "17.5"
+    suggest: { min: 12.3, max: 22.8, step: 0.1, decimals: 1 }
+  - name: P0
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: rho_water
+    value: 997
+    unit: kg/m^3
+    text: "997"
+    suggest: { min: 698, max: 1296, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam4-p027
+  source: { document: PHYS161_Exam4, labels: [ P27 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    An air bubble at the bottom of a lake {d:unit} deep has a volume of {V:unit}. Normal atmosphere
+    pressure $P_{0}$ = {P0:unit}. Density of water $\rho_{water}$ = {rho_water:unit}. Gravitational
+    acceleration g = {g:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: P0, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: rho_water, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        If the temperature at the bottom is {T:unit} and the top {T2:unit}, what is the radius of
+        the bubble just before it reaches the surface? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 27, V: 1.4, T: 5.5, T2: 17.5, P0: 101325, rho_water: 997, g: 9.8 }
+    parts:
+      - { id: answer, answer: 0.010790234882701, unit: m, source: P27 }

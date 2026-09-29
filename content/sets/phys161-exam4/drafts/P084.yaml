@@ -1,0 +1,49 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P84
+number: 84
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: An output of an engine with efficiency of 20% is 215 W. It works at 8 cycles/s. How much heat
+  is rejected each cycle? (107.5 J)
+text: An output of an engine with efficiency of 20% is 215 W. It works at 8 cycles/s. How much heat
+  is rejected each cycle? (107.5 J)
+answer: { value: 107.5, unit: J, raw: 107.5 J }
+figures: []
+literals:
+  - name: pct
+    value: 20
+    unit: "%"
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: P
+    value: 215
+    unit: W
+    text: "215"
+    suggest: { min: 151, max: 280, step: 1 }
+  - name: f
+    value: 8
+    unit: Hz
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+scenario:
+  id: phys161-exam4-p084
+  source: { document: PHYS161_Exam4, labels: [ P84 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    An output of an engine with efficiency of {pct}% is {P:unit}. It works at {f:unit}.
+  vars:
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+  parts:
+    - id: answer
+      prompt: How much heat is rejected each cycle? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { pct: 20, P: 215, f: 8 }
+    parts:
+      - { id: answer, answer: 107.5, unit: J, source: P84 }

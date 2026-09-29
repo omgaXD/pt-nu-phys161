@@ -1,0 +1,65 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P9
+number: 9
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: Calculate the absolute temperature of the lead ball after it falls from the height of 126.1 m
+  on the floor without bouncing off, so that all the energy of the fall goes into heating the lead.
+  Initial temperature of the ball is 20.1°C and c<sub>lead</sub> = 128 J/(kg·°C). The gravitational
+  acceleration is g = 9.8 m/s<sup>2</sup>. (302.75453125 K)
+text: Calculate the absolute temperature of the lead ball after it falls from the height of 126.1 m
+  on the floor without bouncing off, so that all the energy of the fall goes into heating the lead.
+  Initial temperature of the ball is 20.1°C and c_lead = 128 J/(kg·°C). The gravitational
+  acceleration is g = 9.8 m/s^2. (302.75453125 K)
+answer: { value: 302.75453125, unit: K, raw: 302.75453125 K }
+figures: []
+literals:
+  - name: h
+    value: 126.1
+    unit: m
+    text: "126.1"
+    suggest: { min: 88.3, max: 163.9, step: 0.1, decimals: 1 }
+  - name: T
+    value: 20.1
+    unit: °C
+    text: "20.1"
+    suggest: { min: 14.1, max: 26.1, step: 0.1, decimals: 1 }
+  - name: clead
+    value: 128
+    unit: J/(kg °C)
+    text: "128"
+    suggest: { min: 90, max: 166, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam4-p009
+  source: { document: PHYS161_Exam4, labels: [ P9 ] }
+  section: Temperature and heat
+  narrative: >-
+    Initial temperature of the ball is {T:unit} and $c_{lead}$ = {clead:unit}. The gravitational
+    acceleration is g = {g:unit}.
+  vars:
+    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: clead, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg °C) }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the absolute temperature of the lead ball after it falls from the height of
+        {h:unit} on the floor without bouncing off, so that all the energy of the fall goes into
+        heating the lead. {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { h: 126.1, T: 20.1, clead: 128, g: 9.8 }
+    parts:
+      - { id: answer, answer: 302.75453125, unit: K, source: P9 }

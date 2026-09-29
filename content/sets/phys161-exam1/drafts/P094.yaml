@@ -1,0 +1,70 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P94
+number: 94
+section: Friction
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Figure shows a block with mass m<sub>1</sub> = 3.561 kg on a horizontal surface, connected by a
+  massless string to a hook where mass m<sub>2</sub> can be increased smoothly. The pulley has a
+  negligible mass and no friction. When m<sub>2</sub> = 2.92 kg it begins to accelerate downwards at
+  a rate of 1.645 m/s<sup>2</sup>. Calculate the difference between static and kinetic coefficients
+  of friction, μ<sub>s</sub>−μ<sub>k</sub>, between m<sub>1</sub> and the surface. Take
+  gravitational acceleration g = 9.8 m/s<sup>2</sup>. (0.305)
+text: Figure shows a block with mass m_1 = 3.561 kg on a horizontal surface, connected by a massless
+  string to a hook where mass m_2 can be increased smoothly. The pulley has a negligible mass and no
+  friction. When m_2 = 2.92 kg it begins to accelerate downwards at a rate of 1.645 m/s^2. Calculate
+  the difference between static and kinetic coefficients of friction, μ_s-μ_k, between m_1 and the
+  surface. Take gravitational acceleration g = 9.8 m/s^2. (0.305)
+answer: { value: 0.305, raw: "0.305" }
+figures:
+  - { src: figures/unnamed_006_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_006_R6Ld.png }
+literals:
+  - name: m1
+    value: 3.561
+    unit: kg
+    text: "3.561"
+    suggest: { min: 2.493, max: 4.629, step: 0.001, decimals: 3 }
+  - name: m2
+    value: 2.92
+    unit: kg
+    text: "2.92"
+    suggest: { min: 2.04, max: 3.8, step: 0.01, decimals: 2 }
+  - name: a
+    value: 1.645
+    unit: m/s^2
+    text: "1.645"
+    suggest: { min: 1.152, max: 2.139, step: 0.001, decimals: 3 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p094
+  source: { document: PHYS161_Exam1, labels: [ P94 ] }
+  section: Friction
+  figure: { id: fig, src: figures/unnamed_006_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Figure shows a block with mass $m_{1}$ = {m1:unit} on a horizontal surface, connected by a
+    massless string to a hook where mass $m_{2}$ can be increased smoothly. The pulley has a
+    negligible mass and no friction. When $m_{2}$ = {m2:unit} it begins to accelerate downwards at a
+    rate of {a:unit}. Take gravitational acceleration g = {g:unit}. {@fig}
+  vars:
+    - { name: m1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the difference between static and kinetic coefficients of friction,
+        $\mu_{s}$-$\mu_{k}$, between $m_{1}$ and the surface. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m1: 3.561, m2: 2.92, a: 1.645, g: 9.8 }
+    parts:
+      - { id: answer, answer: 0.305, source: P94 }

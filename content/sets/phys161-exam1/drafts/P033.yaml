@@ -1,0 +1,59 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P33
+number: 33
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Locations A and B are 19 km apart and a bird is making a round trip A-B-A. When traveling from
+  A to B, the bird flies against the wind, while on the return trip it goes along the wind. The
+  speed of the bird in stationary air is 32 km/h. Determine the average speed of the bird with
+  respect to the ground in the round trip if the wind had a constant speed of 2.1 m/s for the entire
+  time. Provide the answer in units m/s. (8.3927638888889 m/s)
+text: Locations A and B are 19 km apart and a bird is making a round trip A-B-A. When traveling from
+  A to B, the bird flies against the wind, while on the return trip it goes along the wind. The
+  speed of the bird in stationary air is 32 km/h. Determine the average speed of the bird with
+  respect to the ground in the round trip if the wind had a constant speed of 2.1 m/s for the entire
+  time. Provide the answer in units m/s. (8.3927638888889 m/s)
+answer: { value: 8.3927638888889, unit: m/s, raw: 8.3927638888889 m/s }
+figures: []
+literals:
+  - name: d
+    value: 19
+    unit: km
+    text: "19"
+    suggest: { min: 13, max: 25, step: 1 }
+  - name: x
+    value: 32
+    text: "32"
+    suggest: { min: 22, max: 42, step: 1 }
+  - name: v
+    value: 2.1
+    unit: m/s
+    text: "2.1"
+    suggest: { min: 1.5, max: 2.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p033
+  source: { document: PHYS161_Exam1, labels: [ P33 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    Locations A and B are {d:unit} apart and a bird is making a round trip A-B-A. When traveling
+    from A to B, the bird flies against the wind, while on the return trip it goes along the wind.
+    The speed of the bird in stationary air is {x} km/h.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Determine the average speed of the bird with respect to the ground in the round trip if the
+        wind had a constant speed of {v:unit} for the entire time. Provide the answer in units m/s.
+        {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 19, x: 32, v: 2.1 }
+    parts:
+      - { id: answer, answer: 8.3927638888889, unit: m/s, source: P33 }

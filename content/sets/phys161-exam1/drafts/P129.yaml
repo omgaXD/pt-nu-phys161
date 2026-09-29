@@ -1,0 +1,73 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P129
+number: 129
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A block with mass m₁ = 185 kg is placed on an inclined plane with slope angle α = 33° and is
+  connected to a second hanging block with mass m₂ by a cord passing over a small, frictionless
+  pulley. The coefficient of kinetic friction between m₁ and the incline is 0.12. Find the mass m₂
+  for which m₁ moves up the plane with a constant acceleration of 1.3 m/s². The gravitational
+  acceleration is g = 9.8 m/s². (165.928 kg)
+text: A block with mass m_1 = 185 kg is placed on an inclined plane with slope angle α = 33° and is
+  connected to a second hanging block with mass m_2 by a cord passing over a small, frictionless
+  pulley. The coefficient of kinetic friction between m_1 and the incline is 0.12. Find the mass m_2
+  for which m_1 moves up the plane with a constant acceleration of 1.3 m/s^2. The gravitational
+  acceleration is g = 9.8 m/s^2. (165.928 kg)
+answer: { value: 165.928, unit: kg, raw: 165.928 kg }
+figures: []
+literals:
+  - name: m1
+    value: 185
+    unit: kg
+    text: "185"
+    suggest: { min: 130, max: 241, step: 1 }
+  - name: alpha
+    value: 33
+    unit: °
+    text: "33"
+    suggest: { min: 23, max: 43, step: 1 }
+  - name: x
+    value: 0.12
+    text: "0.12"
+    suggest: { min: 0.08, max: 0.16, step: 0.01, decimals: 2 }
+  - name: a
+    value: 1.3
+    unit: m/s^2
+    text: "1.3"
+    suggest: { min: 0.9, max: 1.7, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p129
+  source: { document: PHYS161_Exam1, labels: [ P129 ] }
+  section: Application of Newton's laws
+  narrative: >-
+    A block with mass $m_{1}$ = {m1:unit} is placed on an inclined plane with slope angle α =
+    {alpha}° and is connected to a second hanging block with mass $m_{2}$ by a cord passing over a
+    small, frictionless pulley. The coefficient of kinetic friction between $m_{1}$ and the incline
+    is {x}. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: m1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the mass $m_{2}$ for which $m_{1}$ moves up the plane with a constant acceleration of
+        {a:unit}. {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m1: 185, alpha: 33, x: 0.12, a: 1.3, g: 9.8 }
+    parts:
+      - { id: answer, answer: 165.928, unit: kg, source: P129 }

@@ -1,0 +1,43 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P86
+number: 86
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: An organ pipe has two successive harmonics with frequencies 555 Hz and 925 Hz. What is the
+  fundamental frequency? (185 Hz)
+text: An organ pipe has two successive harmonics with frequencies 555 Hz and 925 Hz. What is the
+  fundamental frequency? (185 Hz)
+answer: { value: 185, unit: Hz, raw: 185 Hz }
+figures: []
+literals:
+  - name: f
+    value: 555
+    unit: Hz
+    text: "555"
+    suggest: { min: 389, max: 722, step: 1 }
+  - name: f2
+    value: 925
+    unit: Hz
+    text: "925"
+    suggest: { min: 648, max: 1203, step: 1 }
+scenario:
+  id: phys161-exam3-p086
+  source: { document: PHYS161_Exam3, labels: [ P86 ] }
+  section: Sound
+  narrative: >-
+    An organ pipe has two successive harmonics with frequencies {f:unit} and {f2:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+  parts:
+    - id: answer
+      prompt: What is the fundamental frequency? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 555, f2: 925 }
+    parts:
+      - { id: answer, answer: 185, unit: Hz, source: P86 }

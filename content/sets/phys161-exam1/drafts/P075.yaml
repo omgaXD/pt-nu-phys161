@@ -1,0 +1,63 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P75
+number: 75
+section: Kinematics of 2D and 3D motion in vectors form
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A fish swimming in a horizontal plane has velocity vᵢ = -5î + 1ĵ m/s at a point in the ocean.
+  After the fish swims with constant acceleration for 29 s, its velocity is v = 4î + 10ĵ m/s. What
+  is the angle of the acceleration vector, measured counterclockwise from the +x axis? Give the
+  answer in degrees. (45)]
+text: A fish swimming in a horizontal plane has velocity vᵢ = -5î + 1ĵ m/s at a point in the ocean.
+  After the fish swims with constant acceleration for 29 s, its velocity is v = 4î + 10ĵ m/s. What
+  is the angle of the acceleration vector, measured counterclockwise from the +x axis? Give the
+  answer in degrees. (45)]
+answer: { value: 45, raw: "45" }
+figures: []
+literals:
+  - name: vx
+    value: -5
+    text: "-5"
+    suggest: { min: -6, max: -3, step: 1 }
+  - name: vy
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: t
+    value: 29
+    unit: s
+    text: "29"
+    suggest: { min: 20, max: 38, step: 1 }
+  - name: v
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: vy2
+    value: 10
+    text: "10"
+    suggest: { min: 7, max: 13, step: 1 }
+scenario:
+  id: phys161-exam1-p075
+  source: { document: PHYS161_Exam1, labels: [ P75 ] }
+  section: Kinematics of 2D and 3D motion in vectors form
+  narrative: >-
+    A fish swimming in a horizontal plane has velocity vᵢ = {vx}î + {vy}ĵ m/s at a point in the
+    ocean. After the fish swims with constant acceleration for {t:unit}, its velocity is v = {v}î +
+    {vy2}ĵ m/s. What is the angle of the acceleration vector, measured counterclockwise from the +x
+    axis?
+  vars:
+    - { name: vx, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy2, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: Give the answer in degrees. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { vx: -5, vy: 1, t: 29, v: 4, vy2: 10 }
+    parts:
+      - { id: answer, answer: 45, source: P75 }

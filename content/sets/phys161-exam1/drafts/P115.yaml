@@ -1,0 +1,55 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P115
+number: 115
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A particle of mass 2 kg is acted on by a single force F = 14î N. At t = 0 the particle has
+  velocity v₀ = -6.5î m/s. What is the magnitude of its displacement during the first 6 s? (87 m)
+text: A particle of mass 2 kg is acted on by a single force F = 14î N. At t = 0 the particle has
+  velocity v_0 = -6.5î m/s. What is the magnitude of its displacement during the first 6 s? (87 m)
+answer: { value: 87, unit: m, raw: 87 m }
+figures: []
+literals:
+  - name: m
+    value: 2
+    unit: kg
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: F
+    value: 14
+    text: "14"
+    suggest: { min: 10, max: 18, step: 1 }
+  - name: v0
+    value: -6.5
+    text: "-6.5"
+    suggest: { min: -8.4, max: -4.5, step: 0.1, decimals: 1 }
+  - name: t
+    value: 6
+    unit: s
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+scenario:
+  id: phys161-exam1-p115
+  source: { document: PHYS161_Exam1, labels: [ P115 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    A particle of mass {m:unit} is acted on by a single force F = {F}î N. At t = 0 the particle has
+    velocity $v_{0}$ = {v0}î m/s.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v0, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of its displacement during the first {t:unit}? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 2, F: 14, v0: -6.5, t: 6 }
+    parts:
+      - { id: answer, answer: 87, unit: m, source: P115 }

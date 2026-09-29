@@ -1,0 +1,81 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P77
+number: 77
+section: Kinematics of 2D and 3D motion in vectors form
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A fish swimming in a horizontal plane has velocity v<sub>i</sub>= 3i + 1j m/s at a point in the
+  ocean where the position relative to a certain rock is r<sub>i</sub>= 3i + 4j m. After the fish
+  swims with constant acceleration for 13 s, its velocity is v = 8i + 7j m/s. If the fish maintains
+  constant acceleration, what is its vertical position at t = 29 s? (227.076923 m)
+text: A fish swimming in a horizontal plane has velocity v_i= 3i + 1j m/s at a point in the ocean
+  where the position relative to a certain rock is r_i= 3i + 4j m. After the fish swims with
+  constant acceleration for 13 s, its velocity is v = 8i + 7j m/s. If the fish maintains constant
+  acceleration, what is its vertical position at t = 29 s? (227.076923 m)
+answer: { value: 227.076923, unit: m, raw: 227.076923 m }
+figures: []
+literals:
+  - name: vi
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: vy
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: ri
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: vy2
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: t
+    value: 13
+    unit: s
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+  - name: v
+    value: 8
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: vy3
+    value: 7
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+  - name: t2
+    value: 29
+    unit: s
+    text: "29"
+    suggest: { min: 20, max: 38, step: 1 }
+scenario:
+  id: phys161-exam1-p077
+  source: { document: PHYS161_Exam1, labels: [ P77 ] }
+  section: Kinematics of 2D and 3D motion in vectors form
+  narrative: >-
+    A fish swimming in a horizontal plane has velocity $v_{i}$= {vi}i + {vy}j m/s at a point in the
+    ocean where the position relative to a certain rock is $r_{i}$= {ri}i + {vy2}j m. After the fish
+    swims with constant acceleration for {t:unit}, its velocity is v = {v}i + {vy3}j m/s.
+  vars:
+    - { name: vi, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: ri, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy3, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t2, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        If the fish maintains constant acceleration, what is its vertical position at t = {t2:unit}?
+        {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { vi: 3, vy: 1, ri: 3, vy2: 4, t: 13, v: 8, vy3: 7, t2: 29 }
+    parts:
+      - { id: answer, answer: 227.076923, unit: m, source: P77 }

@@ -1,0 +1,92 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P67
+number: 67
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: >-
+  In a cylinder sealed with a piston, you rapidly compress 1.65 L of N<sub>2</sub> gas initially at
+  0.98 atm pressure and 2°C to half its original volume. Assume N<sub>2</sub> behaves like an ideal
+  gas. Assume the compression is adiabatic, γ = 1.4. Calculate the final temperature of the gas.
+
+  1 atm = 101325 Pa
+
+  1 L = 0.001 m<sup>3</sup>
+
+  (362.86467546255 K)
+text: In a cylinder sealed with a piston, you rapidly compress 1.65 L of N_2 gas initially at 0.98
+  atm pressure and 2°C to half its original volume. Assume N_2 behaves like an ideal gas. Assume the
+  compression is adiabatic, γ = 1.4. Calculate the final temperature of the gas. 1 atm = 101325 Pa 1
+  L = 0.001 m^3 (362.86467546255 K)
+answer: { value: 362.86467546255, unit: K, raw: 362.86467546255 K }
+figures: []
+literals:
+  - name: V
+    value: 1.65
+    unit: L
+    text: "1.65"
+    suggest: { min: 1.15, max: 2.15, step: 0.01, decimals: 2 }
+  - name: p
+    value: 0.98
+    unit: atm
+    text: "0.98"
+    suggest: { min: 0.69, max: 1.27, step: 0.01, decimals: 2 }
+  - name: T
+    value: 2
+    unit: °C
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: gamma
+    value: 1.4
+    text: "1.4"
+    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p067
+  source: { document: PHYS161_Exam4, labels: [ P67 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    In a cylinder sealed with a piston, you rapidly compress {V:unit} of $N_{2}$ gas initially at
+    {p:unit} pressure and {T:unit} to half its original volume. Assume $N_{2}$ behaves like an ideal
+    gas. Assume the compression is adiabatic, γ = {gamma}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: gamma, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the final temperature of the gas. {p2:unit} = {atm:unit} {V2:unit} = {L:unit}
+        {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 1.65, p: 0.98, T: 2, gamma: 1.4, p2: 1, atm: 101325, V2: 1, L: 0.001 }
+    parts:
+      - { id: answer, answer: 362.86467546255, unit: K, source: P67 }

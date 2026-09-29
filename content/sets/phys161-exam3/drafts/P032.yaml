@@ -1,0 +1,60 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P32
+number: 32
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: "A body oscillates in a simple harmonic motion with its position described by the following
+  formula: x=Acos(ωt+φ), where A=8.1, ω=1.379, and φ=0.337. Assume all quantities are given in SI
+  units. Assuming the oscillations are governed by Hooke's law and the body's mass is 790 g,
+  calculate the total energy of the oscillator. (49.28 J)"
+text: "A body oscillates in a simple harmonic motion with its position described by the following
+  formula: x=Acos(ωt+φ), where A=8.1, ω=1.379, and φ=0.337. Assume all quantities are given in SI
+  units. Assuming the oscillations are governed by Hooke's law and the body's mass is 790 g,
+  calculate the total energy of the oscillator. (49.28 J)"
+answer: { value: 49.28, unit: J, raw: 49.28 J }
+figures: []
+literals:
+  - name: A
+    value: 8.1
+    text: "8.1"
+    suggest: { min: 5.7, max: 10.5, step: 0.1, decimals: 1 }
+  - name: omega
+    value: 1.379
+    text: "1.379"
+    suggest: { min: 0.965, max: 1.793, step: 0.001, decimals: 3 }
+  - name: phi
+    value: 0.337
+    text: "0.337"
+    suggest: { min: 0.236, max: 0.438, step: 0.001, decimals: 3 }
+  - name: m
+    value: 790
+    unit: g
+    text: "790"
+    suggest: { min: 553, max: 1027, step: 1 }
+scenario:
+  id: phys161-exam3-p032
+  source: { document: PHYS161_Exam3, labels: [ P32 ] }
+  section: Oscillations
+  narrative: >-
+    A body oscillates in a simple harmonic motion with its position described by the following
+    formula: x=Acos(ωt+φ), where A={A}, ω={omega}, and φ={phi}. Assume all quantities are given in
+    SI units.
+  vars:
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: omega, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: phi, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+  parts:
+    - id: answer
+      prompt: >-
+        Assuming the oscillations are governed by Hooke's law and the body's mass is {m:unit},
+        calculate the total energy of the oscillator. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { A: 8.1, omega: 1.379, phi: 0.337, m: 790 }
+    parts:
+      - { id: answer, answer: 49.28, unit: J, source: P32 }

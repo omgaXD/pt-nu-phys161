@@ -1,0 +1,55 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P117
+number: 117
+section: Newton's 2nd law
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A man of mass 73.5 kg stands on a weighing scale in an elevator that is accelerating upward.
+  The scale reads 925 N. Find the magnitude of the acceleration of the elevator. The gravitational
+  acceleration is g = 9.8 m/s². (2.78503 m/s^2)
+text: A man of mass 73.5 kg stands on a weighing scale in an elevator that is accelerating upward.
+  The scale reads 925 N. Find the magnitude of the acceleration of the elevator. The gravitational
+  acceleration is g = 9.8 m/s^2. (2.78503 m/s^2)
+answer: { value: 2.78503, unit: m/s^2, raw: 2.78503 m/s^2 }
+figures: []
+literals:
+  - name: m
+    value: 73.5
+    unit: kg
+    text: "73.5"
+    suggest: { min: 51.4, max: 95.5, step: 0.1, decimals: 1 }
+  - name: F
+    value: 925
+    unit: N
+    text: "925"
+    suggest: { min: 648, max: 1203, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p117
+  source: { document: PHYS161_Exam1, labels: [ P117 ] }
+  section: Newton's 2nd law
+  narrative: >-
+    A man of mass {m:unit} stands on a weighing scale in an elevator that is accelerating upward.
+    The scale reads {F:unit}. The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of the acceleration of the elevator. {_0}{_u}
+      answer: TODO
+      unit: m/s^2
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 73.5, F: 925, g: 9.8 }
+    parts:
+      - { id: answer, answer: 2.78503, unit: m/s^2, source: P117 }

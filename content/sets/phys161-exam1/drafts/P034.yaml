@@ -1,0 +1,52 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P34
+number: 34
+section: Kinematics of 1D motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: When the Sun is directly overhead, an eagle flies toward the ground with a constant velocity of
+  13 km/h at 58° below the horizontal line. Calculate the distance its shadow traveled on the level
+  ground in 12 s. (22.9631681167722 m)
+text: When the Sun is directly overhead, an eagle flies toward the ground with a constant velocity
+  of 13 km/h at 58° below the horizontal line. Calculate the distance its shadow traveled on the
+  level ground in 12 s. (22.9631681167722 m)
+answer: { value: 22.9631681167722, unit: m, raw: 22.9631681167722 m }
+figures: []
+literals:
+  - name: x
+    value: 13
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+  - name: theta
+    value: 58
+    unit: °
+    text: "58"
+    suggest: { min: 41, max: 75, step: 1 }
+  - name: t
+    value: 12
+    unit: s
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+scenario:
+  id: phys161-exam1-p034
+  source: { document: PHYS161_Exam1, labels: [ P34 ] }
+  section: Kinematics of 1D motion
+  narrative: >-
+    When the Sun is directly overhead, an eagle flies toward the ground with a constant velocity of
+    {x} km/h at {theta}° below the horizontal line.
+  vars:
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the distance its shadow traveled on the level ground in {t:unit}. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { x: 13, theta: 58, t: 12 }
+    parts:
+      - { id: answer, answer: 22.9631681167722, unit: m, source: P34 }

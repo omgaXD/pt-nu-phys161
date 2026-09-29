@@ -1,0 +1,60 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P131
+number: 131
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Block A weighs 72 N. The coefficient of static friction between the block and the surface on
+  which it rests is 0.29. Angle of the cord with horizontal is α = 52°. The weight w is 13 N and the
+  system is in equilibrium. Find the friction force exerted on block A. (10.1567 N)
+text: Block A weighs 72 N. The coefficient of static friction between the block and the surface on
+  which it rests is 0.29. Angle of the cord with horizontal is α = 52°. The weight w is 13 N and the
+  system is in equilibrium. Find the friction force exerted on block A. (10.1567 N)
+answer: { value: 10.1567, unit: N, raw: 10.1567 N }
+figures:
+  - { src: figures/unnamed_013_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_013_R6Ld.png }
+literals:
+  - name: F
+    value: 72
+    unit: N
+    text: "72"
+    suggest: { min: 50, max: 94, step: 1 }
+  - name: x
+    value: 0.29
+    text: "0.29"
+    suggest: { min: 0.2, max: 0.38, step: 0.01, decimals: 2 }
+  - name: alpha
+    value: 52
+    unit: °
+    text: "52"
+    suggest: { min: 36, max: 68, step: 1 }
+  - name: F2
+    value: 13
+    unit: N
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+scenario:
+  id: phys161-exam1-p131
+  source: { document: PHYS161_Exam1, labels: [ P131 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_013_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Block A weighs {F:unit}. The coefficient of static friction between the block and the surface on
+    which it rests is {x}. Angle of the cord with horizontal is α = {alpha}°. The weight w is
+    {F2:unit} and the system is in equilibrium. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: Find the friction force exerted on block A. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 72, x: 0.29, alpha: 52, F2: 13 }
+    parts:
+      - { id: answer, answer: 10.1567, unit: N, source: P131 }

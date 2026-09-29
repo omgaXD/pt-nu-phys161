@@ -1,0 +1,84 @@
+# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P36
+number: 36
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+raw: A vertical cylindrical tank contains 1.73 mol of an ideal gas under a pressure of 1 atm at
+  20°C. The round part of the tank has a radius of 10.2 cm, and the gas is supporting a piston that
+  can move up and down in the cylinder without friction. How tall is the column of gas that is
+  supporting the piston? Assume a vacuum in the tank above the piston. Pressure 1 atm = 101325 Pa
+  and the universal gas constant is R = 8.31 J/(mol K). (1.2718852142085 m)
+text: A vertical cylindrical tank contains 1.73 mol of an ideal gas under a pressure of 1 atm at
+  20°C. The round part of the tank has a radius of 10.2 cm, and the gas is supporting a piston that
+  can move up and down in the cylinder without friction. How tall is the column of gas that is
+  supporting the piston? Assume a vacuum in the tank above the piston. Pressure 1 atm = 101325 Pa
+  and the universal gas constant is R = 8.31 J/(mol K). (1.2718852142085 m)
+answer: { value: 1.2718852142085, unit: m, raw: 1.2718852142085 m }
+figures: []
+literals:
+  - name: n
+    value: 1.73
+    unit: mol
+    text: "1.73"
+    suggest: { min: 1.21, max: 2.25, step: 0.01, decimals: 2 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: T
+    value: 20
+    unit: °C
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: r
+    value: 10.2
+    unit: cm
+    text: "10.2"
+    suggest: { min: 7.1, max: 13.3, step: 0.1, decimals: 1 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p036
+  source: { document: PHYS161_Exam4, labels: [ P36 ] }
+  section: Kinetic Theory of Gases
+  narrative: >-
+    A vertical cylindrical tank contains {n:unit} of an ideal gas under a pressure of {p:unit} at
+    {T:unit}. The round part of the tank has a radius of {r:unit}, and the gas is supporting a
+    piston that can move up and down in the cylinder without friction. Assume a vacuum in the tank
+    above the piston. Pressure {p2:unit} = {atm:unit} and the universal gas constant is R =
+    {R:unit}.
+  vars:
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        How tall is the column of gas that is supporting the piston? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { n: 1.73, p: 1, T: 20, r: 10.2, p2: 1, atm: 101325, R: 8.31 }
+    parts:
+      - { id: answer, answer: 1.2718852142085, unit: m, source: P36 }

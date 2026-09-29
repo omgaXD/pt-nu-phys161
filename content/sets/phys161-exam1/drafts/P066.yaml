@@ -1,0 +1,60 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P66
+number: 66
+section: Kinematics of projectile motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: During a fireworks display, a shell is shot into the air with an initial speed of 87 m/s at an
+  angle of 80° above the horizontal. The fuse is timed to ignite the shell just as it reaches its
+  highest point above the ground. How much time passes between the launch of the shell and the
+  explosion? The gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (8.7422747172345 s)
+text: During a fireworks display, a shell is shot into the air with an initial speed of 87 m/s at an
+  angle of 80° above the horizontal. The fuse is timed to ignite the shell just as it reaches its
+  highest point above the ground. How much time passes between the launch of the shell and the
+  explosion? The gravitational acceleration is g = 9.8 m/s^2. (8.7422747172345 s)
+answer: { value: 8.7422747172345, unit: s, raw: 8.7422747172345 s }
+figures:
+  - { src: figures/unnamed_011_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_011_R6Ld.png }
+literals:
+  - name: v
+    value: 87
+    unit: m/s
+    text: "87"
+    suggest: { min: 61, max: 113, step: 1 }
+  - name: theta
+    value: 80
+    unit: °
+    text: "80"
+    suggest: { min: 56, max: 104, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p066
+  source: { document: PHYS161_Exam1, labels: [ P66 ] }
+  section: Kinematics of projectile motion
+  figure: { id: fig, src: figures/unnamed_011_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    During a fireworks display, a shell is shot into the air with an initial speed of {v:unit} at an
+    angle of {theta}° above the horizontal. The fuse is timed to ignite the shell just as it reaches
+    its highest point above the ground. The gravitational acceleration is g = {g:unit}. {@fig}
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        How much time passes between the launch of the shell and the explosion? {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 87, theta: 80, g: 9.8 }
+    parts:
+      - { id: answer, answer: 8.7422747172345, unit: s, source: P66 }

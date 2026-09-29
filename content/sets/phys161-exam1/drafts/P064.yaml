@@ -1,0 +1,63 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P64
+number: 64
+section: Kinematics of projectile motion
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: A ball is tossed from an upper-story window of a building. The ball is given an initial
+  velocity of 6 m/s at an angle of 27° above the horizontal. It strikes the ground 5.5 s later. Find
+  the height from which the ball was thrown. The gravitational acceleration is g = 9.8 m/s².
+  (133.243 m)
+text: A ball is tossed from an upper-story window of a building. The ball is given an initial
+  velocity of 6 m/s at an angle of 27° above the horizontal. It strikes the ground 5.5 s later. Find
+  the height from which the ball was thrown. The gravitational acceleration is g = 9.8 m/s^2.
+  (133.243 m)
+answer: { value: 133.243, unit: m, raw: 133.243 m }
+figures: []
+literals:
+  - name: v
+    value: 6
+    unit: m/s
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: theta
+    value: 27
+    unit: °
+    text: "27"
+    suggest: { min: 19, max: 35, step: 1 }
+  - name: t
+    value: 5.5
+    unit: s
+    text: "5.5"
+    suggest: { min: 3.8, max: 7.2, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam1-p064
+  source: { document: PHYS161_Exam1, labels: [ P64 ] }
+  section: Kinematics of projectile motion
+  narrative: >-
+    A ball is tossed from an upper-story window of a building. The ball is given an initial velocity
+    of {v:unit} at an angle of {theta}° above the horizontal. It strikes the ground {t:unit} later.
+    The gravitational acceleration is g = {g:unit}.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: Find the height from which the ball was thrown. {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 6, theta: 27, t: 5.5, g: 9.8 }
+    parts:
+      - { id: answer, answer: 133.243, unit: m, source: P64 }

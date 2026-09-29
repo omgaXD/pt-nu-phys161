@@ -1,0 +1,43 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P18
+number: 18
+section: Vectors
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Given vector B = 3i + 2j + 3k, find its magnitude. (4.6904)
+text: Given vector B = 3i + 2j + 3k, find its magnitude. (4.6904)
+answer: { value: 4.6904, raw: "4.6904" }
+figures: []
+literals:
+  - name: B
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: vy
+    value: 2
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: vz
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+scenario:
+  id: phys161-exam1-p018
+  source: { document: PHYS161_Exam1, labels: [ P18 ] }
+  section: Vectors
+  narrative: ""
+  vars:
+    - { name: B, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vy, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: vz, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Given vector B = {B}i + {vy}j + {vz}k, find its magnitude. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { B: 3, vy: 2, vz: 3 }
+    parts:
+      - { id: answer, answer: 4.6904, source: P18 }

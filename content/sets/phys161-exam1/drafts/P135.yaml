@@ -1,0 +1,55 @@
+# Draft imported from PHYS161_Exam1_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P135
+number: 135
+section: Application of Newton's laws
+source: { document: PHYS161_Exam1, file: PHYS161_Exam1_new.docx.html }
+raw: Block A weighs 1.1 N and B weighs 3.3 N. The coefficient of kinetic friction between all
+  surfaces is 0.24. Find the magnitude of the horizontal force F necessary to drag block B to the
+  left at constant speed if A is held at rest. (1.32 N)
+text: Block A weighs 1.1 N and B weighs 3.3 N. The coefficient of kinetic friction between all
+  surfaces is 0.24. Find the magnitude of the horizontal force F necessary to drag block B to the
+  left at constant speed if A is held at rest. (1.32 N)
+answer: { value: 1.32, unit: N, raw: 1.32 N }
+figures:
+  - { src: figures/unnamed_008_R6Ld.png, original: PHYS161_Exam1_new.docx_files/unnamed_008_R6Ld.png }
+literals:
+  - name: F
+    value: 1.1
+    unit: N
+    text: "1.1"
+    suggest: { min: 0.8, max: 1.4, step: 0.1, decimals: 1 }
+  - name: F2
+    value: 3.3
+    unit: N
+    text: "3.3"
+    suggest: { min: 2.3, max: 4.3, step: 0.1, decimals: 1 }
+  - name: x
+    value: 0.24
+    text: "0.24"
+    suggest: { min: 0.17, max: 0.31, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam1-p135
+  source: { document: PHYS161_Exam1, labels: [ P135 ] }
+  section: Application of Newton's laws
+  figure: { id: fig, src: figures/unnamed_008_R6Ld.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    Block A weighs {F:unit} and B weighs {F2:unit}. The coefficient of kinetic friction between all
+    surfaces is {x}. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the magnitude of the horizontal force F necessary to drag block B to the left at
+        constant speed if A is held at rest. {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 1.1, F2: 3.3, x: 0.24 }
+    parts:
+      - { id: answer, answer: 1.32, unit: N, source: P135 }

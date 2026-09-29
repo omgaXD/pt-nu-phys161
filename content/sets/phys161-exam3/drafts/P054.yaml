@@ -1,0 +1,61 @@
+# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P54
+number: 54
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+raw: Damping is negligible for a 0.15-kg object hanging from a light, 5.8-N/m spring. A sinusoidal
+  force with an amplitude of 1.7 N drives the system. At what frequency will the force make the
+  object vibrate with an amplitude of 0.25 m? Assume (w<sup>2</sup> - w<sub>0</sub><sup>2</sup>) > 0
+  (1.459 Hz)
+text: Damping is negligible for a 0.15-kg object hanging from a light, 5.8-N/m spring. A sinusoidal
+  force with an amplitude of 1.7 N drives the system. At what frequency will the force make the
+  object vibrate with an amplitude of 0.25 m? Assume (w^2 - w_0^2) > 0 (1.459 Hz)
+answer: { value: 1.459, unit: Hz, raw: 1.459 Hz }
+figures: []
+literals:
+  - name: m
+    value: 0.15
+    unit: kg
+    text: "0.15"
+    suggest: { min: 0.11, max: 0.2, step: 0.01, decimals: 2 }
+  - name: k
+    value: 5.8
+    unit: N/m
+    text: "5.8"
+    suggest: { min: 4.1, max: 7.5, step: 0.1, decimals: 1 }
+  - name: F
+    value: 1.7
+    unit: N
+    text: "1.7"
+    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
+  - name: d
+    value: 0.25
+    unit: m
+    text: "0.25"
+    suggest: { min: 0.18, max: 0.33, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam3-p054
+  source: { document: PHYS161_Exam3, labels: [ P54 ] }
+  section: Oscillations
+  narrative: >-
+    Damping is negligible for a {m}-kg object hanging from a light, {k}-N/m spring. A sinusoidal
+    force with an amplitude of {F:unit} drives the system. Assume (w$^{2}$ - $w_{0}^{2}$) > 0
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        At what frequency will the force make the object vibrate with an amplitude of {d:unit}?
+        {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 0.15, k: 5.8, F: 1.7, d: 0.25 }
+    parts:
+      - { id: answer, answer: 1.459, unit: Hz, source: P54 }
