@@ -1,0 +1,26 @@
+# P9 — the error in the train's total distance is the overshoot s, so the relative error is
+# s / d. The distance is given in km and the overshoot in m (converted inside the formula).
+# The answer is a dimensionless ratio (no unit field).
+id: phys161-e1-p009-train-overshoot-relative-error
+title: Relative error from a train's overshoot
+source: { document: PHYS161_Exam1, labels: [ P9 ] }
+section: Uncertainty
+tags: [ uncertainty, relative-error, unit-conversion ]
+narrative: ""
+vars:
+  - { name: d, kind: range, min: 700, max: 1250, step: 10, unit: km, label: distance travelled }
+  - { name: s, kind: range, min: 3, max: 8, step: 1, unit: m, label: overshoot }
+derived:
+  - { name: mPerKm, expr: "1000" } # 1 km = 1000 m
+parts:
+  - id: relative-error
+    prompt: >-
+      If a train travels {d:unit} from Berlin to Paris and then overshoots the end of the track by
+      {s:unit}, what is the relative error in the total distance covered? {_0}
+    answer: s / (d * mPerKm)
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { d: 970, s: 5 }
+  parts:
+    - { id: relative-error, answer: 5.1546e-6, source: P9 }

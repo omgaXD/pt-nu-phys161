@@ -1,0 +1,37 @@
+# P10 — the inverse of P9: the relative error is overshoot / distance, so the largest acceptable
+# overshoot is s = ε d. The distance is given in km and the answer must be in meters (exactUnit).
+# ε is printed in scientific notation (two significant figures, as in the source).
+id: phys161-e1-p010-train-max-overshoot
+title: Largest acceptable overshoot of a train
+source: { document: PHYS161_Exam1, labels: [ P10 ] }
+section: Uncertainty
+tags: [ uncertainty, relative-error, unit-conversion ]
+narrative: >-
+  A train travels {d:unit} from Berlin to Paris and then overshoots the end of the track. If the
+  relative error in the total distance covered must not exceed {eps}, what is the largest overshoot
+  that is acceptable?
+vars:
+  - { name: d, kind: range, min: 550, max: 1000, step: 10, unit: km, label: distance travelled }
+  - {
+      name: eps,
+      kind: range,
+      min: 2.5e-6,
+      max: 4.7e-6,
+      step: 1e-7,
+      sigfigs: 2,
+      label: largest relative error
+    }
+derived:
+  - { name: mPerKm, expr: "1000" } # 1 km = 1000 m
+parts:
+  - id: max-overshoot
+    prompt: "Give the answer in meters. {_0}{_u}"
+    answer: eps * d * mPerKm
+    unit: m
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { d: 770, eps: 3.6e-6 }
+  parts:
+    - { id: max-overshoot, answer: 2.772, unit: m, source: P10 }

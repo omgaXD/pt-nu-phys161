@@ -1,0 +1,47 @@
+# P11/P12 — maximum-error propagation for a rectangle of length L ± δL and width W ± δW.
+# Area A = L W: relative errors add, δA = A (δL/L + δW/W) = W δL + L δW.
+# Perimeter P = 2 (L + W): absolute errors add, δP = 2 (δL + δW).
+# (The printed answers are these linear sums, not the quadrature sums.)
+# The base canonical values are P11's; P12 overrides them with its own numbers. The source
+# prints P12's width as "2.7"; all lengths are shown with two decimals to match the ±0.01 cm
+# uncertainties. The uncertainties are randomized on a small 0.01 cm grid.
+id: phys161-e1-p011-aluminum-rectangle-uncertainty
+title: Uncertainty in the area and perimeter of an aluminum rectangle
+source: { document: PHYS161_Exam1, labels: [ P11, P12 ] }
+section: Uncertainty
+tags: [ uncertainty, error-propagation, max-error, multi-part ]
+narrative: >-
+  A rectangular piece of aluminum is {L} ± {dL:unit} long and {W} ± {dW:unit} wide.
+vars:
+  - { name: L, kind: range, min: 4.5, max: 10, step: 0.05, decimals: 2, unit: cm, label: length }
+  - { name: dL, kind: range, min: 0.01, max: 0.03, step: 0.01, decimals: 2, unit: cm }
+  - { name: W, kind: range, min: 1.2, max: 3.5, step: 0.05, decimals: 2, unit: cm, label: width }
+  - { name: dW, kind: range, min: 0.01, max: 0.03, step: 0.01, decimals: 2, unit: cm }
+parts:
+  - id: area-uncertainty
+    prompt: >-
+      If the area is in $A \pm \delta A$ format. Find the maximum possible uncertainty in the area
+      $\delta A$. {_0}{_u}
+    answer: L * W * (dL / L + dW / W)
+    unit: cm^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: perimeter-uncertainty
+    prompt: >-
+      If the perimeter is written in $P \pm \delta P$ format, find the maximum possible uncertainty
+      in the perimeter $\delta P$. {_0}{_u}
+    answer: 2 * (dL + dW)
+    unit: cm
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { L: 5.70, dL: 0.01, W: 1.80, dW: 0.01 }
+  parts:
+    - { id: area-uncertainty, answer: 0.075, unit: cm^2, source: P11 }
+    - {
+        id: perimeter-uncertainty,
+        answer: 0.06,
+        unit: cm,
+        source: P12,
+        vars: { L: 8.55, dL: 0.02, W: 2.7, dW: 0.01 }
+      }

@@ -1,0 +1,60 @@
+# P13/P14 — maximum-error propagation for a disk of diameter D ± δD and thickness t ± δt.
+# Volume V = π D² t / 4: relative errors add with the power as weight, δV = V (2 δD/D + δt/t).
+# Top face A = π D² / 4: δA = A · 2 δD/D = π D δD / 2 (the thickness does not enter).
+# (The printed answers are these linear sums, not the quadrature sums.)
+# The base canonical values are P13's; P14 overrides them with its own numbers. The source
+# prints P14's "9.6" and "0.1"; they are shown here as 9.60 and 0.100 to match the precision
+# of their uncertainties. The uncertainties are randomized on a small grid.
+id: phys161-e1-p013-cookie-disk-uncertainty
+title: Uncertainty in the volume and face area of a cookie
+source: { document: PHYS161_Exam1, labels: [ P13, P14 ] }
+section: Uncertainty
+tags: [ uncertainty, error-propagation, max-error, multi-part ]
+narrative: >-
+  A chocolate cookie is a circular disk with a diameter of {D} ± {dD:unit} and a thickness of {t} ±
+  {dt:unit}.
+vars:
+  - { name: D, kind: range, min: 6, max: 12, step: 0.05, decimals: 2, unit: cm, label: diameter }
+  - { name: dD, kind: range, min: 0.01, max: 0.04, step: 0.01, decimals: 2, unit: cm }
+  - {
+      name: t,
+      kind: range,
+      min: 0.06,
+      max: 0.12,
+      step: 0.001,
+      decimals: 3,
+      unit: cm,
+      label: thickness
+    }
+  - { name: dt, kind: range, min: 0.001, max: 0.004, step: 0.001, decimals: 3, unit: cm }
+derived:
+  - { name: A, expr: "pi * D^2 / 4", unit: cm^2 } # top face
+  - { name: V, expr: "A * t", unit: cm^3 }
+parts:
+  - id: volume-uncertainty
+    prompt: >-
+      If the volume is in $V \pm \delta V$ format, find the maximum possible uncertainty in the
+      volume $\delta V$. {_0}{_u}
+    answer: V * (2 * dD / D + dt / t)
+    unit: cm^3
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: face-area-uncertainty
+    prompt: >-
+      If the area of its top circular face is written in $A \pm \delta A$ format, find the maximum
+      possible uncertainty in that area $\delta A$. {_0}{_u}
+    answer: A * 2 * dD / D
+    unit: cm^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { D: 8.60, dD: 0.03, t: 0.080, dt: 0.003 }
+  parts:
+    - { id: volume-uncertainty, answer: 0.2066875, unit: cm^3, source: P13 }
+    - {
+        id: face-area-uncertainty,
+        answer: 0.452389,
+        unit: cm^2,
+        source: P14,
+        vars: { D: 9.6, dD: 0.03, t: 0.1, dt: 0.002 }
+      }
