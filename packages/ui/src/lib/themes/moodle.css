@@ -348,7 +348,12 @@
   border-width: 0 9px 9px 0;
   border-color: transparent #ca3120 transparent transparent;
 }
+/* Moodle's .qnbutton is a link styled as .btn: on hover it underlines and fades to the link colour. */
+.pt-theme-moodle .pt-nav-grid .pt-nav-item {
+  transition: color 0.15s ease-in-out;
+}
 .pt-theme-moodle .pt-nav-grid .pt-nav-item:is(:hover, :focus) {
+  color: #0a58ca;
   text-decoration: underline;
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item:focus-visible {
