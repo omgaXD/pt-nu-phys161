@@ -153,8 +153,11 @@ describe('AnswerField', () => {
     await fireEvent.input(input, { target: { value: '191.88 J' } });
     await waitFor(() => expect(screen.getByTestId('answer-preview').querySelector('annotation')?.textContent).toBe('191.88\\ \\text{J}'));
     expect(onchange).toHaveBeenLastCalledWith('191.88 J');
+    // A bare number: no preview and no warning, like Moodle.
     await fireEvent.input(input, { target: { value: '191.88' } });
-    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent('Add a unit.'));
+    await waitFor(() => expect(screen.queryByTestId('answer-preview')).toBeNull());
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(input).not.toHaveAttribute('aria-invalid', 'true');
     await fireEvent.input(input, { target: { value: '191.88 m/s/s' } });
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent('This is not a valid unit.'));
   });

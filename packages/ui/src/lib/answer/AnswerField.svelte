@@ -10,7 +10,7 @@
     /** Combined mode: one field holds number and unit ("191.88 J"). */
     withUnit?: boolean;
     /** Custom validator; defaults to @pt/core's acceptance checks. */
-    validate?: (input: string) => FieldValidation;
+    validate?: (input: string) => FieldValidation | null;
     /** Milliseconds to wait after typing before validating. */
     debounce?: number;
     label?: string;
