@@ -411,6 +411,9 @@ h3 {
   cursor: pointer;
   text-align: left;
 }
+.que .info .pt-flag-toggle:hover {
+  text-decoration: underline;
+}
 .rightanswer {
   margin-top: 0.5rem;
 }
