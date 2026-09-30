@@ -13,6 +13,8 @@ function moodleNumber(v: number): string {
   return `${Number(m)} \\cdot 10^{${Number(e)}}`;
 }
 
+const PLAIN_NUMBER = /^[+-]?(?:\d+\.?\d*|\.\d+)$/;
+
 const E_LITERAL = /(?<![\w.])(\d+(?:\.\d*)?|\.\d+)[eE]([+-]?\d+)/g;
 
 /** Preview TeX for an already validated value. */
@@ -33,12 +35,15 @@ export function validateField(input: string, answerType: AnswerType, withUnit: b
   }
   const { value, unit } = splitCombinedAnswer(input, answerType);
   if (unit === '') {
-    // No usable unit. A valid number followed by unit-like text means the
-    // unit is what's wrong ("191.88 m/s/s"), not the number.
+    // No unit, but a valid value: Moodle previews it ("1e4" → 1·10⁴,
+    // "10^2"), except a plain number, which gets nothing at all.
+    const whole = validateAnswer(value, answerType);
+    if (whole.ok) return PLAIN_NUMBER.test(value.trim()) ? null : { ok: true, latex: valueTex(value, whole.latex) };
+    // A valid number followed by unit-like text means the unit is what's
+    // wrong ("191.88 m/s/s"), not the number.
     const m = /^(.*?[\d).\s])\s*([\p{L}µ°Ω].*)$/u.exec(input.trim());
     if (m && validateAnswer(m[1]!, answerType).ok) return { ok: false, error: 'unit-syntax' };
-    const r = validateAnswer(value, answerType);
-    return r.ok ? null : { ok: false, error: r.error };
+    return { ok: false, error: whole.error };
   }
   const r = validateAnswer(value, answerType);
   if (!r.ok) return { ok: false, error: r.error };
