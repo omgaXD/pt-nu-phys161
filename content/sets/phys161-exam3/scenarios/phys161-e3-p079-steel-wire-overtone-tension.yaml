@@ -1,0 +1,40 @@
+# P79 — the wire's linear density is μ = ρ π d² / 4. The first overtone of a wire fixed at both
+# ends is the second harmonic, f₂ = 2 v / (2L) = v / L, so v = f L and the tension is
+# F = μ v² = μ (f L)². The length is given in cm and the diameter in mm; the density of steel is
+# a constant stated by the source.
+id: phys161-e3-p079-steel-wire-overtone-tension
+title: Tension of a steel wire for a first-overtone note
+source: { document: PHYS161_Exam3, labels: [ P79 ] }
+section: Waves
+tags: [ waves, string, standing-waves, overtone, linear-density, tension ]
+narrative: >-
+  A uniform cylindrical steel wire, {L:unit} long and {d:unit} in diameter, is fixed at both ends.
+vars:
+  - { name: L, kind: range, min: 38, max: 60, step: 1, unit: cm, label: wire length }
+  - {
+      name: d,
+      kind: range,
+      min: 1.00,
+      max: 2.00,
+      step: 0.01,
+      decimals: 2,
+      unit: mm,
+      label: wire diameter
+    }
+  - { name: f, kind: range, min: 360, max: 520, step: 1, unit: Hz, label: note frequency }
+derived:
+  - { name: rho, expr: "7.8e3", unit: kg/m^3 }
+parts:
+  - id: tension
+    prompt: >-
+      To what tension must it be adjusted so that, when vibrating in its first overtone, it produces
+      the note of frequency {f:unit}? Assume that it stretches an insignificant amount. Density of
+      steel $\rho = {= rho / 1000} \times 10^3\ \text{kg/m}^3$. {_0}{_u}
+    answer: rho * pi * (d / 1000)^2 / 4 * (f * L / 100)^2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 48, d: 1.52, f: 439, rho: 7800 }
+  parts:
+    - { id: tension, answer: 628.468, unit: N, source: P79 }

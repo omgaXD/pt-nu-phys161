@@ -1,0 +1,68 @@
+# P74/P75 — each post (weight w, pivoted at its base, inclined at θ above the horizontal) is held
+# by the horizontal wire at its top. Torques about the pivot: T l sin θ = w (l/2) cos θ, so the
+# wire tension is T = w / (2 tan θ). With μ = m / L the wave speed is v = sqrt(T / μ); the n-th
+# overtone is the (n + 1)-th harmonic, f = (n + 1) v / (2L) (P74), and the sound it produces has
+# wavelength λ = v_sound / f (P75). The overtone number is a parameter; it stays in 4–9 so the
+# ordinal always takes "th", and L ≠ 8 keeps "A {L}-m wire" grammatical. The base canonical
+# values are P74's; P75 overrides them with its own.
+id: phys161-e3-p074-wire-posts-overtone-sound
+title: Sound from a wire between two inclined posts
+source: { document: PHYS161_Exam3, labels: [ P74, P75 ] }
+section: Waves
+tags: [ waves, string, standing-waves, overtone, torque, sound-wavelength, multi-part ]
+figure:
+  id: wire-posts
+  src: figures/unnamed_010_LYNB.png
+  alt: >-
+    Two uniform posts stand on the ground on pivots at their lower ends, leaning away from each
+    other in a V shape. Each post makes the angle θ with the ground, and a horizontal wire connects
+    their top ends.
+narrative: >-
+  A {L}-m, {m}-kg wire is used to support two uniform {w}-N posts of equal length inclined at an
+  angle of θ = {theta}°. Assume that the wire is essentially horizontal and that the speed of sound
+  is {vs:unit}. A strong wind is blowing, causing the wire to vibrate in its {n}th overtone. {@fig}
+vars:
+  - { name: L, kind: range, min: 4, max: 10, step: 1, unit: m, label: wire length }
+  - {
+      name: m,
+      kind: range,
+      min: 0.600,
+      max: 1.100,
+      step: 0.005,
+      decimals: 3,
+      unit: kg,
+      label: wire mass
+    }
+  - { name: w, kind: range, min: 180, max: 280, step: 5, unit: N, label: weight of each post }
+  - { name: theta, kind: range, min: 50, max: 72, step: 1, unit: "°", label: post inclination }
+  - { name: n, kind: range, min: 4, max: 9, step: 1, label: overtone number }
+derived:
+  - { name: vs, expr: "344", unit: m/s }
+  - { name: T, expr: "w / (2 * tan(theta * pi / 180))", unit: N } # wire tension
+  - { name: f, expr: "(n + 1) * sqrt(T / (m / L)) / (2 * L)", unit: Hz }
+constraints:
+  - "L != 8" # "A 8-m wire" would need "An"
+parts:
+  - id: frequency
+    prompt: "What is the frequency of the sound this wire produces? {_0}{_u}"
+    answer: f
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+  - id: wavelength
+    prompt: "What is the wavelength of the sound this wire produces? {_0}{_u}"
+    answer: vs / f
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { L: 6, m: 0.825, w: 230, theta: 56, n: 5, vs: 344 }
+  parts:
+    - { id: frequency, answer: 11.876, unit: Hz, source: P74 }
+    - {
+        id: wavelength,
+        answer: 32.75,
+        unit: m,
+        source: P75,
+        vars: { L: 9, m: 0.825, w: 230, theta: 66, n: 7 }
+      }

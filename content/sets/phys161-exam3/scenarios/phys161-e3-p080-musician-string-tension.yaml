@@ -1,0 +1,43 @@
+# P80 — in the fundamental λ = 2L, so the wave speed is v = 2 L f; with μ = m / L the tension is
+# F = μ v² = (m / L) (2 L f)². The mass is given in g.
+id: phys161-e3-p080-musician-string-tension
+title: Tension to tune an instrument string
+source: { document: PHYS161_Exam3, labels: [ P80 ] }
+section: Waves
+tags: [ waves, string, standing-waves, fundamental, tension ]
+narrative: >-
+  A musician tunes the string of her instrument to a fundamental frequency of {f:unit}. The
+  vibrating portion of the string is {L:unit} long and has a mass of {m:unit}.
+vars:
+  - { name: f, kind: range, min: 55, max: 95, step: 1, unit: Hz, label: fundamental frequency }
+  - {
+      name: L,
+      kind: range,
+      min: 0.50,
+      max: 0.85,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: vibrating length
+    }
+  - {
+      name: m,
+      kind: range,
+      min: 10.0,
+      max: 20.0,
+      step: 0.1,
+      decimals: 1,
+      unit: g,
+      label: string mass
+    }
+parts:
+  - id: tension
+    prompt: "With what tension must the musician stretch it? {_0}{_u}"
+    answer: ((m / 1000) / L) * (2 * L * f)^2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { f: 74, L: 0.66, m: 14.7 }
+  parts:
+    - { id: tension, answer: 212.51, unit: N, source: P80 }

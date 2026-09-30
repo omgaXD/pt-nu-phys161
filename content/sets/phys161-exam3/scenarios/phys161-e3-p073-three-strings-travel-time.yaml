@@ -1,0 +1,71 @@
+# P73 — the tension is the same in all three pieces, so the wave speed in piece i is
+# vᵢ = sqrt(F / μᵢ) and the total travel time is t = Σ L / vᵢ = L Σ sqrt(μᵢ / F). The lengths are
+# given in cm and the linear densities in kg/cm (×100 → kg/m). The combined length is 3L.
+id: phys161-e3-p073-three-strings-travel-time
+title: Wave travel time along three joined strings
+source: { document: PHYS161_Exam3, labels: [ P73 ] }
+section: Waves
+tags: [ waves, string, wave-speed, linear-density, travel-time ]
+narrative: >-
+  Three pieces of string, each of length {L:unit}, are joined together end to end, to make a
+  combined string of length {Ltot:unit}. The first piece of string has mass per unit length
+  {mu1:unit}, the second piece has mass per unit length {mu2:unit}, and the third piece has mass per
+  unit length {mu3:unit}.
+vars:
+  - { name: L, kind: range, min: 40, max: 75, step: 1, unit: cm, label: length of each piece }
+  - {
+      name: mu1,
+      kind: range,
+      min: 2.5e-6,
+      max: 4.5e-6,
+      step: 1e-8,
+      sigfigs: 3,
+      unit: kg/cm,
+      label: linear density of the first piece
+    }
+  - {
+      name: mu2,
+      kind: range,
+      min: 1e-5,
+      max: 1.8e-5,
+      step: 1e-7,
+      sigfigs: 3,
+      unit: kg/cm,
+      label: linear density of the second piece
+    }
+  - {
+      name: mu3,
+      kind: range,
+      min: 6e-7,
+      max: 9.995e-7,
+      step: 5e-10,
+      sigfigs: 4,
+      unit: kg/cm,
+      label: linear density of the third piece
+    }
+  - {
+      name: F,
+      kind: range,
+      min: 0.30,
+      max: 0.65,
+      step: 0.01,
+      decimals: 2,
+      unit: N,
+      label: tension
+    }
+derived:
+  - { name: Ltot, expr: "3 * L", unit: cm }
+parts:
+  - id: travel-time
+    prompt: >-
+      If the combined string is under tension {F:unit}, how much time does it take a transverse wave
+      to travel the entire length of {Ltot:unit}? {_0}{_u}
+    answer: >-
+      (L / 100) * (sqrt(100 * mu1 / F) + sqrt(100 * mu2 / F) + sqrt(100 * mu3 / F))
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 58, mu1: 3.55e-6, mu2: 1.42e-5, mu3: 8.875e-7, F: 0.46 }
+  parts:
+    - { id: travel-time, answer: 0.05639, unit: s, source: P73 }

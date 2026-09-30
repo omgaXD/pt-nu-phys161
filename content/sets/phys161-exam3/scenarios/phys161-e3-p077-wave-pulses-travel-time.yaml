@@ -1,0 +1,38 @@
+# P77 — the wave speed is v = f λ, so the travel time over a distance d is t = d / (f λ). The
+# amplitude (given in mm) does not affect the answer.
+id: phys161-e3-p077-wave-pulses-travel-time
+title: Travel time of a sinusoidal wave on a string
+source: { document: PHYS161_Exam3, labels: [ P77 ] }
+section: Waves
+tags: [ waves, string, wave-speed, travel-time ]
+narrative: >-
+  A continuous succession of sinusoidal wave pulses are produced at one end of a very long string
+  and travel along the length of the string. The wave has frequency {f:unit}, amplitude {A:unit},
+  and wavelength {lam:unit}.
+vars:
+  - { name: f, kind: range, min: 45, max: 85, step: 1, unit: Hz, label: frequency }
+  - { name: A, kind: range, min: 2, max: 5, step: 1, unit: mm, label: amplitude }
+  - {
+      name: lam,
+      kind: range,
+      min: 0.35,
+      max: 0.70,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: wavelength
+    }
+  - { name: d, kind: range, min: 5, max: 12, step: 1, unit: m, label: distance }
+parts:
+  - id: travel-time
+    prompt: >-
+      How long does it take the wave to travel a distance of {d:unit} along the length of the
+      string? {_0}{_u}
+    answer: d / (f * lam)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { f: 64, A: 3, lam: 0.51, d: 8 }
+  parts:
+    - { id: travel-time, answer: 0.245, unit: s, source: P77 }
