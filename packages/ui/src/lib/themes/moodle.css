@@ -356,13 +356,13 @@
   border-color: #0a58ca;
 }
 .pt-theme-moodle .btn-secondary {
-  color: #1d2125;
-  background: #ced4da;
-  border-color: #ced4da;
+  color: #fff;
+  background: #6c757d;
+  border-color: #6c757d;
 }
 .pt-theme-moodle .btn-secondary:hover {
-  background: #b8bfc6;
-  border-color: #b1b9c0;
+  background: #5c636a;
+  border-color: #565e64;
 }
 .pt-theme-moodle .btn-outline-secondary {
   color: #1d2125;
