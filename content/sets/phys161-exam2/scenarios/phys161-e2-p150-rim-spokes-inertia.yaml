@@ -1,0 +1,36 @@
+# P150 — a thin rim (mass M, radius r) contributes M r²; each of the four uniform spokes (mass m,
+# length r, pivoted at one end) contributes ⅓ m r², so I = (M + 4 m / 3) r².
+id: phys161-e2-p150-rim-spokes-inertia
+title: Moment of inertia of a rim with spokes
+source: { document: PHYS161_Exam2, labels: [ P150 ] }
+section: Angular momentum
+tags: [ moment-of-inertia, rod, hoop ]
+narrative: >-
+  A wheel consists of a thin circular rim of mass {M:unit} and radius {r:unit}, together with four
+  identical uniform spokes, each of mass {m:unit}, running from the center of the wheel to the rim.
+vars:
+  - { name: M, kind: range, min: 2.00, max: 3.50, step: 0.05, decimals: 2, unit: kg, label: rim }
+  - {
+      name: r,
+      kind: range,
+      min: 0.08,
+      max: 0.16,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: radius
+    }
+  - { name: m, kind: range, min: 0.3, max: 0.7, step: 0.1, decimals: 1, unit: kg, label: spoke }
+parts:
+  - id: moment-of-inertia
+    prompt: >-
+      What is the moment of inertia of this wheel about an axle through its center, perpendicular to
+      the plane of the wheel? {_0}{_u}
+    answer: (M + 4 * m / 3) * r^2
+    unit: kg m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { M: 2.75, r: 0.12, m: 0.5 }
+  parts:
+    - { id: moment-of-inertia, answer: 0.0492, unit: kg m^2, source: P150 }

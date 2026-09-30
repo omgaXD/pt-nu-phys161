@@ -1,0 +1,52 @@
+# P142/P143 — a square board (side s, mass M) pivots about its top edge: I_board = ⅓ M s². A bullet
+# (mass m in g, speed v) hits it face-on at its center, s/2 below the axis, and stays embedded:
+# m v s/2 = I ω with I = ⅓ M s² + m (s/2)². Afterwards energy is conserved and the center (board
+# and bullet) rises h = ½ I ω² / ((M + m) g). Swinging all the way over lifts the center by s, so
+# the minimum speed is v_min = I ω_min / (m s/2) with ½ I ω_min² = (M + m) g s. The base canonical
+# values are P142's; P143 overrides the side with its own. The side carries no decimals so that
+# 0.3 m and 0.25 m print naturally.
+id: phys161-e2-p142-target-board-swing
+title: Target board swinging up after a bullet hit
+source: { document: PHYS161_Exam2, labels: [ P142, P143 ] }
+section: Angular momentum
+tags: [ angular-momentum, inelastic-collision, energy-conservation, moment-of-inertia, multi-part ]
+narrative: >-
+  A target in a shooting gallery consists of a vertical square wooden board, {s:unit} on a side and
+  with mass {M:unit}, that pivots on a horizontal axis along its top edge. The board is struck
+  face-on at its center by a bullet with mass {m:unit} that is traveling at {v:unit} and that
+  remains embedded in the board. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: s, kind: range, min: 0.2, max: 0.4, step: 0.05, unit: m, label: side }
+  - { name: M, kind: range, min: 0.6, max: 1.2, step: 0.1, decimals: 1, unit: kg, label: board }
+  - { name: m, kind: range, min: 1.5, max: 3.0, step: 0.1, decimals: 1, unit: g, label: bullet }
+  - { name: v, kind: range, min: 250, max: 450, step: 10, unit: m/s, label: bullet speed }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: mb, expr: "m / 1000", unit: kg }
+  - { name: I, expr: "M * s^2 / 3 + mb * (s / 2)^2", unit: kg m^2 }
+  - { name: omega, expr: "mb * v * (s / 2) / I", unit: rad/s }
+  - { name: vmin, expr: "sqrt(2 * (M + mb) * g * s / I) * I / (mb * s / 2)", unit: m/s }
+constraints:
+  - "v < vmin" # the board swings back down instead of going all the way over
+parts:
+  - id: max-height
+    prompt: >-
+      What maximum height above the equilibrium position does the center of the board reach before
+      starting to swing down again? {_0}{_u}
+    answer: I * omega^2 / 2 / ((M + mb) * g)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+  - id: min-bullet-speed
+    prompt: >-
+      What minimum bullet speed would be required for the board to swing all the way over after
+      impact? {_0}{_u}
+    answer: vmin
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { s: 0.3, M: 0.9, m: 2.2, v: 340, g: 9.8 }
+  parts:
+    - { id: max-height, answer: 0.02632, unit: m, source: P142 }
+    - { id: min-bullet-speed, answer: 937.26, unit: m/s, source: P143, vars: { s: 0.2 } }

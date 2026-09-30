@@ -1,0 +1,84 @@
+# P144/P145/P146 — a toy plane (mass m in g, speed v) hits a uniform vertical bar (mass M, length
+# L) hinged at its base, a distance l below its top, i.e. at r = L − l above the hinge, and drops
+# (keeps no angular momentum). About the hinge: m v r = ⅓ M L² ω₀. The bar then falls to the
+# ground (center of mass drops L/2): ω² = ω₀² + 3 g / L. The base canonical values are P144's;
+# P145 and P146 override them with their own. The bar length carries no decimals so that 0.75 m
+# and 0.9 m print as the source does.
+id: phys161-e2-p144-toy-plane-hinged-bar
+title: Toy plane hitting a hinged bar
+source: { document: PHYS161_Exam2, labels: [ P144, P145, P146 ] }
+section: Angular momentum
+tags: [ angular-momentum, collision, energy-conservation, rod, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_014_GNcJ.png
+  alt: >-
+    A uniform vertical bar stands on the ground, hinged at its base. A toy plane on the left flies
+    horizontally toward the bar along a dashed line that meets the bar a distance l below its top,
+    marked by a dimension arrow.
+narrative: >-
+  A {m}-g toy plane is flying horizontally at {v:unit}, when it hits a stationary vertical bar $l =
+  {l:unit}$ below the top. The bar is uniform, {L:unit} long, has a mass of {M:unit}, and is hinged
+  at its base. The toy plane drops to the ground after the collision. {@fig}
+vars:
+  - { name: m, kind: range, min: 400, max: 700, step: 10, unit: g, label: plane mass }
+  - { name: v, kind: range, min: 1.50, max: 2.50, step: 0.05, decimals: 2, unit: m/s }
+  - { name: l, kind: range, min: 15, max: 30, step: 1, unit: cm, label: distance below top }
+  - { name: L, kind: range, min: 0.7, max: 1.0, step: 0.05, unit: m, label: bar length }
+  - {
+      name: M,
+      kind: range,
+      min: 1.0,
+      max: 1.8,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: bar mass
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: Lp, expr: "m / 1000 * v * (L - l / 100)", unit: kg m^2/s }
+  - { name: I, expr: "M * L^2 / 3", unit: kg m^2 }
+constraints:
+  - "Lp^2 / (2 * I) < m / 1000 * v^2 / 2" # the collision cannot create kinetic energy
+parts:
+  - id: angular-velocity-after
+    prompt: "What is the angular velocity of the bar just after it is hit by the plane? {_0}{_u}"
+    answer: Lp / I
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: plane-angular-momentum
+    prompt: >-
+      What is the magnitude of the angular momentum of the plane about the hinge just before the
+      collision? {_0}{_u}
+    answer: Lp
+    unit: kg m^2/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: angular-velocity-ground
+    prompt: >-
+      What is the angular velocity of the bar just as it reaches the ground? The gravitational
+      acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: sqrt((Lp / I)^2 + M * g * L / I)
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m: 450, v: 1.75, l: 20, L: 0.75, M: 1.1, g: 9.8 }
+  parts:
+    - { id: angular-velocity-after, answer: 2.1, unit: rad/s, source: P144 }
+    - {
+        id: plane-angular-momentum,
+        answer: 1.0602,
+        unit: kg m^2/s,
+        source: P145,
+        vars: { m: 620, v: 2.25, l: 19, L: 0.95, M: 1.5 }
+      }
+    - {
+        id: angular-velocity-ground,
+        answer: 6.1367,
+        unit: rad/s,
+        source: P146,
+        vars: { m: 650, v: 2.25, l: 24, L: 0.9, M: 1.6 }
+      }
