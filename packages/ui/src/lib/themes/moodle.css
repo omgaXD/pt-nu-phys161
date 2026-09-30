@@ -317,11 +317,11 @@
 
 /* ---- Links ---------------------------------------------------------------- */
 
-.pt-theme-moodle a {
+.pt-theme-moodle a:not(.btn) {
   color: #0d6efd;
   text-decoration: none;
 }
-.pt-theme-moodle a:hover {
+.pt-theme-moodle a:not(.btn):hover {
   color: #0a58ca;
   text-decoration: underline;
 }
