@@ -67,39 +67,231 @@ h3 {
   }
 }
 
-/* ---- Page with the right-hand block drawer --------------------------------- */
+/* ---- Page with drawers (Moodle Boost #page.drawers) ------------------------ */
 
-.page {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 315px;
+#page.drawers {
+  display: flex;
+  flex-direction: column;
   min-height: calc(100vh - 60px);
+  padding: 0 3rem;
 }
-.page.no-drawer {
-  grid-template-columns: minmax(0, 1fr);
-}
-.page-main {
+.main-inner {
   width: 100%;
+  margin: 1.5rem auto 3rem;
+  padding: 0 0.5rem;
+}
+#page.narrow .main-inner {
   max-width: 830px;
-  margin: 0 auto;
-  padding: 1.25rem 1.25rem 3rem;
 }
-.page.wide .page-main {
-  max-width: 1100px;
+.main-inner .alert {
+  margin: 0 0 1rem;
 }
-.drawer-right {
-  padding: 1rem;
+.drawer {
   background: #f8f9fa;
-  border-left: 1px solid #dee2e6;
+}
+.drawerheader {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+.drawertoggle,
+.drawer-menu {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 0.375rem;
+  background: none;
+  color: #1d2125;
+}
+.drawertoggle {
+  cursor: pointer;
+}
+.drawertoggle:hover {
+  background: #e9ecef;
+}
+.drawer-left .drawertoggle {
+  margin: 0 auto 0 5px;
+}
+.drawer-left .drawer-menu {
+  margin-right: 16px;
+}
+.drawer-right .drawertoggle {
+  margin: 0 5px 0 auto;
+}
+.drawer svg,
+.drawer-toggler svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.drawer-menu svg {
+  stroke: none;
+}
+.drawer-toggler svg path {
+  fill: none;
+}
+.drawercontent {
+  padding: 0.4rem;
 }
 .drawer-right .block {
-  position: sticky;
-  top: 76px;
-  max-height: calc(100vh - 92px);
-  overflow-y: auto;
   padding: 1rem;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.5rem;
+}
+.drawer-toggles {
+  display: none;
+}
+@media (min-width: 768px) {
+  .drawer {
+    position: fixed;
+    top: 60px;
+    z-index: 1015;
+    height: calc(100vh - 60px);
+    visibility: hidden;
+    transition:
+      left 0.2s ease,
+      right 0.2s ease,
+      visibility 0.2s ease;
+  }
+  .drawer-left {
+    left: -295px;
+    width: 285px;
+  }
+  .drawer-left.show {
+    left: 0;
+    visibility: visible;
+  }
+  .drawer-right {
+    right: -325px;
+    width: 315px;
+  }
+  .drawer-right.show {
+    right: 0;
+    visibility: visible;
+  }
+  .drawer .drawercontent {
+    height: calc(100% - 60px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #6c757d #f8f9fa;
+  }
+  #page.drawers {
+    transition:
+      margin 0.2s,
+      padding 0.2s;
+  }
+  #page.drawers.show-drawer-left {
+    margin-left: 285px;
+    padding-left: 1rem;
+  }
+  #page.drawers.show-drawer-right {
+    margin-right: 315px;
+  }
+  .drawer-toggles {
+    display: block;
+  }
+  .drawer-toggler {
+    position: fixed;
+    top: calc(60px + 0.7rem);
+    z-index: 2;
+  }
+  .drawer-toggler .btn {
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    border: 0;
+    border-radius: 200px;
+    background: #dee2e6;
+    color: #1d2125;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: padding 200ms;
+  }
+  .drawer-toggler .btn:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+  .drawer-left-toggle {
+    left: 0;
+  }
+  .drawer-left-toggle .btn {
+    padding-right: 14px;
+    padding-left: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .drawer-left-toggle .btn:hover {
+    padding-left: 20px;
+  }
+  .drawer-right-toggle {
+    right: 0;
+  }
+  .drawer-right-toggle .btn {
+    padding-right: 10px;
+    padding-left: 14px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .drawer-right-toggle .btn:hover {
+    padding-right: 20px;
+  }
+}
+@media (max-width: 767.98px) {
+  /* Phones: no course index; the blocks follow the page content. */
+  #page.drawers {
+    padding: 0 1rem;
+  }
+  .drawer-left {
+    display: none;
+  }
+  .drawer-right {
+    order: 1;
+    margin: 0 -1rem;
+    border-top: 1px solid #dee2e6;
+  }
+  .drawer-right .drawerheader {
+    display: none;
+  }
+}
+
+/* Bootstrap tooltips on the drawer buttons: instant, black, beside or below the button. */
+:is(.drawertoggle, .drawer-toggler .btn) {
+  position: relative;
+}
+:is(.drawertoggle, .drawer-toggler .btn)[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  z-index: 1080;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  background: #000;
+  color: #fff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.drawertoggle[data-tooltip]:hover::after {
+  top: calc(100% + 0.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.drawer-left-toggle .btn[data-tooltip]:hover::after {
+  top: 50%;
+  left: calc(100% + 0.4rem);
+  transform: translateY(-50%);
+}
+.drawer-right-toggle .btn[data-tooltip]:hover::after {
+  top: 50%;
+  right: calc(100% + 0.4rem);
+  transform: translateY(-50%);
 }
 .block h2 {
   margin: 0 0 1rem;
@@ -113,15 +305,6 @@ h3 {
 .block .othernav {
   margin-top: 1rem;
   font-size: 0.9375rem;
-}
-@media (max-width: 991.98px) {
-  .page {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .drawer-right {
-    border-left: 0;
-    border-top: 1px solid #dee2e6;
-  }
 }
 
 .breadcrumb {
@@ -275,9 +458,6 @@ h3 {
   padding: 0.75rem 1rem;
   border: 1px solid transparent;
   border-radius: 0.5rem;
-}
-.page-main .alert {
-  margin: 0 0 1rem;
 }
 .alert-danger {
   background: #f8d7da;

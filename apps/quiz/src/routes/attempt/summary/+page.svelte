@@ -3,6 +3,7 @@
   import { resolve } from '$app/paths';
   import { isFinished, questionState } from '@pt/quiz';
   import { app } from '$lib/app.svelte';
+  import Page from '$lib/components/Page.svelte';
   import QuizNav from '$lib/components/QuizNav.svelte';
   import TimeLeft from '$lib/components/TimeLeft.svelte';
   import { presetName, STATE_TEXT } from '$lib/labels';
@@ -34,66 +35,64 @@
 <svelte:head><title>Summary of attempt · Physics Quiz</title></svelte:head>
 
 {#if a}
-  <div class="page">
-    <main class="page-main">
-      <ol class="breadcrumb">
-        <li><a href={resolve('/')}>Home</a></li>
-        <li>{presetName(a.preset)}</li>
-      </ol>
-      <div class="page-header">
-        <span class="activity-icon" aria-hidden="true">?</span>
-        <h1>{presetName(a.preset)}</h1>
-      </div>
-      {#if a.endsAt !== null}
-        <TimeLeft endsAt={a.endsAt} onExpire={() => app.dispatch({ type: 'tick', now: Date.now() })} />
-      {/if}
-      <h2>Summary of attempt</h2>
-      <table class="generaltable quizsummaryofattempt" data-testid="attempt-summary">
-        <thead>
+  <Page>
+    <ol class="breadcrumb">
+      <li><a href={resolve('/')}>Home</a></li>
+      <li>{presetName(a.preset)}</li>
+    </ol>
+    <div class="page-header">
+      <span class="activity-icon" aria-hidden="true">?</span>
+      <h1>{presetName(a.preset)}</h1>
+    </div>
+    {#if a.endsAt !== null}
+      <TimeLeft endsAt={a.endsAt} onExpire={() => app.dispatch({ type: 'tick', now: Date.now() })} />
+    {/if}
+    <h2>Summary of attempt</h2>
+    <table class="generaltable quizsummaryofattempt" data-testid="attempt-summary">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Status</th>
+          {#if a.config.feedback === 'immediate'}<th scope="col">Marks</th>{/if}
+        </tr>
+      </thead>
+      <tbody>
+        {#each a.questions as q, i (q.key)}
+          {@const state = questionState(a, i)}
           <tr>
-            <th scope="col">Question</th>
-            <th scope="col">Status</th>
-            {#if a.config.feedback === 'immediate'}<th scope="col">Marks</th>{/if}
+            <td>
+              <button type="button" class="link-button" onclick={() => open(i)}>{i + 1}</button>
+              {#if a.flagged[i]}<span class="muted" title="Flagged"> ⚑</span>{/if}
+            </td>
+            <td>{STATE_TEXT[state]}</td>
+            {#if a.config.feedback === 'immediate'}
+              <td>{state === 'correct' ? '1.00' : state === 'answersaved' || state === 'notyetanswered' ? '' : '0.00'}</td>
+            {/if}
           </tr>
-        </thead>
-        <tbody>
-          {#each a.questions as q, i (q.key)}
-            {@const state = questionState(a, i)}
-            <tr>
-              <td>
-                <button type="button" class="link-button" onclick={() => open(i)}>{i + 1}</button>
-                {#if a.flagged[i]}<span class="muted" title="Flagged"> ⚑</span>{/if}
-              </td>
-              <td>{STATE_TEXT[state]}</td>
-              {#if a.config.feedback === 'immediate'}
-                <td>{state === 'correct' ? '1.00' : state === 'answersaved' || state === 'notyetanswered' ? '' : '0.00'}</td>
-              {/if}
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-      <div class="actions">
-        <a class="btn btn-secondary" href={resolve('/attempt/')}>Return to attempt</a>
-      </div>
-      {#if a.endsAt !== null}
-        <p class="muted">This attempt must be submitted by {new Date(a.endsAt).toLocaleTimeString()}.</p>
-      {/if}
-      <div class="actions" style="margin-top: 1rem">
-        <button type="button" class="btn btn-primary" onclick={() => dialog?.showModal()}>Submit all and finish</button>
-      </div>
+        {/each}
+      </tbody>
+    </table>
+    <div class="actions">
+      <a class="btn btn-secondary" href={resolve('/attempt/')}>Return to attempt</a>
+    </div>
+    {#if a.endsAt !== null}
+      <p class="muted">This attempt must be submitted by {new Date(a.endsAt).toLocaleTimeString()}.</p>
+    {/if}
+    <div class="actions" style="margin-top: 1rem">
+      <button type="button" class="btn btn-primary" onclick={() => dialog?.showModal()}>Submit all and finish</button>
+    </div>
 
-      <dialog bind:this={dialog} aria-labelledby="confirm-title">
-        <h2 id="confirm-title">Submit all your answers and finish?</h2>
-        <p>Once you submit your answers, you won't be able to change them.</p>
-        {#if unanswered > 0}<p><strong>Questions without a response: {unanswered}</strong></p>{/if}
-        <div class="actions">
-          <button type="button" class="btn btn-secondary" onclick={() => dialog?.close()}>Cancel</button>
-          <button type="button" class="btn btn-primary" onclick={submit}>Submit all and finish</button>
-        </div>
-      </dialog>
-    </main>
-    <aside class="drawer-right">
+    <dialog bind:this={dialog} aria-labelledby="confirm-title">
+      <h2 id="confirm-title">Submit all your answers and finish?</h2>
+      <p>Once you submit your answers, you won't be able to change them.</p>
+      {#if unanswered > 0}<p><strong>Questions without a response: {unanswered}</strong></p>{/if}
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" onclick={() => dialog?.close()}>Cancel</button>
+        <button type="button" class="btn btn-primary" onclick={submit}>Submit all and finish</button>
+      </div>
+    </dialog>
+    {#snippet blocks()}
       <QuizNav attempt={a} onSelect={open} setTitle={(id) => app.setTitle(id)} />
-    </aside>
-  </div>
+    {/snippet}
+  </Page>
 {/if}
