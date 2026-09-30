@@ -1,0 +1,50 @@
+# P122 — grindstone (solid disk, I = ½ m R², R = d/2) spinning at ω0, slowed by the ax friction
+# torque μ N R plus the axle friction torque τ_f: α = (μ N R + τ_f) / I and t = ω0 / α.
+id: phys161-e2-p122-grindstone-stopping-time
+title: Stopping time of a grindstone
+source: { document: PHYS161_Exam2, labels: [ P122 ] }
+section: Torque
+tags: [ torque, friction, moment-of-inertia, angular-acceleration ]
+figure:
+  id: grindstone
+  src: figures/unnamed_021_GNcJ.png
+  alt: >-
+    A large grindstone disk mounted on a horizontal axle in a wooden frame, turning with angular
+    velocity ω (curved arrow on its rim). A person presses an ax blade against the rim, a red arrow
+    showing the push of the blade toward the stone, and a crank handle is attached to the end of the
+    axle on the right.
+narrative: >-
+  A {m}-kg grindstone is a solid disk {d:unit} in diameter, spinning at {w0:unit}. You press an ax
+  down on the rim with a normal force of {N:unit}. The coefficient of kinetic friction between the
+  blade and the stone is {mu}, and there is a constant friction torque of {tauf:unit} between the
+  axle of the stone and its bearings. {@fig}
+vars:
+  - { name: m, kind: range, min: 40, max: 70, step: 1, unit: kg, label: mass }
+  - {
+      name: d,
+      kind: range,
+      min: 0.4,
+      max: 0.8,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: diameter
+    }
+  - { name: w0, kind: range, min: 25.0, max: 45.0, step: 0.5, decimals: 1, unit: rad/s }
+  - { name: N, kind: range, min: 100, max: 170, step: 5, unit: N, label: normal force }
+  - { name: mu, kind: range, min: 0.40, max: 0.80, step: 0.01, decimals: 2 }
+  - { name: tauf, kind: range, min: 4.0, max: 8.0, step: 0.1, decimals: 1, unit: N m }
+derived:
+  - { name: R, expr: "d / 2", unit: m }
+  - { name: I, expr: "m * R^2 / 2", unit: kg m^2 }
+parts:
+  - id: stopping-time
+    prompt: "How long does it take the grindstone to come to rest? {_0}{_u}"
+    answer: w0 * I / (mu * N * R + tauf)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 54, d: 0.6, w0: 35.5, N: 130, mu: 0.61, tauf: 5.9 }
+  parts:
+    - { id: stopping-time, answer: 2.90552, unit: s, source: P122 }

@@ -1,0 +1,45 @@
+# P130 — thin spherical shell (I = ⅔ m R², R = d/2) with four small masses mp on its surface;
+# the spin axis passes through two of them, so only the two on the equator add 2 mp R².
+# τ = I Δω / t with Δω = 2π (n2 − n1) / 60 < 0: the speed ranges never overlap, so the
+# answer is always negative (torque that speeds the sphere up is positive).
+id: phys161-e2-p130-shell-masses-friction-torque
+title: Friction torque slowing a spherical shell with masses
+source: { document: PHYS161_Exam2, labels: [ P130 ] }
+section: Torque
+tags: [ torque, moment-of-inertia, sphere, point-mass, unit-conversion ]
+figure:
+  id: shell-masses
+  src: figures/unnamed_010_GNcJ.png
+  alt: >-
+    A sphere with a vertical dashed line through its center labelled "Spin axis". Four small red
+    dots sit on its surface, equally spaced around a great circle: two at the top and bottom, on the
+    spin axis, and two at the left and right sides.
+narrative: >-
+  A uniform, {m}-kg spherical shell {d:unit} in diameter has four small {mp}-kg masses attached to
+  its outer surface and equally spaced around it. This combination is spinning about an axis running
+  through the center of the sphere and two of the small masses. {@fig}
+vars:
+  - { name: m, kind: range, min: 6.0, max: 11.0, step: 0.1, decimals: 1, unit: kg }
+  - { name: d, kind: range, min: 55, max: 90, step: 1, unit: cm, label: diameter }
+  - { name: mp, kind: range, min: 1.0, max: 2.2, step: 0.1, decimals: 1, unit: kg }
+  - { name: n1, kind: range, min: 75, max: 120, step: 5, unit: rpm, label: initial speed }
+  - { name: n2, kind: range, min: 30, max: 65, step: 5, unit: rpm, label: final speed }
+  - { name: t, kind: range, min: 18, max: 36, step: 1, unit: s, label: time }
+derived:
+  - { name: R, expr: "d / 200", unit: m }
+  - { name: I, expr: "2 / 3 * m * R^2 + 2 * mp * R^2", unit: kg m^2 }
+constraints:
+  - "n2 < n1" # the torque slows the sphere (always true for these ranges)
+parts:
+  - id: friction-torque
+    prompt: >-
+      What friction torque is needed to reduce its angular speed from {n1:unit} to {n2:unit} in
+      {t:unit}? Assume torque causing acceleration is in positive direction. {_0}{_u}
+    answer: I * (2 * pi * (n2 - n1) / 60) / t
+    unit: N m
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m: 8.6, d: 72, mp: 1.6, n1: 95, n2: 50, t: 27 }
+  parts:
+    - { id: friction-torque, answer: -0.2021, unit: N m, source: P130 }

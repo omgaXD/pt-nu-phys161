@@ -1,0 +1,46 @@
+# P120 — a uniform rod (M, L) with point masses m1 and m2 at its ends. About a perpendicular axis
+# through the rod's center: I = M L²/12 + (m1 + m2)(L/2)².
+id: phys161-e2-p120-rod-two-masses-inertia
+title: Moment of inertia of a rod with two end masses
+source: { document: PHYS161_Exam2, labels: [ P120 ] }
+section: Torque
+tags: [ moment-of-inertia, rod, point-mass ]
+narrative: >-
+  Two point-like particles with masses $m_1 = {m1}$ kg and $m_2 = {m2}$ kg are attached at the ends
+  of a uniform rigid rod with mass $M = {M}$ kg and length $L = {L}$ m.
+vars:
+  - { name: m1, kind: range, min: 6, max: 10, step: 1, unit: kg, label: mass 1 }
+  - {
+      name: m2,
+      kind: range,
+      min: 0.8,
+      max: 1.6,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: mass 2
+    }
+  - { name: M, kind: range, min: 6, max: 10, step: 1, unit: kg, label: rod mass }
+  - {
+      name: L,
+      kind: range,
+      min: 0.9,
+      max: 1.7,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: rod length
+    }
+parts:
+  - id: moment-of-inertia
+    prompt: >-
+      Find the moment of inertia of this system about an axis through the center of the rod and
+      perpendicular to it. {_0}{_u}
+    answer: M * L^2 / 12 + (m1 + m2) * (L / 2)^2
+    unit: kg m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m1: 8, m2: 1.2, M: 8, L: 1.3 }
+  parts:
+    - { id: moment-of-inertia, answer: 5.01367, unit: kg m^2, source: P120 }

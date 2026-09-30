@@ -1,0 +1,56 @@
+# P121 — grindstone (solid disk, I = ½ m R², R = d/2) spun up from rest to n rev/min in t while
+# the ax rubs its rim (friction torque μ N R) and the axle bearings resist with τ_f. The crank
+# force F at lever arm ℓ satisfies F ℓ = I α + μ N R + τ_f with α = (2π n / 60) / t.
+id: phys161-e2-p121-grindstone-crank-force
+title: Crank force to spin up a grindstone
+source: { document: PHYS161_Exam2, labels: [ P121 ] }
+section: Torque
+tags: [ torque, friction, moment-of-inertia, angular-acceleration ]
+figure:
+  id: grindstone
+  src: figures/unnamed_021_GNcJ.png
+  alt: >-
+    A large grindstone disk mounted on a horizontal axle in a wooden frame, turning with angular
+    velocity ω (curved arrow on its rim). A person presses an ax blade against the rim, a red arrow
+    showing the push of the blade toward the stone, and a crank handle is attached to the end of the
+    axle on the right.
+narrative: >-
+  A {m}-kg grindstone is a solid disk {d:unit} in diameter. You press an ax down on the rim with a
+  normal force of {N:unit}. The coefficient of kinetic friction between the blade and the stone is
+  {mu}, and there is a constant friction torque of {tauf:unit} between the axle of the stone and its
+  bearings. {@fig}
+vars:
+  - { name: m, kind: range, min: 45, max: 70, step: 1, unit: kg, label: mass }
+  - {
+      name: d,
+      kind: range,
+      min: 0.4,
+      max: 0.7,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: diameter
+    }
+  - { name: N, kind: range, min: 120, max: 200, step: 5, unit: N, label: normal force }
+  - { name: mu, kind: range, min: 0.40, max: 0.80, step: 0.01, decimals: 2 }
+  - { name: tauf, kind: range, min: 4.0, max: 7.0, step: 0.1, decimals: 1, unit: N m }
+  - { name: l, kind: range, min: 0.35, max: 0.60, step: 0.01, decimals: 2, unit: m }
+  - { name: n, kind: range, min: 100, max: 180, step: 5, unit: rpm, label: final speed }
+  - { name: t, kind: range, min: 5, max: 10, step: 1, unit: s, label: time }
+derived:
+  - { name: R, expr: "d / 2", unit: m }
+  - { name: I, expr: "m * R^2 / 2", unit: kg m^2 }
+  - { name: alpha, expr: "(2 * pi * n / 60) / t", unit: rad/s^2 }
+parts:
+  - id: crank-force
+    prompt: >-
+      How much force must be applied tangentially at the end of a crank handle {l:unit} long to
+      bring the stone from rest to {n} rev/min in {t:unit}? {_0}{_u}
+    answer: (I * alpha + mu * N * R + tauf) / l
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m: 58, d: 0.5, N: 160, mu: 0.59, tauf: 5.5, l: 0.47, n: 140, t: 7 }
+  parts:
+    - { id: crank-force, answer: 69.99, unit: N, source: P121 }

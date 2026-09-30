@@ -1,0 +1,71 @@
+# P119 — a uniform rod (M, L) with point masses m1 and m2 at its ends, pivoted at its center in a
+# vertical plane. Gravity on the rod itself has no torque; the end masses give
+# τ = (m1 − m2) g (L/2) cos θ with θ measured from the horizontal, and
+# I = M L²/12 + (m1 + m2)(L/2)², so α = τ / I. m1 > m2 over the whole range.
+id: phys161-e2-p119-rod-two-masses-angular-acceleration
+title: Angular acceleration of a rod with two end masses
+source: { document: PHYS161_Exam2, labels: [ P119 ] }
+section: Torque
+tags: [ torque, moment-of-inertia, rod, angular-acceleration ]
+narrative: >-
+  Two point-like particles with masses $m_1 = {m1}$ kg and $m_2 = {m2}$ kg are attached at the ends
+  of a uniform rigid rod with mass $M = {M}$ kg and length $L = {L}$ m, rotating in the vertical
+  plane about a frictionless pivot through its center.
+vars:
+  - {
+      name: m1,
+      kind: range,
+      min: 6.0,
+      max: 11.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: mass 1
+    }
+  - {
+      name: m2,
+      kind: range,
+      min: 1.2,
+      max: 2.4,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: mass 2
+    }
+  - {
+      name: M,
+      kind: range,
+      min: 7.0,
+      max: 12.6,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: rod mass
+    }
+  - {
+      name: L,
+      kind: range,
+      min: 1.0,
+      max: 2.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: rod length
+    }
+  - { name: theta, kind: range, min: 20, max: 45, step: 1, unit: "°", label: angle }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: I, expr: "M * L^2 / 12 + (m1 + m2) * (L / 2)^2", unit: kg m^2 }
+parts:
+  - id: angular-acceleration
+    prompt: >-
+      What is the magnitude of the angular acceleration of the system when the rod makes an angle of
+      {theta}° with the horizontal? The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: abs(m1 - m2) * g * (L / 2) * cos(rad(theta)) / I
+    unit: rad/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m1: 8.5, m2: 1.7, M: 9.8, L: 1.5, theta: 32, g: 9.8 }
+  parts:
+    - { id: angular-acceleration, answer: 5.595, unit: rad/s^2, source: P119 }

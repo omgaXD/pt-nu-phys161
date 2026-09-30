@@ -1,0 +1,39 @@
+# P125 — a net torque τ applied for t spins a wheel up from rest to n rev/min, so
+# I = τ t / ω with ω = 2π n / 60. The coasting time t2 is not needed for this part.
+id: phys161-e2-p125-bicycle-wheel-inertia
+title: Moment of inertia of a bicycle wheel on a test stand
+source: { document: PHYS161_Exam2, labels: [ P125 ] }
+section: Torque
+tags: [ torque, moment-of-inertia, angular-acceleration ]
+narrative: >-
+  An experimental bicycle wheel is placed on a test stand so that it is free to turn on its axle. If
+  a constant net torque of {tau:unit} is applied to the tire for {t:unit}, the angular speed of the
+  tire increases from 0 to {n} rev/min. The external torque is then removed, and the wheel is
+  brought to rest by friction in its bearings in {t2:unit}.
+vars:
+  - {
+      name: tau,
+      kind: range,
+      min: 3.5,
+      max: 6.5,
+      step: 0.1,
+      decimals: 1,
+      unit: N m,
+      label: torque
+    }
+  - { name: t, kind: range, min: 1.2, max: 2.5, step: 0.1, decimals: 1, unit: s }
+  - { name: n, kind: range, min: 100, max: 180, step: 5, unit: rpm, label: angular speed }
+  - { name: t2, kind: range, min: 80, max: 140, step: 1, unit: s, label: coasting time }
+parts:
+  - id: moment-of-inertia
+    prompt: >-
+      Compute the moment of inertia of the wheel about the rotational axis. Ignore the contribution
+      of friction to accelerating motion of the wheel. {_0}{_u}
+    answer: tau * t / (2 * pi * n / 60)
+    unit: kg m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { tau: 4.9, t: 1.8, n: 140, t2: 110 }
+  parts:
+    - { id: moment-of-inertia, answer: 0.6016, unit: kg m^2, source: P125 }

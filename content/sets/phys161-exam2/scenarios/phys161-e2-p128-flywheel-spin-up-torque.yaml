@@ -1,0 +1,26 @@
+# P128 — constant torque spins a flywheel up from rest to n rev/min in t:
+# τ = I α with α = (2π n / 60) / t.
+id: phys161-e2-p128-flywheel-spin-up-torque
+title: Torque to spin up a flywheel
+source: { document: PHYS161_Exam2, labels: [ P128 ] }
+section: Torque
+tags: [ torque, moment-of-inertia, angular-acceleration ]
+narrative: >-
+  The flywheel of an engine has a moment of inertia {I:unit} about its rotation axis.
+vars:
+  - { name: I, kind: range, min: 3.5, max: 6.5, step: 0.1, decimals: 1, unit: kg m^2 }
+  - { name: n, kind: range, min: 90, max: 170, step: 5, unit: rpm, label: final speed }
+  - { name: t, kind: range, min: 5, max: 10, step: 1, unit: s, label: time }
+parts:
+  - id: torque
+    prompt: >-
+      What constant torque is required to bring it up to an angular speed of {n} rev/min in
+      {t:unit}, starting from rest? {_0}{_u}
+    answer: I * (2 * pi * n / 60) / t
+    unit: N m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { I: 4.9, n: 130, t: 7 }
+  parts:
+    - { id: torque, answer: 9.5295, unit: N m, source: P128 }

@@ -1,0 +1,41 @@
+# P127 — during the coast-down the wheel decelerates uniformly from ω = 2π n / 60 to rest in t2,
+# so it turns through θ = ½ ω t2 (radians). The spin-up torque and time are not needed.
+id: phys161-e2-p127-bicycle-wheel-stopping-angle
+title: Angle turned by a coasting bicycle wheel
+source: { document: PHYS161_Exam2, labels: [ P127 ] }
+section: Torque
+tags: [ rotation, kinematics, angular-acceleration ]
+narrative: >-
+  An experimental bicycle wheel is placed on a test stand so that it is free to turn on its axle. If
+  a constant net torque of {tau:unit} is applied to the tire for {t:unit}, the angular speed of the
+  tire increases from 0 to {n} rev/min. The external torque is then removed, and the wheel is
+  brought to rest by friction in its bearings in {t2:unit}.
+vars:
+  - {
+      name: tau,
+      kind: range,
+      min: 3.5,
+      max: 6.5,
+      step: 0.1,
+      decimals: 1,
+      unit: N m,
+      label: torque
+    }
+  - { name: t, kind: range, min: 1.00, max: 2.00, step: 0.05, decimals: 2, unit: s }
+  - { name: n, kind: range, min: 80, max: 160, step: 5, unit: rpm, label: angular speed }
+  - { name: t2, kind: range, min: 80, max: 140, step: 1, unit: s, label: coasting time }
+parts:
+  - id: coast-angle
+    prompt: >-
+      Compute the total angle of revolution made by the wheel in the {t2}-s time interval. Provide
+      the answer in radians (rad). Ignore the contribution of friction to accelerating motion of the
+      wheel. {_0}{_u}
+    answer: (2 * pi * n / 60) * t2 / 2
+    unit: rad
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { tau: 4.9, t: 1.45, n: 120, t2: 107 }
+  parts:
+    - { id: coast-angle, answer: 672.30, unit: rad, source: P127 }

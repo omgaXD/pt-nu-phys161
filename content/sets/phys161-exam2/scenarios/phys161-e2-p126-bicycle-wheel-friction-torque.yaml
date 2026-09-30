@@ -1,0 +1,42 @@
+# P126 — spin-up: I = τ t / ω; coast-down from ω to rest in t2: τ_f = I ω / t2 = τ t / t2
+# (ω cancels), with ω = 2π n / 60.
+id: phys161-e2-p126-bicycle-wheel-friction-torque
+title: Bearing friction torque of a bicycle wheel
+source: { document: PHYS161_Exam2, labels: [ P126 ] }
+section: Torque
+tags: [ torque, friction, moment-of-inertia, angular-acceleration ]
+narrative: >-
+  An experimental bicycle wheel is placed on a test stand so that it is free to turn on its axle. If
+  a constant net torque of {tau:unit} is applied to the tire for {t:unit}, the angular speed of the
+  tire increases from 0 to {n} rev/min. The external torque is then removed, and the wheel is
+  brought to rest by friction in its bearings in {t2:unit}.
+vars:
+  - {
+      name: tau,
+      kind: range,
+      min: 3.5,
+      max: 6.0,
+      step: 0.1,
+      decimals: 1,
+      unit: N m,
+      label: torque
+    }
+  - { name: t, kind: range, min: 1.80, max: 3.30, step: 0.05, decimals: 2, unit: s }
+  - { name: n, kind: range, min: 80, max: 160, step: 5, unit: rpm, label: angular speed }
+  - { name: t2, kind: range, min: 90, max: 150, step: 1, unit: s, label: coasting time }
+derived:
+  - { name: omega, expr: "2 * pi * n / 60", unit: rad/s }
+  - { name: I, expr: "tau * t / omega", unit: kg m^2 }
+parts:
+  - id: friction-torque
+    prompt: >-
+      Compute the magnitude of the friction torque. Ignore the contribution of friction to
+      accelerating motion of the wheel. {_0}{_u}
+    answer: I * omega / t2
+    unit: N m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { tau: 4.7, t: 2.55, n: 120, t2: 121 }
+  parts:
+    - { id: friction-torque, answer: 0.09905, unit: N m, source: P126 }

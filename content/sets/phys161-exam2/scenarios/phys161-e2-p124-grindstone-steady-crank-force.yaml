@@ -1,0 +1,35 @@
+# P124 — grindstone at constant angular speed: the crank torque balances the ax friction torque
+# μ N R (R = d/2) and the axle friction torque τ_f, so F = (μ N R + τ_f) / ℓ. The mass and the
+# angular speed do not enter.
+id: phys161-e2-p124-grindstone-steady-crank-force
+title: Crank force to keep a grindstone turning
+source: { document: PHYS161_Exam2, labels: [ P124 ] }
+section: Torque
+tags: [ torque, friction, rotational-equilibrium ]
+narrative: >-
+  A {m}-kg grindstone is a solid disk {d:unit} in diameter. You press an ax down on the rim with a
+  normal force of {N:unit}. The coefficient of kinetic friction between the blade and the stone is
+  {mu}, and there is a constant friction torque of {tauf:unit} between the axle of the stone and its
+  bearings.
+vars:
+  - { name: m, kind: range, min: 45, max: 70, step: 1, unit: kg, label: mass }
+  - { name: d, kind: range, min: 0.45, max: 0.85, step: 0.05, decimals: 2, unit: m }
+  - { name: N, kind: range, min: 100, max: 170, step: 5, unit: N, label: normal force }
+  - { name: mu, kind: range, min: 0.40, max: 0.75, step: 0.01, decimals: 2 }
+  - { name: tauf, kind: range, min: 4, max: 8, step: 1, unit: N m, label: axle torque }
+  - { name: n, kind: range, min: 80, max: 160, step: 5, unit: rpm, label: angular speed }
+  - { name: l, kind: range, min: 0.35, max: 0.65, step: 0.01, decimals: 2, unit: m }
+parts:
+  - id: steady-crank-force
+    prompt: >-
+      After the grindstone attains an angular speed of {n} rev/min, what tangential force at the end
+      of the handle {l:unit} long is needed to maintain a constant angular speed of {n} rev/min?
+      {_0}{_u}
+    answer: (mu * N * d / 2 + tauf) / l
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 57, d: 0.65, N: 130, mu: 0.58, tauf: 6, n: 120, l: 0.49 }
+  parts:
+    - { id: steady-crank-force, answer: 62.255, unit: N, source: P124 }

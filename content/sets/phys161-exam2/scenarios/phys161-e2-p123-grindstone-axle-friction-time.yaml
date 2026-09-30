@@ -1,0 +1,35 @@
+# P123 — grindstone (solid disk, I = ½ m R², R = d/2) coasting from n rev/min with only the axle
+# friction torque τ_f acting (the ax data are distractors): t = I ω0 / τ_f, ω0 = 2π n / 60.
+id: phys161-e2-p123-grindstone-axle-friction-time
+title: Grindstone slowed by axle friction alone
+source: { document: PHYS161_Exam2, labels: [ P123 ] }
+section: Torque
+tags: [ torque, friction, moment-of-inertia, angular-acceleration ]
+narrative: >-
+  A {m}-kg grindstone is a solid disk {d:unit} in diameter. You press an ax down on the rim with a
+  normal force of {N:unit}. The coefficient of kinetic friction between the blade and the stone is
+  {mu}, and there is a constant friction torque of {tauf:unit} between the axle of the stone and its
+  bearings.
+vars:
+  - { name: m, kind: range, min: 40, max: 65, step: 1, unit: kg, label: mass }
+  - { name: d, kind: range, min: 0.40, max: 0.75, step: 0.05, decimals: 2, unit: m }
+  - { name: N, kind: range, min: 100, max: 170, step: 5, unit: N, label: normal force }
+  - { name: mu, kind: range, min: 0.40, max: 0.75, step: 0.01, decimals: 2 }
+  - { name: tauf, kind: range, min: 4, max: 8, step: 1, unit: N m, label: axle torque }
+  - { name: n, kind: range, min: 90, max: 170, step: 5, unit: rpm, label: initial speed }
+derived:
+  - { name: R, expr: "d / 2", unit: m }
+  - { name: I, expr: "m * R^2 / 2", unit: kg m^2 }
+parts:
+  - id: coast-time
+    prompt: >-
+      How much time does it take the grindstone to come from {n} rev/min to rest if it is acted on
+      by the axle friction only? {_0}{_u}
+    answer: I * (2 * pi * n / 60) / tauf
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 52, d: 0.55, N: 130, mu: 0.55, tauf: 6, n: 130 }
+  parts:
+    - { id: coast-time, answer: 4.461, unit: s, source: P123 }
