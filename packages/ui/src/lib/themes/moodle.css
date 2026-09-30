@@ -122,6 +122,15 @@
 
 /* ---- Answer field (qtype_formulas "Numeric and unit") ------------------- */
 
+/* Fields that end the prompt sit on their own row, like .formulaspart. */
+.pt-theme-moodle .pt-part-answer {
+  display: block;
+  margin-top: 1rem;
+}
+.pt-theme-moodle .pt-part-answer > :first-child {
+  margin-left: 0;
+}
+
 .pt-theme-moodle .pt-answer-field input {
   width: 200px;
   min-width: 0;

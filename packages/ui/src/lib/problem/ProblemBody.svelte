@@ -41,6 +41,13 @@
     instance.narrativeHtml.includes('class="pt-figure"') || parts.some((p) => p.promptHtml.includes('class="pt-figure"')),
   );
 
+  /** Answer slots that end a prompt; they get their own row, like Moodle's .formulaspart. */
+  const TRAILING_SLOTS = /(?:\s*<span class="pt-slot"[^>]*><\/span>)+\s*$/;
+  function splitPrompt(html: string): { text: string; answer: string } {
+    const m = TRAILING_SLOTS.exec(html);
+    return m ? { text: html.slice(0, m.index), answer: m[0] } : { text: html, answer: '' };
+  }
+
   function answerOf(partId: string): PartAnswer {
     return answers[partId] ?? emptyAnswer();
   }
@@ -67,6 +74,7 @@
     <Figure figure={instance.figure} {resolveSrc} />
   {/if}
   {#each parts as p (p.partId)}
+    {@const prompt = splitPrompt(p.promptHtml)}
     <div class="pt-part" data-part={p.partId}>
       {#snippet slotSnippet(seg: { index: number; kind: 'value' | 'unit' | 'combined' })}
         {#if readonly}
@@ -93,7 +101,10 @@
           />
         {/if}
       {/snippet}
-      <RichHtml html={p.promptHtml} slot={slotSnippet} figure={figureSnippet} />
+      <RichHtml html={prompt.text} slot={slotSnippet} figure={figureSnippet} />
+      {#if prompt.answer}
+        <span class="pt-part-answer"><RichHtml html={prompt.answer} slot={slotSnippet} /></span>
+      {/if}
     </div>
   {/each}
 </div>
