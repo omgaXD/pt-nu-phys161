@@ -1,0 +1,43 @@
+# P111 — rolling without slipping up an incline until it stops a distance d along it:
+# ½MV² + ½I(V/R)² = Mgd sinθ, so I = MR²(2gd sinθ / V² − 1).
+id: phys161-e2-p111-rolling-incline-inertia
+title: Moment of inertia from a roll up an incline
+source: { document: PHYS161_Exam2, labels: [ P111 ] }
+section: Rotation
+tags: [ rotation, rolling, energy-conservation, moment-of-inertia, incline ]
+figure:
+  id: fig
+  src: figures/unnamed_006_GNcJ.png
+  alt: >-
+    A ball of mass M moves to the right with velocity V along a horizontal floor toward an incline
+    of angle θ; further up the incline the ball is shown at rest a distance d from the bottom,
+    measured along the incline surface.
+narrative: >-
+  Spherically symmetric object with radius R = {R:unit} and mass M = {M:unit} rolls without slipping
+  across a horizontal floor with velocity V = {V:unit}. It then rolls up an incline with an angle of
+  inclination θ = {theta}° and comes to rest a distance d = {d:unit} up the incline before reversing
+  direction and rolling back down. {@fig}
+vars:
+  - { name: R, kind: range, min: 0.27, max: 0.51, step: 0.01, decimals: 2, unit: m }
+  - { name: M, kind: range, min: 1.5, max: 2.7, step: 0.1, decimals: 1, unit: kg }
+  - { name: V, kind: range, min: 1.3, max: 2.5, step: 0.1, decimals: 1, unit: m/s }
+  - { name: theta, kind: range, min: 26, max: 48, step: 1, unit: "°" }
+  - { name: d, kind: range, min: 2.6, max: 4.8, step: 0.1, decimals: 1, unit: m }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  # The rise must use up more than the translational energy alone (I > 0).
+  - "2 * g * d * sin(theta * pi / 180) > V^2"
+parts:
+  - id: inertia
+    prompt: >-
+      Find the moment of inertia of this object about an axis through its center of mass. The
+      gravitational acceleration is g = {g:unit}. {_0}{_u}
+    answer: M * R^2 * (2 * g * d * sin(theta * pi / 180) / V^2 - 1)
+    unit: kg m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { R: 0.39, M: 2.1, V: 1.9, theta: 37, d: 3.7, g: 9.8 }
+  parts:
+    - { id: inertia, answer: 3.542, unit: kg m^2, source: P111 }

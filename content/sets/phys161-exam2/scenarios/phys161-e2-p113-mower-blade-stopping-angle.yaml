@@ -1,0 +1,29 @@
+# P113 — same constant deceleration: ω² = 2αθ, so the stopping angle scales as ω².
+# θ₂ = k² · (n revolutions) = 2π n k² rad, answered in radians.
+id: phys161-e2-p113-mower-blade-stopping-angle
+title: Stopping angle of a mower blade
+source: { document: PHYS161_Exam2, labels: [ P113 ] }
+section: Rotation
+tags: [ rotation, kinematics, scaling, unit-conversion ]
+narrative: >-
+  A safety device brings the blade of a power mower from an initial angular speed $\omega_1$ to rest
+  in {n:unit}.
+vars:
+  # "rev" as the unit keeps "1 rev" / "3 rev" grammatical for every draw.
+  - { name: n, kind: range, min: 1, max: 4, step: 1, unit: rev, label: revolutions }
+  - { name: k, kind: range, min: 2, max: 7, step: 1, label: speed ratio }
+parts:
+  - id: angle
+    prompt: >-
+      At the same constant acceleration, what angle of rotation would it take the blade to come to
+      rest from an initial angular speed $\omega_2$ that is {k} times as great, $\omega_2 =
+      {k}\omega_1$? Provide the answer in units of radian (rad). {_0}{_u}
+    answer: 2 * pi * n * k^2
+    unit: rad
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { n: 1, k: 4 }
+  parts:
+    - { id: angle, answer: 100.53, unit: rad, source: P113 }

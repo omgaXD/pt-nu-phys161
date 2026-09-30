@@ -1,0 +1,28 @@
+# P107 — a wheel accelerates uniformly from rest. Over an interval Δt starting at t₀ it turns
+# through θ = ω₀Δt + ½αΔt² with ω₀ = αt₀, so t₀ = θ / (αΔt) − Δt / 2.
+id: phys161-e2-p107-wheel-interval-start-time
+title: Start time of a wheel's rotation interval
+source: { document: PHYS161_Exam2, labels: [ P107 ] }
+section: Rotation
+tags: [ rotation, kinematics, constant-angular-acceleration ]
+narrative: >-
+  A wheel starts to rotate from rest with constant angular acceleration of {alpha:unit}. It turns
+  through an angle of {theta:unit} in an interval of {dt:unit}.
+vars:
+  - { name: alpha, kind: range, min: 1.0, max: 2.0, step: 0.1, decimals: 1, unit: rad/s^2 }
+  - { name: theta, kind: range, min: 50, max: 95, step: 1, unit: rad }
+  - { name: dt, kind: range, min: 1.0, max: 2.0, step: 0.1, decimals: 1, unit: s }
+constraints:
+  # The wheel must already be turning when the interval starts (t₀ > 0).
+  - "theta > alpha * dt^2 / 2"
+parts:
+  - id: start-time
+    prompt: "How long has the wheel been in motion at the start of this interval? {_0}{_u}"
+    answer: theta / (alpha * dt) - dt / 2
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { alpha: 1.4, theta: 71, dt: 1.4 }
+  parts:
+    - { id: start-time, answer: 35.525, unit: s, source: P107 }

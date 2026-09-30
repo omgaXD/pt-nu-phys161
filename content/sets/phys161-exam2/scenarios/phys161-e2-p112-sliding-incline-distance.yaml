@@ -1,0 +1,38 @@
+# P112 — sliding without friction (no rotation): ½MV² = Mgd sinθ, so d = V² / (2g sinθ).
+# The radius and mass are given but do not enter the answer.
+id: phys161-e2-p112-sliding-incline-distance
+title: Frictionless slide up an incline
+source: { document: PHYS161_Exam2, labels: [ P112 ] }
+section: Rotation
+tags: [ energy-conservation, incline, sliding ]
+figure:
+  id: fig
+  src: figures/unnamed_GNcJ.gif
+  alt: >-
+    A ball of mass M moves to the right with velocity V along a horizontal floor toward an incline
+    of angle θ; further up the incline the ball is shown at rest a distance d from the bottom,
+    measured along the incline surface.
+narrative: >-
+  A spherically symmetric object with radius R = {R:unit} and mass M = {M:unit} slides without
+  friction across a horizontal floor with velocity V = {V:unit}. It then slides up a frictionless
+  incline with an angle of inclination θ = {theta}°. {@fig}
+vars:
+  - { name: R, kind: range, min: 0.2, max: 0.5, step: 0.1, decimals: 1, unit: m }
+  - { name: M, kind: range, min: 1.6, max: 3.0, step: 0.1, decimals: 1, unit: kg }
+  - { name: V, kind: range, min: 1.15, max: 2.15, step: 0.01, decimals: 2, unit: m/s }
+  - { name: theta, kind: range, min: 20, max: 40, step: 1, unit: "°" }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: distance
+    prompt: >-
+      How far along the incline does it travel before coming to rest? The gravitational acceleration
+      is g = {g:unit}. {_0}{_u}
+    answer: V^2 / (2 * g * sin(theta * pi / 180))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { R: 0.3, M: 2.3, V: 1.65, theta: 30, g: 9.8 }
+  parts:
+    - { id: distance, answer: 0.277806, unit: m, source: P112 }

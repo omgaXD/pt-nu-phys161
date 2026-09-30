@@ -1,0 +1,50 @@
+# P109/P110 — a wheel spins up from rest with α = ω₁/t₁ until t₂, then turns at the constant
+# ω = αt₂. Angle from 0 to t₃ > t₂: θ = ½αt₂² + αt₂(t₃ − t₂); angular velocity at t₃ > t₂: αt₂.
+# The base canonical values are P109's; P110 overrides them with its own.
+id: phys161-e2-p109-wheel-accelerate-then-coast
+title: Wheel that spins up, then turns steadily
+source: { document: PHYS161_Exam2, labels: [ P109, P110 ] }
+section: Rotation
+tags: [ rotation, kinematics, constant-angular-acceleration, multi-part ]
+narrative: >-
+  A solid wheel undergoes a constant angular acceleration starting from rest at $t = 0$ s. When $t =
+  {t1}$ s, the angular velocity of the wheel is {omega1:unit}. The acceleration continues until $t =
+  {t2}$ s, when the acceleration abruptly changes to 0 rad/s$^2$.
+vars:
+  # Half-second steps and no fixed decimals, so both sources' values print as they do there
+  # (P109: 2 s, 14 s, 38 s; P110: 2.5 s, 15.5 s, 20.5 s).
+  - { name: t1, kind: range, min: 1.5, max: 3.5, step: 0.5, unit: s }
+  - { name: omega1, kind: range, min: 3.5, max: 7.5, step: 0.1, unit: rad/s }
+  - { name: t2, kind: range, min: 10, max: 20, step: 0.5, unit: s }
+  - { name: t3, kind: range, min: 20.5, max: 45, step: 0.5, unit: s }
+derived:
+  - { name: alpha, expr: "omega1 / t1", unit: rad/s^2 }
+constraints:
+  # The asked-about time lies after the acceleration phase has ended.
+  - "t1 < t2"
+  - "t3 > t2"
+parts:
+  - id: angle
+    prompt: >-
+      Through what angle does the wheel rotate in the interval $t = 0$ s to $t = {t3}$ s? {_0}{_u}
+    answer: alpha * t2^2 / 2 + alpha * t2 * (t3 - t2)
+    unit: rad
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: omega-late
+    prompt: "What is the angular velocity of the wheel at $t = {t3}$ s? {_0}{_u}"
+    answer: alpha * t2
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { t1: 2, omega1: 4.8, t2: 14, t3: 38 }
+  parts:
+    - { id: angle, answer: 1041.6, unit: rad, source: P109 }
+    - {
+        id: omega-late,
+        answer: 37.2,
+        unit: rad/s,
+        source: P110,
+        vars: { t1: 2.5, omega1: 6, t2: 15.5, t3: 20.5 }
+      }
