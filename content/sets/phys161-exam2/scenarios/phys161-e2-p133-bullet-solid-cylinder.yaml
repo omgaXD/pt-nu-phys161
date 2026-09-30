@@ -1,0 +1,80 @@
+# P133 — a bullet (mass m, speed v) moving on a line a distance d from the axis of a solid
+# cylinder (mass M, radius R) at rest sticks to the cylinder's surface. Angular momentum about
+# the fixed axis is conserved: m v d = (½ M R² + m R²) ω, so ω = m v d / (½ M R² + m R²).
+id: phys161-e2-p133-bullet-solid-cylinder
+title: Bullet embedded in a solid cylinder
+source: { document: PHYS161_Exam2, labels: [ P133 ] }
+section: Angular momentum
+tags: [ angular-momentum, inelastic-collision, moment-of-inertia ]
+figure:
+  id: fig
+  src: figures/unnamed_011_GNcJ.png
+  alt: >-
+    Top view of the cylinder: a circle of radius r centred on the rotation axis, with a dashed
+    horizontal line through the axis. On the left, a bullet moves to the right with velocity V₀
+    along a line a distance d above the dashed line. An arrow along the bottom of the circle shows
+    the resulting rotation ω.
+narrative: >-
+  A solid cylinder of mass {M:unit} and radius {R:unit} is mounted on a fixed vertical axis that
+  runs through its center of mass. A bullet of mass {m:unit} is fired with a velocity of {v:unit}
+  into the cylinder at rest, with the line of motion of the bullet perpendicular to the cylinder
+  axis and at a distance $d = {d:unit}$ from the center. {@fig}
+vars:
+  - { name: M, kind: range, min: 12.5, max: 23.3, step: 0.1, decimals: 1, unit: kg, label: mass }
+  - {
+      name: R,
+      kind: range,
+      min: 0.11,
+      max: 0.20,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: radius
+    }
+  - {
+      name: m,
+      kind: range,
+      min: 0.12,
+      max: 0.22,
+      step: 0.01,
+      decimals: 2,
+      unit: kg,
+      label: bullet
+    }
+  - {
+      name: v,
+      kind: range,
+      min: 55.8,
+      max: 103.6,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: speed
+    }
+  - {
+      name: d,
+      kind: range,
+      min: 0.02,
+      max: 0.05,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: offset
+    }
+derived:
+  - { name: I, expr: "M * R^2 / 2 + m * R^2", unit: kg m^2 }
+constraints:
+  - "d < R" # the bullet's line of motion passes through the cylinder
+parts:
+  - id: angular-speed
+    prompt: >-
+      What is the angular speed of the system after the bullet strikes and adheres to the surface of
+      the cylinder? {_0}{_u}
+    answer: m * v * d / I
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { M: 17.9, R: 0.15, m: 0.17, v: 79.7, d: 0.03 }
+  parts:
+    - { id: angular-speed, answer: 1.981, unit: rad/s, source: P133 }

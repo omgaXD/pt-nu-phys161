@@ -1,0 +1,57 @@
+# P140/P141 — a square board (side s, mass M) pivots about its top edge: I = ⅓ M s². A bullet
+# (mass m in g, speed v) hits it face-on at its center, a distance s/2 below the axis, and stays
+# embedded. The bullet's angular momentum about the axis is L = m v s/2; conservation gives
+# ω = L / (⅓ M s² + m (s/2)²). The base canonical values are P140's; P141 overrides them with
+# its own. The bullet mass carries no decimals so that 1.8 g and 2 g print as the source does.
+id: phys161-e2-p140-shooting-gallery-board
+title: Bullet hitting a pivoted target board
+source: { document: PHYS161_Exam2, labels: [ P140, P141 ] }
+section: Angular momentum
+tags: [ angular-momentum, inelastic-collision, moment-of-inertia, multi-part ]
+narrative: >-
+  A target in a shooting gallery consists of a vertical square wooden board, {s:unit} on a side and
+  with mass {M:unit}, that pivots on a horizontal axis along its top edge. The board is struck
+  face-on at its center by a bullet with mass {m:unit} that is traveling at {v:unit} and that
+  remains embedded in the board.
+vars:
+  - { name: s, kind: range, min: 0.18, max: 0.33, step: 0.01, decimals: 2, unit: m, label: side }
+  - {
+      name: M,
+      kind: range,
+      min: 0.60,
+      max: 1.20,
+      step: 0.01,
+      decimals: 2,
+      unit: kg,
+      label: board
+    }
+  - { name: m, kind: range, min: 1.2, max: 2.6, step: 0.1, unit: g, label: bullet mass }
+  - { name: v, kind: range, min: 250, max: 450, step: 5, unit: m/s, label: bullet speed }
+derived:
+  - { name: Lb, expr: "m / 1000 * v * s / 2", unit: kg m^2/s }
+parts:
+  - id: angular-speed
+    prompt: "What is the angular speed of the board just after the bullet's impact? {_0}{_u}"
+    answer: Lb / (M * s^2 / 3 + m / 1000 * (s / 2)^2)
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: bullet-angular-momentum
+    prompt: >-
+      What is the magnitude of the angular momentum of the bullet about the pivot axis just before
+      impact? {_0}{_u}
+    answer: Lb
+    unit: kg m^2/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { s: 0.25, M: 0.85, m: 1.8, v: 350 }
+  parts:
+    - { id: angular-speed, answer: 4.44, unit: rad/s, source: P140 }
+    - {
+        id: bullet-angular-momentum,
+        answer: 0.08165,
+        unit: kg m^2/s,
+        source: P141,
+        vars: { s: 0.23, M: 0.95, m: 2, v: 355 }
+      }

@@ -1,0 +1,31 @@
+# P139 — a bar of length L pivoted at its center rotates with ω; a loose ball on its end leaves
+# straight up with the end's speed v = ω L/2 and rises h = v² / (2 g). The ball's mass does not
+# enter the answer.
+id: phys161-e2-p139-bar-launches-ball
+title: Ball launched by a rotating bar
+source: { document: PHYS161_Exam2, labels: [ P139 ] }
+section: Angular momentum
+tags: [ rotation, kinematics, energy-conservation ]
+narrative: >-
+  A uniform bar of length {L:unit} pivots about its center and, immediately after being struck,
+  rotates with angular velocity $\omega = {omega:unit}$. A ball of mass {m:unit} resting on the far
+  end of the bar, unattached to it, is launched straight up.
+vars:
+  - { name: L, kind: range, min: 2, max: 4, step: 1, unit: m, label: bar length }
+  - { name: omega, kind: range, min: 2.5, max: 4.7, step: 0.1, decimals: 1, unit: rad/s }
+  - { name: m, kind: range, min: 2, max: 4, step: 1, unit: kg, label: ball mass }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: rise-height
+    prompt: >-
+      How high above its starting point does that ball rise? The gravitational acceleration is $g =
+      {g:unit}$. {_0}{_u}
+    answer: (omega * L / 2)^2 / (2 * g)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 3, omega: 3.6, m: 3, g: 9.8 }
+  parts:
+    - { id: rise-height, answer: 1.48776, unit: m, source: P139 }

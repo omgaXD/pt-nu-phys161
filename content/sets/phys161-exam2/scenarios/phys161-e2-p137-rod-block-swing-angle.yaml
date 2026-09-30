@@ -1,0 +1,64 @@
+# P137 — a rod (mass M, length l) pivoted at its top, with a block (mass m) stuck to its lower
+# end, starts swinging with angular velocity ω. Energy:
+# ½ (⅓ M l² + m l²) ω² = (m l + M l/2) g (1 − cos θ), so
+# θ = acos(1 − (M/3 + m) l ω² / (2 g (m + M/2))). P136's figure shows the same setup.
+id: phys161-e2-p137-rod-block-swing-angle
+title: Swing angle of a rod after a block sticks to it
+source: { document: PHYS161_Exam2, labels: [ P137 ] }
+section: Angular momentum
+tags: [ angular-momentum, energy-conservation, rod ]
+figure:
+  id: fig
+  src: figures/unnamed_004_GNcJ.gif
+  alt: >-
+    A uniform rod labelled M, l hangs vertically from a pivot O at its upper end. On the right, a
+    block m starts at height h on a curved ramp and slides down to the floor, where it meets the
+    lower end of the rod. A dashed outline shows the rod, with the block stuck to its lower end,
+    swung to the left through an angle θ from the vertical.
+narrative: >-
+  A block of mass $m = {m:unit}$ has just struck and stuck to the lower end of a uniform vertical
+  rod of mass $M = {M:unit}$ and length $l = {l:unit}$ that hangs from a frictionless pivot O at its
+  upper end (see Figure below). Immediately after the collision the rod and block rotate about the
+  pivot with angular velocity $\omega = {omega:unit}$. {@fig}
+vars:
+  - { name: m, kind: range, min: 1.6, max: 3.0, step: 0.1, decimals: 1, unit: kg, label: block }
+  - {
+      name: M,
+      kind: range,
+      min: 2.3,
+      max: 4.3,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: rod mass
+    }
+  - {
+      name: l,
+      kind: range,
+      min: 1.7,
+      max: 3.1,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: rod length
+    }
+  - { name: omega, kind: range, min: 0.4, max: 0.8, step: 0.1, decimals: 1, unit: rad/s }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: c, expr: "1 - (M / 3 + m) * l * omega^2 / (2 * g * (m + M / 2))" }
+constraints:
+  - "c > -1" # the rod stops before swinging over the top
+parts:
+  - id: swing-angle
+    prompt: >-
+      Find the angle θ through which the rod swings before momentarily coming to rest. Provide the
+      answer in radians. The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: acos(c)
+    unit: rad
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 2.3, M: 3.3, l: 2.4, omega: 0.6, g: 9.8 }
+  parts:
+    - { id: swing-angle, answer: 0.276355, unit: rad, source: P137 }

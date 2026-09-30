@@ -1,0 +1,62 @@
+# P138 — a ball (mass m) dropped from height h lands on one end of a uniform bar (mass M,
+# length L) pivoted at its center, with a second ball (mass m2) on the other end, and sticks. It
+# arrives with v = √(2 g h); angular momentum about the pivot:
+# m v L/2 = (M L²/12 + (m + m2)(L/2)²) ω.
+id: phys161-e2-p138-ball-drop-bar
+title: Ball dropped onto a pivoted bar
+source: { document: PHYS161_Exam2, labels: [ P138 ] }
+section: Angular momentum
+tags: [ angular-momentum, inelastic-collision, energy-conservation, rod ]
+narrative: >-
+  A {m}-kg ball is dropped from a height of {h:unit} above one end of a uniform bar that pivots
+  about its center. The bar has a mass of {M:unit} and is {L:unit} long. At the other end of the bar
+  sits another ball of mass {m2:unit}. The dropped ball sticks to the bar after the collision.
+vars:
+  - { name: m, kind: range, min: 3, max: 7, step: 1, unit: kg, label: dropped ball mass }
+  - { name: h, kind: range, min: 5, max: 11, step: 1, unit: m, label: drop height }
+  - {
+      name: M,
+      kind: range,
+      min: 4.0,
+      max: 7.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: bar mass
+    }
+  - {
+      name: L,
+      kind: range,
+      min: 3.0,
+      max: 5.4,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: bar length
+    }
+  - {
+      name: m2,
+      kind: range,
+      min: 3.2,
+      max: 6.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: ball 2
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: I, expr: "M * L^2 / 12 + (m + m2) * (L / 2)^2", unit: kg m^2 }
+parts:
+  - id: angular-velocity
+    prompt: >-
+      Find the angular velocity of the bar immediately after the collision. The gravitational
+      acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: m * sqrt(2 * g * h) * (L / 2) / I
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 5, h: 8, M: 5.5, L: 4.2, m2: 4.6, g: 9.8 }
+  parts:
+    - { id: angular-velocity, answer: 2.60766, unit: rad/s, source: P138 }

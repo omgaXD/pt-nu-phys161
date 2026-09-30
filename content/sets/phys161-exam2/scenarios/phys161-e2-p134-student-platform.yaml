@@ -1,0 +1,51 @@
+# P134/P135 — a student (point mass m) walks from the rim of a rotating uniform disk platform
+# (mass M, radius r) toward its center; with a frictionless axle the angular momentum is
+# conserved: (½ M r² + m r²) ω₀ = (½ M r² + m d²) ω. At the center I = ½ M r², and with L fixed
+# K = L² / (2 I), so K_f / K_i = I_i / I_f = 1 + 2 m / M. The base canonical values are P134's;
+# P135 overrides them with its own. Masses carry no decimals so that 64.1 kg and 79 kg print as
+# the source does.
+id: phys161-e2-p134-student-platform
+title: Student walking toward the center of a rotating platform
+source: { document: PHYS161_Exam2, labels: [ P134, P135 ] }
+section: Angular momentum
+tags: [ angular-momentum, moment-of-inertia, rotational-energy, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_019_GNcJ.png
+  alt: >-
+    A shaded horizontal circular platform of radius r turns about a vertical dotted axle through its
+    center; a curved arrow above the platform shows the rotation. A stick-figure student stands at
+    the rim.
+narrative: >-
+  A student with mass {m:unit} walks slowly from the rim toward the center of a horizontal circular
+  platform with mass {M:unit} and radius $r = {r:unit}$, rotating about a frictionless vertical
+  axle. {@fig}
+vars:
+  - { name: m, kind: range, min: 45, max: 85, step: 0.1, unit: kg, label: student mass }
+  - { name: M, kind: range, min: 55, max: 100, step: 0.1, unit: kg, label: platform mass }
+  - { name: r, kind: range, min: 2.0, max: 4.0, step: 0.1, decimals: 1, unit: m, label: radius }
+  - { name: omega, kind: range, min: 3.6, max: 6.8, step: 0.1, decimals: 1, unit: rad/s }
+  - { name: d, kind: range, min: 0.80, max: 1.70, step: 0.01, decimals: 2, unit: m }
+constraints:
+  - "d < r" # the student is still on the platform, between the rim and the center
+parts:
+  - id: angular-velocity
+    prompt: >-
+      The angular velocity of the system is {omega:unit} when the student is at the rim. Find the
+      angular velocity of the system when the student is {d:unit} from the center. {_0}{_u}
+    answer: omega * (M / 2 + m) * r^2 / (M * r^2 / 2 + m * d^2)
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: kinetic-energy-factor
+    prompt: >-
+      By what factor does the total kinetic energy of the system increase by the time the student
+      reaches the center? {_0}
+    answer: (M / 2 + m) / (M / 2)
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 64.1, M: 76.3, r: 2.9, omega: 5.2, d: 1.24 }
+  parts:
+    - { id: angular-velocity, answer: 10.662, unit: rad/s, source: P134 }
+    - { id: kinetic-energy-factor, answer: 2.65316, source: P135, vars: { m: 65.3, M: 79, r: 3.2 } }
