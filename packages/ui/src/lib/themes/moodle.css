@@ -162,8 +162,9 @@
   line-height: 1.5;
   color: #1d2125;
   background: #fff;
-  border: 1px solid #8f959e;
-  border-radius: 0.5rem;
+  /* Bootstrap's .form-control: --bs-border-color and --bs-border-radius. */
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
   transition:
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
