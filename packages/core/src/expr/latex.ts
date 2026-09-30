@@ -87,11 +87,12 @@ function stripParen(n: Ast): Ast {
   return n.t === 'paren' ? n.a : n;
 }
 
-/** Render an expression AST as TeX (for live previews of typed answers). */
-export function toTex(n: Ast): string {
+/** Render an expression AST as TeX (for live previews of typed answers); `num` formats number literals. */
+export function toTex(n: Ast, num: (v: number) => string = numberToTex): string {
+  const tex = (x: Ast): string => toTex(x, num);
   switch (n.t) {
     case 'num':
-      return numberToTex(n.v);
+      return num(n.v);
     case 'str':
       return `\\text{"${n.v.replace(/[\\{}$&#%_^~]/g, '')}"}`;
     case 'bool':
@@ -99,14 +100,14 @@ export function toTex(n: Ast): string {
     case 'sym':
       return identifierToTex(n.name);
     case 'paren':
-      return `\\left(${toTex(n.a)}\\right)`;
+      return `\\left(${tex(n.a)}\\right)`;
     case 'unary':
-      return n.op === 'not' ? `\\lnot ${toTex(n.a)}` : `${n.op}${toTex(n.a)}`;
+      return n.op === 'not' ? `\\lnot ${tex(n.a)}` : `${n.op}${tex(n.a)}`;
     case 'factorial':
-      return `${toTex(n.a)}!`;
+      return `${tex(n.a)}!`;
     case 'bin': {
-      const a = toTex(n.a);
-      const b = toTex(n.b);
+      const a = tex(n.a);
+      const b = tex(n.b);
       switch (n.op) {
         case '+':
           return `${a} + ${b}`;
@@ -115,10 +116,10 @@ export function toTex(n: Ast): string {
         case '*':
           return n.implicit ? `${a}\\,${b}` : `${a} \\cdot ${b}`;
         case '/':
-          return `\\frac{${toTex(stripParen(n.a))}}{${toTex(stripParen(n.b))}}`;
+          return `\\frac{${tex(stripParen(n.a))}}{${tex(stripParen(n.b))}}`;
         case '^': {
           const base = n.a.t === 'bin' || n.a.t === 'unary' ? `\\left(${a}\\right)` : a;
-          return `{${base}}^{${toTex(stripParen(n.b))}}`;
+          return `{${base}}^{${tex(stripParen(n.b))}}`;
         }
         case 'mod':
           return `${a} \\bmod ${b}`;
@@ -133,17 +134,17 @@ export function toTex(n: Ast): string {
       }
     }
     case 'chain':
-      return n.args.map((a, i) => (i === 0 ? toTex(a) : ` ${CMP_TEX[n.ops[i - 1]!]} ${toTex(a)}`)).join('');
+      return n.args.map((a, i) => (i === 0 ? tex(a) : ` ${CMP_TEX[n.ops[i - 1]!]} ${tex(a)}`)).join('');
     case 'cond':
-      return `\\left(${toTex(n.c)} \\;?\\; ${toTex(n.a)} : ${toTex(n.b)}\\right)`;
+      return `\\left(${tex(n.c)} \\;?\\; ${tex(n.a)} : ${tex(n.b)}\\right)`;
     case 'array':
-      return `\\left[${n.items.map(toTex).join(', ')}\\right]`;
+      return `\\left[${n.items.map(tex).join(', ')}\\right]`;
     case 'index':
-      return `${toTex(n.obj)}\\left[${toTex(n.idx)}\\right]`;
+      return `${tex(n.obj)}\\left[${tex(n.idx)}\\right]`;
     case 'lambda':
-      return `\\left(${n.params.map(identifierToTex).join(', ')} \\mapsto ${toTex(n.body)}\\right)`;
+      return `\\left(${n.params.map(identifierToTex).join(', ')} \\mapsto ${tex(n.body)}\\right)`;
     case 'call': {
-      const args = n.args.map((a) => toTex(stripParen(a)));
+      const args = n.args.map((a) => tex(stripParen(a)));
       if (n.name === 'sqrt' && args.length === 1) return `\\sqrt{${args[0]}}`;
       if (n.name === 'abs' && args.length === 1) return `\\left|${args[0]}\\right|`;
       if (n.name === 'log' && args.length === 2) return `\\log_{${args[1]}}\\left(${args[0]}\\right)`;

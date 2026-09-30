@@ -2,6 +2,25 @@ import { type AnswerType, splitCombinedAnswer, tryParseUnit, unitToTex, validate
 
 export type FieldValidation = { ok: true; latex: string } | { ok: false; error: string };
 
+// The preview mimics qtype_formulas': literals with PHP's 14 significant
+// digits, e-notation kept as typed (1.5·10³), units as a fraction with
+// centred dots, and a \quad between number and unit.
+
+function moodleNumber(v: number): string {
+  const abs = Math.abs(v);
+  if (v === 0 || (abs >= 1e-4 && abs < 1e15)) return String(Number(v.toPrecision(14)));
+  const [m, e] = v.toExponential(13).split('e') as [string, string];
+  return `${Number(m)} \\cdot 10^{${Number(e)}}`;
+}
+
+const E_LITERAL = /(?<![\w.])(\d+(?:\.\d*)?|\.\d+)[eE]([+-]?\d+)/g;
+
+/** Preview TeX for an already validated value. */
+function valueTex(src: string, fallback: string): string {
+  const r = validateAnswer(src.replace(E_LITERAL, '$1*10^($2)'), 'numericalFormula', moodleNumber);
+  return r.ok ? r.latex : fallback;
+}
+
 /**
  * Validate a value field, or a combined "number unit" field. Null means there
  * is nothing to show: a bare number in a combined field gets neither preview
@@ -10,7 +29,7 @@ export type FieldValidation = { ok: true; latex: string } | { ok: false; error: 
 export function validateField(input: string, answerType: AnswerType, withUnit: boolean): FieldValidation | null {
   if (!withUnit) {
     const r = validateAnswer(input, answerType);
-    return r.ok ? { ok: true, latex: r.latex } : { ok: false, error: r.error };
+    return r.ok ? { ok: true, latex: valueTex(input, r.latex) } : { ok: false, error: r.error };
   }
   const { value, unit } = splitCombinedAnswer(input, answerType);
   if (unit === '') {
@@ -23,10 +42,10 @@ export function validateField(input: string, answerType: AnswerType, withUnit: b
   }
   const r = validateAnswer(value, answerType);
   if (!r.ok) return { ok: false, error: r.error };
-  return { ok: true, latex: `${r.latex}\\ ${unitToTex(unit)}` };
+  return { ok: true, latex: `${valueTex(value, r.latex)}\\quad ${unitToTex(unit, { fraction: true })}` };
 }
 
 export function validateUnitField(input: string): FieldValidation {
   if (input.trim() === '') return { ok: false, error: 'unit-missing' };
-  return tryParseUnit(input) ? { ok: true, latex: unitToTex(input) } : { ok: false, error: 'unit-syntax' };
+  return tryParseUnit(input) ? { ok: true, latex: unitToTex(input, { fraction: true }) } : { ok: false, error: 'unit-syntax' };
 }

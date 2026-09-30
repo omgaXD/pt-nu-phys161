@@ -169,6 +169,8 @@
   box-shadow: none;
 }
 .pt-theme-moodle .pt-answer-field .pt-answer-preview:not(:empty) {
+  align-self: flex-start;
+  font-size: 1.1rem;
   margin-top: 0.25rem;
   padding: 0.15rem 0.5rem;
   background: #eef;

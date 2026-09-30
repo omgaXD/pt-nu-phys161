@@ -80,8 +80,13 @@ function texComponent(name: string, exp: number): string {
   return exp === 1 ? texName(name) : `${texName(name)}^{${exp}}`;
 }
 
+export interface UnitTexOptions {
+  /** `\dfrac{\text{kg} \cdot \text{m}}{\text{s}^{2}}`, as in qtype_formulas' answer preview. */
+  fraction?: boolean;
+}
+
 /** TeX for a unit: `\text{m}/\text{s}^{2}`. Falls back to `\text{…}` if unparseable. */
-export function unitToTex(unit: string | UnitMap): string {
+export function unitToTex(unit: string | UnitMap, opts: UnitTexOptions = {}): string {
   let u: UnitMap;
   try {
     u = typeof unit === 'string' ? parseUnit(unit) : unit;
@@ -91,9 +96,11 @@ export function unitToTex(unit: string | UnitMap): string {
   const entries = Object.entries(u);
   const num = entries.filter(([, e]) => e > 0).map(([n, e]) => texComponent(n, e));
   const den = entries.filter(([, e]) => e < 0).map(([n, e]) => texComponent(n, -e));
-  const top = num.join('\\,');
+  const sep = opts.fraction ? ' \\cdot ' : '\\,';
+  const top = num.join(sep);
   if (den.length === 0) return top;
-  const bottom = den.join('\\,');
+  const bottom = den.join(sep);
+  if (opts.fraction) return `\\dfrac{${top || '1'}}{${bottom}}`;
   return `${top || '1'}/${den.length > 1 ? `\\left(${bottom}\\right)` : bottom}`;
 }
 

@@ -20,6 +20,7 @@ import {
   SeedScrubber,
   toResponse,
   UnitField,
+  validateField,
   VariableTable,
 } from '../src/lib/index.ts';
 import { canonicalInstance, scenario } from './fixtures.ts';
@@ -123,8 +124,16 @@ describe('AnswerField', () => {
     expect(screen.queryByTestId('answer-preview')).toBeNull(); // not yet
     await vi.advanceTimersByTimeAsync(300);
     const preview = screen.getByTestId('answer-preview');
-    expect(preview.querySelector('annotation')?.textContent).toBe('1.152\\times10^{16}');
+    expect(preview.querySelector('annotation')?.textContent).toBe('1.152 \\cdot {10}^{16}');
     expect(input).toHaveAttribute('aria-invalid', 'false');
+  });
+
+  it('previews like qtype_formulas', () => {
+    const tex = (s: string) => validateField(s, 'numeric', true);
+    expect(tex('123 kg m / s^2')).toEqual({ ok: true, latex: '123\\quad \\dfrac{\\text{kg} \\cdot \\text{m}}{\\text{s}^{2}}' });
+    expect(tex('123456789.123456 m')).toEqual({ ok: true, latex: '123456789.12346\\quad \\text{m}' });
+    expect(tex('2.5E-7 s')).toEqual({ ok: true, latex: '2.5 \\cdot {10}^{-7}\\quad \\text{s}' });
+    expect(tex('3*10^4 m')).toEqual({ ok: true, latex: '3 \\cdot {10}^{4}\\quad \\text{m}' });
   });
 
   it('flags disallowed input with aria-invalid and a message (numeric rejects functions)', async () => {
@@ -151,7 +160,7 @@ describe('AnswerField', () => {
     render(AnswerField, { withUnit: true, debounce: 0, onchange });
     const input = screen.getByLabelText('Answer');
     await fireEvent.input(input, { target: { value: '191.88 J' } });
-    await waitFor(() => expect(screen.getByTestId('answer-preview').querySelector('annotation')?.textContent).toBe('191.88\\ \\text{J}'));
+    await waitFor(() => expect(screen.getByTestId('answer-preview').querySelector('annotation')?.textContent).toBe('191.88\\quad \\text{J}'));
     expect(onchange).toHaveBeenLastCalledWith('191.88 J');
     // A bare number: no preview and no warning, like Moodle.
     await fireEvent.input(input, { target: { value: '191.88' } });
@@ -177,7 +186,7 @@ describe('UnitField / NumericKeypad', () => {
     render(UnitField, { debounce: 0 });
     const input = screen.getByLabelText('Unit');
     await fireEvent.input(input, { target: { value: 'm/s^2' } });
-    await waitFor(() => expect(input.parentElement!.querySelector('annotation')?.textContent).toBe('\\text{m}/\\text{s}^{2}'));
+    await waitFor(() => expect(input.parentElement!.querySelector('annotation')?.textContent).toBe('\\dfrac{\\text{m}}{\\text{s}^{2}}'));
     await fireEvent.input(input, { target: { value: 'm/s/s' } });
     await waitFor(() => expect(input).toHaveAttribute('aria-invalid', 'true'));
   });

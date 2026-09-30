@@ -152,4 +152,12 @@ describe('formatUnit / unitToTex', () => {
     expect(unitToTex('J/(kg K)')).toBe('\\text{J}/\\left(\\text{kg}\\,\\text{K}\\right)');
     expect(unitToTex('°')).toBe('^{\\circ}');
   });
+
+  it('renders the fraction form of the answer preview', () => {
+    const tex = (u: string) => unitToTex(u, { fraction: true });
+    expect(tex('kg m^2/(s^3 A)')).toBe('\\dfrac{\\text{kg} \\cdot \\text{m}^{2}}{\\text{s}^{3} \\cdot \\text{A}}');
+    expect(tex('m s^-1')).toBe('\\dfrac{\\text{m}}{\\text{s}}');
+    expect(tex('1/s')).toBe('\\dfrac{1}{\\text{s}}');
+    expect(tex('N m')).toBe('\\text{N} \\cdot \\text{m}');
+  });
 });

@@ -99,9 +99,10 @@ function checkExpression(ast: Ast, allowFunctions: boolean): Violation | null {
 /**
  * Decide whether a student may submit `src` for a part of `answerType`
  * (§3.2), by walking the parsed AST — never by regex. On success returns the
- * TeX for the live preview and the evaluated value.
+ * TeX for the live preview (number literals formatted by `num`) and the
+ * evaluated value.
  */
-export function validateAnswer(src: string, answerType: AnswerType): AnswerValidation {
+export function validateAnswer(src: string, answerType: AnswerType, num?: (v: number) => string): AnswerValidation {
   if (src.trim() === '') return { ok: false, error: 'empty' };
   let ast: Ast;
   try {
@@ -123,7 +124,7 @@ export function validateAnswer(src: string, answerType: AnswerType): AnswerValid
     return fromError(e);
   }
   if (typeof value !== 'number' || !Number.isFinite(value)) return { ok: false, error: 'not-a-number' };
-  return { ok: true, latex: toTex(ast), value: value === 0 ? 0 : value };
+  return { ok: true, latex: toTex(ast, num), value: value === 0 ? 0 : value };
 }
 
 function fromError(e: unknown): AnswerValidation {
