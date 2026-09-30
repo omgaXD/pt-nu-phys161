@@ -4,7 +4,7 @@ import type { Part, RandomVar, Scenario } from './scenario.js';
 export const DEFAULTS = Object.freeze({
   rel: 0.01,
   absBelow: 1e-12,
-  unitPenalty: 1,
+  unitPenalty: 0.1,
   mark: 1,
   maxSampleAttempts: 200,
 });

@@ -38,7 +38,7 @@ describe('scenario schema (M1)', () => {
     expect(s.constraints).toEqual([]);
     expect(s.parts[0]!.tolerance).toEqual({});
     expect(effectiveTolerance(s.parts[0]!)).toEqual({ rel: 0.01, abs: undefined, absBelow: 1e-12 });
-    expect(effectiveUnitPenalty(s.parts[0]!)).toBe(1);
+    expect(effectiveUnitPenalty(s.parts[0]!)).toBe(0.1);
     expect(effectiveMark(s.parts[0]!)).toBe(1);
     expect(DEFAULTS.maxSampleAttempts).toBe(200);
   });

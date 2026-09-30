@@ -126,7 +126,7 @@ export const PartSchema = z.strictObject({
   answer: z.string().min(1),
   /** Expected unit; omit for dimensionless answers. */
   unit: z.string().min(1).optional(),
-  /** 0..1, default 1. Fraction of credit lost for a wrong/missing unit. */
+  /** 0..1, default 0.1 (Moodle: 0.9 for a right number with a wrong unit). Fraction of credit lost for a wrong/missing unit. */
   unitPenalty: z.number().min(0).max(1).optional(),
   tolerance: ToleranceSchema.default({}),
   /** The answer is an exact integer; tolerance does not apply. */

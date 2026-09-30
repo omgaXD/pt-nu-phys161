@@ -217,7 +217,7 @@ describe('result display', () => {
     const ok = render(PartFeedback, { result: grade('191.88', 'J') });
     expect(ok.container.querySelector('[data-verdict="correct"]')).toHaveTextContent('Value is correct.');
     const noUnit = render(PartFeedback, { result: grade('191.88') });
-    expect(noUnit.container.querySelector('[data-verdict="incorrect"]')).toHaveTextContent('Unit is missing or wrong.');
+    expect(noUnit.container.querySelector('[data-verdict="partially-correct"]')).toHaveTextContent('Unit is missing or wrong.');
     const bad = render(PartFeedback, { result: grade('abc', 'J') });
     expect(bad.container).toHaveTextContent('Letters are not allowed here');
   });

@@ -123,7 +123,7 @@ type Part = {
   answerType: AnswerType;    // default "numeric"
   answer: string;            // formula for the model answer
   unit?: string;             // expected unit; omit for dimensionless
-  unitPenalty?: number;      // 0..1, default 1
+  unitPenalty?: number;      // 0..1, default 0.1
   tolerance: {
     rel?: number;            // default 0.01
     abs?: number;            // used when |model| is below `absBelow`

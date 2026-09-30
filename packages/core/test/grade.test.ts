@@ -71,8 +71,9 @@ describe('grading (M6)', () => {
   it('unit penalty: wrong or missing unit costs `unitPenalty` of the credit', () => {
     const { grade } = grader('c01-push-work');
     expect(grade({ value: '191.88', unit: 'J' }).fraction).toBe(1);
-    expect(grade({ value: '191.88' })).toMatchObject({ fraction: 0, valueOk: true, unitOk: false });
-    expect(grade({ value: '191.88', unit: 'N' })).toMatchObject({ fraction: 0, valueOk: true, unitOk: false });
+    // Moodle's default: a right number with a wrong or missing unit earns 0.9.
+    expect(grade({ value: '191.88' })).toMatchObject({ fraction: 0.9, valueOk: true, unitOk: false });
+    expect(grade({ value: '191.88', unit: 'N' })).toMatchObject({ fraction: 0.9, valueOk: true, unitOk: false });
     expect(grade({ value: '191.88', unit: 'N' }, { unitPenalty: 0.25 }).fraction).toBe(0.75);
     expect(grade({ value: '191.88' }, { unitPenalty: 0 }).fraction).toBe(1);
     expect(grade({ value: '150', unit: 'J' }, { unitPenalty: 0.25 }).fraction).toBe(0);
@@ -91,7 +92,7 @@ describe('grading (M6)', () => {
     expect(grade({ combined: '191.88 J' }).fraction).toBe(1);
     expect(grade({ combined: '191.88J' }).fraction).toBe(1);
     expect(grade({ combined: '0.19188 kJ' }).fraction).toBe(1);
-    expect(grade({ combined: '191.88' })).toMatchObject({ fraction: 0, unitOk: false, valueOk: true });
+    expect(grade({ combined: '191.88' })).toMatchObject({ fraction: 0.9, unitOk: false, valueOk: true });
     const mars = grader('c12c-mars-launch-window');
     expect(mars.grade({ combined: '111.3 days' }).fraction).toBe(1);
     expect(mars.grade({ combined: '111.3 day' }).fraction).toBe(1);
@@ -203,7 +204,7 @@ describe('exactUnit and percent', () => {
   it('grades percent answers', () => {
     const p = part({ unit: '%' });
     expect(gradePart(p, { modelAnswer: 12.5 }, { combined: '12.5%' }).fraction).toBe(1);
-    expect(gradePart(p, { modelAnswer: 12.5 }, { combined: '12.5' })).toMatchObject({ valueOk: true, unitOk: false, fraction: 0 });
+    expect(gradePart(p, { modelAnswer: 12.5 }, { combined: '12.5' })).toMatchObject({ valueOk: true, unitOk: false, fraction: 0.9 });
   });
 
   it('turns field contents into responses', () => {
