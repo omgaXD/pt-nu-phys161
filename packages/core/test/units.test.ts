@@ -6,6 +6,8 @@ import {
   formatUnit,
   parseUnit,
   SI_CLASSES,
+  tryParseStudentUnit,
+  tryParseUnit,
   UnitParseError,
   unitToTex,
 } from '../src/index.ts';
@@ -151,6 +153,13 @@ describe('formatUnit / unitToTex', () => {
     expect(unitToTex('kg m^2')).toBe('\\text{kg}\\,\\text{m}^{2}');
     expect(unitToTex('J/(kg K)')).toBe('\\text{J}/\\left(\\text{kg}\\,\\text{K}\\right)');
     expect(unitToTex('°')).toBe('^{\\circ}');
+  });
+
+  it('parses student units with qtype_formulas\' stricter grammar', () => {
+    expect(tryParseStudentUnit('kg m^2 s^-2')).toEqual({ kg: 1, m: 2, s: -2 });
+    expect(tryParseStudentUnit('J/(kg K)')).toEqual({ J: 1, kg: -1, K: -1 });
+    for (const u of ['N*m', 'N·m', 'N⋅m', '1/s']) expect(tryParseStudentUnit(u)).toBeNull();
+    expect(tryParseUnit('N*m')).toEqual({ N: 1, m: 1 }); // authored units stay lenient
   });
 
   it('renders the fraction form of the answer preview', () => {

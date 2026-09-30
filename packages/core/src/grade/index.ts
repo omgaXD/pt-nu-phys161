@@ -2,7 +2,7 @@ import { type AnswerErrorCode, validateAnswer } from '../expr/acceptance.js';
 import type { InstancePart, ProblemInstance } from '../instantiate/index.js';
 import { effectiveMark, effectiveTolerance, effectiveUnitPenalty } from '../schema/defaults.js';
 import type { AnswerType, Part, Scenario } from '../schema/scenario.js';
-import { areCompatible, DEFAULT_UNIT_TABLE, tryParseUnit, type UnitMap } from '../units/index.js';
+import { areCompatible, DEFAULT_UNIT_TABLE, tryParseStudentUnit, tryParseUnit, type UnitMap } from '../units/index.js';
 
 /** What a student submitted for one part: separate fields, or one combined field. */
 export type PartResponse = { value: string; unit?: string } | { combined: string };
@@ -148,13 +148,16 @@ export function gradePart(
   const { value, unit } = normalizeResponse(response, part.answerType);
   base.studentUnit = unit;
 
-  if (part.unit !== undefined) {
+  // An invalid unit makes the whole answer invalid, as in Moodle: no credit at all.
+  const unitInvalid = unit !== '' && tryParseStudentUnit(unit) === null;
+  if (unitInvalid) {
+    base.unitOk = false;
+    base.error = { code: 'unit-syntax' };
+  } else if (part.unit !== undefined) {
     const factor = unitFactor(unit, { ...part, unit: part.unit });
     if (factor !== false) {
       base.unitOk = true;
       base.conversionFactor = factor;
-    } else if (unit !== '' && tryParseUnit(unit) === null) {
-      base.error = { code: 'unit-syntax' };
     }
   }
 
@@ -166,7 +169,7 @@ export function gradePart(
   base.studentValue = v.value;
   base.valueOk = withinTolerance(v.value * base.conversionFactor, model, part);
   const penalty = part.unit === undefined ? 0 : effectiveUnitPenalty(part);
-  base.fraction = (base.valueOk ? 1 : 0) * (base.unitOk ? 1 : 1 - penalty);
+  base.fraction = unitInvalid ? 0 : (base.valueOk ? 1 : 0) * (base.unitOk ? 1 : 1 - penalty);
   return base;
 }
 

@@ -139,3 +139,13 @@ export function tryParseUnit(input: string): UnitMap | null {
     throw e;
   }
 }
+
+/**
+ * A unit as a student may type it: like qtype_formulas, only spaces multiply
+ * (`N*m` and `N·m` are invalid) and there is no `1/` numerator (`1/s`).
+ * Authored units keep the looser grammar of `parseUnit`.
+ */
+export function tryParseStudentUnit(input: string): UnitMap | null {
+  if (/[*·⋅∙]/.test(input) || /(^|\s)1\s*\//.test(input.trim())) return null;
+  return tryParseUnit(input);
+}

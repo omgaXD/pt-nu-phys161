@@ -1,4 +1,4 @@
-import { type AnswerType, splitCombinedAnswer, tryParseUnit, unitToTex, validateAnswer } from '@pt/core';
+import { type AnswerType, splitCombinedAnswer, tryParseStudentUnit, unitToTex, validateAnswer } from '@pt/core';
 
 export type FieldValidation = { ok: true; latex: string } | { ok: false; error: string };
 
@@ -14,9 +14,6 @@ function moodleNumber(v: number): string {
 }
 
 const E_LITERAL = /(?<![\w.])(\d+(?:\.\d*)?|\.\d+)[eE]([+-]?\d+)/g;
-
-/** qtype_formulas rejects `*` between units ("N*m"); our unit parser allows it. */
-const unitOk = (unit: string): boolean => !unit.includes('*') && tryParseUnit(unit) !== null;
 
 /** Preview TeX for an already validated value. */
 function valueTex(src: string, fallback: string): string {
@@ -45,11 +42,11 @@ export function validateField(input: string, answerType: AnswerType, withUnit: b
   }
   const r = validateAnswer(value, answerType);
   if (!r.ok) return { ok: false, error: r.error };
-  if (!unitOk(unit)) return { ok: false, error: 'unit-syntax' };
+  if (tryParseStudentUnit(unit) === null) return { ok: false, error: 'unit-syntax' };
   return { ok: true, latex: `${valueTex(value, r.latex)}\\quad ${unitToTex(unit, { fraction: true })}` };
 }
 
 export function validateUnitField(input: string): FieldValidation {
   if (input.trim() === '') return { ok: false, error: 'unit-missing' };
-  return unitOk(input) ? { ok: true, latex: unitToTex(input, { fraction: true }) } : { ok: false, error: 'unit-syntax' };
+  return tryParseStudentUnit(input) ? { ok: true, latex: unitToTex(input, { fraction: true }) } : { ok: false, error: 'unit-syntax' };
 }

@@ -112,6 +112,15 @@ describe('grading (M6)', () => {
     expect(grade(undefined)).toMatchObject({ fraction: 0, error: { code: 'no-response' } });
   });
 
+  it('a unit Moodle rejects ("N*m", "N·m") makes the whole answer incorrect', () => {
+    const { grade } = grader('c01-push-work');
+    const nm = { unit: 'N m', unitPenalty: 0.5 };
+    expect(grade({ combined: '191.88 N m' }, nm).fraction).toBe(1);
+    for (const combined of ['191.88 N*m', '191.88 N·m']) {
+      expect(grade({ combined }, nm)).toMatchObject({ fraction: 0, valueOk: true, unitOk: false, error: { code: 'unit-syntax' } });
+    }
+  });
+
   it('accepts the whole instance, as in the plan (gradePart(part, instance, response))', () => {
     const s = corpusScenario('c03-luggage-ramp');
     const inst = atCanonical(s);

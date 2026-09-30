@@ -1,7 +1,7 @@
 import { parseUnit, type UnitMap } from './parse.js';
 import { DEFAULT_UNIT_TABLE, type UnitTable } from './table.js';
 
-export { normalizeUnitString, parseUnit, tryParseUnit, type UnitMap, UnitParseError } from './parse.js';
+export { normalizeUnitString, parseUnit, tryParseStudentUnit, tryParseUnit, type UnitMap, UnitParseError } from './parse.js';
 export { createUnitTable, DEFAULT_UNIT_TABLE, SI_CLASSES, type UnitClass, type UnitTable } from './table.js';
 
 /**
