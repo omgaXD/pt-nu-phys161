@@ -134,6 +134,7 @@ describe('AnswerField', () => {
     expect(tex('123456789.123456 m')).toEqual({ ok: true, latex: '123456789.12346\\quad \\text{m}' });
     expect(tex('2.5E-7 s')).toEqual({ ok: true, latex: '2.5 \\cdot {10}^{-7}\\quad \\text{s}' });
     expect(tex('3*10^4 m')).toEqual({ ok: true, latex: '3 \\cdot {10}^{4}\\quad \\text{m}' });
+    expect(tex('123 N*m')).toEqual({ ok: false, error: 'unit-syntax' });
   });
 
   it('flags disallowed input with aria-invalid and a message (numeric rejects functions)', async () => {
