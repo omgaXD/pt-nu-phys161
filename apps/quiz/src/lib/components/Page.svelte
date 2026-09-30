@@ -11,7 +11,21 @@
   }
 
   let { children, blocks, narrow = false }: Props = $props();
+
+  // The course index's "⋮" menu. In Moodle it holds expand/collapse actions; here it hides an easter egg.
+  let menuOpen = $state(false);
+  let menuEl: HTMLElement | undefined = $state();
 </script>
+
+<svelte:window
+  onclick={(e) => {
+    if (menuOpen && menuEl && !menuEl.contains(e.target as Node)) menuOpen = false;
+  }}
+  onkeydown={(e) => {
+    if (menuOpen && e.key === 'Escape') menuOpen = false;
+  }}
+/>
+
 
 <!-- Moodle Boost's #page.drawers: a course-index drawer on the left (empty here, for the look),
      the block drawer on the right, each closable and reopened from a toggle at the edge. -->
@@ -21,9 +35,16 @@
       <button type="button" class="drawertoggle" aria-label="Close course index" data-tooltip="Close course index" onclick={() => drawers.set('left', false)}>
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" /></svg>
       </button>
-      <span class="drawer-menu" aria-hidden="true">
-        <svg viewBox="0 0 16 16"><circle cx="8" cy="3" r="1.4" /><circle cx="8" cy="8" r="1.4" /><circle cx="8" cy="13" r="1.4" /></svg>
-      </span>
+      <div class="dropdown" bind:this={menuEl}>
+        <button type="button" class="drawer-menu" aria-label="Course index options" aria-haspopup="true" aria-expanded={menuOpen} onclick={() => (menuOpen = !menuOpen)}>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3" r="1.4" /><circle cx="8" cy="8" r="1.4" /><circle cx="8" cy="13" r="1.4" /></svg>
+        </button>
+        {#if menuOpen}
+          <div class="dropdown-menu dropdown-menu-end show">
+            <div class="dropdown-item-text">:3</div>
+          </div>
+        {/if}
+      </div>
     </div>
   </div>
 
