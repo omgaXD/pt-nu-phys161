@@ -1,0 +1,44 @@
+# P95 — shock wave: the Mach cone has sin α = v / u. The boom reaches the person when the plane
+# is u t past overhead and the cone's edge runs through the person: tan α = h / (u t). With
+# tan α = v / sqrt(u² − v²) this gives u = h v / sqrt(h² − (v t)²). The altitude is given in km.
+# The speed of sound, 344 m/s, is the value the source states. v t ≪ h, so the answer exceeds v
+# by only ½ (v t / h)² (0.075% in the source: 344.258 m/s). The constraint keeps that excess above
+# 0.07% and the tolerance is 0.05%, so typing the speed of sound itself is never accepted.
+id: phys161-e3-p095-sonic-boom-plane-speed
+title: Speed of a jet from the delay of its sonic boom
+source: { document: PHYS161_Exam3, labels: [ P95 ] }
+section: Sound
+tags: [ sound, shock-wave, mach-cone ]
+narrative: >-
+  On a clear day a person sees a jet plane flying overhead flying at a constant altitude of
+  {h:unit}. The person hears the sonic boom at time {t:unit} after the plane passes directly
+  overhead.
+vars:
+  - { name: h, kind: range, min: 5, max: 10, step: 1, unit: km, label: altitude }
+  - {
+      name: t,
+      kind: range,
+      min: 0.6,
+      max: 1.5,
+      step: 0.1,
+      decimals: 1,
+      unit: s,
+      label: delay of the boom
+    }
+derived:
+  - { name: v, expr: "344", unit: m/s }
+constraints:
+  - "(v * t / (h * 1000))^2 > 1.4e-3" # the plane is measurably faster than sound
+parts:
+  - id: plane-speed
+    prompt: >-
+      Assuming that the speed of sound $v = {v:unit}$ is the same at all altitudes, calculate the
+      speed of the plane. {_0}{_u}
+    answer: h * 1000 * v / sqrt((h * 1000)^2 - (v * t)^2)
+    unit: m/s
+    tolerance: { rel: 0.0005 }
+    difficulty: 3
+canonical:
+  vars: { h: 8, t: 0.9, v: 344 }
+  parts:
+    - { id: plane-speed, answer: 344.258, unit: m/s, source: P95 }

@@ -1,0 +1,31 @@
+# P94 — Doppler effect, source at rest and listener receding: f_L = f_S (v − v_L) / v, so
+# v_L = v (1 − f_L / f_S) = v (f_S − f_L) / f_S. The detected frequency is drawn as a drop
+# below the emitted one, so the listener always recedes at a road speed (about 6–35 m/s).
+# The speed of sound, 344 m/s, is the value the source states.
+id: phys161-e3-p094-motorcyclist-doppler
+title: Speed of a motorcyclist from the Doppler shift
+source: { document: PHYS161_Exam3, labels: [ P94 ] }
+section: Sound
+tags: [ sound, doppler-effect, moving-listener ]
+narrative: >-
+  A car at rest is emitting alarm sound waves of frequency {f:unit}. A motorcyclist is traveling
+  directly away from the car.
+vars:
+  - { name: f, kind: range, min: 400, max: 600, step: 5, unit: Hz, label: emitted frequency }
+  - { name: df, kind: range, min: 10, max: 40, step: 1, unit: Hz, label: frequency drop }
+derived:
+  - { name: v, expr: "344", unit: m/s }
+  - { name: f2, expr: "f - df", unit: Hz }
+parts:
+  - id: speed
+    prompt: >-
+      What is the magnitude of the motorcyclist's velocity if he detects a frequency of {f2:unit}.
+      Use speed of sound in air $v = {v:unit}$. {_0}{_u}
+    answer: v * (f - f2) / f
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { f: 490, df: 20, v: 344 }
+  parts:
+    - { id: speed, answer: 14.041, unit: m/s, source: P94 }

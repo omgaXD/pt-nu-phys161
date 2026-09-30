@@ -1,0 +1,52 @@
+# P96 — beats: f_beat = |f₁ − f₂| = v |1/λ₁ − 1/λ₂|. The wavelengths are given in cm. The
+# out-of-tune wavelength is drawn as a small offset from the intended one (either sign, never
+# zero), printed with two decimals as in the source. The speed of sound, 344 m/s, is the value
+# the source states.
+id: phys161-e3-p096-guitar-beat-wavelengths
+title: Beat frequency of two slightly different notes
+source: { document: PHYS161_Exam3, labels: [ P96 ] }
+section: Sound
+tags: [ sound, beats, wavelength ]
+narrative: >-
+  Two guitarists attempt to play the same note of wavelength {L:unit} at the same time, but one of
+  the instruments is slightly out of tune and plays a note of wavelength {L2:unit} instead.
+vars:
+  - {
+      name: L,
+      kind: range,
+      min: 5.5,
+      max: 9.5,
+      step: 0.1,
+      decimals: 1,
+      unit: cm,
+      label: intended wavelength
+    }
+  - {
+      name: dL,
+      kind: range,
+      min: -0.04,
+      max: 0.04,
+      step: 0.01,
+      decimals: 2,
+      unit: cm,
+      label: wavelength offset
+    }
+derived:
+  - { name: v, expr: "344", unit: m/s }
+  - { name: L2, expr: "L + dL", unit: cm }
+constraints:
+  # The second instrument must actually be out of tune.
+  - "abs(dL) > 0.005"
+parts:
+  - id: beat-frequency
+    prompt: >-
+      What is the frequency of the beat these musicians hear when they play together? The speed of
+      sound in air is $v = {v:unit}$. {_0}{_u}
+    answer: v * abs(1 / (L / 100) - 1 / (L2 / 100))
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 7.3, dL: 0.02, v: 344 }
+  parts:
+    - { id: beat-frequency, answer: 12.875, unit: Hz, source: P96 }

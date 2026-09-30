@@ -1,0 +1,34 @@
+# P105 — the siren moves in SHM with maximum speed v_s = ω A = 2π f_p A. A listener directly
+# above hears the highest frequency while the siren moves up toward them at v_s:
+# f_max = f v / (v − v_s). The siren frequency is given in kHz and the amplitude in cm. The speed
+# of sound, 340 m/s, is the value the source states. The shift is below 1% of f for every draw
+# (as in the source: 24093.50 Hz from 24 kHz) but at least 0.15%, so the tolerance is 0.1%:
+# typing the unshifted siren frequency is never accepted.
+id: phys161-e3-p105-oscillating-siren-doppler
+title: Highest frequency heard from an oscillating siren
+source: { document: PHYS161_Exam3, labels: [ P105 ] }
+section: Sound
+tags: [ sound, doppler-effect, moving-source, simple-harmonic-motion ]
+narrative: >-
+  A police siren of frequency {f:unit} is attached to a vibrating platform. The platform and siren
+  oscillate up and down in simple harmonic motion with amplitude {A:unit} and frequency {fp:unit}.
+vars:
+  - { name: f, kind: range, min: 16, max: 32, step: 1, unit: kHz, label: siren frequency }
+  - { name: A, kind: range, min: 2, max: 5, step: 1, unit: cm, label: amplitude }
+  - { name: fp, kind: range, min: 4, max: 10, step: 1, unit: Hz, label: platform frequency }
+derived:
+  - { name: v, expr: "340", unit: m/s }
+  - { name: vs, expr: "2 * pi * fp * A / 100", unit: m/s }
+parts:
+  - id: max-frequency
+    prompt: >-
+      Find the maximum sound frequency that you would hear at a position directly above the siren.
+      Use {v:unit} for the speed of sound in air. {_0}{_u}
+    answer: f * 1000 * v / (v - vs)
+    unit: Hz
+    tolerance: { rel: 0.001 }
+    difficulty: 3
+canonical:
+  vars: { f: 24, A: 3, fp: 7, v: 340 }
+  parts:
+    - { id: max-frequency, answer: 24093.50, unit: Hz, source: P105 }
