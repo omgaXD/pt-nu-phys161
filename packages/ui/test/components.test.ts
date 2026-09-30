@@ -218,6 +218,10 @@ describe('result display', () => {
     expect(ok.container.querySelector('[data-verdict="correct"]')).toHaveTextContent('Value is correct.');
     const noUnit = render(PartFeedback, { result: grade('191.88') });
     expect(noUnit.container.querySelector('[data-verdict="partially-correct"]')).toHaveTextContent('Unit is missing or wrong.');
+    // The student's unit is rendered as a unit, not as raw text ("^" would break TeX).
+    const si = render(PartFeedback, { result: grade('191.88', 'kg m^2 s^-2') });
+    expect(si.container.querySelector('annotation')?.textContent).toBe('191.88\\quad \\dfrac{\\text{kg} \\cdot \\text{m}^{2}}{\\text{s}^{2}}');
+    expect(si.container.querySelector('.katex-error')).toBeNull();
     const bad = render(PartFeedback, { result: grade('abc', 'J') });
     expect(bad.container).toHaveTextContent('Letters are not allowed here');
   });

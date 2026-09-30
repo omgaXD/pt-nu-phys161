@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PartResult } from '@pt/core';
+  import { type PartResult, unitToTex } from '@pt/core';
   import { type AnswerMessages, message } from '../answer/messages.js';
   import MathInline from '../math/MathInline.svelte';
   import GradeBadge from './GradeBadge.svelte';
@@ -19,7 +19,7 @@
   <strong>{verdict}</strong>
   {#if result.parsedLatex}
     <span class="pt-feedback-answer">
-      Your answer: <MathInline tex={result.parsedLatex + (result.studentUnit ? `\\ \\text{${result.studentUnit}}` : '')} />
+      Your answer: <MathInline tex={result.parsedLatex + (result.studentUnit ? `\\quad ${unitToTex(result.studentUnit, { fraction: true })}` : '')} />
     </span>
   {/if}
   <ul class="pt-feedback-details">
