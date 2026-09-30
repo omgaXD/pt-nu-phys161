@@ -44,6 +44,7 @@ parts:
 canonical:
   vars: { closed: 1, k: 2, f0: 185, v: 344, f1: 555, f2: 925 }
   parts:
+    - { id: fundamental, answer: 185, unit: Hz, source: P86 }
     - {
         id: fundamental,
         answer: 183,
@@ -51,20 +52,7 @@ canonical:
         source: P87,
         vars: { closed: 0, k: 4, f0: 183, f1: 732, f2: 915 }
       }
-    - {
-        id: fundamental,
-        answer: 183,
-        unit: Hz,
-        source: P87,
-        vars: { closed: 0, k: 4, f0: 183, f1: 732, f2: 915 }
-      }
-    - {
-        id: length,
-        answer: 0.8866,
-        unit: m,
-        source: P89,
-        vars: { closed: 0, k: 3, f0: 194, f1: 582, f2: 776 }
-      }
+    - { id: length, answer: 0.465, unit: m, source: P88 }
     - {
         id: length,
         answer: 0.8866,

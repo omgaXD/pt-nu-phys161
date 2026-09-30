@@ -98,7 +98,9 @@ function create(doc: Document, value: unknown, path: Path): Node {
 /**
  * Merge `value` into an existing node, preserving comments, key order and
  * scalar styles wherever the data did not change. Sequences of records are
- * matched by `id` (or `name`) so reordering keeps each item's comments.
+ * matched by `id` (or `name`) so reordering keeps each item's comments; an old
+ * item is reused at most once, so records sharing an id (canonical rows for one
+ * part from different source problems) pair up in order.
  */
 function merge(doc: Document, node: unknown, value: unknown, path: Path): Node {
   if (isPlainObject(value) && isMap(node)) {
@@ -113,15 +115,15 @@ function merge(doc: Document, node: unknown, value: unknown, path: Path): Node {
     return node;
   }
   if (Array.isArray(value) && isSeq(node)) {
-    const byId = new Map<string, unknown>();
+    const byId = new Map<string, unknown[]>();
     for (const item of node.items) {
       const id = nodeIdentity(item);
-      if (id !== undefined && !byId.has(id)) byId.set(id, item);
+      if (id !== undefined) byId.set(id, [...(byId.get(id) ?? []), item]);
     }
     const old = node.items;
     node.items = value.map((v, i) => {
       const id = identityKey(v);
-      const existing = id !== undefined ? byId.get(id) : old[i];
+      const existing = id !== undefined ? byId.get(id)?.shift() : old[i];
       return existing !== undefined ? merge(doc, existing, v, [...path, i]) : create(doc, v, [...path, i]);
     });
     return node;

@@ -233,9 +233,16 @@ export const ScenarioSchema = z
       }
     }
     const randomNames = s.vars.map((v) => v.name);
+    const sources = new Set<string>();
     s.canonical.parts.forEach((cp, i) => {
       if (!partIds.has(cp.id)) {
         ctx.addIssue({ code: 'custom', message: `unknown part "${cp.id}"`, path: ['canonical', 'parts', i, 'id'] });
+      }
+      if (cp.source !== undefined) {
+        if (sources.has(cp.source)) {
+          ctx.addIssue({ code: 'custom', message: `duplicate canonical source "${cp.source}"`, path: ['canonical', 'parts', i, 'source'] });
+        }
+        sources.add(cp.source);
       }
       for (const key of Object.keys(cp.vars ?? {})) {
         if (!names.has(key)) {

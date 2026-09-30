@@ -95,6 +95,14 @@ canonical:
     expect(out.indexOf('id: b')).toBeLessThan(out.indexOf('id: a'));
   });
 
+  it('keeps records that share an id apart (one canonical row per source problem)', () => {
+    const src = `parts:\n  - { id: a, source: P1 }\n  - { id: a, source: P2 }\n`;
+    const value = { parts: [{ id: 'a', source: 'P1' }, { id: 'a', source: 'P2' }] };
+    expect(updateDocumentText(src, value)).toBe(src);
+    const changed = { parts: [{ id: 'a', source: 'P1', x: 1 }, { id: 'a', source: 'P2', x: 2 }] };
+    expect(updateDocumentText(src, changed)).toBe(`parts:\n  - { id: a, source: P1, x: 1 }\n  - { id: a, source: P2, x: 2 }\n`);
+  });
+
   it('writes new documents in house style', () => {
     const text = newDocumentText(toStorable(parseScenario(C1)));
     expect(text).toContain('  - { name: m, kind: range, min: 20, max: 90, step: 0.5, decimals: 1, unit: kg }');

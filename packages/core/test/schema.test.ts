@@ -132,6 +132,15 @@ describe('scenario schema (M1)', () => {
     expect(issuesOf(dup).join()).toMatch(/duplicate part id/);
   });
 
+  it('allows several canonical rows per part, one per source label', () => {
+    const p = clone(C1);
+    const row = p.canonical.parts[0]!;
+    p.canonical.parts = [{ ...row, source: 'P1' }, { ...row, source: 'P2' }];
+    expect(issuesOf(p)).toEqual([]);
+    p.canonical.parts[1]!.source = 'P1';
+    expect(issuesOf(p).join()).toMatch(/duplicate canonical source "P1"/);
+  });
+
   it('accepts an integer flag on parts', () => {
     const p = clone(C1);
     p.parts[0]!.integer = true;
