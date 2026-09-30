@@ -278,17 +278,13 @@ h3 {
   opacity: 0.9;
   pointer-events: none;
 }
-.drawertoggle[data-tooltip]:hover::after {
-  top: calc(100% + 0.4rem);
-  left: 50%;
-  transform: translateX(-50%);
-}
-.drawer-left-toggle .btn[data-tooltip]:hover::after {
+/* Pointing into the page: right of the left-hand buttons, left of the right-hand ones. */
+:is(.drawer-left .drawertoggle, .drawer-left-toggle .btn)[data-tooltip]:hover::after {
   top: 50%;
   left: calc(100% + 0.4rem);
   transform: translateY(-50%);
 }
-.drawer-right-toggle .btn[data-tooltip]:hover::after {
+:is(.drawer-right .drawertoggle, .drawer-right-toggle .btn)[data-tooltip]:hover::after {
   top: 50%;
   right: calc(100% + 0.4rem);
   transform: translateY(-50%);
