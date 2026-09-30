@@ -53,10 +53,21 @@ describe('areCompatible — deliberate consequences (§5)', () => {
     expect(5000 * (f as number)).toBeCloseTo(5);
   });
 
-  it('N vs kg m/s^2 are NOT interchangeable (different component counts)', () => {
-    expect(areCompatible('N', 'kg m/s^2')).toBe(false);
-    expect(areCompatible('kg m/s^2', 'N')).toBe(false);
-    expect(areCompatible('J', 'N m')).toBe(false);
+  it('units with the same SI dimensions are interchangeable, as in Moodle', () => {
+    expect(areCompatible('N', 'kg m/s^2')).toBe(1);
+    expect(areCompatible('kg m/s^2', 'N')).toBe(1);
+    expect(areCompatible('N m', 'J')).toBe(1);
+    expect(areCompatible('kg m^2 s^-2', 'J')).toBe(1);
+    expect(areCompatible('J/s', 'W')).toBe(1);
+    expect(areCompatible('N/m^2', 'kPa')).toBeCloseTo(1e-3);
+    expect(areCompatible('g cm/s^2', 'N')).toBeCloseTo(1e-5);
+    expect(areCompatible('s^-1', 'Hz')).toBe(1);
+    // Different dimensions still differ; so do unknown names and angles vs pure numbers.
+    expect(areCompatible('N', 'J')).toBe(false);
+    expect(areCompatible('N', 'kg m/s')).toBe(false);
+    expect(areCompatible('xyz m', 'J')).toBe(false);
+    expect(areCompatible('rad/s', 's^-1')).toBe(false);
+    expect(areCompatible('°C', 'K')).toBe(false);
   });
 
   it('72 km/h vs 20 m/s: only compatible because h is in the s class', () => {
@@ -90,7 +101,8 @@ describe('areCompatible — deliberate consequences (§5)', () => {
     expect(areCompatible('cm^2', 'm^2')).toBeCloseTo(1e-4);
     expect(areCompatible('m^2', 'm^3')).toBe(false);
     expect(areCompatible('m', 's')).toBe(false);
-    expect(areCompatible('L', 'm^3')).toBe(false);
+    expect(areCompatible('L', 'm^3')).toBeCloseTo(1e-3);
+    expect(areCompatible('mL', 'cm^3')).toBeCloseTo(1);
     expect(areCompatible('rad/s', 'rpm')).toBe(false);
   });
 
@@ -133,7 +145,7 @@ describe('areCompatible — deliberate consequences (§5)', () => {
 
   it('has no name in two classes', () => {
     expect(() => createUnitTable([...SI_CLASSES, { id: 'x', units: { m: 1 } }])).toThrow(/more than one class/);
-    expect(DEFAULT_UNIT_TABLE.lookup('kg')).toEqual({ classId: 'g', factor: 1 });
+    expect(DEFAULT_UNIT_TABLE.lookup('kg')).toEqual({ classId: 'g', factor: 1, dims: { kg: 1 } });
   });
 });
 

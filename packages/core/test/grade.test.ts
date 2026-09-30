@@ -84,7 +84,10 @@ describe('grading (M6)', () => {
     expect(grade({ value: '0.19188', unit: 'kJ' })).toMatchObject({ fraction: 1, conversionFactor: 1000 });
     expect(grade({ value: '191880', unit: 'mJ' }).fraction).toBe(1);
     expect(grade({ value: '191.88', unit: 'kJ' })).toMatchObject({ fraction: 0, unitOk: true, valueOk: false });
-    expect(grade({ value: '191.88', unit: 'N m' }).unitOk).toBe(false); // J ≠ N m by design
+    expect(grade({ value: '191.88', unit: 'N m' })).toMatchObject({ fraction: 1, unitOk: true });
+    expect(grade({ combined: '191.88 kg m^2 s^-2' }).fraction).toBe(1);
+    // Converted first, then compared: 191.88 cm is not 191.88 m.
+    expect(grade({ value: '191.88', unit: 'N cm' })).toMatchObject({ fraction: 0, unitOk: true, valueOk: false });
   });
 
   it('grades combined number+unit fields', () => {

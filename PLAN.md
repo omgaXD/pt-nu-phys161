@@ -392,7 +392,7 @@ Parse a unit string into `Record<string, number>` (name → exponent):
 - Duplicate names ⇒ parse error
 - Permutation-invariant: `m s^(-1)` ≡ `m/s`
 
-Compatibility: two units match iff they have **the same number of named components** and, for each, the exponents are equal after converting the name within its dimension class. Conversion factor is `Π f_i^e_i`.
+Compatibility: two units match if they have **the same number of named components** and, for each, the exponents are equal after converting the name within its dimension class; otherwise, if every component is known, they match when their **SI dimensions agree** (each class records the dimensions of its SI coherent unit; angles are their own dimension). Conversion factor is `Π f_i^e_i`. Moodle converts this generously (observed: `N m` and `kg m^2 s^-2` accepted for `J`).
 
 Class table (extend as needed; seed with SI):
 
@@ -411,7 +411,9 @@ rad, rev, °                   (with rev = 2π rad, ° = π/180 rad)
 Consequences to preserve deliberately, and to assert in tests:
 
 - `5000 mm` ≡ `5 m` ✅
-- `N` vs `kg m/s^2` ❌ — different component counts, not interchangeable
+- `N` ≡ `kg m/s^2`, `J` ≡ `N m` ≡ `kg m^2 s^-2` ✅ — same SI dimensions
+- `10 cm` for an answer of `10 m` ❌ — converted first (0.1 m), then compared
+- `rad/s` vs `s^-1` ❌ — angles are a dimension of their own
 - `72 km/h` vs `20 m/s` ❌ unless `h` is added to the `s` class
 
 Add `min`, `h`, `day`, `rpm`, `L` to the table — the corpus needs them (P16 seconds, P26 W, P98 rpm, P29 litres, P114 days, P92 km/s).

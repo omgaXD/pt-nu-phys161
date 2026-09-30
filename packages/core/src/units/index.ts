@@ -8,8 +8,9 @@ export { createUnitTable, DEFAULT_UNIT_TABLE, SI_CLASSES, type UnitClass, type U
  * If a value expressed in `from` can be read as a value in `to`, return the
  * factor to multiply it by; otherwise `false`.
  *
- * Two units match iff they have the same number of named components and the
- * components pair up class-by-class with equal exponents (§5). Unknown names
+ * Two units match when their components pair up class-by-class with equal
+ * exponents (§5), or else when all their components are known and their SI
+ * dimensions agree: `J` ≡ `N m` ≡ `kg m^2 s^-2`, `mL` ≡ `cm^3`. Unknown names
  * only match themselves. The empty unit only matches the empty unit.
  */
 export function areCompatible(
@@ -25,6 +26,33 @@ export function areCompatible(
   } catch {
     return false;
   }
+  return byClass(a, b, table) || bySiDimensions(a, b, table);
+}
+
+/** SI dimensions and factor to the SI coherent unit, or null if a component is unknown or dimensionless-by-class. */
+function toSi(u: UnitMap, table: UnitTable): { dims: Map<string, number>; factor: number } | null {
+  const dims = new Map<string, number>();
+  let factor = 1;
+  for (const [name, exp] of Object.entries(u)) {
+    const hit = table.lookup(name);
+    if (!hit?.dims) return null;
+    factor *= hit.factor ** exp;
+    for (const [d, e] of Object.entries(hit.dims)) dims.set(d, (dims.get(d) ?? 0) + e * exp);
+  }
+  return { dims, factor };
+}
+
+function bySiDimensions(a: UnitMap, b: UnitMap, table: UnitTable): number | false {
+  if (Object.keys(a).length === 0 || Object.keys(b).length === 0) return false;
+  const sa = toSi(a, table);
+  const sb = toSi(b, table);
+  if (!sa || !sb) return false;
+  const keys = new Set([...sa.dims.keys(), ...sb.dims.keys()]);
+  for (const k of keys) if (Math.abs((sa.dims.get(k) ?? 0) - (sb.dims.get(k) ?? 0)) > 1e-9) return false;
+  return sa.factor / sb.factor;
+}
+
+function byClass(a: UnitMap, b: UnitMap, table: UnitTable): number | false {
   const aEntries = Object.entries(a);
   const bEntries = Object.entries(b);
   if (aEntries.length !== bEntries.length) return false;

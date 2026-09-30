@@ -1,15 +1,16 @@
 /**
- * Dimension classes (§5). Two unit components are interchangeable only if
- * their names belong to the same class; the factor converts to the class base.
- * Deliberately NOT a dimensional-analysis engine: `N` and `kg m/s^2` are
- * different classes (and different component counts), exactly as in the
- * target system.
+ * Dimension classes (§5). Units of one class convert by factor; the factor is
+ * relative to the SI coherent unit the class's `dims` describe (kg, not g).
+ * Across classes, units match when their SI dimensions agree (`J` ≡ `N m` ≡
+ * `kg m^2 s^-2`), as in Moodle. A class without `dims` only matches itself.
  */
 export interface UnitClass {
   /** Class id; conventionally its base unit name. */
   id: string;
-  /** Unit name → factor relative to the class base. */
+  /** Unit name → factor relative to the class's SI coherent unit. */
   units: Readonly<Record<string, number>>;
+  /** SI base dimensions of that unit: `{ kg: 1, m: 1, s: -2 }` for N. Angles count as their own dimension. */
+  dims?: Readonly<Record<string, number>>;
 }
 
 const PREFIX: Record<string, number> = {
@@ -40,14 +41,15 @@ function prefixed(base: string, baseFactor: number, prefixes: string): Record<st
   return out;
 }
 
-export const SI_CLASSES: readonly UnitClass[] = Object.freeze([
-  { id: 'm', units: prefixed('m', 1, 'k c d m µ n p f') },
+export const SI_CLASSES: readonly UnitClass[] = Object.freeze<UnitClass[]>([
+  { id: 'm', units: prefixed('m', 1, 'k c d m µ n p f'), dims: { m: 1 } },
   {
     id: 's',
     units: { ...prefixed('s', 1, 'm µ n p f'), min: 60, h: 3600, day: 86_400, days: 86_400 },
+    dims: { s: 1 },
   },
-  { id: 'g', units: prefixed('g', 1e-3, 'k m µ n p f') },
-  { id: 'N', units: prefixed('N', 1, 'M k m µ n p f') },
+  { id: 'g', units: prefixed('g', 1e-3, 'k m µ n p f'), dims: { kg: 1 } },
+  { id: 'N', units: prefixed('N', 1, 'M k m µ n p f'), dims: { kg: 1, m: 1, s: -2 } },
   {
     id: 'J',
     units: {
@@ -56,17 +58,18 @@ export const SI_CLASSES: readonly UnitClass[] = Object.freeze([
       cal: 4.184,
       kcal: 4184,
     },
+    dims: { kg: 1, m: 2, s: -2 },
   },
-  { id: 'W', units: prefixed('W', 1, 'k M G T P m µ n p f') },
-  { id: 'Pa', units: { ...prefixed('Pa', 1, 'k M G T P'), atm: 101_325, bar: 1e5 } },
+  { id: 'W', units: prefixed('W', 1, 'k M G T P m µ n p f'), dims: { kg: 1, m: 2, s: -3 } },
+  { id: 'Pa', units: { ...prefixed('Pa', 1, 'k M G T P'), atm: 101_325, bar: 1e5 }, dims: { kg: 1, m: -1, s: -2 } },
   // rpm is a rotational frequency: 1 rpm = 1/60 Hz.
-  { id: 'Hz', units: { ...prefixed('Hz', 1, 'k M G T P E'), rpm: 1 / 60 } },
-  { id: 'rad', units: { rad: 1, rev: 2 * Math.PI, '°': Math.PI / 180, deg: Math.PI / 180 } },
-  { id: 'L', units: prefixed('L', 1e-3, 'm µ d c') },
+  { id: 'Hz', units: { ...prefixed('Hz', 1, 'k M G T P E'), rpm: 1 / 60 }, dims: { s: -1 } },
+  { id: 'rad', units: { rad: 1, rev: 2 * Math.PI, '°': Math.PI / 180, deg: Math.PI / 180 }, dims: { rad: 1 } },
+  { id: 'L', units: prefixed('L', 1e-3, 'm µ d c'), dims: { m: 3 } },
   // Thermodynamics. Celsius is its own class: an offset scale, never converted to K.
-  { id: 'K', units: prefixed('K', 1, 'm') },
+  { id: 'K', units: prefixed('K', 1, 'm'), dims: { K: 1 } },
   { id: '°C', units: { '°C': 1 } },
-  { id: 'mol', units: prefixed('mol', 1, 'k m µ') },
+  { id: 'mol', units: prefixed('mol', 1, 'k m µ'), dims: { mol: 1 } },
   // Logarithmic and relative "units" only match themselves (listed so they count as known).
   { id: 'dB', units: { dB: 1 } },
   { id: '%', units: { '%': 1 } },
@@ -74,16 +77,22 @@ export const SI_CLASSES: readonly UnitClass[] = Object.freeze([
 
 export interface UnitTable {
   readonly classes: readonly UnitClass[];
-  /** Class id and factor for a unit name, or undefined when unknown. */
-  lookup(name: string): { classId: string; factor: number } | undefined;
+  /** Class id, factor and SI dimensions for a unit name, or undefined when unknown. */
+  lookup(name: string): UnitInfo | undefined;
+}
+
+export interface UnitInfo {
+  classId: string;
+  factor: number;
+  dims?: Readonly<Record<string, number>>;
 }
 
 export function createUnitTable(classes: readonly UnitClass[]): UnitTable {
-  const index = new Map<string, { classId: string; factor: number }>();
+  const index = new Map<string, UnitInfo>();
   for (const c of classes) {
     for (const [name, factor] of Object.entries(c.units)) {
       if (index.has(name)) throw new Error(`unit "${name}" is in more than one class`);
-      index.set(name, { classId: c.id, factor });
+      index.set(name, { classId: c.id, factor, ...(c.dims && { dims: c.dims }) });
     }
   }
   return { classes, lookup: (name) => index.get(name) };
