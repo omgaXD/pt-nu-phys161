@@ -1,0 +1,25 @@
+# P100 — a solid sphere (I = (2/5) M R²) is replaced by a thin spherical shell of the same radius
+# (I = (2/3) m R²). Equal rotational kinetic energy at every ω needs equal I, so m = (3/5) M.
+id: phys161-e2-p100-hollow-sphere-part-mass
+title: Mass of a hollow replacement part
+source: { document: PHYS161_Exam2, labels: [ P100 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, rotational-energy, sphere ]
+narrative: >-
+  While redesigning a rocket engine, in order to reduce weight, a solid spherical part is replaced
+  with a hollow spherical shell of the same size. The parts rotate about an axis through their
+  center. You need to make sure that the new part always has the same rotational kinetic energy as
+  the original part had at any given rate of rotation.
+vars:
+  - { name: M, kind: range, min: 120, max: 240, step: 5, unit: kg, label: original mass }
+parts:
+  - id: new-mass
+    prompt: "If the original part had a mass of {M:unit}, what must be the mass of the new part? {_0}{_u}"
+    answer: 3 / 5 * M
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { M: 180 }
+  parts:
+    - { id: new-mass, answer: 108, unit: kg, source: P100 }

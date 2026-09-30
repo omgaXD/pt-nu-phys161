@@ -1,0 +1,28 @@
+# P106 — a thin uniform bar (mass m, length L) pivoted at its center: I = m L² / 12. It makes n
+# revolutions every T seconds, so ω = 2π n / T and K = ½ I ω².
+id: phys161-e2-p106-bar-center-pivot-energy
+title: Kinetic energy of a bar pivoted at its center
+source: { document: PHYS161_Exam2, labels: [ P106 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, rod, rotational-energy ]
+narrative: >-
+  A thin, uniform {m}-kg bar that is {L:unit} long rotates uniformly about a pivot at its center,
+  making {n} complete revolutions every {T} seconds.
+vars:
+  - { name: m, kind: range, min: 8, max: 14, step: 1, unit: kg, label: mass }
+  - { name: L, kind: range, min: 1.6, max: 2.8, step: 0.1, decimals: 1, unit: m, label: length }
+  - { name: n, kind: range, min: 3, max: 8, step: 1, label: revolutions }
+  - { name: T, kind: range, min: 2, max: 5, step: 1, unit: s, label: time }
+derived:
+  - { name: omega, expr: "2 * pi * n / T", unit: rad/s }
+parts:
+  - id: kinetic-energy
+    prompt: "What is the kinetic energy of this bar? {_0}{_u}"
+    answer: 1 / 2 * (m * L^2 / 12) * omega^2
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 11, L: 2.2, n: 5, T: 3 }
+  parts:
+    - { id: kinetic-energy, answer: 243.267, unit: J, source: P106 }

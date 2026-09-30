@@ -1,0 +1,31 @@
+# P101 — a uniform disk (mass m, radius r) pivoted at its center carries a point mass m glued to
+# its rim. Released with the mass on a horizontal radius, the mass drops r by the time it is
+# directly below the axis: m g r = ½ I ω² with I = ½ m r² + m r², so ω = √(2 m g r / I).
+id: phys161-e2-p101-disk-rim-mass-angular-speed
+title: Disk with a glued rim mass — angular speed
+source: { document: PHYS161_Exam2, labels: [ P101 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, rotational-energy, energy-conservation ]
+narrative: >-
+  A uniform, solid disk with mass {m:unit} and radius {r:unit} is pivoted about a horizontal axis
+  through its center. A small object of the same mass of {m:unit} is glued to the rim of the disk.
+vars:
+  - { name: m, kind: range, min: 120, max: 220, step: 5, unit: kg, label: mass }
+  - { name: r, kind: range, min: 2, max: 7, step: 1, unit: m, label: radius }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: I, expr: "m * r^2 / 2 + m * r^2", unit: kg m^2 }
+parts:
+  - id: angular-speed
+    prompt: >-
+      If the disk is released from rest with the small object at the end of a horizontal radius,
+      find the angular speed when the small object is directly below the axis. The gravitational
+      acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: sqrt(2 * m * g * r / I)
+    unit: rad/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 170, r: 4, g: 9.8 }
+  parts:
+    - { id: angular-speed, answer: 1.807, unit: rad/s, source: P101 }

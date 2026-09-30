@@ -1,0 +1,32 @@
+# P99 — iron flywheel disk of thickness t (cm) storing E (MJ) at n rpm. E = ½ I ω² with
+# I = ½ M r² and M = ρ π r² t, so r = (4E / (ρ π t ω²))^(1/4); the rim's centripetal
+# acceleration is a = ω² r. rpm → rad/s, cm → m and MJ → J inside the formulas.
+id: phys161-e2-p099-flywheel-rim-acceleration
+title: Rim acceleration of an energy-storage flywheel
+source: { document: PHYS161_Exam2, labels: [ P99 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, rotational-energy, centripetal-acceleration, unit-conversion ]
+narrative: >-
+  A flywheel is made of iron (density {rho:unit}) in the shape of a {t}-cm-thick uniform disk.
+vars:
+  - { name: t, kind: range, min: 6.0, max: 13.0, step: 0.5, decimals: 1, label: thickness in cm }
+  - { name: E, kind: range, min: 5, max: 12, step: 1, unit: MJ, label: stored energy }
+  - { name: n, kind: range, min: 60, max: 110, step: 5, unit: rpm, label: rotation rate }
+derived:
+  - { name: rho, expr: "7800", unit: kg/m^3 }
+  - { name: omega, expr: "n * 2 * pi / 60", unit: rad/s }
+  - { name: r, expr: "(4 * E * 1e6 / (rho * pi * (t / 100) * omega^2))^(1/4)", unit: m }
+parts:
+  - id: rim-acceleration
+    prompt: >-
+      If it is to store {E} megajoules of kinetic energy when spinning at {n:unit} about an axis
+      perpendicular to the disk at its center, what would be the centripetal acceleration of a point
+      on its rim when spinning at this rate? {_0}{_u}
+    answer: omega^2 * r
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { rho: 7800, t: 9.5, E: 8, n: 85 }
+  parts:
+    - { id: rim-acceleration, answer: 287.55, unit: m/s^2, source: P99 }

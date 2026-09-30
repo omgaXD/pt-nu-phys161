@@ -1,0 +1,27 @@
+# P94 — a uniform stick of length L falls over, pivoting about its lower end (no slipping).
+# Energy: m g L/2 = ½ (⅓ m L²) ω², so ω² = 3 g / L and the free end moves at v = ω L = √(3 g L).
+id: phys161-e2-p094-falling-stick-end-speed
+title: Speed of the tip of a falling stick
+source: { document: PHYS161_Exam2, labels: [ P94 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, rotational-energy, energy-conservation ]
+narrative: >-
+  A stick of length {L:unit} is held vertically with one end on the floor and is then allowed to
+  fall.
+vars:
+  - { name: L, kind: range, min: 0.8, max: 1.8, step: 0.1, decimals: 1, unit: m, label: length }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: end-speed
+    prompt: >-
+      Find the speed of the other end when it hits the floor, assuming that the end on the floor
+      does not slip. The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: sqrt(3 * g * L)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 1.3, g: 9.8 }
+  parts:
+    - { id: end-speed, answer: 6.182, unit: m/s, source: P94 }

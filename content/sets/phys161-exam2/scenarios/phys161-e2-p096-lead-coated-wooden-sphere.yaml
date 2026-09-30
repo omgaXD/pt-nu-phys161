@@ -1,0 +1,48 @@
+# P96 — a solid wooden ball (density ρ, radius r) covered with lead foil of area density σ.
+# Ball: M = (4/3) π r³ ρ, I = (2/5) M r²; foil (thin spherical shell): m = 4π r² σ,
+# I = (2/3) m r². The two moments of inertia add.
+id: phys161-e2-p096-lead-coated-wooden-sphere
+title: Moment of inertia of a lead-coated wooden sphere
+source: { document: PHYS161_Exam2, labels: [ P96 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, composite-body, density ]
+narrative: >-
+  A sphere consists of a solid wooden ball of uniform density {rho:unit} and radius {r:unit} and is
+  covered with a thin coating of lead foil with area density {sigma:unit}.
+vars:
+  - { name: rho, kind: range, min: 600, max: 1000, step: 5, unit: kg/m^3, label: wood density }
+  - {
+      name: r,
+      kind: range,
+      min: 0.150,
+      max: 0.300,
+      step: 0.005,
+      decimals: 3,
+      unit: m,
+      label: radius
+    }
+  - {
+      name: sigma,
+      kind: range,
+      min: 13,
+      max: 25,
+      step: 1,
+      unit: kg/m^2,
+      label: foil area density
+    }
+derived:
+  - { name: M_ball, expr: "4 / 3 * pi * r^3 * rho", unit: kg }
+  - { name: m_foil, expr: "4 * pi * r^2 * sigma", unit: kg }
+parts:
+  - id: moment-of-inertia
+    prompt: >-
+      Calculate the moment of inertia of this sphere about an axis passing through its center.
+      {_0}{_u}
+    answer: 2 / 5 * M_ball * r^2 + 2 / 3 * m_foil * r^2
+    unit: kg m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { rho: 805, r: 0.225, sigma: 19 }
+  parts:
+    - { id: moment-of-inertia, answer: 1.1857, unit: kg m^2, source: P96 }

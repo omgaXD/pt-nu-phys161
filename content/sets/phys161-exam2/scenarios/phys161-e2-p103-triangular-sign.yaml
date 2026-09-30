@@ -1,0 +1,56 @@
+# P103/P104 — a thin uniform right-triangle plate (legs L and h, mass m) rotating about its leg
+# of length h. A strip at distance x from the axis has mass ∝ (1 − x/L), which gives
+# I = m L² / 6; at f rev/s, ω = 2π f and K = ½ I ω².
+# The base canonical values are P104's; P103 overrides them with its own numbers.
+id: phys161-e2-p103-triangular-sign
+title: Triangular dealership sign
+source: { document: PHYS161_Exam2, labels: [ P103, P104 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, plate, rotational-energy, multi-part ]
+narrative: >-
+  A metal sign for a car dealership is a thin, uniform right triangle with base length of {L:unit}
+  and height of {h:unit}. The sign has a mass of {m:unit}.
+vars:
+  - {
+      name: L,
+      kind: range,
+      min: 3.0,
+      max: 5.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: base length
+    }
+  - { name: h, kind: range, min: 1.2, max: 2.4, step: 0.1, decimals: 1, unit: m, label: height }
+  - { name: m, kind: range, min: 2, max: 6, step: 1, unit: kg, label: mass }
+  - { name: f, kind: range, min: 1.5, max: 3.0, step: 0.1, decimals: 1, label: rev/s }
+derived:
+  - { name: I, expr: "m * L^2 / 6", unit: kg m^2 }
+parts:
+  - id: moment-of-inertia
+    prompt: >-
+      What is the moment of inertia of the sign for rotation about the side of {h:unit} in length.
+      {_0}{_u}
+    answer: I
+    unit: kg m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: kinetic-energy
+    prompt: >-
+      What is the kinetic energy of the sign when it is rotating about an axis along the {h:unit}
+      side at {f} rev/s? {_0}{_u}
+    answer: 1 / 2 * I * (2 * pi * f)^2
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 4.4, h: 1.8, m: 4, f: 2.2 }
+  parts:
+    - {
+        id: moment-of-inertia,
+        answer: 7.22,
+        unit: kg m^2,
+        source: P103,
+        vars: { L: 3.8, h: 1.7, m: 3 }
+      }
+    - { id: kinetic-energy, answer: 1233.07, unit: J, source: P104 }

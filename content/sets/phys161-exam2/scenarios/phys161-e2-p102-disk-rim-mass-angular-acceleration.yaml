@@ -1,0 +1,32 @@
+# P102 — a uniform disk (mass M, radius r) pivoted at its center carries a point mass m glued to
+# its rim, released from rest with m on a horizontal radius. Gravity on m gives the torque m g r;
+# I = ½ M r² + m r², so α = m g r / I at the instant of release.
+id: phys161-e2-p102-disk-rim-mass-angular-acceleration
+title: Disk with a glued rim mass — angular acceleration
+source: { document: PHYS161_Exam2, labels: [ P102 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, torque, angular-acceleration ]
+narrative: >-
+  A uniform, solid disk with mass {M:unit} and radius {r:unit} is pivoted about a horizontal axis
+  through its center. A small object of mass {m:unit} is glued to the rim of the disk. The disk is
+  released from rest with the small object at the end of a horizontal radius.
+vars:
+  - { name: M, kind: range, min: 95, max: 175, step: 5, unit: kg, label: disk mass }
+  - { name: m, kind: range, min: 115, max: 215, step: 5, unit: kg, label: object mass }
+  - { name: r, kind: range, min: 3.5, max: 6.5, step: 0.1, decimals: 1, unit: m, label: radius }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: I, expr: "M * r^2 / 2 + m * r^2", unit: kg m^2 }
+parts:
+  - id: angular-acceleration
+    prompt: >-
+      Find the magnitude of the angular acceleration of the disk at the instant it is released. The
+      gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: m * g * r / I
+    unit: rad/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { M: 135, m: 165, r: 4.9, g: 9.8 }
+  parts:
+    - { id: angular-acceleration, answer: 1.41935, unit: rad/s^2, source: P102 }

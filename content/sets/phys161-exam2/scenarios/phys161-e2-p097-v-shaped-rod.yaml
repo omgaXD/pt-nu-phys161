@@ -1,0 +1,28 @@
+# P97 — a uniform rod (mass m, length L in cm) bent at its center into a V. Each half is a rod of
+# mass m/2 and length L/2 pivoted at its end, so I = 2 · ⅓ (m/2)(L/2)² = m L² / 12 about the
+# vertex; the opening angle does not enter (every element keeps its distance from the vertex).
+id: phys161-e2-p097-v-shaped-rod
+title: Moment of inertia of a V-shaped rod
+source: { document: PHYS161_Exam2, labels: [ P97 ] }
+section: Moment of Inertia
+tags: [ moment-of-inertia, rod, unit-conversion ]
+narrative: >-
+  A thin uniform rod {L:unit} long with mass {m:unit} is bent at its center into a V shape, with a
+  {theta:unit} angle at its vertex.
+vars:
+  - { name: L, kind: range, min: 48, max: 90, step: 1, unit: cm, label: rod length }
+  - { name: m, kind: range, min: 0.3, max: 0.8, step: 0.1, decimals: 1, unit: kg, label: mass }
+  - { name: theta, kind: range, min: 40, max: 110, step: 5, unit: "°", label: vertex angle }
+parts:
+  - id: moment-of-inertia
+    prompt: >-
+      Find the moment of inertia of this V-shaped object about an axis perpendicular to the plane of
+      the V at its vertex. {_0}{_u}
+    answer: m * (L / 100)^2 / 12
+    unit: kg m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 68, m: 0.5, theta: 70 }
+  parts:
+    - { id: moment-of-inertia, answer: 0.01927, unit: kg m^2, source: P97 }
