@@ -1,0 +1,29 @@
+# P82 — the man hears the fork directly at f and its echo from the closed end of the hall. The
+# wall receives f v / (v − u) from the approaching source and reflects it back to the approaching
+# man, who hears f (v + u) / (v − u). The beat frequency is B = f (v + u) / (v − u) − f
+# = 2 f u / (v − u), so the walking speed is u = B v / (2 f + B).
+id: phys161-e3-p082-tuning-fork-hall-beats
+title: Walking speed from beats with an echo
+source: { document: PHYS161_Exam3, labels: [ P82 ] }
+section: Sound
+tags: [ sound, doppler-effect, beats, reflection ]
+narrative: >-
+  A man walks down a long hall carrying a tuning fork vibrating at {f:unit}, so that the sound
+  reflects from the closed end of the hall.
+vars:
+  - { name: f, kind: range, min: 350, max: 520, step: 1, unit: Hz, label: fork frequency }
+  - { name: B, kind: range, min: 2, max: 5, step: 1, label: beats per second }
+  - { name: v, kind: range, min: 330, max: 350, step: 1, unit: m/s, label: speed of sound }
+parts:
+  - id: walking-speed
+    prompt: >-
+      If the man hears {B} beats per second, how fast is the man walking? Use the velocity of sound
+      of {v:unit}. {_0}{_u}
+    answer: B * v / (2 * f + B)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { f: 431, B: 3, v: 340 }
+  parts:
+    - { id: walking-speed, answer: 1.179, unit: m/s, source: P82 }

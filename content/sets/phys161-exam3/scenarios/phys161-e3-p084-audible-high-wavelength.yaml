@@ -1,0 +1,26 @@
+# P84 — wavelength λ = v / f. The 20 kHz upper limit of human hearing is a fixed fact, not data,
+# so it is a constant (converted from kHz inside the formula); only the speed of sound in air
+# (which depends on the temperature) varies.
+id: phys161-e3-p084-audible-high-wavelength
+title: Wavelength at the high end of hearing
+source: { document: PHYS161_Exam3, labels: [ P84 ] }
+section: Sound
+tags: [ sound, wavelength, audible-range ]
+narrative: ""
+vars:
+  - { name: v, kind: range, min: 320, max: 350, step: 1, unit: m/s, label: speed of sound }
+derived:
+  - { name: f, expr: "20", unit: kHz } # higher extreme of the audible range
+parts:
+  - id: wavelength
+    prompt: >-
+      Calculate the wavelength of sound at the higher extreme of the audible range {f:unit}, when
+      the speed of sound in air is {v:unit}. {_0}{_u}
+    answer: v / (f * 1000)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { v: 336, f: 20 }
+  parts:
+    - { id: wavelength, answer: 0.0168, unit: m, source: P84 }

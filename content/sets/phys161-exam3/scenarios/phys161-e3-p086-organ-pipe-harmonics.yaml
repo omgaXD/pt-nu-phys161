@@ -1,0 +1,74 @@
+# P86/P87/P88/P89 — two successive harmonics of an organ pipe. A pipe open at both ends has every
+# harmonic n f₁, so successive ones differ by f₁ and f_low / Δf is a whole number (P87: 732 and
+# 915 Hz are the 4th and 5th harmonics of 183 Hz; P89: 582 and 776 Hz the 3rd and 4th of 194 Hz).
+# A pipe closed at one end has only odd harmonics, so successive ones differ by 2 f₁ and
+# f_low / Δf is a half-integer (P86/P88: 555 and 925 Hz are the 3rd and 5th of 185 Hz). The
+# fundamental is Δf (open) or Δf / 2 (closed); in both cases Δf = v / (2L), so L = v / (2 Δf).
+# The printed frequencies are built from the pipe type, the fundamental and the harmonic index,
+# so every draw is a genuine pair of successive harmonics of an open or a closed pipe.
+# The base canonical values are P86's (P88 shares them); P87 and P89 override them.
+id: phys161-e3-p086-organ-pipe-harmonics
+title: Organ pipe from two successive harmonics
+source: { document: PHYS161_Exam3, labels: [ P86, P87, P88, P89 ] }
+section: Sound
+tags: [ sound, standing-waves, organ-pipe, harmonics, multi-part ]
+narrative: >-
+  An organ pipe has two successive harmonics with frequencies {f1:unit} and {f2:unit}.
+vars:
+  # 1 = closed at one end (odd harmonics only), 0 = open at both ends; not printed.
+  - { name: closed, kind: choice, options: [ 0, 1 ], label: pipe closed at one end }
+  # Index of the lower harmonic: the k-th harmonic of an open pipe, or the k-th odd harmonic
+  # (2k − 1) of a closed pipe.
+  - { name: k, kind: range, min: 2, max: 4, step: 1, label: harmonic index }
+  - { name: f0, kind: range, min: 120, max: 250, step: 1, unit: Hz, label: fundamental }
+  - { name: v, kind: range, min: 330, max: 350, step: 1, unit: m/s, label: speed of sound }
+derived:
+  - { name: n1, expr: "closed * (2 * k - 1) + (1 - closed) * k" } # harmonic number of f1
+  - { name: f1, expr: "n1 * f0", unit: Hz }
+  - { name: f2, expr: "(n1 + 1 + closed) * f0", unit: Hz }
+constraints:
+  - "f2 <= 1500" # keeps the printed frequencies in the source's range (below 1.5 kHz)
+parts:
+  - id: fundamental
+    prompt: "What is the fundamental frequency? {_0}{_u}"
+    answer: (f2 - f1) / (1 + closed)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: length
+    prompt: "What is the length of the pipe? Speed of sound in air is {v:unit}. {_0}{_u}"
+    answer: v / (2 * (f2 - f1))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { closed: 1, k: 2, f0: 185, v: 344, f1: 555, f2: 925 }
+  parts:
+    - {
+        id: fundamental,
+        answer: 183,
+        unit: Hz,
+        source: P87,
+        vars: { closed: 0, k: 4, f0: 183, f1: 732, f2: 915 }
+      }
+    - {
+        id: fundamental,
+        answer: 183,
+        unit: Hz,
+        source: P87,
+        vars: { closed: 0, k: 4, f0: 183, f1: 732, f2: 915 }
+      }
+    - {
+        id: length,
+        answer: 0.8866,
+        unit: m,
+        source: P89,
+        vars: { closed: 0, k: 3, f0: 194, f1: 582, f2: 776 }
+      }
+    - {
+        id: length,
+        answer: 0.8866,
+        unit: m,
+        source: P89,
+        vars: { closed: 0, k: 3, f0: 194, f1: 582, f2: 776 }
+      }
