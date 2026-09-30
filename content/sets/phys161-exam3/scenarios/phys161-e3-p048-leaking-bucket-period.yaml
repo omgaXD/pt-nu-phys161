@@ -1,0 +1,73 @@
+# P48/P49 — a bucket of mass mb holding mw of water on a spring k. When the bucket is half full
+# the oscillating mass is M = mb + mw / 2, so T = 2π sqrt(M / k). The water leaks at a steady
+# rate R (g/s), so dT/dt = (dT/dM)(dM/dt) = π R / sqrt(M k) (R converted to kg/s; the result is
+# dimensionless, s per s, and taken in magnitude). The amplitude plays no role.
+# The base canonical values are P48's; P49 overrides them with its own.
+id: phys161-e3-p048-leaking-bucket-period
+title: Period of a leaking bucket on a spring
+source: { document: PHYS161_Exam3, labels: [ P48, P49 ] }
+section: Oscillations
+tags: [ oscillations, spring, period, rate-of-change, multi-part ]
+narrative: >-
+  A {mb}-kg bucket containing {mw:unit} of water is hanging from a vertical ideal spring of force
+  constant {k:unit} and oscillating up and down with an amplitude of {A:unit}. Suddenly the bucket
+  springs a leak in the bottom such that water drops out at a steady rate of {R:unit}.
+vars:
+  - { name: mb, kind: range, min: 1.5, max: 3.0, step: 0.1, unit: kg, label: bucket mass }
+  - {
+      name: mw,
+      kind: range,
+      min: 8.0,
+      max: 12.5,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: initial water mass
+    }
+  - { name: k, kind: range, min: 90, max: 160, step: 1, unit: N/m, label: force constant }
+  - {
+      name: A,
+      kind: range,
+      min: 2.0,
+      max: 4.5,
+      step: 0.1,
+      decimals: 1,
+      unit: cm,
+      label: amplitude
+    }
+  - {
+      name: R,
+      kind: range,
+      min: 1.2,
+      max: 2.8,
+      step: 0.1,
+      decimals: 1,
+      unit: g/s,
+      label: leak rate
+    }
+derived:
+  - { name: M, expr: "mb + mw / 2", unit: kg }
+parts:
+  - id: period
+    prompt: "When the bucket is half full, find the period of oscillation. {_0}{_u}"
+    answer: 2 * pi * sqrt(M / k)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: period-rate
+    prompt: >-
+      When the bucket is half full, find the magnitude of rate at which the period is changing with
+      respect to time. {_0}
+    answer: pi * (R / 1000) / sqrt(M * k)
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { mb: 2, mw: 9.5, k: 120, A: 3.5, R: 1.8 }
+  parts:
+    - { id: period, answer: 1.4902, unit: s, source: P48 }
+    - {
+        id: period-rate,
+        answer: 0.0002216,
+        source: P49,
+        vars: { mb: 2.2, mw: 10.8, k: 128, A: 2.5, R: 2.2 }
+      }

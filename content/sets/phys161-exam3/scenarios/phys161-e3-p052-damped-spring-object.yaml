@@ -1,0 +1,73 @@
+# P52/P55 — weakly damped (underdamped) spring: ω' = sqrt(k/m − (b/2m)²), f' = ω' / 2π.
+# The amplitude decays as e^{−(b/2m) t}, so over one period T' = 2π / ω' it falls by the fraction
+# 1 − e^{−(b/2m) T'}, printed as a percentage. The base canonical values are P52's; P55 overrides
+# them with its own. The constraint keeps the motion underdamped (never binding here).
+id: phys161-e3-p052-damped-spring-object
+title: Damped oscillation of an object on a spring
+source: { document: PHYS161_Exam3, labels: [ P52, P55 ] }
+section: Oscillations
+tags: [ oscillations, damping, spring, frequency, amplitude-decay, multi-part ]
+narrative: >-
+  A {m}-kg object oscillates at the end of a vertical spring that has a spring constant of {k:unit}.
+  The effect of air resistance is represented by the damping coefficient $b = {b:unit}$.
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 9.0,
+      max: 14.0,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: object mass
+    }
+  - {
+      name: k,
+      kind: range,
+      min: 15000,
+      max: 40000,
+      step: 500,
+      sigfigs: 3,
+      unit: N/m,
+      label: spring constant
+    }
+  - {
+      name: b,
+      kind: range,
+      min: 2.0,
+      max: 5.0,
+      step: 0.1,
+      decimals: 1,
+      unit: N s/m,
+      label: damping coefficient
+    }
+derived:
+  - { name: gamma, expr: "b / (2 * m)", unit: s^-1 }
+  - { name: wd, expr: "sqrt(k / m - gamma^2)", unit: rad/s }
+constraints:
+  - "b^2 < 4 * m * k" # underdamped
+parts:
+  - id: damped-frequency
+    prompt: "Calculate the frequency of the damped oscillation. {_0}{_u}"
+    answer: wd / (2 * pi)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: amplitude-decrease
+    prompt: >-
+      By what percentage does the amplitude of the oscillation decrease in each cycle? {_0}{_u}
+    answer: 100 * (1 - exp(-gamma * 2 * pi / wd))
+    unit: "%"
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 10.6, k: 20500, b: 3 }
+  parts:
+    - { id: damped-frequency, answer: 6.998, unit: Hz, source: P52 }
+    - {
+        id: amplitude-decrease,
+        answer: 1.8237,
+        unit: "%",
+        source: P55,
+        vars: { m: 11.8, k: 32000, b: 3.6 }
+      }

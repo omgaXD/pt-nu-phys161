@@ -1,0 +1,48 @@
+# P50 — the wire acts as a spring: at equilibrium k Δx = m g, so ω = sqrt(k / m) = sqrt(g / Δx)
+# and f = sqrt(g / Δx) / (2π). The stretch is given in mm; the wire length and the ball's mass
+# do not affect the answer. The mass stays below 80 kg so "a {m}-kg" never needs "an".
+id: phys161-e3-p050-wire-steel-ball-frequency
+title: Vibration frequency of a ball hanging from a wire
+source: { document: PHYS161_Exam3, labels: [ P50 ] }
+section: Oscillations
+tags: [ oscillations, spring, static-stretch, frequency ]
+narrative: >-
+  A hanging wire is {L:unit} long. When a {m}-kg steel ball is suspended from the wire, the wire
+  stretches by {dx:unit}.
+vars:
+  - {
+      name: L,
+      kind: range,
+      min: 1.2,
+      max: 2.5,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: wire length
+    }
+  - { name: m, kind: range, min: 48, max: 79, step: 1, unit: kg, label: ball mass }
+  - {
+      name: dx,
+      kind: range,
+      min: 1.4,
+      max: 3.0,
+      step: 0.1,
+      decimals: 1,
+      unit: mm,
+      label: stretch of the wire
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: frequency
+    prompt: >-
+      If the ball is pulled down a small additional distance and released, at what frequency will it
+      vibrate? The gravitational acceleration is $g = {g:unit}$. {_0}{_u}
+    answer: sqrt(g / (dx / 1000)) / (2 * pi)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 1.8, m: 64, dx: 2.2, g: 9.8 }
+  parts:
+    - { id: frequency, answer: 10.622, unit: Hz, source: P50 }
