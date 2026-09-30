@@ -1,0 +1,17 @@
+# Production compose file. The deploy workflow (.github/workflows/deploy.yml)
+# copies it to the server as docker-compose.yml, next to a generated .env.
+name: pt-quiz
+
+services:
+  app:
+    image: ${IMAGE:?set IMAGE in .env}
+    restart: unless-stopped
+    networks:
+      - caddy
+    labels:
+      caddy: ${DOMAIN:?set DOMAIN in .env}
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+
+networks:
+  caddy:
+    external: true

@@ -1,0 +1,15 @@
+.git
+.github
+.claude
+**/node_modules
+**/dist
+**/build
+**/.svelte-kit
+**/coverage
+**/*.tsbuildinfo
+**/test-results
+**/playwright-report
+apps/quiz/static/content
+extra
+.env
+.env.*

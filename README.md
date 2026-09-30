@@ -143,6 +143,39 @@ deployed site shows every problem and answer to anyone with the URL.
 UI. Each question's numbers come from `hash(attempt seed, set/label)`, so they do not depend on
 its position in the quiz.
 
+### Deploying the quiz (GitHub Actions)
+
+`.github/workflows/deploy.yml` runs on every push to `main` (and by hand). It runs the CI
+checks, builds the [`Dockerfile`](Dockerfile) (the static build served by Caddy on :8080, see
+[`deploy/Caddyfile`](deploy/Caddyfile)), pushes it to `ghcr.io/<owner>/<repo>` tagged with the
+commit SHA and `latest`, then SSHes into the server, writes `docker-compose.yml` (from
+[`deploy/docker-compose.prod.yml`](deploy/docker-compose.prod.yml)) and `.env` into
+`DEPLOY_DIR`, runs `docker compose up -d`, and fails if the container isn't running 10 seconds
+later. Like the Pages workflow, it makes every problem and answer public on `DOMAIN`.
+
+The container publishes no ports: it joins the external `caddy` network and
+[caddy-docker-proxy](https://github.com/lucaslorentz/caddy-docker-proxy) serves it on `DOMAIN`
+over HTTPS. The server needs Docker with the compose plugin (SSH user in the `docker` group,
+`sudo systemctl enable docker`), caddy-docker-proxy on a network named `caddy`, and a DNS
+record for `DOMAIN`.
+
+In *Settings → Environments → `production`*:
+
+| Name | Kind | |
+| --- | --- | --- |
+| `SSH_PRIVATE_KEY` | secret | a deploy key authorized on the server |
+| `GHCR_PAT` | secret | classic PAT with only `read:packages` (the server pulls the image with it) |
+| `SSH_HOST`, `SSH_USER` | variable | |
+| `SSH_KNOWN_HOSTS` | variable | output of `ssh-keyscan -p <port> <host>` |
+| `DOMAIN` | variable | the quiz's hostname, e.g. `quiz.example.com` |
+| `SSH_PORT` | variable | optional, default `22` |
+| `DEPLOY_DIR` | variable | optional, default `~/pt-quiz`; created if missing |
+| `GHCR_USERNAME` | variable | optional, owner of the PAT; default is the repo owner |
+
+Values must not contain single quotes or newlines. To roll back, re-run an older successful
+*Deploy* run, or set `IMAGE` in the server's `.env` to an older SHA and run
+`docker compose up -d`.
+
 ## Decisions, deviations and additions (relative to PLAN.md)
 
 - **Attempts keep snapshots.** An attempt stores each question's rendered instance (trimmed to
