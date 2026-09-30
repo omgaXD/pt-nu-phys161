@@ -312,6 +312,9 @@ h3 {
   list-style: none;
   font-size: 0.9375rem;
 }
+.pt-theme-moodle .breadcrumb a {
+  text-decoration: underline;
+}
 .breadcrumb li + li::before {
   content: '/';
   margin-right: 0.5rem;
