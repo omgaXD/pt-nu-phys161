@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { InstancePart, ProblemInstance } from '@pt/core';
+  import type { Snippet } from 'svelte';
   import AnswerField from '../answer/AnswerField.svelte';
   import type { AnswerMessages } from '../answer/messages.js';
   import { emptyAnswer, type PartAnswer } from '../answer/types.js';
@@ -21,6 +22,8 @@
     readonly?: boolean;
     messages?: Partial<AnswerMessages>;
     debounce?: number;
+    /** Buttons for the answer (Check, ...): beside the last part's fields when they end its prompt, else after the parts. */
+    controls?: Snippet;
   }
 
   let {
@@ -33,6 +36,7 @@
     readonly = false,
     messages,
     debounce = 300,
+    controls,
   }: Props = $props();
 
   const parts = $derived(part === undefined ? instance.parts : instance.parts.filter((p) => p.partId === part));
@@ -47,6 +51,11 @@
     const m = TRAILING_SLOTS.exec(html);
     return m ? { text: html.slice(0, m.index), answer: m[0] } : { text: html, answer: '' };
   }
+
+  const lastTrailing = $derived.by(() => {
+    const last = parts.at(-1);
+    return last && splitPrompt(last.promptHtml).answer ? last.partId : null;
+  });
 
   function answerOf(partId: string): PartAnswer {
     return answers[partId] ?? emptyAnswer();
@@ -103,10 +112,17 @@
       {/snippet}
       <RichHtml html={prompt.text} slot={slotSnippet} figure={figureSnippet} />
       {#if prompt.answer}
-        <span class="pt-part-answer"><RichHtml html={prompt.answer} slot={slotSnippet} /></span>
+        <span class="pt-part-answer"
+          ><RichHtml html={prompt.answer} slot={slotSnippet} />{#if controls && p.partId === lastTrailing}<span class="pt-answer-controls"
+              >{@render controls()}</span
+            >{/if}</span
+        >
       {/if}
     </div>
   {/each}
+  {#if controls && lastTrailing === null}
+    <div class="pt-answer-controls">{@render controls()}</div>
+  {/if}
 </div>
 
 <style>

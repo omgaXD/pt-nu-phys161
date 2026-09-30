@@ -200,10 +200,13 @@ h3 {
   margin-left: auto;
 }
 .im-controls {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
+}
+/* No answer row to sit beside (fields inside the text): the buttons go below. */
+.pt-problem > .pt-answer-controls {
   margin-top: 0.75rem;
 }
 .tries {

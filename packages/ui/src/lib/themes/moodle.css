@@ -136,10 +136,19 @@
 
 /* ---- Answer field (qtype_formulas "Numeric and unit") ------------------- */
 
-/* Fields that end the prompt sit on their own row, like .formulaspart. */
+/* Fields that end the prompt sit on their own row, like .formulaspart; the answer buttons go beside them. */
 .pt-theme-moodle .pt-part-answer {
-  display: block;
-  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 1rem 0 1.2em;
+}
+.pt-theme-moodle .pt-answer-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
 }
 .pt-theme-moodle .pt-part-answer > :first-child {
   margin-left: 0;
@@ -185,10 +194,24 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+/* The preview is a tooltip under the field while it has focus; it never moves the layout. */
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field) {
+  position: relative;
+}
+.pt-theme-moodle :is(.pt-answer-field .pt-answer-preview, .pt-unit-field .pt-unit-preview) {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  z-index: 1070;
+  display: none;
+  min-height: 0;
+  white-space: nowrap;
+}
+.pt-theme-moodle :is(.pt-answer-field:focus-within .pt-answer-preview, .pt-unit-field:focus-within .pt-unit-preview):not(:empty) {
+  display: block;
+}
 .pt-theme-moodle .pt-answer-field .pt-answer-preview:not(:empty) {
-  align-self: flex-start;
   font-size: 1.1rem;
-  margin-top: 0.25rem;
   padding: 0.15rem 0.5rem;
   background: #eef;
   border: 1px solid #88c;

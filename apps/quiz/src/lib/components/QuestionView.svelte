@@ -45,6 +45,18 @@
   const gradeText = $derived(review ? `Mark ${formatMark(attempt.marks[index] ?? 0)} out of 1.00` : 'Marked out of 1.00');
 </script>
 
+{#snippet controls()}
+  <span class="im-controls">
+    <button type="button" class="btn btn-secondary" onclick={() => oncheck?.()} disabled={blank || checkedNow}>Check</button>
+    {#if attempt.config.allowReveal}
+      <button type="button" class="btn btn-outline-secondary" onclick={() => onreveal?.()}>Show correct answer</button>
+    {/if}
+    {#if tries !== null}
+      <span class="tries">{tries} {tries === 1 ? 'try' : 'tries'} left</span>
+    {/if}
+  </span>
+{/snippet}
+
 {#snippet outcomeBox()}
   {#if outcome?.result}
     <PartFeedback result={outcome.result} />
@@ -74,24 +86,20 @@
     {/snippet}
 
     {#if snapshot}
-      <ProblemBody instance={snapshot.instance} answers={{ [partId]: answer }} onanswer={(_, a) => onanswer?.(a)} disabled={locked} {resolveSrc} />
+      <ProblemBody
+        instance={snapshot.instance}
+        answers={{ [partId]: answer }}
+        onanswer={(_, a) => onanswer?.(a)}
+        disabled={locked}
+        {resolveSrc}
+        controls={immediate && !review && !locked ? controls : undefined}
+      />
       {#each references as r (r.src)}
         <details class="reference-link">
           <summary>Reference sheet: {r.section}</summary>
           <div class="reference-figure"><img src={resolveSrc(r.src)} alt={r.alt} /></div>
         </details>
       {/each}
-      {#if immediate && !review && !locked}
-        <div class="im-controls">
-          <button type="button" class="btn btn-secondary" onclick={() => oncheck?.()} disabled={blank || checkedNow}>Check</button>
-          {#if attempt.config.allowReveal}
-            <button type="button" class="btn btn-outline-secondary" onclick={() => onreveal?.()}>Show correct answer</button>
-          {/if}
-          {#if tries !== null}
-            <span class="tries">{tries} {tries === 1 ? 'try' : 'tries'} left</span>
-          {/if}
-        </div>
-      {/if}
     {:else}
       <p>This question is no longer available: its problem was removed from the content.</p>
     {/if}
