@@ -17,6 +17,8 @@
     id?: string;
     disabled?: boolean;
     placeholder?: string;
+    /** Hover hint; defaults to qtype_formulas' wording ("Numeric and unit"). */
+    title?: string;
     messages?: Partial<AnswerMessages>;
     onchange?: (value: string) => void;
   }
@@ -33,6 +35,7 @@
     id = `pt-answer-${uid}`,
     disabled = false,
     placeholder,
+    title,
     messages,
     onchange,
   }: Props = $props();
@@ -50,6 +53,9 @@
     return () => clearTimeout(t);
   });
 
+  const TYPE_TITLE: Record<AnswerType, string> = { number: 'Number', numeric: 'Numeric', numericalFormula: 'Numerical formula' };
+  const hint = $derived(title ?? `${TYPE_TITLE[answerType]}${withUnit ? ' and unit' : ''}`);
+
   const invalid = $derived(result !== null && !result.ok);
   const errorId = $derived(`${id}-error`);
   const previewId = $derived(`${id}-preview`);
@@ -60,7 +66,7 @@
   }
 </script>
 
-<span class="pt-answer-field" class:invalid class:combined={withUnit}>
+<span class="pt-answer-field" class:invalid class:combined={withUnit} data-tooltip={hint}>
   <input
     {id}
     type="text"
@@ -70,7 +76,8 @@
     aria-label={label}
     aria-invalid={invalid}
     aria-describedby={invalid ? errorId : result?.ok ? previewId : undefined}
-    placeholder={placeholder ?? (withUnit ? 'value unit' : '')}
+    title={hint}
+    {placeholder}
     {value}
     {disabled}
     {oninput}

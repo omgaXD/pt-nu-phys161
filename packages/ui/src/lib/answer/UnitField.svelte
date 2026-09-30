@@ -40,7 +40,7 @@
   const invalid = $derived(result !== null && !result.ok);
 </script>
 
-<span class="pt-unit-field" class:invalid>
+<span class="pt-unit-field" class:invalid data-tooltip="Unit">
   <input
     {id}
     type="text"
@@ -48,7 +48,7 @@
     spellcheck="false"
     aria-label={label}
     aria-invalid={invalid}
-    placeholder="unit"
+    title="Unit"
     {value}
     {disabled}
     oninput={(e) => {
