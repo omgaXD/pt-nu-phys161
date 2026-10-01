@@ -7,7 +7,6 @@
   import quizIcon from '$lib/assets/quiz-monologo.svg';
   import QuestionView from '$lib/components/QuestionView.svelte';
   import QuizNav from '$lib/components/QuizNav.svelte';
-  import StateBlock from '$lib/components/StateBlock.svelte';
   import TimeLeft from '$lib/components/TimeLeft.svelte';
   import { presetName } from '$lib/labels';
 
@@ -90,7 +89,6 @@
       <QuizNav attempt={a} current={i} onSelect={go} setTitle={(id) => app.setTitle(id)}>
         <a href={resolve('/attempt/summary/')}>Finish attempt ...</a>
       </QuizNav>
-      <StateBlock />
     {/snippet}
   </Page>
 {/if}

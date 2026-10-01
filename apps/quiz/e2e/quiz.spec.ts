@@ -343,7 +343,9 @@ test('export and import move the attempt and progress to another browser', async
   await expect(card(page).locator('.state')).toHaveText('Correct');
   await nav(page).getByRole('button', { name: /^3,/ }).click();
   await answerField(page).fill('12');
-  const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export state' }).click()]);
+  // App-wide actions are leaves of the course index (left drawer).
+  const exportLink = page.locator('.drawer-left .courseindex').getByRole('button', { name: 'Export state' });
+  const [download] = await Promise.all([page.waitForEvent('download'), exportLink.click()]);
   expect(download.suggestedFilename()).toMatch(/^pt-quiz-state-\d{4}-\d\d-\d\d-\d{4}\.json$/);
   const file = await download.path();
 
@@ -351,6 +353,7 @@ test('export and import move the attempt and progress to another browser', async
   const other = await context.newPage();
   other.on('pageerror', (e) => errors.push(String(e)));
   await open(other, '');
+  await expect(other.locator('.drawer-right')).toHaveCount(0); // the start page has no block drawer
   const corpusRow = other.locator('.set-row').filter({ hasText: 'Reference corpus' });
   await expect(corpusRow).toContainText('0 solved');
   await other.locator('input[type=file]').setInputFiles(file);
@@ -363,6 +366,7 @@ test('export and import move the attempt and progress to another browser', async
   await expect(dialog.getByLabel('Finished attempts')).toBeDisabled();
   await expect(dialog.getByLabel('Start-page settings')).toBeChecked();
   await dialog.getByRole('button', { name: 'Import' }).click();
+  await expect(other.getByRole('alert')).toHaveText('The saved state was imported.');
 
   await expect(other).toHaveURL(/\/pt\/attempt\/$/);
   await expect(card(other).locator('.qno')).toHaveText('3');
@@ -377,8 +381,11 @@ test('export and import move the attempt and progress to another browser', async
 test('importing a file that is not a saved state shows why', async ({ page }) => {
   await open(page, '');
   await page.locator('input[type=file]').setInputFiles({ name: 'notes.json', mimeType: 'application/json', buffer: Buffer.from('{"hello":1}') });
-  await expect(page.getByRole('alert')).toHaveText('This is not a saved quiz state.');
+  const toast = page.getByRole('alert');
+  await expect(toast).toHaveText('This is not a saved quiz state.');
   await expect(page.getByRole('dialog')).toHaveCount(0);
+  await toast.getByRole('button', { name: 'Dismiss this notification' }).click();
+  await expect(toast).toHaveCount(0);
 });
 
 test('figures load (assets under the base path)', async ({ page, request }) => {

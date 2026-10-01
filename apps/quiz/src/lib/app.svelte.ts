@@ -264,10 +264,9 @@ export class QuizApp {
 
   /**
    * Take the chosen parts of a saved-state file. An imported attempt replaces
-   * the one in progress; `resumed` says whether there is one to continue, and
-   * `skipped` why the file's attempt was left out.
+   * the one in progress; `resumed` says whether there is one to continue.
    */
-  importState(file: QuizStateFile, choices: ImportChoices): { resumed: boolean; skipped: string | null } {
+  importState(file: QuizStateFile, choices: ImportChoices): { resumed: boolean } {
     clearTimeout(this.saveTimer);
     if (choices.progress && file.mastery) {
       const incoming = file.mastery;
@@ -286,18 +285,15 @@ export class QuizApp {
       const prefs = file.prefs;
       this.persist(() => this.storage.savePrefs(prefs));
     }
-    if (!choices.attempt || !file.attempt) return { resumed: false, skipped: null };
     // Already finished here (an older export of it): the finished one wins.
-    if (this.history.some((h) => h.id === file.attempt?.id)) {
-      return { resumed: false, skipped: 'The quiz in the file was already finished in this browser, so it was not imported.' };
-    }
+    if (!choices.attempt || !file.attempt || this.history.some((h) => h.id === file.attempt?.id)) return { resumed: false };
     if (this.attempt && this.attempt.id !== file.attempt.id) this.storage.abandonCurrent();
     this.attempt = resumeAttempt(file.attempt, file.exportedAt, Date.now());
     this.notice = null;
     this.save();
     this.dispatch({ type: 'tick', now: Date.now() });
     if (this.attempt && !isFinished(this.attempt)) this.ensureSnapshot(this.attempt.page);
-    return { resumed: true, skipped: null };
+    return { resumed: true };
   }
 
   /** Submit when the deadline passes, even if the timer is not on screen. */

@@ -30,7 +30,6 @@
   import type { DifficultyLevel } from '@pt/core';
   import { DEFAULT_DIFFICULTY_NAMES } from '@pt/ui';
   import { app } from '$lib/app.svelte';
-  import StateBlock from '$lib/components/StateBlock.svelte';
   import { describeConfig, formatDate, formatMark, PRESET_INFO, presetName } from '$lib/labels';
 
   const index = app.index;
@@ -158,7 +157,7 @@
 
 <svelte:head><title>Start a quiz · Physics Quiz</title></svelte:head>
 
-<Page narrow>
+<Page narrow onimported={(c) => c.prefs && (config = savedConfig())}>
   <ol class="breadcrumb"><li>Home</li></ol>
   <div class="page-header">
     <img class="activity-icon" src={quizIcon} alt="" />
@@ -452,7 +451,4 @@
       <button type="button" class="btn btn-secondary btn-sm" onclick={() => confirm('Forget which problems you have solved?') && app.resetMastery()}>Reset solved problems</button>
     {/if}
   </div>
-  {#snippet blocks()}
-    <StateBlock onimported={(c) => c.prefs && (config = savedConfig())} />
-  {/snippet}
 </Page>

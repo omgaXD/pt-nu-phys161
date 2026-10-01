@@ -191,7 +191,6 @@ h3 {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.175);
   border-radius: 0.375rem;
-  margin-bottom: 1rem;
 }
 .drawer-toggles {
   display: none;
@@ -290,21 +289,65 @@ h3 {
   }
 }
 @media (max-width: 767.98px) {
-  /* Phones: no course index; the blocks follow the page content. */
+  /* Phones: the blocks, then the course index, follow the page content (without drawer headers). */
   #page.drawers {
     padding: 0 1rem;
   }
-  .drawer-left {
-    display: none;
-  }
-  .drawer-right {
-    order: 1;
+  .drawer {
     margin: 0 -1rem;
     border-top: 1px solid #dee2e6;
   }
-  .drawer-right .drawerheader {
+  .drawer-right {
+    order: 1;
+  }
+  .drawer-left {
+    order: 2;
+  }
+  .drawer .drawerheader {
     display: none;
   }
+}
+
+/* ---- Course index (left drawer) ---------------------------------------------------- */
+/* Its leaves as in the saved page: li.courseindex-item.d-flex > span.completioninfo +
+   .courseindex-link.text-truncate, in --bs-secondary-color, black on hover. Here the links
+   are buttons for app-wide actions. */
+.unlist,
+.unlist li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.courseindex .courseindex-item {
+  display: flex;
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+}
+.courseindex .courseindex-item .completioninfo {
+  min-width: 24px;
+}
+.courseindex .courseindex-item .courseindex-link {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: rgba(33, 37, 41, 0.75);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.courseindex .courseindex-item:is(:hover, :focus-within) .courseindex-link {
+  color: #000;
+  cursor: pointer;
+}
+.courseindex .courseindex-item .courseindex-link:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
 /* Bootstrap tooltips on the drawer buttons: instant, black, beside or below the button. */
@@ -755,10 +798,7 @@ dialog h2 {
   margin-top: 0;
 }
 
-/* ---- Saved state block and import dialog ----------------------------------------- */
-.block .alert {
-  margin: 0.75rem 0 0;
-}
+/* ---- Import dialog ----------------------------------------------------------------- */
 .import-choices {
   margin: 0 0 1rem;
   padding: 0;
@@ -781,4 +821,95 @@ dialog .merge + .counts {
 }
 dialog .merge + .counts {
   margin-bottom: 1rem;
+}
+
+/* ---- Toasts --------------------------------------------------------------------------- */
+/* Moodle's .toast-wrapper.mx-auto.py-0.fixed-top and Bootstrap 5 .toast, resolved from the
+   saved page: --bs-toast-* variables, the NU .toast-{type} colours, body text #1a1a1a and a
+   Font Awesome solid circle icon (circle-check, -xmark, -info, -exclamation) before the text. */
+.toast-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1051;
+  max-width: 350px;
+  max-height: 0;
+  margin: 0 auto;
+}
+.toast-wrapper > :first-child {
+  margin-top: 1rem;
+}
+.toast {
+  width: 350px;
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: 0.875rem;
+  pointer-events: auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.toast-body {
+  display: flex;
+  padding: 0.75rem;
+  overflow-wrap: break-word;
+  color: #1a1a1a;
+}
+.toast-body::before {
+  content: '';
+  flex: none;
+  width: 1em;
+  height: 1em;
+  margin: 2px 5px 0 0;
+  background: currentColor;
+  -webkit-mask: var(--toast-icon) center / contain no-repeat;
+  mask: var(--toast-icon) center / contain no-repeat;
+}
+.toast.toast-success {
+  background-color: rgb(209 231 221 / 0.95);
+  color: #0f5132;
+  --toast-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM6.7 11.6 3.5 8.4l1.2-1.2 2 2 4.6-4.6 1.2 1.2z'/%3E%3C/svg%3E");
+}
+.toast.toast-danger {
+  background-color: rgb(248 215 218 / 0.95);
+  color: #842029;
+  --toast-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM5.3 4.1 8 6.8l2.7-2.7 1.2 1.2L9.2 8l2.7 2.7-1.2 1.2L8 9.2l-2.7 2.7-1.2-1.2L6.8 8 4.1 5.3z'/%3E%3C/svg%3E");
+}
+.toast.toast-info {
+  background-color: rgb(207 244 252 / 0.95);
+  color: #087990;
+  --toast-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM7 3.5h2v2H7zm.1 3.3h1.8v5.7H7.1z'/%3E%3C/svg%3E");
+}
+.toast.toast-warning {
+  background-color: rgb(255 243 205 / 0.95);
+  color: #997404;
+  --toast-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM7.1 3.5h1.8V9H7.1zM7 10.6h2v2H7z'/%3E%3C/svg%3E");
+}
+/* Bootstrap 5 .btn-close (.ms-auto), its colour inherited in a toast. */
+.toast .btn-close {
+  box-sizing: content-box;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  margin-left: auto;
+  padding: 0.25em;
+  border: 0;
+  border-radius: 0.375rem;
+  background: transparent
+    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e")
+    center / 1em auto no-repeat;
+  color: inherit;
+  opacity: 0.5;
+  cursor: pointer;
+}
+.toast .btn-close:hover {
+  opacity: 0.75;
+}
+.toast .btn-close:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  opacity: 1;
 }

@@ -5,6 +5,7 @@
   import { tick } from 'svelte';
   import { app, type ImportChoices } from '$lib/app.svelte';
   import { formatDuration, presetName } from '$lib/labels';
+  import { toasts } from '$lib/toasts.svelte';
 
   interface Props {
     /** After an import that did not resume an attempt (the start page reloads its options). */
@@ -16,8 +17,6 @@
   let input = $state<HTMLInputElement>();
   let dialog = $state<HTMLDialogElement>();
   let file = $state.raw<QuizStateFile | null>(null);
-  let error = $state<string | null>(null);
-  let status = $state<{ kind: 'success' | 'warning'; text: string } | null>(null);
   let choices = $state<ImportChoices>({ progress: false, attempt: false, history: false, prefs: false, merge: true });
 
   const pad = (n: number): string => String(n).padStart(2, '0');
@@ -41,15 +40,13 @@
     const f = e.currentTarget.files?.[0];
     e.currentTarget.value = ''; // choosing the same file again still fires `change`
     if (!f) return;
-    error = null;
-    status = null;
     const parsed = parseStateFile(await f.text());
     if (!parsed.ok) {
-      error = parsed.message;
+      toasts.add(parsed.message, 'danger', { closeButton: true });
       return;
     }
     file = parsed.file;
-    choices = { progress: !!file.mastery, attempt: !!file.attempt, history: !!file.history, prefs: file.prefs !== undefined, merge: true };
+    choices = { progress: !!file.mastery, attempt: attemptImportable, history: !!file.history, prefs: file.prefs !== undefined, merge: true };
     await tick(); // render the choices first, so the dialog focuses the first one
     dialog?.showModal();
   }
@@ -57,16 +54,17 @@
   function apply(): void {
     if (!file) return;
     const taken = { ...choices };
-    const { resumed, skipped } = app.importState(file, taken);
+    const { resumed } = app.importState(file, taken);
     dialog?.close();
     file = null;
-    if (resumed) {
-      void goto(resolve('/attempt/'));
-      return;
-    }
-    status = skipped ? { kind: 'warning', text: skipped } : { kind: 'success', text: 'The saved state was imported.' };
-    onimported?.(taken);
+    toasts.add('The saved state was imported.');
+    if (resumed) void goto(resolve('/attempt/'));
+    else onimported?.(taken);
   }
+
+  /** The file's quiz was finished in this browser since (an older export of it): it stays finished. */
+  const finishedHere = $derived(!!file?.attempt && app.history.some((h) => h.id === file?.attempt?.id));
+  const attemptImportable = $derived(!!file?.attempt && !finishedHere);
 
   const progress = $derived.by(() => {
     const m = Object.values(file?.mastery ?? {});
@@ -96,16 +94,21 @@
   const contentChanged = $derived(!!file?.contentVersion && !!app.index && file.contentVersion !== app.index.version);
 </script>
 
-<section class="block state-block" aria-labelledby="state-block-title">
-  <h2 id="state-block-title">Saved state</h2>
-  <div class="actions">
-    <button type="button" class="btn btn-secondary" onclick={exportState}>Export state</button>
-    <button type="button" class="btn btn-secondary" onclick={() => input?.click()}>Import state</button>
-  </div>
-  <input bind:this={input} type="file" accept=".json,application/json" hidden aria-label="Saved state file" onchange={pick} />
-  {#if error}<div class="alert alert-danger" role="alert">{error}</div>{/if}
-  {#if status}<div class="alert alert-{status.kind}" role="status">{status.text}</div>{/if}
-</section>
+<!-- Leaves of Moodle's course index (li.courseindex-item > .completioninfo + a.courseindex-link),
+     holding app-wide actions instead of course links. -->
+<nav class="courseindex" aria-label="Saved state">
+  <ul class="courseindex-sectioncontent unlist">
+    <li class="courseindex-item d-flex">
+      <span class="completioninfo"></span>
+      <button type="button" class="courseindex-link text-truncate" onclick={exportState}>Export state</button>
+    </li>
+    <li class="courseindex-item d-flex">
+      <span class="completioninfo"></span>
+      <button type="button" class="courseindex-link text-truncate" onclick={() => input?.click()}>Import state</button>
+    </li>
+  </ul>
+</nav>
+<input bind:this={input} type="file" accept=".json,application/json" hidden aria-label="Saved state file" onchange={pick} />
 
 <dialog bind:this={dialog} aria-labelledby="import-title" onclose={() => (file = null)}>
   {#if file}
@@ -117,12 +120,14 @@
         <span class="counts">{file.mastery ? progress : 'Not in this file.'}</span>
       </li>
       <li>
-        <label><input type="checkbox" bind:checked={choices.attempt} disabled={!file.attempt} /> Current quiz</label>
+        <label><input type="checkbox" bind:checked={choices.attempt} disabled={!attemptImportable} /> Current quiz</label>
         <span class="counts">
-          {#if file.attempt}
-            {attempt}.{#if app.attempt}<br /><strong>Replaces the attempt in progress in this browser.</strong>{/if}
-          {:else}
+          {#if !file.attempt}
             Not in this file.
+          {:else}
+            {attempt}.
+            {#if finishedHere}<br />Already finished in this browser, so it stays finished.
+            {:else if app.attempt}<br /><strong>Replaces the attempt in progress in this browser.</strong>{/if}
           {/if}
         </span>
       </li>

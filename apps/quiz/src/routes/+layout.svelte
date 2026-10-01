@@ -5,6 +5,7 @@
   import { onMount, type Snippet } from 'svelte';
   import { resolve } from '$app/paths';
   import { app } from '$lib/app.svelte';
+  import Toasts from '$lib/components/Toasts.svelte';
 
   let { children }: { children: Snippet } = $props();
 
@@ -25,6 +26,8 @@
 <svelte:head>
   <title>Physics Quiz</title>
 </svelte:head>
+
+<Toasts />
 
 <nav class="navbar" aria-label="Site">
   <a class="brand" href={resolve('/')}>Physics Quiz</a>

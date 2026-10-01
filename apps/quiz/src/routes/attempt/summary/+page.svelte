@@ -5,7 +5,6 @@
   import { app } from '$lib/app.svelte';
   import Page from '$lib/components/Page.svelte';
   import QuizNav from '$lib/components/QuizNav.svelte';
-  import StateBlock from '$lib/components/StateBlock.svelte';
   import TimeLeft from '$lib/components/TimeLeft.svelte';
   import { presetName, STATE_TEXT } from '$lib/labels';
 
@@ -94,7 +93,6 @@
     </dialog>
     {#snippet blocks()}
       <QuizNav attempt={a} onSelect={open} setTitle={(id) => app.setTitle(id)} />
-      <StateBlock />
     {/snippet}
   </Page>
 {/if}

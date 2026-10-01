@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import type { ImportChoices } from '$lib/app.svelte';
   import { drawers } from '$lib/drawers.svelte';
+  import StateActions from './StateActions.svelte';
 
   interface Props {
     children: Snippet;
@@ -8,9 +10,11 @@
     blocks?: Snippet;
     /** Keep the main column at reading width (start page, forms). */
     narrow?: boolean;
+    /** After importing a saved state without resuming an attempt. */
+    onimported?: (choices: ImportChoices) => void;
   }
 
-  let { children, blocks, narrow = false }: Props = $props();
+  let { children, blocks, narrow = false, onimported }: Props = $props();
 
   // The course index's "⋮" menu. In Moodle it holds expand/collapse actions; here it hides an easter egg.
   let menuOpen = $state(false);
@@ -27,7 +31,7 @@
 />
 
 
-<!-- Moodle Boost's #page.drawers: a course-index drawer on the left (empty here, for the look),
+<!-- Moodle Boost's #page.drawers: the course-index drawer on the left (app-wide actions here),
      the block drawer on the right, each closable and reopened from a toggle at the edge. -->
 <div id="page" class="drawers" class:show-drawer-left={drawers.left} class:show-drawer-right={blocks && drawers.right} class:narrow>
   <div class="drawer drawer-left" class:show={drawers.left} aria-label="Course index" role="region">
@@ -46,6 +50,7 @@
         {/if}
       </div>
     </div>
+    <div class="drawercontent"><StateActions {onimported} /></div>
   </div>
 
   {#if blocks}
