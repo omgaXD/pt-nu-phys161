@@ -4,6 +4,7 @@
   import { encodeConfig, summarizeAttempt } from '@pt/quiz';
   import { app } from '$lib/app.svelte';
   import Page from '$lib/components/Page.svelte';
+  import quizIcon from '$lib/assets/quiz-monologo.svg';
   import QuestionView from '$lib/components/QuestionView.svelte';
   import QuizNav from '$lib/components/QuizNav.svelte';
   import { formatDate, formatDuration, formatMark, presetName } from '$lib/labels';
@@ -45,7 +46,7 @@
       <li>Review</li>
     </ol>
     <div class="page-header">
-      <span class="activity-icon" aria-hidden="true">?</span>
+      <img class="activity-icon" src={quizIcon} alt="" />
       <h1>{presetName(a.preset)}</h1>
     </div>
     {#if app.notice}

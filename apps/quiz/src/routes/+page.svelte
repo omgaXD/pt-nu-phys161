@@ -1,5 +1,6 @@
 <script lang="ts">
   import Page from '$lib/components/Page.svelte';
+  import quizIcon from '$lib/assets/quiz-monologo.svg';
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
   import { page } from '$app/state';
@@ -129,7 +130,7 @@
 <Page narrow>
   <ol class="breadcrumb"><li>Home</li></ol>
   <div class="page-header">
-    <span class="activity-icon" aria-hidden="true">?</span>
+    <img class="activity-icon" src={quizIcon} alt="" />
     <h1>Start a quiz</h1>
   </div>
 
