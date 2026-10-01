@@ -18,7 +18,7 @@ h2,
 h3 {
   font-weight: 700;
   line-height: 1.2;
-  color: #1d2125;
+  color: #212529;
 }
 h1 {
   font-size: 1.875rem;
@@ -109,7 +109,7 @@ h3 {
   border: 0;
   border-radius: 0.375rem;
   background: none;
-  color: #1d2125;
+  color: #212529;
 }
 .drawertoggle,
 .drawer-menu {
@@ -250,7 +250,7 @@ h3 {
     border: 0;
     border-radius: 200px;
     background: #dee2e6;
-    color: #1d2125;
+    color: #212529;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     transition: padding 200ms;
   }
@@ -336,7 +336,7 @@ h3 {
 .block .section-name {
   margin: 0.75rem 0 0.35rem;
   font-size: 0.8rem;
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
 }
 .block .othernav {
   margin-top: 1rem;
@@ -358,7 +358,7 @@ h3 {
 .breadcrumb li + li::before {
   content: '/';
   margin-right: 0.5rem;
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
 }
 .page-header {
   display: flex;
@@ -384,7 +384,7 @@ h3 {
 }
 .loading {
   padding: 2rem;
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
 }
 
 /* ---- Timer ------------------------------------------------------------------ */
@@ -408,7 +408,7 @@ h3 {
   padding: 0 0.25rem;
   border-radius: 3px;
   background: color-mix(in srgb, #dc3545 calc(var(--pt-urgency, 0) * 100%), #fef9f9);
-  color: color-mix(in srgb, #fff calc(var(--pt-urgency, 0) * 100%), #1d2125);
+  color: color-mix(in srgb, #fff calc(var(--pt-urgency, 0) * 100%), #212529);
 }
 
 /* ---- Question page ----------------------------------------------------------- */
@@ -433,12 +433,12 @@ h3 {
 }
 .tries {
   font-size: 0.875rem;
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
 }
 .que .info .source {
   margin-top: 0.7em;
   font-size: 0.75em;
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
   word-break: break-word;
 }
 .que .info .pt-flag-toggle {
@@ -522,7 +522,7 @@ h3 {
   color: #0a3622;
 }
 .muted {
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
 }
 
 /* ---- Start page ------------------------------------------------------------------ */
@@ -558,7 +558,7 @@ h3 {
 }
 .preset span {
   font-size: 0.85rem;
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
 }
 .custom-chip {
   display: inline-block;
@@ -596,7 +596,7 @@ details + .set-row {
 }
 .counts {
   font-size: 0.85rem;
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
 }
 .sections {
   margin: 0.25rem 0 0.5rem 1.6rem;
@@ -635,7 +635,7 @@ details + .set-row {
 }
 .options .hint {
   font-size: 0.8rem;
-  color: #6a737b;
+  color: rgba(33, 37, 41, 0.75);
 }
 @media (max-width: 575.98px) {
   .options {
@@ -653,7 +653,7 @@ input[type='number'].form-control {
   border: 1px solid #8f959e;
   border-radius: 0.4rem;
   background: #fff;
-  color: #1d2125;
+  color: #212529;
 }
 .start-summary {
   margin: 1rem 0;
