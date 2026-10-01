@@ -6,9 +6,14 @@
     /** Included in the selection. */
     on: boolean;
     solved: boolean;
-    /** Why an option below leaves it out anyway (it cannot be toggled then). */
-    blockedBy?: string;
+    /** An option below leaves it out anyway (it cannot be toggled then). */
+    blockedBy?: 'fixed' | 'solved';
   }
+
+  const BLOCKED = {
+    fixed: 'Left out while "Include problems not randomized yet" is off',
+    solved: 'Solved, so left out while "Skip problems I have solved" is on',
+  } as const;
 </script>
 
 <script lang="ts">
@@ -27,8 +32,11 @@
   const shownProblem = $derived(problems.find((p) => p.q.key === shown));
 
   const name = (q: CatalogQuestion): string => (q.title ? `${q.label} · ${q.title}` : q.label);
-  const stateText = (p: PickerProblem): string =>
-    `${p.blockedBy ? `left out: ${p.blockedBy}` : p.on ? 'included' : 'left out'}${p.solved ? ', solved' : ''}`;
+  function stateText(p: PickerProblem): string {
+    if (p.blockedBy === 'solved') return BLOCKED.solved;
+    const state = p.blockedBy ? BLOCKED[p.blockedBy] : p.on ? 'Included' : 'Left out';
+    return p.solved ? `${state} · solved` : state;
+  }
 </script>
 
 <div class="problem-picker" {id}>
@@ -55,7 +63,12 @@
     {/each}
   </div>
   <p class="hint" aria-hidden="true">
-    {#if shownProblem}{name(shownProblem.q)} — {stateText(shownProblem)}{:else}Select a number to leave that problem out or bring it back.{/if}
+    {#if shownProblem}
+      {name(shownProblem.q)}<br />
+      {#if shownProblem.blockedBy}<strong class="blocked">{stateText(shownProblem)}</strong>{:else}{stateText(shownProblem)}{/if}
+    {:else}
+      Select a number to leave that problem out or bring it back.
+    {/if}
   </p>
 </div>
 
@@ -64,16 +77,15 @@
     font: inherit;
     cursor: pointer;
   }
-  /* Two lines kept free, so the rows below do not jump as the text changes. */
+  /* The problem, then its state on a line of its own; two lines kept free so the text below barely moves. */
   .hint {
-    display: -webkit-box;
     min-height: 2lh;
     margin: 0.35rem 0 0;
-    overflow: hidden;
     font-size: 0.8rem;
     color: rgba(33, 37, 41, 0.75);
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+  }
+  /* An option is hiding it: Bootstrap's warning text (--bs-warning-text-emphasis), bold. */
+  .blocked {
+    color: #664d03;
   }
 </style>

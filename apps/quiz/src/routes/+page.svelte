@@ -109,12 +109,7 @@
       .filter((q) => sectionSlug(q.section) === sectionId)
       .map((q) => {
         const solved = app.mastery[q.key]?.solved ?? false;
-        const blockedBy =
-          !config.includeFixed && q.kind === 'fixed'
-            ? 'not randomized yet'
-            : config.skipSolved && solved
-              ? 'already solved'
-              : undefined;
+        const blockedBy = config.skipSolved && solved ? 'solved' : !config.includeFixed && q.kind === 'fixed' ? 'fixed' : undefined;
         return { q, on: isProblemOn(config, q), solved, ...(blockedBy && { blockedBy }) };
       });
   }
