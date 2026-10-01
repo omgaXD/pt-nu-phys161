@@ -157,6 +157,9 @@
 
 .pt-theme-moodle .pt-answer-field input {
   width: 200px;
+}
+/* Answer and unit fields are both Bootstrap .form-control inputs in qtype_formulas. */
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field) input {
   min-width: 0;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -170,13 +173,13 @@
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
 }
-.pt-theme-moodle .pt-answer-field input:focus {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field) input:focus {
   border-color: #86b7fe;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 /* Bootstrap's .is-invalid: red frame and icon, and no message, as in Moodle. */
-.pt-theme-moodle .pt-answer-field.invalid input {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field).invalid input {
   padding-right: calc(1.5em + 0.75rem);
   border-color: #dc3545;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
@@ -185,10 +188,10 @@
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
   box-shadow: none;
 }
-.pt-theme-moodle .pt-answer-field.invalid input:focus {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field).invalid input:focus {
   box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
-.pt-theme-moodle .pt-answer-field .pt-answer-error {
+.pt-theme-moodle :is(.pt-answer-field .pt-answer-error, .pt-unit-field .pt-unit-error) {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -220,7 +223,7 @@
   border-radius: 3px;
   color: #212529;
 }
-.pt-theme-moodle .pt-answer-field input:disabled {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field) input:disabled {
   background: #e9ecef;
 }
 
