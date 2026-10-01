@@ -20,12 +20,20 @@
     solvedCount,
   } from '@pt/quiz';
   import { app } from '$lib/app.svelte';
+  import StateBlock from '$lib/components/StateBlock.svelte';
   import { describeConfig, formatDate, formatMark, PRESET_INFO, presetName } from '$lib/labels';
 
   const index = app.index;
   const allSets = (index?.sets ?? []).map((s) => s.id);
 
-  /** URL (share link) first, then the last configuration used, then Ordered over the first set. */
+  /** The last configuration used, else Ordered over the first set. */
+  function savedConfig(): QuizConfig {
+    const saved = QuizConfigSchema.safeParse(app.prefs().config);
+    const base = saved.success ? { ...saved.data, sets: saved.data.sets.filter((s) => allSets.includes(s)) } : defaultConfig(allSets.slice(0, 1));
+    return base.sets.length ? base : { ...base, sets: allSets.slice(0, 1) };
+  }
+
+  /** URL (share link) first, then the last configuration used. */
   function initialConfig(): { config: QuizConfig; linkIssue: string | null } {
     const decoded = decodeConfig(page.url.searchParams);
     if (decoded?.ok) {
@@ -36,10 +44,7 @@
         linkIssue: stale ? 'The content changed since this link was made, so the questions may differ.' : null,
       };
     }
-    const saved = QuizConfigSchema.safeParse(app.prefs().config);
-    const base = saved.success ? { ...saved.data, sets: saved.data.sets.filter((s) => allSets.includes(s)) } : defaultConfig(allSets.slice(0, 1));
-    const config = base.sets.length ? base : { ...base, sets: allSets.slice(0, 1) };
-    return { config, linkIssue: decoded && !decoded.ok ? `This link could not be read (${decoded.issues.join('; ')}).` : null };
+    return { config: savedConfig(), linkIssue: decoded && !decoded.ok ? `This link could not be read (${decoded.issues.join('; ')}).` : null };
   }
 
   const init = initialConfig();
@@ -362,4 +367,7 @@
       <button type="button" class="btn btn-secondary btn-sm" onclick={() => confirm('Forget which problems you have solved?') && app.resetMastery()}>Reset solved problems</button>
     {/if}
   </div>
+  {#snippet blocks()}
+    <StateBlock onimported={(c) => c.prefs && (config = savedConfig())} />
+  {/snippet}
 </Page>

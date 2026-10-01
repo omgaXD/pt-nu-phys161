@@ -7,6 +7,7 @@
   import quizIcon from '$lib/assets/quiz-monologo.svg';
   import QuestionView from '$lib/components/QuestionView.svelte';
   import QuizNav from '$lib/components/QuizNav.svelte';
+  import StateBlock from '$lib/components/StateBlock.svelte';
   import { formatDate, formatDuration, formatMark, presetName } from '$lib/labels';
 
   const PER_PAGE = 20;
@@ -103,6 +104,7 @@
     </div>
     {#snippet blocks()}
       <QuizNav attempt={a} onSelect={show} setTitle={(sid) => app.setTitle(sid)} />
+      <StateBlock />
     {/snippet}
   </Page>
 {/if}

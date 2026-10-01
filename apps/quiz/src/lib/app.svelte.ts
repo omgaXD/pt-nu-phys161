@@ -11,16 +11,21 @@ import {
   type BundleSet,
   BundleSetSchema,
   type CatalogSet,
+  createStateFile,
   type HistoryEntry,
   isFinished,
   isLocked,
   type Mastery,
   materialize,
   memoryStorage,
+  mergeHistory,
+  mergeMastery,
   type QuestionSnapshot,
   type QuizConfig,
+  type QuizStateFile,
   QuizStorage,
   reduceAttempt,
+  resumeAttempt,
   snapshotAtStart,
   type StorageLike,
   startAttempt,
@@ -50,6 +55,16 @@ async function fetchJson(path: string): Promise<unknown> {
 
 export interface Prefs {
   config?: QuizConfig;
+}
+
+/** What to take from a saved-state file. */
+export interface ImportChoices {
+  progress: boolean;
+  attempt: boolean;
+  history: boolean;
+  prefs: boolean;
+  /** Combine progress and finished attempts with this browser's instead of replacing them. */
+  merge: boolean;
 }
 
 /**
@@ -232,6 +247,57 @@ export class QuizApp {
   resetMastery(): void {
     this.storage.clearMastery();
     this.mastery = {};
+  }
+
+  /** Everything this browser keeps, as a saved-state file. */
+  exportState(): QuizStateFile {
+    this.save();
+    return createStateFile({
+      now: Date.now(),
+      contentVersion: this.index?.version ?? null,
+      mastery: this.mastery,
+      attempt: this.attempt,
+      history: this.storage.exportHistory(),
+      prefs: this.storage.prefs(),
+    });
+  }
+
+  /**
+   * Take the chosen parts of a saved-state file. An imported attempt replaces
+   * the one in progress; `resumed` says whether there is one to continue, and
+   * `skipped` why the file's attempt was left out.
+   */
+  importState(file: QuizStateFile, choices: ImportChoices): { resumed: boolean; skipped: string | null } {
+    clearTimeout(this.saveTimer);
+    if (choices.progress && file.mastery) {
+      const incoming = file.mastery;
+      this.mastery = choices.merge ? mergeMastery(this.mastery, incoming) : incoming;
+      this.persist(() => this.storage.saveMastery(this.mastery));
+    }
+    if (choices.history && file.history) {
+      const { entries, attempts } = file.history;
+      // Finished in the file but still in progress here: the finished one wins.
+      if (this.attempt && entries.some((h) => h.id === this.attempt?.id)) this.abandon();
+      this.persist(() => this.storage.importHistory(choices.merge ? mergeHistory(this.storage.history(), entries) : entries, attempts));
+      this.history = this.storage.history();
+      this.lastFinished = null;
+    }
+    if (choices.prefs && file.prefs !== undefined) {
+      const prefs = file.prefs;
+      this.persist(() => this.storage.savePrefs(prefs));
+    }
+    if (!choices.attempt || !file.attempt) return { resumed: false, skipped: null };
+    // Already finished here (an older export of it): the finished one wins.
+    if (this.history.some((h) => h.id === file.attempt?.id)) {
+      return { resumed: false, skipped: 'The quiz in the file was already finished in this browser, so it was not imported.' };
+    }
+    if (this.attempt && this.attempt.id !== file.attempt.id) this.storage.abandonCurrent();
+    this.attempt = resumeAttempt(file.attempt, file.exportedAt, Date.now());
+    this.notice = null;
+    this.save();
+    this.dispatch({ type: 'tick', now: Date.now() });
+    if (this.attempt && !isFinished(this.attempt)) this.ensureSnapshot(this.attempt.page);
+    return { resumed: true, skipped: null };
   }
 
   /** Submit when the deadline passes, even if the timer is not on screen. */

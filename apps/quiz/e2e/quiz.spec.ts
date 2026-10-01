@@ -17,7 +17,7 @@ async function startFrom(page: Page, query: string): Promise<void> {
 }
 
 const card = (page: Page) => page.locator('.que');
-const nav = (page: Page) => page.locator('section.block');
+const nav = (page: Page) => page.locator('section.block[aria-labelledby="quiz-nav-title"]');
 const answerField = (page: Page) => card(page).getByRole('textbox');
 
 async function submitAll(page: Page): Promise<void> {
@@ -216,6 +216,51 @@ test('solved problems are counted and can be skipped', async ({ page }) => {
   await expect(page.locator('.set-row').filter({ hasText: 'Reference corpus' })).toContainText('1 solved');
   await page.getByLabel('Skip problems I have solved').check();
   await expect(page.getByTestId('summary')).toContainText('27 questions');
+});
+
+test('export and import move the attempt and progress to another browser', async ({ page, browser }) => {
+  await startFrom(page, '?p=ordered&sets=corpus&values=source');
+  await answerField(page).fill('191.88 J');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(card(page).locator('.state')).toHaveText('Correct');
+  await nav(page).getByRole('button', { name: /^3,/ }).click();
+  await answerField(page).fill('12');
+  const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export state' }).click()]);
+  expect(download.suggestedFilename()).toMatch(/^pt-quiz-state-\d{4}-\d\d-\d\d-\d{4}\.json$/);
+  const file = await download.path();
+
+  const context = await browser.newContext();
+  const other = await context.newPage();
+  other.on('pageerror', (e) => errors.push(String(e)));
+  await open(other, '');
+  const corpusRow = other.locator('.set-row').filter({ hasText: 'Reference corpus' });
+  await expect(corpusRow).toContainText('0 solved');
+  await other.locator('input[type=file]').setInputFiles(file);
+  const dialog = other.getByRole('dialog');
+  await expect(dialog.getByRole('heading', { name: 'Import saved state' })).toBeVisible();
+  await expect(dialog.getByLabel('Problem progress')).toBeChecked();
+  await expect(dialog).toContainText('1 problem solved, 1 tried');
+  await expect(dialog.getByLabel('Current quiz')).toBeChecked();
+  await expect(dialog).toContainText('on question 3 of 28, 2 answered');
+  await expect(dialog.getByLabel('Finished attempts')).toBeDisabled();
+  await expect(dialog.getByLabel('Start-page settings')).toBeChecked();
+  await dialog.getByRole('button', { name: 'Import' }).click();
+
+  await expect(other).toHaveURL(/\/pt\/attempt\/$/);
+  await expect(card(other).locator('.qno')).toHaveText('3');
+  await expect(answerField(other)).toHaveValue('12');
+  await expect(nav(other).getByRole('button', { name: /^1, correct/ })).toBeVisible();
+  await other.getByRole('link', { name: 'Back' }).click();
+  await expect(corpusRow).toContainText('1 solved');
+  await expect(other.getByTestId('resume')).toContainText('2 of 28 answered');
+  await context.close();
+});
+
+test('importing a file that is not a saved state shows why', async ({ page }) => {
+  await open(page, '');
+  await page.locator('input[type=file]').setInputFiles({ name: 'notes.json', mimeType: 'application/json', buffer: Buffer.from('{"hello":1}') });
+  await expect(page.getByRole('alert')).toHaveText('This is not a saved quiz state.');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
 test('figures load (assets under the base path)', async ({ page, request }) => {

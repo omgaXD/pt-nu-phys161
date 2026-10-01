@@ -184,6 +184,41 @@ export class QuizStorage {
     this.storage.removeItem(this.key('history'));
   }
 
+  /** The history and every finished attempt still kept in full (for a saved-state file). */
+  exportHistory(): { entries: HistoryEntry[]; attempts: Attempt[] } {
+    const entries = this.history();
+    const attempts = entries.flatMap((h) => {
+      const a = h.full ? this.loadAttempt(h.id) : null;
+      return a ? [a] : [];
+    });
+    return { entries, attempts };
+  }
+
+  /**
+   * Replace the history with `entries` (newest first). An entry keeps its full
+   * data when `attempts` has it or it is already stored here; past `keepFull`,
+   * only the summary is kept, as in `archive`.
+   */
+  importHistory(entries: readonly HistoryEntry[], attempts: readonly Attempt[]): void {
+    const given = new Map(attempts.filter((a) => a.finishedAt !== null).map((a) => [a.id, a]));
+    const storedFull = new Set(this.history().flatMap((h) => (h.full ? [h.id] : [])));
+    let full = 0;
+    const next = entries.map((h): HistoryEntry => {
+      const has = given.has(h.id) || storedFull.has(h.id);
+      return { ...h, full: has && ++full <= this.keepFull };
+    });
+    const keep = new Set(next.flatMap((h) => (h.full ? [h.id] : [])));
+    for (const id of storedFull) if (!keep.has(id) || given.has(id)) this.removeFull(id);
+    this.updateHistory(() => next);
+    // Newest first: if space runs out, writing evicts the oldest full attempts.
+    for (const h of next) {
+      const a = given.get(h.id);
+      if (!a || !this.history().find((x) => x.id === h.id)?.full) continue;
+      this.saveAttempt(a);
+      if (!this.history().find((x) => x.id === h.id)?.full) this.removeFull(h.id);
+    }
+  }
+
   mastery(): Mastery {
     return this.read<Mastery>('mastery') ?? {};
   }
