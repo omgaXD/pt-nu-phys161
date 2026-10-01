@@ -183,8 +183,8 @@ h3 {
 .drawer-right .block {
   padding: 1rem;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  border-radius: 0.375rem;
 }
 .drawer-toggles {
   display: none;
@@ -329,9 +329,11 @@ h3 {
   right: calc(100% + 0.4rem);
   transform: translateY(-50%);
 }
+/* The block title is an .h5.card-title; the content follows with .mt-3. */
 .block h2 {
   margin: 0 0 1rem;
-  font-size: 1.171875rem;
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 .block .section-name {
   margin: 0.75rem 0 0.35rem;
@@ -339,8 +341,7 @@ h3 {
   color: rgba(33, 37, 41, 0.75);
 }
 .block .othernav {
-  margin-top: 1rem;
-  font-size: 0.9375rem;
+  margin: 0.5em 0;
 }
 
 .breadcrumb {
