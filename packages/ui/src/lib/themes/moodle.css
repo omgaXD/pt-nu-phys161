@@ -385,7 +385,7 @@
   display: inline-block;
   padding: 0.375rem 0.75rem;
   font: inherit;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5;
   text-align: center;
   text-decoration: none;
@@ -393,7 +393,7 @@
   cursor: pointer;
   user-select: none;
   border: 1px solid transparent;
-  border-radius: 0.5rem;
+  border-radius: 0.375rem;
   transition:
     color 0.15s ease-in-out,
     background-color 0.15s ease-in-out,
@@ -428,17 +428,19 @@
   border-color: #565e64;
 }
 .pt-theme-moodle .btn-outline-secondary {
-  color: #212529;
+  color: #6c757d;
   background: transparent;
-  border-color: #8f959e;
+  border-color: #6c757d;
 }
 .pt-theme-moodle .btn-outline-secondary:hover {
-  background: #e9ecef;
+  color: #fff;
+  background: #6c757d;
 }
 .pt-theme-moodle .btn-sm {
   padding: 0.25rem 0.5rem;
-  font-size: 0.8203125rem;
-  border-radius: 0.4rem;
+  font-size: 0.875rem;
+  /* Moodle overrides Bootstrap's --bs-border-radius-sm here. */
+  border-radius: 0.375rem;
 }
 
 /* ---- Links ---------------------------------------------------------------- */
