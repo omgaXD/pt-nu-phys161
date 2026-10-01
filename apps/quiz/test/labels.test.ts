@@ -12,6 +12,8 @@ describe('labels', () => {
       '7 questions · in order · randomized values · difficulty 2–4 (+ unrated) · 40 min · feedback at the end',
     );
     expect(describeConfig({ ...defaultConfig(['a']), difficulty: { min: 1, max: 5, unrated: false } }, 3)).not.toMatch(/difficulty/);
+    expect(describeConfig({ ...defaultConfig(['a']), order: 'easy-first' }, 3)).toMatch(/^3 questions · easy to hard ·/);
+    expect(describeConfig({ ...defaultConfig(['a']), order: 'hard-first' }, 3)).toMatch(/^3 questions · hard to easy ·/);
   });
 
   it('maps question states to navigation colours', () => {

@@ -75,7 +75,11 @@ export function drawQuestions(
   return { questions: picked, shortfall: config.count - picked.length };
 }
 
-/** Source order (set order, then problem number) or a seeded shuffle. */
+/**
+ * Source order (set order, then problem number), a seeded shuffle, or by
+ * difficulty, easiest or hardest first: the seeded shuffle, stably sorted by
+ * level, so each level stays shuffled. Unrated problems come last either way.
+ */
 export function orderQuestions(
   questions: readonly CatalogQuestion[],
   config: Pick<QuizConfig, 'order'>,
@@ -83,6 +87,11 @@ export function orderQuestions(
   setOrder: readonly string[],
 ): CatalogQuestion[] {
   if (config.order === 'shuffled') return shuffle(questions, streamRng(seed, 'order'));
+  if (config.order === 'easy-first' || config.order === 'hard-first') {
+    const easyFirst = config.order === 'easy-first';
+    const level = (q: CatalogQuestion): number => (q.difficulty === undefined ? 6 : easyFirst ? q.difficulty : 6 - q.difficulty);
+    return shuffle(questions, streamRng(seed, 'order')).sort((a, b) => level(a) - level(b));
+  }
   const rank = (q: CatalogQuestion): number => {
     const i = setOrder.indexOf(q.setId);
     return i < 0 ? setOrder.length : i;

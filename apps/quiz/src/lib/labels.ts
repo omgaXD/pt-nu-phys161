@@ -56,12 +56,19 @@ export function formatMark(x: number): string {
   return x.toFixed(2);
 }
 
+const ORDER_TEXT: Record<QuizConfig['order'], string> = {
+  source: 'in order',
+  shuffled: 'shuffled',
+  'easy-first': 'easy to hard',
+  'hard-first': 'hard to easy',
+};
+
 /** One line describing a configuration: "7 questions · 40 min · feedback at the end". */
 export function describeConfig(c: QuizConfig, questions: number): string {
   const d = difficultyFilter(c.difficulty);
   return [
     `${questions} question${questions === 1 ? '' : 's'}`,
-    c.order === 'shuffled' ? 'shuffled' : 'in order',
+    ORDER_TEXT[c.order],
     c.values === 'source' ? 'source values' : 'randomized values',
     ...(d ? [`difficulty ${d.min === d.max ? d.min : `${d.min}–${d.max}`}${d.unrated ? ' (+ unrated)' : ''}`] : []),
     c.timeLimitMinutes !== null ? `${c.timeLimitMinutes} min` : 'no time limit',

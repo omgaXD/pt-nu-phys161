@@ -78,7 +78,7 @@ describe('share links', () => {
         skipSolved: pick([true, false]),
         count: pick(['all', 1, 7, 25] as const),
         draw: pick(['uniform', 'sections', 'sets'] as const),
-        order: pick(['source', 'shuffled'] as const),
+        order: pick(['source', 'shuffled', 'easy-first', 'hard-first'] as const),
         feedback: pick(['immediate', 'deferred'] as const),
         maxTries: pick([null, 1, 3]),
         allowReveal: pick([true, false]),

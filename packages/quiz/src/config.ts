@@ -40,8 +40,8 @@ export const QuizConfigSchema = z.strictObject({
   count: z.union([z.literal('all'), z.number().int().min(1).max(1000)]),
   /** How a sample is spread: evenly over problems, sections or sets. */
   draw: z.enum(['uniform', 'sections', 'sets']),
-  /** Source order (set, then problem number) or shuffled. */
-  order: z.enum(['source', 'shuffled']),
+  /** Source order (set, then problem number), shuffled, or by difficulty (shuffled within each level). */
+  order: z.enum(['source', 'shuffled', 'easy-first', 'hard-first']),
   /** `immediate`: a Check button per question; `deferred`: feedback only after finishing. */
   feedback: z.enum(['immediate', 'deferred']),
   /** Immediate feedback only: checks allowed per question; null = unlimited. */

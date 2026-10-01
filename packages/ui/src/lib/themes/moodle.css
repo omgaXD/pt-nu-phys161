@@ -220,13 +220,14 @@
 
 /*
  * qtype_formulas' instant Bootstrap tooltip above the field ("Numeric and unit"),
- * also used for the difficulty dots' level name.
+ * also used for the difficulty dots' level name and, as .pt-tooltip, for any
+ * element that explains itself on hover.
  */
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip] {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty, .pt-tooltip)[data-tooltip] {
   position: relative;
 }
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip]::before,
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip]::after {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty, .pt-tooltip)[data-tooltip]::before,
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty, .pt-tooltip)[data-tooltip]::after {
   position: absolute;
   left: 50%;
   z-index: 1080;
@@ -234,7 +235,7 @@
   pointer-events: none;
   opacity: 0.9;
 }
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip]::before {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty, .pt-tooltip)[data-tooltip]::before {
   content: attr(data-tooltip);
   bottom: calc(100% + 0.4rem);
   transform: translateX(-50%);
@@ -249,7 +250,7 @@
   text-align: center;
   white-space: nowrap;
 }
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip]::after {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty, .pt-tooltip)[data-tooltip]::after {
   content: '';
   bottom: 100%;
   transform: translateX(-50%);
@@ -263,6 +264,15 @@
 }
 .pt-theme-moodle .pt-difficulty[data-tooltip]:hover::before,
 .pt-theme-moodle .pt-difficulty[data-tooltip]:hover::after {
+  display: block;
+}
+/* Longer text wraps at Bootstrap's 200px; keyboard focus inside shows it too. */
+.pt-theme-moodle .pt-tooltip[data-tooltip]::before {
+  width: max-content;
+  white-space: normal;
+}
+.pt-theme-moodle .pt-tooltip[data-tooltip]:is(:hover, :has(:focus-visible))::before,
+.pt-theme-moodle .pt-tooltip[data-tooltip]:is(:hover, :has(:focus-visible))::after {
   display: block;
 }
 

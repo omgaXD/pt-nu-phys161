@@ -78,6 +78,7 @@
   }
 
   const LEVELS: DifficultyLevel[] = [1, 2, 3, 4, 5];
+  const BY_DIFFICULTY_HINT = 'Shuffled within each difficulty level. Problems without a difficulty come last.';
   const range = $derived(config.difficulty ?? { min: 1 as DifficultyLevel, max: 5 as DifficultyLevel, unrated: false });
 
   /** Set the difficulty range; the full range is stored as no filter. A bound crossing the other moves it along. */
@@ -304,6 +305,13 @@
       <div class="choices" role="radiogroup" aria-labelledby="opt-order">
         <label><input type="radio" name="order" checked={config.order === 'source'} onchange={() => (config = { ...config, order: 'source' })} /> As in the source</label>
         <label><input type="radio" name="order" checked={config.order === 'shuffled'} onchange={() => (config = { ...config, order: 'shuffled' })} /> Shuffled</label>
+        <label class="pt-tooltip" data-tooltip={BY_DIFFICULTY_HINT}>
+          <input type="radio" name="order" aria-describedby="order-difficulty-hint" checked={config.order === 'easy-first'} onchange={() => (config = { ...config, order: 'easy-first' })} /> Easy to hard
+        </label>
+        <label class="pt-tooltip" data-tooltip={BY_DIFFICULTY_HINT}>
+          <input type="radio" name="order" aria-describedby="order-difficulty-hint" checked={config.order === 'hard-first'} onchange={() => (config = { ...config, order: 'hard-first' })} /> Hard to easy
+        </label>
+        <span id="order-difficulty-hint" class="pt-sr-only">{BY_DIFFICULTY_HINT}</span>
       </div>
 
       <span class="label" id="opt-values">Numbers</span>

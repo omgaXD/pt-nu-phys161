@@ -312,6 +312,30 @@ test('an exam never shows difficulty before it is finished; the review does', as
   await expect(page.locator('.que .pt-difficulty')).toHaveCount(7);
 });
 
+test('difficulty orders: easy to hard or hard to easy, explained by a tooltip', async ({ page }) => {
+  await open(page, '?p=ordered&sets=corpus');
+  const easy = page.locator('label.pt-tooltip').filter({ hasText: 'Easy to hard' });
+  await expect(easy).toHaveAttribute('data-tooltip', 'Shuffled within each difficulty level. Problems without a difficulty come last.');
+  await expect(page.getByRole('radio', { name: 'Easy to hard' })).toHaveAccessibleDescription(/Shuffled within each difficulty level/);
+  const tooltipShown = (): Promise<boolean> => easy.evaluate((el) => getComputedStyle(el, '::before').display === 'block');
+  expect(await tooltipShown()).toBe(false);
+  await easy.hover();
+  expect(await tooltipShown()).toBe(true);
+  await page.getByRole('radio', { name: 'Easy to hard' }).check();
+  await expect(page.getByTestId('summary')).toContainText('28 questions · easy to hard');
+  await expect(page.getByTestId('preset-state')).toContainText('Custom');
+
+  // The review shows the levels: they never go down (or up).
+  for (const [order, sorted] of [['easy-first', (a: number, b: number) => a - b], ['hard-first', (a: number, b: number) => b - a]] as const) {
+    await startFrom(page, `?p=exam&sets=corpus&seed=42&order=${order}`);
+    await submitAll(page);
+    const levels = (await page.locator('.que .pt-difficulty').evaluateAll((els) => els.map((e) => Number(e.getAttribute('data-level')))));
+    expect(levels).toHaveLength(7);
+    expect(levels).toEqual([...levels].sort(sorted));
+    expect(new Set(levels).size).toBeGreaterThan(1);
+  }
+});
+
 test('export and import move the attempt and progress to another browser', async ({ page, browser }) => {
   await startFrom(page, '?p=ordered&sets=corpus&values=source');
   await answerField(page).fill('191.88 J');

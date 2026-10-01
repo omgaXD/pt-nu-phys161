@@ -102,6 +102,23 @@ describe('order', () => {
     expect([...one].sort()).toEqual(qs.map((q) => q.key).sort());
   });
 
+  it('difficulty orders group by level, shuffled within each level, unrated last', () => {
+    // 40 problems: levels 1..5 in turn, every eighth one unrated.
+    const qs = syntheticSet('d', ['Work', 'Power'], 20, { difficulty: (n) => (n % 8 === 0 ? undefined : ((n % 5) + 1) as 1 | 2 | 3 | 4 | 5) }).questions;
+    const levels = (order: 'easy-first' | 'hard-first', seed: number): (number | undefined)[] =>
+      orderQuestions(qs, { order }, seed, ['d']).map((q) => q.difficulty);
+    const rated = qs.flatMap((q) => (q.difficulty === undefined ? [] : [q.difficulty]));
+    const unrated = qs.length - rated.length;
+    expect(levels('easy-first', 1)).toEqual([...[...rated].sort((a, b) => a - b), ...Array<undefined>(unrated).fill(undefined)]);
+    expect(levels('hard-first', 1)).toEqual([...[...rated].sort((a, b) => b - a), ...Array<undefined>(unrated).fill(undefined)]);
+    // Within a level: seeded, and not source order.
+    const keys = (seed: number): string[] => orderQuestions(qs, { order: 'easy-first' }, seed, ['d']).map((q) => q.key);
+    expect(keys(3)).toEqual(keys(3));
+    expect(keys(3)).not.toEqual(keys(4));
+    const level1 = (seed: number): number[] => orderQuestions(qs, { order: 'easy-first' }, seed, ['d']).filter((q) => q.difficulty === 1).map((q) => q.number);
+    expect([level1(3), level1(4)].some((ns) => ns.join() !== [...ns].sort((a, b) => a - b).join())).toBe(true);
+  });
+
   it('an exam lists its draw in topic order; the draw does not depend on the order stream', () => {
     const c = exam({ seed: 8 });
     const src = selectQuestions(CATALOG, c, 8);

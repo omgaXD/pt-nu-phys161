@@ -126,7 +126,8 @@ deployed site shows every problem and answer to anyone with the URL.
 - **Start page:** one configuration model (sets, sections, single problems picked on number
   tiles like the quiz navigation's, randomized or source numbers,
   include not-yet-randomized problems, skip solved ones, a difficulty range, all or a sample of
-  N spread uniformly / across sections / across sets, source or shuffled order, immediate or
+  N spread uniformly / across sections / across sets, source, shuffled, easy-to-hard or
+  hard-to-easy order (shuffled within each level, unrated problems last), immediate or
   deferred feedback, tries, a "Show correct answer" button, a time limit, a seed) with three
   presets that set it in one click — **Ordered** (every problem in order, Check after each),
   **Exam** (7 problems from different sections, 40 minutes, marks at the end) and **Chaotic**
