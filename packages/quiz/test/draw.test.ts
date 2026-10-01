@@ -19,6 +19,18 @@ describe('pool', () => {
     expect(buildPool(CATALOG, { ...defaultConfig(['a']), skipSolved: true }, mastery).map((q) => q.key)).not.toContain('a/P1');
     expect(buildPool(CATALOG, defaultConfig(['a']), mastery).map((q) => q.key)).toContain('a/P1');
   });
+
+  it('filters by difficulty range, leaving unrated problems out unless asked', () => {
+    // P1..P10: difficulty 1..5 twice, except every fifth problem, which is unrated.
+    const rated = syntheticSet('r', ['Work', 'Power'], 5, { difficulty: (n) => (n % 5 === 0 ? undefined : ((((n - 1) % 5) + 1) as 1 | 2 | 3 | 4)) });
+    const keys = (difficulty: QuizConfig['difficulty']): string[] =>
+      buildPool([rated], { ...defaultConfig(['r']), ...(difficulty && { difficulty }) }).map((q) => q.label);
+    expect(keys(undefined)).toHaveLength(10);
+    expect(keys({ min: 1, max: 5, unrated: false })).toHaveLength(10); // the full range is no filter
+    expect(keys({ min: 2, max: 3, unrated: false })).toEqual(['P2', 'P3', 'P7', 'P8']);
+    expect(keys({ min: 2, max: 3, unrated: true })).toEqual(['P2', 'P3', 'P5', 'P7', 'P8', 'P10']);
+    expect(keys({ min: 4, max: 4, unrated: false })).toEqual(['P4', 'P9']);
+  });
 });
 
 describe('draw', () => {

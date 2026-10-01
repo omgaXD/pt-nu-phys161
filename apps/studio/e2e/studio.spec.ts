@@ -186,7 +186,7 @@ test('the /dev gallery renders every component against the corpus (M10)', async 
     'AnswerField',
     'UnitField',
     'NumericKeypad',
-    'PartFeedback / GradeBadge / CorrectAnswer',
+    'PartFeedback / GradeBadge / CorrectAnswer / DifficultyDots',
     'QuestionCard',
     'CountdownTimer',
     'NavGrid',
@@ -199,6 +199,7 @@ test('the /dev gallery renders every component against the corpus (M10)', async 
     await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
   }
   await expect(page.locator('.katex').first()).toBeVisible();
+  await expect(page.locator('.pt-difficulty')).toHaveCount(5);
   await expect(page.locator('.pt-canonical-panel header[data-status="pass"]')).toHaveCount(1);
   await expect(page.locator('.pt-canonical-panel header[data-status="fail"]')).toHaveCount(1);
   await expect(page.locator('[data-overlay="angle"]').first()).toHaveText('31°');

@@ -5,6 +5,7 @@
     CanonicalPanel,
     CorrectAnswer,
     CountdownTimer,
+    DifficultyDots,
     Figure,
     FlagToggle,
     FormulaInput,
@@ -92,7 +93,7 @@
 </section>
 
 <section id="result">
-  <h2>PartFeedback / GradeBadge / CorrectAnswer</h2>
+  <h2>PartFeedback / GradeBadge / CorrectAnswer / DifficultyDots</h2>
   <div class="grid">
     <PartFeedback result={gradePart(c1.parts[0]!, c1i.parts[0]!, { combined: '191.88 J' })} />
     <PartFeedback result={gradePart(c1.parts[0]!, c1i.parts[0]!, { value: '191.88' })} />
@@ -100,6 +101,7 @@
   </div>
   <p><GradeBadge fraction={1} /> <GradeBadge fraction={0.5} /> <GradeBadge fraction={0} /></p>
   <p>Correct answer: <CorrectAnswer instance={c1i} part="work" /></p>
+  <p class="difficulties">Difficulty {#each [1, 2, 3, 4, 5] as const as d (d)}<DifficultyDots level={d} />{/each}</p>
 </section>
 
 <section id="shell">
@@ -183,6 +185,11 @@
 </section>
 
 <style>
+  .difficulties {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
   section {
     margin: 2rem 0;
     max-width: 70rem;

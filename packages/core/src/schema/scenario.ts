@@ -100,6 +100,9 @@ export const FigureSchema = z.strictObject({
 
 // ---- Parts -----------------------------------------------------------------
 
+/** How hard a part is, 1 (direct plug-in) to 5 (long chain or inverse problem); rated by its author. */
+export const DifficultySchema = z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)]);
+
 /**
  * What a student may type (§3.2). A future `algebraic` type (symbolic
  * answers compared by numerical sampling) slots in here; grading dispatches on
@@ -138,7 +141,7 @@ export const PartSchema = z.strictObject({
   exactUnit: z.boolean().optional(),
   /** Weight within the scenario, default 1. */
   mark: z.number().positive().optional(),
-  difficulty: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)]).optional(),
+  difficulty: DifficultySchema.optional(),
   tags: z.array(z.string().min(1)).optional(),
   hint: z.string().optional(),
   /** Worked solution markup, shown in review modes. */
@@ -274,6 +277,7 @@ export type DerivedVar = z.infer<typeof DerivedVarSchema>;
 export type Overlay = z.infer<typeof OverlaySchema>;
 export type Figure = z.infer<typeof FigureSchema>;
 export type AnswerType = z.infer<typeof AnswerTypeSchema>;
+export type DifficultyLevel = z.infer<typeof DifficultySchema>;
 export type Tolerance = z.infer<typeof ToleranceSchema>;
 export type Part = z.infer<typeof PartSchema>;
 export type CanonicalPart = z.infer<typeof CanonicalPartSchema>;

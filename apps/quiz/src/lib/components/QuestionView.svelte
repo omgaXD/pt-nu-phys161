@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { FieldContents } from '@pt/core';
   import { type Attempt, isLocked, type QuestionSnapshot, questionState, type SectionReference, triesLeft } from '@pt/quiz';
-  import { CorrectAnswer, FlagToggle, PartFeedback, ProblemBody, QuestionCard } from '@pt/ui';
+  import { CorrectAnswer, DifficultyDots, FlagToggle, PartFeedback, ProblemBody, QuestionCard } from '@pt/ui';
   import { formatMark, STATE_TEXT } from '$lib/labels';
 
   interface Props {
@@ -32,6 +32,10 @@
   const tries = $derived(triesLeft(attempt, index));
   const blank = $derived(answer.value.trim() === '' && answer.unit.trim() === '');
   const flagged = $derived(attempt.flagged[index] ?? false);
+  /** Difficulty stays internal until the question is settled: in review, or locked with immediate feedback (solved, shown, out of tries). */
+  const difficulty = $derived(
+    q.difficulty !== undefined && snapshot && !attempt.unavailable[index] && (review || (immediate && isLocked(attempt, index))) ? q.difficulty : undefined,
+  );
 
   /** What the outcome box shows. */
   const outcome = $derived.by(() => {
@@ -82,6 +86,9 @@
       {/if}
       {#if immediate || review}
         <div class="source">{setTitle} · {q.label}{snapshot?.sourceValues ? ' · source values' : ''}</div>
+      {/if}
+      {#if difficulty !== undefined}
+        <div class="difficulty">Difficulty <DifficultyDots level={difficulty} /></div>
       {/if}
     {/snippet}
 

@@ -34,6 +34,7 @@ const INSTRUCTIONS = [
   'When there is a figure, look at the file under `figures[].src` (relative to the set directory) and describe it in `figure.alt`.',
   'If a random draw could change which physics applies (static vs kinetic friction, a root leaving its bracket), add `constraints`.',
   'Omit `unit` for dimensionless answers; set `integer: true` for counts.',
+  'Set `difficulty` on every part by the reasoning it takes, not the length of the formula: 1 one formula, direct plug-in; 2 one principle plus a conversion or one intermediate step; 3 two principles or a multi-step chain; 4 several principles or a non-obvious setup; 5 a long chain, or an inverse/numerical solution.',
   'Describe the figure in `figure.alt` (required) when there is one.',
   'Return only the scenario document (YAML or JSON). It is accepted when `pt check <file>` passes and `pt fuzz <file>` reports no failures.',
 ];

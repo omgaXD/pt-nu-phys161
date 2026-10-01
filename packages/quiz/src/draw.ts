@@ -1,14 +1,20 @@
 import { type CatalogQuestion, type CatalogSet, sectionSlug } from './bundle.js';
-import type { QuizConfig } from './config.js';
+import { difficultyFilter, type QuizConfig } from './config.js';
 import type { Mastery } from './mastery.js';
 import { shuffle, streamRng } from './random.js';
 
 /**
  * Every question the configuration allows, in source order (the sets in
  * `catalog` order, then problem number): selected sets and sections, fixed
- * problems only if included, solved problems left out if asked.
+ * problems only if included, solved problems left out if asked, and the
+ * difficulty range (unrated problems only if asked).
  */
-export function buildPool(catalog: readonly CatalogSet[], config: Pick<QuizConfig, 'sets' | 'sections' | 'includeFixed' | 'skipSolved'>, mastery: Mastery = {}): CatalogQuestion[] {
+export function buildPool(
+  catalog: readonly CatalogSet[],
+  config: Pick<QuizConfig, 'sets' | 'sections' | 'includeFixed' | 'skipSolved' | 'difficulty'>,
+  mastery: Mastery = {},
+): CatalogQuestion[] {
+  const range = difficultyFilter(config.difficulty);
   const out: CatalogQuestion[] = [];
   for (const set of catalog) {
     if (!config.sets.includes(set.setId)) continue;
@@ -17,6 +23,7 @@ export function buildPool(catalog: readonly CatalogSet[], config: Pick<QuizConfi
       if (sections && sections.length > 0 && !sections.includes(sectionSlug(q.section))) continue;
       if (!config.includeFixed && q.kind === 'fixed') continue;
       if (config.skipSolved && mastery[q.key]?.solved) continue;
+      if (range && (q.difficulty === undefined ? !range.unrated : q.difficulty < range.min || q.difficulty > range.max)) continue;
       out.push(q);
     }
   }

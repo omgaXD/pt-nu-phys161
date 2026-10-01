@@ -1,9 +1,10 @@
-import { type ModeFields, PRESET_IDS, PRESETS, type PresetId, type QuizConfig, QuizConfigSchema } from './config.js';
+import { difficultyFilter, type ModeFields, PRESET_IDS, PRESETS, type PresetId, type QuizConfig, QuizConfigSchema } from './config.js';
 
 /**
  * Share links: a configuration (and seed) as URL parameters. The link names
  * the nearest preset and lists only the fields that differ from it, so
  * `?p=exam&sets=phys161-exam1&seed=42` is a complete, reproducible exam.
+ * A difficulty range is `diff=2-4` (with `unrated=1` to keep unrated problems).
  * `skipSolved` is never encoded: it depends on the viewer's own progress.
  */
 type Codec = { param: string; encode(v: unknown): string; decode(s: string): unknown };
@@ -49,6 +50,11 @@ export function encodeConfig(config: QuizConfig, contentVersion?: string): URLSe
     const sections = config.sections[setId];
     if (sections && sections.length > 0) q.set(`sec.${setId}`, [...sections].sort().join(','));
   }
+  const range = difficultyFilter(config.difficulty);
+  if (range) {
+    q.set('diff', `${range.min}-${range.max}`);
+    if (range.unrated) q.set('unrated', '1');
+  }
   for (const k of differing(config, preset)) q.set(FIELDS[k].param, FIELDS[k].encode(config[k]));
   if (config.seed !== undefined) q.set('seed', String(config.seed));
   if (contentVersion) q.set('cv', contentVersion);
@@ -74,6 +80,12 @@ export function decodeConfig(params: URLSearchParams): DecodedConfig | null {
   for (const k of FIELD_KEYS) {
     const s = params.get(FIELDS[k].param);
     if (s !== null) raw[k] = FIELDS[k].decode(s);
+  }
+  const diff = params.get('diff');
+  if (diff !== null) {
+    const m = /^(\d)-(\d)$/.exec(diff);
+    if (m) raw.difficulty = { min: Number(m[1]), max: Number(m[2]), unrated: params.get('unrated') === '1' };
+    else issues.push(`difficulty: "${diff}" is not a range like 2-4`);
   }
   const seed = params.get('seed');
   if (seed !== null) raw.seed = /^\d+$/.test(seed) ? Number(seed) : seed;

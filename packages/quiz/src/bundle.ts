@@ -1,3 +1,4 @@
+import { DifficultySchema } from '@pt/core';
 import { z } from 'zod';
 
 /**
@@ -34,6 +35,8 @@ export const CatalogQuestionSchema = z.object({
   partId: z.string(),
   /** Variants of one situation share a family; a sampled draw takes one per family. */
   family: z.string(),
+  /** The part's authored difficulty (1–5); absent = unrated (fixed problems, unrated parts). Internal: shown only once a question is settled or reviewed. */
+  difficulty: DifficultySchema.optional(),
 });
 export type CatalogQuestion = z.infer<typeof CatalogQuestionSchema>;
 

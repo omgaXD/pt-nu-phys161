@@ -103,6 +103,7 @@ test('Show correct answer locks the question and earns nothing', async ({ page }
   await expect(card(page).locator('.state')).toHaveText('Correct answer shown');
   await expect(card(page).locator('.rightanswer')).toContainText('191.88');
   await expect(answerField(page)).toBeDisabled();
+  await expect(card(page).locator('.pt-difficulty')).toHaveCount(0); // demo problems are unrated
   await submitAll(page);
   await expect(page.getByTestId('marks')).toHaveText('0.00/7.00');
   await expect(page.getByTestId('review-summary')).toContainText('1 answer shown');
@@ -216,6 +217,86 @@ test('solved problems are counted and can be skipped', async ({ page }) => {
   await expect(page.locator('.set-row').filter({ hasText: 'Reference corpus' })).toContainText('1 solved');
   await page.getByLabel('Skip problems I have solved').check();
   await expect(page.getByTestId('summary')).toContainText('27 questions');
+});
+
+test('difficulty: the start page filters by a range, unrated problems only if asked', async ({ page }) => {
+  // Corpus: 28 rated problems, 5 of them at 4–5; demo: 7 unrated.
+  await open(page, '?p=ordered&sets=corpus,demo');
+  await expect(page.getByTestId('summary')).toContainText('35 questions');
+  await expect(page.getByLabel(/Include problems without a difficulty/)).toHaveCount(0);
+  await page.getByLabel('Lowest difficulty').selectOption('4');
+  await expect(page.getByTestId('summary')).toContainText('5 questions · in order · randomized values · difficulty 4–5 ·');
+  await expect(page.getByTestId('preset-state')).not.toContainText('Custom');
+  await page.getByLabel(/Include problems without a difficulty/).check();
+  await expect(page.getByTestId('summary')).toContainText('12 questions');
+  await expect(page.getByTestId('summary')).toContainText('difficulty 4–5 (+ unrated)');
+  // A bound crossing the other one moves it along.
+  await page.getByLabel('Highest difficulty').selectOption('2');
+  await expect(page.getByLabel('Lowest difficulty')).toHaveValue('2');
+  await page.getByLabel('Lowest difficulty').selectOption('1');
+  await page.getByLabel('Highest difficulty').selectOption('5');
+  await expect(page.getByTestId('summary')).toContainText('35 questions');
+  await expect(page.getByTestId('summary')).not.toContainText('difficulty');
+
+  // A link carries the range.
+  await open(page, '?p=ordered&sets=corpus&diff=2-2');
+  await expect(page.getByLabel('Lowest difficulty')).toHaveValue('2');
+  await expect(page.getByLabel('Highest difficulty')).toHaveValue('2');
+  await expect(page.getByTestId('summary')).toContainText('14 questions');
+});
+
+test('difficulty stays hidden until a question is settled, then shows as dots with a tooltip', async ({ page }) => {
+  await startFrom(page, '?p=ordered&sets=corpus&values=source&tries=2');
+  const dots = card(page).locator('.pt-difficulty');
+  await expect(dots).toHaveCount(0);
+  await answerField(page).fill('100 J');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(card(page).locator('.state')).toHaveText('Incorrect');
+  await expect(dots).toHaveCount(0); // a try is left
+  await answerField(page).fill('191.88 J');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(card(page).locator('.state')).toHaveText('Correct');
+  await expect(dots).toHaveAttribute('aria-label', 'Very easy, 1 of 5');
+  await expect(dots.locator('.dot.on')).toHaveCount(1);
+  await expect(dots).toHaveAttribute('data-tooltip', 'Very easy');
+  const tooltipShown = (): Promise<boolean> => dots.evaluate((el) => getComputedStyle(el, '::before').display === 'block');
+  expect(await tooltipShown()).toBe(false);
+  await dots.hover();
+  expect(await tooltipShown()).toBe(true);
+
+  // Answer shown: settled.
+  await page.getByRole('button', { name: 'Next page' }).click();
+  await expect(dots).toHaveCount(0);
+  await page.getByRole('button', { name: 'Show correct answer' }).click();
+  await expect(dots).toHaveCount(1);
+
+  // Out of tries: settled.
+  await page.getByRole('button', { name: 'Next page' }).click();
+  await expect(dots).toHaveCount(0);
+  await answerField(page).fill('1 J');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(card(page)).toContainText('1 try left');
+  await expect(dots).toHaveCount(0);
+  await answerField(page).fill('2 J');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(page.getByRole('button', { name: 'Check' })).toHaveCount(0);
+  await expect(dots).toHaveCount(1);
+});
+
+test('an exam never shows difficulty before it is finished; the review does', async ({ page }) => {
+  await startFrom(page, '?p=exam&sets=corpus&seed=42');
+  for (let i = 1; i <= 7; i++) {
+    await expect(card(page).locator('.qno')).toHaveText(String(i));
+    await expect(page.locator('.pt-difficulty')).toHaveCount(0);
+    if (i < 7) await page.getByRole('button', { name: 'Next page' }).click();
+  }
+  await page.getByRole('link', { name: 'Finish attempt ...' }).first().click();
+  await expect(page).toHaveURL(/attempt\/summary\/$/);
+  await expect(page.locator('.pt-difficulty')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Submit all and finish' }).click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Submit all and finish' }).click();
+  await expect(page).toHaveURL(/review\/\?id=/);
+  await expect(page.locator('.que .pt-difficulty')).toHaveCount(7);
 });
 
 test('export and import move the attempt and progress to another browser', async ({ page, browser }) => {

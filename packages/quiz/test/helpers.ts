@@ -42,7 +42,7 @@ export function syntheticSet(
   setId: string,
   sections: string[],
   perSection: number,
-  opts: { fixedEvery?: number; family?: (n: number) => string } = {},
+  opts: { fixedEvery?: number; family?: (n: number) => string; difficulty?: (n: number) => CatalogQuestion['difficulty'] } = {},
 ): CatalogSet {
   const questions: CatalogQuestion[] = [];
   let n = 0;
@@ -60,6 +60,8 @@ export function syntheticSet(
         partId: 'answer',
         family: `${setId}/${opts.family ? opts.family(n) : `P${n}`}`,
       });
+      const difficulty = opts.difficulty?.(n);
+      if (difficulty !== undefined) questions.at(-1)!.difficulty = difficulty;
     }
   }
   return { setId, questions };

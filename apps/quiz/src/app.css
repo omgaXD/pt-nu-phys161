@@ -437,7 +437,7 @@ h3 {
   font-size: 0.875rem;
   color: rgba(33, 37, 41, 0.75);
 }
-.que .info .source {
+.que .info :is(.source, .difficulty) {
   margin-top: 0.7em;
   font-size: 0.75em;
   color: rgba(33, 37, 41, 0.75);

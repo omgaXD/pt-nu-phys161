@@ -218,12 +218,15 @@
   background: #e9ecef;
 }
 
-/* qtype_formulas' instant Bootstrap tooltip above the field ("Numeric and unit"). */
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field)[data-tooltip] {
+/*
+ * qtype_formulas' instant Bootstrap tooltip above the field ("Numeric and unit"),
+ * also used for the difficulty dots' level name.
+ */
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip] {
   position: relative;
 }
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field)[data-tooltip]::before,
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field)[data-tooltip]::after {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip]::before,
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip]::after {
   position: absolute;
   left: 50%;
   z-index: 1080;
@@ -231,7 +234,7 @@
   pointer-events: none;
   opacity: 0.9;
 }
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field)[data-tooltip]::before {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip]::before {
   content: attr(data-tooltip);
   bottom: calc(100% + 0.4rem);
   transform: translateX(-50%);
@@ -246,7 +249,7 @@
   text-align: center;
   white-space: nowrap;
 }
-.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field)[data-tooltip]::after {
+.pt-theme-moodle :is(.pt-answer-field, .pt-unit-field, .pt-difficulty)[data-tooltip]::after {
   content: '';
   bottom: 100%;
   transform: translateX(-50%);
@@ -256,6 +259,10 @@
 }
 .pt-theme-moodle :is(.pt-answer-field, .pt-unit-field):has(> input:hover:enabled)::before,
 .pt-theme-moodle :is(.pt-answer-field, .pt-unit-field):has(> input:hover:enabled)::after {
+  display: block;
+}
+.pt-theme-moodle .pt-difficulty[data-tooltip]:hover::before,
+.pt-theme-moodle .pt-difficulty[data-tooltip]:hover::after {
   display: block;
 }
 

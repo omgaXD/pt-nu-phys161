@@ -104,6 +104,7 @@ export function lintSet(root: string, setId: string): LintFinding[] {
     for (const p of parts) {
       const pid = String(p.id ?? '?');
       if (!('tolerance' in p) && p.integer !== true) add('warning', 'tolerance-missing', file, `part ${pid} has no tolerance (default rel 0.01 applies)`);
+      if (!('difficulty' in p)) add('warning', 'difficulty-missing', file, `part ${pid} has no difficulty (it cannot be filtered by difficulty)`);
       if (typeof p.prompt === 'string' && !hasValueSlot(p.prompt)) {
         add('warning', 'slot-missing', file, `part ${pid} prompt has no {_0} slot (it will be appended)`);
       }

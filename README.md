@@ -124,13 +124,13 @@ The GitHub Pages workflow (`.github/workflows/pages.yml`) runs only when started
 deployed site shows every problem and answer to anyone with the URL.
 
 - **Start page:** one configuration model (sets and sections, randomized or source numbers,
-  include not-yet-randomized problems, skip solved ones, all or a sample of N spread uniformly /
-  across sections / across sets, source or shuffled order, immediate or deferred feedback, tries,
-  a "Show correct answer" button, a time limit, a seed) with three presets that set it in one
-  click — **Ordered** (every problem in order, Check after each), **Exam** (7 problems from
-  different sections, 40 minutes, marks at the end) and **Chaotic** (Ordered, shuffled). Any edit
-  shows *Custom*. *Copy link* encodes the configuration and seed: the same link reproduces the
-  same questions and numbers.
+  include not-yet-randomized problems, skip solved ones, a difficulty range, all or a sample of
+  N spread uniformly / across sections / across sets, source or shuffled order, immediate or
+  deferred feedback, tries, a "Show correct answer" button, a time limit, a seed) with three
+  presets that set it in one click — **Ordered** (every problem in order, Check after each),
+  **Exam** (7 problems from different sections, 40 minutes, marks at the end) and **Chaotic**
+  (Ordered, shuffled). Any edit shows *Custom*. *Copy link* encodes the configuration and seed:
+  the same link reproduces the same questions and numbers.
 - **Attempt:** Moodle's layout — one question per page, the question card, a quiz navigation
   block, a sticky `Time left 0:39:59` timer that submits at the deadline (also after a reload),
   flags, Check / tries / Show correct answer in immediate mode, a summary page with *Submit all
@@ -202,6 +202,14 @@ Values must not contain single quotes or newlines. To roll back, re-run an older
   P115–P118). A key naming a derived value (`g: 9.8`) is *asserted*, not overridden. Source
   values that violate a constraint are reported as warnings, not failures (P12's suitcase is
   already moving). Values the randomization cannot reach are also warnings.
+- **Difficulty is authored, not computed.** `Part.difficulty` (1–5) is rated by the author or
+  agent by the reasoning a part takes (`pt agent-task` carries the rubric; `pt lint` warns when it
+  is missing). A score from the answer formula agreed with the existing ratings only roughly
+  (61% exactly) and underrates problems whose final formula is short but whose reasoning is not
+  (loop minimum height, Doppler beats), so there is none. Fixed problems have no rating until they are authored.
+  The quiz filters by a difficulty range (unrated problems only if asked) and shows a question's
+  difficulty, as dots, only once it is settled: in review, or with immediate feedback once it is
+  solved, its answer shown, or out of tries. Never during an attempt otherwise.
 - **Extra schema fields:** `Part.integer` (asked for by C11), `Scenario.title`,
   `Scenario.draft` (Studio's "saved while failing") and `SetDoc.order`. `ProblemRepository`
   also has `putSet`, and `putScenario(s, { setId })` for creating scenarios.

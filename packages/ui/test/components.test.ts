@@ -7,6 +7,7 @@ import {
   CanonicalPanel,
   CorrectAnswer,
   CountdownTimer,
+  DifficultyDots,
   Figure,
   FlagToggle,
   GradeBadge,
@@ -216,6 +217,17 @@ describe('result display', () => {
     expect(render(GradeBadge, { fraction: 1 }).container.querySelector('[data-kind="full"]')).toHaveTextContent('100%');
     expect(render(GradeBadge, { fraction: 0.75 }).container.querySelector('[data-kind="partial"]')).toHaveTextContent('75%');
     expect(render(GradeBadge, { fraction: 0 }).container.querySelector('[data-kind="zero"]')).toHaveTextContent('0%');
+  });
+
+  it('DifficultyDots fills one dot per level and names the level', () => {
+    const hard = render(DifficultyDots, { level: 4 }).container.querySelector('.pt-difficulty')!;
+    expect(hard).toHaveAttribute('role', 'img');
+    expect(hard).toHaveAttribute('aria-label', 'Hard, 4 of 5');
+    expect(hard).toHaveAttribute('data-tooltip', 'Hard');
+    expect(hard.querySelectorAll('.dot')).toHaveLength(5);
+    expect(hard.querySelectorAll('.dot.on')).toHaveLength(4);
+    const named = render(DifficultyDots, { level: 1, names: { 1: 'Leicht', 2: '', 3: '', 4: '', 5: '' } }).container.querySelector('.pt-difficulty')!;
+    expect(named).toHaveAttribute('aria-label', 'Leicht, 1 of 5');
   });
 
   it('PartFeedback explains a result', () => {

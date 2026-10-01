@@ -9,6 +9,7 @@
     buildPool,
     decodeConfig,
     defaultConfig,
+    difficultyFilter,
     encodeConfig,
     matchPreset,
     PRESET_IDS,
@@ -19,6 +20,8 @@
     sectionSlug,
     solvedCount,
   } from '@pt/quiz';
+  import type { DifficultyLevel } from '@pt/core';
+  import { DEFAULT_DIFFICULTY_NAMES } from '@pt/ui';
   import { app } from '$lib/app.svelte';
   import StateBlock from '$lib/components/StateBlock.svelte';
   import { describeConfig, formatDate, formatMark, PRESET_INFO, presetName } from '$lib/labels';
@@ -65,6 +68,18 @@
   function toggleSet(id: string, on: boolean): void {
     const sets = on ? allSets.filter((s) => s === id || config.sets.includes(s)) : config.sets.filter((s) => s !== id);
     config = { ...config, sets };
+  }
+
+  const LEVELS: DifficultyLevel[] = [1, 2, 3, 4, 5];
+  const range = $derived(config.difficulty ?? { min: 1 as DifficultyLevel, max: 5 as DifficultyLevel, unrated: false });
+
+  /** Set the difficulty range; the full range is stored as no filter. A bound crossing the other moves it along. */
+  function setDifficulty(change: { min?: DifficultyLevel; max?: DifficultyLevel; unrated?: boolean }): void {
+    let { min, max, unrated } = { ...range, ...change };
+    if (change.min !== undefined && min > max) max = min;
+    if (change.max !== undefined && max < min) min = max;
+    const { difficulty: _drop, ...rest } = config;
+    config = min === 1 && max === 5 ? rest : { ...rest, difficulty: { min, max, unrated } };
   }
 
   function sectionsOf(setId: string): string[] {
@@ -255,6 +270,27 @@
       <div class="choices">
         <label><input type="checkbox" checked={config.includeFixed} onchange={(e) => (config = { ...config, includeFixed: e.currentTarget.checked })} /> Include problems not randomized yet</label>
         <label><input type="checkbox" checked={config.skipSolved} onchange={(e) => (config = { ...config, skipSolved: e.currentTarget.checked })} /> Skip problems I have solved</label>
+      </div>
+
+      <span class="label" id="opt-difficulty">Difficulty</span>
+      <div class="choices" role="group" aria-labelledby="opt-difficulty">
+        <label>
+          from
+          <select class="form-select" aria-label="Lowest difficulty" value={String(range.min)} onchange={(e) => setDifficulty({ min: Number(e.currentTarget.value) as DifficultyLevel })}>
+            {#each LEVELS as d (d)}<option value={String(d)}>{d} · {DEFAULT_DIFFICULTY_NAMES[d]}</option>{/each}
+          </select>
+        </label>
+        <label>
+          to
+          <select class="form-select" aria-label="Highest difficulty" value={String(range.max)} onchange={(e) => setDifficulty({ max: Number(e.currentTarget.value) as DifficultyLevel })}>
+            {#each LEVELS as d (d)}<option value={String(d)}>{d} · {DEFAULT_DIFFICULTY_NAMES[d]}</option>{/each}
+          </select>
+        </label>
+        {#if difficultyFilter(config.difficulty)}
+          <label>
+            <input type="checkbox" checked={range.unrated} onchange={(e) => setDifficulty({ unrated: e.currentTarget.checked })} /> Include problems without a difficulty (not randomized yet)
+          </label>
+        {/if}
       </div>
 
       <span class="label" id="opt-feedback">Feedback</span>

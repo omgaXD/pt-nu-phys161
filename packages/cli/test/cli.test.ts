@@ -176,6 +176,7 @@ describe('pt lint / fmt (M8)', () => {
         'figure-file-missing demo/scenarios/a.yaml',
         'unknown-section demo/scenarios/a.yaml',
         'tolerance-missing demo/scenarios/a.yaml',
+        'difficulty-missing demo/scenarios/a.yaml',
         'slot-missing demo/scenarios/a.yaml',
         'canonical-missing demo/scenarios/b.yaml',
         'id-file-mismatch demo/scenarios/c.yaml',
@@ -194,7 +195,7 @@ describe('pt lint / fmt (M8)', () => {
     const scenario = (id: string, labels: string[], parts: string[], document = 'source'): string =>
       `id: ${id}\nsource: { document: ${document}, labels: [ ${labels.join(', ')} ] }\nnarrative: A mass {m:unit}.\n` +
       `vars:\n  - { name: m, kind: range, min: 1, max: 5, unit: kg }\n` +
-      `parts:\n  - id: p\n    prompt: "What is it? {_0}{_u}"\n    answer: m\n    unit: kg\n    tolerance: { rel: 0.01 }\n` +
+      `parts:\n  - id: p\n    prompt: "What is it? {_0}{_u}"\n    answer: m\n    unit: kg\n    tolerance: { rel: 0.01 }\n    difficulty: 1\n` +
       `canonical:\n  vars: { m: 2 }\n  parts:\n${parts.map((l) => `    - { id: p, answer: 2, unit: kg, source: ${l} }`).join('\n')}\n`;
     mkdirSync(join(root, 'demo', 'scenarios'));
     writeFileSync(join(root, 'demo', 'scenarios', 'x.yaml'), scenario('x', ['P1'], ['P1']));

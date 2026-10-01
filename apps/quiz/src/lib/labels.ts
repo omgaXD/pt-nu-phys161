@@ -1,4 +1,4 @@
-import type { PresetId, QuestionState, QuizConfig } from '@pt/quiz';
+import { difficultyFilter, type PresetId, type QuestionState, type QuizConfig } from '@pt/quiz';
 import type { NavItem } from '@pt/ui';
 
 export const PRESET_INFO: Record<PresetId, { name: string; blurb: string }> = {
@@ -58,10 +58,12 @@ export function formatMark(x: number): string {
 
 /** One line describing a configuration: "7 questions · 40 min · feedback at the end". */
 export function describeConfig(c: QuizConfig, questions: number): string {
+  const d = difficultyFilter(c.difficulty);
   return [
     `${questions} question${questions === 1 ? '' : 's'}`,
     c.order === 'shuffled' ? 'shuffled' : 'in order',
     c.values === 'source' ? 'source values' : 'randomized values',
+    ...(d ? [`difficulty ${d.min === d.max ? d.min : `${d.min}–${d.max}`}${d.unrated ? ' (+ unrated)' : ''}`] : []),
     c.timeLimitMinutes !== null ? `${c.timeLimitMinutes} min` : 'no time limit',
     c.feedback === 'immediate'
       ? `Check after each${c.maxTries !== null ? ` (${c.maxTries} ${c.maxTries === 1 ? 'try' : 'tries'})` : ''}`

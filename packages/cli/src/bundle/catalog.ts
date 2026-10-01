@@ -156,7 +156,14 @@ export async function buildSetCatalog(repo: FsRepository, root: string, setId: s
     const a = authored.get(label);
     if (a) {
       const section = draft?.section ?? a.scenario.section;
-      questions.push({ ...base, ...(section !== undefined && { section }), kind: 'authored', scenarioId: a.scenario.id, partId: a.partId });
+      questions.push({
+        ...base,
+        ...(section !== undefined && { section }),
+        kind: 'authored',
+        scenarioId: a.scenario.id,
+        partId: a.partId,
+        ...difficultyOf(a.scenario, a.partId),
+      });
       continue;
     }
     if (!draft) continue;
@@ -171,7 +178,8 @@ export async function buildSetCatalog(repo: FsRepository, root: string, setId: s
       continue;
     }
     scenarios.set(f.scenario.id, f.scenario);
-    questions.push({ ...base, ...section, kind: 'fixed', scenarioId: f.scenario.id, partId: f.scenario.parts[0]!.id });
+    const partId = f.scenario.parts[0]!.id;
+    questions.push({ ...base, ...section, kind: 'fixed', scenarioId: f.scenario.id, partId, ...difficultyOf(f.scenario, partId) });
   }
   const bySource = (a: { number: number; label: string }, b: { number: number; label: string }): number =>
     a.number - b.number || a.label.localeCompare(b.label);
@@ -187,6 +195,12 @@ export async function buildSetCatalog(repo: FsRepository, root: string, setId: s
     }
   }
   return { set, questions, missing, scenarios, references, issues };
+}
+
+/** The part's authored difficulty, as an optional field (unrated parts have none). */
+function difficultyOf(s: Scenario, partId: string): Pick<CatalogQuestion, 'difficulty'> {
+  const d = s.parts.find((p) => p.id === partId)?.difficulty;
+  return d !== undefined ? { difficulty: d } : {};
 }
 
 function firstInstantiationError(s: Scenario, seeds: number): string | undefined {

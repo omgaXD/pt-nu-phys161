@@ -1,4 +1,20 @@
+import { DifficultySchema } from '@pt/core';
 import { z } from 'zod';
+
+/**
+ * A difficulty range (inclusive). Unrated problems (fixed ones, mostly) are
+ * left out unless `unrated` is set. The full range 1–5 is no filter at all:
+ * see `difficultyFilter`.
+ */
+export const DifficultyFilterSchema = z
+  .strictObject({ min: DifficultySchema, max: DifficultySchema, unrated: z.boolean() })
+  .refine((d) => d.min <= d.max, { message: 'min must be <= max', path: ['max'] });
+export type DifficultyFilter = z.infer<typeof DifficultyFilterSchema>;
+
+/** The effective filter: `undefined` when it lets every problem through (absent, or the full range). */
+export function difficultyFilter(d: DifficultyFilter | undefined): DifficultyFilter | undefined {
+  return d && (d.min > 1 || d.max < 5) ? d : undefined;
+}
 
 /**
  * One configuration model for every way of taking a quiz. The presets are
@@ -16,6 +32,8 @@ export const QuizConfigSchema = z.strictObject({
   includeFixed: z.boolean(),
   /** Leave out problems already solved (local progress; never part of a share link). */
   skipSolved: z.boolean().default(false),
+  /** Only problems in this difficulty range; absent = every problem. */
+  difficulty: DifficultyFilterSchema.optional(),
   /** How many questions: every selected problem, or a sample of N. */
   count: z.union([z.literal('all'), z.number().int().min(1).max(1000)]),
   /** How a sample is spread: evenly over problems, sections or sets. */
@@ -37,7 +55,7 @@ export type QuizConfig = z.infer<typeof QuizConfigSchema>;
 export type QuizConfigInput = z.input<typeof QuizConfigSchema>;
 
 /** The fields a preset decides. */
-export type ModeFields = Omit<QuizConfig, 'sets' | 'sections' | 'skipSolved' | 'seed'>;
+export type ModeFields = Omit<QuizConfig, 'sets' | 'sections' | 'skipSolved' | 'difficulty' | 'seed'>;
 export const MODE_FIELDS = [
   'values',
   'includeFixed',
@@ -88,7 +106,7 @@ export function defaultConfig(sets: readonly string[], preset: PresetId = 'order
   return { sets: [...sets], sections: {}, skipSolved: false, ...PRESETS[preset] };
 }
 
-/** Pick a preset: its mode fields replace the current ones; sets, sections, skipSolved and seed stay. */
+/** Pick a preset: its mode fields replace the current ones; sets, sections, skipSolved, difficulty and seed stay. */
 export function applyPreset(config: QuizConfig, preset: PresetId): QuizConfig {
   return { ...config, ...PRESETS[preset] };
 }

@@ -8,6 +8,10 @@ describe('labels', () => {
     expect(describeConfig({ ...defaultConfig(['a'], 'chaotic'), maxTries: 1, values: 'source' }, 1)).toBe(
       '1 question · shuffled · source values · no time limit · Check after each (1 try)',
     );
+    expect(describeConfig({ ...defaultConfig(['a'], 'exam'), difficulty: { min: 2, max: 4, unrated: true } }, 7)).toBe(
+      '7 questions · in order · randomized values · difficulty 2–4 (+ unrated) · 40 min · feedback at the end',
+    );
+    expect(describeConfig({ ...defaultConfig(['a']), difficulty: { min: 1, max: 5, unrated: false } }, 3)).not.toMatch(/difficulty/);
   });
 
   it('maps question states to navigation colours', () => {

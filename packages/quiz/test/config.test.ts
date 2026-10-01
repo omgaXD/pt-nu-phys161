@@ -35,6 +35,9 @@ describe('presets', () => {
     expect(exam).toMatchObject({ sets: ['a', 'b'], sections: { a: ['work'] }, skipSolved: true, seed: 5, count: 7 });
     expect(matchPreset({ ...exam, timeLimitMinutes: 30 })).toBe('custom');
     expect(matchPreset({ ...c, values: 'source' })).toBe('custom');
+    const ranged: QuizConfig = { ...c, difficulty: { min: 2, max: 4, unrated: false } };
+    expect(applyPreset(ranged, 'exam').difficulty).toEqual({ min: 2, max: 4, unrated: false });
+    expect(matchPreset(applyPreset(ranged, 'exam'))).toBe('exam');
   });
 
   it('ignore fields that do not apply (draw without a sample, tries without immediate feedback)', () => {
@@ -47,6 +50,8 @@ describe('presets', () => {
     expect(QuizConfigSchema.safeParse({ ...defaultConfig([]) }).success).toBe(false);
     expect(QuizConfigSchema.safeParse({ ...defaultConfig(['a']), count: 0 }).success).toBe(false);
     expect(QuizConfigSchema.safeParse({ ...defaultConfig(['a']), extra: 1 }).success).toBe(false);
+    expect(QuizConfigSchema.safeParse({ ...defaultConfig(['a']), difficulty: { min: 4, max: 2, unrated: false } }).success).toBe(false);
+    expect(QuizConfigSchema.safeParse({ ...defaultConfig(['a']), difficulty: { min: 0, max: 2, unrated: false } }).success).toBe(false);
   });
 });
 
@@ -77,6 +82,7 @@ describe('share links', () => {
         maxTries: pick([null, 1, 3]),
         allowReveal: pick([true, false]),
         timeLimitMinutes: pick([null, 1, 40]),
+        ...(pick([true, false]) && { difficulty: pick([{ min: 1, max: 3, unrated: false }, { min: 2, max: 5, unrated: true }, { min: 4, max: 4, unrated: false }] as const) }),
         ...(pick([true, false]) && { seed: rng.next() >>> 0 }),
       };
       const q = encodeConfig(c, 'v1');
@@ -86,6 +92,15 @@ describe('share links', () => {
       // Canonical: same config, same link.
       expect(encodeConfig({ ...c }, 'v1').toString()).toBe(q.toString());
     }
+  });
+
+  it('carry a difficulty range, and drop the full range (no filter)', () => {
+    const c: QuizConfig = { ...defaultConfig(['a']), difficulty: { min: 2, max: 4, unrated: true } };
+    expect(encodeConfig(c).toString()).toBe('p=ordered&sets=a&diff=2-4&unrated=1');
+    expect(encodeConfig({ ...c, difficulty: { min: 1, max: 5, unrated: true } }).toString()).toBe('p=ordered&sets=a');
+    expect(decodeConfig(new URLSearchParams('sets=a&diff=3-3'))).toMatchObject({ ok: true, config: { difficulty: { min: 3, max: 3, unrated: false } } });
+    expect(decodeConfig(new URLSearchParams('sets=a&diff=hard'))).toMatchObject({ ok: false, issues: [expect.stringMatching(/difficulty/)] });
+    expect(decodeConfig(new URLSearchParams('sets=a&diff=4-2'))).toMatchObject({ ok: false });
   });
 
   it('report bad links instead of guessing', () => {
