@@ -466,24 +466,19 @@ h3 {
 
 /* ---- Tables -------------------------------------------------------------------- */
 
+/* .generaltable in the saved NU Moodle 5 page: rules between rows, no stripes. */
 .generaltable {
   width: 100%;
   margin-bottom: 1rem;
   border-collapse: collapse;
-  font-size: 0.9375rem;
+  border-top: 1px solid #dee2e6;
 }
 .generaltable th,
 .generaltable td {
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-top: 1px solid #dee2e6;
   text-align: left;
   vertical-align: top;
-}
-.generaltable thead th {
-  border-bottom: 2px solid #dee2e6;
-}
-.generaltable tbody tr:nth-child(odd) {
-  background: rgba(0, 0, 0, 0.03);
 }
 .quizreviewsummary {
   width: auto;
