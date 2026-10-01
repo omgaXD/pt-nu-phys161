@@ -10,6 +10,7 @@ export * from './draw.js';
 export * from './mastery.js';
 export * from './materialize.js';
 export { hash32, questionSeed, randomId, randomSeed, type Rng, shuffle, streamRng } from './random.js';
+export * from './selection.js';
 export * from './storage.js';
 export * from './transfer.js';
 export * from './url.js';

@@ -19,13 +19,15 @@ export function difficultyFilter(d: DifficultyFilter | undefined): DifficultyFil
 /**
  * One configuration model for every way of taking a quiz. The presets are
  * just values of it: picking one sets the mode fields and keeps the content
- * selection (sets, sections).
+ * selection (sets, sections, excluded problems).
  */
 export const QuizConfigSchema = z.strictObject({
   /** Selected set ids. */
   sets: z.array(z.string().min(1)).min(1),
-  /** Per set, the selected section ids (see `sectionSlug`); absent or empty = every section. */
+  /** Per set, the selected section ids (see `sectionSlug`); absent = every section, empty = none. */
   sections: z.record(z.string(), z.array(z.string())).default({}),
+  /** Per set, problem labels left out of the selected sections (see `selection.ts`); absent = none. */
+  exclude: z.record(z.string(), z.array(z.string())).default({}),
   /** `random`: fresh numbers per attempt; `source`: the source document's own numbers. */
   values: z.enum(['random', 'source']),
   /** Include problems that are not randomized yet (played with the source's numbers). */
@@ -55,7 +57,7 @@ export type QuizConfig = z.infer<typeof QuizConfigSchema>;
 export type QuizConfigInput = z.input<typeof QuizConfigSchema>;
 
 /** The fields a preset decides. */
-export type ModeFields = Omit<QuizConfig, 'sets' | 'sections' | 'skipSolved' | 'difficulty' | 'seed'>;
+export type ModeFields = Omit<QuizConfig, 'sets' | 'sections' | 'exclude' | 'skipSolved' | 'difficulty' | 'seed'>;
 export const MODE_FIELDS = [
   'values',
   'includeFixed',
@@ -103,10 +105,10 @@ export const PRESETS: Readonly<Record<PresetId, Readonly<ModeFields>>> = Object.
 });
 
 export function defaultConfig(sets: readonly string[], preset: PresetId = 'ordered'): QuizConfig {
-  return { sets: [...sets], sections: {}, skipSolved: false, ...PRESETS[preset] };
+  return { sets: [...sets], sections: {}, exclude: {}, skipSolved: false, ...PRESETS[preset] };
 }
 
-/** Pick a preset: its mode fields replace the current ones; sets, sections, skipSolved, difficulty and seed stay. */
+/** Pick a preset: its mode fields replace the current ones; sets, sections, excluded problems, skipSolved, difficulty and seed stay. */
 export function applyPreset(config: QuizConfig, preset: PresetId): QuizConfig {
   return { ...config, ...PRESETS[preset] };
 }

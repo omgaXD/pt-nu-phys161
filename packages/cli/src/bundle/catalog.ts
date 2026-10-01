@@ -1,4 +1,4 @@
-import { checkCanonical, diagnoseScenario, instantiate, type Scenario, type SetDoc } from '@pt/core';
+import { checkCanonical, diagnoseScenario, instantiate, type Scenario, scenarioTitle, type SetDoc } from '@pt/core';
 import type { CatalogQuestion, SectionReference } from '@pt/quiz';
 import type { FsRepository } from '@pt/store-fs';
 import { groupDrafts } from '../commands/group.js';
@@ -162,6 +162,7 @@ export async function buildSetCatalog(repo: FsRepository, root: string, setId: s
         kind: 'authored',
         scenarioId: a.scenario.id,
         partId: a.partId,
+        title: scenarioTitle(a.scenario),
         ...difficultyOf(a.scenario, a.partId),
       });
       continue;
@@ -179,7 +180,15 @@ export async function buildSetCatalog(repo: FsRepository, root: string, setId: s
     }
     scenarios.set(f.scenario.id, f.scenario);
     const partId = f.scenario.parts[0]!.id;
-    questions.push({ ...base, ...section, kind: 'fixed', scenarioId: f.scenario.id, partId, ...difficultyOf(f.scenario, partId) });
+    questions.push({
+      ...base,
+      ...section,
+      kind: 'fixed',
+      scenarioId: f.scenario.id,
+      partId,
+      title: scenarioTitle(f.scenario),
+      ...difficultyOf(f.scenario, partId),
+    });
   }
   const bySource = (a: { number: number; label: string }, b: { number: number; label: string }): number =>
     a.number - b.number || a.label.localeCompare(b.label);

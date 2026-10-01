@@ -35,6 +35,8 @@ export const CatalogQuestionSchema = z.object({
   partId: z.string(),
   /** Variants of one situation share a family; a sampled draw takes one per family. */
   family: z.string(),
+  /** Short title for listings (the scenario's, else the start of its text); absent in older bundles. */
+  title: z.string().optional(),
   /** The part's authored difficulty (1–5); absent = unrated (fixed problems, unrated parts). Internal: shown only once a question is settled or reviewed. */
   difficulty: DifficultySchema.optional(),
 });

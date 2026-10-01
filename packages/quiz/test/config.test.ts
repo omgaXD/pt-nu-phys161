@@ -30,9 +30,9 @@ describe('presets', () => {
   });
 
   it('keep the content selection when applied, and become custom when a mode field changes', () => {
-    const c: QuizConfig = { ...defaultConfig(['a', 'b']), sections: { a: ['work'] }, skipSolved: true, seed: 5 };
+    const c: QuizConfig = { ...defaultConfig(['a', 'b']), sections: { a: ['work'] }, exclude: { b: ['P3'] }, skipSolved: true, seed: 5 };
     const exam = applyPreset(c, 'exam');
-    expect(exam).toMatchObject({ sets: ['a', 'b'], sections: { a: ['work'] }, skipSolved: true, seed: 5, count: 7 });
+    expect(exam).toMatchObject({ sets: ['a', 'b'], sections: { a: ['work'] }, exclude: { b: ['P3'] }, skipSolved: true, seed: 5, count: 7 });
     expect(matchPreset({ ...exam, timeLimitMinutes: 30 })).toBe('custom');
     expect(matchPreset({ ...c, values: 'source' })).toBe('custom');
     const ranged: QuizConfig = { ...c, difficulty: { min: 2, max: 4, unrated: false } };
@@ -71,7 +71,8 @@ describe('share links', () => {
     for (let i = 0; i < 300; i++) {
       const c: QuizConfig = {
         sets: pick([['a'], ['a', 'b'], ['b', 'c', 'a']]),
-        sections: pick<Record<string, string[]>>([{}, { a: ['x', 'y'] }]),
+        sections: pick<Record<string, string[]>>([{}, { a: ['x', 'y'] }, { a: [] }]),
+        exclude: pick<Record<string, string[]>>([{}, { a: ['P2', 'P10'] }]),
         values: pick(['random', 'source'] as const),
         includeFixed: pick([true, false]),
         skipSolved: pick([true, false]),
@@ -92,6 +93,12 @@ describe('share links', () => {
       // Canonical: same config, same link.
       expect(encodeConfig({ ...c }, 'v1').toString()).toBe(q.toString());
     }
+  });
+
+  it('carry excluded problems and empty section lists', () => {
+    const c: QuizConfig = { ...defaultConfig(['a', 'b']), sections: { b: [] }, exclude: { a: ['P10', 'P2'] } };
+    expect(encodeConfig(c).toString()).toBe('p=ordered&sets=a%2Cb&ex.a=P2%2CP10&sec.b=');
+    expect(decodeConfig(new URLSearchParams('sets=a&ex.a=P3'))).toMatchObject({ ok: true, config: { exclude: { a: ['P3'] } } });
   });
 
   it('carry a difficulty range, and drop the full range (no filter)', () => {

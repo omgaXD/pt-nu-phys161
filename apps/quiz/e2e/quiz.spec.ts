@@ -61,8 +61,21 @@ test('start page: presets set the options, editing makes a custom quiz', async (
   await page.getByLabel('Demo set').check();
   await expect(page.getByTestId('summary')).toContainText('35 questions');
   await page.locator('details.sections').last().locator('summary').click();
-  await page.locator('details.sections').last().getByLabel('Kinetic energy').uncheck();
+  await page.locator('details.sections').last().getByLabel('Kinetic energy', { exact: true }).uncheck();
   await expect(page.getByTestId('summary')).toContainText('32 questions');
+
+  // Problems are picked inside a section: leaving one out shrinks the pool, and share links carry it.
+  const corpus = page.locator('details.sections').first();
+  await corpus.locator('summary').click();
+  await corpus.getByRole('button', { name: /^Expand / }).first().click();
+  const tile = corpus.locator('.problem-picker .pt-nav-item').first();
+  await expect(tile).toHaveAttribute('aria-pressed', 'true');
+  await tile.click();
+  await expect(tile).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.getByTestId('summary')).toContainText('31 questions');
+  await expect(corpus.locator('summary')).toContainText('27 of 28 problems');
+  await page.getByRole('button', { name: 'Copy link' }).click();
+  await expect(page).toHaveURL(/ex\.corpus=P\d+/);
 });
 
 test('ordered: Check gives immediate feedback and locks a correct answer', async ({ page }) => {

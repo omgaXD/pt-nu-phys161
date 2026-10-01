@@ -123,7 +123,8 @@ Attempts, history and progress live in the browser's `localStorage`. Build with
 The GitHub Pages workflow (`.github/workflows/pages.yml`) runs only when started by hand: a
 deployed site shows every problem and answer to anyone with the URL.
 
-- **Start page:** one configuration model (sets and sections, randomized or source numbers,
+- **Start page:** one configuration model (sets, sections, single problems picked on number
+  tiles like the quiz navigation's, randomized or source numbers,
   include not-yet-randomized problems, skip solved ones, a difficulty range, all or a sample of
   N spread uniformly / across sections / across sets, source or shuffled order, immediate or
   deferred feedback, tries, a "Show correct answer" button, a time limit, a seed) with three

@@ -363,6 +363,18 @@
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.35);
 }
+/* Problem picker (start page): a problem left out fades like a disabled .btn;
+   one an option leaves out anyway cannot be toggled. */
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.left-out {
+  opacity: 0.4;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item[aria-disabled='true']:hover {
+  color: #212529;
+  text-decoration: none;
+}
 
 /* ---- Timer ("Time left 0:39:59") ------------------------------------------ */
 

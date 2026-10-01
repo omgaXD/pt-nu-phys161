@@ -20,6 +20,14 @@ describe('pool', () => {
     expect(buildPool(CATALOG, defaultConfig(['a']), mastery).map((q) => q.key)).toContain('a/P1');
   });
 
+  it('leaves out excluded problems, and takes nothing from a set with no sections', () => {
+    const keys = buildPool(CATALOG, { ...defaultConfig(['a', 'b']), exclude: { a: ['P1', 'P20'], b: ['P3'] } }).map((q) => q.key);
+    expect(keys).toHaveLength(127);
+    expect(keys).not.toContain('a/P1');
+    expect(keys).not.toContain('b/P3');
+    expect(buildPool(CATALOG, { ...defaultConfig(['a', 'b']), sections: { a: [] } }).every((q) => q.setId === 'b')).toBe(true);
+  });
+
   it('filters by difficulty range, leaving unrated problems out unless asked', () => {
     // P1..P10: difficulty 1..5 twice, except every fifth problem, which is unrated.
     const rated = syntheticSet('r', ['Work', 'Power'], 5, { difficulty: (n) => (n % 5 === 0 ? undefined : ((((n - 1) % 5) + 1) as 1 | 2 | 3 | 4)) });

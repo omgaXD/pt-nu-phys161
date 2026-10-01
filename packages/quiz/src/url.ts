@@ -1,10 +1,13 @@
 import { difficultyFilter, type ModeFields, PRESET_IDS, PRESETS, type PresetId, type QuizConfig, QuizConfigSchema } from './config.js';
+import { compareLabels } from './selection.js';
 
 /**
  * Share links: a configuration (and seed) as URL parameters. The link names
  * the nearest preset and lists only the fields that differ from it, so
  * `?p=exam&sets=phys161-exam1&seed=42` is a complete, reproducible exam.
- * A difficulty range is `diff=2-4` (with `unrated=1` to keep unrated problems).
+ * Per set, `sec.<set>=a,b` picks sections (empty: none) and `ex.<set>=P3,P16`
+ * leaves problems out. A difficulty range is `diff=2-4` (with `unrated=1` to
+ * keep unrated problems).
  * `skipSolved` is never encoded: it depends on the viewer's own progress.
  */
 type Codec = { param: string; encode(v: unknown): string; decode(s: string): unknown };
@@ -48,7 +51,9 @@ export function encodeConfig(config: QuizConfig, contentVersion?: string): URLSe
   q.set('sets', config.sets.join(','));
   for (const setId of config.sets) {
     const sections = config.sections[setId];
-    if (sections && sections.length > 0) q.set(`sec.${setId}`, [...sections].sort().join(','));
+    if (sections) q.set(`sec.${setId}`, [...sections].sort().join(','));
+    const excluded = config.exclude[setId];
+    if (excluded && excluded.length > 0) q.set(`ex.${setId}`, [...excluded].sort(compareLabels).join(','));
   }
   const range = difficultyFilter(config.difficulty);
   if (range) {
@@ -73,10 +78,12 @@ export function decodeConfig(params: URLSearchParams): DecodedConfig | null {
 
   const sets = (params.get('sets') ?? '').split(',').filter(Boolean);
   const sections: Record<string, string[]> = {};
+  const exclude: Record<string, string[]> = {};
   for (const [key, value] of params) {
     if (key.startsWith('sec.')) sections[key.slice(4)] = value.split(',').filter(Boolean);
+    if (key.startsWith('ex.')) exclude[key.slice(3)] = value.split(',').filter(Boolean);
   }
-  const raw: Record<string, unknown> = { ...PRESETS[preset ?? 'ordered'], sets, sections, skipSolved: false };
+  const raw: Record<string, unknown> = { ...PRESETS[preset ?? 'ordered'], sets, sections, exclude, skipSolved: false };
   for (const k of FIELD_KEYS) {
     const s = params.get(FIELDS[k].param);
     if (s !== null) raw[k] = FIELDS[k].decode(s);

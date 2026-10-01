@@ -1,5 +1,6 @@
 <script lang="ts">
   import Page from '$lib/components/Page.svelte';
+  import ProblemGrid, { type PickerProblem } from '$lib/components/ProblemGrid.svelte';
   import quizIcon from '$lib/assets/quiz-monologo.svg';
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
@@ -7,18 +8,24 @@
   import {
     applyPreset,
     buildPool,
+    type CatalogQuestion,
     decodeConfig,
     defaultConfig,
     difficultyFilter,
     encodeConfig,
+    isProblemOn,
     matchPreset,
     PRESET_IDS,
     type PresetId,
     type QuizConfig,
     QuizConfigSchema,
     randomSeed,
+    sectionSelection,
     sectionSlug,
+    setAllSections,
     solvedCount,
+    toggleProblem,
+    toggleSection,
   } from '@pt/quiz';
   import type { DifficultyLevel } from '@pt/core';
   import { DEFAULT_DIFFICULTY_NAMES } from '@pt/ui';
@@ -82,31 +89,39 @@
     config = min === 1 && max === 5 ? rest : { ...rest, difficulty: { min, max, unrated } };
   }
 
-  function sectionsOf(setId: string): string[] {
-    return index?.sets.find((s) => s.id === setId)?.sections.map((s) => s.id) ?? [];
+  const sectionsOf = (setId: string): string[] => index?.sets.find((s) => s.id === setId)?.sections.map((s) => s.id) ?? [];
+  const questionsOf = (setId: string): CatalogQuestion[] => [...(app.sets[setId]?.questions ?? [])];
+
+  /** Expanded sections (`setId/sectionId`), showing their problems. */
+  let expanded = $state<Record<string, boolean>>({});
+
+  function pickSection(setId: string, sectionId: string, on: boolean): void {
+    config = toggleSection(config, setId, sectionId, on, sectionsOf(setId), questionsOf(setId));
   }
 
-  function isSectionOn(setId: string, sectionId: string): boolean {
-    const chosen = config.sections[setId];
-    return !chosen || chosen.length === 0 || chosen.includes(sectionId);
+  function pickProblem(q: CatalogQuestion, on: boolean): void {
+    config = toggleProblem(config, q, on, sectionsOf(q.setId), questionsOf(q.setId));
   }
 
-  function toggleSection(setId: string, sectionId: string, on: boolean): void {
-    const all = sectionsOf(setId);
-    const current = all.filter((s) => isSectionOn(setId, s));
-    const next = on ? all.filter((s) => s === sectionId || current.includes(s)) : current.filter((s) => s !== sectionId);
-    const sections = { ...config.sections };
-    if (next.length === all.length) delete sections[setId];
-    else sections[setId] = next;
-    config = { ...config, sections };
+  function problemsIn(setId: string, sectionId: string): PickerProblem[] {
+    return questionsOf(setId)
+      .filter((q) => sectionSlug(q.section) === sectionId)
+      .map((q) => {
+        const solved = app.mastery[q.key]?.solved ?? false;
+        const blockedBy =
+          !config.includeFixed && q.kind === 'fixed'
+            ? 'not randomized yet'
+            : config.skipSolved && solved
+              ? 'already solved'
+              : undefined;
+        return { q, on: isProblemOn(config, q), solved, ...(blockedBy && { blockedBy }) };
+      });
   }
 
-  function setAllSections(setId: string, on: boolean): void {
-    const sections = { ...config.sections };
-    if (on) delete sections[setId];
-    else sections[setId] = [];
-    config = { ...config, sections };
-  }
+  /** Sets a checkbox's mixed state (a property, not an attribute). */
+  const indeterminate = (mixed: boolean) => (el: HTMLInputElement) => {
+    el.indeterminate = mixed;
+  };
 
   function solvedIn(setId: string, sectionId?: string): number {
     const qs = app.sets[setId]?.questions ?? [];
@@ -198,20 +213,51 @@
         </span>
       </div>
       {#if on}
+        {@const qs = questionsOf(s.id)}
+        {@const picked = s.sections.map((sec) => sectionSelection(config, s.id, sec.id, qs))}
         <details class="sections">
-          <summary>Sections ({s.sections.filter((x) => isSectionOn(s.id, x.id)).length} of {s.sections.length})</summary>
+          <summary>
+            Sections ({picked.filter((p) => p.state !== 'none').length} of {s.sections.length} · {picked.reduce((n, p) => n + p.selected, 0)} of {qs.length} problems)
+          </summary>
           <div class="actions">
-            <button type="button" class="link-button" onclick={() => setAllSections(s.id, true)}>All</button>
-            <button type="button" class="link-button" onclick={() => setAllSections(s.id, false)}>None</button>
+            <button type="button" class="link-button" onclick={() => (config = setAllSections(config, s.id, true))}>All</button>
+            <button type="button" class="link-button" onclick={() => (config = setAllSections(config, s.id, false))}>None</button>
           </div>
-          <ul>
-            {#each s.sections as sec (sec.id)}
+          <ul class="section-tree">
+            {#each s.sections as sec, i (sec.id)}
+              {@const sel = picked[i]!}
+              {@const key = `${s.id}/${sec.id}`}
+              {@const open = expanded[key] ?? false}
               <li>
-                <label>
-                  <input type="checkbox" checked={isSectionOn(s.id, sec.id)} onchange={(e) => toggleSection(s.id, sec.id, e.currentTarget.checked)} />
-                  {sec.name}
-                </label>
-                <span class="counts">{sec.questions} · {sec.authored} randomized · {solvedIn(s.id, sec.id)} solved</span>
+                <div class="section-row">
+                  <button
+                    type="button"
+                    class="chevron"
+                    aria-expanded={open}
+                    aria-controls="problems-{s.id}-{sec.id}"
+                    title={open ? 'Collapse' : 'Expand'}
+                    onclick={() => (expanded[key] = !open)}
+                  >
+                    <span class="pt-sr-only">{open ? 'Collapse' : 'Expand'} {sec.name}</span>
+                  </button>
+                  <div>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={sel.state === 'all'}
+                        {@attach indeterminate(sel.state === 'some')}
+                        onchange={(e) => pickSection(s.id, sec.id, e.currentTarget.checked)}
+                      />
+                      {sec.name}
+                    </label>
+                    <span class="counts">
+                      {sel.state === 'some' ? `${sel.selected} of ${sel.total}` : sel.total} · {sec.authored} randomized · {solvedIn(s.id, sec.id)} solved
+                    </span>
+                  </div>
+                </div>
+                {#if open}
+                  <ProblemGrid id="problems-{s.id}-{sec.id}" label="Problems in {sec.name}" problems={problemsIn(s.id, sec.id)} ontoggle={pickProblem} />
+                {/if}
               </li>
             {/each}
           </ul>

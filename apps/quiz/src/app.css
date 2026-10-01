@@ -567,6 +567,7 @@ h3 {
   font-weight: 600;
 }
 fieldset {
+  min-width: 0;
   margin: 0 0 1rem;
   padding: 0.75rem 1rem 1rem;
   border: 1px solid #dee2e6;
@@ -598,21 +599,77 @@ details + .set-row {
 .sections {
   margin: 0.25rem 0 0.5rem 1.6rem;
 }
-.sections summary {
+.sections > summary {
   cursor: pointer;
   font-size: 0.875rem;
   color: #0d6efd;
+  list-style: none;
 }
-.sections ul {
-  margin: 0.5rem 0;
+.sections > summary::-webkit-details-marker {
+  display: none;
+}
+/* Sections and their problems: a tree like the course index drawer, with its
+   chevrons (fa-chevron-right / -down, .fa-fw at 10px, .me-1, padding-right 4px). */
+.sections > summary::before,
+.section-row .chevron::before {
+  content: '';
+  display: inline-block;
+  width: 1.25em;
+  height: 1em;
+  margin-right: 0.25rem;
+  font-size: 10px;
+  background: currentColor;
+  -webkit-mask: var(--chevron-right) center / contain no-repeat;
+  mask: var(--chevron-right) center / contain no-repeat;
+}
+.sections[open] > summary::before,
+.section-row .chevron[aria-expanded='true']::before {
+  -webkit-mask-image: var(--chevron-down);
+  mask-image: var(--chevron-down);
+}
+:root {
+  --chevron-right: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/%3E%3C/svg%3E");
+  --chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
+}
+.section-tree {
+  margin: 0.35rem 0 0.5rem;
   padding: 0;
   list-style: none;
-  columns: 2 18rem;
-}
-.sections li {
-  break-inside: avoid;
-  padding: 0.1rem 0;
   font-size: 0.9rem;
+}
+.section-row {
+  display: flex;
+  align-items: baseline;
+  padding: 0.15rem 0;
+}
+.section-row > div {
+  flex: 1;
+  min-width: 0;
+}
+.section-row label {
+  margin-right: 0.35rem;
+  font-weight: 700;
+}
+.section-row .chevron {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px 0 0;
+  border: 0;
+  border-radius: 0.375rem;
+  background: none;
+  color: rgba(33, 37, 41, 0.75);
+  cursor: pointer;
+}
+.section-row .chevron:is(:hover, :focus) {
+  color: #000;
+}
+.section-row .chevron:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+/* Problems line up under the section's checkbox (past the chevron, its margin and padding). */
+.section-tree .problem-picker {
+  margin: 0.25rem 0 0.6rem calc(12.5px + 0.25rem + 4px);
 }
 .options {
   display: grid;
