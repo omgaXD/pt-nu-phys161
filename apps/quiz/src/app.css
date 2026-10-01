@@ -114,9 +114,18 @@ h3 {
 .drawertoggle,
 .drawer-menu {
   cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
 }
-.drawertoggle:hover {
+/* Both are Moodle .btn.btn-icon: --bs-secondary-bg on hover; .btn-icon leaves --bs-btn-active-bg
+   unset, so pressed (:active) or with its dropdown open (.show) the background is cleared. */
+.drawertoggle:hover,
+.drawer-menu:hover {
   background: #e9ecef;
+}
+.drawertoggle:active,
+.drawer-menu:active,
+.drawer-menu[aria-expanded='true'] {
+  background: none;
 }
 .drawer-left .drawertoggle {
   margin: 0 auto 0 5px;
