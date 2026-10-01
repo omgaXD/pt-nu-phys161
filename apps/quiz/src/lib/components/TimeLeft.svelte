@@ -17,7 +17,7 @@
       Time left <CountdownTimer {endsAt} {onExpire} format="hms" warnBelowMs={100_000} />
     </div>
   {/if}
-  <button type="button" class="btn btn-secondary btn-sm" aria-controls="quiz-timer" onclick={() => (hidden = !hidden)}>
+  <button type="button" class="btn btn-secondary" aria-controls="quiz-timer" onclick={() => (hidden = !hidden)}>
     {hidden ? 'Show' : 'Hide'}
   </button>
 </div>
