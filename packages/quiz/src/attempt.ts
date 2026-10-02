@@ -58,6 +58,7 @@ export type AttemptAction =
   | { type: 'answer'; index: number; answer: FieldContents }
   | { type: 'check'; index: number; now: number }
   | { type: 'reveal'; index: number; now: number }
+  | { type: 'reset'; index: number }
   | { type: 'flag'; index: number; flagged: boolean }
   | { type: 'goto'; page: number }
   | { type: 'finish'; now: number; reason: 'submitted' | 'timeout' }
@@ -217,6 +218,13 @@ export function reduceAttempt(a: Attempt, action: AttemptAction): Attempt {
       const i = action.index;
       if (!inRange(i) || a.config.feedback !== 'immediate' || !a.config.allowReveal || isLocked(a, i) || !a.snapshots[i]) return a;
       return { ...a, revealed: set(a.revealed, i, true) };
+    }
+    case 'reset': {
+      // Immediate feedback: a settled question starts over (same numbers, no checks, empty field).
+      // Progress already recorded for it stays.
+      const i = action.index;
+      if (!inRange(i) || a.config.feedback !== 'immediate' || a.unavailable[i] || !isLocked(a, i)) return a;
+      return { ...a, answers: set(a.answers, i, blank()), checks: set(a.checks, i, []), revealed: set(a.revealed, i, false) };
     }
   }
 }

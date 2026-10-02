@@ -16,10 +16,12 @@
     onanswer?: (answer: FieldContents) => void;
     oncheck?: () => void;
     onreveal?: () => void;
+    /** Start a settled question over (immediate feedback). */
+    onreset?: () => void;
     onflag?: (flagged: boolean) => void;
   }
 
-  let { attempt, index, snapshot, review = false, setTitle, resolveSrc, references = [], onanswer, oncheck, onreveal, onflag }: Props = $props();
+  let { attempt, index, snapshot, review = false, setTitle, resolveSrc, references = [], onanswer, oncheck, onreveal, onreset, onflag }: Props = $props();
 
   const q = $derived(attempt.questions[index]!);
   const state = $derived(questionState(attempt, index));
@@ -54,17 +56,28 @@
   const hasFeedback = $derived(!!outcome && (!!outcome.result || state === 'notanswered' || state === 'unavailable'));
 
   /** Moodle gives a mark only to answered questions: a blank one stays "Marked out of 1.00" in the review. */
+  /** Reset, then put the cursor back in the (now empty) answer field. */
+  function reset(): void {
+    onreset?.();
+    requestAnimationFrame(() => document.querySelector<HTMLInputElement>(`#question-${index + 1} .formulation input:not(:disabled)`)?.focus());
+  }
+
   const gradeText = $derived(review && state !== 'notanswered' ? `Mark ${formatMark(attempt.marks[index] ?? 0)} out of 1.00` : 'Marked out of 1.00');
 </script>
 
 {#snippet controls()}
   <span class="im-controls">
-    <button type="button" class="btn btn-secondary" onclick={() => oncheck?.()} disabled={blank || checkedNow}>Check</button>
-    {#if attempt.config.allowReveal}
-      <button type="button" class="btn btn-outline-secondary" onclick={() => onreveal?.()}>Show correct answer</button>
-    {/if}
-    {#if tries !== null}
-      <span class="tries">{tries} {tries === 1 ? 'try' : 'tries'} left</span>
+    {#if locked}
+      <!-- Settled (solved, out of tries or shown): Reset takes Check's place. -->
+      <button type="button" class="btn btn-outline-secondary" onclick={reset}>Reset</button>
+    {:else}
+      <button type="button" class="btn btn-secondary" onclick={() => oncheck?.()} disabled={blank || checkedNow}>Check</button>
+      {#if attempt.config.allowReveal}
+        <button type="button" class="btn btn-outline-secondary" onclick={() => onreveal?.()}>Show correct answer</button>
+      {/if}
+      {#if tries !== null}
+        <span class="tries">{tries} {tries === 1 ? 'try' : 'tries'} left</span>
+      {/if}
     {/if}
   </span>
 {/snippet}
@@ -107,7 +120,7 @@
         onanswer={(_, a) => onanswer?.(a)}
         disabled={locked}
         {resolveSrc}
-        controls={immediate && !review && !locked ? controls : undefined}
+        controls={immediate && !review && !attempt.unavailable[index] ? controls : undefined}
         outcomes={partOutcomes}
       />
       {#each references as r (r.src)}

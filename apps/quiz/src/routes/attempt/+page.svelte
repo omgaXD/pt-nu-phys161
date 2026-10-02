@@ -72,6 +72,7 @@
         onanswer={(answer) => app.dispatch({ type: 'answer', index: i, answer })}
         oncheck={() => app.dispatch({ type: 'check', index: i, now: Date.now() })}
         onreveal={() => app.dispatch({ type: 'reveal', index: i, now: Date.now() })}
+        onreset={() => app.dispatch({ type: 'reset', index: i })}
         onflag={(flagged) => app.dispatch({ type: 'flag', index: i, flagged })}
       />
       <div class="submitbtns">

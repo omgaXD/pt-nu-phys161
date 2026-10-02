@@ -94,20 +94,18 @@
   const contentChanged = $derived(!!file?.contentVersion && !!app.index && file.contentVersion !== app.index.version);
 </script>
 
-<!-- Leaves of Moodle's course index (li.courseindex-item > .completioninfo + a.courseindex-link),
+<!-- Leaves of a Moodle course-index section (li.courseindex-item > .completioninfo + a.courseindex-link),
      holding app-wide actions instead of course links. -->
-<nav class="courseindex" aria-label="Saved state">
-  <ul class="courseindex-sectioncontent unlist">
-    <li class="courseindex-item d-flex">
-      <span class="completioninfo"></span>
-      <button type="button" class="courseindex-link text-truncate" onclick={exportState}>Export state</button>
-    </li>
-    <li class="courseindex-item d-flex">
-      <span class="completioninfo"></span>
-      <button type="button" class="courseindex-link text-truncate" onclick={() => input?.click()}>Import state</button>
-    </li>
-  </ul>
-</nav>
+<ul class="courseindex-sectioncontent unlist">
+  <li class="courseindex-item d-flex">
+    <span class="completioninfo"></span>
+    <button type="button" class="courseindex-link text-truncate" onclick={exportState}>Export state</button>
+  </li>
+  <li class="courseindex-item d-flex">
+    <span class="completioninfo"></span>
+    <button type="button" class="courseindex-link text-truncate" onclick={() => input?.click()}>Import state</button>
+  </li>
+</ul>
 <input bind:this={input} type="file" accept=".json,application/json" hidden aria-label="Saved state file" onchange={pick} />
 
 <dialog bind:this={dialog} aria-labelledby="import-title" onclose={() => (file = null)}>

@@ -108,6 +108,22 @@ test('maxTries locks a wrong answer and shows the correct one', async ({ page })
   await expect(card(page).locator('.state')).toHaveText('Incorrect');
   await expect(page.getByRole('button', { name: 'Check' })).toHaveCount(0);
   await expect(card(page).locator('.pt-part-correct-answer')).toContainText('One possible correct answer is');
+
+  // Reset starts the question over: an empty, focused field, Check and the tries back, no feedback.
+  const reset = card(page).getByRole('button', { name: 'Reset' });
+  await expect(reset).toHaveClass(/btn-outline-secondary/);
+  await reset.click();
+  await expect(card(page).locator('.state')).toHaveText('Not yet answered');
+  await expect(answerField(page)).toBeEnabled();
+  await expect(answerField(page)).toHaveValue('');
+  await expect(answerField(page)).toBeFocused();
+  await expect(card(page)).toContainText('1 try left');
+  await expect(page.getByRole('button', { name: 'Show correct answer' })).toBeVisible();
+  await expect(reset).toHaveCount(0);
+  await expect(card(page).locator('.outcome, .pt-part-outcome, .pt-outcome-icon')).toHaveCount(0);
+  await answerField(page).fill('191.88 J');
+  await answerField(page).press('Enter');
+  await expect(card(page).locator('.state')).toHaveText('Correct');
 });
 
 test('Show correct answer locks the question and earns nothing', async ({ page }) => {
@@ -117,6 +133,10 @@ test('Show correct answer locks the question and earns nothing', async ({ page }
   await expect(card(page).locator('.pt-part-correct-answer')).toContainText('191.88');
   await expect(answerField(page)).toBeDisabled();
   await expect(card(page).locator('.pt-difficulty')).toHaveCount(0); // demo problems are unrated
+  await card(page).getByRole('button', { name: 'Reset' }).click();
+  await expect(card(page).locator('.state')).toHaveText('Not yet answered');
+  await expect(card(page).locator('.pt-part-correct-answer')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Show correct answer' }).click();
   await submitAll(page);
   await expect(page.getByTestId('marks')).toHaveText('0.00/7.00');
   await expect(page.getByTestId('review-summary')).toContainText('1 answer shown');
@@ -294,6 +314,13 @@ test('difficulty stays hidden until a question is settled, then shows as dots wi
   expect(await tooltipShown()).toBe(false);
   await dots.hover();
   expect(await tooltipShown()).toBe(true);
+  // Reset: unsettled again, so the difficulty hides.
+  await card(page).getByRole('button', { name: 'Reset' }).click();
+  await expect(dots).toHaveCount(0);
+  await expect(card(page)).toContainText('2 tries left');
+  await answerField(page).fill('191.88 J');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(dots).toHaveCount(1);
 
   // Answer shown: settled.
   await page.getByRole('button', { name: 'Next page' }).click();
@@ -352,6 +379,26 @@ test('difficulty orders: easy to hard or hard to easy, explained by a tooltip', 
     expect(levels).toEqual([...levels].sort(sorted));
     expect(new Set(levels).size).toBeGreaterThan(1);
   }
+});
+
+test('the course index: a "General" section that collapses from its whole title row, remembered', async ({ page }) => {
+  await open(page, '');
+  const index = page.locator('.drawer-left .courseindex');
+  const general = index.getByRole('button', { name: 'General' });
+  const exportLink = index.getByRole('button', { name: 'Export state' });
+  await expect(general).toHaveAttribute('aria-expanded', 'true');
+  await expect(exportLink).toBeVisible();
+  await expect(index.getByRole('button', { name: 'Import state' })).toBeVisible();
+  // The title text collapses it too, not only the chevron.
+  await general.locator('.courseindex-link').click();
+  await expect(general).toHaveAttribute('aria-expanded', 'false');
+  await expect(exportLink).toHaveCount(0);
+  await page.reload();
+  await page.locator('body[data-hydrated]').waitFor({ state: 'attached' });
+  await expect(general).toHaveAttribute('aria-expanded', 'false');
+  await general.locator('.courseindex-chevron').click();
+  await expect(general).toHaveAttribute('aria-expanded', 'true');
+  await expect(exportLink).toBeVisible();
 });
 
 test('export and import move the attempt and progress to another browser', async ({ page, browser }) => {

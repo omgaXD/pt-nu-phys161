@@ -97,6 +97,27 @@ describe('immediate feedback', () => {
     const a = start();
     expect(run(a, { type: 'check', index: 0, now: 1 })).toBe(a);
   });
+
+  it('Reset starts a settled question over: same numbers, no checks, empty field', () => {
+    const fresh = start({ maxTries: 1 });
+    expect(run(fresh, { type: 'reset', index: 0 })).toBe(fresh); // not settled yet
+    let a = run(fresh, { type: 'answer', index: 0, answer: wrong }, { type: 'check', index: 0, now: 1 }, { type: 'reveal', index: 1, now: 2 });
+    a = run(a, { type: 'reset', index: 0 }, { type: 'reset', index: 1 });
+    for (const i of [0, 1]) {
+      expect(isLocked(a, i)).toBe(false);
+      expect(questionState(a, i)).toBe('notyetanswered');
+      expect(triesLeft(a, i)).toBe(1);
+    }
+    expect(a.answers[0]).toEqual({ value: '', unit: '' });
+    expect(a.snapshots[0]).toBe(fresh.snapshots[0]);
+    a = run(a, { type: 'answer', index: 0, answer: correct(a, 0) }, { type: 'check', index: 0, now: 3 });
+    expect(questionState(a, 0)).toBe('correct');
+    // Not in an exam, and not after finishing.
+    const exam = run(start({}, 'exam'), { type: 'answer', index: 0, answer: wrong });
+    expect(run(exam, { type: 'reset', index: 0 })).toBe(exam);
+    const done = run(a, { type: 'finish', now: 4, reason: 'submitted' });
+    expect(run(done, { type: 'reset', index: 0 })).toBe(done);
+  });
 });
 
 describe('deferred feedback (exam)', () => {
