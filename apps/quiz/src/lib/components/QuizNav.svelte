@@ -49,11 +49,14 @@
   });
 </script>
 
+<!-- Moodle's #mod_quiz_navblock: .card-body > h3.h5.card-title.d-inline + .card-text.content.mt-3. -->
 <section class="block" aria-labelledby="quiz-nav-title">
-  <h2 id="quiz-nav-title">{title}</h2>
-  {#each groups as g, gi (gi)}
-    {#if g.name}<div class="section-name">{g.name}</div>{/if}
-    <NavGrid items={g.items} label={g.name ? `${title}: ${g.name}` : title} onSelect={(id) => onSelect(Number(id))} />
-  {/each}
-  {#if children}<div class="othernav">{@render children()}</div>{/if}
+  <h2 id="quiz-nav-title" class="card-title">{title}</h2>
+  <div class="content">
+    {#each groups as g, gi (gi)}
+      {#if g.name}<div class="section-name">{g.name}</div>{/if}
+      <NavGrid items={g.items} label={g.name ? `${title}: ${g.name}` : title} onSelect={(id) => onSelect(Number(id))} />
+    {/each}
+    {#if children}<div class="othernav">{@render children()}</div>{/if}
+  </div>
 </section>

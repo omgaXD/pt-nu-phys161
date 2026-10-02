@@ -32,22 +32,11 @@
 
   color: var(--pt-fg);
   background: var(--pt-bg);
-  /* Bootstrap 5.3's --bs-font-sans-serif: system-ui is DejaVu Sans on most Linux desktops. */
-  font-family:
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    'Noto Sans',
-    'Liberation Sans',
-    Arial,
-    sans-serif,
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    'Noto Color Emoji';
-  font-size: 1rem;
+  /* NU's theme overrides Bootstrap's body (system-ui, 1rem) late in its stylesheet with
+     body{font-family:sans-serif;font-size:17px}. The root stays 16px, so everything sized in rem
+     (buttons, inputs, headings, nav buttons) keeps Bootstrap's sizes; text that inherits is 17px. */
+  font-family: sans-serif;
+  font-size: 17px;
   line-height: 1.5;
 }
 
@@ -66,12 +55,14 @@
   background: #f8f9fa;
   border: 1px solid #cad0d7;
   border-radius: 2px;
-  font-size: 1rem;
+  /* The body size (the card's own default is .85em). */
+  font-size: 1em;
 }
+/* Bootstrap's h3 weight (500); Arial has no medium, so it looks regular. */
 .pt-theme-moodle .que .info h3.no {
   margin: 0;
   font-size: 0.8em;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1;
 }
 .pt-theme-moodle .que .info h3.no .qno {
@@ -115,6 +106,21 @@
   }
 }
 
+/* The problem is Moodle's .qtext: the body's line height (the component's own default is 1.6) and
+   margin-bottom 1.5em. In it, .que p{margin:0 0 .5em}: the narrative and each part's prompt are
+   paragraphs, and the answer row follows its text after that half em. */
+.pt-theme-moodle .formulation .pt-problem {
+  margin-bottom: 1.5em;
+  line-height: inherit;
+}
+.pt-theme-moodle .que p,
+.pt-theme-moodle .que .pt-problem .pt-narrative {
+  margin: 0 0 0.5em;
+}
+.pt-theme-moodle .que .pt-problem .pt-part {
+  margin-top: 0;
+}
+
 /* ---- Figures: natural size, like images in Moodle question text ---------- */
 
 .pt-theme-moodle .pt-figure {
@@ -139,7 +145,7 @@
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 0.5rem;
-  margin: 1rem 0 1.2em;
+  margin: 0.5em 0 1.2em;
 }
 .pt-theme-moodle .pt-answer-controls {
   display: inline-flex;

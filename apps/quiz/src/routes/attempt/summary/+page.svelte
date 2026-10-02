@@ -3,6 +3,7 @@
   import { resolve } from '$app/paths';
   import { isFinished, questionState } from '@pt/quiz';
   import { app } from '$lib/app.svelte';
+  import quizIcon from '$lib/assets/quiz-monologo.svg';
   import Page from '$lib/components/Page.svelte';
   import QuizNav from '$lib/components/QuizNav.svelte';
   import TimeLeft from '$lib/components/TimeLeft.svelte';
@@ -41,7 +42,7 @@
       <li>{presetName(a.preset)}</li>
     </ol>
     <div class="page-header">
-      <span class="activity-icon" aria-hidden="true">?</span>
+      <img class="activity-icon" src={quizIcon} alt="" />
       <h1>{presetName(a.preset)}</h1>
     </div>
     {#if a.endsAt !== null}
