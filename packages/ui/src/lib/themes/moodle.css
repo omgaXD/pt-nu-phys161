@@ -117,13 +117,15 @@
 .pt-theme-moodle .que .pt-problem .pt-narrative {
   margin: 0 0 0.5em;
 }
+/* Each part is a .formulaspart: 1.2em below it. */
 .pt-theme-moodle .que .pt-problem .pt-part {
-  margin-top: 0;
+  margin: 0 0 1.2em;
 }
 
 /* ---- Figures: natural size, like images in Moodle question text ---------- */
 
-.pt-theme-moodle .pt-figure {
+/* `figure.` outranks the component's own .pt-figure (max-width 32rem), whatever the stylesheet order. */
+.pt-theme-moodle figure.pt-figure {
   max-width: 100%;
 }
 /* Without overlays there is nothing to keep in place, so the image need not scale. */
@@ -140,12 +142,13 @@
 /* ---- Answer field (qtype_formulas "Numeric and unit") ------------------- */
 
 /* Fields that end the prompt sit on their own row, like .formulaspart; the answer buttons go beside them. */
+/* Field, mark and buttons share the text baseline, like the inline elements of .formulaspart. */
 .pt-theme-moodle .pt-part-answer {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: baseline;
   gap: 0.5rem;
-  margin: 0.5em 0 1.2em;
+  margin: 0.5em 0 0;
 }
 .pt-theme-moodle .pt-answer-controls {
   display: inline-flex;
@@ -289,7 +292,8 @@
 
 /* ---- Quiz navigation buttons (.qnbutton) -------------------------------- */
 
-.pt-theme-moodle .pt-nav-grid {
+/* `nav.` outranks the component's own .pt-nav-grid grid, whatever the stylesheet order. */
+.pt-theme-moodle nav.pt-nav-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -416,56 +420,67 @@
 
 /* ---- Timer ("Time left 0:39:59") ------------------------------------------ */
 
-.pt-theme-moodle .pt-countdown {
+/* `span.` outranks the component's own .pt-countdown / .low, whatever the stylesheet order. */
+.pt-theme-moodle span.pt-countdown {
   font-weight: 400;
   color: inherit;
 }
-.pt-theme-moodle .pt-countdown.low {
+.pt-theme-moodle span.pt-countdown.low {
   font-weight: 700;
 }
 
 /* ---- Feedback ------------------------------------------------------------ */
+/* Selectors here carry .que so they beat the components' own scoped rules whatever the stylesheet
+   order (the production build loads component CSS after this file). */
 
-/* The mark right after the field, like qtype_formulas' fa-fw icon (Bootstrap text-success / -warning / -danger). */
-.pt-theme-moodle .pt-part-answer > .pt-outcome-icon {
-  align-self: center;
+/* The mark after the field: Moodle's inline .icon.fa-fw (1.25em × 1em, line-height 1) right
+   against the input, on its text baseline (the row aligns on baselines), .5rem before what follows.
+   Colours: Bootstrap text-success / text-danger. */
+.pt-theme-moodle .que .pt-part-answer > .pt-outcome-icon {
   margin: 0 0 0 -0.5rem;
+  line-height: 1;
 }
-.pt-theme-moodle .pt-outcome-icon.correct {
+.pt-theme-moodle .que .pt-part-answer > :is(.pt-answer-field, .pt-unit-field):has(+ .pt-outcome-icon) {
+  margin-right: 0;
+}
+.pt-theme-moodle .que .pt-outcome-icon.correct {
   color: #198754;
 }
-/* Partially correct is an <img> of i/grade_partiallycorrect in Moodle, not a font icon: colour baked in, centred. */
-.pt-theme-moodle .pt-outcome-icon.partiallycorrect {
-  color: #90682f;
-}
-.pt-theme-moodle .pt-outcome-icon.partiallycorrect svg {
-  vertical-align: middle;
-}
-.pt-theme-moodle .pt-outcome-icon.incorrect {
+.pt-theme-moodle .que .pt-outcome-icon.incorrect {
   color: #dc3545;
 }
-/* "One possible correct answer is: ..." (.formulaspartoutcome): a yellow strip inside the question box. */
-.pt-theme-moodle .pt-part-answer:has(+ .pt-part-outcome) {
-  margin-bottom: 0;
+/* Partially correct is an <img class="icon"> of i/grade_partiallycorrect instead: 20 × 16, the 16px
+   picture at its left, vertical-align: middle, colour baked in. */
+.pt-theme-moodle .que .pt-outcome-icon.partiallycorrect {
+  width: 20px;
+  color: #90682f;
+  text-align: left;
 }
-.pt-theme-moodle .pt-part-outcome {
-  margin: 0.2em -0.2em 1.2em;
+.pt-theme-moodle .que .pt-outcome-icon.partiallycorrect svg {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+/* "One possible correct answer is: ..." (.formulaspartoutcome.outcome > .formulaspartcorrectanswer):
+   a yellow strip under the field, inside the question box. */
+.pt-theme-moodle .que .pt-part-outcome {
+  margin: 0.2em -0.2em 0.5em;
   padding: 0.2em;
   background: #fff3bf;
   border: 1px solid #ffecb5;
   border-radius: 0.375rem;
   color: #000;
 }
-.pt-theme-moodle .pt-part-outcome .pt-part-correct-answer {
+.pt-theme-moodle .que .pt-part-outcome .pt-part-correct-answer {
   padding-top: 6px;
 }
-/* "Your answer is correct." (.specificfeedback p). */
-.pt-theme-moodle .que.pt-question-card .outcome p {
+/* The feedback box: .que .feedback, .que .specificfeedback, .que p {margin: 0 0 .5em}. */
+.pt-theme-moodle .que.pt-question-card .outcome :is(.feedback, .specificfeedback, p) {
   margin: 0 0 0.5em;
 }
-/* Our value/unit hints sit like Moodle's plain .numpartscorrect line below the verdict. */
+/* Our value/unit hints sit like Moodle's plain .numpartscorrect line below the verdict (no margin). */
 .pt-theme-moodle .que.pt-question-card .outcome .pt-feedback-details {
-  margin: 0 0 0.5em;
+  margin: 0;
   padding: 0;
   list-style: none;
   font-size: inherit;

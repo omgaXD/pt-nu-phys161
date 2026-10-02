@@ -22,9 +22,9 @@
 <div class="que pt-question-card {state}">
   <div class="info">{@render header?.()}</div>
   <div class="content">
-    <div class="formulation clearfix">{@render children?.()}</div>
+    <div class="formulation clearfix"><h4 class="accesshide pt-sr-only">Question text</h4>{@render children?.()}</div>
     {#if footer}
-      <div class="outcome clearfix">{@render footer()}</div>
+      <div class="outcome clearfix"><h4 class="accesshide pt-sr-only">Feedback</h4>{@render footer()}</div>
     {/if}
   </div>
 </div>

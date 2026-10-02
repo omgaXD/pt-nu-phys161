@@ -269,6 +269,14 @@ describe('result display', () => {
     expect(render(CorrectAnswer, { instance: c11, part: 'car-count' }).container.querySelector('annotation')?.textContent).toBe('24');
   });
 
+  it('CorrectAnswer in Moodle form: plain text, the raw value at PHP precision, the unit as written', () => {
+    const { container } = render(CorrectAnswer, { instance: inst, part: 'work', format: 'moodle' });
+    expect(container.querySelector('.pt-correct-answer')).toHaveTextContent(/^191\.88 J$/);
+    expect(container.querySelector('.katex')).toBeNull();
+    const c4 = canonicalInstance(scenario('c04-meteor'));
+    expect(render(CorrectAnswer, { instance: c4, part: 'kinetic-energy', format: 'moodle' }).container).toHaveTextContent('1.152E+16 J');
+  });
+
   it('toResponse maps field contents to grading responses', () => {
     expect(toResponse(inst.parts[0]!, { value: '191.88 J', unit: '' })).toEqual({ combined: '191.88 J' });
     expect(toResponse({ slots: [{ index: 0, kind: 'value' }, { index: 0, kind: 'unit' }] }, { value: '1', unit: 'J' })).toEqual({ value: '1', unit: 'J' });

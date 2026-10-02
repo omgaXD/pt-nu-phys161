@@ -137,7 +137,7 @@
       {/if}
       {#if outcomes[p.partId]?.showAnswer}
         <div class="pt-part-outcome">
-          <div class="pt-part-correct-answer">One possible correct answer is: <CorrectAnswer {instance} part={p.partId} /></div>
+          <div class="pt-part-correct-answer">One possible correct answer is: <CorrectAnswer {instance} part={p.partId} format="moodle" /></div>
         </div>
       {/if}
     </div>

@@ -18,6 +18,7 @@ export {
   significantDigits,
 } from './numbers/decimal.js';
 export { type Formatted, formatNumber, formatValue, formatVector, type NumberFormat } from './numbers/format.js';
+export { phpFloatString } from './numbers/php.js';
 export * from './repo/index.js';
 export * from './schema/index.js';
 export * from './template/index.js';
