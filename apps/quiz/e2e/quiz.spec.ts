@@ -98,6 +98,17 @@ test('ordered: Check gives immediate feedback and locks a correct answer', async
   await page.getByRole('button', { name: 'Next page' }).click();
   await expect(card(page).locator('.qno')).toHaveText('2');
   await expect(card(page).locator('.source')).toContainText('Reference corpus · P2');
+
+  // The right value without its unit earns part of the mark, and the summary shows it.
+  await answerField(page).fill('233.232');
+  await page.getByRole('button', { name: 'Check' }).click();
+  await expect(card(page).locator('.state')).toHaveText('Partially correct');
+  await page.getByRole('link', { name: 'Finish attempt ...' }).first().click();
+  const rows = page.getByTestId('attempt-summary').locator('tbody tr');
+  await expect(rows.nth(0).locator('td').nth(2)).toHaveText('1.00');
+  await expect(rows.nth(1).locator('td').nth(1)).toHaveText('Partially correct');
+  await expect(rows.nth(1).locator('td').nth(2)).toHaveText(/^0\.(?!00)\d\d$/);
+  await expect(rows.nth(2).locator('td').nth(2)).toHaveText('');
 });
 
 test('maxTries locks a wrong answer and shows the correct one', async ({ page }) => {

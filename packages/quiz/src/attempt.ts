@@ -272,6 +272,20 @@ export interface AttemptSummary {
   durationMs: number;
 }
 
+/**
+ * A question's mark so far, 0..1: after finishing, its final mark; before, the last Check of the
+ * answer still in the field (0 once the answer is shown). Null while it has no mark: not checked,
+ * edited since its last Check, or unavailable.
+ */
+export function questionMark(a: Attempt, i: number): number | null {
+  const state = questionState(a, i);
+  if (state === 'unavailable') return null;
+  if (isFinished(a)) return a.marks[i] ?? 0;
+  if (state === 'revealed') return 0;
+  if (state === 'correct' || state === 'partiallycorrect' || state === 'incorrect') return lastCheck(a, i)?.result.fraction ?? 0;
+  return null;
+}
+
 /** Marks and counts of a finished attempt (or the checks so far of one in progress). */
 export function summarizeAttempt(a: Attempt, now = a.finishedAt ?? a.startedAt): AttemptSummary {
   const s: AttemptSummary = {
@@ -291,8 +305,7 @@ export function summarizeAttempt(a: Attempt, now = a.finishedAt ?? a.startedAt):
     const state = questionState(a, i);
     if (state === 'unavailable') return;
     s.total++;
-    const inProgress = state === 'correct' || state === 'partiallycorrect' ? (lastCheck(a, i)?.result.fraction ?? 0) : 0;
-    s.marks += isFinished(a) ? (a.marks[i] ?? 0) : inProgress;
+    s.marks += questionMark(a, i) ?? 0;
     if (state === 'correct') {
       s.correct++;
       const n = a.checks[i]?.length ?? 0;

@@ -1,13 +1,13 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { resolve } from '$app/paths';
-  import { isFinished, questionState } from '@pt/quiz';
+  import { isFinished, questionMark, questionState } from '@pt/quiz';
   import { app } from '$lib/app.svelte';
   import quizIcon from '$lib/assets/quiz-monologo.svg';
   import Page from '$lib/components/Page.svelte';
   import QuizNav from '$lib/components/QuizNav.svelte';
   import TimeLeft from '$lib/components/TimeLeft.svelte';
-  import { presetName, STATE_TEXT } from '$lib/labels';
+  import { formatMark, presetName, STATE_TEXT } from '$lib/labels';
 
   const a = $derived(app.attempt);
   let dialog = $state<HTMLDialogElement>();
@@ -67,7 +67,8 @@
             </td>
             <td>{STATE_TEXT[state]}</td>
             {#if a.config.feedback === 'immediate'}
-              <td>{state === 'correct' ? '1.00' : state === 'answersaved' || state === 'notyetanswered' ? '' : '0.00'}</td>
+              {@const mark = questionMark(a, i)}
+              <td>{mark === null ? '' : formatMark(mark)}</td>
             {/if}
           </tr>
         {/each}

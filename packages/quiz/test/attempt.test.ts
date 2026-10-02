@@ -6,6 +6,7 @@ import {
   isLocked,
   materialize,
   type QuizConfig,
+  questionMark,
   questionState,
   reduceAttempt,
   snapshotAtStart,
@@ -96,6 +97,27 @@ describe('immediate feedback', () => {
   it('blank answers are not checked', () => {
     const a = start();
     expect(run(a, { type: 'check', index: 0, now: 1 })).toBe(a);
+  });
+
+  it('questionMark: the last Check of the current answer, partial marks included', () => {
+    const noUnit = (a: Attempt, i: number) => ({ value: String(a.snapshots[i]!.instance.parts[0]!.modelAnswer), unit: '' });
+    let a = start();
+    expect(questionMark(a, 0)).toBeNull(); // not answered
+    a = run(a, { type: 'answer', index: 0, answer: noUnit(a, 0) });
+    expect(questionMark(a, 0)).toBeNull(); // saved, not checked
+    a = run(a, { type: 'check', index: 0, now: 1 }, { type: 'answer', index: 1, answer: wrong }, { type: 'check', index: 1, now: 2 }, { type: 'reveal', index: 2, now: 3 });
+    expect(questionState(a, 0)).toBe('partiallycorrect');
+    const partial = a.checks[0]!.at(-1)!.result.fraction;
+    expect(partial).toBeGreaterThan(0);
+    expect(partial).toBeLessThan(1);
+    expect(questionMark(a, 0)).toBe(partial);
+    expect(questionMark(a, 1)).toBe(0);
+    expect(questionMark(a, 2)).toBe(0); // shown
+    expect(summarizeAttempt(a).marks).toBe(partial);
+    expect(questionMark(run(a, { type: 'answer', index: 0, answer: wrong }), 0)).toBeNull(); // edited since the Check
+    a = run(a, { type: 'finish', now: 4, reason: 'submitted' });
+    expect(questionMark(a, 0)).toBe(partial);
+    expect(questionMark(a, 3)).toBe(0); // finished: every question has its mark
   });
 
   it('Reset starts a settled question over: same numbers, no checks, empty field', () => {
