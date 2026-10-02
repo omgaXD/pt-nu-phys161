@@ -113,7 +113,7 @@ describe('deferred feedback (exam)', () => {
     expect(summarizeAttempt(a)).toMatchObject({ total: 7, marks: 1, correct: 1, incorrect: 1, unanswered: 5, durationMs: 60_000 });
   });
 
-  it('times out at the deadline, and nothing but paging happens after finishing', () => {
+  it('times out at the deadline, and nothing but paging and flagging happens after finishing', () => {
     let a = start({}, 'exam');
     a = run(a, { type: 'answer', index: 0, answer: correct(a, 0) }, { type: 'tick', now: T0 + 39 * 60_000 });
     expect(a.finishedAt).toBeNull();
@@ -123,6 +123,7 @@ describe('deferred feedback (exam)', () => {
     expect(run(a, { type: 'answer', index: 1, answer: wrong })).toBe(a);
     expect(run(a, { type: 'finish', now: T0, reason: 'submitted' })).toBe(a);
     expect(run(a, { type: 'goto', page: 3 }).page).toBe(3);
+    expect(run(a, { type: 'flag', index: 1, flagged: true }).flagged[1]).toBe(true);
     // Submitting after the deadline (tab closed) still records the deadline.
     expect(run(start({}, 'exam'), { type: 'finish', now: T0 + 99 * 60_000, reason: 'submitted' }).finishedAt).toBe(T0 + 40 * 60_000);
   });

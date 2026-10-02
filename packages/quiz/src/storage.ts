@@ -173,6 +173,12 @@ export class QuizStorage {
     if (this.read<string>('current') === a.id) this.storage.removeItem(this.key('current'));
   }
 
+  /** Store a change to a finished attempt (a flag set in the review), if it is still kept in full. */
+  updateFinished(a: Attempt): void {
+    if (a.finishedAt === null || !this.history().some((h) => h.id === a.id && h.full)) return;
+    this.saveAttempt(a);
+  }
+
   // ---- History, mastery, preferences ------------------------------------
 
   history(): HistoryEntry[] {

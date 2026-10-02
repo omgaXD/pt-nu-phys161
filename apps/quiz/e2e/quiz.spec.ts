@@ -136,7 +136,12 @@ test('exam from a seeded link: 7 problems from different sections, feedback only
 
   await answerField(page).fill('12 J');
   await page.getByRole('button', { name: 'Next page' }).click();
-  await page.getByRole('button', { name: 'Flag question' }).click();
+  const flag = card(page).getByRole('button', { name: 'Flagged', exact: true });
+  await expect(flag).toHaveText('Flag question');
+  await expect(flag).toHaveAttribute('title', 'Flag this question for future reference');
+  await flag.click();
+  await expect(flag).toHaveAttribute('aria-pressed', 'true');
+  await expect(flag).toHaveText('Remove flag');
   await expect(nav(page).getByRole('button', { name: /^2, not answered, flagged/ })).toHaveClass(/flagged/);
 
   await page.getByRole('link', { name: 'Finish attempt ...' }).first().click();
@@ -154,6 +159,19 @@ test('exam from a seeded link: 7 problems from different sections, feedback only
   expect(labels).toHaveLength(7);
   expect(new Set(labels.map((l) => sectionOf.get(l))).size).toBe(7);
   await expect(page.locator('.que .pt-part-correct-answer')).toHaveCount(7);
+
+  // Flags stay editable in the review, and are kept.
+  const reviewFlag = (n: number) => page.locator(`#question-${n}`).getByRole('button', { name: 'Flagged', exact: true });
+  await expect(reviewFlag(2)).toHaveText('Remove flag');
+  await expect(nav(page).getByRole('button', { name: /^2, not answered, flagged/ })).toHaveClass(/flagged/);
+  await reviewFlag(2).click();
+  await reviewFlag(3).click();
+  await expect(nav(page).getByRole('button', { name: /^2, not answered$/ })).not.toHaveClass(/flagged/);
+  await page.reload();
+  await page.locator('body[data-hydrated]').waitFor({ state: 'attached' });
+  await expect(reviewFlag(2)).toHaveText('Flag question');
+  await expect(reviewFlag(3)).toHaveText('Remove flag');
+  await expect(nav(page).getByRole('button', { name: /^3, .*, flagged$/ })).toHaveClass(/flagged/);
 
   // The finished attempt is in the history, with a review link.
   await page.getByRole('link', { name: 'Finish review' }).click();

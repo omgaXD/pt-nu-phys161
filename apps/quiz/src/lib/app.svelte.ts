@@ -82,7 +82,7 @@ export class QuizApp {
   attempt = $state.raw<Attempt | null>(null);
   mastery = $state.raw<Mastery>({});
   history = $state.raw<HistoryEntry[]>([]);
-  /** The attempt that just finished (review works even if storage failed). */
+  /** The attempt that just finished, or was last changed in its review (review works even if storage failed). */
   lastFinished = $state.raw<Attempt | null>(null);
 
   storage: QuizStorage = new QuizStorage(memoryStorage());
@@ -230,6 +230,16 @@ export class QuizApp {
   finished(id: string): Attempt | null {
     if (this.lastFinished?.id === id) return this.lastFinished;
     return this.storage.loadAttempt(id);
+  }
+
+  /** Flag or unflag a question of a finished attempt, from its review. */
+  flagFinished(id: string, index: number, flagged: boolean): void {
+    const before = this.finished(id);
+    if (!before) return;
+    const next = reduceAttempt(before, { type: 'flag', index, flagged });
+    if (next === before) return;
+    this.lastFinished = next;
+    this.persist(() => this.storage.updateFinished(next));
   }
 
   abandon(): void {

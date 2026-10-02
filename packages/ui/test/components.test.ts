@@ -358,13 +358,16 @@ describe('shell primitives', () => {
     expect(c).toHaveAccessibleName('3, incorrect, flagged');
   });
 
-  it('FlagToggle toggles', async () => {
+  it('FlagToggle toggles, like Moodle\'s question flag', async () => {
     const onchange = vi.fn();
     render(FlagToggle, { onchange });
-    const btn = screen.getByRole('button', { name: /flag question/i });
+    const btn = screen.getByRole('button', { name: 'Flagged' });
     expect(btn).toHaveAttribute('aria-pressed', 'false');
+    expect(btn).toHaveTextContent('Flag question');
+    expect(btn).toHaveAttribute('title', 'Flag this question for future reference');
     await fireEvent.click(btn);
     expect(btn).toHaveAttribute('aria-pressed', 'true');
+    expect(btn).not.toHaveAttribute('title');
     expect(onchange).toHaveBeenCalledWith(true);
   });
 });

@@ -173,7 +173,7 @@ function finish(a: Attempt, now: number, reason: 'submitted' | 'timeout'): Attem
 /**
  * The attempt state machine. Pure: returns a new attempt, or the same one
  * when the action is not allowed (answering a locked question, checking in
- * an exam, anything but paging after finishing…).
+ * an exam, anything but paging and flagging after finishing…).
  */
 export function reduceAttempt(a: Attempt, action: AttemptAction): Attempt {
   const inRange = (i: number): boolean => Number.isInteger(i) && i >= 0 && i < a.questions.length;
@@ -184,6 +184,10 @@ export function reduceAttempt(a: Attempt, action: AttemptAction): Attempt {
   if (action.type === 'snapshot') {
     return inRange(action.index) && !a.snapshots[action.index] ? { ...a, snapshots: set(a.snapshots, action.index, action.snapshot) } : a;
   }
+  // Flags stay editable in the review, as in Moodle.
+  if (action.type === 'flag') {
+    return inRange(action.index) && a.flagged[action.index] !== action.flagged ? { ...a, flagged: set(a.flagged, action.index, action.flagged) } : a;
+  }
   if (isFinished(a)) return a;
 
   switch (action.type) {
@@ -193,8 +197,6 @@ export function reduceAttempt(a: Attempt, action: AttemptAction): Attempt {
       return finish(a, a.endsAt !== null ? Math.min(action.now, a.endsAt) : action.now, action.reason);
     case 'unavailable':
       return inRange(action.index) ? { ...a, unavailable: set(a.unavailable, action.index, true) } : a;
-    case 'flag':
-      return inRange(action.index) && a.flagged[action.index] !== action.flagged ? { ...a, flagged: set(a.flagged, action.index, action.flagged) } : a;
     case 'answer': {
       const i = action.index;
       if (!inRange(i) || isLocked(a, i)) return a;

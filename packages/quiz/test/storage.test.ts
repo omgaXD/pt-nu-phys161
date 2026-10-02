@@ -82,6 +82,11 @@ describe('storage', () => {
     ]);
     expect(s.loadAttempt('h1')).toBeNull();
     expect(s.loadAttempt('h3')!.finishReason).toBe('submitted');
+    // A flag set in the review is kept; an attempt no longer kept in full is not brought back.
+    s.updateFinished(reduceAttempt(s.loadAttempt('h3')!, { type: 'flag', index: 1, flagged: true }));
+    expect(s.loadAttempt('h3')!.flagged[1]).toBe(true);
+    s.updateFinished(reduceAttempt(attempt('h1'), { type: 'finish', now: 5000, reason: 'submitted' }));
+    expect(s.loadAttempt('h1')).toBeNull();
     s.clearHistory();
     expect(s.history()).toEqual([]);
   });

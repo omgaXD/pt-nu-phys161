@@ -53,7 +53,8 @@
   /** The yellow box below holds the verdict; a shown answer alone leaves it out. */
   const hasFeedback = $derived(!!outcome && (!!outcome.result || state === 'notanswered' || state === 'unavailable'));
 
-  const gradeText = $derived(review ? `Mark ${formatMark(attempt.marks[index] ?? 0)} out of 1.00` : 'Marked out of 1.00');
+  /** Moodle gives a mark only to answered questions: a blank one stays "Marked out of 1.00" in the review. */
+  const gradeText = $derived(review && state !== 'notanswered' ? `Mark ${formatMark(attempt.marks[index] ?? 0)} out of 1.00` : 'Marked out of 1.00');
 </script>
 
 {#snippet controls()}
@@ -88,9 +89,9 @@
       <h3 class="no">Question <span class="qno">{index + 1}</span></h3>
       <div class="state">{STATE_TEXT[state]}</div>
       <div class="grade">{gradeText}</div>
-      {#if !review}
+      <div class="questionflag">
         <FlagToggle {flagged} label={flagged ? 'Remove flag' : 'Flag question'} onchange={(f) => onflag?.(f)} />
-      {/if}
+      </div>
       {#if immediate || review}
         <div class="source">{setTitle} · {q.label}{snapshot?.sourceValues ? ' · source values' : ''}</div>
       {/if}

@@ -362,14 +362,26 @@
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.notanswered {
   background-image: url('./moodle-icons/grade_incorrect.svg');
 }
+/* Flagged: Moodle's quiz/flag-on triangle, at 15px 0 inside the frame (.thispageholder background). */
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.flagged::after {
   content: '';
   position: absolute;
-  top: 0;
-  right: 0;
-  border-style: solid;
-  border-width: 0 9px 9px 0;
-  border-color: transparent #ca3120 transparent transparent;
+  top: 1px;
+  left: 16px;
+  right: auto;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  border: 0;
+  background: url('./moodle-icons/flag-on.svg') no-repeat;
+}
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.current.flagged::after {
+  top: 3px;
+  left: 18px;
+}
+/* The question's flag icon is an <img> of i/flagged / i/unflagged: black, whatever the link colour. */
+.pt-theme-moodle .pt-flag-toggle .pt-flag-icon {
+  fill: #000;
 }
 /* Moodle's .qnbutton is a link styled as .btn: on hover it underlines and fades to the link colour. */
 .pt-theme-moodle .pt-nav-grid .pt-nav-item {

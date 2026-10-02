@@ -84,6 +84,7 @@
         review
         setTitle={app.setTitle(q.setId)}
         resolveSrc={app.resolveSrc(q.setId)}
+        onflag={(flagged) => app.flagFinished(a.id, i, flagged)}
       />
     {/each}
 
