@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { FieldContents } from '@pt/core';
   import { type Attempt, isLocked, type QuestionSnapshot, questionState, type SectionReference, triesLeft } from '@pt/quiz';
-  import { CorrectAnswer, DifficultyDots, FlagToggle, PartFeedback, ProblemBody, QuestionCard } from '@pt/ui';
+  import { DifficultyDots, FlagToggle, PartFeedback, ProblemBody, QuestionCard } from '@pt/ui';
   import { formatMark, STATE_TEXT } from '$lib/labels';
 
   interface Props {
@@ -43,8 +43,15 @@
     if (!immediate) return null;
     if (attempt.revealed[index]) return { result: null, showAnswer: true };
     if (!checkedNow || !last) return null;
-    return { result: last.result, showAnswer: locked && last.result.fraction < 1, tryAgain: !locked && last.result.fraction < 1 };
+    return { result: last.result, showAnswer: locked, tryAgain: !locked && last.result.fraction < 1 };
   });
+
+  /** The mark beside the field and "One possible correct answer is", inside the question box (qtype_formulas). */
+  const partOutcomes = $derived(
+    outcome ? { [partId]: { fraction: outcome.result?.fraction ?? (state === 'notanswered' ? 0 : undefined), showAnswer: outcome.showAnswer } } : {},
+  );
+  /** The yellow box below holds the verdict; a shown answer alone leaves it out. */
+  const hasFeedback = $derived(!!outcome && (!!outcome.result || state === 'notanswered' || state === 'unavailable'));
 
   const gradeText = $derived(review ? `Mark ${formatMark(attempt.marks[index] ?? 0)} out of 1.00` : 'Marked out of 1.00');
 </script>
@@ -64,19 +71,19 @@
 {#snippet outcomeBox()}
   {#if outcome?.result}
     <PartFeedback result={outcome.result} />
-  {:else if review && !attempt.revealed[index]}
+  {:else if state === 'notanswered'}
+    <!-- Moodle grades a blank answer like a wrong one. -->
+    <div class="feedback"><div class="specificfeedback"><p>Your answer is incorrect.</p></div></div>
+  {:else if state === 'unavailable'}
     <p class="muted">No answer was given.</p>
   {/if}
   {#if outcome && 'tryAgain' in outcome && outcome.tryAgain}
     <p>Please try again.</p>
   {/if}
-  {#if outcome?.showAnswer && snapshot}
-    <div class="rightanswer">The correct answer is: <CorrectAnswer instance={snapshot.instance} part={partId} /></div>
-  {/if}
 {/snippet}
 
 <div id="question-{index + 1}">
-  <QuestionCard state="{state}{immediate ? ' interactive' : ' deferredfeedback'}" footer={outcome ? outcomeBox : undefined}>
+  <QuestionCard state="{state}{immediate ? ' interactive' : ' deferredfeedback'}" footer={hasFeedback ? outcomeBox : undefined}>
     {#snippet header()}
       <h3 class="no">Question <span class="qno">{index + 1}</span></h3>
       <div class="state">{STATE_TEXT[state]}</div>
@@ -100,6 +107,7 @@
         disabled={locked}
         {resolveSrc}
         controls={immediate && !review && !locked ? controls : undefined}
+        outcomes={partOutcomes}
       />
       {#each references as r (r.src)}
         <details class="reference-link">

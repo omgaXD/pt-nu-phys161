@@ -5,6 +5,8 @@
   import type { AnswerMessages } from '../answer/messages.js';
   import { emptyAnswer, type PartAnswer } from '../answer/types.js';
   import UnitField from '../answer/UnitField.svelte';
+  import CorrectAnswer from '../result/CorrectAnswer.svelte';
+  import OutcomeIcon from '../result/OutcomeIcon.svelte';
   import Figure from './Figure.svelte';
   import RichHtml from './RichHtml.svelte';
 
@@ -24,6 +26,13 @@
     debounce?: number;
     /** Buttons for the answer (Check, ...): beside the last part's fields when they end its prompt, else after the parts. */
     controls?: Snippet;
+    /** Per part id, once graded: the mark beside its fields and/or "One possible correct answer is: ...". */
+    outcomes?: Record<string, PartOutcome>;
+  }
+
+  interface PartOutcome {
+    fraction?: number;
+    showAnswer?: boolean;
   }
 
   let {
@@ -37,6 +46,7 @@
     messages,
     debounce = 300,
     controls,
+    outcomes = {},
   }: Props = $props();
 
   const parts = $derived(part === undefined ? instance.parts : instance.parts.filter((p) => p.partId === part));
@@ -70,6 +80,11 @@
   const label = (p: InstancePart, what: string): string =>
     instance.parts.length > 1 ? `${what}, part ${instance.parts.indexOf(p) + 1}` : what;
 </script>
+
+{#snippet mark(partId: string)}
+  {@const fraction = outcomes[partId]?.fraction}
+  {#if fraction !== undefined}<OutcomeIcon {fraction} />{/if}
+{/snippet}
 
 {#snippet figureSnippet(_id: string)}
   {#if instance.figure}<Figure figure={instance.figure} {resolveSrc} />{/if}
@@ -113,10 +128,17 @@
       <RichHtml html={prompt.text} slot={slotSnippet} figure={figureSnippet} />
       {#if prompt.answer}
         <span class="pt-part-answer"
-          ><RichHtml html={prompt.answer} slot={slotSnippet} />{#if controls && p.partId === lastTrailing}<span class="pt-answer-controls"
+          ><RichHtml html={prompt.answer} slot={slotSnippet} />{@render mark(p.partId)}{#if controls && p.partId === lastTrailing}<span class="pt-answer-controls"
               >{@render controls()}</span
             >{/if}</span
         >
+      {:else}
+        {@render mark(p.partId)}
+      {/if}
+      {#if outcomes[p.partId]?.showAnswer}
+        <div class="pt-part-outcome">
+          <div class="pt-part-correct-answer">One possible correct answer is: <CorrectAnswer {instance} part={p.partId} /></div>
+        </div>
       {/if}
     </div>
   {/each}
@@ -131,6 +153,12 @@
   }
   .pt-part {
     margin-top: 0.75rem;
+  }
+  .pt-part-outcome {
+    margin: 0.5rem 0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background: var(--pt-outcome-bg, #fcefdc);
   }
   .pt-slot-placeholder {
     display: inline-block;

@@ -34,6 +34,8 @@ export function navState(state: QuestionState): Pick<NavItem, 'answered' | 'outc
       return { answered: true, outcome: 'incorrect' };
     case 'answersaved':
       return { answered: true };
+    case 'notanswered':
+      return { answered: false, outcome: 'notanswered' };
     default:
       return { answered: false };
   }

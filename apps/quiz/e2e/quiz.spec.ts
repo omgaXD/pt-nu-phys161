@@ -107,14 +107,14 @@ test('maxTries locks a wrong answer and shows the correct one', async ({ page })
   await page.getByRole('button', { name: 'Check' }).click();
   await expect(card(page).locator('.state')).toHaveText('Incorrect');
   await expect(page.getByRole('button', { name: 'Check' })).toHaveCount(0);
-  await expect(card(page).locator('.rightanswer')).toContainText('The correct answer is');
+  await expect(card(page).locator('.pt-part-correct-answer')).toContainText('One possible correct answer is');
 });
 
 test('Show correct answer locks the question and earns nothing', async ({ page }) => {
   await startFrom(page, '?p=ordered&sets=demo');
   await page.getByRole('button', { name: 'Show correct answer' }).click();
   await expect(card(page).locator('.state')).toHaveText('Correct answer shown');
-  await expect(card(page).locator('.rightanswer')).toContainText('191.88');
+  await expect(card(page).locator('.pt-part-correct-answer')).toContainText('191.88');
   await expect(answerField(page)).toBeDisabled();
   await expect(card(page).locator('.pt-difficulty')).toHaveCount(0); // demo problems are unrated
   await submitAll(page);
@@ -153,7 +153,7 @@ test('exam from a seeded link: 7 problems from different sections, feedback only
   const labels = (await page.locator('.que .source').allTextContents()).map((t) => /P\d+/.exec(t)![0]);
   expect(labels).toHaveLength(7);
   expect(new Set(labels.map((l) => sectionOf.get(l))).size).toBe(7);
-  await expect(page.locator('.que .rightanswer')).toHaveCount(7);
+  await expect(page.locator('.que .pt-part-correct-answer')).toHaveCount(7);
 
   // The finished attempt is in the history, with a review link.
   await page.getByRole('link', { name: 'Finish review' }).click();

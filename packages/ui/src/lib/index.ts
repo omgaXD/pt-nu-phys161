@@ -25,6 +25,7 @@ export { default as CorrectAnswer } from './result/CorrectAnswer.svelte';
 export { DEFAULT_DIFFICULTY_NAMES, type DifficultyNames } from './result/difficulty.js';
 export { default as DifficultyDots } from './result/DifficultyDots.svelte';
 export { default as GradeBadge } from './result/GradeBadge.svelte';
+export { default as OutcomeIcon } from './result/OutcomeIcon.svelte';
 export { default as PartFeedback } from './result/PartFeedback.svelte';
 
 // Shell primitives (presentational only)

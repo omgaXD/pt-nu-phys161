@@ -330,32 +330,37 @@
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.answered {
   background: #dee2e6;
 }
-/* Graded: tinted button, coloured frame, a mark in the lower half (.trafficlight). */
-.pt-theme-moodle .pt-nav-grid .pt-nav-item:is(.correct, .partial, .incorrect) {
+/* Graded: tinted button, coloured frame, a mark in the lower half (.trafficlight). The marks are
+   Moodle's own i/grade_correct, i/grade_partiallycorrect and i/grade_incorrect SVGs, colours baked in. */
+.pt-theme-moodle .pt-nav-grid .pt-nav-item:is(.correct, .partial, .incorrect, .notanswered) {
   background-position: center 23px;
   background-size: 14px;
   background-repeat: no-repeat;
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.correct {
   background-color: #dff4d8;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5l4 4 8-9' fill='none' stroke='%23198754' stroke-width='2.5'/%3E%3C/svg%3E");
+  background-image: url('./moodle-icons/grade_correct.svg');
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.correct::before {
   border-color: #177a4c;
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.partial {
   background-color: #fcefdc;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5l4 4 8-9' fill='none' stroke='%23ffc107' stroke-width='2.5'/%3E%3C/svg%3E");
+  background-image: url('./moodle-icons/grade_partiallycorrect.svg');
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.partial::before {
   border-color: #997404;
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.incorrect {
   background-color: #fdd;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 3l10 10M13 3L3 13' fill='none' stroke='%23dc3545' stroke-width='2.5'/%3E%3C/svg%3E");
+  background-image: url('./moodle-icons/grade_incorrect.svg');
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.incorrect::before {
   border-color: #c6303e;
+}
+/* Not answered: the incorrect mark on a plain white button with the usual frame. */
+.pt-theme-moodle .pt-nav-grid .pt-nav-item.notanswered {
+  background-image: url('./moodle-icons/grade_incorrect.svg');
 }
 .pt-theme-moodle .pt-nav-grid .pt-nav-item.flagged::after {
   content: '';
@@ -403,8 +408,49 @@
 
 /* ---- Feedback ------------------------------------------------------------ */
 
-.pt-theme-moodle .pt-part-feedback {
-  font-size: 0.95em;
+/* The mark right after the field, like qtype_formulas' fa-fw icon (Bootstrap text-success / -warning / -danger). */
+.pt-theme-moodle .pt-part-answer > .pt-outcome-icon {
+  align-self: center;
+  margin: 0 0 0 -0.5rem;
+}
+.pt-theme-moodle .pt-outcome-icon.correct {
+  color: #198754;
+}
+/* Partially correct is an <img> of i/grade_partiallycorrect in Moodle, not a font icon: colour baked in, centred. */
+.pt-theme-moodle .pt-outcome-icon.partiallycorrect {
+  color: #90682f;
+}
+.pt-theme-moodle .pt-outcome-icon.partiallycorrect svg {
+  vertical-align: middle;
+}
+.pt-theme-moodle .pt-outcome-icon.incorrect {
+  color: #dc3545;
+}
+/* "One possible correct answer is: ..." (.formulaspartoutcome): a yellow strip inside the question box. */
+.pt-theme-moodle .pt-part-answer:has(+ .pt-part-outcome) {
+  margin-bottom: 0;
+}
+.pt-theme-moodle .pt-part-outcome {
+  margin: 0.2em -0.2em 1.2em;
+  padding: 0.2em;
+  background: #fff3bf;
+  border: 1px solid #ffecb5;
+  border-radius: 0.375rem;
+  color: #000;
+}
+.pt-theme-moodle .pt-part-outcome .pt-part-correct-answer {
+  padding-top: 6px;
+}
+/* "Your answer is correct." (.specificfeedback p). */
+.pt-theme-moodle .que.pt-question-card .outcome p {
+  margin: 0 0 0.5em;
+}
+/* Our value/unit hints sit like Moodle's plain .numpartscorrect line below the verdict. */
+.pt-theme-moodle .que.pt-question-card .outcome .pt-feedback-details {
+  margin: 0 0 0.5em;
+  padding: 0;
+  list-style: none;
+  font-size: inherit;
 }
 
 /* ---- Buttons (Bootstrap 5) ------------------------------------------------ */

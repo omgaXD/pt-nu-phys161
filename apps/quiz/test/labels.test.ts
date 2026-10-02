@@ -21,6 +21,7 @@ describe('labels', () => {
     expect(navState('revealed')).toEqual({ answered: true, outcome: 'incorrect' });
     expect(navState('answersaved')).toEqual({ answered: true });
     expect(navState('notyetanswered')).toEqual({ answered: false });
+    expect(navState('notanswered')).toEqual({ answered: false, outcome: 'notanswered' });
   });
 
   it('formats durations and preset names', () => {

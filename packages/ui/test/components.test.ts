@@ -81,6 +81,20 @@ describe('ProblemBody', () => {
     expect(container.querySelectorAll('.pt-slot-placeholder')).toHaveLength(3);
   });
 
+  it('marks a graded part and offers one possible correct answer', () => {
+    const [first, second] = inst.parts.map((p) => p.partId) as [string, string];
+    const { container } = render(ProblemBody, {
+      instance: inst,
+      outcomes: { [first]: { fraction: 1 }, [second]: { fraction: 0, showAnswer: true } },
+    });
+    const parts = container.querySelectorAll('.pt-part');
+    expect(parts[0]!.querySelector('.pt-outcome-icon')).toHaveAttribute('aria-label', 'Correct');
+    expect(parts[0]!.querySelector('.pt-part-correct-answer')).toBeNull();
+    expect(parts[1]!.querySelector('.pt-outcome-icon')).toHaveAttribute('aria-label', 'Incorrect');
+    expect(parts[1]!.querySelector('.pt-part-correct-answer')).toHaveTextContent('One possible correct answer is:');
+    expect(container.querySelectorAll('.pt-outcome-icon')).toHaveLength(2);
+  });
+
   it('renders vectors in unit-vector notation (C6)', () => {
     const { container } = render(ProblemBody, { instance: canonicalInstance(scenario('c06-vector-work')) });
     const annotations = [...container.querySelectorAll('annotation')].map((a) => a.textContent);
@@ -231,15 +245,16 @@ describe('result display', () => {
   });
 
   it('PartFeedback explains a result', () => {
+    // Moodle's wording, and nothing else when the answer is right.
     const ok = render(PartFeedback, { result: grade('191.88', 'J') });
-    expect(ok.container.querySelector('[data-verdict="correct"]')).toHaveTextContent('Value is correct.');
+    expect(ok.container.querySelector('[data-verdict="correct"]')).toHaveTextContent(/^Your answer is correct\.$/);
     const noUnit = render(PartFeedback, { result: grade('191.88') });
-    expect(noUnit.container.querySelector('[data-verdict="partially-correct"]')).toHaveTextContent('Unit is missing or wrong.');
-    // The student's unit is rendered as a unit, not as raw text ("^" would break TeX).
-    const si = render(PartFeedback, { result: grade('191.88', 'kg m^2 s^-2') });
-    expect(si.container.querySelector('annotation')?.textContent).toBe('191.88\\quad \\dfrac{\\text{kg} \\cdot \\text{m}^{2}}{\\text{s}^{2}}');
-    expect(si.container.querySelector('.katex-error')).toBeNull();
+    const partial = noUnit.container.querySelector('[data-verdict="partially-correct"]');
+    expect(partial).toHaveTextContent('Your answer is partially correct.');
+    expect(partial).toHaveTextContent('Value is correct.');
+    expect(partial).toHaveTextContent('Unit is missing or wrong.');
     const bad = render(PartFeedback, { result: grade('abc', 'J') });
+    expect(bad.container).toHaveTextContent('Your answer is incorrect.');
     expect(bad.container).toHaveTextContent('Letters are not allowed here');
   });
 

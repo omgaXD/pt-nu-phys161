@@ -10,7 +10,8 @@
   let { items, onSelect, label = 'Question navigation' }: Props = $props();
 
   const stateOf = (i: NavItem): string => i.outcome ?? (i.answered ? 'answered' : 'unanswered');
-  const spoken = (i: NavItem): string => (i.outcome ? `, ${i.outcome}` : i.answered ? ', answered' : ', not answered');
+  const spoken = (i: NavItem): string =>
+    i.outcome ? `, ${i.outcome === 'notanswered' ? 'not answered' : i.outcome}` : i.answered ? ', answered' : ', not answered';
 </script>
 
 <nav class="pt-nav-grid" aria-label={label}>
