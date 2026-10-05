@@ -653,13 +653,15 @@ h3 {
 
 /* ---- Start page ------------------------------------------------------------------ */
 
+/* Exams in halves on the first row, practice in thirds on the second; one column on phones. */
 .presets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 0.75rem;
   margin-bottom: 0.5rem;
 }
 .preset {
+  grid-column: span 2;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -671,6 +673,18 @@ h3 {
   border: 1px solid #dee2e6;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+.preset[data-preset='exam'],
+.preset[data-preset='nightmare'] {
+  grid-column: span 3;
+}
+@media (max-width: 575.98px) {
+  .presets {
+    grid-template-columns: 1fr;
+  }
+  .presets .preset {
+    grid-column: auto;
+  }
 }
 .preset:hover {
   border-color: #86b7fe;
