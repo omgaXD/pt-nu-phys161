@@ -128,11 +128,13 @@ deployed site shows every problem and answer to anyone with the URL.
   include not-yet-randomized problems, skip solved ones, a difficulty range, all or a sample of
   N spread uniformly / across sections / across sets, source, shuffled, easy-to-hard or
   hard-to-easy order (shuffled within each level, unrated problems last), immediate or
-  deferred feedback, tries, a "Show correct answer" button, a time limit, a seed) with three
-  presets that set it in one click — **Ordered** (every problem in order, Check after each),
-  **Exam** (7 problems from different sections, 40 minutes, marks at the end) and **Chaotic**
-  (Ordered, shuffled). Any edit shows *Custom*. *Copy link* encodes the configuration and seed:
-  the same link reproduces the same questions and numbers.
+  deferred feedback, tries, a "Show correct answer" button, a time limit, a seed) with six
+  presets that set it in one click — **Exam** (7 problems from different sections, 40 minutes,
+  marks at the end), **Fresh** (Exam, unsolved problems only), **Nightmare** (Exam, difficulty
+  3–5 only), **Ordered** (every problem in order, Check after each), **Chaotic** (Ordered,
+  shuffled) and **Easy to Hard** (Ordered, easiest first). Any edit shows *Custom*. *Copy link*
+  encodes the configuration and seed: the same link reproduces the same questions and numbers
+  (solved problems are never left out by a link, so a Fresh quiz links as an Exam).
 - **Attempt:** Moodle's layout — one question per page, the question card, a quiz navigation
   block, a sticky `Time left 0:39:59` timer that submits at the deadline (also after a reload),
   flags, Check / tries / Show correct answer in immediate mode, a summary page with *Submit all

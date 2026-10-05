@@ -183,7 +183,7 @@
     </div>
   {/if}
 
-  <h2>Mode</h2>
+  <h2>Preset</h2>
   <div class="presets" role="group" aria-label="Presets">
     {#each PRESET_IDS as id (id)}
       <button type="button" class="preset" aria-pressed={preset === id} onclick={() => choose(id)} data-preset={id}>
@@ -429,7 +429,7 @@
     <p class="muted">No finished attempts yet.</p>
   {:else}
     <table class="generaltable" data-testid="history">
-      <thead><tr><th>Finished</th><th>Mode</th><th>Sets</th><th>Marks</th><th></th></tr></thead>
+      <thead><tr><th>Finished</th><th>Preset</th><th>Sets</th><th>Marks</th><th></th></tr></thead>
       <tbody>
         {#each app.history as h (h.id)}
           <tr>

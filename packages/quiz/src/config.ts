@@ -18,8 +18,8 @@ export function difficultyFilter(d: DifficultyFilter | undefined): DifficultyFil
 
 /**
  * One configuration model for every way of taking a quiz. The presets are
- * just values of it: picking one sets the mode fields and keeps the content
- * selection (sets, sections, excluded problems).
+ * just values of it: picking one sets every field but the content selection
+ * (sets, sections, excluded problems) and the seed.
  */
 export const QuizConfigSchema = z.strictObject({
   /** Selected set ids. */
@@ -56,7 +56,7 @@ export const QuizConfigSchema = z.strictObject({
 export type QuizConfig = z.infer<typeof QuizConfigSchema>;
 export type QuizConfigInput = z.input<typeof QuizConfigSchema>;
 
-/** The fields a preset decides. */
+/** The fields that say how the quiz runs (a share link lists the ones that differ from its preset). */
 export type ModeFields = Omit<QuizConfig, 'sets' | 'sections' | 'exclude' | 'skipSolved' | 'difficulty' | 'seed'>;
 export const MODE_FIELDS = [
   'values',
@@ -70,12 +70,29 @@ export const MODE_FIELDS = [
   'timeLimitMinutes',
 ] as const satisfies readonly (keyof ModeFields)[];
 
-export const PRESET_IDS = ['ordered', 'exam', 'chaotic'] as const;
+/** The fields a preset decides: the mode fields, solved problems and the difficulty range. */
+export type PresetFields = ModeFields & Pick<QuizConfig, 'skipSolved' | 'difficulty'>;
+
+export const PRESET_IDS = ['exam', 'fresh', 'nightmare', 'ordered', 'chaotic', 'easy-to-hard'] as const;
 export type PresetId = (typeof PRESET_IDS)[number];
 
-const ORDERED: ModeFields = {
+const EXAM: PresetFields = {
   values: 'random',
   includeFixed: true,
+  skipSolved: false,
+  count: 7,
+  draw: 'sections',
+  order: 'source',
+  feedback: 'deferred',
+  maxTries: null,
+  allowReveal: false,
+  timeLimitMinutes: 40,
+};
+
+const ORDERED: PresetFields = {
+  values: 'random',
+  includeFixed: true,
+  skipSolved: false,
   count: 'all',
   draw: 'uniform',
   order: 'source',
@@ -85,48 +102,49 @@ const ORDERED: ModeFields = {
   timeLimitMinutes: null,
 };
 
-export const PRESETS: Readonly<Record<PresetId, Readonly<ModeFields>>> = Object.freeze({
+export const PRESETS: Readonly<Record<PresetId, Readonly<PresetFields>>> = Object.freeze({
+  /** Seven problems from different sections, feedback only at the end, 40 minutes. */
+  exam: EXAM,
+  /** Exam, leaving out problems already solved. */
+  fresh: { ...EXAM, skipSolved: true },
+  /** Exam, difficulty 3–5 only. */
+  nightmare: { ...EXAM, difficulty: { min: 3, max: 5, unrated: false } },
   /** Every problem of the selected sets in source order, with a Check button. */
   ordered: ORDERED,
-  /** Seven problems from different sections, feedback only at the end, 40 minutes. */
-  exam: {
-    values: 'random',
-    includeFixed: true,
-    count: 7,
-    draw: 'sections',
-    order: 'source',
-    feedback: 'deferred',
-    maxTries: null,
-    allowReveal: false,
-    timeLimitMinutes: 40,
-  },
   /** Ordered, shuffled. */
   chaotic: { ...ORDERED, order: 'shuffled' },
+  /** Ordered, easiest first (shuffled within each difficulty level). */
+  'easy-to-hard': { ...ORDERED, order: 'easy-first' },
 });
 
 export function defaultConfig(sets: readonly string[], preset: PresetId = 'ordered'): QuizConfig {
-  return { sets: [...sets], sections: {}, exclude: {}, skipSolved: false, ...PRESETS[preset] };
+  return { sets: [...sets], sections: {}, exclude: {}, ...PRESETS[preset] };
 }
 
-/** Pick a preset: its mode fields replace the current ones; sets, sections, excluded problems, skipSolved, difficulty and seed stay. */
+/** Pick a preset: it replaces every field but sets, sections, excluded problems and the seed. */
 export function applyPreset(config: QuizConfig, preset: PresetId): QuizConfig {
-  return { ...config, ...PRESETS[preset] };
+  const { difficulty: _drop, ...rest } = config;
+  return { ...rest, ...PRESETS[preset] };
 }
 
 /**
- * Mode fields with the ones that do not matter blanked out: the draw is
- * irrelevant without a sample, tries and reveal without immediate feedback.
+ * Preset fields with the ones that do not matter blanked out: the draw is
+ * irrelevant without a sample, tries and reveal without immediate feedback,
+ * and a full difficulty range is no range.
  */
-function effective(m: ModeFields): Record<string, unknown> {
+function effective(m: PresetFields): Record<string, unknown> {
+  const d = difficultyFilter(m.difficulty);
   return {
     ...Object.fromEntries(MODE_FIELDS.map((k) => [k, m[k]])),
+    skipSolved: m.skipSolved,
+    difficulty: d ? [d.min, d.max, d.unrated] : null,
     ...(m.count === 'all' && { draw: null }),
     ...(m.feedback === 'deferred' && { maxTries: null, allowReveal: null }),
   };
 }
 
-/** Which preset the configuration is, or `custom` once any mode field differs. */
-export function matchPreset(config: ModeFields): PresetId | 'custom' {
+/** Which preset the configuration is, or `custom` once any preset field differs. */
+export function matchPreset(config: PresetFields): PresetId | 'custom' {
   const mine = JSON.stringify(effective(config));
   return PRESET_IDS.find((id) => JSON.stringify(effective(PRESETS[id])) === mine) ?? 'custom';
 }

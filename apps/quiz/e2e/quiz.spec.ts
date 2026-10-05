@@ -54,6 +54,18 @@ test('start page: presets set the options, editing makes a custom quiz', async (
   await page.getByLabel('Time limit in minutes').fill('30');
   await page.getByLabel('Time limit in minutes').blur();
   await expect(page.getByTestId('preset-state')).toContainText('Custom');
+
+  // Fresh and Nightmare are Exam with solved problems left out, or difficulty 3–5 only.
+  await page.getByRole('button', { name: /^Fresh/ }).click();
+  await expect(page.getByLabel('Skip problems I have solved')).toBeChecked();
+  await expect(page.getByTestId('summary')).toContainText('Fresh: 7 questions · in order · randomized values · 40 min');
+  await page.getByRole('button', { name: /^Nightmare/ }).click();
+  await expect(page.getByLabel('Skip problems I have solved')).not.toBeChecked();
+  await expect(page.getByLabel('Lowest difficulty')).toHaveValue('3');
+  await expect(page.getByTestId('summary')).toContainText('Nightmare: 7 questions · in order · randomized values · difficulty 3–5 · 40 min');
+  await page.getByRole('button', { name: /^Easy to Hard/ }).click();
+  await expect(page.getByLabel('Lowest difficulty')).toHaveValue('1');
+  await expect(page.getByTestId('summary')).toContainText('Easy to Hard: 28 questions · easy to hard · randomized values · no time limit');
   await page.getByRole('button', { name: /^Chaotic/ }).click();
   await expect(page.getByTestId('summary')).toContainText('28 questions · shuffled');
 
@@ -288,7 +300,7 @@ test('difficulty: the start page filters by a range, unrated problems only if as
   await expect(page.getByLabel(/Include problems without a difficulty/)).toHaveCount(0);
   await page.getByLabel('Lowest difficulty').selectOption('4');
   await expect(page.getByTestId('summary')).toContainText('5 questions · in order · randomized values · difficulty 4–5 ·');
-  await expect(page.getByTestId('preset-state')).not.toContainText('Custom');
+  await expect(page.getByTestId('preset-state')).toContainText('Custom');
   await page.getByLabel(/Include problems without a difficulty/).check();
   await expect(page.getByTestId('summary')).toContainText('12 questions');
   await expect(page.getByTestId('summary')).toContainText('difficulty 4–5 (+ unrated)');
@@ -379,7 +391,7 @@ test('difficulty orders: easy to hard or hard to easy, explained by a tooltip', 
   expect(await tooltipShown()).toBe(true);
   await page.getByRole('radio', { name: 'Easy to hard' }).check();
   await expect(page.getByTestId('summary')).toContainText('28 questions · easy to hard');
-  await expect(page.getByTestId('preset-state')).toContainText('Custom');
+  await expect(page.getByRole('button', { name: /^Easy to Hard/ })).toHaveAttribute('aria-pressed', 'true');
 
   // The review shows the levels: they never go down (or up).
   for (const [order, sorted] of [['easy-first', (a: number, b: number) => a - b], ['hard-first', (a: number, b: number) => b - a]] as const) {

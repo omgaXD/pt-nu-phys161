@@ -1,4 +1,14 @@
-import { difficultyFilter, type ModeFields, PRESET_IDS, PRESETS, type PresetId, type QuizConfig, QuizConfigSchema } from './config.js';
+import {
+  type DifficultyFilter,
+  difficultyFilter,
+  type ModeFields,
+  PRESET_IDS,
+  type PresetFields,
+  PRESETS,
+  type PresetId,
+  type QuizConfig,
+  QuizConfigSchema,
+} from './config.js';
 import { compareLabels } from './selection.js';
 
 /**
@@ -6,9 +16,10 @@ import { compareLabels } from './selection.js';
  * the nearest preset and lists only the fields that differ from it, so
  * `?p=exam&sets=phys161-exam1&seed=42` is a complete, reproducible exam.
  * Per set, `sec.<set>=a,b` picks sections (empty: none) and `ex.<set>=P3,P16`
- * leaves problems out. A difficulty range is `diff=2-4` (with `unrated=1` to
- * keep unrated problems).
- * `skipSolved` is never encoded: it depends on the viewer's own progress.
+ * leaves problems out. A difficulty range other than the preset's is
+ * `diff=2-4` (with `unrated=1` to keep unrated problems; `diff=1-5` for none).
+ * `skipSolved` is never encoded: it depends on the viewer's own progress, so
+ * a Fresh quiz links as an Exam.
  */
 type Codec = { param: string; encode(v: unknown): string; decode(s: string): unknown };
 
@@ -37,10 +48,21 @@ function differing(config: ModeFields, preset: PresetId): (keyof ModeFields)[] {
   return FIELD_KEYS.filter((k) => config[k] !== PRESETS[preset][k]);
 }
 
-/** The preset a configuration is closest to (fewest differing mode fields). */
-export function nearestPreset(config: ModeFields): PresetId {
+function sameRange(a: DifficultyFilter | undefined, b: DifficultyFilter | undefined): boolean {
+  const x = difficultyFilter(a);
+  const y = difficultyFilter(b);
+  return x === y || (!!x && !!y && x.min === y.min && x.max === y.max && x.unrated === y.unrated);
+}
+
+/** The fields a link must list on top of the preset: mode fields, plus one for the difficulty range. */
+function distance(config: Omit<PresetFields, 'skipSolved'>, preset: PresetId): number {
+  return differing(config, preset).length + (sameRange(config.difficulty, PRESETS[preset].difficulty) ? 0 : 1);
+}
+
+/** The preset a configuration is closest to (fewest differing fields; `skipSolved` does not count). */
+export function nearestPreset(config: Omit<PresetFields, 'skipSolved'>): PresetId {
   let best: PresetId = PRESET_IDS[0];
-  for (const id of PRESET_IDS) if (differing(config, id).length < differing(config, best).length) best = id;
+  for (const id of PRESET_IDS) if (distance(config, id) < distance(config, best)) best = id;
   return best;
 }
 
@@ -55,8 +77,8 @@ export function encodeConfig(config: QuizConfig, contentVersion?: string): URLSe
     const excluded = config.exclude[setId];
     if (excluded && excluded.length > 0) q.set(`ex.${setId}`, [...excluded].sort(compareLabels).join(','));
   }
-  const range = difficultyFilter(config.difficulty);
-  if (range) {
+  if (!sameRange(config.difficulty, PRESETS[preset].difficulty)) {
+    const range = difficultyFilter(config.difficulty) ?? { min: 1, max: 5, unrated: false };
     q.set('diff', `${range.min}-${range.max}`);
     if (range.unrated) q.set('unrated', '1');
   }
@@ -100,6 +122,9 @@ export function decodeConfig(params: URLSearchParams): DecodedConfig | null {
   const r = QuizConfigSchema.safeParse(raw);
   if (!r.success) issues.push(...r.error.issues.map((i) => `${i.path.join('.') || 'config'}: ${i.message}`));
   if (issues.length > 0 || !r.success) return { ok: false, issues };
+  // The full range is no range.
+  const { difficulty, ...rest } = r.data;
+  const config = difficultyFilter(difficulty) ? r.data : rest;
   const cv = params.get('cv');
-  return { ok: true, config: r.data, ...(cv !== null && { contentVersion: cv }) };
+  return { ok: true, config, ...(cv !== null && { contentVersion: cv }) };
 }

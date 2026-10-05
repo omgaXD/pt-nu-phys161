@@ -6,6 +6,7 @@ import {
   encodeConfig,
   hash32,
   matchPreset,
+  PRESET_IDS,
   PRESETS,
   type QuizConfig,
   QuizConfigSchema,
@@ -17,27 +18,40 @@ import {
 
 describe('presets', () => {
   it('are values of the one configuration model', () => {
-    for (const id of ['ordered', 'exam', 'chaotic'] as const) {
+    for (const id of PRESET_IDS) {
       expect(QuizConfigSchema.parse(defaultConfig(['a'], id))).toEqual(defaultConfig(['a'], id));
       expect(matchPreset(defaultConfig(['a'], id))).toBe(id);
     }
   });
 
-  it('describe the three modes', () => {
+  it('describe the six presets', () => {
+    expect(PRESETS.exam).toMatchObject({ count: 7, draw: 'sections', feedback: 'deferred', allowReveal: false, timeLimitMinutes: 40, skipSolved: false });
+    expect(PRESETS.exam.difficulty).toBeUndefined();
+    expect(PRESETS.fresh).toEqual({ ...PRESETS.exam, skipSolved: true });
+    expect(PRESETS.nightmare).toEqual({ ...PRESETS.exam, difficulty: { min: 3, max: 5, unrated: false } });
     expect(PRESETS.ordered).toMatchObject({ count: 'all', order: 'source', feedback: 'immediate', allowReveal: true, timeLimitMinutes: null, values: 'random' });
-    expect(PRESETS.exam).toMatchObject({ count: 7, draw: 'sections', feedback: 'deferred', allowReveal: false, timeLimitMinutes: 40 });
     expect(PRESETS.chaotic).toEqual({ ...PRESETS.ordered, order: 'shuffled' });
+    expect(PRESETS['easy-to-hard']).toEqual({ ...PRESETS.ordered, order: 'easy-first' });
   });
 
-  it('keep the content selection when applied, and become custom when a mode field changes', () => {
-    const c: QuizConfig = { ...defaultConfig(['a', 'b']), sections: { a: ['work'] }, exclude: { b: ['P3'] }, skipSolved: true, seed: 5 };
+  it('keep the content selection and seed when applied, and become custom when any other field changes', () => {
+    const c: QuizConfig = { ...defaultConfig(['a', 'b']), sections: { a: ['work'] }, exclude: { b: ['P3'] }, seed: 5 };
     const exam = applyPreset(c, 'exam');
-    expect(exam).toMatchObject({ sets: ['a', 'b'], sections: { a: ['work'] }, exclude: { b: ['P3'] }, skipSolved: true, seed: 5, count: 7 });
+    expect(exam).toMatchObject({ sets: ['a', 'b'], sections: { a: ['work'] }, exclude: { b: ['P3'] }, seed: 5, count: 7 });
     expect(matchPreset({ ...exam, timeLimitMinutes: 30 })).toBe('custom');
     expect(matchPreset({ ...c, values: 'source' })).toBe('custom');
-    const ranged: QuizConfig = { ...c, difficulty: { min: 2, max: 4, unrated: false } };
-    expect(applyPreset(ranged, 'exam').difficulty).toEqual({ min: 2, max: 4, unrated: false });
+    // Solved problems and the difficulty range belong to the presets too.
+    expect(matchPreset({ ...exam, skipSolved: true })).toBe('fresh');
+    expect(matchPreset({ ...exam, difficulty: { min: 3, max: 5, unrated: false } })).toBe('nightmare');
+    expect(matchPreset({ ...exam, difficulty: { min: 3, max: 5, unrated: true } })).toBe('custom');
+    expect(matchPreset({ ...exam, difficulty: { min: 1, max: 5, unrated: true } })).toBe('exam');
+    expect(matchPreset({ ...c, order: 'easy-first' })).toBe('easy-to-hard');
+    const ranged: QuizConfig = { ...c, skipSolved: true, difficulty: { min: 2, max: 4, unrated: false } };
+    expect(matchPreset(ranged)).toBe('custom');
+    expect(applyPreset(ranged, 'exam')).not.toHaveProperty('difficulty');
+    expect(applyPreset(ranged, 'exam').skipSolved).toBe(false);
     expect(matchPreset(applyPreset(ranged, 'exam'))).toBe('exam');
+    expect(matchPreset(applyPreset(ranged, 'nightmare'))).toBe('nightmare');
   });
 
   it('ignore fields that do not apply (draw without a sample, tries without immediate feedback)', () => {
@@ -83,7 +97,7 @@ describe('share links', () => {
         maxTries: pick([null, 1, 3]),
         allowReveal: pick([true, false]),
         timeLimitMinutes: pick([null, 1, 40]),
-        ...(pick([true, false]) && { difficulty: pick([{ min: 1, max: 3, unrated: false }, { min: 2, max: 5, unrated: true }, { min: 4, max: 4, unrated: false }] as const) }),
+        ...(pick([true, false]) && { difficulty: pick([{ min: 1, max: 3, unrated: false }, { min: 2, max: 5, unrated: true }, { min: 3, max: 5, unrated: false }, { min: 4, max: 4, unrated: false }] as const) }),
         ...(pick([true, false]) && { seed: rng.next() >>> 0 }),
       };
       const q = encodeConfig(c, 'v1');
@@ -101,11 +115,23 @@ describe('share links', () => {
     expect(decodeConfig(new URLSearchParams('sets=a&ex.a=P3'))).toMatchObject({ ok: true, config: { exclude: { a: ['P3'] } } });
   });
 
+  it('name the Nightmare preset with its range, and never the Fresh one', () => {
+    const nightmare = defaultConfig(['a'], 'nightmare');
+    expect(encodeConfig(nightmare).toString()).toBe('p=nightmare&sets=a');
+    expect(decodeConfig(new URLSearchParams('p=nightmare&sets=a'))).toEqual({ ok: true, config: nightmare });
+    expect(decodeConfig(new URLSearchParams('p=nightmare&sets=a&diff=1-5'))).toEqual({ ok: true, config: defaultConfig(['a'], 'exam') });
+    expect(encodeConfig({ ...nightmare, difficulty: { min: 4, max: 5, unrated: false } }).toString()).toBe('p=exam&sets=a&diff=4-5');
+    expect(encodeConfig(defaultConfig(['a'], 'fresh')).toString()).toBe('p=exam&sets=a');
+    expect(decodeConfig(new URLSearchParams('p=fresh&sets=a'))).toMatchObject({ ok: true, config: { skipSolved: false } });
+    expect(encodeConfig(defaultConfig(['a'], 'easy-to-hard')).toString()).toBe('p=easy-to-hard&sets=a');
+  });
+
   it('carry a difficulty range, and drop the full range (no filter)', () => {
     const c: QuizConfig = { ...defaultConfig(['a']), difficulty: { min: 2, max: 4, unrated: true } };
     expect(encodeConfig(c).toString()).toBe('p=ordered&sets=a&diff=2-4&unrated=1');
     expect(encodeConfig({ ...c, difficulty: { min: 1, max: 5, unrated: true } }).toString()).toBe('p=ordered&sets=a');
     expect(decodeConfig(new URLSearchParams('sets=a&diff=3-3'))).toMatchObject({ ok: true, config: { difficulty: { min: 3, max: 3, unrated: false } } });
+    expect(decodeConfig(new URLSearchParams('sets=a&diff=1-5'))).toEqual({ ok: true, config: defaultConfig(['a']) });
     expect(decodeConfig(new URLSearchParams('sets=a&diff=hard'))).toMatchObject({ ok: false, issues: [expect.stringMatching(/difficulty/)] });
     expect(decodeConfig(new URLSearchParams('sets=a&diff=4-2'))).toMatchObject({ ok: false });
   });
