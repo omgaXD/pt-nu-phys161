@@ -7,12 +7,11 @@
     on: boolean;
     solved: boolean;
     /** An option below leaves it out anyway (it cannot be toggled then). */
-    blockedBy?: 'fixed' | 'solved';
+    blockedBy?: 'fixed';
   }
 
   const BLOCKED = {
     fixed: 'Left out while "Include problems not randomized yet" is off',
-    solved: 'Solved, so left out while "Skip problems I have solved" is on',
   } as const;
 </script>
 
@@ -33,7 +32,6 @@
 
   const name = (q: CatalogQuestion): string => (q.title ? `${q.label} · ${q.title}` : q.label);
   function stateText(p: PickerProblem): string {
-    if (p.blockedBy === 'solved') return BLOCKED.solved;
     const state = p.blockedBy ? BLOCKED[p.blockedBy] : p.on ? 'Included' : 'Left out';
     return p.solved ? `${state} · solved` : state;
   }

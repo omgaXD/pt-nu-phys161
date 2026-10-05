@@ -3,10 +3,13 @@ import {
   buildPool,
   defaultConfig,
   isProblemOn,
+  leaveOutSolved,
+  type Mastery,
   type QuizConfig,
   sectionSelection,
   sectionSlug,
   setAllSections,
+  solvedSelected,
   toggleProblem,
   toggleSection,
 } from '../src/index.ts';
@@ -71,5 +74,19 @@ describe('problem selection', () => {
     const big = syntheticSet('b', ['One'], 12);
     const c = [10, 2, 11].reduce<QuizConfig>((acc, n) => toggleProblem(acc, big.questions[n - 1]!, false, ['one'], big.questions), defaultConfig(['b']));
     expect(c.exclude).toEqual({ b: ['P2', 'P10', 'P11'] });
+  });
+
+  it('leaves out solved problems as ordinary exclusions, turning a section off when all of it is solved', () => {
+    const solved = (...ls: string[]): Mastery =>
+      Object.fromEntries(ls.map((l) => [`a/${l}`, { solved: true, attempts: 1, lastFraction: 1, lastAt: 0, lastAttemptId: 'x' }]));
+    const m = { ...solved('P2', 'P4', 'P5', 'P6'), 'a/P7': { solved: false, attempts: 1, lastFraction: 0, lastAt: 0, lastAttemptId: 'x' } };
+    expect(solvedSelected(base, SET.questions, m).map((q) => q.label)).toEqual(['P2', 'P4', 'P5', 'P6']);
+    const c = leaveOutSolved(base, IDS, SET.questions, m);
+    expect(c).toMatchObject({ sections: { a: ['work', 'torque'] }, exclude: { a: ['P2'] } });
+    expect(labels(c)).toEqual(['P1', 'P3', 'P7', 'P8', 'P9']);
+    expect(solvedSelected(c, SET.questions, m)).toEqual([]);
+    expect(leaveOutSolved(c, IDS, SET.questions, m)).toEqual(c);
+    // Picked again by hand, a solved problem stays.
+    expect(labels(on(c, 'P2'))).toContain('P2');
   });
 });

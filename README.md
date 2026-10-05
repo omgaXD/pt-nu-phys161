@@ -125,16 +125,16 @@ deployed site shows every problem and answer to anyone with the URL.
 
 - **Start page:** one configuration model (sets, sections, single problems picked on number
   tiles like the quiz navigation's, randomized or source numbers,
-  include not-yet-randomized problems, skip solved ones, a difficulty range, all or a sample of
+  include not-yet-randomized problems, a difficulty range, all or a sample of
   N spread uniformly / across sections / across sets, source, shuffled, easy-to-hard or
   hard-to-easy order (shuffled within each level, unrated problems last), immediate or
-  deferred feedback, tries, a "Show correct answer" button, a time limit, a seed) with six
+  deferred feedback, tries, a "Show correct answer" button, a time limit, a seed) with five
   presets that set it in one click — **Exam** (7 problems from different sections, 40 minutes,
-  marks at the end), **Fresh** (Exam, unsolved problems only), **Nightmare** (Exam, difficulty
-  3–5 only), **Ordered** (every problem in order, Check after each), **Chaotic** (Ordered,
-  shuffled) and **Easy to Hard** (Ordered, easiest first). Any edit shows *Custom*. *Copy link*
-  encodes the configuration and seed: the same link reproduces the same questions and numbers
-  (solved problems are never left out by a link, so a Fresh quiz links as an Exam).
+  marks at the end), **Nightmare** (Exam, difficulty 3–5 only), **Ordered** (every problem in
+  order, Check after each), **Chaotic** (Ordered, shuffled) and **Easy to Hard** (Ordered,
+  easiest first). Any edit shows *Custom*. *Leave out solved* turns a set's solved problems off
+  in the selection, so nothing depends on local progress: *Copy link* encodes the configuration
+  and seed, and the same link reproduces the same questions and numbers anywhere.
 - **Attempt:** Moodle's layout — one question per page, the question card, a quiz navigation
   block, a sticky `Time left 0:39:59` timer that submits at the deadline (also after a reload),
   flags, Check / tries / Show correct answer in immediate mode, a summary page with *Submit all

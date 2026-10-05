@@ -2,7 +2,6 @@ import { type FieldContents, gradePart, type PartResult, responseFromFields } fr
 import type { CatalogQuestion, CatalogSet } from './bundle.js';
 import { matchPreset, type PresetId, type QuizConfig } from './config.js';
 import { selectQuestions } from './draw.js';
-import type { Mastery } from './mastery.js';
 import type { QuestionSnapshot } from './materialize.js';
 import { questionSeed, randomId, randomSeed } from './random.js';
 
@@ -69,7 +68,6 @@ export interface StartOptions {
   catalog: readonly CatalogSet[];
   contentVersion: string;
   now: number;
-  mastery?: Mastery;
   id?: string;
 }
 
@@ -81,7 +79,7 @@ const sameAnswer = (a: FieldContents, b: FieldContents): boolean => a.value.trim
 export function startAttempt(opts: StartOptions): { attempt: Attempt; pool: number; shortfall: number } {
   const seed = opts.config.seed ?? randomSeed();
   const config: QuizConfig = { ...opts.config, seed };
-  const { questions, pool, shortfall } = selectQuestions(opts.catalog, config, seed, opts.mastery);
+  const { questions, pool, shortfall } = selectQuestions(opts.catalog, config, seed);
   const n = questions.length;
   const attempt: Attempt = {
     format: 1,

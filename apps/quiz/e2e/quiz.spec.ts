@@ -55,12 +55,8 @@ test('start page: presets set the options, editing makes a custom quiz', async (
   await page.getByLabel('Time limit in minutes').blur();
   await expect(page.getByTestId('preset-state')).toContainText('Custom');
 
-  // Fresh and Nightmare are Exam with solved problems left out, or difficulty 3–5 only.
-  await page.getByRole('button', { name: /^Fresh/ }).click();
-  await expect(page.getByLabel('Skip problems I have solved')).toBeChecked();
-  await expect(page.getByTestId('summary')).toContainText('Fresh: 7 questions · in order · randomized values · 40 min');
+  // Nightmare is Exam with difficulty 3–5 only.
   await page.getByRole('button', { name: /^Nightmare/ }).click();
-  await expect(page.getByLabel('Skip problems I have solved')).not.toBeChecked();
   await expect(page.getByLabel('Lowest difficulty')).toHaveValue('3');
   await expect(page.getByTestId('summary')).toContainText('Nightmare: 7 questions · in order · randomized values · difficulty 3–5 · 40 min');
   await page.getByRole('button', { name: /^Easy to Hard/ }).click();
@@ -306,14 +302,28 @@ test('chaotic order is shuffled', async ({ page }) => {
   expect(numbers).not.toEqual([...numbers].sort((x, y) => x - y));
 });
 
-test('solved problems are counted and can be skipped', async ({ page }) => {
+test('solved problems are counted and left out on request, as exclusions a link carries', async ({ page }) => {
   await startFrom(page, '?p=ordered&sets=corpus&values=source');
   await answerField(page).fill('191.88 J');
   await page.getByRole('button', { name: 'Check' }).click();
   await expect(card(page).locator('.state')).toHaveText('Correct');
   await page.getByRole('link', { name: 'Back' }).click();
   await expect(page.locator('.set-row').filter({ hasText: 'Reference corpus' })).toContainText('1 solved');
-  await page.getByLabel('Skip problems I have solved').check();
+  await expect(page.getByTestId('summary')).toContainText('28 questions');
+  const corpus = page.locator('details.sections').first();
+  await corpus.locator('summary').click();
+  await corpus.getByRole('button', { name: 'Leave out solved (1)' }).click();
+  await expect(page.getByTestId('summary')).toContainText('27 questions');
+  await expect(corpus.getByRole('button', { name: 'Leave out solved (0)' })).toBeDisabled();
+  await page.getByRole('button', { name: 'Copy link' }).click();
+  await expect(page).toHaveURL(/[?&]ex\.corpus=P\d+/);
+
+  // Options saved by an older version with "Skip problems I have solved" on: those problems are left out.
+  await page.evaluate(() => {
+    const { config } = JSON.parse(localStorage.getItem('pt:v1:prefs')!);
+    localStorage.setItem('pt:v1:prefs', JSON.stringify({ config: { ...config, skipSolved: true } }));
+  });
+  await open(page, '');
   await expect(page.getByTestId('summary')).toContainText('27 questions');
 });
 

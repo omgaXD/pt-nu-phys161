@@ -9,15 +9,12 @@ const CATALOG = [A, B];
 const exam = (over: Partial<QuizConfig> = {}): QuizConfig => ({ ...defaultConfig(['a'], 'exam'), ...over });
 
 describe('pool', () => {
-  it('filters by set, section, fixed and solved, keeping source order', () => {
+  it('filters by set, section and fixed, keeping source order', () => {
     expect(buildPool(CATALOG, defaultConfig(['a', 'b']))).toHaveLength(130);
     expect(buildPool(CATALOG, defaultConfig(['b']))[0]!.key).toBe('b/P1');
     const work = buildPool(CATALOG, { ...defaultConfig(['a']), sections: { a: [sectionSlug('Work'), sectionSlug('Power')] } });
     expect(new Set(work.map((q) => q.section))).toEqual(new Set(['Work', 'Power']));
     expect(buildPool(CATALOG, { ...defaultConfig(['a']), includeFixed: false }).every((q) => q.kind === 'authored')).toBe(true);
-    const mastery = { 'a/P1': { solved: true, attempts: 1, lastFraction: 1, lastAt: 0, lastAttemptId: 'x' } };
-    expect(buildPool(CATALOG, { ...defaultConfig(['a']), skipSolved: true }, mastery).map((q) => q.key)).not.toContain('a/P1');
-    expect(buildPool(CATALOG, defaultConfig(['a']), mastery).map((q) => q.key)).toContain('a/P1');
   });
 
   it('leaves out excluded problems, and takes nothing from a set with no sections', () => {

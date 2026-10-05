@@ -14,6 +14,7 @@
     difficultyFilter,
     encodeConfig,
     isProblemOn,
+    leaveOutSolved,
     matchPreset,
     PRESET_IDS,
     type PresetId,
@@ -24,6 +25,7 @@
     sectionSlug,
     setAllSections,
     solvedCount,
+    solvedSelected,
     toggleProblem,
     toggleSection,
   } from '@pt/quiz';
@@ -34,12 +36,22 @@
 
   const index = app.index;
   const allSets = (index?.sets ?? []).map((s) => s.id);
+  const sectionsOf = (setId: string): string[] => index?.sets.find((s) => s.id === setId)?.sections.map((s) => s.id) ?? [];
+  const questionsOf = (setId: string): CatalogQuestion[] => [...(app.sets[setId]?.questions ?? [])];
+
+  /** Leave out the solved problems of these sets. */
+  function withoutSolved(c: QuizConfig, setIds: readonly string[]): QuizConfig {
+    return setIds.reduce((acc, id) => leaveOutSolved(acc, sectionsOf(id), questionsOf(id), app.mastery), c);
+  }
 
   /** The last configuration used, else Ordered over the first set. */
   function savedConfig(): QuizConfig {
-    const saved = QuizConfigSchema.safeParse(app.prefs().config);
+    const raw = app.prefs().config;
+    const saved = QuizConfigSchema.safeParse(raw);
     const base = saved.success ? { ...saved.data, sets: saved.data.sets.filter((s) => allSets.includes(s)) } : defaultConfig(allSets.slice(0, 1));
-    return base.sets.length ? base : { ...base, sets: allSets.slice(0, 1) };
+    const c = base.sets.length ? base : { ...base, sets: allSets.slice(0, 1) };
+    // Older versions had a "Skip problems I have solved" option: those problems are left out instead.
+    return saved.success && (raw as { skipSolved?: unknown }).skipSolved === true ? withoutSolved(c, c.sets) : c;
   }
 
   /** URL (share link) first, then the last configuration used. */
@@ -63,7 +75,7 @@
   let copied = $state(false);
 
   const preset = $derived(matchPreset(config));
-  const pool = $derived(config.sets.length ? buildPool(app.catalog(), config, app.mastery).length : 0);
+  const pool = $derived(config.sets.length ? buildPool(app.catalog(), config).length : 0);
   const questions = $derived(config.count === 'all' ? pool : Math.min(pool, config.count));
   const inProgress = $derived(app.attempt);
 
@@ -89,9 +101,6 @@
     config = min === 1 && max === 5 ? rest : { ...rest, difficulty: { min, max, unrated } };
   }
 
-  const sectionsOf = (setId: string): string[] => index?.sets.find((s) => s.id === setId)?.sections.map((s) => s.id) ?? [];
-  const questionsOf = (setId: string): CatalogQuestion[] => [...(app.sets[setId]?.questions ?? [])];
-
   /** Expanded sections (`setId/sectionId`), showing their problems. */
   let expanded = $state<Record<string, boolean>>({});
 
@@ -108,8 +117,8 @@
       .filter((q) => sectionSlug(q.section) === sectionId)
       .map((q) => {
         const solved = app.mastery[q.key]?.solved ?? false;
-        const blockedBy = config.skipSolved && solved ? 'solved' : !config.includeFixed && q.kind === 'fixed' ? 'fixed' : undefined;
-        return { q, on: isProblemOn(config, q), solved, ...(blockedBy && { blockedBy }) };
+        const blocked = !config.includeFixed && q.kind === 'fixed';
+        return { q, on: isProblemOn(config, q), solved, ...(blocked && { blockedBy: 'fixed' as const }) };
       });
   }
 
@@ -210,6 +219,7 @@
       {#if on}
         {@const qs = questionsOf(s.id)}
         {@const picked = s.sections.map((sec) => sectionSelection(config, s.id, sec.id, qs))}
+        {@const solved = solvedSelected(config, qs, app.mastery).length}
         <details class="sections">
           <summary>
             Sections ({picked.filter((p) => p.state !== 'none').length} of {s.sections.length} · {picked.reduce((n, p) => n + p.selected, 0)} of {qs.length} problems)
@@ -217,6 +227,7 @@
           <div class="actions">
             <button type="button" class="link-button" onclick={() => (config = setAllSections(config, s.id, true))}>All</button>
             <button type="button" class="link-button" onclick={() => (config = setAllSections(config, s.id, false))}>None</button>
+            <button type="button" class="link-button" disabled={solved === 0} onclick={() => (config = withoutSolved(config, [s.id]))}>Leave out solved ({solved})</button>
           </div>
           <ul class="section-tree">
             {#each s.sections as sec, i (sec.id)}
@@ -317,7 +328,6 @@
       <span class="label">Content</span>
       <div class="choices">
         <label><input type="checkbox" checked={config.includeFixed} onchange={(e) => (config = { ...config, includeFixed: e.currentTarget.checked })} /> Include problems not randomized yet</label>
-        <label><input type="checkbox" checked={config.skipSolved} onchange={(e) => (config = { ...config, skipSolved: e.currentTarget.checked })} /> Skip problems I have solved</label>
       </div>
 
       <span class="label" id="opt-difficulty">Difficulty</span>

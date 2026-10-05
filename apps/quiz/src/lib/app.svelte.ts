@@ -175,7 +175,7 @@ export class QuizApp {
   /** Start a new attempt (replacing any attempt in progress). */
   start(config: QuizConfig): { ok: true } | { ok: false; message: string } {
     if (!this.index) return { ok: false, message: 'Content is not loaded.' };
-    const { attempt } = startAttempt({ config, catalog: this.catalog(), contentVersion: this.index.version, now: Date.now(), mastery: this.mastery });
+    const { attempt } = startAttempt({ config, catalog: this.catalog(), contentVersion: this.index.version, now: Date.now() });
     if (attempt.questions.length === 0) return { ok: false, message: 'No problems match this selection.' };
     let a = attempt;
     const upFront = snapshotAtStart(a) ? a.questions.map((_, i) => i) : [0];

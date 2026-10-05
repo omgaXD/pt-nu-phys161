@@ -3,7 +3,6 @@ import type { NavItem } from '@pt/ui';
 
 export const PRESET_INFO: Record<PresetId, { name: string; blurb: string }> = {
   exam: { name: 'Exam', blurb: 'Seven problems from different sections, 40 minutes, marks only at the end.' },
-  fresh: { name: 'Fresh', blurb: 'Like Exam, but only problems you have not solved yet.' },
   nightmare: { name: 'Nightmare', blurb: 'Like Exam, but only problems of difficulty 3 to 5.' },
   ordered: { name: 'Ordered', blurb: 'Every problem of the selected sets in order, one at a time, with a Check button.' },
   chaotic: { name: 'Chaotic', blurb: 'Like Ordered, but in random order.' },

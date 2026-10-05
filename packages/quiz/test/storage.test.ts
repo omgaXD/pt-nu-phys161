@@ -112,10 +112,10 @@ describe('storage', () => {
     const a = reduceAttempt(answerRight(attempt('o1'), 0), { type: 'finish', now: 5000, reason: 'submitted' });
     s.archive(a);
     expect(s.reviewable('o1')).toBe(true);
-    // Saved before `exclude` was part of the configuration.
+    // Saved before `exclude` was part of the configuration, and while `skipSolved` was.
     const stored = JSON.parse(mem.getItem('pt:v1:attempt:o1')!) as Attempt;
     const { exclude: _drop, ...older } = stored.config;
-    mem.setItem('pt:v1:attempt:o1', JSON.stringify({ ...stored, config: older }));
+    mem.setItem('pt:v1:attempt:o1', JSON.stringify({ ...stored, config: { ...older, skipSolved: true } }));
     expect(s.reviewable('o1')).toBe(true);
     expect(s.loadAttempt('o1')).toEqual(a);
     // Damaged or gone: nothing to review.

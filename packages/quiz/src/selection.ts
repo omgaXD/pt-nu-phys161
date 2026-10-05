@@ -1,5 +1,6 @@
 import { type CatalogQuestion, sectionSlug } from './bundle.js';
 import type { QuizConfig } from './config.js';
+import type { Mastery } from './mastery.js';
 
 /**
  * Choosing content inside a set: sections, then problems within them. A set
@@ -101,4 +102,18 @@ export function toggleProblem<C extends Selection>(
   const next = [...excluded, q.label];
   if (inSection.every((l) => next.includes(l))) return toggleSection(config, q.setId, sectionId, false, sectionIds, questions);
   return withExcluded(config, q.setId, next);
+}
+
+/** The selected problems already solved (`questions`: the set's questions). */
+export function solvedSelected(config: Selection, questions: readonly CatalogQuestion[], mastery: Mastery): CatalogQuestion[] {
+  return questions.filter((q) => mastery[q.key]?.solved && isProblemOn(config, q));
+}
+
+/**
+ * Leave out a set's solved problems (`sectionIds`: its sections; `questions`:
+ * its questions). They become ordinary exclusions, so the configuration, and
+ * a share link, says exactly which problems remain.
+ */
+export function leaveOutSolved<C extends Selection>(config: C, sectionIds: readonly string[], questions: readonly CatalogQuestion[], mastery: Mastery): C {
+  return solvedSelected(config, questions, mastery).reduce((c, q) => toggleProblem(c, q, false, sectionIds, questions), config);
 }

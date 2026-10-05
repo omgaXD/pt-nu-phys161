@@ -18,8 +18,6 @@ import { compareLabels } from './selection.js';
  * Per set, `sec.<set>=a,b` picks sections (empty: none) and `ex.<set>=P3,P16`
  * leaves problems out. A difficulty range other than the preset's is
  * `diff=2-4` (with `unrated=1` to keep unrated problems; `diff=1-5` for none).
- * `skipSolved` is never encoded: it depends on the viewer's own progress, so
- * a Fresh quiz links as an Exam.
  */
 type Codec = { param: string; encode(v: unknown): string; decode(s: string): unknown };
 
@@ -55,12 +53,12 @@ function sameRange(a: DifficultyFilter | undefined, b: DifficultyFilter | undefi
 }
 
 /** The fields a link must list on top of the preset: mode fields, plus one for the difficulty range. */
-function distance(config: Omit<PresetFields, 'skipSolved'>, preset: PresetId): number {
+function distance(config: PresetFields, preset: PresetId): number {
   return differing(config, preset).length + (sameRange(config.difficulty, PRESETS[preset].difficulty) ? 0 : 1);
 }
 
-/** The preset a configuration is closest to (fewest differing fields; `skipSolved` does not count). */
-export function nearestPreset(config: Omit<PresetFields, 'skipSolved'>): PresetId {
+/** The preset a configuration is closest to (fewest differing fields). */
+export function nearestPreset(config: PresetFields): PresetId {
   let best: PresetId = PRESET_IDS[0];
   for (const id of PRESET_IDS) if (distance(config, id) < distance(config, best)) best = id;
   return best;
@@ -105,7 +103,7 @@ export function decodeConfig(params: URLSearchParams): DecodedConfig | null {
     if (key.startsWith('sec.')) sections[key.slice(4)] = value.split(',').filter(Boolean);
     if (key.startsWith('ex.')) exclude[key.slice(3)] = value.split(',').filter(Boolean);
   }
-  const raw: Record<string, unknown> = { ...PRESETS[preset ?? 'ordered'], sets, sections, exclude, skipSolved: false };
+  const raw: Record<string, unknown> = { ...PRESETS[preset ?? 'ordered'], sets, sections, exclude };
   for (const k of FIELD_KEYS) {
     const s = params.get(FIELDS[k].param);
     if (s !== null) raw[k] = FIELDS[k].decode(s);
