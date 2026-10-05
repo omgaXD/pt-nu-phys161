@@ -111,9 +111,9 @@ export const PRESETS: Readonly<Record<PresetId, Readonly<PresetFields>>> = Objec
   nightmare: { ...EXAM, difficulty: { min: 3, max: 5, unrated: false } },
   /** Every problem of the selected sets in source order, with a Check button. */
   ordered: ORDERED,
-  /** Ordered, shuffled. */
+  /** Practice (`ordered`), shuffled. */
   chaotic: { ...ORDERED, order: 'shuffled' },
-  /** Ordered, easiest first (shuffled within each difficulty level). */
+  /** Practice (`ordered`), easiest first (shuffled within each difficulty level). */
   'easy-to-hard': { ...ORDERED, order: 'easy-first' },
 });
 

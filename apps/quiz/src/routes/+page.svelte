@@ -44,7 +44,7 @@
     return setIds.reduce((acc, id) => leaveOutSolved(acc, sectionsOf(id), questionsOf(id), app.mastery), c);
   }
 
-  /** The last configuration used, else Ordered over the first set. */
+  /** The last configuration used, else Practice over the first set. */
   function savedConfig(): QuizConfig {
     const raw = app.prefs().config;
     const saved = QuizConfigSchema.safeParse(raw);

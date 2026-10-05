@@ -4,9 +4,9 @@ import type { NavItem } from '@pt/ui';
 export const PRESET_INFO: Record<PresetId, { name: string; blurb: string }> = {
   exam: { name: 'Exam', blurb: 'Seven problems from different sections, 40 minutes, marks only at the end.' },
   nightmare: { name: 'Nightmare', blurb: 'Like Exam, but only problems of difficulty 3 to 5.' },
-  ordered: { name: 'Ordered', blurb: 'Every problem of the selected sets in order, one at a time, with a Check button.' },
-  chaotic: { name: 'Chaotic', blurb: 'Like Ordered, but in random order.' },
-  'easy-to-hard': { name: 'Easy to Hard', blurb: 'Like Ordered, but from the easiest problems to the hardest.' },
+  ordered: { name: 'Practice', blurb: 'Every problem of the selected sets in order, one at a time, with a Check button.' },
+  chaotic: { name: 'Chaotic', blurb: 'Like Practice, but in random order.' },
+  'easy-to-hard': { name: 'Easy to Hard', blurb: 'Like Practice, but from the easiest problems to the hardest.' },
 };
 
 export function presetName(p: PresetId | 'custom'): string {

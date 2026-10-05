@@ -130,8 +130,8 @@ deployed site shows every problem and answer to anyone with the URL.
   hard-to-easy order (shuffled within each level, unrated problems last), immediate or
   deferred feedback, tries, a "Show correct answer" button, a time limit, a seed) with five
   presets that set it in one click — **Exam** (7 problems from different sections, 40 minutes,
-  marks at the end), **Nightmare** (Exam, difficulty 3–5 only), **Ordered** (every problem in
-  order, Check after each), **Chaotic** (Ordered, shuffled) and **Easy to Hard** (Ordered,
+  marks at the end), **Nightmare** (Exam, difficulty 3–5 only), **Practice** (every problem in
+  order, Check after each), **Chaotic** (Practice, shuffled) and **Easy to Hard** (Practice,
   easiest first). Any edit shows *Custom*. *Leave out solved* turns a set's solved problems off
   in the selection, so nothing depends on local progress: *Copy link* encodes the configuration
   and seed, and the same link reproduces the same questions and numbers anywhere.

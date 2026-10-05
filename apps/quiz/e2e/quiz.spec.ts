@@ -41,8 +41,8 @@ test.afterEach(() => {
 test('start page: presets set the options, editing makes a custom quiz', async ({ page }) => {
   await open(page, '');
   await expect(page.getByRole('heading', { name: 'Start a quiz' })).toBeVisible();
-  const ordered = page.getByRole('button', { name: /^Ordered/ });
-  await expect(ordered).toHaveAttribute('aria-pressed', 'true');
+  const practice = page.getByRole('button', { name: /^Practice/ });
+  await expect(practice).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByTestId('summary')).toContainText('28 questions · in order · randomized values · no time limit');
 
   await page.getByRole('button', { name: /^Exam/ }).click();
@@ -86,7 +86,7 @@ test('start page: presets set the options, editing makes a custom quiz', async (
   await expect(page).toHaveURL(/ex\.corpus=P\d+/);
 });
 
-test('ordered: Check gives immediate feedback and locks a correct answer', async ({ page }) => {
+test('practice: Check gives immediate feedback and locks a correct answer', async ({ page }) => {
   await startFrom(page, '?p=ordered&sets=corpus&values=source');
   await expect(card(page).locator('.qno')).toHaveText('1');
   await expect(card(page)).toContainText('66.5');
