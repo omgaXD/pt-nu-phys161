@@ -85,7 +85,7 @@ const EXAM: PresetFields = {
   includeFixed: true,
   count: 7,
   draw: 'sections',
-  order: 'source',
+  order: 'shuffled',
   feedback: 'deferred',
   maxTries: null,
   allowReveal: false,
@@ -105,7 +105,7 @@ const ORDERED: PresetFields = {
 };
 
 export const PRESETS: Readonly<Record<PresetId, Readonly<PresetFields>>> = Object.freeze({
-  /** Seven problems from different sections, feedback only at the end, 40 minutes. */
+  /** Seven problems from different sections, shuffled, feedback only at the end, 40 minutes. */
   exam: EXAM,
   /** Exam, difficulty 3–5 only. */
   nightmare: { ...EXAM, difficulty: { min: 3, max: 5, unrated: false } },

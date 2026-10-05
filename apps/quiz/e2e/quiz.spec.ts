@@ -49,7 +49,7 @@ test('start page: presets set the options, editing makes a custom quiz', async (
   await expect(page.getByRole('button', { name: /^Exam/ })).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByLabel('Number of questions')).toHaveValue('7');
   await expect(page.getByLabel('Time limit in minutes')).toHaveValue('40');
-  await expect(page.getByTestId('summary')).toContainText('7 questions · in order · randomized values · 40 min · feedback at the end');
+  await expect(page.getByTestId('summary')).toContainText('7 questions · shuffled · randomized values · 40 min · feedback at the end');
 
   await page.getByLabel('Time limit in minutes').fill('30');
   await page.getByLabel('Time limit in minutes').blur();
@@ -58,7 +58,7 @@ test('start page: presets set the options, editing makes a custom quiz', async (
   // Nightmare is Exam with difficulty 3–5 only.
   await page.getByRole('button', { name: /^Nightmare/ }).click();
   await expect(page.getByLabel('Lowest difficulty')).toHaveValue('3');
-  await expect(page.getByTestId('summary')).toContainText('Nightmare: 7 questions · in order · randomized values · difficulty 3–5 · 40 min');
+  await expect(page.getByTestId('summary')).toContainText('Nightmare: 7 questions · shuffled · randomized values · difficulty 3–5 · 40 min');
   await page.getByRole('button', { name: /^Easy to Hard/ }).click();
   await expect(page.getByLabel('Lowest difficulty')).toHaveValue('1');
   await expect(page.getByTestId('summary')).toContainText('Easy to Hard: 28 questions · easy to hard · randomized values · no time limit');

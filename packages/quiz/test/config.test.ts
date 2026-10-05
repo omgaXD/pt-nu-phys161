@@ -25,7 +25,7 @@ describe('presets', () => {
   });
 
   it('describe the five presets', () => {
-    expect(PRESETS.exam).toMatchObject({ count: 7, draw: 'sections', feedback: 'deferred', allowReveal: false, timeLimitMinutes: 40 });
+    expect(PRESETS.exam).toMatchObject({ count: 7, draw: 'sections', order: 'shuffled', feedback: 'deferred', allowReveal: false, timeLimitMinutes: 40 });
     expect(PRESETS.exam.difficulty).toBeUndefined();
     expect(PRESETS.nightmare).toEqual({ ...PRESETS.exam, difficulty: { min: 3, max: 5, unrated: false } });
     expect(PRESETS.ordered).toMatchObject({ count: 'all', order: 'source', feedback: 'immediate', allowReveal: true, timeLimitMinutes: null, values: 'random' });

@@ -116,13 +116,14 @@ describe('order', () => {
     expect([level1(3), level1(4)].some((ns) => ns.join() !== [...ns].sort((a, b) => a - b).join())).toBe(true);
   });
 
-  it('an exam lists its draw in topic order; the draw does not depend on the order stream', () => {
+  it('an exam shuffles its draw (source order on request); the draw does not depend on the order stream', () => {
     const c = exam({ seed: 8 });
-    const src = selectQuestions(CATALOG, c, 8);
-    const numbers = src.questions.map((q) => q.number);
-    expect(numbers).toEqual([...numbers].sort((x, y) => x - y));
-    const shuffled = selectQuestions(CATALOG, { ...c, order: 'shuffled' }, 8);
-    expect(shuffled.questions.map((q) => q.key).sort()).toEqual(src.questions.map((q) => q.key).sort());
+    const sorted = (ns: number[]): number[] => [...ns].sort((x, y) => x - y);
+    const shuffled = selectQuestions(CATALOG, c, 8);
+    const numbers = shuffled.questions.map((q) => q.number);
+    expect(numbers).not.toEqual(sorted(numbers));
+    const src = selectQuestions(CATALOG, { ...c, order: 'source' }, 8);
+    expect(src.questions.map((q) => q.number)).toEqual(sorted(numbers));
     expect(src.pool).toBe(120);
   });
 });
