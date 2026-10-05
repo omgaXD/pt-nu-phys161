@@ -437,7 +437,7 @@
             <td>{presetName(h.preset)}</td>
             <td>{setTitles(h.sets)}</td>
             <td>{formatMark(h.marks)} / {formatMark(h.total)}</td>
-            <td>{#if h.full}<a href={resolve(`/review/?id=${encodeURIComponent(h.id)}`)}>Review</a>{/if}</td>
+            <td>{#if h.full && app.reviewable(h.id)}<a href={resolve(`/review/?id=${encodeURIComponent(h.id)}`)}>Review</a>{/if}</td>
           </tr>
         {/each}
       </tbody>

@@ -106,6 +106,30 @@ describe('storage', () => {
     expect(mem.size()).toBeLessThanOrEqual(one * 3.5);
   });
 
+  it('brings older stored attempts up to date, and tells which finished ones can be reviewed', () => {
+    const mem = memoryStorage();
+    const s = new QuizStorage(mem);
+    const a = reduceAttempt(answerRight(attempt('o1'), 0), { type: 'finish', now: 5000, reason: 'submitted' });
+    s.archive(a);
+    expect(s.reviewable('o1')).toBe(true);
+    // Saved before `exclude` was part of the configuration.
+    const stored = JSON.parse(mem.getItem('pt:v1:attempt:o1')!) as Attempt;
+    const { exclude: _drop, ...older } = stored.config;
+    mem.setItem('pt:v1:attempt:o1', JSON.stringify({ ...stored, config: older }));
+    expect(s.reviewable('o1')).toBe(true);
+    expect(s.loadAttempt('o1')).toEqual(a);
+    // Damaged or gone: nothing to review.
+    mem.setItem('pt:v1:attempt:o1', JSON.stringify({ ...stored, answers: [] }));
+    expect(s.reviewable('o1')).toBe(false);
+    expect(s.loadAttempt('o1')).toBeNull();
+    mem.removeItem('pt:v1:attempt:o1');
+    expect(s.reviewable('o1')).toBe(false);
+    // Not finished yet.
+    s.saveCurrent(attempt('c1'));
+    expect(s.reviewable('c1')).toBe(false);
+    expect(s.loadCurrent()).not.toBeNull();
+  });
+
   it('stores mastery and preferences, and ignores corrupt data', () => {
     const mem = memoryStorage();
     const s = new QuizStorage(mem);

@@ -232,6 +232,30 @@ test('the timer submits the exam automatically at 40:00', async ({ page }) => {
   await expect(page.getByText('Time is up')).toBeVisible();
 });
 
+test('the history offers a review only for attempts that can still be opened', async ({ page }) => {
+  await startFrom(page, '?p=exam&sets=corpus&seed=5');
+  await submitAll(page);
+  const key = `pt:v1:attempt:${new URL(page.url()).searchParams.get('id')}`;
+  const review = page.getByTestId('history').getByRole('link', { name: 'Review' });
+
+  // Saved before `exclude` was part of the configuration: it still opens.
+  await page.evaluate((k) => {
+    const a = JSON.parse(localStorage.getItem(k)!);
+    delete a.config.exclude;
+    localStorage.setItem(k, JSON.stringify(a));
+  }, key);
+  await open(page, '');
+  await review.click();
+  await expect(page.getByTestId('marks')).toHaveText('0.00/7.00');
+  await expect(page.getByRole('link', { name: 'Start again with the same options' })).toHaveAttribute('href', /p=exam/);
+
+  // Damaged: listed, but without a review link.
+  await page.evaluate((k) => localStorage.setItem(k, '{"format":1}'), key);
+  await open(page, '');
+  await expect(page.getByTestId('history').locator('tbody tr')).toHaveCount(1);
+  await expect(review).toHaveCount(0);
+});
+
 test('reloading keeps the answers, the numbers and the deadline', async ({ page }) => {
   await startFrom(page, '?p=exam&sets=corpus&seed=7');
   const text = await card(page).locator('.formulation').innerText();

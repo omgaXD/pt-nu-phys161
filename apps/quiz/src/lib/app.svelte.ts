@@ -232,6 +232,11 @@ export class QuizApp {
     return this.storage.loadAttempt(id);
   }
 
+  /** Whether the review of a finished attempt opens (it is still stored, undamaged). */
+  reviewable(id: string): boolean {
+    return this.lastFinished?.id === id || this.storage.reviewable(id);
+  }
+
   /** Flag or unflag a question of a finished attempt, from its review. */
   flagFinished(id: string, index: number, flagged: boolean): void {
     const before = this.finished(id);

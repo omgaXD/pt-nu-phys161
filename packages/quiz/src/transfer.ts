@@ -65,7 +65,8 @@ const HistoryEntrySchema = z.object({
 
 const PER_QUESTION = ['snapshots', 'answers', 'checks', 'revealed', 'flagged', 'unavailable', 'final', 'marks'] as const;
 
-const AttemptSchema = z
+/** A stored or exported attempt; parsing fills in config fields added since it was saved. */
+export const AttemptSchema = z
   .object({
     format: z.literal(1),
     id: z.string().min(1),

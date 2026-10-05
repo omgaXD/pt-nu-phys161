@@ -2,6 +2,7 @@ import { type Attempt, summarizeAttempt } from './attempt.js';
 import type { PresetId } from './config.js';
 import type { Mastery } from './mastery.js';
 import type { QuestionSnapshot } from './materialize.js';
+import { AttemptSchema } from './transfer.js';
 
 /** The subset of the Web Storage API used here (window.localStorage, or a fake in tests). */
 export interface StorageLike {
@@ -117,12 +118,26 @@ export class QuizStorage {
     this.write(`attempt:${a.id}`, { ...a, snapshots: null });
   }
 
-  loadAttempt(id: string): Attempt | null {
+  /** The stored attempt with these snapshots, checked and brought up to date; null when missing or damaged. */
+  private parseAttempt(id: string, snapshots: readonly (QuestionSnapshot | null)[]): Attempt | null {
     const a = this.read<Omit<Attempt, 'snapshots'> & { snapshots: null }>(`attempt:${id}`);
-    if (!a || a.format !== 1) return null;
+    if (!a || a.format !== 1 || !Array.isArray(a.questions)) return null;
+    const r = AttemptSchema.safeParse({ ...a, snapshots: a.questions.map((_, i) => snapshots[i] ?? null) });
+    // Snapshots and grading results are checked for shape only; they are what this app wrote.
+    return r.success ? (r.data as unknown as Attempt) : null;
+  }
+
+  loadAttempt(id: string): Attempt | null {
     const snapshots = this.read<(QuestionSnapshot | null)[]>(`snap:${id}`) ?? [];
-    this.written.set(id, snapshots.filter(Boolean).length);
-    return { ...a, snapshots: a.questions.map((_, i) => snapshots[i] ?? null) };
+    const a = this.parseAttempt(id, snapshots);
+    if (a) this.written.set(id, snapshots.filter(Boolean).length);
+    return a;
+  }
+
+  /** Whether a finished attempt is still stored, undamaged, so its review opens (snapshots are rebuilt when missing). */
+  reviewable(id: string): boolean {
+    const a = this.parseAttempt(id, []);
+    return a !== null && a.finishedAt !== null;
   }
 
   // ---- The attempt in progress ------------------------------------------
