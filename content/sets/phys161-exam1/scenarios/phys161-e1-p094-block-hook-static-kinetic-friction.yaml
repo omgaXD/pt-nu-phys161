@@ -1,0 +1,71 @@
+# P94 — m₂ is increased until the block just starts to slide: μ_s m₁ g = m₂ g, so μ_s = m₂ / m₁.
+# It then accelerates with a = (m₂ g − μ_k m₁ g) / (m₁ + m₂), so
+# μ_k = (m₂ g − (m₁ + m₂) a) / (m₁ g), and μ_s − μ_k = (m₁ + m₂) a / (m₁ g). The constraints keep μ_s below 1 and μ_k clearly positive.
+# g as printed.
+id: phys161-e1-p094-block-hook-static-kinetic-friction
+title: Block starting to slide as a hanging mass grows
+source: { document: PHYS161_Exam1, labels: [ P94 ] }
+section: Friction
+tags: [ friction, static-friction, kinetic-friction, pulley ]
+figure:
+  id: fig
+  src: figures/unnamed_006_R6Ld.png
+  alt: >-
+    A block labelled m1 rests on a horizontal table top. A string runs horizontally from it to a
+    pulley at the table's right edge and hangs down from the pulley to a stack of slotted masses
+    labelled m2.
+narrative: >-
+  Figure shows a block with mass $m_1$ = {m1:unit} on a horizontal surface, connected by a massless
+  string to a hook where mass $m_2$ can be increased smoothly. The pulley has a negligible mass and
+  no friction. When $m_2$ = {m2:unit} it begins to accelerate downwards at a rate of {a:unit}. Take
+  gravitational acceleration $g$ = {g:unit}. {@fig}
+vars:
+  - {
+      name: m1,
+      kind: range,
+      min: 2.5,
+      max: 5,
+      step: 0.001,
+      decimals: 3,
+      unit: kg,
+      label: block mass
+    }
+  - {
+      name: m2,
+      kind: range,
+      min: 1.5,
+      max: 4,
+      step: 0.01,
+      decimals: 2,
+      unit: kg,
+      label: hanging mass when sliding starts
+    }
+  - {
+      name: a,
+      kind: range,
+      min: 0.5,
+      max: 2.5,
+      step: 0.001,
+      decimals: 3,
+      unit: m/s^2,
+      label: acceleration
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: muS, expr: "m2 / m1" }
+  - { name: muK, expr: "(m2 * g - (m1 + m2) * a) / (m1 * g)" }
+constraints:
+  - "muS <= 0.95" # a realistic static coefficient
+  - "muK >= 0.05" # the block really is slowed by kinetic friction
+parts:
+  - id: coefficient-difference
+    prompt: >-
+      Calculate the difference between static and kinetic coefficients of friction, $\mu_s - \mu_k$,
+      between $m_1$ and the surface. {_0}
+    answer: (m1 + m2) * a / (m1 * g)
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m1: 3.561, m2: 2.92, a: 1.645 }
+  parts:
+    - { id: coefficient-difference, answer: 0.305, source: P94 }

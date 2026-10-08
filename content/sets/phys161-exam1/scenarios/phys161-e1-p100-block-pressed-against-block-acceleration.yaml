@@ -1,0 +1,36 @@
+# P100 — m₁ does not slip, so the two blocks move together on the frictionless floor and the only
+# external horizontal force is F: a = F / (m₁ + m₂).
+id: phys161-e1-p100-block-pressed-against-block-acceleration
+title: Two blocks pushed together by a horizontal force
+source: { document: PHYS161_Exam1, labels: [ P100 ] }
+section: Friction
+tags: [ friction, newtons-second-law ]
+figure:
+  id: fig
+  src: figures/unnamed_009_R6Ld.png
+  alt: >-
+    A large block m2 stands on a horizontal floor marked "No Friction". A smaller block m1 touches
+    the left vertical face of m2, off the floor, and a horizontal force F pushes m1 to the right
+    against m2.
+narrative: >-
+  Figure shows two blocks with masses $m_1$ = {m1:unit} and $m_2$ = {m2:unit}. A horizontal force
+  $F$ = {F:unit} presses $m_1$ against the vertical face of $m_2$, and the coefficient of static
+  friction between the blocks is large enough that $m_1$ does not slip down. The surface beneath
+  $m_2$ is frictionless. {@fig}
+vars:
+  # Masses are printed as 21 and 59.5: no fixed decimals, so each value prints with the digits it
+  # has.
+  - { name: m1, kind: range, min: 15, max: 25, step: 0.5, unit: kg, label: smaller block }
+  - { name: m2, kind: range, min: 45, max: 75, step: 0.5, unit: kg, label: larger block }
+  - { name: F, kind: range, min: 500, max: 1000, step: 10, unit: N, label: applied force }
+parts:
+  - id: acceleration
+    prompt: "Find the magnitude of the acceleration of the two blocks. {_0}{_u}"
+    answer: F / (m1 + m2)
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m1: 21, m2: 59.5, F: 770 }
+  parts:
+    - { id: acceleration, answer: 9.56522, unit: m/s^2, source: P100 }

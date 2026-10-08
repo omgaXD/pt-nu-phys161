@@ -1,0 +1,89 @@
+# P96 — F pulls m₁ away from the pulley at θ above the horizontal, lifting m₂. The normal force on
+# m₁ is N = m₁ g − F sin θ, kinetic friction μ_k N opposes the motion, and for the pair
+# (m₁ + m₂) a = F cos θ − μ_k N − m₂ g. The constraints keep m₁ on the surface (N > 0, with room)
+# and the acceleration clearly positive. g as printed.
+id: phys161-e1-p096-block-pulled-at-angle-lifts-mass
+title: Block pulled at an angle, lifting a hanging block
+source: { document: PHYS161_Exam1, labels: [ P96 ] }
+section: Friction
+tags: [ friction, kinetic-friction, pulley, newtons-second-law ]
+figure:
+  id: fig
+  src: figures/unnamed_023_R6Ld.png
+  alt: >-
+    A block labelled m1 rests on a horizontal table top. A string runs horizontally from its right
+    side to a pulley at the table's right edge and hangs down to a block labelled m2. A force F
+    pulls m1 up and to the left, at an angle θ above the horizontal.
+narrative: >-
+  Figure shows a block with mass $m_1$ = {m1:unit} on a horizontal surface, connected to a $m_2$ =
+  {m2:unit} block by a massless string. The pulley is massless and frictionless. A force of {F:unit}
+  acts on $m_1$ at an angle of {theta}°. The coefficient of kinetic friction between $m_1$ and the
+  surface is {mu}. Take gravitational acceleration $g$ = {g:unit}. {@fig}
+vars:
+  - {
+      name: m1,
+      kind: range,
+      min: 20,
+      max: 32,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: block on the surface
+    }
+  - {
+      name: m2,
+      kind: range,
+      min: 3,
+      max: 6,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: hanging block
+    }
+  - {
+      name: F,
+      kind: range,
+      min: 220,
+      max: 340,
+      step: 0.1,
+      decimals: 1,
+      unit: N,
+      label: applied force
+    }
+  - {
+      name: theta,
+      kind: range,
+      min: 20,
+      max: 40,
+      step: 0.1,
+      decimals: 1,
+      unit: "°",
+      label: angle of the force
+    }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.1,
+      max: 0.3,
+      step: 0.01,
+      decimals: 2,
+      label: coefficient of kinetic friction
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: N, expr: "m1 * g - F * sin(rad(theta))", unit: N }
+  - { name: a, expr: "(F * cos(rad(theta)) - mu * N - m2 * g) / (m1 + m2)", unit: m/s^2 }
+constraints:
+  - "N >= 0.2 * m1 * g" # m₁ stays pressed on the surface
+  - "a >= 1" # m₂ clearly rises
+parts:
+  - id: acceleration
+    prompt: "Determine the upward acceleration of $m_2$. {_0}{_u}"
+    answer: a
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m1: 26.2, m2: 4.3, F: 302.2, theta: 30.9, mu: 0.17 }
+  parts:
+    - { id: acceleration, answer: 6.55, unit: m/s^2, source: P96 }

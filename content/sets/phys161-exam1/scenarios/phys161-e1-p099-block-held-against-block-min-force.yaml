@@ -1,0 +1,62 @@
+# P99 — F pushes both blocks: a = F / (m₁ + m₂). The only horizontal force on m₂ is the normal force
+# from m₁, so N = m₂ a = m₂ F / (m₁ + m₂). m₁ does not slide down while μ_s N ≥ m₁ g, so the
+# minimal force is F = m₁ g (m₁ + m₂) / (μ_s m₂). g as printed.
+id: phys161-e1-p099-block-held-against-block-min-force
+title: Minimal force to keep a block from sliding down another
+source: { document: PHYS161_Exam1, labels: [ P99 ] }
+section: Friction
+tags: [ friction, static-friction, newtons-second-law ]
+figure:
+  id: fig
+  src: figures/unnamed_009_R6Ld.png
+  alt: >-
+    A large block m2 stands on a horizontal floor marked "No Friction". A smaller block m1 touches
+    the left vertical face of m2, off the floor, and a horizontal force F pushes m1 to the right
+    against m2.
+narrative: >-
+  Figure shows two blocks with masses $m_1$ = {m1:unit} and $m_2$ = {m2:unit}; the blocks are free
+  to move. The surface beneath $m_2$ is frictionless and the coefficient of static friction between
+  the blocks is {mu}. The gravitational acceleration is $g$ = {g:unit}. {@fig}
+vars:
+  - {
+      name: m1,
+      kind: range,
+      min: 15,
+      max: 25,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: smaller block
+    }
+  - {
+      name: m2,
+      kind: range,
+      min: 45,
+      max: 75,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: larger block
+    }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.3,
+      max: 0.6,
+      step: 0.01,
+      decimals: 2,
+      label: coefficient of static friction
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: minimal-force
+    prompt: "Find the minimal force $F$ required to hold $m_1$ against $m_2$. {_0}{_u}"
+    answer: m1 * g * (m1 + m2) / (mu * m2)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m1: 20.6, m2: 61.2, mu: 0.36 }
+  parts:
+    - { id: minimal-force, answer: 749.53631, unit: N, source: P99 }

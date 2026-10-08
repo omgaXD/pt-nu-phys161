@@ -1,0 +1,63 @@
+# P98 — F pulls at θ above the horizontal: N = m g − F sin θ, a = (F cos θ − μ_k N) / m, and from
+# rest v = a t. The constraints keep the block on the surface (N > 0, with room) and clearly
+# accelerating. g as printed.
+id: phys161-e1-p098-block-angled-force-speed
+title: Block pulled at an angle against friction
+source: { document: PHYS161_Exam1, labels: [ P98 ] }
+section: Friction
+tags: [ friction, kinetic-friction, newtons-second-law, constant-acceleration ]
+narrative: >-
+  A force of magnitude {F:unit} is applied at an angle of {theta}° above the horizontal to a block
+  of mass {m:unit} resting on a horizontal surface. The coefficient of kinetic friction between the
+  block and the surface is {mu}. Take the gravitational acceleration $g$ = {g:unit}.
+vars:
+  - {
+      name: F,
+      kind: range,
+      min: 30,
+      max: 60,
+      step: 0.5,
+      decimals: 1,
+      unit: N,
+      label: applied force
+    }
+  - { name: theta, kind: range, min: 15, max: 40, step: 1, unit: "°", label: angle of the force }
+  - {
+      name: m,
+      kind: range,
+      min: 3.5,
+      max: 6,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: block mass
+    }
+  # The coefficient is printed as 0.1: no fixed decimals, so each value prints with the digits it
+  # has.
+  - {
+      name: mu,
+      kind: range,
+      min: 0.05,
+      max: 0.25,
+      step: 0.01,
+      label: coefficient of kinetic friction
+    }
+  - { name: t, kind: range, min: 2, max: 4, step: 0.1, decimals: 1, unit: s, label: time }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: N, expr: "m * g - F * sin(rad(theta))", unit: N }
+constraints:
+  - "N >= 0.2 * m * g" # the block stays pressed on the surface
+  - "F * cos(rad(theta)) - mu * N >= 3" # the block clearly accelerates
+parts:
+  - id: speed
+    prompt: >-
+      Calculate the speed of the block {t:unit} after it starts moving. {_0}{_u}
+    answer: (F * cos(rad(theta)) - mu * N) / m * t
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { F: 46.5, theta: 27, m: 4.7, mu: 0.1, t: 2.8 }
+  parts:
+    - { id: speed, answer: 23.1964, unit: m/s, source: P98 }

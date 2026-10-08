@@ -1,0 +1,49 @@
+# P97 — a horizontal force F against kinetic friction μ_k m g: a = (F − μ_k m g) / m, and from
+# rest v = a t. The constraint makes F clearly larger than the friction force. g as printed.
+id: phys161-e1-p097-block-horizontal-force-speed
+title: Block pushed horizontally against friction
+source: { document: PHYS161_Exam1, labels: [ P97 ] }
+section: Friction
+tags: [ friction, kinetic-friction, newtons-second-law, constant-acceleration ]
+narrative: >-
+  A force of magnitude {F:unit} is applied in the horizontal direction to a block of mass {m:unit}
+  placed on the horizontal surface. The coefficient of kinetic friction between the block and the
+  surface is {mu}. Take gravitational acceleration $g$ = {g:unit}.
+vars:
+  - {
+      name: F,
+      kind: range,
+      min: 15,
+      max: 35,
+      step: 0.1,
+      decimals: 1,
+      unit: N,
+      label: applied force
+    }
+  - { name: m, kind: range, min: 3, max: 6, step: 0.1, decimals: 1, unit: kg, label: block mass }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.1,
+      max: 0.3,
+      step: 0.01,
+      decimals: 2,
+      label: coefficient of kinetic friction
+    }
+  - { name: t, kind: range, min: 1.5, max: 4, step: 0.5, decimals: 1, unit: s, label: time }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "F - mu * m * g >= 3" # the block clearly accelerates
+parts:
+  - id: speed
+    prompt: >-
+      Calculate the speed of the block {t:unit} after it started moving. {_0}{_u}
+    answer: (F - mu * m * g) / m * t
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { F: 23.2, m: 4.4, mu: 0.15, t: 2.5 }
+  parts:
+    - { id: speed, answer: 9.507, unit: m/s, source: P97 }

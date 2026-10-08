@@ -1,0 +1,48 @@
+# P95 — both blocks move together with a: m₂ g − T = m₂ a and T − μ_k m₁ g = m₁ a, so
+# a = g (m₂ − μ_k m₁) / (m₁ + m₂). The constraint makes m₂ clearly heavier than the friction on m₁,
+# so the blocks do accelerate. g as printed.
+id: phys161-e1-p095-block-pulley-kinetic-friction
+title: Block on a table pulled by a hanging mass
+source: { document: PHYS161_Exam1, labels: [ P95 ] }
+section: Friction
+tags: [ friction, kinetic-friction, pulley, newtons-second-law ]
+figure:
+  id: fig
+  src: figures/unnamed_006_R6Ld.png
+  alt: >-
+    A block labelled m1 rests on a horizontal table top. A string runs horizontally from it to a
+    pulley at the table's right edge and hangs down from the pulley to a stack of slotted masses
+    labelled m2.
+narrative: >-
+  Figure shows a block with mass $m_1$ = {m1:unit} on a horizontal surface, connected by a massless
+  string over a massless frictionless pulley to a hanging mass $m_2$ = {m2:unit}. The coefficient of
+  kinetic friction between $m_1$ and the surface is {mu}. The gravitational acceleration is $g$ =
+  {g:unit}. {@fig}
+vars:
+  # Masses are printed as 4 and 2.8: no fixed decimals, so each value prints with the digits it has.
+  - { name: m1, kind: range, min: 3, max: 6, step: 0.1, unit: kg, label: block mass }
+  - { name: m2, kind: range, min: 1.5, max: 4, step: 0.1, unit: kg, label: hanging mass }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.1,
+      max: 0.4,
+      step: 0.01,
+      decimals: 2,
+      label: coefficient of kinetic friction
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "m2 - mu * m1 >= 0.3" # the hanging mass clearly wins over friction
+parts:
+  - id: acceleration
+    prompt: "Calculate the magnitude of the acceleration of the blocks. {_0}{_u}"
+    answer: g * (m2 - mu * m1) / (m1 + m2)
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m1: 4, m2: 2.8, mu: 0.31 }
+  parts:
+    - { id: acceleration, answer: 2.24824, unit: m/s^2, source: P95 }
