@@ -1,0 +1,73 @@
+# P134–P136 — B is dragged left at constant speed, so F balances the friction on B.
+#   A rides on B (P134, and P136 where the cord to the wall has been cut): the floor presses on B
+#   with W_A + W_B, so F = μ_k (W_A + W_B); no friction acts between A and B.
+#   A held at rest by the cord (P135): B also rubs under A, so F = μ_k W_A + μ_k (W_A + W_B).
+# P134 also prints a static coefficient between A and B equal to the kinetic one; it does not enter
+# any answer, so the narrative gives one coefficient for all surfaces, as P135 does. The three
+# source problems use different numbers: the base canonical values are P134's, and the other parts
+# override them.
+id: phys161-e1-p134-block-a-on-block-b-drag
+title: Dragging block B with block A on top
+source: { document: PHYS161_Exam1, labels: [ P134, P135, P136 ] }
+section: Application of Newton's laws
+tags: [ friction, kinetic-friction, equilibrium, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_R6Ld.png
+  alt: >-
+    A small block A sits on top of a wider block B, which rests on a horizontal floor. A horizontal
+    cord runs from A to a vertical wall on the right. A force F pulls B to the left.
+narrative: >-
+  Block A weighs {WA:unit} and block B weighs {WB:unit}. The coefficient of kinetic friction between
+  all surfaces is {mu}. {@fig}
+vars:
+  # Weights and coefficients are printed with mixed precision (1.3, 1.15, 3.1, 3.15, 0.17, 0.24):
+  # no fixed decimals, so each value prints with the digits it has.
+  - { name: WA, kind: range, min: 0.8, max: 1.6, step: 0.05, unit: N, label: weight of A }
+  - { name: WB, kind: range, min: 2.8, max: 3.6, step: 0.05, unit: N, label: weight of B }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.12,
+      max: 0.3,
+      step: 0.01,
+      label: coefficient of kinetic friction
+    }
+parts:
+  - id: force-a-moves-with-b
+    prompt: >-
+      Find the magnitude of the horizontal force $\vec{F}$ necessary to drag block B to the left at
+      constant speed if A rests on B and moves with it. {_0}{_u}
+    answer: mu * (WA + WB)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: force-a-held-at-rest
+    prompt: >-
+      Find the magnitude of the horizontal force $\vec{F}$ necessary to drag block B to the left at
+      constant speed if A is held at rest. {_0}{_u}
+    answer: mu * WA + mu * (WA + WB)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: force-cord-cut
+    prompt: >-
+      The cord connecting block A to the wall has been cut, so block A rests freely on top of B and
+      moves together with it. Find the magnitude of the horizontal force $\vec{F}$ necessary to drag
+      block B to the left at constant speed. {_0}{_u}
+    answer: mu * (WA + WB)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { WA: 1.3, WB: 3.1, mu: 0.17 }
+  parts:
+    - { id: force-a-moves-with-b, answer: 0.748, unit: N, source: P134 }
+    - {
+        id: force-a-held-at-rest,
+        answer: 1.32,
+        unit: N,
+        source: P135,
+        vars: { WA: 1.1, WB: 3.3, mu: 0.24 }
+      }
+    - { id: force-cord-cut, answer: 0.731, unit: N, source: P136, vars: { WA: 1.15, WB: 3.15 } }

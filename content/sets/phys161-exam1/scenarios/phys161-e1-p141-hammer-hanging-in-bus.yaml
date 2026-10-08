@@ -1,0 +1,58 @@
+# P141/P142 — the hammer accelerates with the bus. The rope's vertical component holds the weight
+# and its horizontal component gives m a, so a = g tan φ with φ the angle from the vertical
+# (P142). With the angle β from the ceiling, φ = 90° − β and a = g / tan β (P141). g as printed.
+# The two source problems use different numbers: the base canonical values are P141's, and P142's
+# part overrides them (each prints only its own angle, so each keeps the base value of the other).
+id: phys161-e1-p141-hammer-hanging-in-bus
+title: Hammer hanging from the ceiling of an accelerating bus
+source: { document: PHYS161_Exam1, labels: [ P141, P142 ] }
+section: Application of Newton's laws
+tags: [ newtons-second-law, tension, components, multi-part ]
+narrative: >-
+  A hammer is hanging by a light rope from the ceiling of a bus. The ceiling of the bus is parallel
+  to the roadway. The bus is traveling in a straight line on a horizontal street. The gravitational
+  acceleration is $g$ = {g:unit}.
+vars:
+  - {
+      name: beta,
+      kind: range,
+      min: 55,
+      max: 80,
+      step: 1,
+      unit: "°",
+      label: angle with the ceiling
+    }
+  - {
+      name: phi,
+      kind: range,
+      min: 10,
+      max: 35,
+      step: 0.5,
+      decimals: 1,
+      unit: "°",
+      label: angle with the vertical
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: acceleration-from-ceiling-angle
+    prompt: >-
+      You observe that the hammer hangs at rest with respect to the bus when the angle between the
+      rope and the ceiling of the bus is {beta}°. What is the acceleration of the bus? {_0}{_u}
+    answer: g / tan(rad(beta))
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: acceleration-from-vertical-angle
+    prompt: >-
+      You observe that the hammer hangs at rest with respect to the bus when the angle between the
+      rope and the vertical direction is {phi}°. What is the acceleration of the bus? {_0}{_u}
+    answer: g * tan(rad(phi))
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { beta: 69, phi: 30.5 }
+  parts:
+    - { id: acceleration-from-ceiling-angle, answer: 3.7618675, unit: m/s^2, source: P141 }
+    - { id: acceleration-from-vertical-angle, answer: 5.77264, unit: m/s^2, source: P142 }

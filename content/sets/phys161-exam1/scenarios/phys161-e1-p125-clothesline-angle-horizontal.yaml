@@ -1,0 +1,42 @@
+# P125 — the line hangs in equilibrium; by symmetry each end pulls with the same tension T at θ
+# below the horizontal, and the vertical components carry the weight: 2 T sin θ = m g. The mass is
+# given in g and converted to kg. g as printed. (P126, with the angle measured from the vertical,
+# is authored separately.)
+id: phys161-e1-p125-clothesline-angle-horizontal
+title: Tension at the ends of a sagging clothesline
+source: { document: PHYS161_Exam1, labels: [ P125 ] }
+section: Application of Newton's laws
+tags: [ equilibrium, tension, components, unit-conversion ]
+figure:
+  id: fig
+  src: figures/unnamed_022_R6Ld.png
+  alt: >-
+    A clothesline sags between two hooks on vertical posts. At each end the line makes an angle θ
+    below the horizontal.
+narrative: >-
+  The clothesline has a mass {m:unit}, and each end makes an angle {theta}° with the horizontal. The
+  gravitational acceleration is $g$ = {g:unit}. {@fig}
+vars:
+  - { name: m, kind: range, min: 400, max: 900, step: 10, unit: g, label: mass of the line }
+  - {
+      name: theta,
+      kind: range,
+      min: 8,
+      max: 25,
+      step: 1,
+      unit: "°",
+      label: angle with horizontal
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: end-tension
+    prompt: "What is the tension at each end of the clothesline? {_0}{_u}"
+    answer: (m / 1000) * g / (2 * sin(rad(theta)))
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 600, theta: 16 }
+  parts:
+    - { id: end-tension, answer: 10.666, unit: N, source: P125 }

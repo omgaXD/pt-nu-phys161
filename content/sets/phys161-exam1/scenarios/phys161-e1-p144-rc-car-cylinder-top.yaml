@@ -1,0 +1,53 @@
+# P144/P145 — at the top (point B) the wall and gravity both push toward the centre:
+# N + m g = m v² / R, so N = m (v² / R − g) (P144). Contact is kept while N ≥ 0, so the minimum
+# speed is √(g R) (P145). The constraint keeps P144's car clearly pressed on the wall. g as printed. The
+# two source problems use different numbers: the base canonical values are P144's, and P145's part
+# overrides them (P145 prints no speed, so it keeps the base value). (P143, at the bottom, is
+# authored separately.)
+id: phys161-e1-p144-rc-car-cylinder-top
+title: Remote-control car at the top of a vertical circle
+source: { document: PHYS161_Exam1, labels: [ P144, P145 ] }
+section: Application of Newton's laws
+tags: [ circular-motion, vertical-circle, normal-force, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_014_R6Ld.png
+  alt: >-
+    A vertical circular cylinder of radius R, seen end-on and standing on supports. A small car
+    drives upside down along the inside of the wall at the highest point, labelled B, moving to the
+    left.
+narrative: >-
+  A small remote-control car with mass {m:unit} moves in a vertical circle inside a hollow metal
+  cylinder that has a radius of {R:unit}. The gravitational acceleration is $g$ = {g:unit}. {@fig}
+vars:
+  # Masses and radii are printed as 2.2, 1.9, 4 and 4.3: no fixed decimals, so each value prints
+  # with the digits it has.
+  - { name: m, kind: range, min: 1.5, max: 3, step: 0.1, unit: kg, label: car mass }
+  - { name: R, kind: range, min: 3, max: 5, step: 0.1, unit: m, label: cylinder radius }
+  - { name: v, kind: range, min: 9, max: 15, step: 0.1, decimals: 1, unit: m/s, label: speed }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "v^2 / R >= 1.5 * g" # P144's car is clearly pressed against the wall at B
+parts:
+  - id: normal-force-b
+    prompt: >-
+      The car moves at a constant speed of $v$ = {v:unit}. What is the magnitude of the normal force
+      exerted on the car by the walls of the cylinder at point B? {_0}{_u}
+    answer: m * (v^2 / R - g)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: minimum-speed-b
+    prompt: >-
+      What is the minimum speed the car must have at point B in order to maintain contact with the
+      wall of the cylinder? {_0}{_u}
+    answer: sqrt(g * R)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 2.2, R: 4, v: 12.7 }
+  parts:
+    - { id: normal-force-b, answer: 67.1495, unit: N, source: P144 }
+    - { id: minimum-speed-b, answer: 6.49153, unit: m/s, source: P145, vars: { m: 1.9, R: 4.3 } }

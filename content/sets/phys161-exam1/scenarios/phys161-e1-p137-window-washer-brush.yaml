@@ -1,0 +1,94 @@
+# P137–P139 — the handle pushes with F at α above the horizontal: F cos α presses the brush into
+# the window (N = F cos α) and F sin α pushes it up against its weight w and kinetic friction
+# μ_k N. At constant speed F sin α = w + μ_k F cos α, so F = w / (sin α − μ_k cos α) (P137) and
+# N = F cos α (P138). Accelerating up with a: F (sin α − μ_k cos α) − w = (w / g) a, so
+# F = w (1 + a / g) / (sin α − μ_k cos α) (P139). sin α − μ_k cos α stays well above zero on these
+# ranges. g as printed in P139. The three source problems use different numbers: the base
+# canonical values are P137's, and the other parts override them.
+id: phys161-e1-p137-window-washer-brush
+title: Window washer pushing a brush up a window
+source: { document: PHYS161_Exam1, labels: [ P137, P138, P139 ] }
+section: Application of Newton's laws
+tags: [ friction, kinetic-friction, normal-force, components, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_019_R6Ld.png
+  alt: >-
+    A brush pressed against a vertical window by a long handle. The handle runs down and away from
+    the window to the washer's hands, making an angle α with a dashed horizontal line. The force F
+    on the brush points up along the handle, toward the window.
+narrative: >-
+  A window washer pushes his scrub brush up a vertical window by applying a force $\vec{F}$ at an
+  angle $\alpha$ = {alpha}° above the horizontal, as shown in the figure. The brush weighs {w:unit}
+  and the coefficient of kinetic friction is $\mu_k$ = {mu}. {@fig}
+vars:
+  - {
+      name: alpha,
+      kind: range,
+      min: 50,
+      max: 65,
+      step: 0.1,
+      decimals: 1,
+      unit: "°",
+      label: angle of the handle
+    }
+  # Weights are printed as 14, 9 and 10.5: no fixed decimals, so each value prints with the digits
+  # it has.
+  - { name: w, kind: range, min: 8, max: 16, step: 0.5, unit: N, label: weight of the brush }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.1,
+      max: 0.25,
+      step: 0.01,
+      decimals: 2,
+      label: coefficient of kinetic friction
+    }
+  # The acceleration is printed as 1: no fixed decimals.
+  - { name: a, kind: range, min: 0.5, max: 2, step: 0.1, unit: m/s^2, label: upward acceleration }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: k, expr: "sin(rad(alpha)) - mu * cos(rad(alpha))" }
+parts:
+  - id: force-constant-speed
+    prompt: >-
+      The brush moves up the window at constant speed. Calculate the magnitude of the force
+      $\vec{F}$. {_0}{_u}
+    answer: w / k
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: normal-force-constant-speed
+    prompt: >-
+      The brush moves up the window at constant speed. Calculate the normal force exerted by the
+      window on the brush. {_0}{_u}
+    answer: w / k * cos(rad(alpha))
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+  - id: force-accelerating
+    prompt: >-
+      The brush moves up the window with a constant upward acceleration of {a:unit}. Calculate the
+      magnitude of the force $\vec{F}$. The gravitational acceleration is $g$ = {g:unit}. {_0}{_u}
+    answer: w * (1 + a / g) / k
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { alpha: 58.8, w: 14, mu: 0.17, a: 1 }
+  parts:
+    - { id: force-constant-speed, answer: 18.245804831566, unit: N, source: P137 }
+    - {
+        id: normal-force-constant-speed,
+        answer: 7.0445,
+        unit: N,
+        source: P138,
+        vars: { alpha: 54.8, w: 9, mu: 0.14 }
+      }
+    - {
+        id: force-accelerating,
+        answer: 16.3772,
+        unit: N,
+        source: P139,
+        vars: { alpha: 53.8, w: 10.5, mu: 0.17 }
+      }

@@ -1,0 +1,40 @@
+# P140 — v(t) = b t + c t² gives a(t) = b + 2 c t (upward), so the scale pushes with
+# N = m (g + a(t)). g as printed.
+id: phys161-e1-p140-elevator-scale-varying-speed
+title: Bathroom scale in an elevator with a varying acceleration
+source: { document: PHYS161_Exam1, labels: [ P140 ] }
+section: Application of Newton's laws
+tags: [ newtons-second-law, apparent-weight, elevator, calculus ]
+narrative: >-
+  You are standing on a bathroom scale in an elevator in a tall building. Your mass is {m:unit}. The
+  elevator starts from rest and travels upwards with a speed that varies with time according to
+  $v(t) = ({b}\ \text{m/s}^2)\,t + ({c}\ \text{m/s}^3)\,t^2$. The gravitational acceleration is $g$
+  = {g:unit}.
+vars:
+  - { name: m, kind: range, min: 50, max: 90, step: 1, unit: kg, label: your mass }
+  # b is printed as 2: no fixed decimals.
+  - { name: b, kind: range, min: 1.5, max: 3, step: 0.1, unit: m/s^2, label: coefficient of t }
+  - {
+      name: c,
+      kind: range,
+      min: 0.1,
+      max: 0.3,
+      step: 0.01,
+      decimals: 2,
+      unit: m/s^3,
+      label: coefficient of t²
+    }
+  - { name: t, kind: range, min: 2, max: 6, step: 1, unit: s, label: time }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: scale-reading
+    prompt: "When $t$ = {t:unit}, what is the reading of the bathroom scale? {_0}{_u}"
+    answer: m * (g + b + 2 * c * t)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 61, b: 2, c: 0.16, t: 4 }
+  parts:
+    - { id: scale-reading, answer: 797.88, unit: N, source: P140 }

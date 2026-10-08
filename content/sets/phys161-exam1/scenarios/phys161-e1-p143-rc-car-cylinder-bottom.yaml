@@ -1,0 +1,39 @@
+# P143 — at the bottom (point A) the wall pushes up and gravity pulls down, and their difference
+# points to the centre: N − m g = m v² / R, so N = m (v² / R + g). g as printed. (P144/P145, at the
+# top of the circle, are authored separately.)
+id: phys161-e1-p143-rc-car-cylinder-bottom
+title: Remote-control car at the bottom of a vertical circle
+source: { document: PHYS161_Exam1, labels: [ P143 ] }
+section: Application of Newton's laws
+tags: [ circular-motion, vertical-circle, normal-force ]
+figure:
+  id: fig
+  src: figures/unnamed_005_R6Ld.png
+  alt: >-
+    A vertical circular cylinder of radius R, seen end-on and standing on supports. A small car
+    drives along the inside of the wall at the lowest point, labelled A, moving to the right.
+narrative: >-
+  A small remote-control car with mass {m:unit} moves at a constant speed of $v$ = {v:unit} in a
+  vertical circle inside a hollow metal cylinder that has a radius of {R:unit}. The gravitational
+  acceleration is $g$ = {g:unit}. {@fig}
+vars:
+  # Masses and radii are printed as 2 and 4: no fixed decimals, so each value prints with the
+  # digits it has.
+  - { name: m, kind: range, min: 1.5, max: 3, step: 0.1, unit: kg, label: car mass }
+  - { name: v, kind: range, min: 8, max: 14, step: 0.1, decimals: 1, unit: m/s, label: speed }
+  - { name: R, kind: range, min: 3, max: 5, step: 0.1, unit: m, label: cylinder radius }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: normal-force-a
+    prompt: >-
+      What is the magnitude of the normal force exerted on the car by the walls of the cylinder at
+      point A? {_0}{_u}
+    answer: m * (v^2 / R + g)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 2, v: 11.4, R: 4 }
+  parts:
+    - { id: normal-force-a, answer: 84.58, unit: N, source: P143 }

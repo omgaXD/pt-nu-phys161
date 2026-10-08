@@ -1,0 +1,27 @@
+# P126 — by symmetry each end pulls with the same tension T at φ from the vertical, and the
+# vertical components carry the weight: 2 T cos φ = m g. The mass is given in g and converted to
+# kg. g as printed. (P125, with the angle measured from the horizontal, is authored separately.)
+id: phys161-e1-p126-clothesline-angle-vertical
+title: Clothesline tension with the angle from the vertical
+source: { document: PHYS161_Exam1, labels: [ P126 ] }
+section: Application of Newton's laws
+tags: [ equilibrium, tension, components, unit-conversion ]
+narrative: >-
+  A clothesline has a mass of {m:unit}, and each end makes an angle of {phi}° with the vertical. The
+  gravitational acceleration is $g$ = {g:unit}.
+vars:
+  - { name: m, kind: range, min: 500, max: 1000, step: 10, unit: g, label: mass of the line }
+  - { name: phi, kind: range, min: 65, max: 82, step: 1, unit: "°", label: angle with vertical }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: end-tension
+    prompt: "What is the tension at each end of the clothesline? {_0}{_u}"
+    answer: (m / 1000) * g / (2 * cos(rad(phi)))
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 840, phi: 73 }
+  parts:
+    - { id: end-tension, answer: 14.078, unit: N, source: P126 }

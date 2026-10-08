@@ -1,0 +1,56 @@
+# P123/P124 — the weight hangs from the lower, movable pulley, which is held by two segments of the
+# same rope, each with tension F. At constant speed 2F = w, so F = w / 2 (P123); accelerating up
+# with a, 2F − w = (w / g) a, so F = w (1 + a / g) / 2 (P124). g as printed in P124. The two source
+# problems use different numbers: the base canonical values are P123's, and P124's part overrides
+# them (P123 has no acceleration, so it keeps the base value).
+id: phys161-e1-p123-worker-pulley-lift
+title: Worker lifting a weight with two pulleys
+source: { document: PHYS161_Exam1, labels: [ P123, P124 ] }
+section: Application of Newton's laws
+tags: [ tension, pulley, newtons-second-law, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_015_R6Ld.png
+  alt: >-
+    A pulley hangs from the ceiling by a chain. A rope tied to the ceiling runs down under a second,
+    lower pulley, up over the ceiling pulley and down to a free end pulled by a downward force F.
+    The weight w hangs by a chain from the lower pulley.
+narrative: >-
+  A worker lifts a weight $w$ = {W:unit} using the arrangement of pulleys shown in the figure, by
+  pulling down on a rope with a force $\vec{F}$. Assume that the rope, pulleys, and chains all have
+  negligible weight. {@fig}
+vars:
+  - { name: W, kind: range, min: 300, max: 600, step: 10, unit: N, label: weight }
+  - {
+      name: a,
+      kind: range,
+      min: 1,
+      max: 3,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: upward acceleration
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: force-constant-speed
+    prompt: >-
+      Find the magnitude of the force $\vec{F}$ if the weight is lifted at a constant speed. {_0}{_u}
+    answer: W / 2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: force-accelerating
+    prompt: >-
+      Find the magnitude of the force $\vec{F}$ if the weight is lifted with a constant upward
+      acceleration of {a:unit}. The gravitational acceleration is $g$ = {g:unit}. {_0}{_u}
+    answer: W * (1 + a / g) / 2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { W: 440, a: 2.1 }
+  parts:
+    - { id: force-constant-speed, answer: 220, unit: N, source: P123 }
+    - { id: force-accelerating, answer: 230.714, unit: N, source: P124, vars: { W: 380 } }

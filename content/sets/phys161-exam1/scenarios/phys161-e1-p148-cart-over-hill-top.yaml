@@ -1,0 +1,43 @@
+# P148/P149 — at the top of the hill the seat pushes up with N and gravity pulls down, and their
+# difference points down to the centre: m g − N = m v² / R. The apparent weight is
+# N = m (g − v² / R) (P148); contact is lost when N = 0, at v = √(g R) (P149). The cart's mass does
+# not enter either answer. On these ranges v² / R stays below 0.7 g, so the cart keeps contact in
+# P148. g as printed. The two source problems use different numbers: the base canonical values are
+# P148's, and P149's part overrides them. (P150, at the bottom of a valley, is authored separately.)
+id: phys161-e1-p148-cart-over-hill-top
+title: Person in a cart at the top of a hill
+source: { document: PHYS161_Exam1, labels: [ P148, P149 ] }
+section: Application of Newton's laws
+tags: [ circular-motion, apparent-weight, normal-force, multi-part ]
+narrative: >-
+  A person of mass {mp:unit} rides in a cart of mass {mc:unit} moving at {v:unit} at the top of a
+  hill that is in the shape of an arc of a circle with a radius of {R:unit}. The gravitational
+  acceleration is $g$ = {g:unit}.
+vars:
+  - { name: mp, kind: range, min: 60, max: 90, step: 1, unit: kg, label: person's mass }
+  - { name: mc, kind: range, min: 20, max: 40, step: 1, unit: kg, label: cart's mass }
+  - { name: v, kind: range, min: 8, max: 13, step: 1, unit: m/s, label: speed }
+  - { name: R, kind: range, min: 30, max: 50, step: 1, unit: m, label: radius of the hill }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: apparent-weight
+    prompt: >-
+      What is the apparent weight of the person as the cart passes over the top of the hill? {_0}{_u}
+    answer: mp * (g - v^2 / R)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: maximum-speed
+    prompt: >-
+      Determine the maximum speed that the cart may travel at the top of the hill without losing
+      contact with the surface. {_0}{_u}
+    answer: sqrt(g * R)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { mp: 74, mc: 33, v: 11, R: 39 }
+  parts:
+    - { id: apparent-weight, answer: 495.61, unit: N, source: P148 }
+    - { id: maximum-speed, answer: 20.765, unit: m/s, source: P149, vars: { mc: 23, v: 12, R: 44 } }

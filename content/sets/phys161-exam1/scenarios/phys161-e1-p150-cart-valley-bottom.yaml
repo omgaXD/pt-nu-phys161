@@ -1,0 +1,33 @@
+# P150 — at the bottom of the valley the seat pushes up with N and gravity pulls down, and their
+# difference points up to the centre: N − m g = m v² / R, so the apparent weight is
+# N = m (g + v² / R). The cart's mass does not enter the answer. g as printed. (P148/P149, at the
+# top of a hill, are authored separately.)
+id: phys161-e1-p150-cart-valley-bottom
+title: Person in a cart at the bottom of a valley
+source: { document: PHYS161_Exam1, labels: [ P150 ] }
+section: Application of Newton's laws
+tags: [ circular-motion, apparent-weight, normal-force ]
+narrative: >-
+  A person of mass {mp:unit} rides in a cart of mass {mc:unit} moving at {v:unit} at the bottom of a
+  valley that is in the shape of an arc of a circle with a radius of {R:unit}. The gravitational
+  acceleration is $g$ = {g:unit}.
+vars:
+  - { name: mp, kind: range, min: 60, max: 90, step: 1, unit: kg, label: person's mass }
+  - { name: mc, kind: range, min: 20, max: 40, step: 1, unit: kg, label: cart's mass }
+  - { name: v, kind: range, min: 8, max: 15, step: 1, unit: m/s, label: speed }
+  - { name: R, kind: range, min: 30, max: 50, step: 1, unit: m, label: radius of the valley }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: apparent-weight
+    prompt: >-
+      What is the apparent weight of the person as the cart passes through the lowest point of the
+      valley? {_0}{_u}
+    answer: mp * (g + v^2 / R)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { mp: 82, mc: 37, v: 12, R: 42 }
+  parts:
+    - { id: apparent-weight, answer: 1084.74, unit: N, source: P150 }

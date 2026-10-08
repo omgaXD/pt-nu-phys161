@@ -1,0 +1,54 @@
+# P121/P122 — the knot is in equilibrium. With the ropes at θ₁ and θ₂ to the ceiling:
+# T₁ cos θ₁ = T₂ cos θ₂ and T₁ sin θ₁ + T₂ sin θ₂ = W, so T₁ = W cos θ₂ / sin(θ₁ + θ₂) and
+# T₂ = W cos θ₁ / sin(θ₁ + θ₂). The steeper rope (60°) carries more, so the largest safe weight is
+# T_max sin(θ₁ + θ₂) / cos θ₂ (P121, written with max() over both ropes), and the 40° rope carries
+# W cos θ₁ / sin(θ₁ + θ₂) (P122). Both angles are printed in the figure, so they are fixed
+# (single-option choices). The two source problems use different numbers: the base canonical
+# values are P121's, and P122's part overrides them (P121 prints no weight and P122 no maximum
+# tension, so each keeps the base value of the other).
+id: phys161-e1-p121-two-ropes-hanging-weight
+title: Two ropes holding a hanging weight
+source: { document: PHYS161_Exam1, labels: [ P121, P122 ] }
+section: Application of Newton's laws
+tags: [ equilibrium, tension, components, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_007_R6Ld.png
+  alt: >-
+    Two ropes hang from a horizontal ceiling and meet at a knot, from which a steel cable hangs
+    straight down to a block. The left rope makes an angle of 60° with the ceiling and the right
+    rope an angle of 40° with the ceiling.
+narrative: >-
+  Two ropes are connected to a steel cable that supports a hanging weight. The ropes make angles of
+  {th1}° and {th2}° with the ceiling, as shown in the figure. Ignore the weight of the ropes and the
+  steel cable. {@fig}
+vars:
+  # The figure prints both angles (60° and 40° with the ceiling), so they are fixed.
+  - { name: th1, kind: choice, options: [ 60 ], unit: "°", label: left rope angle (figure) }
+  - { name: th2, kind: choice, options: [ 40 ], unit: "°", label: right rope angle (figure) }
+  - { name: Tmax, kind: range, min: 3000, max: 6000, step: 100, unit: N, label: breaking tension }
+  - { name: W, kind: range, min: 2500, max: 5000, step: 50, unit: N, label: hanging weight }
+derived:
+  - { name: s, expr: "sin(rad(th1 + th2))" }
+parts:
+  - id: maximum-weight
+    prompt: >-
+      If the maximum tension either rope can sustain without breaking is {Tmax:unit}, determine the
+      maximum value of the hanging weight that those ropes can safely support. {_0}{_u}
+    answer: Tmax * s / max(cos(rad(th1)), cos(rad(th2)))
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+  - id: tension-40-rope
+    prompt: >-
+      The hanging weight is {W:unit}. Determine the tension in the rope that makes the {th2}° angle
+      with the ceiling. {_0}{_u}
+    answer: W * cos(rad(th1)) / s
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { th1: 60, th2: 40, Tmax: 4200, W: 3850 }
+  parts:
+    - { id: maximum-weight, answer: 5399.518, unit: N, source: P121 }
+    - { id: tension-40-rope, answer: 1954.7, unit: N, source: P122 }

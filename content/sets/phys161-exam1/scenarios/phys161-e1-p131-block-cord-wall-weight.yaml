@@ -1,0 +1,83 @@
+# P131–P133 — at the knot the slanted cord (α above the horizontal) holds the hanging weight:
+# T sin α = w, and its horizontal pull T cos α = w / tan α is balanced by the horizontal cord, which
+# static friction on A must hold. So the friction force is w / tan α (P131); the system holds while
+# w / tan α ≤ μ_s W_A, giving the largest weight μ_s W_A tan α (P132) and the smallest coefficient
+# w / (W_A tan α) (P133). The constraint keeps P131's system in equilibrium (with room).
+# The three source problems use different numbers: the base canonical values are P131's, and the
+# other parts override them (P132 prints no w and P133 no μ_s, so each keeps the base value).
+id: phys161-e1-p131-block-cord-wall-weight
+title: Block held by friction, a knot and a hanging weight
+source: { document: PHYS161_Exam1, labels: [ P131, P132, P133 ] }
+section: Application of Newton's laws
+tags: [ equilibrium, static-friction, tension, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_013_R6Ld.png
+  alt: >-
+    Block A rests on a horizontal table. A horizontal cord runs from A to a knot beyond the table's
+    edge. From the knot, a second cord rises at angle α above the horizontal to a hook on a vertical
+    wall, and a third cord hangs straight down to a weight w.
+narrative: >-
+  Block A weighs {WA:unit} and rests on a horizontal surface. The angle of the cord with the
+  horizontal is $\alpha$ = {alpha}°. {@fig}
+vars:
+  - { name: WA, kind: range, min: 50, max: 90, step: 1, unit: N, label: weight of A }
+  - { name: alpha, kind: range, min: 40, max: 60, step: 1, unit: "°", label: cord angle }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.2,
+      max: 0.4,
+      step: 0.01,
+      decimals: 2,
+      label: coefficient of static friction
+    }
+  # Weights are printed as 13 and 17.5: no fixed decimals, so each value prints with the digits it
+  # has.
+  - { name: w, kind: range, min: 10, max: 20, step: 0.5, unit: N, label: hanging weight }
+derived:
+  - { name: tanA, expr: "tan(rad(alpha))" }
+constraints:
+  - "w / tanA <= 0.9 * mu * WA" # P131's system really is in equilibrium
+parts:
+  - id: friction-force
+    prompt: >-
+      The coefficient of static friction between the block and the surface on which it rests is
+      {mu}. The weight $w$ is {w:unit} and the system is in equilibrium. Find the friction force
+      exerted on block A. {_0}{_u}
+    answer: w / tanA
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: maximum-weight
+    prompt: >-
+      The coefficient of static friction between the block and the surface on which it rests is
+      {mu}. Find the maximum weight $w$ for which the system will remain in equilibrium. {_0}{_u}
+    answer: mu * WA * tanA
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: minimum-static-coefficient
+    prompt: >-
+      The weight $w$ is {w:unit} and the system is in equilibrium. What is the minimum coefficient
+      of static friction between block A and the surface on which it rests? {_0}
+    answer: w / (WA * tanA)
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { WA: 72, alpha: 52, mu: 0.29, w: 13 }
+  parts:
+    - { id: friction-force, answer: 10.1567, unit: N, source: P131 }
+    - {
+        id: maximum-weight,
+        answer: 17.76,
+        unit: N,
+        source: P132,
+        vars: { WA: 74, alpha: 45, mu: 0.24 }
+      }
+    - {
+        id: minimum-static-coefficient,
+        answer: 0.176374,
+        source: P133,
+        vars: { WA: 62, alpha: 58, w: 17.5 }
+      }
