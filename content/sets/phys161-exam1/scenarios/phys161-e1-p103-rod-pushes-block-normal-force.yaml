@@ -1,0 +1,37 @@
+# P103 — the rod pushes with F at θ below the horizontal, so its vertical component presses the
+# block into the floor: N = m g + F sin θ. g as printed.
+id: phys161-e1-p103-rod-pushes-block-normal-force
+title: Rod pushing a block at an angle
+source: { document: PHYS161_Exam1, labels: [ P103 ] }
+section: Newton's 2nd law
+tags: [ newtons-second-law, normal-force, components ]
+narrative: >-
+  A rod exerts a force $F$ = {F:unit} at an angle $\theta$ = {theta}° below the horizontal on a
+  block of mass {m:unit}, pushing the block along a horizontal frictionless floor. The gravitational
+  acceleration is $g$ = {g:unit}.
+vars:
+  - { name: F, kind: range, min: 6, max: 15, step: 0.5, unit: N, label: rod force }
+  - {
+      name: theta,
+      kind: range,
+      min: 25,
+      max: 60,
+      step: 1,
+      unit: "°",
+      label: angle below horizontal
+    }
+  - { name: m, kind: range, min: 3, max: 8, step: 1, unit: kg, label: block mass }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: normal-force
+    prompt: >-
+      What is the magnitude of the normal force exerted on the block by the floor? {_0}{_u}
+    answer: m * g + F * sin(rad(theta))
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { F: 10.5, theta: 47, m: 5 }
+  parts:
+    - { id: normal-force, answer: 56.6792, unit: N, source: P103 }

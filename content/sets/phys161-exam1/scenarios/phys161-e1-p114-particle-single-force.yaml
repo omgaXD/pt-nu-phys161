@@ -1,0 +1,46 @@
+# P114/P115 — a single constant force along x gives a = F / m. From rest the particle travels
+# ½ a t² (P114). With initial velocity v₀ î (v₀ < 0, against the force) its displacement is
+# x = v₀ t + ½ a t², and P115 asks for |x|. The constraint keeps x away from a near-cancellation
+# of the two terms (|x| at least a fifth of |v₀| t + ½ a t²). The two source problems use different
+# numbers: the base canonical values are P114's, and P115's part overrides them (P114 prints no
+# initial velocity, so it keeps the base value).
+id: phys161-e1-p114-particle-single-force
+title: Particle acted on by a single constant force
+source: { document: PHYS161_Exam1, labels: [ P114, P115 ] }
+section: Newton's 2nd law
+tags: [ newtons-second-law, constant-acceleration, multi-part ]
+narrative: >-
+  A particle of mass {m:unit} is acted on by a single force $\vec{F} = {F}\,\hat{\imath}$ N.
+vars:
+  # The mass is printed as 2 and v₀ as −6.5: no fixed decimals, so each value prints with the
+  # digits it has.
+  - { name: m, kind: range, min: 1, max: 4, step: 0.5, unit: kg, label: mass }
+  - { name: F, kind: range, min: 6, max: 20, step: 1, unit: N, label: force }
+  - { name: v0, kind: range, min: -8, max: -3, step: 0.5, unit: m/s, label: initial velocity }
+  - { name: t, kind: range, min: 2, max: 8, step: 1, unit: s, label: time }
+derived:
+  - { name: a, expr: "F / m", unit: m/s^2 }
+  - { name: x, expr: "v0 * t + a * t^2 / 2", unit: m } # P115's displacement
+constraints:
+  - "abs(x) >= 0.2 * (abs(v0) * t + a * t^2 / 2)" # no near-cancellation in P115
+parts:
+  - id: distance-from-rest
+    prompt: >-
+      If the particle starts at rest, how far does it travel in the first {t:unit}? {_0}{_u}
+    answer: a * t^2 / 2
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: displacement-magnitude
+    prompt: >-
+      At $t$ = 0 the particle has velocity $\vec{v}_0 = {v0}\,\hat{\imath}$ m/s. What is the
+      magnitude of its displacement during the first {t:unit}? {_0}{_u}
+    answer: abs(x)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 2, F: 14, v0: -6.5, t: 3 }
+  parts:
+    - { id: distance-from-rest, answer: 31.5, unit: m, source: P114 }
+    - { id: displacement-magnitude, answer: 87, unit: m, source: P115, vars: { t: 6 } }

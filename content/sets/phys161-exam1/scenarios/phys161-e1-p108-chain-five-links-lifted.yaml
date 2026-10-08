@@ -1,0 +1,71 @@
+# P108–P111 — every link accelerates up with a, so whatever pulls up on the k bottom links must
+# supply k m (g + a). Link 3 on link 2 holds links 1–2: 2 m (g + a) (P108); the force F on the top
+# link holds all five: 5 m (g + a) (P109); link 4 on link 3: 3 m (g + a) (P110); link 5 on
+# link 4: 4 m (g + a) (P111). g as printed. The four source problems use different numbers: the
+# base canonical values are P108's, and the other parts override them.
+id: phys161-e1-p108-chain-five-links-lifted
+title: Chain of five links lifted with constant acceleration
+source: { document: PHYS161_Exam1, labels: [ P108, P109, P110, P111 ] }
+section: Newton's 2nd law
+tags: [ newtons-second-law, newtons-third-law, systems, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_024_R6Ld.png
+  alt: >-
+    A vertical chain of five links, numbered 1 at the bottom to 5 at the top. An arrow labelled F
+    points straight up from the top link.
+narrative: >-
+  A force $\vec{F}$ lifts vertically a chain consisting of five links, each of mass {m:unit},
+  numbered as in the figure: link 1 at the bottom and link 5 at the top. The chain is lifted with a
+  constant acceleration of magnitude $a$ = {a:unit}. The gravitational acceleration is $g$ =
+  {g:unit}. {@fig}
+vars:
+  # Link masses are printed as 0.6, 0.1, 0.55 and 0.2: no fixed decimals, so each value prints with
+  # the digits it has.
+  - { name: m, kind: range, min: 0.1, max: 0.8, step: 0.05, unit: kg, label: mass of one link }
+  - {
+      name: a,
+      kind: range,
+      min: 1.5,
+      max: 3.5,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: acceleration
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: link-3-on-link-2
+    prompt: "What is the magnitude of the force that link 3 exerts on link 2? {_0}{_u}"
+    answer: 2 * m * (g + a)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: force-on-top-link
+    prompt: >-
+      Find the magnitude of the force $|\vec{F}|$ that must be exerted on the top link to achieve
+      this acceleration. {_0}{_u}
+    answer: 5 * m * (g + a)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: link-4-on-link-3
+    prompt: "What is the magnitude of the force that link 4 exerts on link 3? {_0}{_u}"
+    answer: 3 * m * (g + a)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: link-5-on-link-4
+    prompt: "What is the magnitude of the force that link 5 exerts on link 4? {_0}{_u}"
+    answer: 4 * m * (g + a)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 0.6, a: 2.2 }
+  parts:
+    - { id: link-3-on-link-2, answer: 14.4, unit: N, source: P108 }
+    - { id: force-on-top-link, answer: 5.95, unit: N, source: P109, vars: { m: 0.1, a: 2.1 } }
+    - { id: link-4-on-link-3, answer: 19.965, unit: N, source: P110, vars: { m: 0.55, a: 2.3 } }
+    - { id: link-5-on-link-4, answer: 10, unit: N, source: P111, vars: { m: 0.2, a: 2.7 } }

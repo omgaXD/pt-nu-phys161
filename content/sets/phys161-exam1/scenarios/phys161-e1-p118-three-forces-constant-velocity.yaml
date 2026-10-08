@@ -1,0 +1,39 @@
+# P118 — constant velocity means zero net force, so F₃ = −(F₁ + F₂) and |F₃| = |F₁ + F₂|. The
+# velocity is data the answer does not use. Components are integers; the constraints keep every
+# vector non-zero and the answer clearly non-zero.
+id: phys161-e1-p118-three-forces-constant-velocity
+title: Third force on a particle moving at constant velocity
+source: { document: PHYS161_Exam1, labels: [ P118 ] }
+section: Newton's 2nd law
+tags: [ newtons-first-law, vectors, equilibrium ]
+narrative: >-
+  A particle moves with constant velocity $\vec{v} = \left({v}\right)\,\text{m/s}$ under the
+  combined action of three forces. Two of the forces acting on this particle are $\vec{F}_1 =
+  \left({F1}\right)\,\text{N}$ and $\vec{F}_2 = \left({F2}\right)\,\text{N}$.
+vars:
+  - { name: vx, kind: range, min: -8, max: 8, step: 1, label: velocity x }
+  - { name: vy, kind: range, min: -8, max: 8, step: 1, label: velocity y }
+  - { name: F1x, kind: range, min: -12, max: 12, step: 1, label: F1 x }
+  - { name: F1y, kind: range, min: -12, max: 12, step: 1, label: F1 y }
+  - { name: F1z, kind: range, min: -12, max: 12, step: 1, label: F1 z }
+  - { name: F2x, kind: range, min: -12, max: 12, step: 1, label: F2 x }
+  - { name: F2y, kind: range, min: -12, max: 12, step: 1, label: F2 y }
+  - { name: F2z, kind: range, min: -12, max: 12, step: 1, label: F2 z }
+derived:
+  - { name: v, expr: "[vx, vy]", unit: m/s }
+  - { name: F1, expr: "[F1x, F1y, F1z]", unit: N }
+  - { name: F2, expr: "[F2x, F2y, F2z]", unit: N }
+constraints:
+  - "norm(v) > 0 and norm(F1) > 0 and norm(F2) > 0"
+  - "norm(F1 + F2) >= 3" # the third force is clearly non-zero
+parts:
+  - id: third-force-magnitude
+    prompt: "What is the magnitude of the third force? {_0}{_u}"
+    answer: norm(F1 + F2)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { vx: 2, vy: -7, F1x: 6, F1y: 7, F1z: -10, F2x: -9, F2y: -9, F2z: -3 }
+  parts:
+    - { id: third-force-magnitude, answer: 13.491, unit: N, source: P118 }

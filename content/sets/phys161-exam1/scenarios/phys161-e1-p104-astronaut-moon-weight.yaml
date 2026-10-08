@@ -1,0 +1,36 @@
+# P104/P105 — the mass is the same everywhere: m = W_moon / g_moon (P105), and the weight on Earth
+# is m g = W_moon g / g_moon (P104). The two source problems use different numbers: the base
+# canonical values are P104's, and P105's part overrides them.
+id: phys161-e1-p104-astronaut-moon-weight
+title: Astronaut's weight on the Moon and on Earth
+source: { document: PHYS161_Exam1, labels: [ P104, P105 ] }
+section: Newton's 2nd law
+tags: [ newtons-second-law, weight, mass, multi-part ]
+narrative: >-
+  The weight of an astronaut plus his space suit on the Moon is {W:unit}. The acceleration due to
+  gravity on the surface of the Moon is {gm:unit}. The gravitational acceleration on Earth is $g$ =
+  {g:unit}.
+vars:
+  - { name: W, kind: range, min: 150, max: 250, step: 1, unit: N, label: weight on the Moon }
+  # Printed as 1.625 and 1.62: no fixed decimals, so each value prints with the digits it has.
+  - { name: gm, kind: range, min: 1.6, max: 1.65, step: 0.005, unit: m/s^2, label: Moon's g }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: earth-weight
+    prompt: "How much does the suited astronaut weigh on Earth? {_0}{_u}"
+    answer: W * g / gm
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: mass
+    prompt: "What is the mass of the suited astronaut on the Earth? {_0}{_u}"
+    answer: W / gm
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { W: 220, gm: 1.625 }
+  parts:
+    - { id: earth-weight, answer: 1326.76923, unit: N, source: P104 }
+    - { id: mass, answer: 122.222, unit: kg, source: P105, vars: { W: 198, gm: 1.62 } }

@@ -1,0 +1,53 @@
+# P101/P102 — the cord pulls with F at θ above the horizontal on a frictionless floor: horizontally
+# a = F cos θ / m (P101), vertically N + F sin θ = m g, so N = m g − F sin θ (P102). F sin θ stays
+# well below m g on these ranges, so the block never leaves the floor. g as printed in P102. The
+# two source problems use different numbers: the base canonical values are P101's, and P102's
+# part overrides them.
+id: phys161-e1-p101-cord-pulls-block-at-angle
+title: Cord pulling a block at an angle
+source: { document: PHYS161_Exam1, labels: [ P101, P102 ] }
+section: Newton's 2nd law
+tags: [ newtons-second-law, normal-force, components, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_003_R6Ld.png
+  alt: >-
+    A block resting on a horizontal floor. A force F pulls on the block's right side, pointing up
+    and to the right at an angle θ above the horizontal.
+narrative: >-
+  A cord exerts a force $F$ = {F:unit} at an angle $\theta$ = {theta}° above the horizontal to a
+  block of mass {m:unit}, pulling the block along a horizontal frictionless floor. The gravitational
+  acceleration is $g$ = {g:unit}. {@fig}
+vars:
+  - { name: F, kind: range, min: 4, max: 15, step: 1, unit: N, label: cord force }
+  - {
+      name: theta,
+      kind: range,
+      min: 20,
+      max: 60,
+      step: 1,
+      unit: "°",
+      label: angle above horizontal
+    }
+  - { name: m, kind: range, min: 3, max: 8, step: 1, unit: kg, label: block mass }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: acceleration
+    prompt: "What is the magnitude of the acceleration of the block? {_0}{_u}"
+    answer: F * cos(rad(theta)) / m
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: normal-force
+    prompt: >-
+      What is the magnitude of the normal force exerted on the block by the floor? {_0}{_u}
+    answer: m * g - F * sin(rad(theta))
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { F: 5, theta: 45, m: 5 }
+  parts:
+    - { id: acceleration, answer: 0.7071, unit: m/s^2, source: P101 }
+    - { id: normal-force, answer: 42.2897, unit: N, source: P102, vars: { F: 12, theta: 34 } }

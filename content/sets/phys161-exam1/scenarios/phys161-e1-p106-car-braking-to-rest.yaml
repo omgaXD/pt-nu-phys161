@@ -1,0 +1,46 @@
+# P106/P107 — uniform deceleration from v (converted from km/h to m/s) to rest over d:
+# a = v² / (2d). The net force is m a (P106); when friction alone stops the car, μ_k m g = m a, so
+# μ_k = v² / (2 g d) (P107). The constraint keeps that coefficient realistic. g as printed in P107.
+# The two source problems use different numbers: the base canonical values are P106's, and
+# P107's part overrides them.
+id: phys161-e1-p106-car-braking-to-rest
+title: Car braking to rest
+source: { document: PHYS161_Exam1, labels: [ P106, P107 ] }
+section: Newton's 2nd law
+tags: [ newtons-second-law, kinetic-friction, constant-acceleration, unit-conversion, multi-part ]
+narrative: >-
+  The driver of a car of mass {m:unit} applies the brakes when the car is moving at {v:unit}, and
+  the car comes to rest after traveling {d:unit}. The gravitational acceleration is $g$ = {g:unit}.
+vars:
+  - { name: m, kind: range, min: 1000, max: 1600, step: 10, unit: kg, label: car mass }
+  - { name: v, kind: range, min: 50, max: 100, step: 1, unit: km/h, label: initial speed }
+  - { name: d, kind: range, min: 40, max: 90, step: 1, unit: m, label: stopping distance }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: msPerKmh, expr: "1000 / 3600" } # 1 km/h = 1/3.6 m/s
+  - { name: a, expr: "(v * msPerKmh)^2 / (2 * d)", unit: m/s^2 } # deceleration
+constraints:
+  - "a / g >= 0.2 and a / g <= 0.9" # a realistic coefficient of kinetic friction
+parts:
+  - id: net-force
+    prompt: >-
+      What is the magnitude of the net force on the car causing its deceleration? {_0}{_u}
+    answer: m * a
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: kinetic-friction-coefficient
+    prompt: "What is the coefficient of kinetic friction between the tires and the road? {_0}"
+    answer: a / g
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 1300, v: 90, d: 65 }
+  parts:
+    - { id: net-force, answer: 6250, unit: N, source: P106 }
+    - {
+        id: kinetic-friction-coefficient,
+        answer: 0.317864,
+        source: P107,
+        vars: { m: 1440, v: 73, d: 66 }
+      }

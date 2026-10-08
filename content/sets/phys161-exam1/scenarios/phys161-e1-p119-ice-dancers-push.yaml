@@ -1,0 +1,60 @@
+# P119/P120 — A pushes B with F, and by Newton's third law B pushes A back with F. Without friction
+# each dancer's acceleration is F over their own mass: F / m_A (P119), F / m_B (P120). The two
+# source problems use different numbers: the base canonical values are P119's, and P120's part
+# overrides them.
+id: phys161-e1-p119-ice-dancers-push
+title: Ice dancers pushing apart
+source: { document: PHYS161_Exam1, labels: [ P119, P120 ] }
+section: Newton's 2nd law
+tags: [ newtons-second-law, newtons-third-law, multi-part ]
+narrative: >-
+  The friction is very small for ice skating and can be neglected. Ice dancer A of mass {mA:unit}
+  pushes his partner B of mass {mB:unit} with a force of {F:unit}.
+vars:
+  - {
+      name: mA,
+      kind: range,
+      min: 45,
+      max: 80,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: mass of A
+    }
+  - {
+      name: mB,
+      kind: range,
+      min: 45,
+      max: 80,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: mass of B
+    }
+  # Forces are printed as 58.5 and 61: no fixed decimals, so each value prints with the digits it
+  # has.
+  - { name: F, kind: range, min: 40, max: 80, step: 0.5, unit: N, label: push }
+parts:
+  - id: acceleration-a
+    prompt: "Find the magnitude of the acceleration of ice dancer A. {_0}{_u}"
+    answer: F / mA
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: acceleration-b
+    prompt: "Find the magnitude of the acceleration of ice dancer B. {_0}{_u}"
+    answer: F / mB
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { mA: 53.3, mB: 66.4, F: 58.5 }
+  parts:
+    - { id: acceleration-a, answer: 1.09756, unit: m/s^2, source: P119 }
+    - {
+        id: acceleration-b,
+        answer: 0.979133,
+        unit: m/s^2,
+        source: P120,
+        vars: { mA: 54.3, mB: 62.3, F: 61 }
+      }

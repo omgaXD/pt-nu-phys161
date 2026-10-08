@@ -1,0 +1,52 @@
+# P116 — in an elevator accelerating up with a, a scale reads m (g + a). Picking up the box adds
+# m_box (g + a), so g + a = (F₂ − F₁) / m_box and the man's mass is
+# F₁ / (g + a) = F₁ m_box / (F₂ − F₁).
+# The second reading is drawn as F₁ plus its increase ΔF (shown as F₂ = F₁ + ΔF, so the source's
+# 767.3 N is 678.9 + 88.4). The constraint keeps the implied g + a = ΔF / m_box between 10.1 and
+# 14.3 m/s² (an upward acceleration of 0.3–4.5 m/s², g = 9.8 m/s²).
+id: phys161-e1-p116-elevator-scale-man-picks-up-box
+title: Man on a scale in an elevator picks up a box
+source: { document: PHYS161_Exam1, labels: [ P116 ] }
+section: Newton's 2nd law
+tags: [ newtons-second-law, apparent-weight, elevator ]
+narrative: >-
+  An elevator accelerating upward carries a man standing on a weighing scale indicating $F_1$ =
+  {F1:unit}. The scale reads $F_2$ = {F2:unit} when the man picks up a box of mass {mb:unit}.
+vars:
+  - {
+      name: F1,
+      kind: range,
+      min: 600,
+      max: 850,
+      step: 0.1,
+      decimals: 1,
+      unit: N,
+      label: first scale reading
+    }
+  - {
+      name: dF,
+      kind: range,
+      min: 75,
+      max: 130,
+      step: 0.1,
+      decimals: 1,
+      unit: N,
+      label: increase of the reading
+    }
+  - { name: mb, kind: range, min: 7, max: 10, step: 0.1, decimals: 1, unit: kg, label: box mass }
+derived:
+  - { name: F2, expr: "F1 + dF", unit: N } # second scale reading
+  - { name: gPlusA, expr: "dF / mb", unit: m/s^2 } # g + a of the elevator
+constraints:
+  - "gPlusA >= 10.1 and gPlusA <= 14.3" # an upward acceleration of 0.3–4.5 m/s²
+parts:
+  - id: man-mass
+    prompt: "Find the man's mass. {_0}{_u}"
+    answer: F1 / gPlusA
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { F1: 678.9, dF: 88.4, mb: 8.6 }
+  parts:
+    - { id: man-mass, answer: 66.0468, unit: kg, source: P116 }
