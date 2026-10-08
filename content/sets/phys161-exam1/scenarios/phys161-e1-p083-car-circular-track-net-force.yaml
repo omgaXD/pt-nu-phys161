@@ -1,0 +1,30 @@
+# P83 — uniform tangential acceleration a_t from rest; one full circle (2πR) in T gives
+# 2πR = ½ a_t T², a_t = 4πR / T². After half a circle (πR), v² = 2 a_t πR, so the centripetal
+# acceleration is v² / R = 2π a_t. The net force is m √(a_t² + (2π a_t)²) = m a_t √(1 + 4π²).
+id: phys161-e1-p083-car-circular-track-net-force
+title: Car speeding up on a circular track
+source: { document: PHYS161_Exam1, labels: [ P83 ] }
+section: Circular motion
+tags: [ circular-motion, tangential-acceleration, newtons-second-law ]
+narrative: >-
+  A car of mass {m:unit} starts from rest on a horizontal circular track of radius {R:unit}. Its
+  speed is increased uniformly and in {T:unit} it makes a full circle.
+vars:
+  - { name: m, kind: range, min: 1000, max: 1800, step: 10, unit: kg, label: car mass }
+  - { name: R, kind: range, min: 40, max: 90, step: 1, unit: m, label: track radius }
+  - { name: T, kind: range, min: 30, max: 70, step: 1, unit: s, label: time for one circle }
+derived:
+  - { name: at, expr: "4 * pi * R / T^2", unit: m/s^2 } # tangential acceleration
+parts:
+  - id: net-force-half-circle
+    prompt: >-
+      What was the net force acting on the car at the moment when it completed the first semicircle?
+      {_0}{_u}
+    answer: m * at * sqrt(1 + 4 * pi^2)
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { m: 1430, R: 61, T: 49 }
+  parts:
+    - { id: net-force-half-circle, answer: 2905, unit: N, source: P83 }

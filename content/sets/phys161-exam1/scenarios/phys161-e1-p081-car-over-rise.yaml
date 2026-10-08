@@ -1,0 +1,72 @@
+# P81/P82 — at the top of the rise the car moves on a circle of radius R, so its centripetal
+# acceleration is a_c = v² / R (v converted from km/h to m/s). With a tangential acceleration a_t
+# along the road the total is √(a_c² + a_t²) (P81); at constant speed it is a_c alone (P82).
+# v² / R stays far below g, so the car never leaves the road. The two source problems use
+# different numbers: the base canonical values are P81's, and P82's part overrides them (P82 has
+# no tangential acceleration, so it keeps the base value).
+id: phys161-e1-p081-car-over-rise
+title: Car passing over a rise in the road
+source: { document: PHYS161_Exam1, labels: [ P81, P82 ] }
+section: Circular motion
+tags:
+  [
+    circular-motion,
+    centripetal-acceleration,
+    tangential-acceleration,
+    unit-conversion,
+    multi-part
+  ]
+figure:
+  id: fig
+  src: figures/unnamed_004_R6Ld.png
+  alt: >-
+    A car seen from the side at the top of a rounded rise in the road, the road surface curving down
+    on both sides. A horizontal arrow in front of the car points in its direction of motion.
+narrative: >-
+  A car passes over a rise in the roadway such that the top of the rise is shaped like a circle of
+  radius {R:unit}. {@fig}
+vars:
+  - { name: R, kind: range, min: 450, max: 650, step: 10, unit: m, label: radius of the rise }
+  - { name: v, kind: range, min: 20, max: 45, step: 1, unit: km/h, label: speed }
+  - {
+      name: at,
+      kind: range,
+      min: 0.2,
+      max: 0.5,
+      step: 0.01,
+      decimals: 2,
+      unit: m/s^2,
+      label: tangential acceleration
+    }
+derived:
+  - { name: msPerKmh, expr: "1000 / 3600" } # 1 km/h = 1/3.6 m/s
+  - { name: ac, expr: "(v * msPerKmh)^2 / R", unit: m/s^2 } # centripetal acceleration
+parts:
+  - id: total-acceleration-speeding-up
+    prompt: >-
+      At the moment the car is at the top of the rise, its velocity is {v:unit} and its constant
+      acceleration parallel to the roadway is {at:unit}. What is the magnitude of the total
+      acceleration vector for the car at this instant? {_0}{_u}
+    answer: sqrt(ac^2 + at^2)
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: total-acceleration-constant-speed
+    prompt: >-
+      The car moves at a constant speed of {v:unit}. What is the magnitude of the total acceleration
+      of the car at the moment it is at the top of the rise? {_0}{_u}
+    answer: ac
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { R: 530, v: 24, at: 0.34 }
+  parts:
+    - { id: total-acceleration-speeding-up, answer: 0.3501886215, unit: m/s^2, source: P81 }
+    - {
+        id: total-acceleration-constant-speed,
+        answer: 0.192103,
+        unit: m/s^2,
+        source: P82,
+        vars: { R: 580, v: 38 }
+      }

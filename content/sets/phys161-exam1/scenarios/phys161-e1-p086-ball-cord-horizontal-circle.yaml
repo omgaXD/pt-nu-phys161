@@ -1,0 +1,34 @@
+# P86 — on a frictionless horizontal surface the cord tension alone supplies the centripetal force,
+# T = m v² / R, so the cord holds up to v = √(T_max R / m).
+id: phys161-e1-p086-ball-cord-horizontal-circle
+title: Ball on a cord in a horizontal circle
+source: { document: PHYS161_Exam1, labels: [ P86 ] }
+section: Circular motion
+tags: [ circular-motion, tension ]
+narrative: >-
+  A ball of {m:unit} is attached at the end of a cord and revolves in a circle of radius {R:unit} on
+  a frictionless horizontal surface. The cord will break if the tension in it exceeds {Tmax:unit}.
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 0.3,
+      max: 0.8,
+      step: 0.05,
+      decimals: 2,
+      unit: kg,
+      label: ball mass
+    }
+  - { name: R, kind: range, min: 0.8, max: 2, step: 0.1, decimals: 1, unit: m, label: radius }
+  - { name: Tmax, kind: range, min: 50, max: 100, step: 5, unit: N, label: breaking tension }
+parts:
+  - id: maximum-speed
+    prompt: "What is the maximum speed the ball can have without breaking the cord? {_0}{_u}"
+    answer: sqrt(Tmax * R / m)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 0.45, R: 1.3, Tmax: 75 }
+  parts:
+    - { id: maximum-speed, answer: 14.7, unit: m/s, source: P86 }

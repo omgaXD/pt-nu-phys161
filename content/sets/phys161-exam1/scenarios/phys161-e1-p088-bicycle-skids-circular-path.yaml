@@ -1,0 +1,76 @@
+# P88/P89 — uniform tangential acceleration a_t from rest along a circle of radius R. After a
+# fraction f of the circle (arc s = 2πR f), v² = 2 a_t s, so the centripetal acceleration is
+# v² / R = 4π f a_t. Static friction supplies the whole acceleration, and the bicycle skids when
+# a_t √(1 + (4π f)²) = μ_s g. P88 asks for μ_s from a_t, P89 for a_t from μ_s; R cancels.
+# f is a choice of one half, one third or one quarter, as worded in the source. The constraint
+# keeps P88's coefficient at or below 1. g as printed. The two source problems use different
+# numbers: the base canonical values are P88's, and P89's part overrides them (P88 prints no
+# coefficient, so it keeps the base value, and vice versa).
+id: phys161-e1-p088-bicycle-skids-circular-path
+title: Bicycle skidding off a circular path
+source: { document: PHYS161_Exam1, labels: [ P88, P89 ] }
+section: Circular motion
+tags: [ circular-motion, tangential-acceleration, static-friction, inverse, multi-part ]
+narrative: >-
+  A bicycle initially at rest accelerates uniformly along a circular path on a flat horizontal
+  surface. The bicycle makes {frac} of the circle before it skids off the circular path. Take the
+  gravitational acceleration $g$ = {g:unit}.
+vars:
+  - {
+      name: frac,
+      kind: choice,
+      options: [ one half, one third, one quarter ],
+      label: fraction of the circle
+    }
+  - {
+      name: at,
+      kind: range,
+      min: 0.6,
+      max: 1.6,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: tangential acceleration
+    }
+  - {
+      name: mu,
+      kind: range,
+      min: 0.4,
+      max: 0.9,
+      step: 0.01,
+      decimals: 2,
+      label: coefficient of static friction
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: f, expr: 'frac == "one half" ? 1/2 : (frac == "one third" ? 1/3 : 1/4)' }
+  - { name: k, expr: "sqrt(1 + (4 * pi * f)^2)" } # total / tangential acceleration at skidding
+constraints:
+  - "at * k / g <= 1" # P88's coefficient of static friction stays realistic
+parts:
+  - id: static-friction-coefficient
+    prompt: >-
+      The tangential acceleration is {at:unit}. Calculate the coefficient of static friction between
+      the bicycle and the surface. {_0}
+    answer: at * k / g
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+  - id: tangential-acceleration
+    prompt: >-
+      The coefficient of static friction between the bicycle and the surface is {mu}. Find the
+      tangential acceleration. {_0}{_u}
+    answer: mu * g / k
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { frac: one half, at: 1.2, mu: 0.72 }
+  parts:
+    - { id: static-friction-coefficient, answer: 0.779, source: P88 }
+    - {
+        id: tangential-acceleration,
+        answer: 1.63845,
+        unit: m/s^2,
+        source: P89,
+        vars: { frac: one third }
+      }

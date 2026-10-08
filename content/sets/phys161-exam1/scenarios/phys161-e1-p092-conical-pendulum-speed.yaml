@@ -1,0 +1,35 @@
+# P92 — conical pendulum: the ball circles at radius L sin θ. Vertically T cos θ = m g,
+# horizontally T sin θ = m v² / (L sin θ), so v² = g L sin θ tan θ. L is given in cm and converted
+# to m. g as printed.
+id: phys161-e1-p092-conical-pendulum-speed
+title: Ball revolving on a string (conical pendulum)
+source: { document: PHYS161_Exam1, labels: [ P92 ] }
+section: Circular motion
+tags: [ circular-motion, conical-pendulum, unit-conversion ]
+figure:
+  id: fig
+  src: figures/unnamed_016_R6Ld.png
+  alt: >-
+    A ball hangs from a pivot on the ceiling by a string of length L. The string makes an angle θ
+    with a dashed vertical line through the pivot, and the ball moves around a dashed horizontal
+    circle centred on that line, as a curved arrow shows.
+narrative: >-
+  A ball suspended from a pivot on a string of length $L$ = {L:unit} revolves in a horizontal plane
+  with constant speed $v$. The string maintains an angle of $\theta$ = {theta}° with respect to the
+  vertical. {@fig}
+vars:
+  - { name: L, kind: range, min: 50, max: 120, step: 1, unit: cm, label: string length }
+  - { name: theta, kind: range, min: 8, max: 40, step: 1, unit: "°", label: angle from vertical }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: speed
+    prompt: "Find $v$ taking gravitational acceleration $g$ = {g:unit}. {_0}{_u}"
+    answer: sqrt(g * (L / 100) * sin(rad(theta)) * tan(rad(theta)))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 88, theta: 14 }
+  parts:
+    - { id: speed, answer: 0.721, unit: m/s, source: P92 }

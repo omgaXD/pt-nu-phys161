@@ -1,0 +1,43 @@
+# P93 — on a frictionless banked curve the normal force alone keeps the car on the circle:
+# N cos θ = m g and N sin θ = m v² / R, so tan θ = v² / (g R), in radians (exactUnit). The mass
+# does not enter the answer. g as printed.
+id: phys161-e1-p093-banked-road-angle
+title: Banking angle of a frictionless curve
+source: { document: PHYS161_Exam1, labels: [ P93 ] }
+section: Circular motion
+tags: [ circular-motion, banked-curve, angle ]
+figure:
+  id: fig
+  src: figures/unnamed_010_R6Ld.png
+  alt: >-
+    A car on a curved, banked road that bends around a centre point. A dashed horizontal line runs
+    from the car to the centre, labelled r. A line through the car tilts away from the vertical, and
+    a dashed arc between it and the horizontal marks the angle θ.
+narrative: >-
+  A car of mass $m$ = {m:unit} travels around a circular, banked road of radius $R$ = {R:unit}. The
+  road is inclined at an angle $\theta$ above the horizontal, as shown in the figure. The car
+  travels at a constant speed of $v$ = {v:unit}. Assume that friction between the tires and the road
+  is negligible. {@fig}
+vars:
+  - { name: m, kind: range, min: 900, max: 1600, step: 50, unit: kg, label: car mass }
+  - { name: R, kind: range, min: 50, max: 150, step: 5, unit: m, label: radius of the curve }
+  - { name: v, kind: range, min: 12, max: 30, step: 1, unit: m/s, label: speed }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "v^2 / (g * R) >= 0.15 and v^2 / (g * R) <= 1" # a banking angle between 8.5° and 45°
+parts:
+  - id: banking-angle
+    prompt: >-
+      Determine the required banking angle $\theta$ (in radians) so that the car can travel around
+      the curve without relying on friction. The gravitational acceleration is $g$ = {g:unit}.
+      {_0}{_u}
+    answer: atan(v^2 / (g * R))
+    unit: rad
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 1200, R: 80, v: 20 }
+  parts:
+    - { id: banking-angle, answer: 0.47177751, unit: rad, source: P93 }

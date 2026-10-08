@@ -1,0 +1,40 @@
+# P87 — at the lowest point of the vertical circle the tension points up and gravity down:
+# T − m g = m v² / R, so the cord holds up to v = √((T_max / m − g) R). T_max is always several
+# times m g on these ranges. g as printed.
+id: phys161-e1-p087-ball-cord-vertical-circle
+title: Ball on a cord in a vertical circle
+source: { document: PHYS161_Exam1, labels: [ P87 ] }
+section: Circular motion
+tags: [ circular-motion, vertical-circle, tension ]
+narrative: >-
+  A ball of {m:unit} is attached at the end of a cord and revolves in a vertical circle of radius
+  {R:unit}. The cord will break if the tension in it exceeds {Tmax:unit}. Take the gravitational
+  acceleration $g$ = {g:unit}.
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 0.25,
+      max: 0.6,
+      step: 0.05,
+      decimals: 2,
+      unit: kg,
+      label: ball mass
+    }
+  - { name: R, kind: range, min: 1, max: 2.2, step: 0.05, decimals: 2, unit: m, label: radius }
+  - { name: Tmax, kind: range, min: 50, max: 100, step: 5, unit: N, label: breaking tension }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: maximum-speed-lowest-point
+    prompt: >-
+      What is the maximum speed the ball can have at the lowest point of the circle without breaking
+      the cord? {_0}{_u}
+    answer: sqrt((Tmax / m - g) * R)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 0.35, R: 1.75, Tmax: 75 }
+  parts:
+    - { id: maximum-speed-lowest-point, answer: 18.9169, unit: m/s, source: P87 }

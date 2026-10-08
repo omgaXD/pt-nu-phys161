@@ -1,0 +1,63 @@
+# P90/P91 — the hanging mass M is at rest, so the cord tension is M g, and that tension is the
+# centripetal force on the block: M g = m v² / r. P90 asks for v = √(M g r / m), P91 for
+# M = m v² / (g r). g as printed. The two source problems use different numbers: the base
+# canonical values are P90's, and P91's part overrides them (P90 prints no speed and P91 no M,
+# so each keeps the base value of the other). The constraint keeps P91's answer between 0.4 and
+# 6 kg.
+id: phys161-e1-p090-block-table-hanging-mass
+title: Block circling on a table, held by a hanging mass
+source: { document: PHYS161_Exam1, labels: [ P90, P91 ] }
+section: Circular motion
+tags: [ circular-motion, tension, inverse, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_017_R6Ld.png
+  alt: >-
+    A table seen from above at an angle. A small block m moves around a dashed circle of radius r on
+    the table top, centred on a hole in the middle of the table. A cord runs from the block to the
+    hole and down through it to a cylinder of mass M hanging below the table.
+narrative: >-
+  A block of mass $m$ = {m:unit} is moving with constant speed in a circle of radius $r$ = {r:unit}
+  on a frictionless table. The block is attached to a hanging mass $M$ by a cord passing through a
+  hole in the table. Take the gravitational acceleration $g$ = {g:unit}. {@fig}
+vars:
+  # Masses and speeds are printed as 1, 1.4, 1.5 and 2: no fixed decimals, so each value prints
+  # with the digits it has.
+  - { name: m, kind: range, min: 0.5, max: 2, step: 0.1, unit: kg, label: block mass }
+  - {
+      name: r,
+      kind: range,
+      min: 0.12,
+      max: 0.3,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: radius
+    }
+  - { name: M, kind: range, min: 1, max: 3, step: 0.1, unit: kg, label: hanging mass }
+  - { name: v, kind: range, min: 1, max: 3, step: 0.1, unit: m/s, label: block speed }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "m * v^2 / (g * r) >= 0.4 and m * v^2 / (g * r) <= 6" # P91's hanging mass stays plausible
+parts:
+  - id: speed-for-rest
+    prompt: >-
+      The hanging mass is $M$ = {M:unit}. Find the speed with which $m$ must move for $M$ to stay at
+      rest. {_0}{_u}
+    answer: sqrt(M * g * r / m)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: hanging-mass
+    prompt: >-
+      The block moves with speed $v$ = {v:unit}. Find the mass $M$ that stays at rest. {_0}{_u}
+    answer: m * v^2 / (g * r)
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1, r: 0.18, M: 1.5, v: 2 }
+  parts:
+    - { id: speed-for-rest, answer: 1.627, unit: m/s, source: P90 }
+    - { id: hanging-mass, answer: 3.00752, unit: kg, source: P91, vars: { m: 1.4, r: 0.19 } }
