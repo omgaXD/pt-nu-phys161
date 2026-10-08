@@ -1,0 +1,64 @@
+# P62/P63 — the ball leaves the window at v, θ below the horizontal, and lands t later. Horizontal
+# distance from the building: x = v cos θ · t (P62). Taking down as positive, the drop to the
+# ground is h = v sin θ · t + ½ g t² (P63). Both terms are positive for every draw, so no
+# constraint is needed. g as printed. The two source problems use different numbers: the base
+# canonical values are P62's, and P63's part overrides them. (P64, thrown above the horizontal,
+# is authored separately.)
+id: phys161-e1-p062-ball-tossed-below-horizontal
+title: Ball tossed downward from an upper-story window
+source: { document: PHYS161_Exam1, labels: [ P62, P63 ] }
+section: Kinematics of projectile motion
+tags: [ kinematics, projectile-motion, multi-part ]
+narrative: >-
+  A ball is tossed from an upper-story window of a building. The ball is given an initial velocity
+  of {v:unit} at an angle of {theta}° below the horizontal. It strikes the ground {t:unit} later.
+  The gravitational acceleration is $g$ = {g:unit}.
+vars:
+  # Speeds are printed as 5.5 and 6; one decimal throughout.
+  - {
+      name: v,
+      kind: range,
+      min: 4,
+      max: 7.5,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: launch speed
+    }
+  - {
+      name: theta,
+      kind: range,
+      min: 10,
+      max: 32,
+      step: 1,
+      unit: "°",
+      label: angle below horizontal
+    }
+  - { name: t, kind: range, min: 3, max: 7, step: 1, unit: s, label: time of flight }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: horizontal-distance
+    prompt: >-
+      How far horizontally from the base of the building does the ball strike the ground? {_0}{_u}
+    answer: v * cos(rad(theta)) * t
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: launch-height
+    prompt: "Find the height from which the ball was thrown. {_0}{_u}"
+    answer: v * sin(rad(theta)) * t + g * t^2 / 2
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v: 5.5, theta: 16, t: 5 }
+  parts:
+    - { id: horizontal-distance, answer: 26.435095919879, unit: m, source: P62 }
+    - {
+        id: launch-height,
+        answer: 133.7381978,
+        unit: m,
+        source: P63,
+        vars: { v: 6, theta: 22, t: 5 }
+      }

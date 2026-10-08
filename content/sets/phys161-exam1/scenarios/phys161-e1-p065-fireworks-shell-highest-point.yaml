@@ -1,0 +1,51 @@
+# P65/P66 — the shell is launched at v, θ above the horizontal and explodes at the top of its
+# trajectory, where the vertical velocity v sin θ − g t vanishes: t = v sin θ / g (P66) and the
+# height is H = (v sin θ)² / (2g) (P65). Everything stays positive for every draw. g as printed.
+# The two source problems use different numbers: the base canonical values are P65's, and P66's
+# part overrides them. (P67, where the fuse burns for a set time, is authored separately.)
+id: phys161-e1-p065-fireworks-shell-highest-point
+title: Fireworks shell exploding at its highest point
+source: { document: PHYS161_Exam1, labels: [ P65, P66 ] }
+section: Kinematics of projectile motion
+tags: [ kinematics, projectile-motion, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_011_R6Ld.png
+  alt: >-
+    A night sky. A dashed curved path rises from the lower left, where the launch velocity v₀ is
+    drawn at an angle θ above the horizontal, and arcs up to the upper right, ending at a firework
+    burst at the highest point of the path.
+narrative: >-
+  During a fireworks display, a shell is shot into the air with an initial speed of {v:unit} at an
+  angle of {theta}° above the horizontal. The fuse is timed to ignite the shell just as it reaches
+  its highest point above the ground. The gravitational acceleration is $g$ = {g:unit}. {@fig}
+vars:
+  - { name: v, kind: range, min: 60, max: 95, step: 1, unit: m/s, label: launch speed }
+  - { name: theta, kind: range, min: 55, max: 85, step: 1, unit: "°", label: launch angle }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: vy0, expr: "v * sin(rad(theta))", unit: m/s }
+parts:
+  - id: explosion-height
+    prompt: "Calculate the height at which the shell explodes. {_0}{_u}"
+    answer: vy0^2 / (2 * g)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: time-to-explosion
+    prompt: "How much time passes between the launch of the shell and the explosion? {_0}{_u}"
+    answer: vy0 / g
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v: 69, theta: 60 }
+  parts:
+    - { id: explosion-height, answer: 182.18112244898, unit: m, source: P65 }
+    - {
+        id: time-to-explosion,
+        answer: 8.7422747172345,
+        unit: s,
+        source: P66,
+        vars: { v: 87, theta: 80 }
+      }

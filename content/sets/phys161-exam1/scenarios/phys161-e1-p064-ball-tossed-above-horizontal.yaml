@@ -1,0 +1,51 @@
+# P64 — the ball leaves the window at v, θ above the horizontal, and lands t later. Taking down as
+# positive, its drop below the window after t is h = ½ g t² − v sin θ · t. The constraint keeps the
+# ball below the window level when it lands (t longer than the 2 v sin θ / g it takes to come back
+# down past the window), i.e. h > 0. g as printed. (P62/P63, thrown below the horizontal, are
+# authored separately.)
+id: phys161-e1-p064-ball-tossed-above-horizontal
+title: Ball tossed upward from an upper-story window
+source: { document: PHYS161_Exam1, labels: [ P64 ] }
+section: Kinematics of projectile motion
+tags: [ kinematics, projectile-motion ]
+narrative: >-
+  A ball is tossed from an upper-story window of a building. The ball is given an initial velocity
+  of {v:unit} at an angle of {theta}° above the horizontal. It strikes the ground {t:unit} later.
+  The gravitational acceleration is $g$ = {g:unit}.
+vars:
+  - { name: v, kind: range, min: 4, max: 9, step: 1, unit: m/s, label: launch speed }
+  - {
+      name: theta,
+      kind: range,
+      min: 15,
+      max: 40,
+      step: 1,
+      unit: "°",
+      label: angle above horizontal
+    }
+  - {
+      name: t,
+      kind: range,
+      min: 4,
+      max: 7,
+      step: 0.1,
+      decimals: 1,
+      unit: s,
+      label: time of flight
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: h, expr: "g * t^2 / 2 - v * sin(rad(theta)) * t", unit: m }
+constraints:
+  - "h > 0" # the ball lands below the window
+parts:
+  - id: launch-height
+    prompt: "Find the height from which the ball was thrown. {_0}{_u}"
+    answer: h
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v: 6, theta: 27, t: 5.5 }
+  parts:
+    - { id: launch-height, answer: 133.243, unit: m, source: P64 }

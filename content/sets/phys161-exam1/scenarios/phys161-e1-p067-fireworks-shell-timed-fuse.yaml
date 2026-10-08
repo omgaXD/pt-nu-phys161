@@ -1,0 +1,31 @@
+# P67 — the shell is launched at v, θ above the horizontal and explodes t after launch; up is
+# positive, so its height then is y = v sin θ · t − ½ g t². The fuse times (≤ 5 s) are under
+# the time to the top (v sin θ / g ≥ 5.7 s on these ranges), so the shell is still rising and y > 0
+# for every draw. g as printed. (P65/P66, where the shell explodes at the top, are authored
+# separately.)
+id: phys161-e1-p067-fireworks-shell-timed-fuse
+title: Fireworks shell with a timed fuse
+source: { document: PHYS161_Exam1, labels: [ P67 ] }
+section: Kinematics of projectile motion
+tags: [ kinematics, projectile-motion ]
+narrative: >-
+  During a fireworks display, a shell is shot into the air with an initial speed of {v:unit} at an
+  angle of {theta}° above the horizontal. The fuse is timed to ignite the shell {t:unit} after
+  launch. The gravitational acceleration is $g$ = {g:unit}.
+vars:
+  - { name: v, kind: range, min: 65, max: 95, step: 1, unit: m/s, label: launch speed }
+  - { name: theta, kind: range, min: 60, max: 85, step: 1, unit: "°", label: launch angle }
+  - { name: t, kind: range, min: 2, max: 5, step: 1, unit: s, label: fuse time }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: explosion-height
+    prompt: "Calculate the height at which the shell explodes. {_0}{_u}"
+    answer: v * sin(rad(theta)) * t - g * t^2 / 2
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v: 83, theta: 75, t: 3 }
+  parts:
+    - { id: explosion-height, answer: 196.416, unit: m, source: P67 }

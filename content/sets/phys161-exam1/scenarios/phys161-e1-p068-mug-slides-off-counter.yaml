@@ -1,0 +1,70 @@
+# P68/P69/P70 — the mug leaves the counter horizontally at speed v₀ from height y_i and lands x_f
+# from the base. The fall takes t = √(2 y_i / g), so v₀ = x_f / t (P68). At the floor the vertical
+# velocity is v_y = g t = √(2 g y_i): the impact speed is √(v₀² + v_y²) (P69) and the angle below
+# the horizontal is arctan(v_y / v₀), in degrees as a plain number like the source (P70).
+# y_i is given in cm and converted to m. g as printed. The three source problems use different
+# numbers: the base canonical values are P68's, and the other two parts override them.
+id: phys161-e1-p068-mug-slides-off-counter
+title: Mug sliding off a café counter
+source: { document: PHYS161_Exam1, labels: [ P68, P69, P70 ] }
+section: Kinematics of projectile motion
+tags: [ kinematics, projectile-motion, unit-conversion, multi-part ]
+figure:
+  id: fig
+  src: figures/unnamed_002_R6Ld.png
+  alt: >-
+    Side view. A dashed line marks the level of the counter at the top and another the ground at the
+    bottom. A horizontal arrow leaves the counter's edge, and a curved path drops from there to a
+    mug lying on the ground. A vertical arrow labelled y_i spans the counter height, and a
+    horizontal arrow labelled x_f along the ground spans the distance from the base of the counter
+    to the mug.
+narrative: >-
+  In a local café, a customer slides an empty mug down the counter for a refill. The mug slides off
+  the counter and strikes the floor $x_f$ = {xf:unit} from the base of the counter. The height of
+  the counter is $y_i$ = {yi:unit}. The gravitational acceleration is $g$ = {g:unit}. {@fig}
+vars:
+  - {
+      name: xf,
+      kind: range,
+      min: 1,
+      max: 2.4,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: landing distance from the counter
+    }
+  - { name: yi, kind: range, min: 75, max: 100, step: 1, unit: cm, label: counter height }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: h, expr: "yi / 100", unit: m } # counter height in m
+  - { name: tFall, expr: "sqrt(2 * h / g)", unit: s }
+  - { name: v0, expr: "xf / tFall", unit: m/s } # horizontal launch speed
+  - { name: vy, expr: "g * tFall", unit: m/s } # vertical speed at the floor
+parts:
+  - id: launch-speed
+    prompt: >-
+      What is the magnitude of the velocity with which the mug left the counter? {_0}{_u}
+    answer: v0
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: impact-speed
+    prompt: >-
+      What is the magnitude of the velocity with which the mug strikes the floor? {_0}{_u}
+    answer: sqrt(v0^2 + vy^2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: impact-angle
+    prompt: >-
+      At what angle below the horizontal does the mug strike the floor? Give the answer in degrees.
+      {_0}
+    answer: deg(atan(vy / v0))
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { xf: 1.49, yi: 85 }
+  parts:
+    - { id: launch-speed, answer: 3.5774604860727, unit: m/s, source: P68 }
+    - { id: impact-speed, answer: 5.05558, unit: m/s, source: P69, vars: { xf: 1.26, yi: 82 } }
+    - { id: impact-angle, answer: 40.4622, source: P70, vars: { xf: 2.04, yi: 87 } }
