@@ -1,0 +1,37 @@
+# P78 — constant acceleration along x only, from the origin with velocity (v0x, v0y):
+# x = v0x t + ½ a_x t², y = v0y t, and the distance from the origin is √(x² + y²).
+# v0y ≠ 0 on these ranges, so the distance never vanishes.
+id: phys161-e1-p078-particle-x-acceleration-distance
+title: Particle accelerating along x only
+source: { document: PHYS161_Exam1, labels: [ P78 ] }
+section: Kinematics of 2D and 3D motion in vectors form
+tags: [ kinematics, vectors, constant-acceleration ]
+narrative: >-
+  A particle starts from the origin at $t$ = 0 with an initial velocity having an x component of
+  {v0x:unit} and a y component of {v0y:unit}. The particle moves in the xy plane with an x component
+  of acceleration only, given by $a_x$ = {ax:unit}.
+vars:
+  - { name: v0x, kind: range, min: -6, max: -1, step: 1, unit: m/s, label: initial x-velocity }
+  - { name: v0y, kind: range, min: -8, max: -2, step: 1, unit: m/s, label: initial y-velocity }
+  - {
+      name: ax,
+      kind: range,
+      min: 3,
+      max: 6,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s^2,
+      label: x-acceleration
+    }
+  - { name: t, kind: range, min: 3, max: 8, step: 1, unit: s, label: time asked about }
+parts:
+  - id: distance-from-origin
+    prompt: "Determine the distance from the origin at $t$ = {t:unit}. {_0}{_u}"
+    answer: hypot(v0x * t + ax * t^2 / 2, v0y * t)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v0x: -3, v0y: -5, ax: 5.2, t: 6 }
+  parts:
+    - { id: distance-from-origin, answer: 81.334863373587, unit: m, source: P78 }

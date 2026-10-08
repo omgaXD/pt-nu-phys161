@@ -1,0 +1,77 @@
+# P71/P72/P73 — integrate the acceleration a_x = α t², a_y = β − γ t from the origin with initial
+# velocity (v0x, v0y):
+#   v_x = v0x + α t³/3,        v_y = v0y + β t − γ t²/2,
+#   x = v0x t + α t⁴/12 (P72), y = v0y t + β t²/2 − γ t³/6 (P71),
+# and the speed is √(v_x² + v_y²) (P73). On these ranges x, y, v_x and v_y all stay positive
+# (smallest y: 4·8 + 7·32 − 1.8·512/6 = 102.4 m). The three source problems use different
+# numbers: the base canonical values are P71's, and the other two parts override them.
+id: phys161-e1-p071-rocket-xy-acceleration
+title: Rocket with a time-dependent acceleration
+source: { document: PHYS161_Exam1, labels: [ P71, P72, P73 ] }
+section: Kinematics of 2D and 3D motion in vectors form
+tags: [ kinematics, vectors, calculus, variable-acceleration, multi-part ]
+narrative: >-
+  A rocket moves in the xy-plane. The rocket's acceleration has components $a_x(t) = \alpha t^2$ and
+  $a_y(t) = \beta - \gamma t$, where $\alpha$ = {alpha:unit}, $\beta$ = {beta:unit}, and $\gamma$ =
+  {gamma:unit}. At $t$ = 0 the rocket is at the origin and has velocity $\vec{v}_0 =
+  v_{0x}\hat{\imath} + v_{0y}\hat{\jmath}$, with $v_{0x}$ = {v0x:unit} and $v_{0y}$ = {v0y:unit}.
+vars:
+  # α is printed as 2.4, 2 and 2.3: no fixed decimals, so each value prints with the digits it has.
+  - { name: alpha, kind: range, min: 1.5, max: 2.6, step: 0.1, unit: m/s^4, label: α }
+  # β is printed as 9 and 7.5: no fixed decimals, so each value prints with the digits it has.
+  - { name: beta, kind: range, min: 7, max: 10, step: 0.5, unit: m/s^2, label: β }
+  - { name: gamma, kind: range, min: 1, max: 1.8, step: 0.1, decimals: 1, unit: m/s^3, label: γ }
+  - {
+      name: v0x,
+      kind: range,
+      min: 1,
+      max: 1.6,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: initial x-velocity
+    }
+  - { name: v0y, kind: range, min: 4, max: 9, step: 1, unit: m/s, label: initial y-velocity }
+  - { name: t, kind: range, min: 3, max: 8, step: 1, unit: s, label: time asked about }
+derived:
+  - { name: vx, expr: "v0x + alpha * t^3 / 3", unit: m/s }
+  - { name: vy, expr: "v0y + beta * t - gamma * t^2 / 2", unit: m/s }
+parts:
+  - id: vertical-position
+    prompt: >-
+      Calculate the position of the rocket along the vertical axis at $t$ = {t:unit}. {_0}{_u}
+    answer: v0y * t + beta * t^2 / 2 - gamma * t^3 / 6
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: horizontal-position
+    prompt: >-
+      Calculate the position of the rocket along the horizontal axis at $t$ = {t:unit}. {_0}{_u}
+    answer: v0x * t + alpha * t^4 / 12
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: speed
+    prompt: "Calculate the magnitude of the velocity at $t$ = {t:unit}. {_0}{_u}"
+    answer: sqrt(vx^2 + vy^2)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { alpha: 2.4, beta: 9, gamma: 1.6, v0x: 1.3, v0y: 5, t: 7 }
+  parts:
+    - { id: vertical-position, answer: 164.03333333333, unit: m, source: P71 }
+    - {
+        id: horizontal-position,
+        answer: 47.866666666667,
+        unit: m,
+        source: P72,
+        vars: { alpha: 2, beta: 7.5, gamma: 1.4, v0x: 1.3, v0y: 8, t: 4 }
+      }
+    - {
+        id: speed,
+        answer: 60.797843529008,
+        unit: m/s,
+        source: P73,
+        vars: { alpha: 2.3, beta: 9, gamma: 1.1, v0x: 1.2, v0y: 7, t: 4 }
+      }

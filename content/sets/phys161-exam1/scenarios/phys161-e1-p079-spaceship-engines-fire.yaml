@@ -1,0 +1,43 @@
+# P79/P80 — constant acceleration a = (a_x, 0, a_z) from velocity v₀ î: after t the velocity is
+# (v₀ + a_x t, 0, a_z t) (P79) and the displacement (v₀ t + ½ a_x t², 0, ½ a_z t²) (P80).
+# a_x < 0 is small compared with v₀ / t, so nothing changes sign. The two source problems use
+# different numbers: the base canonical values are P79's, and P80's part overrides them.
+id: phys161-e1-p079-spaceship-engines-fire
+title: Spaceship firing its engines
+source: { document: PHYS161_Exam1, labels: [ P79, P80 ] }
+section: Kinematics of 2D and 3D motion in vectors form
+tags: [ kinematics, vectors, constant-acceleration, 3d, multi-part ]
+narrative: >-
+  A spaceship is traveling at a constant velocity of $\vec{v} = \left({v0vec}\right)\,\text{m/s}$
+  when its engines fire up, giving it constant acceleration $\vec{a} =
+  \left({acc}\right)\,\text{m/s}^2$.
+vars:
+  - { name: v0, kind: range, min: 220, max: 300, step: 5, unit: m/s, label: initial speed }
+  # a_x is printed as −2 and −2.2: no fixed decimals, so each value prints with the digits it has.
+  - { name: ax, kind: range, min: -3, max: -1.5, step: 0.1, unit: m/s^2, label: x-acceleration }
+  - { name: az, kind: range, min: 6, max: 14, step: 1, unit: m/s^2, label: z-acceleration }
+  - { name: t, kind: range, min: 2, max: 6, step: 1, unit: s, label: time asked about }
+derived:
+  - { name: v0vec, expr: "[v0, 0, 0]", unit: m/s }
+  - { name: acc, expr: "[ax, 0, az]", unit: m/s^2 }
+parts:
+  - id: speed
+    prompt: >-
+      What is the magnitude of the spaceship's velocity {t:unit} after the engines fired? {_0}{_u}
+    answer: norm(v0vec + acc * t)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: displacement
+    prompt: >-
+      What is the magnitude of the spaceship's displacement {t:unit} after the engines fired?
+      {_0}{_u}
+    answer: norm(v0vec * t + acc * t^2 / 2)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v0: 255, ax: -2, az: 12, t: 3 }
+  parts:
+    - { id: speed, answer: 251.58895047279, unit: m/s, source: P79 }
+    - { id: displacement, answer: 816.106, unit: m, source: P80, vars: { v0: 275, ax: -2.2, az: 9 } }

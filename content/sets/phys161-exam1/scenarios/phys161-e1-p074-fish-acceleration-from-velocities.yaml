@@ -1,0 +1,55 @@
+# P74/P75 — constant acceleration a = (v − v_i) / T. Its magnitude is |v − v_i| / T (P74) and its
+# direction counterclockwise from +x is atan2(a_y, a_x), taken in [0°, 360°) and answered in
+# degrees as a plain number like the source (P75). Components are integers. The constraints keep
+# both velocities non-zero, the change in velocity clearly non-zero, and a_y ≠ 0 so the angle never
+# sits exactly on the +x axis (where 0° and 360° meet). The two source problems use different
+# numbers: the base canonical values are P74's, and P75's part overrides them.
+# (P76/P77, which add the fish's position, are authored separately.)
+id: phys161-e1-p074-fish-acceleration-from-velocities
+title: Fish's acceleration from two velocities
+source: { document: PHYS161_Exam1, labels: [ P74, P75 ] }
+section: Kinematics of 2D and 3D motion in vectors form
+tags: [ kinematics, vectors, constant-acceleration, angle, multi-part ]
+narrative: >-
+  A fish swimming in a horizontal plane has velocity $\vec{v}_i = \left({vi}\right)\,\text{m/s}$ at
+  a point in the ocean. After the fish swims with constant acceleration for {T:unit}, its velocity
+  is $\vec{v} = \left({vf}\right)\,\text{m/s}$.
+vars:
+  - { name: vix, kind: range, min: -6, max: 8, step: 1, label: initial x-velocity }
+  - { name: viy, kind: range, min: -6, max: 8, step: 1, label: initial y-velocity }
+  - { name: vfx, kind: range, min: -6, max: 10, step: 1, label: final x-velocity }
+  - { name: vfy, kind: range, min: -6, max: 10, step: 1, label: final y-velocity }
+  - { name: T, kind: range, min: 10, max: 30, step: 1, unit: s, label: time of swim }
+derived:
+  - { name: vi, expr: "[vix, viy]", unit: m/s }
+  - { name: vf, expr: "[vfx, vfy]", unit: m/s }
+  - { name: acc, expr: "(vf - vi) / T", unit: m/s^2 }
+  - { name: phiRaw, expr: "deg(atan2(acc[2], acc[1]))" } # in (−180°, 180°]
+constraints:
+  - "norm(vi) > 0 and norm(vf) > 0"
+  - "norm(vf - vi) >= 3" # a clear change of velocity
+  - "vfy != viy" # a_y ≠ 0: the angle is never 0° / 360°
+parts:
+  - id: acceleration-magnitude
+    prompt: "What is the magnitude of the acceleration? {_0}{_u}"
+    answer: norm(acc)
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: acceleration-angle
+    prompt: >-
+      What is the angle of the acceleration vector, measured counterclockwise from the +x axis? Give
+      the answer in degrees. {_0}
+    answer: "phiRaw < 0 ? phiRaw + 360 : phiRaw"
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { vix: -3, viy: 3, vfx: -2, vfy: 8, T: 26 }
+  parts:
+    - { id: acceleration-magnitude, answer: 0.19611613513818, unit: m/s^2, source: P74 }
+    - {
+        id: acceleration-angle,
+        answer: 45,
+        source: P75,
+        vars: { vix: -5, viy: 1, vfx: 4, vfy: 10, T: 29 }
+      }

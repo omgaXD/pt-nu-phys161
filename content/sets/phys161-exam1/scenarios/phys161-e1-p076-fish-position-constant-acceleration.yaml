@@ -1,0 +1,69 @@
+# P76/P77 — constant acceleration a = (v − v_i) / T, from the fish's first sighting (t = 0) at
+# r_i with velocity v_i: r(t) = r_i + v_i t + ½ a t². P76 asks for x(t), P77 for y(t).
+# Components are integers. The constraints keep the velocity change clearly non-zero, ask about
+# a time after T, and keep each coordinate away from zero and from a cancellation of large terms
+# (|x| at least 8% of |x_i| + |v_ix t| + |½ a_x t²|, same for y), so a rounded acceleration
+# still lands within tolerance. The two source problems use different numbers: the base
+# canonical values are P76's, and P77's part overrides them.
+# (P74/P75, without the position, are authored separately.)
+id: phys161-e1-p076-fish-position-constant-acceleration
+title: Fish's position under constant acceleration
+source: { document: PHYS161_Exam1, labels: [ P76, P77 ] }
+section: Kinematics of 2D and 3D motion in vectors form
+tags: [ kinematics, vectors, constant-acceleration, multi-part ]
+narrative: >-
+  A fish swimming in a horizontal plane has velocity $\vec{v}_i = \left({vi}\right)\,\text{m/s}$ at
+  a point in the ocean where the position relative to a certain rock is $\vec{r}_i =
+  \left({ri}\right)\,\text{m}$. After the fish swims with constant acceleration for {T:unit}, its
+  velocity is $\vec{v} = \left({vf}\right)\,\text{m/s}$.
+vars:
+  - { name: vix, kind: range, min: -6, max: 8, step: 1, label: initial x-velocity }
+  - { name: viy, kind: range, min: -6, max: 8, step: 1, label: initial y-velocity }
+  - { name: rix, kind: range, min: -9, max: 9, step: 1, label: initial x-position }
+  - { name: riy, kind: range, min: -9, max: 9, step: 1, label: initial y-position }
+  - { name: vfx, kind: range, min: -6, max: 10, step: 1, label: final x-velocity }
+  - { name: vfy, kind: range, min: -6, max: 10, step: 1, label: final y-velocity }
+  - { name: T, kind: range, min: 10, max: 20, step: 1, unit: s, label: time of swim }
+  - { name: t, kind: range, min: 22, max: 40, step: 1, unit: s, label: time asked about }
+derived:
+  - { name: vi, expr: "[vix, viy]", unit: m/s }
+  - { name: ri, expr: "[rix, riy]", unit: m }
+  - { name: vf, expr: "[vfx, vfy]", unit: m/s }
+  - { name: acc, expr: "(vf - vi) / T", unit: m/s^2 }
+  - { name: r, expr: "ri + vi * t + acc * t^2 / 2", unit: m }
+  # The size of the largest terms in x(t) and y(t), to spot a near-cancellation.
+  - { name: xTerms, expr: "abs(rix) + abs(vix * t) + abs(acc[1] * t^2 / 2)", unit: m }
+  - { name: yTerms, expr: "abs(riy) + abs(viy * t) + abs(acc[2] * t^2 / 2)", unit: m }
+constraints:
+  - "norm(vi) > 0 and norm(vf) > 0 and norm(ri) > 0"
+  - "norm(vf - vi) >= 3" # a clear change of velocity
+  - "abs(r[1]) >= max(5, 0.08 * xTerms)" # x(t) not a near-cancellation
+  - "abs(r[2]) >= max(5, 0.08 * yTerms)" # y(t) not a near-cancellation
+parts:
+  - id: horizontal-position
+    prompt: >-
+      If the fish maintains constant acceleration, what is its horizontal position at $t$ =
+      {t:unit}? {_0}{_u}
+    answer: r[1]
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: vertical-position
+    prompt: >-
+      If the fish maintains constant acceleration, what is its vertical position at $t$ = {t:unit}?
+      {_0}{_u}
+    answer: r[2]
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { vix: 2, viy: 6, rix: -6, riy: 4, vfx: -2, vfy: 2, T: 13, t: 33 }
+  parts:
+    - { id: horizontal-position, answer: -107.53846153846, unit: m, source: P76 }
+    - {
+        id: vertical-position,
+        answer: 227.076923,
+        unit: m,
+        source: P77,
+        vars: { vix: 3, viy: 1, rix: 3, riy: 4, vfx: 8, vfy: 7, t: 29 }
+      }
