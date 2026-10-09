@@ -77,7 +77,7 @@ async function writeAtomic(path: string, text: string): Promise<void> {
 }
 
 /**
- * ProblemRepository over a directory tree (§4):
+ * ProblemRepository over a directory tree:
  *
  *   <root>/<setId>/set.yaml
  *   <root>/<setId>/scenarios/<scenarioId>.yaml

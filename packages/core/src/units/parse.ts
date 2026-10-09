@@ -37,7 +37,7 @@ function fail(code: string, message: string, input: string): never {
 }
 
 /**
- * Parse a unit string into name → exponent (§5).
+ * Parse a unit string into name → exponent.
  *
  * - space (or `*`, `·`) multiplies: `kg m/s` → {kg: 1, m: 1, s: -1}
  * - `^` exponents: `m s^-1`, `m s^(-1)`, `s^2`; superscripts are accepted

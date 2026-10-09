@@ -32,7 +32,7 @@ function hasValueSlot(prompt: string): boolean {
 }
 
 /**
- * Authoring lint for one set (§7). Works on the files as written, so it can
+ * Authoring lint for one set. Works on the files as written, so it can
  * see what the schema's defaults would otherwise hide (a missing tolerance).
  */
 export function lintSet(root: string, setId: string): LintFinding[] {
@@ -119,7 +119,7 @@ export function lintSet(root: string, setId: string): LintFinding[] {
     for (const d of diagnoseScenario(r.value)) add(d.severity, d.code, file, `${d.path.join('.')}: ${d.message}`);
   }
 
-  // Source labels (§2.4): each canonical part names the source problem it reproduces.
+  // Source labels: each canonical part names the source problem it reproduces.
   const drafts = loadDrafts(root, setId).map((d) => d.draft);
   const draftLabels = new Set(drafts.map((d) => d.label));
   for (const d of drafts) for (const f of d.figures) referencedFigures.add(f.src);

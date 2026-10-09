@@ -27,7 +27,7 @@ const SUBSCRIPT: Record<string, string> = {
 };
 
 /**
- * Normalise source typography (§7): Unicode super/subscript digits become
+ * Normalise source typography: Unicode super/subscript digits become
  * ^n / _n, ˚ and º become °, the Unicode minus becomes -, `i\u02c6`/`j\u02c6` unit
  * vectors become î/ĵ, and whitespace collapses. Greek letters are kept.
  */

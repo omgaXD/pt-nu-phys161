@@ -1,7 +1,7 @@
 import { IDENTIFIER_RE } from '../expr/names.js';
 
 /**
- * Template syntax (§2.3), one grammar for narrative, prompt, caption,
+ * Template syntax, one grammar for narrative, prompt, caption,
  * overlay text, hint and solution:
  *
  *   {name}        value, formatted per its decimals/sigfigs

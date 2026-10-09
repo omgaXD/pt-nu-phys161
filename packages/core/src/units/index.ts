@@ -9,7 +9,7 @@ export { createUnitTable, DEFAULT_UNIT_TABLE, SI_CLASSES, type UnitClass, type U
  * factor to multiply it by; otherwise `false`.
  *
  * Two units match when their components pair up class-by-class with equal
- * exponents (§5), or else when all their components are known and their SI
+ * exponents, or else when all their components are known and their SI
  * dimensions agree: `J` ≡ `N m` ≡ `kg m^2 s^-2`, `mL` ≡ `cm^3`. Unknown names
  * only match themselves. The empty unit only matches the empty unit.
  */

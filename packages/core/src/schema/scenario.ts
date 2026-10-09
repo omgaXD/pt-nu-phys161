@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { IDENTIFIER_RE, isReservedName } from '../expr/names.js';
 
-// Zod is the single source of truth for types (§2.2). Objects are strict so a
+// Zod is the single source of truth for types. Objects are strict so a
 // typo in a hand-authored YAML file (`tolernce:`) is an error, not silently
 // dropped data.
 
@@ -23,7 +23,7 @@ const Sigfigs = z.number().int().min(1).max(15);
 // Keys are declared in authoring order: zod output (and therefore every file
 // the tools write) follows declaration order.
 const varPresentation = {
-  /** Round to N decimals BEFORE use (§3.3 step 3). */
+  /** Round to N decimals BEFORE use: the rounded value is what the prompt shows and the answer uses. */
   decimals: Decimals.optional(),
   /** Round to N significant figures BEFORE use; alternative to `decimals`. */
   sigfigs: Sigfigs.optional(),
@@ -104,7 +104,7 @@ export const FigureSchema = z.strictObject({
 export const DifficultySchema = z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)]);
 
 /**
- * What a student may type (§3.2). A future `algebraic` type (symbolic
+ * What a student may type. A future `algebraic` type (symbolic
  * answers compared by numerical sampling) slots in here; grading dispatches on
  * this value so adding it does not change the Part shape.
  */
@@ -148,7 +148,7 @@ export const PartSchema = z.strictObject({
   solution: z.string().optional(),
 });
 
-// ---- Canonical check (§2.4) ------------------------------------------------
+// ---- Canonical check -------------------------------------------------------
 
 const PinnedValues = z.record(z.string(), z.union([z.number(), z.string()]));
 
@@ -198,7 +198,7 @@ export const ScenarioSchema = z
     narrative: z.string(),
     vars: z.array(RandomVarSchema).default([]),
     derived: z.array(DerivedVarSchema).default([]),
-    /** Boolean expressions; a falsy one rejects the draw (§3.3). */
+    /** Boolean expressions; a falsy one rejects the draw. */
     constraints: z.array(z.string().min(1)).default([]),
     /** Default 200. */
     maxSampleAttempts: z.number().int().positive().max(100_000).optional(),

@@ -1,5 +1,5 @@
-// Guiding constraints §0.2 and §1: @pt/core knows nothing about how problems
-// will be delivered, and does no I/O.
+// @pt/core knows nothing about how problems will be delivered (it deals in
+// problems, instances, responses and grades), and does no I/O.
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';

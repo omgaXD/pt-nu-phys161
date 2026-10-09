@@ -22,7 +22,7 @@ function issuesOf(input: unknown): string[] {
   return r.ok ? [] : r.issues.map((i) => `${i.path.join('.')}: ${i.message}`);
 }
 
-describe('scenario schema (M1)', () => {
+describe('scenario schema', () => {
   it('C1 parses and validates', () => {
     const s = parseScenario(C1);
     expect(s.id).toBe('c01-push-work');

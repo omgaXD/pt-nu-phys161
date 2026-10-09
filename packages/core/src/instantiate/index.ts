@@ -19,7 +19,7 @@ export {
   varCount,
 } from './sample.js';
 
-// ---- Instance shape (§3.3) --------------------------------------------------
+// ---- Instance shape ---------------------------------------------------------
 
 export interface RenderedOverlay {
   id: string;
@@ -110,7 +110,7 @@ export interface Rejection {
 }
 
 /**
- * Evaluate derived variables in declaration order (§3.3 step 4). A domain
+ * Evaluate derived variables in declaration order, after the randoms. A domain
  * error (sqrt of a negative, division by zero) rejects the draw; any other
  * error is an authoring bug and is thrown.
  */
@@ -161,7 +161,7 @@ export function evaluateConstraints(
   });
 }
 
-/** Evaluate every part's answer formula to a finite number (§3.3 step 6). */
+/** Evaluate every part's answer formula to a finite number. */
 export function evaluateAnswers(
   scenario: Pick<Scenario, 'parts'>,
   values: Readonly<Record<string, Value>>,
@@ -198,7 +198,7 @@ export interface SampleResult {
 }
 
 /**
- * Steps 1–5 of §3.3: draw, quantize, derive, and retry with derived sub-seeds
+ * Draw the randoms, quantize, derive, and retry with derived sub-seeds
  * until every constraint holds. Throws `ConstraintUnsatisfiableError` naming
  * the most frequently failing constraint when the budget runs out.
  */
@@ -323,7 +323,7 @@ export interface InstantiateOptions {
 }
 
 /**
- * `(scenario, seed) → instance`, pure and stable (§0.3, §3.3). The seed is the
+ * `(scenario, seed) → instance`, pure and stable forever. The seed is the
  * entire identity of a generated problem; never persist the generated values.
  */
 export function instantiate(scenario: Scenario, seed: number, opts: InstantiateOptions = {}): ProblemInstance {

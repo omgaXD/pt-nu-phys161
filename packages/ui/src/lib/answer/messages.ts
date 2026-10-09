@@ -2,7 +2,7 @@ import type { AnswerErrorCode } from '@pt/core';
 
 /**
  * English text for the error codes @pt/core returns. Core returns codes, not
- * messages (§11); pass `messages` to any answer component to translate.
+ * messages; pass `messages` to any answer component to translate.
  */
 export type AnswerMessages = Record<AnswerErrorCode | 'unit-syntax' | 'unit-unknown' | 'unit-missing', string>;
 

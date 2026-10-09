@@ -66,7 +66,7 @@ const DRAFT_FLOW_PATHS: Pattern[] = [
 const DATA_URI = /^data:image\/(png|jpe?g|gif|svg\+xml|webp);base64,(.+)$/;
 
 /**
- * Split a source document into one draft YAML per problem (§7):
+ * Split a source document into one draft YAML per problem:
  * `P<n>.` starts a problem, the trailing "(answer unit)" becomes the canonical
  * answer, numeric literals become draft variables with TODO ranges, and
  * images become figure stubs (copied into the set's figures/ directory).

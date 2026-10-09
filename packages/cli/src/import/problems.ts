@@ -95,7 +95,7 @@ export function splitAnswer(text: string): { question: string; answer?: PrintedA
 }
 
 /**
- * Split blocks into problems on `P<n>.` (§7). Paragraphs that do not start a
+ * Split blocks into problems on `P<n>.`. Paragraphs that do not start a
  * new problem continue the current one; images attach to the problem they
  * follow; headings set the section. A leading document title is ignored.
  */

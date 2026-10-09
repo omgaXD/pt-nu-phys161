@@ -100,7 +100,7 @@ function unitFactor(student: string, part: GradablePart & { unit: string }): num
   return a !== null && b !== null && sameUnit(a, b) ? 1 : false;
 }
 
-/** |value − model| within tolerance (§3.4); exact integer match for `integer` parts. */
+/** |value − model| within tolerance; exact integer match for `integer` parts. */
 export function withinTolerance(value: number, model: number, part: Pick<Part, 'integer' | 'tolerance'>): boolean {
   if (part.integer) {
     const target = Math.round(model);
@@ -115,7 +115,7 @@ export function withinTolerance(value: number, model: number, part: Pick<Part, '
 }
 
 /**
- * Grade one part (§3.4) against a whole instance or just its instance part.
+ * Grade one part against a whole instance or just its instance part.
  * Parse/acceptance/evaluation failures give a zero fraction; unit
  * compatibility is still evaluated independently.
  */

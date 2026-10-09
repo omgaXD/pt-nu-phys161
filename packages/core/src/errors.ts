@@ -19,7 +19,7 @@ export class CoreError extends Error {
   }
 }
 
-// ---- Expression errors (§3.1) ----------------------------------------------
+// ---- Expression errors -----------------------------------------------------
 
 /** Base class for everything the expression layer throws. */
 export class ExprError extends CoreError {}

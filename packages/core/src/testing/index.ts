@@ -1,6 +1,6 @@
 /**
  * @pt/core/testing — the shared conformance suite every ProblemRepository
- * implementation must pass (§4). Uses Vitest; import it only from tests.
+ * implementation must pass. Uses Vitest; import it only from tests.
  */
 import { describe, expect, it } from 'vitest';
 import { parseScenario } from '../schema/index.js';

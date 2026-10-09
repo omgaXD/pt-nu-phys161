@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`determinism (M4) > pins a few full instances (readable diff when rendering changes) 1`] = `
+exports[`determinism > pins a few full instances (readable diff when rendering changes) 1`] = `
 {
   "figure": {
     "alt": "A suitcase on a ramp inclined at angle θ above the horizontal, pulled up the ramp by a force F that acts parallel to the ramp surface.",
@@ -72,7 +72,7 @@ exports[`determinism (M4) > pins a few full instances (readable diff when render
 }
 `;
 
-exports[`determinism (M4) > pins a few full instances (readable diff when rendering changes) 2`] = `
+exports[`determinism > pins a few full instances (readable diff when rendering changes) 2`] = `
 {
   "narrativeHtml": "A 3 kg object has a velocity of <span class="pt-math" data-display="inline" data-tex="\\left(2\\,\\hat{\\imath} + 4\\,\\hat{\\jmath}\\right)\\,\\text{m/s}">\\left(2\\,\\hat{\\imath} + 4\\,\\hat{\\jmath}\\right)\\,\\text{m/s}</span>.",
   "parts": [

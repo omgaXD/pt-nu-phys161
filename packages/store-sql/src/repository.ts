@@ -19,7 +19,7 @@ function notImplemented(method: string): never {
 }
 
 /**
- * ProblemRepository over SQLite via Drizzle — a stub (§4). The schema is final
+ * ProblemRepository over SQLite via Drizzle — a stub. The schema is final
  * enough that switching storage later is filling in these method bodies; the
  * shared conformance suite (`@pt/core/testing`) defines "done".
  */

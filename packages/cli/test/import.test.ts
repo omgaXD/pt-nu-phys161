@@ -232,7 +232,7 @@ describe('literal detection', () => {
   });
 });
 
-describe('pt import (M9)', () => {
+describe('pt import', () => {
   it('writes one draft per problem, a set.yaml and copies figures', async () => {
     const root = tempRoot();
     const out = memoryOutput();
@@ -319,7 +319,7 @@ describe('pt import (M9)', () => {
   });
 });
 
-describe('pt group / agent-task (M9)', () => {
+describe('pt group / agent-task', () => {
   async function demoDrafts(): Promise<{ root: string; drafts: Draft[] }> {
     const root = tempRoot();
     await importDocument(createContext(root, memoryOutput()), join(FIX, 'source.html'), { set: 'demo' });

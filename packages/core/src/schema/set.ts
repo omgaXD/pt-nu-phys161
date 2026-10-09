@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { ID_RE } from './scenario.js';
 
-/** A named collection of scenarios with ordered sections (§2.1). */
+/** A named collection of scenarios with ordered sections. */
 export const SetDocSchema = z.strictObject({
   id: z.string().regex(ID_RE),
   title: z.string().min(1),

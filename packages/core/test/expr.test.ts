@@ -24,7 +24,7 @@ function thrown(fn: () => unknown): unknown {
   throw new Error('expected an error');
 }
 
-// ---- §3.2 acceptance table -----------------------------------------------------
+// ---- Acceptance table ---------------------------------------------------------
 
 type Row = [src: string, expected: 'ok' | string];
 
@@ -50,7 +50,7 @@ const TABLE: Record<AnswerType, Row[]> = {
     ['1..2', 'syntax'],
   ],
   numeric: [
-    ['0.01*1.70 + 0.01*5.60', 'ok'], // the plan's example
+    ['0.01*1.70 + 0.01*5.60', 'ok'], // the source document accepts this
     ['2^3', 'ok'],
     ['2**3', 'ok'],
     ['-(3+4)/2', 'ok'],
@@ -58,7 +58,7 @@ const TABLE: Record<AnswerType, Row[]> = {
     ['2 pi', 'ok'],
     ['pi/2', 'ok'],
     ['1.6×10^8', 'ok'],
-    ['sqrt(0.017^2+0.056^2)', 'function-not-allowed'], // the plan's example
+    ['sqrt(0.017^2+0.056^2)', 'function-not-allowed'], // and rejects this
     ['sin(1)', 'function-not-allowed'],
     ['x + 1', 'identifier-not-allowed'],
     ['2 m', 'identifier-not-allowed'],
@@ -93,7 +93,7 @@ const TABLE: Record<AnswerType, Row[]> = {
   ],
 };
 
-describe('validateAnswer — §3.2 acceptance table (M2)', () => {
+describe('validateAnswer — acceptance table', () => {
   for (const [type, rows] of Object.entries(TABLE) as [AnswerType, Row[]][]) {
     describe(type, () => {
       it.each(rows)('%s → %s', (src, expected) => {
@@ -138,7 +138,7 @@ describe('validateAnswer — §3.2 acceptance table (M2)', () => {
 
 // ---- Evaluator ------------------------------------------------------------------
 
-describe('restricted evaluator (M2)', () => {
+describe('restricted evaluator', () => {
   it('implements exactly the documented function set', () => {
     expect([...IMPLEMENTED_FUNCTIONS].sort()).toEqual([...FUNCTION_NAMES].sort());
   });

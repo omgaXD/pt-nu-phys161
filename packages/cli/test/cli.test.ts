@@ -24,7 +24,7 @@ async function pt(...args: string[]) {
   return { code, out: o.text(), err: o.stderr.join('\n') };
 }
 
-describe('pt check (M8)', () => {
+describe('pt check', () => {
   it('is green over every corpus scenario', async () => {
     const r = await pt('--root', FIXTURES, 'check');
     expect(r.code).toBe(0);
@@ -72,7 +72,7 @@ describe('pt check (M8)', () => {
   });
 });
 
-describe('pt gen / variants / fuzz (M8)', () => {
+describe('pt gen / variants / fuzz', () => {
   it('gen prints the instance and model answers', async () => {
     const r = await pt('--root', FIXTURES, 'gen', 'c03-luggage-ramp', '--seed', '42');
     expect(r.code).toBe(0);
@@ -142,7 +142,7 @@ describe('pt gen / variants / fuzz (M8)', () => {
   });
 });
 
-describe('pt lint / fmt (M8)', () => {
+describe('pt lint / fmt', () => {
   it('lint is clean on the corpus', async () => {
     const r = await pt('--root', FIXTURES, 'lint', 'corpus');
     expect(r.code).toBe(0);

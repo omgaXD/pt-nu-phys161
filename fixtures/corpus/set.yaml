@@ -1,4 +1,4 @@
-# Reference corpus (PLAN.md §9): problems chosen to span the feature space.
+# Reference corpus: problems chosen to span the feature space.
 # Every scenario carries the source's literal values and printed answers;
 # `pt check --root fixtures` asserts they reproduce.
 id: corpus

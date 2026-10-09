@@ -43,7 +43,7 @@ function setupText(d: Draft): string {
 
 /**
  * Cluster drafts that share a figure or have highly similar narratives into
- * candidate multi-part scenarios (§7). Proposals only: a human or agent
+ * candidate multi-part scenarios. Proposals only: a human or agent
  * confirms and writes the merged scenario.
  */
 export function groupDrafts(setId: string, drafts: readonly Draft[], threshold = 0.6): DraftGroup[] {

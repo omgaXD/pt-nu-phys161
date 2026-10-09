@@ -12,7 +12,7 @@ import {
   unitToTex,
 } from '../src/index.ts';
 
-describe('parseUnit (M3)', () => {
+describe('parseUnit', () => {
   it('space is multiplication, one "/" negates the right side', () => {
     expect(parseUnit('kg m/s')).toEqual({ kg: 1, m: 1, s: -1 });
     expect(parseUnit('J/m^4')).toEqual({ J: 1, m: -4 });
@@ -46,7 +46,7 @@ describe('parseUnit (M3)', () => {
   });
 });
 
-describe('areCompatible — deliberate consequences (§5)', () => {
+describe('areCompatible — deliberate consequences', () => {
   it('5000 mm ≡ 5 m', () => {
     const f = areCompatible('mm', 'm');
     expect(f).toBeCloseTo(1e-3);

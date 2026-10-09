@@ -28,7 +28,7 @@ export interface RenderOptions {
   field: TemplateField;
   /**
    * For prompts: whether the part expects a unit. `{_u}` is dropped when it
-   * does not, and missing slots are appended when it does (§2.3).
+   * does not, and missing slots are appended when it does.
    */
   hasUnit?: boolean;
 }
@@ -45,7 +45,7 @@ export function escapeHtml(s: string): string {
 /**
  * Placeholder markup. Core never typesets math or mounts inputs: it emits these
  * flat, non-nesting spans and the UI replaces them (see `splitRenderedHtml`).
- * Math stays swappable between KaTeX and MathJax (§11).
+ * Math stays swappable between KaTeX and MathJax.
  */
 export function mathHtml(tex: string, display: boolean): string {
   const t = escapeHtml(tex);

@@ -30,7 +30,7 @@ test.beforeEach(({ page }) => {
 });
 test.afterEach(() => expect(errors).toEqual([]));
 
-test('authors a scenario end to end, sees the canonical check pass, and saves it (M11)', async ({ page }) => {
+test('authors a scenario end to end, sees the canonical check pass, and saves it', async ({ page }) => {
   await open(page, '/sets/e2e/new');
   await expect(page.getByRole('heading', { name: 'New scenario' })).toBeVisible();
 
@@ -177,7 +177,7 @@ test('filters the scenario list by section and search', async ({ page }) => {
   await expect(page.locator('tbody tr')).toHaveCount(1);
 });
 
-test('the /dev gallery renders every component against the corpus (M10)', async ({ page }) => {
+test('the /dev gallery renders every component against the corpus', async ({ page }) => {
   await open(page, '/dev');
   for (const heading of [
     'MathInline / MathBlock',

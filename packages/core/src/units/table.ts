@@ -1,5 +1,5 @@
 /**
- * Dimension classes (§5). Units of one class convert by factor; the factor is
+ * Dimension classes. Units of one class convert by factor; the factor is
  * relative to the SI coherent unit the class's `dims` describe (kg, not g).
  * Across classes, units match when their SI dimensions agree (`J` ≡ `N m` ≡
  * `kg m^2 s^-2`), as in Moodle. A class without `dims` only matches itself.

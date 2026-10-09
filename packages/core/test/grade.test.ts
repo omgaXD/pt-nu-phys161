@@ -30,7 +30,7 @@ function grader(id: string, partIndex = 0) {
   };
 }
 
-describe('grading (M6)', () => {
+describe('grading', () => {
   it('C5: relative tolerance at 1e-19 scale; zero is not "close enough"', () => {
     const { grade, model } = grader('c05-proton-momentum');
     expect(model).toBeCloseTo(2.34205e-19, 24);
@@ -125,7 +125,7 @@ describe('grading (M6)', () => {
     }
   });
 
-  it('accepts the whole instance, as in the plan (gradePart(part, instance, response))', () => {
+  it('accepts the whole instance (gradePart(part, instance, response))', () => {
     const s = corpusScenario('c03-luggage-ramp');
     const inst = atCanonical(s);
     expect(gradePart(s.parts[2]!, inst, { combined: '372.496 J' }).fraction).toBe(1);

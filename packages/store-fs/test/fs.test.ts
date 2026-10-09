@@ -9,7 +9,7 @@ import { copyCorpus, FIXTURES, tempDir, writeSeed } from './helpers.ts';
 
 const corpusIds = readdirSync(join(FIXTURES, 'corpus/scenarios')).map((f) => f.replace(/\.yaml$/, ''));
 
-describe('FsRepository on the reference corpus (M7)', () => {
+describe('FsRepository on the reference corpus', () => {
   it('reads every corpus scenario', async () => {
     const repo = new FsRepository({ root: FIXTURES });
     const rows = await repo.listScenarios({ setId: 'corpus' });

@@ -7,7 +7,7 @@ import { STUDENT_FUNCTIONS } from './names.js';
 
 /**
  * Error codes returned by `validateAnswer`. Codes, not messages: the UI maps
- * them to text (§11, no strings in core).
+ * them to text (no strings in core).
  */
 export type AnswerErrorCode =
   | 'empty'
@@ -98,7 +98,7 @@ function checkExpression(ast: Ast, allowFunctions: boolean): Violation | null {
 
 /**
  * Decide whether a student may submit `src` for a part of `answerType`
- * (§3.2), by walking the parsed AST — never by regex. On success returns the
+ * by walking the parsed AST — never by regex. On success returns the
  * TeX for the live preview (number literals formatted by `num`) and the
  * evaluated value.
  */

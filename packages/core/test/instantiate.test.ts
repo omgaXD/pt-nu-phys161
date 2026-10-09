@@ -28,7 +28,7 @@ function fingerprint(scenario: Scenario, seeds: number): string {
   return h.digest('hex').slice(0, 16);
 }
 
-describe('determinism (M4)', () => {
+describe('determinism', () => {
   it('same seed ⇒ identical instance, for every corpus scenario', () => {
     for (const s of loadCorpus()) {
       for (const seed of [0, 1, 7, 12345, MAX_SEED]) {
@@ -90,7 +90,7 @@ describe('determinism (M4)', () => {
   });
 });
 
-describe('quantization (M4)', () => {
+describe('quantization', () => {
   it('computes grids exactly in decimal', () => {
     const g = rangeGrid({ name: 'mu', kind: 'range', min: 0.25, max: 0.45, step: 0.01 });
     expect(g.count).toBe(21); // naive floor((0.45-0.25)/0.01)+1 gives 20
@@ -133,7 +133,7 @@ describe('quantization (M4)', () => {
   });
 });
 
-describe('constraints (M4)', () => {
+describe('constraints', () => {
   it('C8: rejected draws are re-drawn and every accepted draw satisfies the constraints', () => {
     const s = corpusScenario('c08-bucket-box-gravel');
     let retried = 0;
@@ -197,7 +197,7 @@ describe('constraints (M4)', () => {
   });
 });
 
-describe('variant counting (M4)', () => {
+describe('variant counting', () => {
   it('multiplies grid sizes', () => {
     expect(countVariants(parseScenario(C1))).toBe(141 * 41 * 601);
     expect(variantBreakdown(corpusScenario('c03-luggage-ramp'))).toEqual({

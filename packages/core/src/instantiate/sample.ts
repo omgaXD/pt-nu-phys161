@@ -18,7 +18,7 @@ export function assertSeed(seed: number): void {
 }
 
 /**
- * Seed for draw number `k` (§3.3 step 5). Draw 0 uses the seed itself; each
+ * Seed for draw number `k`. Draw 0 uses the seed itself; each
  * constraint-rejected draw retries with `seed·0x9E3779B1 + k` (mod 2^32).
  * Part of the determinism contract — never change.
  */
@@ -71,7 +71,7 @@ export function varCount(v: RandomVar): number {
   return v.kind === 'range' ? rangeGrid(v).count : v.options.length;
 }
 
-/** Apply the variable's decimals/sigfigs (§3.3 step 3). Strings pass through. */
+/** Apply the variable's decimals/sigfigs, right after the draw. Strings pass through. */
 export function quantize(v: RandomVar, x: number | string): number | string {
   if (typeof x !== 'number') return x;
   if (v.decimals !== undefined) return roundHalfAway(x, v.decimals);
@@ -99,7 +99,7 @@ export interface VariantBreakdown {
   vars: { name: string; count: number }[];
 }
 
-/** Π over vars of grid size (§3.3), clamped to Number.MAX_SAFE_INTEGER. */
+/** Π over vars of grid size, clamped to Number.MAX_SAFE_INTEGER. */
 export function countVariants(scenario: Pick<Scenario, 'vars'>): number {
   return variantBreakdown(scenario).total;
 }

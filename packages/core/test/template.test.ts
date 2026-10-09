@@ -83,7 +83,7 @@ describe('tokenizer', () => {
   });
 });
 
-describe('rendering (M5)', () => {
+describe('rendering', () => {
   it('C3: shared narrative, shared figure with a bound overlay, three prompts with slots', () => {
     const s = corpusScenario('c03-luggage-ramp');
     const inst = atCanonical(s); // P14 values

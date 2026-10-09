@@ -54,7 +54,7 @@ function findDraft(root: string, label: string, setId?: string): { setId: string
 }
 
 /**
- * Emit a compact JSON packet for an LLM (§7): the source text, detected
+ * Emit a compact JSON packet for an LLM: the source text, detected
  * literals, printed answer and current draft, plus the exact schema the
  * result must satisfy and how it will be verified.
  */

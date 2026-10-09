@@ -25,7 +25,7 @@ export interface ScenarioSummary {
 
 /**
  * Deliberately rich enough to push filtering down to SQL later, while
- * trivially implementable in memory today (§4).
+ * trivially implementable in memory today.
  */
 export interface ScenarioQuery {
   setId?: string;
@@ -56,7 +56,7 @@ export interface PutScenarioOptions {
 }
 
 /**
- * The storage-uncertainty hedge (§4): everything above this interface is
+ * The storage-uncertainty hedge: everything above this interface is
  * independent of files vs database.
  */
 export interface ProblemRepository {

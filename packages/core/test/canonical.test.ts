@@ -9,7 +9,7 @@ const mutate = (s: Scenario, f: (s: Scenario) => void): Scenario => {
   return parseScenario(c);
 };
 
-describe('canonical check (§2.4)', () => {
+describe('canonical check', () => {
   it('passes on a correct transcription', () => {
     const r = checkCanonical(parseScenario(C1));
     expect(r.ok).toBe(true);

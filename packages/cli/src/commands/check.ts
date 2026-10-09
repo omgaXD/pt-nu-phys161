@@ -32,7 +32,7 @@ function checkOne(s: Scenario): ScenarioCheck {
 }
 
 /**
- * Validate schema, run semantic diagnostics and the canonical check (§2.4).
+ * Validate schema, run semantic diagnostics and the canonical check.
  * Exit code 1 if anything fails — this is the CI gate.
  */
 export async function runCheck(ctx: Context, ids: string[], opts: CheckOptions = {}): Promise<number> {

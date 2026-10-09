@@ -38,7 +38,7 @@ export interface FuzzResult {
 }
 
 /**
- * Instantiate across N seeds (§7): no NaN/∞, constraints satisfiable within
+ * Instantiate across N seeds: no NaN/∞, constraints satisfiable within
  * budget, answers inside a sane magnitude band, templates resolve. Reports
  * the constraint rejection rate — a high rate means badly chosen ranges.
  */

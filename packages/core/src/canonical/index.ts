@@ -62,7 +62,7 @@ function onGrid(scenario: Scenario, name: string, value: number | string): Canon
 
 /**
  * Pin the random variables to the source values and assert every canonical
- * part reproduces its printed answer within the part's tolerance (§2.4).
+ * part reproduces its printed answer within the part's tolerance.
  */
 export function checkCanonical(scenario: Scenario, ev: Evaluator = defaultEvaluator()): CanonicalReport {
   const randomNames = new Set(scenario.vars.map((v) => v.name));

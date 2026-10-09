@@ -4,7 +4,7 @@ export const CONSTANTS: Readonly<Record<string, number>> = Object.freeze({
   e: Math.E,
 });
 
-/** Functions a student may use in a `numericalFormula` answer (§3.2). */
+/** Functions a student may use in a `numericalFormula` answer. */
 export const STUDENT_FUNCTIONS = [
   'sqrt',
   'abs',
