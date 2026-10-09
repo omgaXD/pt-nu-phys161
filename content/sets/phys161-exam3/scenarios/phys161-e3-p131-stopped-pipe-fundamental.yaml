@@ -1,0 +1,24 @@
+# P131 — a pipe closed at one end has a node at the closed end and an antinode at the open end,
+# so its fundamental has λ = 4L and f = v / (4L).
+id: phys161-e3-p131-stopped-pipe-fundamental
+title: Fundamental of a stopped organ pipe
+source: { document: PHYS161_Exam3, labels: [ P131 ] }
+section: Sound
+tags: [ sound, standing-waves, organ-pipe, fundamental ]
+narrative: ""
+vars:
+  - { name: L, kind: range, min: 0.50, max: 2.50, step: 0.01, unit: m, label: pipe length }
+  - { name: v, kind: range, min: 330, max: 350, step: 1, unit: m/s, label: speed of sound }
+parts:
+  - id: fundamental
+    prompt: >-
+      An organ pipe that is open at one end but closed at the other is {L:unit} long. Find the
+      frequency of its fundamental mode. The speed of sound in air is {v:unit}. {_0}{_u}
+    answer: v / (4 * L)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { L: 1.41, v: 339 }
+  parts:
+    - { id: fundamental, answer: 60.1064, unit: Hz, source: P131 }

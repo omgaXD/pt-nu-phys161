@@ -1,0 +1,40 @@
+# P143 — torques about A give the tension in wire B: with the cube a fraction x of the way from A
+# to B, T_B = W/2 + w x. The wire (length L, mass m, μ = m / L) vibrates in its fundamental at
+# f = sqrt(T_B / μ) / (2 L). The length is given in cm and the mass in g. The figure draws the
+# cube about three quarters of the way to B, so x stays between 0.6 and 0.85.
+id: phys161-e3-p143-bar-wire-fundamental
+title: Fundamental of a wire holding a loaded bar
+source: { document: PHYS161_Exam3, labels: [ P143 ] }
+section: Sound
+tags: [ sound, string-fundamental, equilibrium, torque ]
+figure:
+  id: fig
+  src: figures/unnamed_006_OTxQ.png
+  alt: >-
+    A horizontal bar hangs from a ceiling by two vertical wires, wire A at its left end and wire B
+    at its right end. A small cube rests on the bar about three quarters of the way from A to B.
+narrative: >-
+  A uniform {W}-N bar is supported horizontally by two identical wires, A and B, attached at its
+  ends. Each wire is {L:unit} long and has a mass of {m:unit}. A small {w}-N cube of lead is placed
+  a fraction {x} of the way from A to B. {@fig}
+vars:
+  - { name: W, kind: range, min: 100, max: 200, step: 5, unit: N, label: weight of the bar }
+  - { name: w, kind: range, min: 120, max: 250, step: 5, unit: N, label: weight of the cube }
+  - { name: x, kind: range, min: 0.60, max: 0.85, step: 0.05, label: fraction of the way to B }
+  - { name: L, kind: range, min: 40, max: 75, step: 1, unit: cm, label: wire length }
+  - { name: m, kind: range, min: 4.0, max: 9.0, step: 0.1, unit: g, label: wire mass }
+derived:
+  - { name: TB, expr: "W / 2 + w * x", unit: N }
+  - { name: mu, expr: "(m / 1000) / (L / 100)", unit: kg/m }
+parts:
+  - id: fundamental-b
+    prompt: >-
+      If wire B is plucked, what is the fundamental frequency at which it vibrates? {_0}{_u}
+    answer: sqrt(TB / mu) / (2 * L / 100)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { W: 135, w: 175, x: 0.7, L: 57, m: 7.6 }
+  parts:
+    - { id: fundamental-b, answer: 104.713, unit: Hz, source: P143 }

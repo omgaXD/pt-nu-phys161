@@ -1,0 +1,47 @@
+# P122/P125 — a pipe closed at one end has only the odd harmonics n f₀ (n = 1, 3, 5, …), so two
+# successive ones are n f₀ and (n + 2) f₀ and differ by Δf = 2 f₀ = v / (2L). P122: the lower one
+# is harmonic n = 2 f₁ / Δf. P125: the speed of sound is v = 2 L Δf.
+# The printed frequencies are built from the pipe length L, a hidden speed of sound v and the
+# harmonic index k (n = 2k − 1), rounded to 0.1 Hz as printed, so every draw is a genuine pair of
+# successive harmonics of a closed pipe; both answers use the printed values.
+# The source left both problems' frequencies as unfilled placeholders ("{f1} Hz and {f2} Hz").
+# The canonical values are the pair that reproduces both printed answers at once: the 11th and
+# 13th harmonics of P125's 0.52 m pipe at 347.5 m/s (1837.7 Hz and 2171.9 Hz).
+id: phys161-e3-p122-closed-pipe-harmonics
+title: Closed organ pipe from two successive harmonics
+source: { document: PHYS161_Exam3, labels: [ P122, P125 ] }
+section: Sound
+tags: [ sound, standing-waves, organ-pipe, harmonics, multi-part ]
+narrative: >-
+  An organ pipe that is open at one end and closed at the other has two successive harmonics with
+  frequencies {f1:unit} and {f2:unit}.
+vars:
+  - { name: L, kind: range, min: 0.30, max: 1.50, step: 0.01, unit: m, label: pipe length }
+  # Hidden speed of sound; the printed frequencies carry it.
+  - { name: v, kind: range, min: 335, max: 350, step: 0.5, unit: m/s, label: speed of sound }
+  # Index of the lower harmonic: it is the (2k − 1)-th harmonic.
+  - { name: k, kind: range, min: 2, max: 9, step: 1, label: harmonic index }
+derived:
+  - { name: n1, expr: "2 * k - 1" } # harmonic number of f1
+  - { name: f1, expr: "round(n1 * v / (4 * L), 1)", unit: Hz }
+  - { name: f2, expr: "round((n1 + 2) * v / (4 * L), 1)", unit: Hz }
+constraints:
+  - "f2 <= 3000" # keeps the printed frequencies within a few kHz
+parts:
+  - id: harmonic-number
+    prompt: "Which harmonic is the {f1:unit} one? Give the harmonic number. {_0}"
+    answer: round(2 * f1 / (f2 - f1))
+    integer: true
+    difficulty: 3
+  - id: speed-of-sound
+    prompt: >-
+      The pipe is {L:unit} long. What is the speed of sound in the air inside the pipe? {_0}{_u}
+    answer: 2 * L * (f2 - f1)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 0.52, v: 347.5, k: 6, f1: 1837.7, f2: 2171.9 }
+  parts:
+    - { id: harmonic-number, answer: 11, source: P122 }
+    - { id: speed-of-sound, answer: 347.5, unit: m/s, source: P125 }

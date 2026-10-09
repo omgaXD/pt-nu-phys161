@@ -1,0 +1,34 @@
+# P138 — beats: the out-of-tune note is lower by the beat frequency, f₂ = v / λ₁ − f_beat, so its
+# wavelength is λ₂ = v / f₂. λ₁ is given in cm; the answer is in m.
+id: phys161-e3-p138-guitar-beat-out-of-tune
+title: Wavelength of an out-of-tune note from the beats
+source: { document: PHYS161_Exam3, labels: [ P138 ] }
+section: Sound
+tags: [ sound, beats, wavelength ]
+narrative: >-
+  Two guitarists try to play the same note at the same time. One plays a note of wavelength
+  {L1:unit}; the other is slightly out of tune and they hear a beat of {B:unit}, the out-of-tune
+  note being the lower in frequency. The speed of sound in air is {v:unit}.
+vars:
+  - {
+      name: L1,
+      kind: range,
+      min: 5.5,
+      max: 9.5,
+      step: 0.1,
+      unit: cm,
+      label: wavelength of the note
+    }
+  - { name: B, kind: range, min: 5, max: 20, step: 0.05, unit: Hz, label: beat frequency }
+  - { name: v, kind: range, min: 340, max: 350, step: 0.5, unit: m/s, label: speed of sound }
+parts:
+  - id: wavelength
+    prompt: "What is the wavelength of the out-of-tune note? {_0}{_u}"
+    answer: v / (v / (L1 / 100) - B)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L1: 7.1, B: 13.45, v: 345.5 }
+  parts:
+    - { id: wavelength, answer: 0.0711968, unit: m, source: P138 }

@@ -1,28 +1,21 @@
-# P132 — the bat hears its own call at f and the echo from the wall. The wall receives
+# P132/P133 — the bat hears its own call at f and the echo from the wall. The wall receives
 # f v / (v − u) from the approaching bat and reflects it back to the approaching bat, which hears
-# f (v + u) / (v − u). The beat frequency is B = 2 f u / (v − u), so the bat's speed is
-# u = B v / (2 f + B). The emitted frequency is given in kHz and converted inside the formula.
+# f (v + u) / (v − u). The beat frequency is B = 2 f u / (v − u) (P133), so the bat's speed is
+# u = B v / (2 f + B) (P132). The emitted frequency is given in kHz and converted inside the
+# formulas. The base canonical values are P132's; P133 overrides them.
 id: phys161-e3-p132-bat-wall-beats
-title: Bat speed from beats with its echo
-source: { document: PHYS161_Exam3, labels: [ P132 ] }
+title: Beats between a bat and its echo from a wall
+source: { document: PHYS161_Exam3, labels: [ P132, P133 ] }
 section: Sound
-tags: [ sound, doppler-effect, beats, reflection ]
+tags: [ sound, doppler-effect, beats, reflection, multi-part ]
 narrative: >-
   A bat flies toward a wall, emitting a steady sound of frequency {f:unit}. This bat hears its own
   sound plus the sound reflected by the wall.
 vars:
-  - {
-      name: f,
-      kind: range,
-      min: 1.5,
-      max: 3.0,
-      step: 0.1,
-      decimals: 1,
-      unit: kHz,
-      label: emitted frequency
-    }
+  - { name: f, kind: range, min: 1.5, max: 3.0, step: 0.05, unit: kHz, label: emitted frequency }
   - { name: B, kind: range, min: 4, max: 12, step: 1, unit: Hz, label: beat frequency }
-  - { name: v, kind: range, min: 330, max: 350, step: 1, unit: m/s, label: speed of sound }
+  - { name: v, kind: range, min: 330, max: 350, step: 0.5, unit: m/s, label: speed of sound }
+  - { name: u, kind: range, min: 0.30, max: 1.20, step: 0.01, unit: m/s, label: speed of the bat }
 parts:
   - id: bat-speed
     prompt: >-
@@ -32,7 +25,16 @@ parts:
     unit: m/s
     tolerance: { rel: 0.01 }
     difficulty: 4
+  - id: beat-frequency
+    prompt: >-
+      The bat flies at {u:unit}. What beat frequency does it hear? Use {v:unit} for the speed of
+      sound in air. {_0}{_u}
+    answer: 2 * f * 1000 * u / (v - u)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 3
 canonical:
-  vars: { f: 2.1, B: 8, v: 344 }
+  vars: { f: 2.1, B: 8, v: 344, u: 0.57 }
   parts:
     - { id: bat-speed, answer: 0.654, unit: m/s, source: P132 }
+    - { id: beat-frequency, answer: 7.06483, unit: Hz, source: P133, vars: { f: 2.15, v: 347.5 } }

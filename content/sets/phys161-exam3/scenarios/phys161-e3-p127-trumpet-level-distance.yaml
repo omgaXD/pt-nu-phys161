@@ -1,19 +1,24 @@
-# P127 — a source radiating uniformly in all directions: I ∝ 1 / r², so the level drops by
-# β₁ − β₂ = 10 log₁₀(I₁ / I₂) = 20 log₁₀(r₂ / r₁), giving r₂ = r₁ · 10^((β₁ − β₂) / 20).
-# I₀ = 10⁻¹² W/m² is stated by the source but cancels. The constraint keeps the level drop, and
-# hence the distance ratio, near the source's (30 dB, a factor of about 32).
+# P127/P128 — a source radiating uniformly in all directions: I ∝ 1 / r², so the level drops by
+# β₁ − β₂ = 10 log₁₀(I₁ / I₂) = 20 log₁₀(r₂ / r₁), giving r₂ = r₁ · 10^((β₁ − β₂) / 20) (P127)
+# and β₂ = β₁ − 20 log₁₀(r₂ / r₁) (P128, with its own distance r₂ = d2).
+# I₀ = 10⁻¹² W/m² is stated by the source but cancels. The constraints keep P127's level drop,
+# and hence the distance ratio, near the source's (30 dB, a factor of about 32); P128's distances
+# (r₁ ≤ 8 m, d2 ≥ 20 m) keep its drop between about 8 and 34 dB, so β₂ stays positive.
+# The base canonical values are P127's; P128 overrides them (its β₂ = 30 dB is not part of P128,
+# only a value inside P127's constraints).
 id: phys161-e3-p127-trumpet-level-distance
-title: Distance for a lower sound level
-source: { document: PHYS161_Exam3, labels: [ P127 ] }
+title: Sound level and distance from a trumpet
+source: { document: PHYS161_Exam3, labels: [ P127, P128 ] }
 section: Sound
-tags: [ sound, sound-level, inverse-square, decibels ]
+tags: [ sound, sound-level, inverse-square, decibels, multi-part ]
 narrative: >-
   The sound from a trumpet radiates uniformly in all directions. At a distance of {r1:unit} from the
   trumpet the sound intensity level is {beta1:unit}.
 vars:
-  - { name: r1, kind: range, min: 2, max: 8, step: 1, unit: m, label: first distance }
-  - { name: beta1, kind: range, min: 40, max: 65, step: 1, unit: dB, label: level at r1 }
+  - { name: r1, kind: range, min: 2, max: 8, step: 0.5, unit: m, label: first distance }
+  - { name: beta1, kind: range, min: 40, max: 80, step: 1, unit: dB, label: level at r1 }
   - { name: beta2, kind: range, min: 10, max: 35, step: 1, unit: dB, label: target level }
+  - { name: d2, kind: range, min: 20, max: 100, step: 1, unit: m, label: second distance }
 derived:
   - { name: I0, expr: "1e-12", unit: W/m^2 } # reference intensity
 constraints:
@@ -27,7 +32,20 @@ parts:
     unit: m
     tolerance: { rel: 0.01 }
     difficulty: 3
+  - id: level-at-distance
+    prompt: "What is the sound intensity level at a distance of {d2:unit}? {_0}{_u}"
+    answer: beta1 - 20 * log10(d2 / r1)
+    unit: dB
+    tolerance: { rel: 0.01 }
+    difficulty: 3
 canonical:
-  vars: { r1: 4, beta1: 50, beta2: 20, I0: 1e-12 }
+  vars: { r1: 4, beta1: 50, beta2: 20, d2: 74, I0: 1e-12 }
   parts:
     - { id: distance, answer: 126.49, unit: m, source: P127 }
+    - {
+        id: level-at-distance,
+        answer: 46.4967,
+        unit: dB,
+        source: P128,
+        vars: { r1: 3.5, beta1: 73, beta2: 30 }
+      }
