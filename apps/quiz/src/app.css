@@ -716,10 +716,6 @@ fieldset {
   border: 1px solid #dee2e6;
   border-radius: 0.5rem;
 }
-legend {
-  padding: 0 0.35rem;
-  font-weight: 700;
-}
 .set-row {
   display: flex;
   flex-wrap: wrap;

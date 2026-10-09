@@ -207,9 +207,8 @@
     {#if preset === 'custom'}<span class="custom-chip">Custom</span> The options below differ from every preset.{:else}Preset: {PRESET_INFO[preset].name}. Change any option below to customise it.{/if}
   </p>
 
-  <h2>Problems</h2>
-  <fieldset>
-    <legend>Sets</legend>
+  <h2 id="problems-title">Problems</h2>
+  <fieldset aria-labelledby="problems-title">
     {#each index?.sets ?? [] as s (s.id)}
       {@const on = config.sets.includes(s.id)}
       <div class="set-row">
@@ -274,9 +273,8 @@
     {/each}
   </fieldset>
 
-  <h2>Options</h2>
-  <fieldset>
-    <legend>How the quiz runs</legend>
+  <h2 id="options-title">Options</h2>
+  <fieldset aria-labelledby="options-title">
     <div class="options">
       <span class="label" id="opt-count">Questions</span>
       <div class="choices" role="radiogroup" aria-labelledby="opt-count">
