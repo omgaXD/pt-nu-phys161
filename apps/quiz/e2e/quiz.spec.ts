@@ -125,6 +125,40 @@ test('start page: advanced options start collapsed, are remembered, and show whe
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 });
 
+test('start page: a number or no limit, the field picking its option', async ({ page }) => {
+  await open(page, '?p=ordered&sets=corpus');
+  await showOptions(page);
+  const summary = page.getByTestId('summary');
+  const questions = page.getByRole('radiogroup', { name: 'Questions' });
+  const tries = page.getByRole('radiogroup', { name: 'Tries' });
+  const time = page.getByRole('radiogroup', { name: 'Time limit' });
+
+  // Clicking the field picks "A sample of" with the number shown.
+  await expect(questions.getByRole('radio', { name: 'All selected problems' })).toBeChecked();
+  await page.getByLabel('Number of questions').click();
+  await expect(questions.getByRole('radio', { name: 'A sample of' })).toBeChecked();
+  await expect(summary).toContainText('7 questions');
+  await questions.getByRole('radio', { name: 'All selected problems' }).check();
+  await expect(summary).toContainText('28 questions');
+
+  // Typing a number picks it too.
+  await page.getByLabel('Tries per question').fill('2');
+  await page.getByLabel('Tries per question').blur();
+  await expect(tries.getByRole('radio', { name: 'Up to' })).toBeChecked();
+  await expect(summary).toContainText('Check after each (2 tries)');
+  await tries.getByRole('radio', { name: 'Unlimited' }).check();
+  await expect(summary).not.toContainText('tries');
+  await tries.getByRole('radio', { name: 'Up to' }).check();
+  await expect(summary).toContainText('Check after each (3 tries)');
+
+  await expect(time.getByRole('radio', { name: 'None' })).toBeChecked();
+  await time.getByRole('radio', { name: 'Up to' }).check();
+  await expect(page.getByLabel('Time limit in minutes')).toHaveValue('40');
+  await expect(summary).toContainText('40 min');
+  await time.getByRole('radio', { name: 'None' }).check();
+  await expect(summary).toContainText('no time limit');
+});
+
 test('practice: Check gives immediate feedback and locks a correct answer', async ({ page }) => {
   await startFrom(page, '?p=ordered&sets=corpus&values=source');
   await expect(card(page).locator('.qno')).toHaveText('1');

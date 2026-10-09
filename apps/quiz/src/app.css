@@ -860,6 +860,12 @@ details + .set-row {
   align-items: baseline;
   gap: 0.35rem 1.25rem;
 }
+/* An option with its number field (and unit), kept together. */
+.options .limit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
 .options .hint {
   font-size: 0.8rem;
   color: rgba(33, 37, 41, 0.75);

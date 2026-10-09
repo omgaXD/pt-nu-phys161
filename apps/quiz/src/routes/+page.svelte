@@ -94,6 +94,24 @@
     config = { ...config, sets };
   }
 
+  /** A setting that is a number from 1 to `max`, or no limit (null). */
+  interface Limit {
+    /** Radio group name; the row's label is `opt-{name}`. */
+    name: string;
+    /** The option without a number, and the one with it (before the field). */
+    none: string;
+    some: string;
+    /** After the field. */
+    unit?: string;
+    /** The field's accessible name. */
+    label: string;
+    value: number | null;
+    /** Shown in the field while there is no limit, and taken when the field or its option is picked. */
+    fallback: number;
+    max: number;
+    set: (n: number | null) => void;
+  }
+
   const LEVELS: DifficultyLevel[] = [1, 2, 3, 4, 5];
   const BY_DIFFICULTY_HINT = 'Shuffled within each difficulty level. Problems without a difficulty come last.';
   const range = $derived(config.difficulty ?? { min: 1 as DifficultyLevel, max: 5 as DifficultyLevel, unrated: false });
@@ -171,6 +189,27 @@
 </script>
 
 <svelte:head><title>Start a quiz · Physics Quiz</title></svelte:head>
+
+<!-- A number or no limit: two options, the number's field always shown; using the field picks its option. -->
+{#snippet limit(o: Limit)}
+  <div class="choices" role="radiogroup" aria-labelledby="opt-{o.name}">
+    <label><input type="radio" name={o.name} checked={o.value === null} onchange={() => o.set(null)} /> {o.none}</label>
+    <span class="limit">
+      <label><input type="radio" name={o.name} checked={o.value !== null} onchange={() => o.set(o.value ?? o.fallback)} /> {o.some}</label>
+      <input
+        class="form-control"
+        type="number"
+        min="1"
+        max={o.max}
+        aria-label={o.label}
+        value={o.value ?? o.fallback}
+        onclick={() => o.value === null && o.set(o.fallback)}
+        onchange={(e) => o.set(Math.max(1, Math.min(o.max, Math.round(Number(e.currentTarget.value) || 1))))}
+      />
+      {o.unit}
+    </span>
+  </div>
+{/snippet}
 
 <Page narrow onimported={(c) => c.prefs && (config = savedConfig())}>
   <ol class="breadcrumb"><li>Home</li></ol>
@@ -292,22 +331,16 @@
     <fieldset id="advanced-options" aria-labelledby="options-title">
       <div class="options">
         <span class="label" id="opt-count">Questions</span>
-        <div class="choices" role="radiogroup" aria-labelledby="opt-count">
-          <label><input type="radio" name="count" checked={config.count === 'all'} onchange={() => (config = { ...config, count: 'all' })} /> All selected problems</label>
-          <label>
-            <input type="radio" name="count" checked={config.count !== 'all'} onchange={() => (config = { ...config, count: 7 })} /> A sample of
-          </label>
-          <input
-            class="form-control"
-            type="number"
-            min="1"
-            max="1000"
-            aria-label="Number of questions"
-            disabled={config.count === 'all'}
-            value={config.count === 'all' ? 7 : config.count}
-            onchange={(e) => (config = { ...config, count: Math.max(1, Math.min(1000, Math.round(Number(e.currentTarget.value) || 1))) })}
-          />
-        </div>
+        {@render limit({
+          name: 'count',
+          none: 'All selected problems',
+          some: 'A sample of',
+          label: 'Number of questions',
+          value: config.count === 'all' ? null : config.count,
+          fallback: 7,
+          max: 1000,
+          set: (n) => (config = { ...config, count: n ?? 'all' }),
+        })}
 
         {#if config.count !== 'all'}
           <label class="label" for="opt-draw">Spread</label>
@@ -373,47 +406,37 @@
         </div>
 
         {#if config.feedback === 'immediate'}
-          <span class="label">Tries</span>
+          <span class="label" id="opt-tries">Tries</span>
+          {@render limit({
+            name: 'tries',
+            none: 'Unlimited',
+            some: 'Up to',
+            unit: 'tries',
+            label: 'Tries per question',
+            value: config.maxTries,
+            fallback: 3,
+            max: 99,
+            set: (n) => (config = { ...config, maxTries: n }),
+          })}
+
+          <span class="label">Reveal</span>
           <div class="choices">
-            <label>
-              <input type="checkbox" checked={config.maxTries === null} onchange={(e) => (config = { ...config, maxTries: e.currentTarget.checked ? null : 3 })} /> Unlimited
-            </label>
-            {#if config.maxTries !== null}
-              <input
-                class="form-control"
-                type="number"
-                min="1"
-                max="99"
-                aria-label="Tries per question"
-                value={config.maxTries}
-                onchange={(e) => (config = { ...config, maxTries: Math.max(1, Math.min(99, Math.round(Number(e.currentTarget.value) || 1))) })}
-              />
-            {/if}
             <label><input type="checkbox" checked={config.allowReveal} onchange={(e) => (config = { ...config, allowReveal: e.currentTarget.checked })} /> "Show correct answer" button</label>
           </div>
         {/if}
 
-        <span class="label">Time limit</span>
-        <div class="choices">
-          <label>
-            <input
-              type="checkbox"
-              checked={config.timeLimitMinutes !== null}
-              onchange={(e) => (config = { ...config, timeLimitMinutes: e.currentTarget.checked ? 40 : null })}
-            /> Enable
-          </label>
-          {#if config.timeLimitMinutes !== null}
-            <input
-              class="form-control"
-              type="number"
-              min="1"
-              max="600"
-              aria-label="Time limit in minutes"
-              value={config.timeLimitMinutes}
-              onchange={(e) => (config = { ...config, timeLimitMinutes: Math.max(1, Math.min(600, Math.round(Number(e.currentTarget.value) || 1))) })}
-            /> minutes
-          {/if}
-        </div>
+        <span class="label" id="opt-time">Time limit</span>
+        {@render limit({
+          name: 'time',
+          none: 'None',
+          some: 'Up to',
+          unit: 'minutes',
+          label: 'Time limit in minutes',
+          value: config.timeLimitMinutes,
+          fallback: 40,
+          max: 600,
+          set: (n) => (config = { ...config, timeLimitMinutes: n }),
+        })}
 
         <label class="label" for="opt-seed">Seed</label>
         <div class="choices">
