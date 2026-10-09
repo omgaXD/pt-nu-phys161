@@ -1,0 +1,41 @@
+# P108 — with the center of gravity a fraction 1/n of the way from A, torques about B give the
+# tension in wire A, T_A = W (1 − 1/n). The wire has mass w / g, so μ = w / (g L), the wave speed
+# is v = sqrt(T_A / μ) and the fundamental is f₁ = v / (2L). The source prints the fraction as
+# "one-4th"; n is drawn from 4–6 so the same wording always reads correctly.
+id: phys161-e3-p108-beam-wire-fundamental
+title: Fundamental frequency of a wire holding a beam
+source: { document: PHYS161_Exam3, labels: [ P108 ] }
+section: Waves
+tags: [ waves, string, standing-waves, fundamental, equilibrium, torque ]
+figure:
+  id: beam-wires
+  src: figures/unnamed_003_OTxQ.png
+  alt: >-
+    A horizontal beam hangs from the ceiling by two vertical wires attached at its ends; upward
+    arrows on the wires show their tensions. The beam's weight W is drawn as a downward arrow acting
+    off-centre, closer to the left end of the beam.
+narrative: >-
+  A {W}-N irregular beam is hanging horizontally by its ends from the ceiling by two vertical wires,
+  A and B, each {L:unit} long and weighing {w:unit}. The center of gravity of this beam is one-{n}th
+  of the way along the beam from the end where wire A is attached. The gravitational acceleration on
+  Earth is $g = {g:unit}$. {@fig}
+vars:
+  - { name: W, kind: range, min: 1200, max: 2400, step: 50, unit: N, label: beam weight }
+  - { name: L, kind: range, min: 0.90, max: 2.00, step: 0.05, unit: m, label: wire length }
+  - { name: w, kind: range, min: 1.00, max: 2.50, step: 0.05, unit: N, label: wire weight }
+  - { name: n, kind: range, min: 4, max: 6, step: 1, label: fraction denominator }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: TA, expr: "W * (1 - 1 / n)", unit: N } # tension in wire A
+parts:
+  - id: fundamental-a
+    prompt: >-
+      If wire A is plucked, what is the fundamental frequency at which it vibrates? {_0}{_u}
+    answer: sqrt(TA * g * L / w) / (2 * L)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { W: 2000, L: 1.7, w: 1.95, n: 4, g: 9.8 }
+  parts:
+    - { id: fundamental-a, answer: 33.2956, unit: Hz, source: P108 }

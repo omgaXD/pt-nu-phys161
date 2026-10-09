@@ -1,0 +1,26 @@
+# P99 — every particle of the string moves in simple harmonic motion with the wave's angular
+# frequency ω = 2π v / λ, so its maximum transverse acceleration is ω² A. The amplitude is given
+# in mm.
+id: phys161-e3-p099-harmonic-wave-max-acceleration
+title: Maximum transverse acceleration in a harmonic wave
+source: { document: PHYS161_Exam3, labels: [ P99 ] }
+section: Waves
+tags: [ waves, harmonic-wave, transverse-acceleration ]
+narrative: >-
+  A transverse harmonic wave with an amplitude of {A:unit} and a wavelength of {lam:unit} travels
+  from left to right along a long, horizontal, stretched string with a speed of {v:unit}.
+vars:
+  - { name: A, kind: range, min: 1.00, max: 3.00, step: 0.05, unit: mm, label: amplitude }
+  - { name: lam, kind: range, min: 1.20, max: 2.40, step: 0.01, unit: m, label: wavelength }
+  - { name: v, kind: range, min: 20, max: 45, step: 1, unit: m/s, label: wave speed }
+parts:
+  - id: max-acceleration
+    prompt: "What is the maximum transverse acceleration of a particle of the string? {_0}{_u}"
+    answer: (2 * pi * v / lam)^2 * A / 1000
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { A: 1.25, lam: 1.72, v: 31 }
+  parts:
+    - { id: max-acceleration, answer: 16.0301, unit: m/s^2, source: P99 }

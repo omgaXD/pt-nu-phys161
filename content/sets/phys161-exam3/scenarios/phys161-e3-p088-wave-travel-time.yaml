@@ -1,12 +1,14 @@
-# P88 — wave speed v = λ f, so the time to cover a distance d is t = d / (λ f).
+# P88/P89 — wave speed v = λ f, so the time to cover a distance d is t = d / (λ f) (P88), and
+# d holds d / λ wavelengths (P89, printed unrounded; the frequency does not enter it). The base
+# canonical values are P88's; P89 overrides them.
 id: phys161-e3-p088-wave-travel-time
-title: Travel time of a wave
-source: { document: PHYS161_Exam3, labels: [ P88 ] }
+title: Travel time and wavelengths of a wave
+source: { document: PHYS161_Exam3, labels: [ P88, P89 ] }
 section: Waves
-tags: [ waves, wave-speed, wavelength, frequency ]
+tags: [ waves, wave-speed, wavelength, frequency, multi-part ]
 narrative: ""
 vars:
-  - { name: d, kind: range, min: 400, max: 850, step: 5, unit: m, label: distance }
+  - { name: d, kind: range, min: 400, max: 850, step: 1, unit: m, label: distance }
   - {
       name: lam,
       kind: range,
@@ -27,7 +29,15 @@ parts:
     unit: s
     tolerance: { rel: 0.01 }
     difficulty: 1
+  - id: wavelength-count
+    prompt: >-
+      A wave of wavelength {lam:unit} and frequency {f:unit} travels along a long string. How many
+      complete wavelengths fit into a distance of {d:unit}? {_0}
+    answer: d / lam
+    tolerance: { rel: 0.01 }
+    difficulty: 1
 canonical:
   vars: { d: 620, lam: 0.755, f: 425 }
   parts:
     - { id: travel-time, answer: 1.9322, unit: s, source: P88 }
+    - { id: wavelength-count, answer: 644.324, source: P89, vars: { d: 596, lam: 0.925, f: 450 } }

@@ -1,11 +1,12 @@
 # P79–P83 — two in-phase sources a distance x apart; the listener at A is a distance L in front of
-# one of them, so the path difference is Δ = sqrt(x² + L²) − L. Constructive interference:
+# one of them, so the path difference is Δ = sqrt(x² + L²) − L (P80). Constructive interference:
 # Δ = n λ, f = n v / Δ (n = 1, 2); destructive interference: Δ = (n − 1/2) λ,
 # f = (2n − 1) v / (2Δ) (n = 1, 2). The base canonical values are P79's; the other parts override
-# them with their own. The figure comes from P81 and fits all four.
+# them with their own (P80 states no speed of sound and keeps P79's). The figure comes from P80
+# and P81 and fits all five.
 id: phys161-e3-p079-megaphones-interference
 title: Interference from two megaphones
-source: { document: PHYS161_Exam3, labels: [ P79, P81, P82, P83 ] }
+source: { document: PHYS161_Exam3, labels: [ P79, P80, P81, P82, P83 ] }
 section: Waves
 tags: [ waves, sound, interference, path-difference, multi-part ]
 figure:
@@ -53,6 +54,13 @@ vars:
 derived:
   - { name: dpath, expr: "sqrt(x^2 + L^2) - L", unit: m }
 parts:
+  - id: path-difference
+    prompt: >-
+      By how much do the path lengths from the two megaphones to the listener differ? {_0}{_u}
+    answer: dpath
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: constructive-lowest
     prompt: "What is the lowest frequency at which constructive interference occurs? {_0}{_u}"
     answer: v / dpath
@@ -84,6 +92,7 @@ canonical:
   vars: { x: 4.99, L: 3.55, v: 348.7 }
   parts:
     - { id: constructive-lowest, answer: 135.47, unit: Hz, source: P79 }
+    - { id: path-difference, answer: 3.10325, unit: m, source: P80, vars: { x: 5.66, L: 3.61 } }
     - {
         id: constructive-second,
         answer: 286.437,

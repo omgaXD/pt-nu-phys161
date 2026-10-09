@@ -1,10 +1,11 @@
-# P90 — transverse wave speed on a string: v = sqrt(F / μ) with μ = m / L. The mass is given in
-# grams and converted inside the formula.
+# P90/P91 — transverse wave speed on a string: v = sqrt(F / μ) with μ = m / L (P90), and a pulse
+# crosses the wire in t = L / v = sqrt(m L / F) (P91). The mass is given in grams and converted
+# inside the formulas. The base canonical values are P90's; P91 overrides them.
 id: phys161-e3-p090-piano-wire-wave-speed
-title: Wave speed on a piano wire
-source: { document: PHYS161_Exam3, labels: [ P90 ] }
+title: Waves on a piano wire
+source: { document: PHYS161_Exam3, labels: [ P90, P91 ] }
 section: Waves
-tags: [ waves, string, wave-speed, linear-density, units ]
+tags: [ waves, string, wave-speed, linear-density, travel-time, units, multi-part ]
 narrative: ""
 vars:
   - {
@@ -17,16 +18,7 @@ vars:
       unit: m,
       label: wire length
     }
-  - {
-      name: m,
-      kind: range,
-      min: 3.0,
-      max: 5.5,
-      step: 0.1,
-      decimals: 1,
-      unit: g,
-      label: wire mass
-    }
+  - { name: m, kind: range, min: 3.0, max: 5.5, step: 0.05, unit: g, label: wire mass }
   - { name: F, kind: range, min: 450, max: 850, step: 1, unit: N, label: tension }
 parts:
   - id: wave-speed
@@ -37,7 +29,16 @@ parts:
     unit: m/s
     tolerance: { rel: 0.01 }
     difficulty: 1
+  - id: pulse-time
+    prompt: >-
+      Calculate the time taken by a transverse pulse to travel the length of a steel piano wire of
+      length {L:unit} and mass {m:unit} that is stretched under a tension of {F:unit}. {_0}{_u}
+    answer: L / sqrt(F * L / (m / 1000))
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
 canonical:
   vars: { L: 1.7, m: 4.3, F: 648 }
   parts:
     - { id: wave-speed, answer: 506.148, unit: m/s, source: P90 }
+    - { id: pulse-time, answer: 0.00336578, unit: s, source: P91, vars: { L: 1.6, m: 4.85, F: 685 } }

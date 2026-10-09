@@ -1,0 +1,35 @@
+# P85 — a longitudinal (sound) wave in a fluid travels at v = sqrt(B / ρ). The density of sea
+# water is the source's constant; the bulk modulus (1.95 × 10⁹ here, 2.0 × 10⁹ in P84/P86) is
+# part of the data.
+id: phys161-e3-p085-sea-water-wave-speed
+title: Speed of a longitudinal wave in sea water
+source: { document: PHYS161_Exam3, labels: [ P85 ] }
+section: Waves
+tags: [ waves, sound, bulk-modulus, wave-speed ]
+narrative: ""
+vars:
+  - {
+      name: B,
+      kind: range,
+      min: 1.8e+9,
+      max: 2.4e+9,
+      step: 5e+7,
+      sigfigs: 3,
+      unit: N/m^2,
+      label: bulk modulus
+    }
+derived:
+  - { name: rho, expr: "1.025e3", unit: kg/m^3 }
+parts:
+  - id: wave-speed
+    prompt: >-
+      Calculate the speed of a longitudinal wave in sea water. The density of the sea water is
+      {rho:unit} and the bulk modulus of water is {B:unit}. {_0}{_u}
+    answer: sqrt(B / rho)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { B: 1.95e+9, rho: 1025 }
+  parts:
+    - { id: wave-speed, answer: 1379.29, unit: m/s, source: P85 }

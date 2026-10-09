@@ -1,16 +1,19 @@
-# P94 — the fundamental of a string fixed at both ends has λ = 2L, so v = λ f = 2 L f. The length
-# is given in cm and converted inside the formula.
+# P94/P95 — the fundamental of a string fixed at both ends has λ = 2L, so v = λ f = 2 L f (P94).
+# At the same tension v stays the same, so shortening the string to L₂ raises the fundamental to
+# f₂ = f L / L₂ (P95). The lengths are given in cm. The base canonical values are P94's; P95
+# overrides them.
 id: phys161-e3-p094-guitar-string-wave-speed
-title: Wave speed on a guitar string
-source: { document: PHYS161_Exam3, labels: [ P94 ] }
+title: Waves on a guitar string
+source: { document: PHYS161_Exam3, labels: [ P94, P95 ] }
 section: Waves
-tags: [ waves, string, standing-wave, fundamental, wave-speed, units ]
+tags: [ waves, string, standing-wave, fundamental, wave-speed, units, multi-part ]
 narrative: >-
   A string on a certain guitar of the length of {L:unit} vibrates at a fundamental frequency of
   {f:unit}.
 vars:
   - { name: L, kind: range, min: 40, max: 70, step: 1, unit: cm, label: string length }
   - { name: f, kind: range, min: 180, max: 350, step: 1, unit: Hz, label: fundamental frequency }
+  - { name: L2, kind: range, min: 25, max: 38, step: 1, unit: cm, label: shortened length }
 parts:
   - id: wave-speed
     prompt: "Calculate the speed of the transverse waves on the string. {_0}{_u}"
@@ -18,7 +21,16 @@ parts:
     unit: m/s
     tolerance: { rel: 0.01 }
     difficulty: 1
+  - id: shortened-frequency
+    prompt: >-
+      Without changing the tension, the vibrating length is shortened to {L2:unit}. What fundamental
+      frequency does the string now produce? {_0}{_u}
+    answer: f * L / L2
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
 canonical:
-  vars: { L: 52, f: 262 }
+  vars: { L: 52, f: 262, L2: 34 }
   parts:
     - { id: wave-speed, answer: 272.48, unit: m/s, source: P94 }
+    - { id: shortened-frequency, answer: 444.706, unit: Hz, source: P95, vars: { L: 56, f: 270 } }

@@ -1,0 +1,30 @@
+# P113 — the wire is a cylinder, so its mass is m = ρ π d² L / 4. The first-overtone note is
+# part of the problem's data but does not enter the answer. The length is given in cm and the
+# diameter in mm; the density of steel is the constant the source states (7.95 × 10³ kg/m³, not
+# P112's 7.8 × 10³).
+id: phys161-e3-p113-steel-wire-mass
+title: Mass of a steel wire
+source: { document: PHYS161_Exam3, labels: [ P113 ] }
+section: Waves
+tags: [ waves, string, density, mass ]
+narrative: >-
+  A uniform cylindrical steel wire is {L:unit} long and {d:unit} in diameter, and is fixed at both
+  ends so that in its first overtone it sounds the note {f:unit}. The density of steel is $\rho = {=
+  rho / 1000} \times 10^3\ \text{kg/m}^3$.
+vars:
+  - { name: L, kind: range, min: 38, max: 60, step: 1, unit: cm, label: wire length }
+  - { name: d, kind: range, min: 1.00, max: 2.00, step: 0.01, unit: mm, label: wire diameter }
+  - { name: f, kind: range, min: 360, max: 520, step: 1, unit: Hz, label: note frequency }
+derived:
+  - { name: rho, expr: "7.95e3", unit: kg/m^3 }
+parts:
+  - id: mass
+    prompt: "What is the mass of this wire? {_0}{_u}"
+    answer: rho * pi * (d / 1000)^2 / 4 * (L / 100)
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 49, d: 1.63, f: 451, rho: 7950 }
+  parts:
+    - { id: mass, answer: 0.00812883, unit: kg, source: P113 }

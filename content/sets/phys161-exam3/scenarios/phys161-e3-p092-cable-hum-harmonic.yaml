@@ -1,35 +1,19 @@
-# P92 — string fixed at both ends: v = sqrt(T L / m), f₁ = v / (2L), and the n-th harmonic is
-# f_n = n f₁. The multiple n of the fundamental is a small whole number, drawn from 2–4.
+# P92/P93 — string fixed at both ends: v = sqrt(T L / m), f₁ = v / (2L), and the n-th harmonic is
+# f_n = n f₁ (P92) with wavelength λ_n = 2L / n (P93, which needs neither the mass nor the
+# tension). The multiple n of the fundamental is a small whole number, drawn from 2–4. The base
+# canonical values are P92's; P93 overrides them.
 id: phys161-e3-p092-cable-hum-harmonic
 title: Hum of a vibrating cable
-source: { document: PHYS161_Exam3, labels: [ P92 ] }
+source: { document: PHYS161_Exam3, labels: [ P92, P93 ] }
 section: Waves
-tags: [ waves, string, standing-wave, harmonics, frequency ]
+tags: [ waves, string, standing-wave, harmonics, frequency, wavelength, multi-part ]
 narrative: >-
   The tension in a thin cable of length {L:unit} and mass {m:unit}, stretched between two poles, is
   $T = {T:unit}$. Due to the wind in the air the cable is vibrating and produces a standing wave at
   {n} times its fundamental frequency.
 vars:
-  - {
-      name: L,
-      kind: range,
-      min: 2.4,
-      max: 4.0,
-      step: 0.1,
-      decimals: 1,
-      unit: m,
-      label: cable length
-    }
-  - {
-      name: m,
-      kind: range,
-      min: 0.4,
-      max: 0.8,
-      step: 0.1,
-      decimals: 1,
-      unit: kg,
-      label: cable mass
-    }
+  - { name: L, kind: range, min: 2.4, max: 4.0, step: 0.05, unit: m, label: cable length }
+  - { name: m, kind: range, min: 0.4, max: 0.8, step: 0.01, unit: kg, label: cable mass }
   - { name: T, kind: range, min: 200, max: 350, step: 5, unit: N, label: tension }
   - { name: n, kind: range, min: 2, max: 4, step: 1, label: multiple of the fundamental }
 derived:
@@ -41,7 +25,20 @@ parts:
     unit: Hz
     tolerance: { rel: 0.01 }
     difficulty: 2
+  - id: wavelength
+    prompt: "What is the wavelength of the standing wave on the cable? {_0}{_u}"
+    answer: 2 * L / n
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
 canonical:
   vars: { L: 3.2, m: 0.6, T: 275, n: 2 }
   parts:
     - { id: hum-frequency, answer: 11.9678, unit: Hz, source: P92 }
+    - {
+        id: wavelength,
+        answer: 2.16667,
+        unit: m,
+        source: P93,
+        vars: { L: 3.25, m: 0.52, T: 310, n: 3 }
+      }

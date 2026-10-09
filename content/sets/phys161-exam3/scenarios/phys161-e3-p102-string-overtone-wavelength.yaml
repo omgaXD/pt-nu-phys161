@@ -1,0 +1,28 @@
+# P102 — the second overtone of a string fixed at both ends is the third harmonic, three half
+# wavelengths along the string: λ = 2L / 3. The string's mass and the speed of sound in the room
+# do not affect the answer. L is given in cm.
+id: phys161-e3-p102-string-overtone-wavelength
+title: Wavelength of a string's second overtone
+source: { document: PHYS161_Exam3, labels: [ P102 ] }
+section: Waves
+tags: [ waves, string, standing-waves, overtone, wavelength ]
+narrative: >-
+  One string of a musical instrument is {L:unit} long and has a mass of {m:unit}. It is played in a
+  room where the speed of sound is {vs:unit}.
+vars:
+  - { name: L, kind: range, min: 45, max: 75, step: 0.5, unit: cm, label: string length }
+  - { name: m, kind: range, min: 6.0, max: 12.0, step: 0.5, unit: g, label: string mass }
+  - { name: vs, kind: range, min: 340, max: 348, step: 1, unit: m/s, label: speed of sound }
+parts:
+  - id: wavelength
+    prompt: >-
+      When the string vibrates in its second overtone, what is the wavelength of the standing wave
+      on the string itself? {_0}{_u}
+    answer: 2 * (L / 100) / 3
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 61.5, m: 9.5, vs: 345 }
+  parts:
+    - { id: wavelength, answer: 0.41, unit: m, source: P102 }
