@@ -48,7 +48,9 @@
   function savedConfig(): QuizConfig {
     const raw = app.prefs().config;
     const saved = QuizConfigSchema.safeParse(raw);
-    const base = saved.success ? { ...saved.data, sets: saved.data.sets.filter((s) => allSets.includes(s)) } : defaultConfig(allSets.slice(0, 1));
+    // Older versions also remembered the seed, which kept repeating the same questions and numbers.
+    const { seed: _seed, ...data } = saved.success ? saved.data : defaultConfig(allSets.slice(0, 1));
+    const base = { ...data, sets: data.sets.filter((s) => allSets.includes(s)) };
     const c = base.sets.length ? base : { ...base, sets: allSets.slice(0, 1) };
     // Older versions had a "Skip problems I have solved" option: those problems are left out instead.
     return saved.success && (raw as { skipSolved?: unknown }).skipSolved === true ? withoutSolved(c, c.sets) : c;

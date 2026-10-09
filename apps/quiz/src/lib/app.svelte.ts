@@ -184,8 +184,10 @@ export class QuizApp {
     this.attempt = a;
     this.notice = null;
     this.save();
+    // Without the seed (from a share link or "Copy link"): the next quiz gets fresh questions and numbers.
+    const { seed: _seed, ...remembered } = config;
     try {
-      this.storage.savePrefs({ config } satisfies Prefs);
+      this.storage.savePrefs({ config: remembered } satisfies Prefs);
     } catch {
       // Preferences are a convenience.
     }

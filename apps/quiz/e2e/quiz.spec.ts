@@ -273,6 +273,21 @@ test('reloading keeps the answers, the numbers and the deadline', async ({ page 
   await expect(page).toHaveURL(/attempt\/$/);
 });
 
+test('the next quiz does not reuse the seed of a link', async ({ page }) => {
+  await startFrom(page, '?p=exam&sets=corpus&seed=42');
+  await open(page, '');
+  await expect(page.getByRole('button', { name: /^Exam/ })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByLabel('Seed')).toHaveValue('');
+
+  // Remembered by an older version: dropped too.
+  await page.evaluate(() => {
+    const { config } = JSON.parse(localStorage.getItem('pt:v1:prefs')!);
+    localStorage.setItem('pt:v1:prefs', JSON.stringify({ config: { ...config, seed: 42 } }));
+  });
+  await open(page, '');
+  await expect(page.getByLabel('Seed')).toHaveValue('');
+});
+
 async function examTexts(browser: Browser, seed: number): Promise<string[]> {
   const context = await browser.newContext();
   const page = await context.newPage();
