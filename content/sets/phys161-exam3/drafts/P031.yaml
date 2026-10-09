@@ -1,50 +1,59 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P31
 number: 31
-section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: "A body oscillates in a simple harmonic motion with its position described by the following
-  formula: x=Acos(ωt+φ), where A=8.2, ω=1.127, and φ=0.288. Assume all quantities are given in SI
-  units. Calculate the period of oscillations. (5.575 s)"
-text: "A body oscillates in a simple harmonic motion with its position described by the following
-  formula: x=Acos(ωt+φ), where A=8.2, ω=1.127, and φ=0.288. Assume all quantities are given in SI
-  units. Calculate the period of oscillations. (5.575 s)"
-answer: { value: 5.575, unit: s, raw: 5.575 s }
-figures: []
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Two identical stars with mass 2 × 10<sup>30</sup> kg orbit around their center of mass. Each
+  orbit is circular and has a radius of 5 × 10<sup>7</sup> km, so that the two stars are always on
+  opposite sides of the circle. How much energy would be required to separate the two stars to
+  infinity? Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>.
+  (1.334E+39 J)
+text: Two identical stars with mass 2 × 10^30 kg orbit around their center of mass. Each orbit is
+  circular and has a radius of 5 × 10^7 km, so that the two stars are always on opposite sides of
+  the circle. How much energy would be required to separate the two stars to infinity? Gravitational
+  constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (1.334E+39 J)
+answer: { value: 1.334e+39, unit: J, raw: 1.334E+39 J }
+figures:
+  - { src: figures/unnamed_007_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_007_OTxQ.png }
 literals:
-  - name: A
-    value: 8.2
-    text: "8.2"
-    suggest: { min: 5.7, max: 10.7, step: 0.1, decimals: 1 }
-  - name: omega
-    value: 1.127
-    text: "1.127"
-    suggest: { min: 0.789, max: 1.465, step: 0.001, decimals: 3 }
-  - name: phi
-    value: 0.288
-    text: "0.288"
-    suggest: { min: 0.202, max: 0.374, step: 0.001, decimals: 3 }
+  - name: m
+    value: 2e+30
+    unit: kg
+    text: 2 × 10^30
+    suggest: { min: 1.4e+30, max: 2.6e+30, step: 1e+29 }
+  - name: r
+    value: 50000000
+    unit: km
+    text: 5 × 10^7
+    suggest: { min: 35000000, max: 65000000, step: 1 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p031
   source: { document: PHYS161_Exam3, labels: [ P31 ] }
-  section: Oscillations
+  section: Gravitation
+  figure: { id: fig, src: figures/unnamed_007_OTxQ.png, alt: "TODO: describe the figure" }
   narrative: >-
-    A body oscillates in a simple harmonic motion with its position described by the following
-    formula: x=Acos(ωt+φ), where A={A}, ω={omega}, and φ={phi}. Assume all quantities are given in
-    SI units.
+    Two identical stars with mass {m:unit} orbit around their center of mass. Each orbit is circular
+    and has a radius of {r:unit}, so that the two stars are always on opposite sides of the circle.
+    Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$. {@fig}
   vars:
-    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: omega, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: phi, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
-      prompt: Calculate the period of oscillations. {_0}{_u}
+      prompt: >-
+        How much energy would be required to separate the two stars to infinity? {_0}{_u}
       answer: TODO
-      unit: s
+      unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { A: 8.2, omega: 1.127, phi: 0.288 }
+    vars: { m: 2e+30, r: 50000000, F: 6.67e-11 }
     parts:
-      - { id: answer, answer: 5.575, unit: s, source: P31 }
+      - { id: answer, answer: 1.334e+39, unit: J, source: P31 }

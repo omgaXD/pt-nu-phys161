@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P139
+number: 139
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: In a liquid with density 1100 kg/m<sup>3</sup>, longitudinal waves with frequency 275 Hz are
+  found to have wavelength 8 m. Calculate the bulk modulus of the liquid. (5324000000 Pa)
+text: In a liquid with density 1100 kg/m^3, longitudinal waves with frequency 275 Hz are found to
+  have wavelength 8 m. Calculate the bulk modulus of the liquid. (5324000000 Pa)
+answer: { value: 5324000000, unit: Pa, raw: 5324000000 Pa }
+figures: []
+literals:
+  - name: rho
+    value: 1100
+    unit: kg/m^3
+    text: "1100"
+    suggest: { min: 770, max: 1430, step: 1 }
+  - name: f
+    value: 275
+    unit: Hz
+    text: "275"
+    suggest: { min: 193, max: 358, step: 1 }
+  - name: L
+    value: 8
+    unit: m
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+scenario:
+  id: phys161-exam3-p139
+  source: { document: PHYS161_Exam3, labels: [ P139 ] }
+  section: Sound
+  narrative: >-
+    In a liquid with density {rho:unit}, longitudinal waves with frequency {f:unit} are found to
+    have wavelength {L:unit}.
+  vars:
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: Calculate the bulk modulus of the liquid. {_0}{_u}
+      answer: TODO
+      unit: Pa
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { rho: 1100, f: 275, L: 8 }
+    parts:
+      - { id: answer, answer: 5324000000, unit: Pa, source: P139 }

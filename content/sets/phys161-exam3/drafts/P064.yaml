@@ -1,50 +1,60 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P64
 number: 64
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Calculate the speed of transverse waves on a steel piano wire of length 1.7 m and mass 4.3 g
-  that is stretched under a tension of 648 N? (506.148 m/s)
-text: Calculate the speed of transverse waves on a steel piano wire of length 1.7 m and mass 4.3 g
-  that is stretched under a tension of 648 N? (506.148 m/s)
-answer: { value: 506.148, unit: m/s, raw: 506.148 m/s }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 13-kg mass travels to the right at 2.1 m/s on a smooth horizontal surface when it collides
+  with and sticks to a second 13-kg mass that is initially at rest but attached to a light spring of
+  force constant 93 N/m. Find the total energy of the subsequent oscillations. (14.3325 J)
+text: A 13-kg mass travels to the right at 2.1 m/s on a smooth horizontal surface when it collides
+  with and sticks to a second 13-kg mass that is initially at rest but attached to a light spring of
+  force constant 93 N/m. Find the total energy of the subsequent oscillations. (14.3325 J)
+answer: { value: 14.3325, unit: J, raw: 14.3325 J }
 figures: []
 literals:
-  - name: L
-    value: 1.7
-    unit: m
-    text: "1.7"
-    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
   - name: m
-    value: 4.3
-    unit: g
-    text: "4.3"
-    suggest: { min: 3, max: 5.6, step: 0.1, decimals: 1 }
-  - name: F
-    value: 648
-    unit: N
-    text: "648"
-    suggest: { min: 454, max: 842, step: 1 }
+    value: 13
+    unit: kg
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+  - name: v
+    value: 2.1
+    unit: m/s
+    text: "2.1"
+    suggest: { min: 1.5, max: 2.7, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 13
+    unit: kg
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+  - name: k
+    value: 93
+    unit: N/m
+    text: "93"
+    suggest: { min: 65, max: 121, step: 1 }
 scenario:
   id: phys161-exam3-p064
   source: { document: PHYS161_Exam3, labels: [ P64 ] }
-  section: Waves
-  narrative: ""
+  section: Oscillations
+  narrative: >-
+    A {m}-kg mass travels to the right at {v:unit} on a smooth horizontal surface when it collides
+    with and sticks to a second {m2}-kg mass that is initially at rest but attached to a light
+    spring of force constant {k:unit}.
   vars:
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
   parts:
     - id: answer
       prompt: >-
-        Calculate the speed of transverse waves on a steel piano wire of length {L:unit} and mass
-        {m:unit} that is stretched under a tension of {F:unit}? {_0}{_u}
+        Find the total energy of the subsequent oscillations. {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { L: 1.7, m: 4.3, F: 648 }
+    vars: { m: 13, v: 2.1, m2: 13, k: 93 }
     parts:
-      - { id: answer, answer: 506.148, unit: m/s, source: P64 }
+      - { id: answer, answer: 14.3325, unit: J, source: P64 }

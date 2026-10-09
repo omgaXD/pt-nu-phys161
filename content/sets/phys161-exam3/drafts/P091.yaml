@@ -1,76 +1,50 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P91
 number: 91
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: The sound from a trumpet radiates uniformly in all directions. At a distance of 7 m from the
-  trumpet the sound intensity level is 70 dB. What is the pressure amplitude at this distance? The
-  air density at 20˚C is 1.2 kg/m<sup>3</sup> and speed of sound is 343 m/s.
-  I<sub>0</sub>=10<sup>−12</sup> W/m<sup>2</sup>. (0.0907 Pa)
-text: The sound from a trumpet radiates uniformly in all directions. At a distance of 7 m from the
-  trumpet the sound intensity level is 70 dB. What is the pressure amplitude at this distance? The
-  air density at 20°C is 1.2 kg/m^3 and speed of sound is 343 m/s. I_0=10^-12 W/m^2. (0.0907 Pa)
-answer: { value: 0.0907, unit: Pa, raw: 0.0907 Pa }
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Calculate the time taken by a transverse pulse to travel the length of a steel piano wire of
+  length 1.6 m and mass 4.85 g that is stretched under a tension of 685 N. (0.00336578 s)
+text: Calculate the time taken by a transverse pulse to travel the length of a steel piano wire of
+  length 1.6 m and mass 4.85 g that is stretched under a tension of 685 N. (0.00336578 s)
+answer: { value: 0.00336578, unit: s, raw: 0.00336578 s }
 figures: []
 literals:
-  - name: d
-    value: 7
+  - name: L
+    value: 1.6
     unit: m
-    text: "7"
-    suggest: { min: 5, max: 9, step: 1 }
-  - name: beta
-    value: 70
-    unit: dB
-    text: "70"
-    suggest: { min: 49, max: 91, step: 1 }
-  - name: T
-    value: 20
-    unit: °C
-    text: "20"
-    suggest: { min: 14, max: 26, step: 1 }
-  - name: rho
-    value: 1.2
-    unit: kg/m^3
-    text: "1.2"
-    suggest: { min: 0.8, max: 1.6, step: 0.1, decimals: 1 }
-  - name: v
-    value: 343
-    unit: m/s
-    text: "343"
-    suggest: { min: 240, max: 446, step: 1 }
-  - name: I0
-    value: 10
-    text: "10"
-    suggest: { min: 7, max: 13, step: 1 }
-  - name: x
-    value: 12
-    text: "12"
-    suggest: { min: 8, max: 16, step: 1 }
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: m
+    value: 4.85
+    unit: g
+    text: "4.85"
+    suggest: { min: 3.39, max: 6.31, step: 0.01, decimals: 2 }
+  - name: F
+    value: 685
+    unit: N
+    text: "685"
+    suggest: { min: 479, max: 891, step: 1 }
 scenario:
   id: phys161-exam3-p091
   source: { document: PHYS161_Exam3, labels: [ P91 ] }
-  section: Sound
-  narrative: >-
-    The sound from a trumpet radiates uniformly in all directions. At a distance of {d:unit} from
-    the trumpet the sound intensity level is {beta:unit}. The air density at {T:unit} is {rho:unit}
-    and speed of sound is {v:unit}. $I_{0}$={I0}^-{x} W/m$^{2}$.
+  section: Waves
+  narrative: ""
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: beta, kind: range, min: TODO, max: TODO, step: TODO, unit: dB }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: I0, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
-      prompt: What is the pressure amplitude at this distance? {_0}{_u}
+      prompt: >-
+        Calculate the time taken by a transverse pulse to travel the length of a steel piano wire of
+        length {L:unit} and mass {m:unit} that is stretched under a tension of {F:unit}. {_0}{_u}
       answer: TODO
-      unit: Pa
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 7, beta: 70, T: 20, rho: 1.2, v: 343, I0: 10, x: 12 }
+    vars: { L: 1.6, m: 4.85, F: 685 }
     parts:
-      - { id: answer, answer: 0.0907, unit: Pa, source: P91 }
+      - { id: answer, answer: 0.00336578, unit: s, source: P91 }

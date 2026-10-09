@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P128
+number: 128
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: The sound from a trumpet radiates uniformly in all directions. At a distance of 3.5 m from the
+  trumpet the sound intensity level is 73 dB. What is the sound intensity level at a distance of 74
+  m? (46.4967 dB)
+text: The sound from a trumpet radiates uniformly in all directions. At a distance of 3.5 m from the
+  trumpet the sound intensity level is 73 dB. What is the sound intensity level at a distance of 74
+  m? (46.4967 dB)
+answer: { value: 46.4967, unit: dB, raw: 46.4967 dB }
+figures: []
+literals:
+  - name: d
+    value: 3.5
+    unit: m
+    text: "3.5"
+    suggest: { min: 2.4, max: 4.5, step: 0.1, decimals: 1 }
+  - name: beta
+    value: 73
+    unit: dB
+    text: "73"
+    suggest: { min: 51, max: 95, step: 1 }
+  - name: d2
+    value: 74
+    unit: m
+    text: "74"
+    suggest: { min: 52, max: 96, step: 1 }
+scenario:
+  id: phys161-exam3-p128
+  source: { document: PHYS161_Exam3, labels: [ P128 ] }
+  section: Sound
+  narrative: >-
+    The sound from a trumpet radiates uniformly in all directions. At a distance of {d:unit} from
+    the trumpet the sound intensity level is {beta:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: beta, kind: range, min: TODO, max: TODO, step: TODO, unit: dB }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the sound intensity level at a distance of {d2:unit}? {_0}{_u}
+      answer: TODO
+      unit: dB
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 3.5, beta: 73, d2: 74 }
+    parts:
+      - { id: answer, answer: 46.4967, unit: dB, source: P128 }

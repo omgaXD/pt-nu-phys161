@@ -1,54 +1,58 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P81
 number: 81
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: As the train passes the crossing, the receiver at the crossing notices how the sound of the
-  train's whistle changes, with frequency decreasing from 547 Hz on approach to 475 Hz on departure.
-  Using 333 m/s for the speed of sound in air, calculate the speed of the train. (23.46 m/s)
-text: As the train passes the crossing, the receiver at the crossing notices how the sound of the
-  train's whistle changes, with frequency decreasing from 547 Hz on approach to 475 Hz on departure.
-  Using 333 m/s for the speed of sound in air, calculate the speed of the train. (23.46 m/s)
-answer: { value: 23.46, unit: m/s, raw: 23.46 m/s }
-figures: []
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Two megaphones at distance x = 4.74 m to each other are driven in phase by the same amplifier.
+  A listener is located directly in front of one of the megaphones at point A at distance L = 3.41
+  m. The speed of sound can be taken as 347.9 m/s. What is the second-lowest frequency at which
+  constructive interference occurs? (286.437 Hz)
+text: Two megaphones at distance x = 4.74 m to each other are driven in phase by the same amplifier.
+  A listener is located directly in front of one of the megaphones at point A at distance L = 3.41
+  m. The speed of sound can be taken as 347.9 m/s. What is the second-lowest frequency at which
+  constructive interference occurs? (286.437 Hz)
+answer: { value: 286.437, unit: Hz, raw: 286.437 Hz }
+figures:
+  - { src: figures/unnamed_005_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_005_OTxQ.png }
 literals:
-  - name: f
-    value: 547
-    unit: Hz
-    text: "547"
-    suggest: { min: 383, max: 711, step: 1 }
-  - name: f2
-    value: 475
-    unit: Hz
-    text: "475"
-    suggest: { min: 333, max: 618, step: 1 }
+  - name: x
+    value: 4.74
+    unit: m
+    text: "4.74"
+    suggest: { min: 3.32, max: 6.16, step: 0.01, decimals: 2 }
+  - name: L
+    value: 3.41
+    unit: m
+    text: "3.41"
+    suggest: { min: 2.39, max: 4.43, step: 0.01, decimals: 2 }
   - name: v
-    value: 333
+    value: 347.9
     unit: m/s
-    text: "333"
-    suggest: { min: 233, max: 433, step: 1 }
+    text: "347.9"
+    suggest: { min: 243.5, max: 452.3, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p081
   source: { document: PHYS161_Exam3, labels: [ P81 ] }
-  section: Sound
+  section: Waves
+  figure: { id: fig, src: figures/unnamed_005_OTxQ.png, alt: "TODO: describe the figure" }
   narrative: >-
-    As the train passes the crossing, the receiver at the crossing notices how the sound of the
-    train's whistle changes, with frequency decreasing from {f:unit} on approach to {f2:unit} on
-    departure.
+    Two megaphones at distance x = {x:unit} to each other are driven in phase by the same amplifier.
+    A listener is located directly in front of one of the megaphones at point A at distance L =
+    {L:unit}. The speed of sound can be taken as {v:unit}. {@fig}
   vars:
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
-    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
   parts:
     - id: answer
       prompt: >-
-        Using {v:unit} for the speed of sound in air, calculate the speed of the train. {_0}{_u}
+        What is the second-lowest frequency at which constructive interference occurs? {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: Hz
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { f: 547, f2: 475, v: 333 }
+    vars: { x: 4.74, L: 3.41, v: 347.9 }
     parts:
-      - { id: answer, answer: 23.46, unit: m/s, source: P81 }
+      - { id: answer, answer: 286.437, unit: Hz, source: P81 }

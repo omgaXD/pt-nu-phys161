@@ -1,0 +1,45 @@
+# P41 — each cycle multiplies the amplitude by r, so the energy (∝ A²) by r². The energy
+# falls to the fraction p after n = ln p / (2 ln r) cycles, i.e. after t = n T = T ln p / (2 ln r).
+id: phys161-e3-p041-damped-energy-decay
+title: Energy decay of a damped oscillator
+source: { document: PHYS161_Exam3, labels: [ P41 ] }
+section: Oscillations
+tags: [ oscillations, damping, energy, logarithms ]
+narrative: >-
+  A mass M is suspended from a spring and oscillates with a period of {T:unit}. Each complete
+  oscillation results in an amplitude reduction of a factor of {r} due to a small velocity dependent
+  frictional effect.
+vars:
+  - {
+      name: T,
+      kind: range,
+      min: 0.55,
+      max: 0.95,
+      step: 0.001,
+      decimals: 3,
+      unit: s,
+      label: period
+    }
+  - {
+      name: r,
+      kind: range,
+      min: 0.93,
+      max: 0.99,
+      step: 0.001,
+      decimals: 3,
+      label: amplitude factor per cycle
+    }
+  - { name: pct, kind: range, min: 30, max: 70, step: 1, unit: "%", label: remaining energy }
+parts:
+  - id: decay-time
+    prompt: >-
+      Calculate the time it takes for the total energy of the oscillator to decrease to {pct}% of
+      its initial value. {_0}{_u}
+    answer: T * ln(pct / 100) / (2 * ln(r))
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { T: 0.753, r: 0.961, pct: 46 }
+  parts:
+    - { id: decay-time, answer: 7.349, unit: s, source: P41 }

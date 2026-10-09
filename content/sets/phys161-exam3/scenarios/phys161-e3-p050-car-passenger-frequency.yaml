@@ -1,0 +1,29 @@
+# P50 — the person's weight fixes the spring constant, k = m g / d (d in cm); the car and
+# passenger together vibrate at f = (1 / 2π) sqrt(k / (M + m)).
+id: phys161-e3-p050-car-passenger-frequency
+title: Vibration frequency of a car with a passenger
+source: { document: PHYS161_Exam3, labels: [ P50 ] }
+section: Oscillations
+tags: [ oscillations, spring, hookes-law, frequency ]
+narrative: >-
+  When a person with a mass of {m:unit} steps into a car of mass {M:unit}, the car sinks by
+  {d:unit}. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 45, max: 90, step: 1, unit: kg, label: person's mass }
+  - { name: M, kind: range, min: 1100, max: 2100, step: 50, unit: kg, label: car mass }
+  - { name: d, kind: range, min: 4, max: 10, step: 1, unit: cm, label: sink distance }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: frequency
+    prompt: >-
+      Assuming no damping, what is the frequency of vibration of the car and passenger on the car
+      springs? {_0}{_u}
+    answer: sqrt(m * g / (d / 100) / (M + m)) / (2 * pi)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 62, M: 1600, d: 7, g: 9.8 }
+  parts:
+    - { id: frequency, answer: 0.3637, unit: Hz, source: P50 }

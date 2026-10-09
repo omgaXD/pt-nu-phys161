@@ -1,0 +1,41 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P125
+number: 125
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: An organ pipe that is open at one end and closed at the other is 0.52 m long and has two
+  successive harmonics with frequencies {f1} Hz and {f2} Hz. What is the speed of sound in the air
+  inside the pipe? (347.5 m/s)
+text: An organ pipe that is open at one end and closed at the other is 0.52 m long and has two
+  successive harmonics with frequencies {f1} Hz and {f2} Hz. What is the speed of sound in the air
+  inside the pipe? (347.5 m/s)
+answer: { value: 347.5, unit: m/s, raw: 347.5 m/s }
+figures: []
+literals:
+  - name: d
+    value: 0.52
+    unit: m
+    text: "0.52"
+    suggest: { min: 0.36, max: 0.68, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam3-p125
+  source: { document: PHYS161_Exam3, labels: [ P125 ] }
+  section: Sound
+  narrative: >-
+    An organ pipe that is open at one end and closed at the other is {d:unit} long and has two
+    successive harmonics with frequencies (f1) Hz and (f2) Hz.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the speed of sound in the air inside the pipe? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 0.52 }
+    parts:
+      - { id: answer, answer: 347.5, unit: m/s, source: P125 }

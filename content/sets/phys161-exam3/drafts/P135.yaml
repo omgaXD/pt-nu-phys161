@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P135
+number: 135
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A car at rest is emitting alarm sound waves of frequency 470 Hz. A motorcyclist is traveling
+  directly toward the car. What is the magnitude of the motorcyclist's velocity if he detects a
+  frequency of 608 Hz? Use 341.5 m/s for the speed of sound in air. (100.27 m/s)
+text: A car at rest is emitting alarm sound waves of frequency 470 Hz. A motorcyclist is traveling
+  directly toward the car. What is the magnitude of the motorcyclist's velocity if he detects a
+  frequency of 608 Hz? Use 341.5 m/s for the speed of sound in air. (100.27 m/s)
+answer: { value: 100.27, unit: m/s, raw: 100.27 m/s }
+figures: []
+literals:
+  - name: f
+    value: 470
+    unit: Hz
+    text: "470"
+    suggest: { min: 329, max: 611, step: 1 }
+  - name: f2
+    value: 608
+    unit: Hz
+    text: "608"
+    suggest: { min: 426, max: 790, step: 1 }
+  - name: v
+    value: 341.5
+    unit: m/s
+    text: "341.5"
+    suggest: { min: 239, max: 444, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p135
+  source: { document: PHYS161_Exam3, labels: [ P135 ] }
+  section: Sound
+  narrative: >-
+    A car at rest is emitting alarm sound waves of frequency {f:unit}. A motorcyclist is traveling
+    directly toward the car. Use {v:unit} for the speed of sound in air.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the motorcyclist's velocity if he detects a frequency of {f2:unit}?
+        {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 470, f2: 608, v: 341.5 }
+    parts:
+      - { id: answer, answer: 100.27, unit: m/s, source: P135 }

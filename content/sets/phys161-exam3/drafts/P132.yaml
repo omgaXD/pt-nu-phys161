@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P132
+number: 132
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A bat flies toward a wall, emitting a steady sound of frequency 2.1 kHz. This bat hears its own
+  sound plus the sound reflected by the wall. How fast should the bat fly in order to hear a beat
+  frequency of 8 Hz? Use speed of sound in air v = 344 m/s. (0.654 m/s)
+text: A bat flies toward a wall, emitting a steady sound of frequency 2.1 kHz. This bat hears its
+  own sound plus the sound reflected by the wall. How fast should the bat fly in order to hear a
+  beat frequency of 8 Hz? Use speed of sound in air v = 344 m/s. (0.654 m/s)
+answer: { value: 0.654, unit: m/s, raw: 0.654 m/s }
+figures: []
+literals:
+  - name: f
+    value: 2.1
+    unit: kHz
+    text: "2.1"
+    suggest: { min: 1.5, max: 2.7, step: 0.1, decimals: 1 }
+  - name: f2
+    value: 8
+    unit: Hz
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: v
+    value: 344
+    unit: m/s
+    text: "344"
+    suggest: { min: 241, max: 447, step: 1 }
+scenario:
+  id: phys161-exam3-p132
+  source: { document: PHYS161_Exam3, labels: [ P132 ] }
+  section: Sound
+  narrative: >-
+    A bat flies toward a wall, emitting a steady sound of frequency {f:unit}. This bat hears its own
+    sound plus the sound reflected by the wall. Use speed of sound in air v = {v:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
+    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        How fast should the bat fly in order to hear a beat frequency of {f2:unit}? {_0}{_u}
+      answer: TODO
+      unit: m/s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 2.1, f2: 8, v: 344 }
+    parts:
+      - { id: answer, answer: 0.654, unit: m/s, source: P132 }

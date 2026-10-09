@@ -1,71 +1,62 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P74
 number: 74
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A 6-m, 0.825-kg wire is used to support two uniform 230-N posts of equal length inclined at an
-  angle of θ = 56˚. Assume that the wire is essentially horizontal and that the speed of sound is
-  344 m/s. A strong wind is blowing, causing the wire to vibrate in its 5th overtone. What is the
-  frequency of the sound this wire produces? (11.876 Hz)
-text: A 6-m, 0.825-kg wire is used to support two uniform 230-N posts of equal length inclined at an
-  angle of θ = 56°. Assume that the wire is essentially horizontal and that the speed of sound is
-  344 m/s. A strong wind is blowing, causing the wire to vibrate in its 5th overtone. What is the
-  frequency of the sound this wire produces? (11.876 Hz)
-answer: { value: 11.876, unit: Hz, raw: 11.876 Hz }
-figures:
-  - { src: figures/unnamed_010_LYNB.png, original: PHYS161%20Exam%203_files/unnamed_010_LYNB.png }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 9.7-kg object oscillates at the end of a vertical spring that has a spring constant of
+  3.05×10⁴ N/m. The effect of air resistance is represented by the damping coefficient b = 3.7
+  N·s/m. After what time does the amplitude of the oscillation fall to 1/e of its initial value?
+  (5.24324 s)
+text: A 9.7-kg object oscillates at the end of a vertical spring that has a spring constant of
+  3.05×10^4 N/m. The effect of air resistance is represented by the damping coefficient b = 3.7
+  N·s/m. After what time does the amplitude of the oscillation fall to 1/e of its initial value?
+  (5.24324 s)
+answer: { value: 5.24324, unit: s, raw: 5.24324 s }
+figures: []
 literals:
-  - name: d
-    value: 6
-    unit: m
-    text: "6"
-    suggest: { min: 4, max: 8, step: 1 }
   - name: m
-    value: 0.825
+    value: 9.7
     unit: kg
-    text: "0.825"
-    suggest: { min: 0.577, max: 1.073, step: 0.001, decimals: 3 }
-  - name: F
-    value: 230
+    text: "9.7"
+    suggest: { min: 6.8, max: 12.6, step: 0.1, decimals: 1 }
+  - name: k
+    value: 30500
+    unit: N/m
+    text: 3.05×10^4
+    suggest: { min: 21350, max: 39650, step: 1 }
+  - name: b
+    value: 3.7
     unit: N
-    text: "230"
-    suggest: { min: 161, max: 299, step: 1 }
-  - name: theta
-    value: 56
-    unit: °
-    text: "56"
-    suggest: { min: 39, max: 73, step: 1 }
-  - name: v
-    value: 344
-    unit: m/s
-    text: "344"
-    suggest: { min: 241, max: 447, step: 1 }
+    text: "3.7"
+    suggest: { min: 2.6, max: 4.8, step: 0.1, decimals: 1 }
+  - name: x
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
 scenario:
   id: phys161-exam3-p074
   source: { document: PHYS161_Exam3, labels: [ P74 ] }
-  section: Waves
-  figure: { id: fig, src: figures/unnamed_010_LYNB.png, alt: "TODO: describe the figure" }
+  section: Oscillations
   narrative: >-
-    A {d}-m, {m}-kg wire is used to support two uniform {F}-N posts of equal length inclined at an
-    angle of θ = {theta}°. Assume that the wire is essentially horizontal and that the speed of
-    sound is {v:unit}. A strong wind is blowing, causing the wire to vibrate in its 5th overtone.
-    {@fig}
+    A {m}-kg object oscillates at the end of a vertical spring that has a spring constant of
+    {k:unit}. The effect of air resistance is represented by the damping coefficient b =
+    {b:unit}·s/m.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
-    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: b, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
   parts:
     - id: answer
       prompt: >-
-        What is the frequency of the sound this wire produces? {_0}{_u}
+        After what time does the amplitude of the oscillation fall to {x}/e of its initial value?
+        {_0}{_u}
       answer: TODO
-      unit: Hz
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 6, m: 0.825, F: 230, theta: 56, v: 344 }
+    vars: { m: 9.7, k: 30500, b: 3.7, x: 1 }
     parts:
-      - { id: answer, answer: 11.876, unit: Hz, source: P74 }
+      - { id: answer, answer: 5.24324, unit: s, source: P74 }

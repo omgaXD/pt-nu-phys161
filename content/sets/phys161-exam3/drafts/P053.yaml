@@ -1,70 +1,46 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P53
 number: 53
 section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A block weighing 42 N is suspended from a spring that has a force constant of 200 N/m. The
-  system is undamped (b = 0) and is subjected to a harmonic driving force of frequency 9 Hz,
-  resulting in a forced-motion amplitude of 1.8 cm. Determine the maximum value of the driving
-  force. The gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (243.08 N)
-text: A block weighing 42 N is suspended from a spring that has a force constant of 200 N/m. The
-  system is undamped (b = 0) and is subjected to a harmonic driving force of frequency 9 Hz,
-  resulting in a forced-motion amplitude of 1.8 cm. Determine the maximum value of the driving
-  force. The gravitational acceleration is g = 9.8 m/s^2. (243.08 N)
-answer: { value: 243.08, unit: N, raw: 243.08 N }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: The tip of one half of a tuning fork vibrates approximately in simple harmonic motion with an
+  amplitude of 0.71 mm. The tip passes its equilibrium position with a speed of 1.45 m/s. What is
+  the magnitude of its maximum acceleration? (2961.27 m/s^2)
+text: The tip of one half of a tuning fork vibrates approximately in simple harmonic motion with an
+  amplitude of 0.71 mm. The tip passes its equilibrium position with a speed of 1.45 m/s. What is
+  the magnitude of its maximum acceleration? (2961.27 m/s^2)
+answer: { value: 2961.27, unit: m/s^2, raw: 2961.27 m/s^2 }
 figures: []
 literals:
-  - name: F
-    value: 42
-    unit: N
-    text: "42"
-    suggest: { min: 29, max: 55, step: 1 }
-  - name: k
-    value: 200
-    unit: N/m
-    text: "200"
-    suggest: { min: 140, max: 260, step: 1 }
-  - name: f
-    value: 9
-    unit: Hz
-    text: "9"
-    suggest: { min: 6, max: 12, step: 1 }
   - name: d
-    value: 1.8
-    unit: cm
-    text: "1.8"
-    suggest: { min: 1.3, max: 2.3, step: 0.1, decimals: 1 }
-  - name: g
-    value: 9.8
-    unit: m/s^2
-    text: "9.8"
-    constant: true
-    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+    value: 0.71
+    unit: mm
+    text: "0.71"
+    suggest: { min: 0.5, max: 0.92, step: 0.01, decimals: 2 }
+  - name: v
+    value: 1.45
+    unit: m/s
+    text: "1.45"
+    suggest: { min: 1.01, max: 1.89, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam3-p053
   source: { document: PHYS161_Exam3, labels: [ P53 ] }
   section: Oscillations
   narrative: >-
-    A block weighing {F:unit} is suspended from a spring that has a force constant of {k:unit}. The
-    system is undamped (b = 0) and is subjected to a harmonic driving force of frequency {f:unit},
-    resulting in a forced-motion amplitude of {d:unit}. The gravitational acceleration is g =
-    {g:unit}.
+    The tip of one half of a tuning fork vibrates approximately in simple harmonic motion with an
+    amplitude of {d:unit}. The tip passes its equilibrium position with a speed of {v:unit}.
   vars:
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
-    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-  derived:
-    - { name: g, expr: "9.8", unit: m/s^2 }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
   parts:
     - id: answer
-      prompt: Determine the maximum value of the driving force. {_0}{_u}
+      prompt: What is the magnitude of its maximum acceleration? {_0}{_u}
       answer: TODO
-      unit: N
+      unit: m/s^2
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { F: 42, k: 200, f: 9, d: 1.8, g: 9.8 }
+    vars: { d: 0.71, v: 1.45 }
     parts:
-      - { id: answer, answer: 243.08, unit: N, source: P53 }
+      - { id: answer, answer: 2961.27, unit: m/s^2, source: P53 }

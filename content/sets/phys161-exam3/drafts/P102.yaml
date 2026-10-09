@@ -1,61 +1,54 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P102
 number: 102
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: One type of steel has a density of 7.8×10<sup>3</sup> kg/m<sup>3</sup> and a breaking stress of
-  7×10<sup>8</sup> N/m<sup>2</sup>. A cylindrical guitar string is to be made of 6 g of this steel.
-  What is the radius of the longest and thinnest string that can be placed under a tension of 780 N
-  without breaking? (0.0005956 m)
-text: One type of steel has a density of 7.8×10^3 kg/m^3 and a breaking stress of 7×10^8 N/m^2. A
-  cylindrical guitar string is to be made of 6 g of this steel. What is the radius of the longest
-  and thinnest string that can be placed under a tension of 780 N without breaking? (0.0005956 m)
-answer: { value: 0.0005956, unit: m, raw: 0.0005956 m }
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: One string of a musical instrument is 61.5 cm long and has a mass of 9.5 g. It is played in a
+  room where the speed of sound is 345 m/s. When the string vibrates in its second overtone, what is
+  the wavelength of the standing wave on the string itself? (0.41 m)
+text: One string of a musical instrument is 61.5 cm long and has a mass of 9.5 g. It is played in a
+  room where the speed of sound is 345 m/s. When the string vibrates in its second overtone, what is
+  the wavelength of the standing wave on the string itself? (0.41 m)
+answer: { value: 0.41, unit: m, raw: 0.41 m }
 figures: []
 literals:
-  - name: rho
-    value: 7800
-    unit: kg/m^3
-    text: 7.8×10^3
-    suggest: { min: 5460, max: 10140, step: 1 }
-  - name: p
-    value: 700000000
-    unit: N/m^2
-    text: 7×10^8
-    suggest: { min: 490000000, max: 910000000, step: 1 }
+  - name: d
+    value: 61.5
+    unit: cm
+    text: "61.5"
+    suggest: { min: 43, max: 80, step: 0.1, decimals: 1 }
   - name: m
-    value: 6
+    value: 9.5
     unit: g
-    text: "6"
-    suggest: { min: 4, max: 8, step: 1 }
-  - name: F
-    value: 780
-    unit: N
-    text: "780"
-    suggest: { min: 546, max: 1014, step: 1 }
+    text: "9.5"
+    suggest: { min: 6.6, max: 12.3, step: 0.1, decimals: 1 }
+  - name: v
+    value: 345
+    unit: m/s
+    text: "345"
+    suggest: { min: 241, max: 449, step: 1 }
 scenario:
   id: phys161-exam3-p102
   source: { document: PHYS161_Exam3, labels: [ P102 ] }
-  section: Sound
+  section: Waves
   narrative: >-
-    One type of steel has a density of {rho:unit} and a breaking stress of {p:unit}. A cylindrical
-    guitar string is to be made of {m:unit} of this steel.
+    One string of a musical instrument is {d:unit} long and has a mass of {m:unit}. It is played in
+    a room where the speed of sound is {v:unit}.
   vars:
-    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m^2 }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
   parts:
     - id: answer
       prompt: >-
-        What is the radius of the longest and thinnest string that can be placed under a tension of
-        {F:unit} without breaking? {_0}{_u}
+        When the string vibrates in its second overtone, what is the wavelength of the standing wave
+        on the string itself? {_0}{_u}
       answer: TODO
       unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { rho: 7800, p: 700000000, m: 6, F: 780 }
+    vars: { d: 61.5, m: 9.5, v: 345 }
     parts:
-      - { id: answer, answer: 0.0005956, unit: m, source: P102 }
+      - { id: answer, answer: 0.41, unit: m, source: P102 }

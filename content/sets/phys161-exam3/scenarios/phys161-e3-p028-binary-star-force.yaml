@@ -1,0 +1,53 @@
+# P28 — two equal stars on opposite sides of a circular orbit of radius R about their centre of
+# mass are 2R apart: F = G m² / (2R)². R is given in km and converted inside the formula.
+# The figure prints only symbols (M, R, cm), so every parameter is randomized.
+id: phys161-e3-p028-binary-star-force
+title: Gravitational force between binary stars
+source: { document: PHYS161_Exam3, labels: [ P28 ] }
+section: Gravitation
+tags: [ gravitation, newtons-law-of-gravitation, binary-stars ]
+figure:
+  id: binary-stars
+  src: figures/unnamed_007_OTxQ.png
+  alt: >-
+    A circle with two black dots labelled M at the opposite ends of its horizontal diameter. A small
+    dot labelled cm marks the centre of the circle, and each half of the diameter, from the centre
+    to a star, is labelled R.
+narrative: >-
+  Two identical stars with mass {m:unit} orbit around their center of mass. Each orbit is circular
+  and has a radius of {R:unit}, so that the two stars are always on opposite sides of the circle.
+  Gravitational constant is {G:unit}. {@fig}
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 6e+29,
+      max: 1.5e+30,
+      step: 1e+29,
+      sigfigs: 2,
+      unit: kg,
+      label: star mass
+    }
+  - {
+      name: R,
+      kind: range,
+      min: 4e+7,
+      max: 9e+7,
+      step: 1e+7,
+      sigfigs: 1,
+      unit: km,
+      label: orbit radius
+    }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: force
+    prompt: "Find the gravitational force of one star on the other. {_0}{_u}"
+    answer: G * m^2 / (2 * R * 1000)^2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1e+30, R: 8e+7, G: 6.67e-11 }
+  parts:
+    - { id: force, answer: 2.6055e+27, unit: N, source: P28 }

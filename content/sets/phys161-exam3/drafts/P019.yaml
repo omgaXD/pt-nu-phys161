@@ -1,57 +1,47 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P19
 number: 19
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Two identical stars with mass 1x10^30 kg orbit around their center of mass. Each orbit is
-  circular and has a radius of 5 × 10<sup>7</sup> km, so that the two stars are always on opposite
-  sides of the circle. Find the orbital speed of each star. Gravitational constant is 6.67 ×
-  10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (18261.98 m/s)
-text: Two identical stars with mass 1x10^30 kg orbit around their center of mass. Each orbit is
-  circular and has a radius of 5 × 10^7 km, so that the two stars are always on opposite sides of
-  the circle. Find the orbital speed of each star. Gravitational constant is 6.67 × 10^-11N⋅ m^2
-  /kg^2. (18261.98 m/s)
-answer: { value: 18261.98, unit: m/s, raw: 18261.98 m/s }
-figures:
-  - { src: figures/unnamed_009_LYNB.png, original: PHYS161%20Exam%203_files/unnamed_009_LYNB.png }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Calculate the weight of a 50.3-kg person on the Moon where the gravitational acceleration is
+  one-sixth that of the Earth. The gravitational acceleration on Earth is g = 9.8 m/s<sup>2</sup>.
+  (82.157 N)
+text: Calculate the weight of a 50.3-kg person on the Moon where the gravitational acceleration is
+  one-sixth that of the Earth. The gravitational acceleration on Earth is g = 9.8 m/s^2. (82.157 N)
+answer: { value: 82.157, unit: N, raw: 82.157 N }
+figures: []
 literals:
   - name: m
-    value: 1e+30
+    value: 50.3
     unit: kg
-    text: 1x10^30
-    suggest: { min: 7e+29, max: 1.3e+30, step: 1e+29 }
-  - name: r
-    value: 50000000
-    unit: km
-    text: 5 × 10^7
-    suggest: { min: 35000000, max: 65000000, step: 1 }
-  - name: F
-    value: 6.67e-11
-    unit: N
-    text: 6.67 × 10^-11
-    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+    text: "50.3"
+    suggest: { min: 35.2, max: 65.4, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p019
   source: { document: PHYS161_Exam3, labels: [ P19 ] }
   section: Gravitation
-  figure: { id: fig, src: figures/unnamed_009_LYNB.png, alt: "TODO: describe the figure" }
-  narrative: >-
-    Two identical stars with mass {m:unit} orbit around their center of mass. Each orbit is circular
-    and has a radius of {r:unit}, so that the two stars are always on opposite sides of the circle.
-    Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$. {@fig}
+  narrative: The gravitational acceleration on Earth is g = {g:unit}.
   vars:
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
-      prompt: Find the orbital speed of each star. {_0}{_u}
+      prompt: >-
+        Calculate the weight of a {m}-kg person on the Moon where the gravitational acceleration is
+        one-sixth that of the Earth. {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: N
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 1e+30, r: 50000000, F: 6.67e-11 }
+    vars: { m: 50.3, g: 9.8 }
     parts:
-      - { id: answer, answer: 18261.98, unit: m/s, source: P19 }
+      - { id: answer, answer: 82.157, unit: N, source: P19 }

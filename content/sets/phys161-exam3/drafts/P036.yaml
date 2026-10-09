@@ -1,48 +1,62 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P36
 number: 36
-section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
-  motion with amplitude of 0.57 mm. If the tip passes its equilibrium position with a speed of 1.538
-  m/s, what is the frequency of vibration? (429.439 Hz)
-text: The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
-  motion with amplitude of 0.57 mm. If the tip passes its equilibrium position with a speed of 1.538
-  m/s, what is the frequency of vibration? (429.439 Hz)
-answer: { value: 429.439, unit: Hz, raw: 429.439 Hz }
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: The space station makes 15.45 revolutions per day in its orbit around the earth. Assuming a
+  circular orbit, how high is this satellite above the surface of the earth? The radius of Earth is
+  6.371×10<sup>6</sup> m. Mass of Earth is 5.972×10<sup>24</sup> kg. The gravitational constant is
+  6.6743 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (438451.032 m)
+text: The space station makes 15.45 revolutions per day in its orbit around the earth. Assuming a
+  circular orbit, how high is this satellite above the surface of the earth? The radius of Earth is
+  6.371×10^6 m. Mass of Earth is 5.972×10^24 kg. The gravitational constant is 6.6743 × 10^-11N⋅ m^2
+  /kg^2. (438451.032 m)
+answer: { value: 438451.032, unit: m, raw: 438451.032 m }
 figures: []
 literals:
-  - name: d
-    value: 0.57
-    unit: mm
-    text: "0.57"
-    suggest: { min: 0.4, max: 0.74, step: 0.01, decimals: 2 }
-  - name: v
-    value: 1.538
-    unit: m/s
-    text: "1.538"
-    suggest: { min: 1.077, max: 1.999, step: 0.001, decimals: 3 }
+  - name: x
+    value: 15.45
+    unit: rev
+    text: "15.45"
+    suggest: { min: 10.82, max: 20.09, step: 0.01, decimals: 2 }
+  - name: r
+    value: 6371000
+    unit: m
+    text: 6.371×10^6
+    suggest: { min: 4459700, max: 8282300, step: 1 }
+  - name: m
+    value: 5.972e+24
+    unit: kg
+    text: 5.972×10^24
+    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+  - name: F
+    value: 6.6743e-11
+    unit: N
+    text: 6.6743 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p036
   source: { document: PHYS161_Exam3, labels: [ P36 ] }
-  section: Oscillations
+  section: Gravitation
   narrative: >-
-    The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
-    motion with amplitude of {d:unit}.
+    The space station makes {x:unit} per day in its orbit around the earth. The radius of Earth is
+    {r:unit}. Mass of Earth is {m:unit}. The gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: rev }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
       prompt: >-
-        If the tip passes its equilibrium position with a speed of {v:unit}, what is the frequency
-        of vibration? {_0}{_u}
+        Assuming a circular orbit, how high is this satellite above the surface of the earth?
+        {_0}{_u}
       answer: TODO
-      unit: Hz
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 0.57, v: 1.538 }
+    vars: { x: 15.45, r: 6371000, m: 5.972e+24, F: 6.6743e-11 }
     parts:
-      - { id: answer, answer: 429.439, unit: Hz, source: P36 }
+      - { id: answer, answer: 438451.032, unit: m, source: P36 }

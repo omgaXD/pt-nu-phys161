@@ -1,0 +1,54 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P147
+number: 147
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: The sound source of a ship's sonar system operates at a frequency of 24.5 kHz. The speed of
+  sound in water is 1490 m/s. How long does it take a pulse to travel from the ship to a target 830
+  m away and back? (1.11409 s)
+text: The sound source of a ship's sonar system operates at a frequency of 24.5 kHz. The speed of
+  sound in water is 1490 m/s. How long does it take a pulse to travel from the ship to a target 830
+  m away and back? (1.11409 s)
+answer: { value: 1.11409, unit: s, raw: 1.11409 s }
+figures: []
+literals:
+  - name: f
+    value: 24.5
+    unit: kHz
+    text: "24.5"
+    suggest: { min: 17.1, max: 31.9, step: 0.1, decimals: 1 }
+  - name: v
+    value: 1490
+    unit: m/s
+    text: "1490"
+    suggest: { min: 1043, max: 1937, step: 1 }
+  - name: d
+    value: 830
+    unit: m
+    text: "830"
+    suggest: { min: 581, max: 1079, step: 1 }
+scenario:
+  id: phys161-exam3-p147
+  source: { document: PHYS161_Exam3, labels: [ P147 ] }
+  section: Sound
+  narrative: >-
+    The sound source of a ship's sonar system operates at a frequency of {f:unit}. The speed of
+    sound in water is {v:unit}.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  parts:
+    - id: answer
+      prompt: >-
+        How long does it take a pulse to travel from the ship to a target {d:unit} away and back?
+        {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 24.5, v: 1490, d: 830 }
+    parts:
+      - { id: answer, answer: 1.11409, unit: s, source: P147 }

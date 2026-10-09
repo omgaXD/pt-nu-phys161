@@ -1,0 +1,62 @@
+# P146/P148 — sonar in water: λ = v / f. A whale approaching the ship at speed u first hears
+# f (v + u) / v as a moving listener, then re-radiates it as a moving source, so the echo
+# arrives at f (v + u) / (v − u) and differs from the emitted frequency by 2 u f / (v − u).
+# The frequency is given in kHz. The two source problems use different sonar frequencies and
+# speeds of sound in water, so both are parameters: the base canonical values are P146's
+# (with P148's whale speed), and P148 overrides them with its own.
+id: phys161-e3-p146-ship-sonar-whale
+title: Ship sonar wavelength and the echo from a whale
+source: { document: PHYS161_Exam3, labels: [ P146, P148 ] }
+section: Sound
+tags: [ sound, wavelength, doppler-effect, reflection, multi-part ]
+narrative: >-
+  The sound source of a ship's sonar system operates at a frequency of {f:unit}. The speed of sound
+  in water is {v:unit}.
+vars:
+  - { name: f, kind: range, min: 15, max: 30, step: 1, unit: kHz, label: sonar frequency }
+  - {
+      name: v,
+      kind: range,
+      min: 1440,
+      max: 1540,
+      step: 1,
+      unit: m/s,
+      label: speed of sound in water
+    }
+  - {
+      name: u,
+      kind: range,
+      min: 2.5,
+      max: 6.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: speed of the whale
+    }
+parts:
+  - id: wavelength
+    prompt: "What is the wavelength of the waves emitted by the source? {_0}{_u}"
+    answer: v / (f * 1000)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+  - id: echo-frequency-difference
+    prompt: >-
+      Calculate the absolute value of the difference in frequency between the directly radiated
+      waves and the waves reflected from a whale traveling directly toward the ship at {u:unit}. The
+      ship is at rest in the water. {_0}{_u}
+    answer: f * 1000 * 2 * u / (v - u)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { f: 22, v: 1471, u: 4.3 }
+  parts:
+    - { id: wavelength, answer: 0.06686, unit: m, source: P146 }
+    - {
+        id: echo-frequency-difference,
+        answer: 121.72,
+        unit: Hz,
+        source: P148,
+        vars: { f: 21, v: 1488 }
+      }

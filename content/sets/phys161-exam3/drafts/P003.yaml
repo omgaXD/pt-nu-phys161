@@ -1,30 +1,28 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P3
 number: 3
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: In a Star Wars movie the rebel space station is built as circular ring of 45 m in diameter. At
-  what angular speed should it be rotated so the occupants feel that they have the 75% of the weight
-  they feel on Earth? The gravitational acceleration on Earth is g = 9.8 m/s<sup>2</sup>. (0.572
-  rad/s)
-text: In a Star Wars movie the rebel space station is built as circular ring of 45 m in diameter. At
-  what angular speed should it be rotated so the occupants feel that they have the 75% of the weight
-  they feel on Earth? The gravitational acceleration on Earth is g = 9.8 m/s^2. (0.572 rad/s)
-answer: { value: 0.572, unit: rad/s, raw: 0.572 rad/s }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: What is the value of gravitational acceleration g 720 km above Earth’s surface? The radius of
+  Earth is 6.371 × 10<sup>6</sup> m. The gravitational acceleration on Earth is g = 9.8
+  m/s<sup>2</sup>. (7.911 m/s^2)
+text: What is the value of gravitational acceleration g 720 km above Earth’s surface? The radius of
+  Earth is 6.371 × 10^6 m. The gravitational acceleration on Earth is g = 9.8 m/s^2. (7.911 m/s^2)
+answer: { value: 7.911, unit: m/s^2, raw: 7.911 m/s^2 }
 figures: []
 literals:
   - name: d
-    value: 45
+    value: 720
+    unit: km
+    text: "720"
+    suggest: { min: 504, max: 936, step: 1 }
+  - name: r
+    value: 6371000
     unit: m
-    text: "45"
-    suggest: { min: 31, max: 59, step: 1 }
-  - name: pct
-    value: 75
-    unit: "%"
-    text: "75"
-    suggest: { min: 53, max: 98, step: 1 }
+    text: 6.371 × 10^6
+    suggest: { min: 4459700, max: 8282300, step: 1 }
   - name: g
     value: 9.8
     unit: m/s^2
@@ -36,22 +34,20 @@ scenario:
   source: { document: PHYS161_Exam3, labels: [ P3 ] }
   section: Gravitation
   narrative: >-
-    In a Star Wars movie the rebel space station is built as circular ring of {d:unit} in diameter.
-    The gravitational acceleration on Earth is g = {g:unit}.
+    The radius of Earth is {r:unit}. The gravitational acceleration on Earth is g = {g:unit}.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
   derived:
     - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        At what angular speed should it be rotated so the occupants feel that they have the {pct}%
-        of the weight they feel on Earth? {_0}{_u}
+        What is the value of gravitational acceleration g {d:unit} above Earth’s surface? {_0}{_u}
       answer: TODO
-      unit: rad/s
+      unit: m/s^2
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 45, pct: 75, g: 9.8 }
+    vars: { d: 720, r: 6371000, g: 9.8 }
     parts:
-      - { id: answer, answer: 0.572, unit: rad/s, source: P3 }
+      - { id: answer, answer: 7.911, unit: m/s^2, source: P3 }

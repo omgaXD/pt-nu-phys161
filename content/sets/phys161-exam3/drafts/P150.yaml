@@ -1,0 +1,63 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P150
+number: 150
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A police siren of frequency 20.5 kHz is attached to a vibrating platform. The platform and
+  siren oscillate up and down in simple harmonic motion with amplitude 3.1 cm and frequency 8.5 Hz.
+  Find the minimum sound frequency that you would hear at a position directly above the siren. Use
+  338.5 m/s for the speed of sound in air. (20400.2 Hz)
+text: A police siren of frequency 20.5 kHz is attached to a vibrating platform. The platform and
+  siren oscillate up and down in simple harmonic motion with amplitude 3.1 cm and frequency 8.5 Hz.
+  Find the minimum sound frequency that you would hear at a position directly above the siren. Use
+  338.5 m/s for the speed of sound in air. (20400.2 Hz)
+answer: { value: 20400.2, unit: Hz, raw: 20400.2 Hz }
+figures: []
+literals:
+  - name: f
+    value: 20.5
+    unit: kHz
+    text: "20.5"
+    suggest: { min: 14.4, max: 26.7, step: 0.1, decimals: 1 }
+  - name: d
+    value: 3.1
+    unit: cm
+    text: "3.1"
+    suggest: { min: 2.2, max: 4, step: 0.1, decimals: 1 }
+  - name: f2
+    value: 8.5
+    unit: Hz
+    text: "8.5"
+    suggest: { min: 5.9, max: 11.1, step: 0.1, decimals: 1 }
+  - name: v
+    value: 338.5
+    unit: m/s
+    text: "338.5"
+    suggest: { min: 236.9, max: 440.1, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p150
+  source: { document: PHYS161_Exam3, labels: [ P150 ] }
+  section: Sound
+  narrative: >-
+    A police siren of frequency {f:unit} is attached to a vibrating platform. The platform and siren
+    oscillate up and down in simple harmonic motion with amplitude {d:unit} and frequency {f2:unit}.
+    Use {v:unit} for the speed of sound in air.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the minimum sound frequency that you would hear at a position directly above the siren.
+        {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 20.5, d: 3.1, f2: 8.5, v: 338.5 }
+    parts:
+      - { id: answer, answer: 20400.2, unit: Hz, source: P150 }

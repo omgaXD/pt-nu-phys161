@@ -1,67 +1,59 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P48
 number: 48
 section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A 2-kg bucket containing 9.5 kg of water is hanging from a vertical ideal spring of force
-  constant 120 N/m and oscillating up and down with an amplitude of 3.5 cm. Suddenly the bucket
-  springs a leak in the bottom such that water drops out at a steady rate of 1.8 g/s. When the
-  bucket is half full, find the period of oscillation. (1.4902 s)
-text: A 2-kg bucket containing 9.5 kg of water is hanging from a vertical ideal spring of force
-  constant 120 N/m and oscillating up and down with an amplitude of 3.5 cm. Suddenly the bucket
-  springs a leak in the bottom such that water drops out at a steady rate of 1.8 g/s. When the
-  bucket is half full, find the period of oscillation. (1.4902 s)
-answer: { value: 1.4902, unit: s, raw: 1.4902 s }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Circus performer of mass 77 kg oscillates up and down at the end of a long elastic rope at a
+  rate of once every 5.5 s. The elastic rope obeys Hooke's Law. By how much is the rope extended
+  beyond its unloaded length when the performer hangs at rest? The gravitational acceleration is g =
+  9.8 m/s<sup>2</sup>. (7.5091662226928 m)
+text: Circus performer of mass 77 kg oscillates up and down at the end of a long elastic rope at a
+  rate of once every 5.5 s. The elastic rope obeys Hooke's Law. By how much is the rope extended
+  beyond its unloaded length when the performer hangs at rest? The gravitational acceleration is g =
+  9.8 m/s^2. (7.5091662226928 m)
+answer: { value: 7.5091662226928, unit: m, raw: 7.5091662226928 m }
 figures: []
 literals:
   - name: m
-    value: 2
+    value: 77
     unit: kg
-    text: "2"
-    suggest: { min: 1, max: 3, step: 1 }
-  - name: m2
-    value: 9.5
-    unit: kg
-    text: "9.5"
-    suggest: { min: 6.6, max: 12.3, step: 0.1, decimals: 1 }
-  - name: k
-    value: 120
-    unit: N/m
-    text: "120"
-    suggest: { min: 84, max: 156, step: 1 }
-  - name: d
-    value: 3.5
-    unit: cm
-    text: "3.5"
-    suggest: { min: 2.4, max: 4.5, step: 0.1, decimals: 1 }
-  - name: x
-    value: 1.8
-    text: "1.8"
-    suggest: { min: 1.3, max: 2.3, step: 0.1, decimals: 1 }
+    text: "77"
+    suggest: { min: 54, max: 100, step: 1 }
+  - name: t
+    value: 5.5
+    unit: s
+    text: "5.5"
+    suggest: { min: 3.8, max: 7.2, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p048
   source: { document: PHYS161_Exam3, labels: [ P48 ] }
   section: Oscillations
   narrative: >-
-    A {m}-kg bucket containing {m2:unit} of water is hanging from a vertical ideal spring of force
-    constant {k:unit} and oscillating up and down with an amplitude of {d:unit}. Suddenly the bucket
-    springs a leak in the bottom such that water drops out at a steady rate of {x} g/s.
+    Circus performer of mass {m:unit} oscillates up and down at the end of a long elastic rope at a
+    rate of once every {t:unit}. The elastic rope obeys Hooke's Law. The gravitational acceleration
+    is g = {g:unit}.
   vars:
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        When the bucket is half full, find the period of oscillation. {_0}{_u}
+        By how much is the rope extended beyond its unloaded length when the performer hangs at
+        rest? {_0}{_u}
       answer: TODO
-      unit: s
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 2, m2: 9.5, k: 120, d: 3.5, x: 1.8 }
+    vars: { m: 77, t: 5.5, g: 9.8 }
     parts:
-      - { id: answer, answer: 1.4902, unit: s, source: P48 }
+      - { id: answer, answer: 7.5091662226928, unit: m, source: P48 }

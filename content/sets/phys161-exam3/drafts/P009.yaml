@@ -1,68 +1,77 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P9
 number: 9
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: How much energy is required to lift the 8000 kg space vehicle from Earth’s surface to the
-  height of the 380 km above the surface? Neglect the rotation of the Earth. The radius of Earth is
-  6.371 × 10<sup>6</sup> m. The mass of the Earth is 5.972 × 10<sup>24</sup> kg. Gravitational
-  constant is 6.6743 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (28172370630.036 J)
-text: How much energy is required to lift the 8000 kg space vehicle from Earth’s surface to the
-  height of the 380 km above the surface? Neglect the rotation of the Earth. The radius of Earth is
-  6.371 × 10^6 m. The mass of the Earth is 5.972 × 10^24 kg. Gravitational constant is 6.6743 ×
-  10^-11N⋅ m^2 /kg^2. (28172370630.036 J)
-answer: { value: 28172370630.036, unit: J, raw: 28172370630.036 J }
-figures: []
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Spherical hollow is made in a lead sphere of radius R = 12.4 cm such that its surface touches
+  the outside surface of a lead sphere and passes through its center as shown in the figure below.
+  The mass of the sphere before hollowing was M = 24.8 kg. Find the magnitude of the gravitational
+  force between the hollowed-out lead sphere and a small sphere of mass m = 2.4 kg, located at
+  distance d = 0.75 m from the center of the lead sphere. Gravitational constant is 6.67 ×
+  10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (6.305E-9 N)
+text: Spherical hollow is made in a lead sphere of radius R = 12.4 cm such that its surface touches
+  the outside surface of a lead sphere and passes through its center as shown in the figure below.
+  The mass of the sphere before hollowing was M = 24.8 kg. Find the magnitude of the gravitational
+  force between the hollowed-out lead sphere and a small sphere of mass m = 2.4 kg, located at
+  distance d = 0.75 m from the center of the lead sphere. Gravitational constant is 6.67 × 10^-11N⋅
+  m^2 /kg^2. (6.305E-9 N)
+answer: { value: 6.305e-9, unit: N, raw: 6.305E-9 N }
+figures:
+  - { src: figures/unnamed_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_OTxQ.png }
 literals:
+  - name: R
+    value: 12.4
+    unit: cm
+    text: "12.4"
+    suggest: { min: 8.7, max: 16.1, step: 0.1, decimals: 1 }
+  - name: M
+    value: 24.8
+    unit: kg
+    text: "24.8"
+    suggest: { min: 17.4, max: 32.2, step: 0.1, decimals: 1 }
   - name: m
-    value: 8000
+    value: 2.4
     unit: kg
-    text: "8000"
-    suggest: { min: 5600, max: 10400, step: 1 }
-  - name: h
-    value: 380
-    unit: km
-    text: "380"
-    suggest: { min: 266, max: 494, step: 1 }
-  - name: r
-    value: 6371000
+    text: "2.4"
+    suggest: { min: 1.7, max: 3.1, step: 0.1, decimals: 1 }
+  - name: d
+    value: 0.75
     unit: m
-    text: 6.371 × 10^6
-    suggest: { min: 4459700, max: 8282300, step: 1 }
-  - name: m2
-    value: 5.972e+24
-    unit: kg
-    text: 5.972 × 10^24
-    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+    text: "0.75"
+    suggest: { min: 0.52, max: 0.98, step: 0.01, decimals: 2 }
   - name: F
-    value: 6.6743e-11
+    value: 6.67e-11
     unit: N
-    text: 6.6743 × 10^-11
+    text: 6.67 × 10^-11
     suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p009
   source: { document: PHYS161_Exam3, labels: [ P9 ] }
   section: Gravitation
+  figure: { id: fig, src: figures/unnamed_OTxQ.png, alt: "TODO: describe the figure" }
   narrative: >-
-    Neglect the rotation of the Earth. The radius of Earth is {r:unit}. The mass of the Earth is
-    {m2:unit}. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+    Spherical hollow is made in a lead sphere of radius R = {R:unit} such that its surface touches
+    the outside surface of a lead sphere and passes through its center as shown in the figure below.
+    The mass of the sphere before hollowing was M = {M:unit}. Gravitational constant is {F:unit}⋅
+    m$^{2}$ /kg$^{2}$. {@fig}
   vars:
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
-    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
       prompt: >-
-        How much energy is required to lift the {m:unit} space vehicle from Earth’s surface to the
-        height of the {h:unit} above the surface? {_0}{_u}
+        Find the magnitude of the gravitational force between the hollowed-out lead sphere and a
+        small sphere of mass m = {m:unit}, located at distance d = {d:unit} from the center of the
+        lead sphere. {_0}{_u}
       answer: TODO
-      unit: J
+      unit: N
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 8000, h: 380, r: 6371000, m2: 5.972e+24, F: 6.6743e-11 }
+    vars: { R: 12.4, M: 24.8, m: 2.4, d: 0.75, F: 6.67e-11 }
     parts:
-      - { id: answer, answer: 28172370630.036, unit: J, source: P9 }
+      - { id: answer, answer: 6.305e-9, unit: N, source: P9 }

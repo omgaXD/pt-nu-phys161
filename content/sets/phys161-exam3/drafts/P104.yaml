@@ -1,57 +1,82 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P104
 number: 104
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: The sound source of a ship's sonar system operates at a frequency of 21 kHz. The speed of sound
-  in water is 1488 m/s. Calculate the absolute value of the difference in frequency between the
-  directly radiated waves and the waves reflected from a whale traveling directly toward the ship at
-  4.3 m/s. The ship is at rest in the water. (121.72 Hz)
-text: The sound source of a ship's sonar system operates at a frequency of 21 kHz. The speed of
-  sound in water is 1488 m/s. Calculate the absolute value of the difference in frequency between
-  the directly radiated waves and the waves reflected from a whale traveling directly toward the
-  ship at 4.3 m/s. The ship is at rest in the water. (121.72 Hz)
-answer: { value: 121.72, unit: Hz, raw: 121.72 Hz }
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Three pieces of string, each of length 58 cm, are joined together end to end, to make a
+  combined string of length 174 cm. The first piece of string has mass per unit length
+  3.55⋅10<sup>−6</sup> kg/cm, the second piece has mass per unit length 14.2⋅10<sup>−6</sup> kg/cm,
+  and the third piece has mass per unit length 0.8875⋅10<sup>−6</sup> kg/cm. If the combined string
+  is under tension 0.46 N, how much time does it take a transverse wave to travel the entire length
+  of 174 cm? (0.05639 s)
+text: Three pieces of string, each of length 58 cm, are joined together end to end, to make a
+  combined string of length 174 cm. The first piece of string has mass per unit length 3.55⋅10^-6
+  kg/cm, the second piece has mass per unit length 14.2⋅10^-6 kg/cm, and the third piece has mass
+  per unit length 0.8875⋅10^-6 kg/cm. If the combined string is under tension 0.46 N, how much time
+  does it take a transverse wave to travel the entire length of 174 cm? (0.05639 s)
+answer: { value: 0.05639, unit: s, raw: 0.05639 s }
 figures: []
 literals:
-  - name: f
-    value: 21
-    unit: kHz
-    text: "21"
-    suggest: { min: 15, max: 27, step: 1 }
-  - name: v
-    value: 1488
-    unit: m/s
-    text: "1488"
-    suggest: { min: 1042, max: 1934, step: 1 }
-  - name: v2
-    value: 4.3
-    unit: m/s
-    text: "4.3"
-    suggest: { min: 3, max: 5.6, step: 0.1, decimals: 1 }
+  - name: L
+    value: 58
+    unit: cm
+    text: "58"
+    suggest: { min: 41, max: 75, step: 1 }
+  - name: L2
+    value: 174
+    unit: cm
+    text: "174"
+    suggest: { min: 122, max: 226, step: 1 }
+  - name: x
+    value: 0.00000355
+    text: 3.55⋅10^-6
+    suggest: { min: 0.00000249, max: 0.00000462, step: 1e-8, decimals: 8 }
+  - name: x2
+    value: 0.0000142
+    text: 14.2⋅10^-6
+    suggest: { min: 0.0000099, max: 0.0000185, step: 1e-7, decimals: 7 }
+  - name: x3
+    value: 8.875e-7
+    text: 0.8875⋅10^-6
+    suggest: { min: 6.2e-7, max: 0.00000115, step: 1e-8 }
+  - name: F
+    value: 0.46
+    unit: N
+    text: "0.46"
+    suggest: { min: 0.32, max: 0.6, step: 0.01, decimals: 2 }
+  - name: L3
+    value: 174
+    unit: cm
+    text: "174"
+    suggest: { min: 122, max: 226, step: 1 }
 scenario:
   id: phys161-exam3-p104
   source: { document: PHYS161_Exam3, labels: [ P104 ] }
-  section: Sound
+  section: Waves
   narrative: >-
-    The sound source of a ship's sonar system operates at a frequency of {f:unit}. The speed of
-    sound in water is {v:unit}. The ship is at rest in the water.
+    Three pieces of string, each of length {L:unit}, are joined together end to end, to make a
+    combined string of length {L2:unit}. The first piece of string has mass per unit length {x}
+    kg/cm, the second piece has mass per unit length {x2} kg/cm, and the third piece has mass per
+    unit length {x3} kg/cm.
   vars:
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: L2, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: L3, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
   parts:
     - id: answer
       prompt: >-
-        Calculate the absolute value of the difference in frequency between the directly radiated
-        waves and the waves reflected from a whale traveling directly toward the ship at {v2:unit}.
-        {_0}{_u}
+        If the combined string is under tension {F:unit}, how much time does it take a transverse
+        wave to travel the entire length of {L3:unit}? {_0}{_u}
       answer: TODO
-      unit: Hz
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { f: 21, v: 1488, v2: 4.3 }
+    vars: { L: 58, L2: 174, x: 0.00000355, x2: 0.0000142, x3: 8.875e-7, F: 0.46, L3: 174 }
     parts:
-      - { id: answer, answer: 121.72, unit: Hz, source: P104 }
+      - { id: answer, answer: 0.05639, unit: s, source: P104 }

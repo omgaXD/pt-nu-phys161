@@ -1,0 +1,41 @@
+# P141 — the same length d is covered in air at v = 344 m/s and in the rod at sqrt(Y / ρ), so the
+# two sounds arrive Δt = d / v − d / sqrt(Y / ρ) apart. The speed of sound in air, 344 m/s, is
+# the value the source states; Young's modulus is printed with one significant figure as in the
+# source.
+id: phys161-e3-p141-brass-rod-two-sounds
+title: Delay between sounds through a brass rod and through air
+source: { document: PHYS161_Exam3, labels: [ P141 ] }
+section: Sound
+tags: [ sound, speed-of-sound, youngs-modulus ]
+narrative: >-
+  A {d:unit} long brass rod is stuck at one end. A person at the other end hears two sounds as a
+  result of two longitudinal waves, one traveling in the metal rod and the other traveling in the
+  air.
+vars:
+  - { name: d, kind: range, min: 60, max: 120, step: 1, unit: m, label: rod length }
+  - {
+      name: Y,
+      kind: range,
+      min: 6e+10,
+      max: 9e+10,
+      step: 1e+10,
+      sigfigs: 1,
+      unit: Pa,
+      label: Young's modulus
+    }
+  - { name: rho, kind: range, min: 8000, max: 9000, step: 100, unit: kg/m^3, label: density }
+derived:
+  - { name: v, expr: "344", unit: m/s }
+parts:
+  - id: time-interval
+    prompt: >-
+      What is the time interval between the two sounds? The speed of sound in air is {v:unit}.
+      Young's modulus of the brass is {Y:unit} and density of the brass is {rho:unit}. {_0}{_u}
+    answer: d / v - d / sqrt(Y / rho)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { d: 88, Y: 9e+10, rho: 8600, v: 344 }
+  parts:
+    - { id: time-interval, answer: 0.229, unit: s, source: P141 }

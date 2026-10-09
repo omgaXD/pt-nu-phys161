@@ -1,33 +1,36 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P21
 number: 21
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Two identical stars with mass 2 × 10<sup>30</sup> kg orbit around their center of mass. Each
-  orbit is circular and has a radius of 5 × 10<sup>7</sup> km, so that the two stars are always on
-  opposite sides of the circle. How much energy would be required to separate the two stars to
-  infinity? Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>.
-  (1.334E+39 J)
-text: Two identical stars with mass 2 × 10^30 kg orbit around their center of mass. Each orbit is
-  circular and has a radius of 5 × 10^7 km, so that the two stars are always on opposite sides of
-  the circle. How much energy would be required to separate the two stars to infinity? Gravitational
-  constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (1.334E+39 J)
-answer: { value: 1.334e+39, unit: J, raw: 1.334E+39 J }
-figures:
-  - { src: figures/unnamed_009_LYNB.png, original: PHYS161%20Exam%203_files/unnamed_009_LYNB.png }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: >-
+  Calculate the force of gravity of a 16 kg block resting on the earth. Mass of Earth is ME
+
+  = 5.97 × 10<sup>24</sup> kg. The radius of the Earth is RE = 6.38 × 10<sup>6</sup> m.
+  Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (156.5 N)
+text: Calculate the force of gravity of a 16 kg block resting on the earth. Mass of Earth is ME =
+  5.97 × 10^24 kg. The radius of the Earth is RE = 6.38 × 10^6 m. Gravitational constant is 6.67 ×
+  10^-11N⋅ m^2 /kg^2. (156.5 N)
+answer: { value: 156.5, unit: N, raw: 156.5 N }
+figures: []
 literals:
   - name: m
-    value: 2e+30
+    value: 16
     unit: kg
-    text: 2 × 10^30
-    suggest: { min: 1.4e+30, max: 2.6e+30, step: 1e+29 }
-  - name: r
-    value: 50000000
-    unit: km
-    text: 5 × 10^7
-    suggest: { min: 35000000, max: 65000000, step: 1 }
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: ME
+    value: 5.97e+24
+    unit: kg
+    text: 5.97 × 10^24
+    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+  - name: RE
+    value: 6380000
+    unit: m
+    text: 6.38 × 10^6
+    suggest: { min: 4466000, max: 8294000, step: 1 }
   - name: F
     value: 6.67e-11
     unit: N
@@ -37,23 +40,22 @@ scenario:
   id: phys161-exam3-p021
   source: { document: PHYS161_Exam3, labels: [ P21 ] }
   section: Gravitation
-  figure: { id: fig, src: figures/unnamed_009_LYNB.png, alt: "TODO: describe the figure" }
   narrative: >-
-    Two identical stars with mass {m:unit} orbit around their center of mass. Each orbit is circular
-    and has a radius of {r:unit}, so that the two stars are always on opposite sides of the circle.
-    Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$. {@fig}
+    Mass of Earth is ME = {ME:unit}. The radius of the Earth is RE = {RE:unit}. Gravitational
+    constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
   vars:
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: ME, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: RE, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
       prompt: >-
-        How much energy would be required to separate the two stars to infinity? {_0}{_u}
+        Calculate the force of gravity of a {m:unit} block resting on the earth. {_0}{_u}
       answer: TODO
-      unit: J
+      unit: N
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 2e+30, r: 50000000, F: 6.67e-11 }
+    vars: { m: 16, ME: 5.97e+24, RE: 6380000, F: 6.67e-11 }
     parts:
-      - { id: answer, answer: 1.334e+39, unit: J, source: P21 }
+      - { id: answer, answer: 156.5, unit: N, source: P21 }

@@ -1,64 +1,56 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P79
 number: 79
 section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: >-
-  A uniform cylindrical steel wire, 48 cm long and 1.52 mm in diameter, is fixed at both ends. To
-  what tension must it be adjusted so that, when vibrating in its first overtone, it produces the
-  note of frequency 439 Hz? Assume that it stretches an insignificant amount. Density of steel ρ
-
-  = 7.8 ×10<sup>3</sup> kg/m<sup>3</sup>. (628.4680 N)
-text: A uniform cylindrical steel wire, 48 cm long and 1.52 mm in diameter, is fixed at both ends.
-  To what tension must it be adjusted so that, when vibrating in its first overtone, it produces the
-  note of frequency 439 Hz? Assume that it stretches an insignificant amount. Density of steel ρ =
-  7.8 ×10^3 kg/m^3. (628.4680 N)
-answer: { value: 628.468, unit: N, raw: 628.4680 N }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Two megaphones at distance x = 4.99 m to each other are driven in phase by the same amplifier.
+  A listener is located directly in front of one of the megaphones at point A at distance L = 3.55
+  m. The speed of sound can be taken as 348.7 m/s. What is the lowest frequency at which
+  constructive interference occurs? (135.47 Hz)
+text: Two megaphones at distance x = 4.99 m to each other are driven in phase by the same amplifier.
+  A listener is located directly in front of one of the megaphones at point A at distance L = 3.55
+  m. The speed of sound can be taken as 348.7 m/s. What is the lowest frequency at which
+  constructive interference occurs? (135.47 Hz)
+answer: { value: 135.47, unit: Hz, raw: 135.47 Hz }
 figures: []
 literals:
-  - name: d
-    value: 48
-    unit: cm
-    text: "48"
-    suggest: { min: 34, max: 62, step: 1 }
+  - name: x
+    value: 4.99
+    unit: m
+    text: "4.99"
+    suggest: { min: 3.49, max: 6.49, step: 0.01, decimals: 2 }
   - name: L
-    value: 1.52
-    unit: mm
-    text: "1.52"
-    suggest: { min: 1.06, max: 1.98, step: 0.01, decimals: 2 }
-  - name: f
-    value: 439
-    unit: Hz
-    text: "439"
-    suggest: { min: 307, max: 571, step: 1 }
-  - name: rho
-    value: 7800
-    unit: kg/m^3
-    text: 7.8 ×10^3
-    suggest: { min: 5460, max: 10140, step: 1 }
+    value: 3.55
+    unit: m
+    text: "3.55"
+    suggest: { min: 2.48, max: 4.62, step: 0.01, decimals: 2 }
+  - name: v
+    value: 348.7
+    unit: m/s
+    text: "348.7"
+    suggest: { min: 244.1, max: 453.3, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p079
   source: { document: PHYS161_Exam3, labels: [ P79 ] }
   section: Waves
   narrative: >-
-    A uniform cylindrical steel wire, {d:unit} long and {L:unit} in diameter, is fixed at both ends.
-    Assume that it stretches an insignificant amount. Density of steel ρ = {rho:unit}.
+    Two megaphones at distance x = {x:unit} to each other are driven in phase by the same amplifier.
+    A listener is located directly in front of one of the megaphones at point A at distance L =
+    {L:unit}. The speed of sound can be taken as {v:unit}.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
-    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
   parts:
     - id: answer
       prompt: >-
-        To what tension must it be adjusted so that, when vibrating in its first overtone, it
-        produces the note of frequency {f:unit}? {_0}{_u}
+        What is the lowest frequency at which constructive interference occurs? {_0}{_u}
       answer: TODO
-      unit: N
+      unit: Hz
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 48, L: 1.52, f: 439, rho: 7800 }
+    vars: { x: 4.99, L: 3.55, v: 348.7 }
     parts:
-      - { id: answer, answer: 628.468, unit: N, source: P79 }
+      - { id: answer, answer: 135.47, unit: Hz, source: P79 }

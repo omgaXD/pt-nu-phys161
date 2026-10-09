@@ -1,69 +1,62 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P10
 number: 10
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Calculate the initial speed of the object of mass 3 kg launched from the Earth’s surface and
-  reaching the speed of 13800 m/s at a very far distance from the Earth. Neglect atmospheric
-  friction and the rotation of the Earth. The Earth’s radius and mass are 6371 km and 5.97×
-  10<sup>24</sup> kg, respectively. Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅
-  m<sup>2</sup> /kg<sup>2</sup>. (17760.73 m/s)
-text: Calculate the initial speed of the object of mass 3 kg launched from the Earth’s surface and
-  reaching the speed of 13800 m/s at a very far distance from the Earth. Neglect atmospheric
-  friction and the rotation of the Earth. The Earth’s radius and mass are 6371 km and 5.97× 10^24
-  kg, respectively. Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (17760.73 m/s)
-answer: { value: 17760.73, unit: m/s, raw: 17760.73 m/s }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Two spherical masses are located on the x-axis, the first at the origin with M<sub>1</sub>=11.2
+  kg, and the second M<sub>2</sub>=42 kg at position x=48.1 m. The third sphere with
+  M<sub>3</sub>=19.8 kg is placed on x-axis such that M<sub>3</sub> experiences no net gravitational
+  force due to M<sub>1</sub> and M<sub>2</sub>. Calculate the position of M<sub>3</sub>. (16.38 m)
+text: Two spherical masses are located on the x-axis, the first at the origin with M_1=11.2 kg, and
+  the second M_2=42 kg at position x=48.1 m. The third sphere with M_3=19.8 kg is placed on x-axis
+  such that M_3 experiences no net gravitational force due to M_1 and M_2. Calculate the position of
+  M_3. (16.38 m)
+answer: { value: 16.38, unit: m, raw: 16.38 m }
 figures: []
 literals:
-  - name: m
-    value: 3
+  - name: M1
+    value: 11.2
     unit: kg
-    text: "3"
-    suggest: { min: 2, max: 4, step: 1 }
-  - name: v
-    value: 13800
-    unit: m/s
-    text: "13800"
-    suggest: { min: 9660, max: 17940, step: 1 }
-  - name: r
-    value: 6371
-    unit: km
-    text: "6371"
-    suggest: { min: 4460, max: 8282, step: 1 }
-  - name: m2
-    value: 5.97e+24
+    text: "11.2"
+    suggest: { min: 7.8, max: 14.6, step: 0.1, decimals: 1 }
+  - name: M2
+    value: 42
     unit: kg
-    text: 5.97× 10^24
-    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
-  - name: F
-    value: 6.67e-11
-    unit: N
-    text: 6.67 × 10^-11
-    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+    text: "42"
+    suggest: { min: 29, max: 55, step: 1 }
+  - name: x
+    value: 48.1
+    unit: m
+    text: "48.1"
+    suggest: { min: 33.7, max: 62.5, step: 0.1, decimals: 1 }
+  - name: M3
+    value: 19.8
+    unit: kg
+    text: "19.8"
+    suggest: { min: 13.9, max: 25.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p010
   source: { document: PHYS161_Exam3, labels: [ P10 ] }
   section: Gravitation
   narrative: >-
-    Neglect atmospheric friction and the rotation of the Earth. The Earth’s radius and mass are
-    {r:unit} and {m2:unit}, respectively. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+    Two spherical masses are located on the x-axis, the first at the origin with $M_{1}$={M1:unit},
+    and the second $M_{2}$={M2:unit} at position x={x:unit}. The third sphere with $M_{3}$={M3:unit}
+    is placed on x-axis such that $M_{3}$ experiences no net gravitational force due to $M_{1}$ and
+    $M_{2}$.
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: M1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: M2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: M3, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
   parts:
     - id: answer
-      prompt: >-
-        Calculate the initial speed of the object of mass {m:unit} launched from the Earth’s surface
-        and reaching the speed of {v:unit} at a very far distance from the Earth. {_0}{_u}
+      prompt: Calculate the position of $M_{3}$. {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 3, v: 13800, r: 6371, m2: 5.97e+24, F: 6.67e-11 }
+    vars: { M1: 11.2, M2: 42, x: 48.1, M3: 19.8 }
     parts:
-      - { id: answer, answer: 17760.73, unit: m/s, source: P10 }
+      - { id: answer, answer: 16.38, unit: m, source: P10 }

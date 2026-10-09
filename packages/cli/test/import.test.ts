@@ -296,7 +296,7 @@ describe('pt import (M9)', () => {
   const REAL = [
     { file: 'PHYS161_Exam1_new.docx.html', problems: 150, sections: 11, figures: 41, inline: [] as string[] },
     { file: 'PHYS161_Exam2_new.docx.html', problems: 150, sections: 12, figures: 42, inline: [] },
-    { file: 'PHYS161 Exam 3.html', problems: 105, sections: 4, figures: 15, inline: ['P51'] },
+    { file: 'PHYS161_Exam3_new.docx.html', problems: 150, sections: 4, figures: 18, inline: ['P72'] },
     { file: 'PHYS161 Exam 4.html', problems: 99, sections: 4, figures: 12, inline: [] },
   ];
   it.runIf(existsSync(SOURCES)).each(REAL)('imports the real source $file', async (x) => {

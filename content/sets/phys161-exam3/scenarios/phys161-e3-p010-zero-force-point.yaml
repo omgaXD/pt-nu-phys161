@@ -1,0 +1,28 @@
+# P10 — M3 feels no net force where the two pulls balance, between M1 and M2:
+# M1 / x3² = M2 / (L − x3)², so x3 = L sqrt(M1) / (sqrt(M1) + sqrt(M2)). M3 itself drops out.
+id: phys161-e3-p010-zero-force-point
+title: Point of zero net gravitational force
+source: { document: PHYS161_Exam3, labels: [ P10 ] }
+section: Gravitation
+tags: [ gravitation, equilibrium, superposition ]
+narrative: >-
+  Two spherical masses are located on the x-axis, the first at the origin with $M_1 = {M1:unit}$,
+  and the second $M_2 = {M2:unit}$ at position $x = {L:unit}$. The third sphere with $M_3 =
+  {M3:unit}$ is placed on x-axis such that $M_3$ experiences no net gravitational force due to $M_1$
+  and $M_2$.
+vars:
+  - { name: M1, kind: range, min: 7.0, max: 16.0, step: 0.1, decimals: 1, unit: kg }
+  - { name: M2, kind: range, min: 28, max: 56, step: 1, unit: kg }
+  - { name: L, kind: range, min: 30.0, max: 65.0, step: 0.1, decimals: 1, unit: m, label: x }
+  - { name: M3, kind: range, min: 12.0, max: 28.0, step: 0.1, decimals: 1, unit: kg }
+parts:
+  - id: position
+    prompt: "Calculate the position of $M_3$. {_0}{_u}"
+    answer: L * sqrt(M1) / (sqrt(M1) + sqrt(M2))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { M1: 11.2, M2: 42, L: 48.1, M3: 19.8 }
+  parts:
+    - { id: position, answer: 16.38, unit: m, source: P10 }

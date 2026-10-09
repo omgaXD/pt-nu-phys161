@@ -1,0 +1,71 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P106
+number: 106
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 9-m, 0.825-kg wire is used to support two uniform 230-N posts of equal length inclined at an
+  angle of θ = 66˚. Assume that the wire is essentially horizontal and that the speed of sound is
+  344 m/s. A strong wind is blowing, causing the wire to vibrate in its 7th overtone. What is the
+  wavelength of the sound this wire produces? (32.75 m)
+text: A 9-m, 0.825-kg wire is used to support two uniform 230-N posts of equal length inclined at an
+  angle of θ = 66°. Assume that the wire is essentially horizontal and that the speed of sound is
+  344 m/s. A strong wind is blowing, causing the wire to vibrate in its 7th overtone. What is the
+  wavelength of the sound this wire produces? (32.75 m)
+answer: { value: 32.75, unit: m, raw: 32.75 m }
+figures:
+  - { src: figures/unnamed_008_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_008_OTxQ.png }
+literals:
+  - name: d
+    value: 9
+    unit: m
+    text: "9"
+    suggest: { min: 6, max: 12, step: 1 }
+  - name: m
+    value: 0.825
+    unit: kg
+    text: "0.825"
+    suggest: { min: 0.577, max: 1.073, step: 0.001, decimals: 3 }
+  - name: F
+    value: 230
+    unit: N
+    text: "230"
+    suggest: { min: 161, max: 299, step: 1 }
+  - name: theta
+    value: 66
+    unit: °
+    text: "66"
+    suggest: { min: 46, max: 86, step: 1 }
+  - name: v
+    value: 344
+    unit: m/s
+    text: "344"
+    suggest: { min: 241, max: 447, step: 1 }
+scenario:
+  id: phys161-exam3-p106
+  source: { document: PHYS161_Exam3, labels: [ P106 ] }
+  section: Waves
+  figure: { id: fig, src: figures/unnamed_008_OTxQ.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A {d}-m, {m}-kg wire is used to support two uniform {F}-N posts of equal length inclined at an
+    angle of θ = {theta}°. Assume that the wire is essentially horizontal and that the speed of
+    sound is {v:unit}. A strong wind is blowing, causing the wire to vibrate in its 7th overtone.
+    {@fig}
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the wavelength of the sound this wire produces? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 9, m: 0.825, F: 230, theta: 66, v: 344 }
+    parts:
+      - { id: answer, answer: 32.75, unit: m, source: P106 }

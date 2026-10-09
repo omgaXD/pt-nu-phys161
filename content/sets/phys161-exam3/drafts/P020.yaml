@@ -1,57 +1,48 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P20
 number: 20
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Two identical stars with mass 2 × 10<sup>30</sup> kg orbit around their center of mass. Each
-  orbit is circular and has a radius of 8 × 10<sup>7</sup> km, so that the two stars are always on
-  opposite sides of the circle. Find the period of the orbit. Gravitational constant is 6.67 ×
-  10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (24618802.81 s)
-text: Two identical stars with mass 2 × 10^30 kg orbit around their center of mass. Each orbit is
-  circular and has a radius of 8 × 10^7 km, so that the two stars are always on opposite sides of
-  the circle. Find the period of the orbit. Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2.
-  (24618802.81 s)
-answer: { value: 24618802.81, unit: s, raw: 24618802.81 s }
-figures:
-  - { src: figures/unnamed_009_LYNB.png, original: PHYS161%20Exam%203_files/unnamed_009_LYNB.png }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A person weighs 115 N on the Moon, where the gravitational acceleration is one-sixth that of
+  the Earth. What is the mass of this person? The gravitational acceleration on Earth is g = 9.8
+  m/s². (70.4082 kg)
+text: A person weighs 115 N on the Moon, where the gravitational acceleration is one-sixth that of
+  the Earth. What is the mass of this person? The gravitational acceleration on Earth is g = 9.8
+  m/s^2. (70.4082 kg)
+answer: { value: 70.4082, unit: kg, raw: 70.4082 kg }
+figures: []
 literals:
-  - name: m
-    value: 2e+30
-    unit: kg
-    text: 2 × 10^30
-    suggest: { min: 1.4e+30, max: 2.6e+30, step: 1e+29 }
-  - name: r
-    value: 80000000
-    unit: km
-    text: 8 × 10^7
-    suggest: { min: 56000000, max: 104000000, step: 1 }
   - name: F
-    value: 6.67e-11
+    value: 115
     unit: N
-    text: 6.67 × 10^-11
-    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+    text: "115"
+    suggest: { min: 81, max: 150, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p020
   source: { document: PHYS161_Exam3, labels: [ P20 ] }
   section: Gravitation
-  figure: { id: fig, src: figures/unnamed_009_LYNB.png, alt: "TODO: describe the figure" }
   narrative: >-
-    Two identical stars with mass {m:unit} orbit around their center of mass. Each orbit is circular
-    and has a radius of {r:unit}, so that the two stars are always on opposite sides of the circle.
-    Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$. {@fig}
+    A person weighs {F:unit} on the Moon, where the gravitational acceleration is one-sixth that of
+    the Earth. The gravitational acceleration on Earth is g = {g:unit}.
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
     - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
-      prompt: Find the period of the orbit. {_0}{_u}
+      prompt: What is the mass of this person? {_0}{_u}
       answer: TODO
-      unit: s
+      unit: kg
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 2e+30, r: 80000000, F: 6.67e-11 }
+    vars: { F: 115, g: 9.8 }
     parts:
-      - { id: answer, answer: 24618802.81, unit: s, source: P20 }
+      - { id: answer, answer: 70.4082, unit: kg, source: P20 }

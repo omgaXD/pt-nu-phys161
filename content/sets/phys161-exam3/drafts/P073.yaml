@@ -1,82 +1,56 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P73
 number: 73
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Three pieces of string, each of length 58 cm, are joined together end to end, to make a
-  combined string of length 174 cm. The first piece of string has mass per unit length
-  3.55⋅10<sup>−6</sup> kg/cm, the second piece has mass per unit length 14.2⋅10<sup>−6</sup> kg/cm,
-  and the third piece has mass per unit length 0.8875⋅10<sup>−6</sup> kg/cm. If the combined string
-  is under tension 0.46 N, how much time does it take a transverse wave to travel the entire length
-  of 174 cm? (0.05639 s)
-text: Three pieces of string, each of length 58 cm, are joined together end to end, to make a
-  combined string of length 174 cm. The first piece of string has mass per unit length 3.55⋅10^-6
-  kg/cm, the second piece has mass per unit length 14.2⋅10^-6 kg/cm, and the third piece has mass
-  per unit length 0.8875⋅10^-6 kg/cm. If the combined string is under tension 0.46 N, how much time
-  does it take a transverse wave to travel the entire length of 174 cm? (0.05639 s)
-answer: { value: 0.05639, unit: s, raw: 0.05639 s }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: >-
+  A 10.6-kg object oscillates at the end of a vertical spring that has a spring constant of 2.05 ×
+  10<sup>4</sup> N/m. The effect of air resistance is represented by the damping coefficient b = 3 N
+  ⋅
+
+  s/m. Calculate the frequency of the damped oscillation. (6.998 Hz)
+text: A 10.6-kg object oscillates at the end of a vertical spring that has a spring constant of 2.05
+  × 10^4 N/m. The effect of air resistance is represented by the damping coefficient b = 3 N ⋅ s/m.
+  Calculate the frequency of the damped oscillation. (6.998 Hz)
+answer: { value: 6.998, unit: Hz, raw: 6.998 Hz }
 figures: []
 literals:
-  - name: L
-    value: 58
-    unit: cm
-    text: "58"
-    suggest: { min: 41, max: 75, step: 1 }
-  - name: L2
-    value: 174
-    unit: cm
-    text: "174"
-    suggest: { min: 122, max: 226, step: 1 }
-  - name: x
-    value: 0.00000355
-    text: 3.55⋅10^-6
-    suggest: { min: 0.00000249, max: 0.00000462, step: 1e-8, decimals: 8 }
-  - name: x2
-    value: 0.0000142
-    text: 14.2⋅10^-6
-    suggest: { min: 0.0000099, max: 0.0000185, step: 1e-7, decimals: 7 }
-  - name: x3
-    value: 8.875e-7
-    text: 0.8875⋅10^-6
-    suggest: { min: 6.2e-7, max: 0.00000115, step: 1e-8 }
-  - name: F
-    value: 0.46
+  - name: m
+    value: 10.6
+    unit: kg
+    text: "10.6"
+    suggest: { min: 7.4, max: 13.8, step: 0.1, decimals: 1 }
+  - name: k
+    value: 20500
+    unit: N/m
+    text: 2.05 × 10^4
+    suggest: { min: 14350, max: 26650, step: 1 }
+  - name: b
+    value: 3
     unit: N
-    text: "0.46"
-    suggest: { min: 0.32, max: 0.6, step: 0.01, decimals: 2 }
-  - name: L3
-    value: 174
-    unit: cm
-    text: "174"
-    suggest: { min: 122, max: 226, step: 1 }
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
 scenario:
   id: phys161-exam3-p073
   source: { document: PHYS161_Exam3, labels: [ P73 ] }
-  section: Waves
+  section: Oscillations
   narrative: >-
-    Three pieces of string, each of length {L:unit}, are joined together end to end, to make a
-    combined string of length {L2:unit}. The first piece of string has mass per unit length {x}
-    kg/cm, the second piece has mass per unit length {x2} kg/cm, and the third piece has mass per
-    unit length {x3} kg/cm.
+    A {m}-kg object oscillates at the end of a vertical spring that has a spring constant of
+    {k:unit}. The effect of air resistance is represented by the damping coefficient b = {b:unit} ⋅
+    s/m.
   vars:
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: L2, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
-    - { name: L3, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: b, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
-      prompt: >-
-        If the combined string is under tension {F:unit}, how much time does it take a transverse
-        wave to travel the entire length of {L3:unit}? {_0}{_u}
+      prompt: Calculate the frequency of the damped oscillation. {_0}{_u}
       answer: TODO
-      unit: s
+      unit: Hz
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { L: 58, L2: 174, x: 0.00000355, x2: 0.0000142, x3: 8.875e-7, F: 0.46, L3: 174 }
+    vars: { m: 10.6, k: 20500, b: 3 }
     parts:
-      - { id: answer, answer: 0.05639, unit: s, source: P73 }
+      - { id: answer, answer: 6.998, unit: Hz, source: P73 }

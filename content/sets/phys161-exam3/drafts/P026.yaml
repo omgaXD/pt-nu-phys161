@@ -1,48 +1,69 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P26
 number: 26
-section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A 54 cm simple pendulum makes 30 complete swings in 54 seconds on an unknown planet. What is
-  the gravitational acceleration of the planet? (6.5797 m/s^2)
-text: A 54 cm simple pendulum makes 30 complete swings in 54 seconds on an unknown planet. What is
-  the gravitational acceleration of the planet? (6.5797 m/s^2)
-answer: { value: 6.5797, unit: m/s^2, raw: 6.5797 m/s^2 }
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Comets travel around the sun in its elliptical orbits with large eccentricities. If a comet has
+  speed 2.4 × 10<sup>4</sup> m/s when at a distance of 2.7 × 10<sup>11</sup> m from the center of
+  the sun, what is its speed when at a distance of 5.1 × 10<sup>10</sup> m? Gravitational constant
+  is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> / kg<sup>2</sup>. Mass of the sun is 1.989 ×
+  10<sup>30</sup> kg. (69252.98 m/s)
+text: Comets travel around the sun in its elliptical orbits with large eccentricities. If a comet
+  has speed 2.4 × 10^4 m/s when at a distance of 2.7 × 10^11 m from the center of the sun, what is
+  its speed when at a distance of 5.1 × 10^10 m? Gravitational constant is 6.67 × 10^-11N⋅ m^2 /
+  kg^2. Mass of the sun is 1.989 × 10^30 kg. (69252.98 m/s)
+answer: { value: 69252.98, unit: m/s, raw: 69252.98 m/s }
 figures: []
 literals:
+  - name: v
+    value: 24000
+    unit: m/s
+    text: 2.4 × 10^4
+    suggest: { min: 16800, max: 31200, step: 1 }
   - name: d
-    value: 54
-    unit: cm
-    text: "54"
-    suggest: { min: 38, max: 70, step: 1 }
-  - name: x
-    value: 30
-    text: "30"
-    suggest: { min: 21, max: 39, step: 1 }
-  - name: x2
-    value: 54
-    text: "54"
-    suggest: { min: 38, max: 70, step: 1 }
+    value: 270000000000
+    unit: m
+    text: 2.7 × 10^11
+    suggest: { min: 189000000000, max: 351000000000, step: 1 }
+  - name: d2
+    value: 51000000000
+    unit: m
+    text: 5.1 × 10^10
+    suggest: { min: 35700000000, max: 66300000000, step: 1 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
+  - name: m
+    value: 1.989e+30
+    unit: kg
+    text: 1.989 × 10^30
+    suggest: { min: 1.4e+30, max: 2.6e+30, step: 1e+29 }
 scenario:
   id: phys161-exam3-p026
   source: { document: PHYS161_Exam3, labels: [ P26 ] }
-  section: Oscillations
+  section: Gravitation
   narrative: >-
-    A {d:unit} simple pendulum makes {x} complete swings in {x2} seconds on an unknown planet.
+    Comets travel around the sun in its elliptical orbits with large eccentricities. Gravitational
+    constant is {F:unit}⋅ m$^{2}$ / kg$^{2}$. Mass of the sun is {m:unit}.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
   parts:
     - id: answer
       prompt: >-
-        What is the gravitational acceleration of the planet? {_0}{_u}
+        If a comet has speed {v:unit} when at a distance of {d:unit} from the center of the sun,
+        what is its speed when at a distance of {d2:unit}? {_0}{_u}
       answer: TODO
-      unit: m/s^2
+      unit: m/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 54, x: 30, x2: 54 }
+    vars: { v: 24000, d: 270000000000, d2: 51000000000, F: 6.67e-11, m: 1.989e+30 }
     parts:
-      - { id: answer, answer: 6.5797, unit: m/s^2, source: P26 }
+      - { id: answer, answer: 69252.98, unit: m/s, source: P26 }

@@ -1,0 +1,69 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P108
+number: 108
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 2000-N irregular beam is hanging horizontally by its ends from the ceiling by two vertical
+  wires, A and B, each 1.7 m long and weighing 1.95 N. The center of gravity of this beam is one-4th
+  of the way along the beam from the end where wire A is attached. If wire A is plucked, what is the
+  fundamental frequency at which it vibrates? The gravitational acceleration on Earth is g = 9.8
+  m/s². (33.2956 Hz)
+text: A 2000-N irregular beam is hanging horizontally by its ends from the ceiling by two vertical
+  wires, A and B, each 1.7 m long and weighing 1.95 N. The center of gravity of this beam is one-4th
+  of the way along the beam from the end where wire A is attached. If wire A is plucked, what is the
+  fundamental frequency at which it vibrates? The gravitational acceleration on Earth is g = 9.8
+  m/s^2. (33.2956 Hz)
+answer: { value: 33.2956, unit: Hz, raw: 33.2956 Hz }
+figures:
+  - { src: figures/unnamed_003_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_003_OTxQ.png }
+literals:
+  - name: F
+    value: 2000
+    unit: N
+    text: "2000"
+    suggest: { min: 1400, max: 2600, step: 1 }
+  - name: d
+    value: 1.7
+    unit: m
+    text: "1.7"
+    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
+  - name: F2
+    value: 1.95
+    unit: N
+    text: "1.95"
+    suggest: { min: 1.37, max: 2.54, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p108
+  source: { document: PHYS161_Exam3, labels: [ P108 ] }
+  section: Waves
+  figure: { id: fig, src: figures/unnamed_003_OTxQ.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A {F}-N irregular beam is hanging horizontally by its ends from the ceiling by two vertical
+    wires, A and B, each {d:unit} long and weighing {F2:unit}. The center of gravity of this beam is
+    one-4th of the way along the beam from the end where wire A is attached. The gravitational
+    acceleration on Earth is g = {g:unit}. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
+  parts:
+    - id: answer
+      prompt: >-
+        If wire A is plucked, what is the fundamental frequency at which it vibrates? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 2000, d: 1.7, F2: 1.95, g: 9.8 }
+    parts:
+      - { id: answer, answer: 33.2956, unit: Hz, source: P108 }

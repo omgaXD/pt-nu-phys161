@@ -1,50 +1,61 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P63
 number: 63
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Calculate the time required to travel the distance 620 m by a wave with wavelength 0.755 m and
-  frequency 425 Hz. (1.9322 s)
-text: Calculate the time required to travel the distance 620 m by a wave with wavelength 0.755 m and
-  frequency 425 Hz. (1.9322 s)
-answer: { value: 1.9322, unit: s, raw: 1.9322 s }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 12-kg mass is traveling to the right with a speed of 1.6 m/s on a smooth horizontal surface
+  when it collides with and sticks to a second 12-kg mass that is initially at rest but is attached
+  to a light spring with force constant 88 N/m. Find the amplitude of the subsequent oscillations.
+  (0.41779 m)
+text: A 12-kg mass is traveling to the right with a speed of 1.6 m/s on a smooth horizontal surface
+  when it collides with and sticks to a second 12-kg mass that is initially at rest but is attached
+  to a light spring with force constant 88 N/m. Find the amplitude of the subsequent oscillations.
+  (0.41779 m)
+answer: { value: 0.41779, unit: m, raw: 0.41779 m }
 figures: []
 literals:
-  - name: d
-    value: 620
-    unit: m
-    text: "620"
-    suggest: { min: 434, max: 806, step: 1 }
-  - name: L
-    value: 0.755
-    unit: m
-    text: "0.755"
-    suggest: { min: 0.529, max: 0.982, step: 0.001, decimals: 3 }
-  - name: f
-    value: 425
-    unit: Hz
-    text: "425"
-    suggest: { min: 298, max: 553, step: 1 }
+  - name: m
+    value: 12
+    unit: kg
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: v
+    value: 1.6
+    unit: m/s
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 12
+    unit: kg
+    text: "12"
+    suggest: { min: 8, max: 16, step: 1 }
+  - name: k
+    value: 88
+    unit: N/m
+    text: "88"
+    suggest: { min: 62, max: 114, step: 1 }
 scenario:
   id: phys161-exam3-p063
   source: { document: PHYS161_Exam3, labels: [ P63 ] }
-  section: Waves
-  narrative: ""
+  section: Oscillations
+  narrative: >-
+    A {m}-kg mass is traveling to the right with a speed of {v:unit} on a smooth horizontal surface
+    when it collides with and sticks to a second {m2}-kg mass that is initially at rest but is
+    attached to a light spring with force constant {k:unit}.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
   parts:
     - id: answer
-      prompt: >-
-        Calculate the time required to travel the distance {d:unit} by a wave with wavelength
-        {L:unit} and frequency {f:unit}. {_0}{_u}
+      prompt: Find the amplitude of the subsequent oscillations. {_0}{_u}
       answer: TODO
-      unit: s
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 620, L: 0.755, f: 425 }
+    vars: { m: 12, v: 1.6, m2: 12, k: 88 }
     parts:
-      - { id: answer, answer: 1.9322, unit: s, source: P63 }
+      - { id: answer, answer: 0.41779, unit: m, source: P63 }

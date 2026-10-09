@@ -1,61 +1,75 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P54
 number: 54
 section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Damping is negligible for a 0.15-kg object hanging from a light, 5.8-N/m spring. A sinusoidal
-  force with an amplitude of 1.7 N drives the system. At what frequency will the force make the
-  object vibrate with an amplitude of 0.25 m? Assume (w<sup>2</sup> - w<sub>0</sub><sup>2</sup>) > 0
-  (1.459 Hz)
-text: Damping is negligible for a 0.15-kg object hanging from a light, 5.8-N/m spring. A sinusoidal
-  force with an amplitude of 1.7 N drives the system. At what frequency will the force make the
-  object vibrate with an amplitude of 0.25 m? Assume (w^2 - w_0^2) > 0 (1.459 Hz)
-answer: { value: 1.459, unit: Hz, raw: 1.459 Hz }
-figures: []
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A spring with spring constant k=140 N/m is connected to a pair of blocks with masses
+  M<sub>1</sub>=0.7 kg and M<sub>2</sub>=7.9 kg on a horizontal, frictionless surface, as shown in
+  the Figure. The coefficient of static friction between the two blocks is 0.9. What is the maximum
+  possible amplitude of the simple harmonic motion if no slippage is to occur between the blocks?
+  The gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (0.5418 m)
+text: A spring with spring constant k=140 N/m is connected to a pair of blocks with masses M_1=0.7
+  kg and M_2=7.9 kg on a horizontal, frictionless surface, as shown in the Figure. The coefficient
+  of static friction between the two blocks is 0.9. What is the maximum possible amplitude of the
+  simple harmonic motion if no slippage is to occur between the blocks? The gravitational
+  acceleration is g = 9.8 m/s^2. (0.5418 m)
+answer: { value: 0.5418, unit: m, raw: 0.5418 m }
+figures:
+  - { src: figures/unnamed_004_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_004_OTxQ.png }
 literals:
-  - name: m
-    value: 0.15
-    unit: kg
-    text: "0.15"
-    suggest: { min: 0.11, max: 0.2, step: 0.01, decimals: 2 }
   - name: k
-    value: 5.8
+    value: 140
     unit: N/m
-    text: "5.8"
-    suggest: { min: 4.1, max: 7.5, step: 0.1, decimals: 1 }
-  - name: F
-    value: 1.7
-    unit: N
-    text: "1.7"
-    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
-  - name: d
-    value: 0.25
-    unit: m
-    text: "0.25"
-    suggest: { min: 0.18, max: 0.33, step: 0.01, decimals: 2 }
+    text: "140"
+    suggest: { min: 98, max: 182, step: 1 }
+  - name: M1
+    value: 0.7
+    unit: kg
+    text: "0.7"
+    suggest: { min: 0.5, max: 0.9, step: 0.1, decimals: 1 }
+  - name: M2
+    value: 7.9
+    unit: kg
+    text: "7.9"
+    suggest: { min: 5.5, max: 10.3, step: 0.1, decimals: 1 }
+  - name: x
+    value: 0.9
+    text: "0.9"
+    suggest: { min: 0.6, max: 1.2, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p054
   source: { document: PHYS161_Exam3, labels: [ P54 ] }
   section: Oscillations
+  figure: { id: fig, src: figures/unnamed_004_OTxQ.png, alt: "TODO: describe the figure" }
   narrative: >-
-    Damping is negligible for a {m}-kg object hanging from a light, {k}-N/m spring. A sinusoidal
-    force with an amplitude of {F:unit} drives the system. Assume (w$^{2}$ - $w_{0}^{2}$) > 0
+    A spring with spring constant k={k:unit} is connected to a pair of blocks with masses
+    $M_{1}$={M1:unit} and $M_{2}$={M2:unit} on a horizontal, frictionless surface, as shown in the
+    Figure. The coefficient of static friction between the two blocks is {x}. The gravitational
+    acceleration is g = {g:unit}. {@fig}
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
     - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: M1, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: M2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        At what frequency will the force make the object vibrate with an amplitude of {d:unit}?
-        {_0}{_u}
+        What is the maximum possible amplitude of the simple harmonic motion if no slippage is to
+        occur between the blocks? {_0}{_u}
       answer: TODO
-      unit: Hz
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 0.15, k: 5.8, F: 1.7, d: 0.25 }
+    vars: { k: 140, M1: 0.7, M2: 7.9, x: 0.9, g: 9.8 }
     parts:
-      - { id: answer, answer: 1.459, unit: Hz, source: P54 }
+      - { id: answer, answer: 0.5418, unit: m, source: P54 }

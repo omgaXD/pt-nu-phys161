@@ -1,74 +1,63 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P62
 number: 62
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A nylon string is stretched between two rigid columns such that the tension in it is 175 N. The
-  string is of length L = 2 m and has the cross-sectional area that varies with distance as A(x) =
-  (1+x/L)*10^(-6), where A is in meters squared and x is in meters. Determine the time it takes for
-  a transverse pulse in the string to travel from one end to the other. The density of nylon is 1.1
-  g/cm^3. (0.006112 s)
-text: A nylon string is stretched between two rigid columns such that the tension in it is 175 N.
-  The string is of length L = 2 m and has the cross-sectional area that varies with distance as A(x)
-  = (1+x/L)*10^(-6), where A is in meters squared and x is in meters. Determine the time it takes
-  for a transverse pulse in the string to travel from one end to the other. The density of nylon is
-  1.1 g/cm^3. (0.006112 s)
-answer: { value: 0.006112, unit: s, raw: 0.006112 s }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A rocket is accelerating upward at 4.6 m/s<sup>2</sup> from the launchpad on the earth. Inside
+  a small 1.8 kg ball hangs from the ceiling by a light 1.2 m wire. If the ball is displaced from
+  the vertical and released, find the period of the resulting swings of this pendulum. The
+  gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (1.8138 s)
+text: A rocket is accelerating upward at 4.6 m/s^2 from the launchpad on the earth. Inside a small
+  1.8 kg ball hangs from the ceiling by a light 1.2 m wire. If the ball is displaced from the
+  vertical and released, find the period of the resulting swings of this pendulum. The gravitational
+  acceleration is g = 9.8 m/s^2. (1.8138 s)
+answer: { value: 1.8138, unit: s, raw: 1.8138 s }
 figures: []
 literals:
-  - name: F
-    value: 175
-    unit: N
-    text: "175"
-    suggest: { min: 122, max: 228, step: 1 }
-  - name: L
-    value: 2
+  - name: a
+    value: 4.6
+    unit: m/s^2
+    text: "4.6"
+    suggest: { min: 3.2, max: 6, step: 0.1, decimals: 1 }
+  - name: m
+    value: 1.8
+    unit: kg
+    text: "1.8"
+    suggest: { min: 1.3, max: 2.3, step: 0.1, decimals: 1 }
+  - name: d
+    value: 1.2
     unit: m
-    text: "2"
-    suggest: { min: 1, max: 3, step: 1 }
-  - name: x
-    value: 1
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: x2
-    value: 10
-    text: "10"
-    suggest: { min: 7, max: 13, step: 1 }
-  - name: x3
-    value: -6
-    text: "-6"
-    suggest: { min: -8, max: -4, step: 1 }
-  - name: x4
-    value: 1.1
-    text: "1.1"
-    suggest: { min: 0.8, max: 1.4, step: 0.1, decimals: 1 }
+    text: "1.2"
+    suggest: { min: 0.8, max: 1.6, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p062
   source: { document: PHYS161_Exam3, labels: [ P62 ] }
-  section: Waves
+  section: Oscillations
   narrative: >-
-    A nylon string is stretched between two rigid columns such that the tension in it is {F:unit}.
-    The string is of length L = {L:unit} and has the cross-sectional area that varies with distance
-    as A(x) = ({x}+x/L)*{x2}^({x3}), where A is in meters squared and x is in meters. The density of
-    nylon is {x4} g/cm$^{3}$.
+    A rocket is accelerating upward at {a:unit} from the launchpad on the earth. Inside a small
+    {m:unit} ball hangs from the ceiling by a light {d:unit} wire. If the ball is displaced from the
+    vertical and released, find the period of the resulting swings of this pendulum.
   vars:
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x4, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: a, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
-      prompt: >-
-        Determine the time it takes for a transverse pulse in the string to travel from one end to
-        the other. {_0}{_u}
+      prompt: The gravitational acceleration is g = {g:unit}. {_0}{_u}
       answer: TODO
       unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { F: 175, L: 2, x: 1, x2: 10, x3: -6, x4: 1.1 }
+    vars: { a: 4.6, m: 1.8, d: 1.2, g: 9.8 }
     parts:
-      - { id: answer, answer: 0.006112, unit: s, source: P62 }
+      - { id: answer, answer: 1.8138, unit: s, source: P62 }

@@ -1,58 +1,61 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P65
 number: 65
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: The tension in a thin cable of length 3.2 m and mass 0.6 kg, stretched between two poles, is T
-  = 275 N. Due to the wind in the air the cable is vibrating and produces a standing wave at 2 times
-  its fundamental frequency. What is the frequency of the hum that is produced? (11.9678 Hz)
-text: The tension in a thin cable of length 3.2 m and mass 0.6 kg, stretched between two poles, is T
-  = 275 N. Due to the wind in the air the cable is vibrating and produces a standing wave at 2 times
-  its fundamental frequency. What is the frequency of the hum that is produced? (11.9678 Hz)
-answer: { value: 11.9678, unit: Hz, raw: 11.9678 Hz }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 16-kg mass is traveling to the right with a speed of 2.7 m/s on a smooth horizontal surface
+  when it collides with and sticks to a second 16-kg mass that is initially at rest but is attached
+  to a light spring with force constant 87 N/m. Find the period of the subsequent oscillations.
+  (3.8106 s)
+text: A 16-kg mass is traveling to the right with a speed of 2.7 m/s on a smooth horizontal surface
+  when it collides with and sticks to a second 16-kg mass that is initially at rest but is attached
+  to a light spring with force constant 87 N/m. Find the period of the subsequent oscillations.
+  (3.8106 s)
+answer: { value: 3.8106, unit: s, raw: 3.8106 s }
 figures: []
 literals:
-  - name: L
-    value: 3.2
-    unit: m
-    text: "3.2"
-    suggest: { min: 2.2, max: 4.2, step: 0.1, decimals: 1 }
   - name: m
-    value: 0.6
+    value: 16
     unit: kg
-    text: "0.6"
-    suggest: { min: 0.4, max: 0.8, step: 0.1, decimals: 1 }
-  - name: T
-    value: 275
-    unit: N
-    text: "275"
-    suggest: { min: 193, max: 358, step: 1 }
-  - name: ratio
-    value: 2
-    text: "2"
-    suggest: { min: 1, max: 3, step: 1 }
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: v
+    value: 2.7
+    unit: m/s
+    text: "2.7"
+    suggest: { min: 1.9, max: 3.5, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 16
+    unit: kg
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: k
+    value: 87
+    unit: N/m
+    text: "87"
+    suggest: { min: 61, max: 113, step: 1 }
 scenario:
   id: phys161-exam3-p065
   source: { document: PHYS161_Exam3, labels: [ P65 ] }
-  section: Waves
+  section: Oscillations
   narrative: >-
-    The tension in a thin cable of length {L:unit} and mass {m:unit}, stretched between two poles,
-    is T = {T:unit}. Due to the wind in the air the cable is vibrating and produces a standing wave
-    at {ratio} times its fundamental frequency.
+    A {m}-kg mass is traveling to the right with a speed of {v:unit} on a smooth horizontal surface
+    when it collides with and sticks to a second {m2}-kg mass that is initially at rest but is
+    attached to a light spring with force constant {k:unit}.
   vars:
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
-    - { name: ratio, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
   parts:
     - id: answer
-      prompt: What is the frequency of the hum that is produced? {_0}{_u}
+      prompt: Find the period of the subsequent oscillations. {_0}{_u}
       answer: TODO
-      unit: Hz
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { L: 3.2, m: 0.6, T: 275, ratio: 2 }
+    vars: { m: 16, v: 2.7, m2: 16, k: 87 }
     parts:
-      - { id: answer, answer: 11.9678, unit: Hz, source: P65 }
+      - { id: answer, answer: 3.8106, unit: s, source: P65 }

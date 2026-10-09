@@ -1,0 +1,27 @@
+# P21 — Newton's law of gravitation at the Earth's surface: F = G M_E m / R_E². G, M_E and R_E
+# are the constants the source states; only the block's mass is randomized.
+id: phys161-e3-p021-block-weight-earth
+title: Gravitational force on a block on the Earth
+source: { document: PHYS161_Exam3, labels: [ P21 ] }
+section: Gravitation
+tags: [ gravitation, newtons-law-of-gravitation, weight ]
+narrative: >-
+  Mass of Earth is $M_E = {ME:unit}$. The radius of the Earth is $R_E = {RE:unit}$. Gravitational
+  constant is {G:unit}.
+vars:
+  - { name: m, kind: range, min: 8, max: 30, step: 1, unit: kg, label: block mass }
+derived:
+  - { name: ME, expr: "5.97e24", unit: kg }
+  - { name: RE, expr: "6.38e6", unit: m }
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: gravity-force
+    prompt: "Calculate the force of gravity of a {m:unit} block resting on the earth. {_0}{_u}"
+    answer: G * ME * m / RE^2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 16, ME: 5.97e+24, RE: 6380000, G: 6.67e-11 }
+  parts:
+    - { id: gravity-force, answer: 156.5, unit: N, source: P21 }

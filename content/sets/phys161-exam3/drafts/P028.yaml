@@ -1,58 +1,58 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P28
 number: 28
-section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A spring is mounted horizontally, with its left end fixed. A block of mass m = 0.3 kg is
-  attached to the free end, pulled toward the right and released from rest at x = 0.02 m. Force
-  constant of the spring is k = 152 N/m. Find the maximum velocity attained by the oscillating
-  block. (0.4502 m/s)
-text: A spring is mounted horizontally, with its left end fixed. A block of mass m = 0.3 kg is
-  attached to the free end, pulled toward the right and released from rest at x = 0.02 m. Force
-  constant of the spring is k = 152 N/m. Find the maximum velocity attained by the oscillating
-  block. (0.4502 m/s)
-answer: { value: 0.4502, unit: m/s, raw: 0.4502 m/s }
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Two identical stars with mass 1 × 10<sup>30</sup> kg orbit around their center of mass. Each
+  orbit is circular and has a radius of 8 × 10<sup>7</sup> km, so that the two stars are always on
+  opposite sides of the circle. Find the gravitational force of one star on the other. Gravitational
+  constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (2.6055E+27 N)
+text: Two identical stars with mass 1 × 10^30 kg orbit around their center of mass. Each orbit is
+  circular and has a radius of 8 × 10^7 km, so that the two stars are always on opposite sides of
+  the circle. Find the gravitational force of one star on the other. Gravitational constant is 6.67
+  × 10^-11N⋅ m^2 /kg^2. (2.6055E+27 N)
+answer: { value: 2.6055e+27, unit: N, raw: 2.6055E+27 N }
 figures:
-  - { src: figures/unnamed_LYNB.png, original: PHYS161%20Exam%203_files/unnamed_LYNB.png }
+  - { src: figures/unnamed_007_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_007_OTxQ.png }
 literals:
   - name: m
-    value: 0.3
+    value: 1e+30
     unit: kg
-    text: "0.3"
-    suggest: { min: 0.2, max: 0.4, step: 0.1, decimals: 1 }
-  - name: x
-    value: 0.02
-    unit: m
-    text: "0.02"
-    suggest: { min: 0.01, max: 0.03, step: 0.01, decimals: 2 }
-  - name: k
-    value: 152
-    unit: N/m
-    text: "152"
-    suggest: { min: 106, max: 198, step: 1 }
+    text: 1 × 10^30
+    suggest: { min: 7e+29, max: 1.3e+30, step: 1e+29 }
+  - name: r
+    value: 80000000
+    unit: km
+    text: 8 × 10^7
+    suggest: { min: 56000000, max: 104000000, step: 1 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p028
   source: { document: PHYS161_Exam3, labels: [ P28 ] }
-  section: Oscillations
-  figure: { id: fig, src: figures/unnamed_LYNB.png, alt: "TODO: describe the figure" }
+  section: Gravitation
+  figure: { id: fig, src: figures/unnamed_007_OTxQ.png, alt: "TODO: describe the figure" }
   narrative: >-
-    A spring is mounted horizontally, with its left end fixed. A block of mass m = {m:unit} is
-    attached to the free end, pulled toward the right and released from rest at x = {x:unit}. Force
-    constant of the spring is k = {k:unit}. {@fig}
+    Two identical stars with mass {m:unit} orbit around their center of mass. Each orbit is circular
+    and has a radius of {r:unit}, so that the two stars are always on opposite sides of the circle.
+    Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$. {@fig}
   vars:
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
       prompt: >-
-        Find the maximum velocity attained by the oscillating block. {_0}{_u}
+        Find the gravitational force of one star on the other. {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: N
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 0.3, x: 0.02, k: 152 }
+    vars: { m: 1e+30, r: 80000000, F: 6.67e-11 }
     parts:
-      - { id: answer, answer: 0.4502, unit: m/s, source: P28 }
+      - { id: answer, answer: 2.6055e+27, unit: N, source: P28 }

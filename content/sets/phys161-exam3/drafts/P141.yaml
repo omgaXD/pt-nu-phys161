@@ -1,0 +1,63 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P141
+number: 141
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 88 m long brass rod is stuck at one end. A person at the other end hears two sounds as a
+  result of two longitudinal waves, one traveling in the metal rod and the other traveling in the
+  air. What is the time interval between the two sounds? The speed of sound in air is 344 m/s.
+  Young's modulus of the brass is 9x10<sup>10</sup> Pa and density of the brass is 8600
+  kg/m<sup>3</sup>. (0.229 s)
+text: A 88 m long brass rod is stuck at one end. A person at the other end hears two sounds as a
+  result of two longitudinal waves, one traveling in the metal rod and the other traveling in the
+  air. What is the time interval between the two sounds? The speed of sound in air is 344 m/s.
+  Young's modulus of the brass is 9x10^10 Pa and density of the brass is 8600 kg/m^3. (0.229 s)
+answer: { value: 0.229, unit: s, raw: 0.229 s }
+figures: []
+literals:
+  - name: d
+    value: 88
+    unit: m
+    text: "88"
+    suggest: { min: 62, max: 114, step: 1 }
+  - name: v
+    value: 344
+    unit: m/s
+    text: "344"
+    suggest: { min: 241, max: 447, step: 1 }
+  - name: p
+    value: 90000000000
+    unit: Pa
+    text: 9x10^10
+    suggest: { min: 63000000000, max: 117000000000, step: 1 }
+  - name: rho
+    value: 8600
+    unit: kg/m^3
+    text: "8600"
+    suggest: { min: 6020, max: 11180, step: 1 }
+scenario:
+  id: phys161-exam3-p141
+  source: { document: PHYS161_Exam3, labels: [ P141 ] }
+  section: Sound
+  narrative: >-
+    A {d:unit} long brass rod is stuck at one end. A person at the other end hears two sounds as a
+    result of two longitudinal waves, one traveling in the metal rod and the other traveling in the
+    air. The speed of sound in air is {v:unit}. Young's modulus of the brass is {p:unit} and density
+    of the brass is {rho:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+  parts:
+    - id: answer
+      prompt: What is the time interval between the two sounds? {_0}{_u}
+      answer: TODO
+      unit: s
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 88, v: 344, p: 90000000000, rho: 8600 }
+    parts:
+      - { id: answer, answer: 0.229, unit: s, source: P141 }

@@ -1,0 +1,60 @@
+# P61 — released from rest, the bob swings from one turning point to the other (zero speed again)
+# in half a period, so T = 2t. The small-angle period T = 2π sqrt(L / g) gives
+# g = 4π² L / T² = π² L / t², and g = G M / R² gives M = g R² / G = π² L R² / (G t²).
+# L is in cm and R in km; the bob's mass and the (small) swing angle do not affect the answer.
+id: phys161-e3-p061-pendulum-planet-mass
+title: Planet mass from a pendulum swing
+source: { document: PHYS161_Exam3, labels: [ P61 ] }
+section: Oscillations
+tags: [ oscillations, simple-pendulum, period, gravitation ]
+narrative: >-
+  On an unknown planet, a simple pendulum having a bob with mass {m:unit} and a length of {L:unit}
+  takes {t:unit}, when released from rest, to swing through an angle of {theta}°, where it again has
+  zero speed. The radius of the planet is measured to be {R:unit}.
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 0.60,
+      max: 1.50,
+      step: 0.01,
+      decimals: 2,
+      unit: kg,
+      label: bob mass
+    }
+  - { name: L, kind: range, min: 100, max: 200, step: 1, unit: cm, label: pendulum length }
+  - {
+      name: t,
+      kind: range,
+      min: 1.10,
+      max: 2.20,
+      step: 0.01,
+      decimals: 2,
+      unit: s,
+      label: swing time
+    }
+  - {
+      name: theta,
+      kind: range,
+      min: 8.0,
+      max: 15.0,
+      step: 0.5,
+      decimals: 1,
+      unit: "°",
+      label: swing angle
+    }
+  - { name: R, kind: range, min: 5000, max: 12000, step: 100, unit: km, label: planet radius }
+derived:
+  - { name: G, expr: "6.67e-11", unit: m^3/(kg s^2) }
+parts:
+  - id: planet-mass
+    prompt: >-
+      What is the mass of the planet? Gravitational constant is $G = {G:unit}$. {_0}{_u}
+    answer: pi^2 * (L / 100) * (R * 1000)^2 / (G * t^2)
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 1.05, L: 145, t: 1.55, theta: 12.5, R: 8600, G: 6.67e-11 }
+  parts:
+    - { id: planet-mass, answer: 6.605e+24, unit: kg, source: P61 }

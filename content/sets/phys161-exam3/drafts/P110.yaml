@@ -1,0 +1,66 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P110
+number: 110
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A sinusoidal transverse wave travels on a string. The string has length 8 m and mass 7.65 g.
+  The wave speed is 26 m/s and the wavelength is 0.22 m. If the wave is to have an average power of
+  51 W, what must be the amplitude of the wave? (0.086 m)
+text: A sinusoidal transverse wave travels on a string. The string has length 8 m and mass 7.65 g.
+  The wave speed is 26 m/s and the wavelength is 0.22 m. If the wave is to have an average power of
+  51 W, what must be the amplitude of the wave? (0.086 m)
+answer: { value: 0.086, unit: m, raw: 0.086 m }
+figures: []
+literals:
+  - name: L
+    value: 8
+    unit: m
+    text: "8"
+    suggest: { min: 6, max: 10, step: 1 }
+  - name: m
+    value: 7.65
+    unit: g
+    text: "7.65"
+    suggest: { min: 5.35, max: 9.95, step: 0.01, decimals: 2 }
+  - name: v
+    value: 26
+    unit: m/s
+    text: "26"
+    suggest: { min: 18, max: 34, step: 1 }
+  - name: L2
+    value: 0.22
+    unit: m
+    text: "0.22"
+    suggest: { min: 0.15, max: 0.29, step: 0.01, decimals: 2 }
+  - name: P
+    value: 51
+    unit: W
+    text: "51"
+    suggest: { min: 36, max: 66, step: 1 }
+scenario:
+  id: phys161-exam3-p110
+  source: { document: PHYS161_Exam3, labels: [ P110 ] }
+  section: Waves
+  narrative: >-
+    A sinusoidal transverse wave travels on a string. The string has length {L:unit} and mass
+    {m:unit}. The wave speed is {v:unit} and the wavelength is {L2:unit}.
+  vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: L2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
+  parts:
+    - id: answer
+      prompt: >-
+        If the wave is to have an average power of {P:unit}, what must be the amplitude of the wave?
+        {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { L: 8, m: 7.65, v: 26, L2: 0.22, P: 51 }
+    parts:
+      - { id: answer, answer: 0.086, unit: m, source: P110 }

@@ -1,59 +1,71 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P34
 number: 34
-section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Circus performer of mass 77 kg oscillates up and down at the end of a long elastic rope at a
-  rate of once every 5.5 s. The elastic rope obeys Hooke's Law. By how much is the rope extended
-  beyond its unloaded length when the performer hangs at rest? The gravitational acceleration is g =
-  9.8 m/s<sup>2</sup>. (7.5091662226928 m)
-text: Circus performer of mass 77 kg oscillates up and down at the end of a long elastic rope at a
-  rate of once every 5.5 s. The elastic rope obeys Hooke's Law. By how much is the rope extended
-  beyond its unloaded length when the performer hangs at rest? The gravitational acceleration is g =
-  9.8 m/s^2. (7.5091662226928 m)
-answer: { value: 7.5091662226928, unit: m, raw: 7.5091662226928 m }
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: In deep space, two uniform spheres, one of mass 25 kg and the other with mass 110 kg, are
+  released from rest with their centers 38 m apart. They accelerate toward each other because of
+  their mutual gravitational attraction. Find the magnitude of the relative velocity with which one
+  sphere is approaching the other, when their centers are 20 m apart. Gravitational constant is 6.67
+  × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (2.065E-5 m/s)
+text: In deep space, two uniform spheres, one of mass 25 kg and the other with mass 110 kg, are
+  released from rest with their centers 38 m apart. They accelerate toward each other because of
+  their mutual gravitational attraction. Find the magnitude of the relative velocity with which one
+  sphere is approaching the other, when their centers are 20 m apart. Gravitational constant is 6.67
+  × 10^-11N⋅ m^2 /kg^2. (2.065E-5 m/s)
+answer: { value: 0.00002065, unit: m/s, raw: 2.065E-5 m/s }
 figures: []
 literals:
   - name: m
-    value: 77
+    value: 25
     unit: kg
-    text: "77"
-    suggest: { min: 54, max: 100, step: 1 }
-  - name: t
-    value: 5.5
-    unit: s
-    text: "5.5"
-    suggest: { min: 3.8, max: 7.2, step: 0.1, decimals: 1 }
-  - name: g
-    value: 9.8
-    unit: m/s^2
-    text: "9.8"
-    constant: true
-    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+    text: "25"
+    suggest: { min: 18, max: 33, step: 1 }
+  - name: m2
+    value: 110
+    unit: kg
+    text: "110"
+    suggest: { min: 77, max: 143, step: 1 }
+  - name: d
+    value: 38
+    unit: m
+    text: "38"
+    suggest: { min: 27, max: 49, step: 1 }
+  - name: d2
+    value: 20
+    unit: m
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p034
   source: { document: PHYS161_Exam3, labels: [ P34 ] }
-  section: Oscillations
+  section: Gravitation
   narrative: >-
-    Circus performer of mass {m:unit} oscillates up and down at the end of a long elastic rope at a
-    rate of once every {t:unit}. The elastic rope obeys Hooke's Law. The gravitational acceleration
-    is g = {g:unit}.
+    In deep space, two uniform spheres, one of mass {m:unit} and the other with mass {m2:unit}, are
+    released from rest with their centers {d:unit} apart. They accelerate toward each other because
+    of their mutual gravitational attraction. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
   vars:
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
-  derived:
-    - { name: g, expr: "9.8", unit: m/s^2 }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
       prompt: >-
-        By how much is the rope extended beyond its unloaded length when the performer hangs at
-        rest? {_0}{_u}
+        Find the magnitude of the relative velocity with which one sphere is approaching the other,
+        when their centers are {d2:unit} apart. {_0}{_u}
       answer: TODO
-      unit: m
+      unit: m/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 77, t: 5.5, g: 9.8 }
+    vars: { m: 25, m2: 110, d: 38, d2: 20, F: 6.67e-11 }
     parts:
-      - { id: answer, answer: 7.5091662226928, unit: m, source: P34 }
+      - { id: answer, answer: 0.00002065, unit: m/s, source: P34 }

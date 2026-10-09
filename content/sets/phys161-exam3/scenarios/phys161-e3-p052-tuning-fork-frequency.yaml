@@ -1,0 +1,44 @@
+# P52 — in simple harmonic motion the tip passes equilibrium at its maximum speed v = ω A, so
+# the frequency is f = ω / 2π = v / (2π A). The amplitude is given in mm.
+id: phys161-e3-p052-tuning-fork-frequency
+title: Frequency of a tuning fork tip
+source: { document: PHYS161_Exam3, labels: [ P52 ] }
+section: Oscillations
+tags: [ oscillations, simple-harmonic-motion, maximum-speed, frequency ]
+narrative: >-
+  The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
+  motion with amplitude of {A:unit}.
+vars:
+  - {
+      name: A,
+      kind: range,
+      min: 0.40,
+      max: 0.74,
+      step: 0.01,
+      decimals: 2,
+      unit: mm,
+      label: amplitude
+    }
+  - {
+      name: v,
+      kind: range,
+      min: 1.100,
+      max: 2.000,
+      step: 0.001,
+      decimals: 3,
+      unit: m/s,
+      label: speed at equilibrium
+    }
+parts:
+  - id: frequency
+    prompt: >-
+      If the tip passes its equilibrium position with a speed of {v:unit}, what is the frequency of
+      vibration? {_0}{_u}
+    answer: v / (2 * pi * A / 1000)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { A: 0.57, v: 1.538 }
+  parts:
+    - { id: frequency, answer: 429.439, unit: Hz, source: P52 }

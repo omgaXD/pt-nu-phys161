@@ -1,0 +1,24 @@
+# P37 — a simple pendulum of length L makes N complete swings in time t, so its period is
+# T = t / N, and T = 2π sqrt(L / g) gives g = 4π² L / T² = 4π² L N² / t². L is in cm.
+id: phys161-e3-p037-pendulum-unknown-planet
+title: Pendulum on an unknown planet
+source: { document: PHYS161_Exam3, labels: [ P37 ] }
+section: Oscillations
+tags: [ oscillations, simple-pendulum, period, gravitational-acceleration ]
+narrative: >-
+  A {L:unit} simple pendulum makes {N} complete swings in {t} seconds on an unknown planet.
+vars:
+  - { name: L, kind: range, min: 40, max: 70, step: 1, unit: cm, label: pendulum length }
+  - { name: N, kind: range, min: 20, max: 40, step: 1, label: number of complete swings }
+  - { name: t, kind: range, min: 40, max: 70, step: 1, unit: s, label: elapsed time }
+parts:
+  - id: gravity
+    prompt: "What is the gravitational acceleration of the planet? {_0}{_u}"
+    answer: 4 * pi^2 * (L / 100) * N^2 / t^2
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 54, N: 30, t: 54 }
+  parts:
+    - { id: gravity, answer: 6.5797, unit: m/s^2, source: P37 }

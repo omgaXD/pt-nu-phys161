@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P133
+number: 133
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A bat flies toward a wall at 0.57 m/s, emitting a steady sound of frequency 2.15 kHz. The bat
+  hears its own sound plus the sound reflected from the wall. What beat frequency does it hear? Use
+  347.5 m/s for the speed of sound in air. (7.06483 Hz)
+text: A bat flies toward a wall at 0.57 m/s, emitting a steady sound of frequency 2.15 kHz. The bat
+  hears its own sound plus the sound reflected from the wall. What beat frequency does it hear? Use
+  347.5 m/s for the speed of sound in air. (7.06483 Hz)
+answer: { value: 7.06483, unit: Hz, raw: 7.06483 Hz }
+figures: []
+literals:
+  - name: v
+    value: 0.57
+    unit: m/s
+    text: "0.57"
+    suggest: { min: 0.4, max: 0.74, step: 0.01, decimals: 2 }
+  - name: f
+    value: 2.15
+    unit: kHz
+    text: "2.15"
+    suggest: { min: 1.51, max: 2.8, step: 0.01, decimals: 2 }
+  - name: v2
+    value: 347.5
+    unit: m/s
+    text: "347.5"
+    suggest: { min: 243.2, max: 451.8, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p133
+  source: { document: PHYS161_Exam3, labels: [ P133 ] }
+  section: Sound
+  narrative: >-
+    A bat flies toward a wall at {v:unit}, emitting a steady sound of frequency {f:unit}. The bat
+    hears its own sound plus the sound reflected from the wall. Use {v2:unit} for the speed of sound
+    in air.
+  vars:
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
+    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: What beat frequency does it hear? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { v: 0.57, f: 2.15, v2: 347.5 }
+    parts:
+      - { id: answer, answer: 7.06483, unit: Hz, source: P133 }

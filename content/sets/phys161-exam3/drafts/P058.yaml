@@ -1,57 +1,53 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P58
 number: 58
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Two megaphones at distance x = 4.8 m to each other are driven in phase by the same amplifier. A
-  listener is located directly in front of one of the megaphones at point A at distance L = 3.05 m.
-  The speed of sound can be taken as 342 m/s. What is the lowest frequency for which there is a
-  minimum signal due to destructive interference? (64.845 Hz)
-text: Two megaphones at distance x = 4.8 m to each other are driven in phase by the same amplifier.
-  A listener is located directly in front of one of the megaphones at point A at distance L = 3.05
-  m. The speed of sound can be taken as 342 m/s. What is the lowest frequency for which there is a
-  minimum signal due to destructive interference? (64.845 Hz)
-answer: { value: 64.845, unit: Hz, raw: 64.845 Hz }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A body slides back and forth in simple harmonic motion with an amplitude of 0.12 m on a
+  horizontal surface. At a point 0.04 m away from equilibrium, the speed of the body is 0.29 m/s.
+  What is the maximum speed of the body? (0.307591 m/s)
+text: A body slides back and forth in simple harmonic motion with an amplitude of 0.12 m on a
+  horizontal surface. At a point 0.04 m away from equilibrium, the speed of the body is 0.29 m/s.
+  What is the maximum speed of the body? (0.307591 m/s)
+answer: { value: 0.307591, unit: m/s, raw: 0.307591 m/s }
 figures: []
 literals:
-  - name: x
-    value: 4.8
+  - name: d
+    value: 0.12
     unit: m
-    text: "4.8"
-    suggest: { min: 3.4, max: 6.2, step: 0.1, decimals: 1 }
-  - name: L
-    value: 3.05
+    text: "0.12"
+    suggest: { min: 0.08, max: 0.16, step: 0.01, decimals: 2 }
+  - name: d2
+    value: 0.04
     unit: m
-    text: "3.05"
-    suggest: { min: 2.13, max: 3.97, step: 0.01, decimals: 2 }
+    text: "0.04"
+    suggest: { min: 0.03, max: 0.05, step: 0.01, decimals: 2 }
   - name: v
-    value: 342
+    value: 0.29
     unit: m/s
-    text: "342"
-    suggest: { min: 239, max: 445, step: 1 }
+    text: "0.29"
+    suggest: { min: 0.2, max: 0.38, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam3-p058
   source: { document: PHYS161_Exam3, labels: [ P58 ] }
-  section: Waves
+  section: Oscillations
   narrative: >-
-    Two megaphones at distance x = {x:unit} to each other are driven in phase by the same amplifier.
-    A listener is located directly in front of one of the megaphones at point A at distance L =
-    {L:unit}. The speed of sound can be taken as {v:unit}.
+    A body slides back and forth in simple harmonic motion with an amplitude of {d:unit} on a
+    horizontal surface. At a point {d2:unit} away from equilibrium, the speed of the body is
+    {v:unit}.
   vars:
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
   parts:
     - id: answer
-      prompt: >-
-        What is the lowest frequency for which there is a minimum signal due to destructive
-        interference? {_0}{_u}
+      prompt: What is the maximum speed of the body? {_0}{_u}
       answer: TODO
-      unit: Hz
+      unit: m/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { x: 4.8, L: 3.05, v: 342 }
+    vars: { d: 0.12, d2: 0.04, v: 0.29 }
     parts:
-      - { id: answer, answer: 64.845, unit: Hz, source: P58 }
+      - { id: answer, answer: 0.307591, unit: m/s, source: P58 }

@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P112
+number: 112
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: >-
+  A uniform cylindrical steel wire, 48 cm long and 1.52 mm in diameter, is fixed at both ends. To
+  what tension must it be adjusted so that, when vibrating in its first overtone, it produces the
+  note of frequency 439 Hz? Assume that it stretches an insignificant amount. Density of steel ρ
+
+  = 7.8 ×10<sup>3</sup> kg/m<sup>3</sup>. (628.4680 N)
+text: A uniform cylindrical steel wire, 48 cm long and 1.52 mm in diameter, is fixed at both ends.
+  To what tension must it be adjusted so that, when vibrating in its first overtone, it produces the
+  note of frequency 439 Hz? Assume that it stretches an insignificant amount. Density of steel ρ =
+  7.8 ×10^3 kg/m^3. (628.4680 N)
+answer: { value: 628.468, unit: N, raw: 628.4680 N }
+figures: []
+literals:
+  - name: d
+    value: 48
+    unit: cm
+    text: "48"
+    suggest: { min: 34, max: 62, step: 1 }
+  - name: L
+    value: 1.52
+    unit: mm
+    text: "1.52"
+    suggest: { min: 1.06, max: 1.98, step: 0.01, decimals: 2 }
+  - name: f
+    value: 439
+    unit: Hz
+    text: "439"
+    suggest: { min: 307, max: 571, step: 1 }
+  - name: rho
+    value: 7800
+    unit: kg/m^3
+    text: 7.8 ×10^3
+    suggest: { min: 5460, max: 10140, step: 1 }
+scenario:
+  id: phys161-exam3-p112
+  source: { document: PHYS161_Exam3, labels: [ P112 ] }
+  section: Waves
+  narrative: >-
+    A uniform cylindrical steel wire, {d:unit} long and {L:unit} in diameter, is fixed at both ends.
+    Assume that it stretches an insignificant amount. Density of steel ρ = {rho:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        To what tension must it be adjusted so that, when vibrating in its first overtone, it
+        produces the note of frequency {f:unit}? {_0}{_u}
+      answer: TODO
+      unit: N
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 48, L: 1.52, f: 439, rho: 7800 }
+    parts:
+      - { id: answer, answer: 628.468, unit: N, source: P112 }

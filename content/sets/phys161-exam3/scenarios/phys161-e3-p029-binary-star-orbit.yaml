@@ -1,0 +1,72 @@
+# P29/P30/P31 — two equal stars on opposite sides of a circular orbit of radius R about their
+# centre of mass are 2R apart, so G m² / (2R)² = m v² / R gives v = sqrt(G m / (4R)) (P29), the
+# period is T = 2πR / v = 4π sqrt(R³ / (G m)) (P30), and the total energy
+# E = 2·½ m v² − G m² / (2R) = −G m² / (4R) must be supplied to separate them to infinity (P31).
+# Same situation and figure as P28 (phys161-e3-p018-binary-star-force), with the same variables;
+# the mass range is wider because P30/P31 use 2 × 10^30 kg. R is given in km and converted inside
+# the formulas. The base canonical values are P29's; P30 and P31 override them with their own.
+id: phys161-e3-p029-binary-star-orbit
+title: Orbit of a binary star system
+source: { document: PHYS161_Exam3, labels: [ P29, P30, P31 ] }
+section: Gravitation
+tags: [ gravitation, orbits, binary-stars, energy, multi-part ]
+figure:
+  id: binary-stars
+  src: figures/unnamed_007_OTxQ.png
+  alt: >-
+    A circle with two black dots labelled M at the opposite ends of its horizontal diameter. A small
+    dot labelled cm marks the centre of the circle, and each half of the diameter, from the centre
+    to a star, is labelled R.
+narrative: >-
+  Two identical stars with mass {m:unit} orbit around their center of mass. Each orbit is circular
+  and has a radius of {R:unit}, so that the two stars are always on opposite sides of the circle.
+  Gravitational constant is {G:unit}. {@fig}
+vars:
+  - {
+      name: m,
+      kind: range,
+      min: 6e+29,
+      max: 2.6e+30,
+      step: 1e+29,
+      sigfigs: 2,
+      unit: kg,
+      label: star mass
+    }
+  - {
+      name: R,
+      kind: range,
+      min: 4e+7,
+      max: 9e+7,
+      step: 1e+7,
+      sigfigs: 1,
+      unit: km,
+      label: orbit radius
+    }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: orbital-speed
+    prompt: "Find the orbital speed of each star. {_0}{_u}"
+    answer: sqrt(G * m / (4 * R * 1000))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: period
+    prompt: "Find the period of the orbit. {_0}{_u}"
+    answer: 4 * pi * sqrt((R * 1000)^3 / (G * m))
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: separation-energy
+    prompt: >-
+      How much energy would be required to separate the two stars to infinity? {_0}{_u}
+    answer: G * m^2 / (4 * R * 1000)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 1e+30, R: 5e+7, G: 6.67e-11 }
+  parts:
+    - { id: orbital-speed, answer: 18261.98, unit: m/s, source: P29 }
+    - { id: period, answer: 24618802.81, unit: s, source: P30, vars: { m: 2e+30, R: 8e+7 } }
+    - { id: separation-energy, answer: 1.334e+39, unit: J, source: P31, vars: { m: 2e+30 } }

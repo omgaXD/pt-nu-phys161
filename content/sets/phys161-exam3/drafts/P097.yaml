@@ -1,50 +1,56 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P97
 number: 97
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: In a liquid with density 1100 kg/m<sup>3</sup>, longitudinal waves with frequency 275 Hz are
-  found to have wavelength 8 m. Calculate the bulk modulus of the liquid. (5324000000 Pa)
-text: In a liquid with density 1100 kg/m^3, longitudinal waves with frequency 275 Hz are found to
-  have wavelength 8 m. Calculate the bulk modulus of the liquid. (5324000000 Pa)
-answer: { value: 5324000000, unit: Pa, raw: 5324000000 Pa }
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A transverse wave, traveling along a string of length 8.45 m and mass 1.8 kg, moves by 14.7 m
+  during a time interval of 1.45 s. Calculate the tension in the string. (21.89 N)
+text: A transverse wave, traveling along a string of length 8.45 m and mass 1.8 kg, moves by 14.7 m
+  during a time interval of 1.45 s. Calculate the tension in the string. (21.89 N)
+answer: { value: 21.89, unit: N, raw: 21.89 N }
 figures: []
 literals:
-  - name: rho
-    value: 1100
-    unit: kg/m^3
-    text: "1100"
-    suggest: { min: 770, max: 1430, step: 1 }
-  - name: f
-    value: 275
-    unit: Hz
-    text: "275"
-    suggest: { min: 193, max: 358, step: 1 }
   - name: L
-    value: 8
+    value: 8.45
     unit: m
-    text: "8"
-    suggest: { min: 6, max: 10, step: 1 }
+    text: "8.45"
+    suggest: { min: 5.91, max: 10.99, step: 0.01, decimals: 2 }
+  - name: m
+    value: 1.8
+    unit: kg
+    text: "1.8"
+    suggest: { min: 1.3, max: 2.3, step: 0.1, decimals: 1 }
+  - name: d
+    value: 14.7
+    unit: m
+    text: "14.7"
+    suggest: { min: 10.3, max: 19.1, step: 0.1, decimals: 1 }
+  - name: t
+    value: 1.45
+    unit: s
+    text: "1.45"
+    suggest: { min: 1.01, max: 1.89, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam3-p097
   source: { document: PHYS161_Exam3, labels: [ P97 ] }
-  section: Sound
+  section: Waves
   narrative: >-
-    In a liquid with density {rho:unit}, longitudinal waves with frequency {f:unit} are found to
-    have wavelength {L:unit}.
+    A transverse wave, traveling along a string of length {L:unit} and mass {m:unit}, moves by
+    {d:unit} during a time interval of {t:unit}.
   vars:
-    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
     - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
   parts:
     - id: answer
-      prompt: Calculate the bulk modulus of the liquid. {_0}{_u}
+      prompt: Calculate the tension in the string. {_0}{_u}
       answer: TODO
-      unit: Pa
+      unit: N
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { rho: 1100, f: 275, L: 8 }
+    vars: { L: 8.45, m: 1.8, d: 14.7, t: 1.45 }
     parts:
-      - { id: answer, answer: 5324000000, unit: Pa, source: P97 }
+      - { id: answer, answer: 21.89, unit: N, source: P97 }

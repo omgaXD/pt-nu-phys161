@@ -1,0 +1,33 @@
+# P43 — the passengers' weight fixes the spring constant, k = m g / d (d in cm). The loaded car
+# (car + passengers) has period T = 2π sqrt((M + m) / k), so M = k T² / (4π²) − m.
+# The period is printed as a whole "1 s"; other whole-second periods would give absurd car
+# masses (T = 2 s quadruples the loaded mass), so it is kept fixed (a single-option choice).
+id: phys161-e3-p043-car-mass-passengers
+title: Mass of a car from its vibration period
+source: { document: PHYS161_Exam3, labels: [ P43 ] }
+section: Oscillations
+tags: [ oscillations, spring, hookes-law, period, inverse ]
+narrative: >-
+  Four passengers with combined mass {m:unit} compress the springs of a car by {d:unit} when they
+  enter it. The gravitational acceleration is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 200, max: 320, step: 1, unit: kg, label: passengers' mass }
+  - { name: d, kind: range, min: 4, max: 7, step: 1, unit: cm, label: compression }
+  - { name: T, kind: choice, options: [ 1 ], unit: s, label: period of the loaded car }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "m * g / (d / 100) * T^2 / (4 * pi^2) - m > 600" # a plausible car mass
+parts:
+  - id: car-mass
+    prompt: >-
+      If the loaded car has a period of vibration of {T:unit}, what is the mass of the car? Ignore
+      damping. {_0}{_u}
+    answer: m * g / (d / 100) * T^2 / (4 * pi^2) - m
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 260, d: 5, T: 1, g: 9.8 }
+  parts:
+    - { id: car-mass, answer: 1030.83, unit: kg, source: P43 }

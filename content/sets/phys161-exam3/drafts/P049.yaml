@@ -1,69 +1,55 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P49
 number: 49
 section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A 2.2-kg bucket containing 10.8 kg of water is hanging from a vertical ideal spring of force
-  constant 128 N/m and oscillating up and down with an amplitude of 2.5 cm. Suddenly the bucket
-  springs a leak in the bottom such that water drops out at a steady rate of 2.2 g/s. When the
-  bucket is half full, find the magnitude of rate at which the period is changing with respect to
-  time. (0.0002216)
-text: A 2.2-kg bucket containing 10.8 kg of water is hanging from a vertical ideal spring of force
-  constant 128 N/m and oscillating up and down with an amplitude of 2.5 cm. Suddenly the bucket
-  springs a leak in the bottom such that water drops out at a steady rate of 2.2 g/s. When the
-  bucket is half full, find the magnitude of rate at which the period is changing with respect to
-  time. (0.0002216)
-answer: { value: 0.0002216, raw: "0.0002216" }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A circus performer of mass 88.5 kg oscillates up and down at the end of a long elastic rope at
+  a rate of once every 6.85 s. The elastic rope obeys Hooke's law. What is the force constant of the
+  rope? The gravitational acceleration on Earth is g = 9.8 m/s². (74.4598 N/m)
+text: A circus performer of mass 88.5 kg oscillates up and down at the end of a long elastic rope at
+  a rate of once every 6.85 s. The elastic rope obeys Hooke's law. What is the force constant of the
+  rope? The gravitational acceleration on Earth is g = 9.8 m/s^2. (74.4598 N/m)
+answer: { value: 74.4598, unit: N/m, raw: 74.4598 N/m }
 figures: []
 literals:
   - name: m
-    value: 2.2
+    value: 88.5
     unit: kg
-    text: "2.2"
-    suggest: { min: 1.5, max: 2.9, step: 0.1, decimals: 1 }
-  - name: m2
-    value: 10.8
-    unit: kg
-    text: "10.8"
-    suggest: { min: 7.6, max: 14, step: 0.1, decimals: 1 }
-  - name: k
-    value: 128
-    unit: N/m
-    text: "128"
-    suggest: { min: 90, max: 166, step: 1 }
-  - name: d
-    value: 2.5
-    unit: cm
-    text: "2.5"
-    suggest: { min: 1.8, max: 3.3, step: 0.1, decimals: 1 }
-  - name: x
-    value: 2.2
-    text: "2.2"
-    suggest: { min: 1.5, max: 2.9, step: 0.1, decimals: 1 }
+    text: "88.5"
+    suggest: { min: 61.9, max: 115.1, step: 0.1, decimals: 1 }
+  - name: t
+    value: 6.85
+    unit: s
+    text: "6.85"
+    suggest: { min: 4.79, max: 8.9, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p049
   source: { document: PHYS161_Exam3, labels: [ P49 ] }
   section: Oscillations
   narrative: >-
-    A {m}-kg bucket containing {m2:unit} of water is hanging from a vertical ideal spring of force
-    constant {k:unit} and oscillating up and down with an amplitude of {d:unit}. Suddenly the bucket
-    springs a leak in the bottom such that water drops out at a steady rate of {x} g/s.
+    A circus performer of mass {m:unit} oscillates up and down at the end of a long elastic rope at
+    a rate of once every {t:unit}. The elastic rope obeys Hooke's law. The gravitational
+    acceleration on Earth is g = {g:unit}.
   vars:
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
-      prompt: >-
-        When the bucket is half full, find the magnitude of rate at which the period is changing
-        with respect to time. {_0}
+      prompt: What is the force constant of the rope? {_0}{_u}
       answer: TODO
+      unit: N/m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 2.2, m2: 10.8, k: 128, d: 2.5, x: 2.2 }
+    vars: { m: 88.5, t: 6.85, g: 9.8 }
     parts:
-      - { id: answer, answer: 0.0002216, source: P49 }
+      - { id: answer, answer: 74.4598, unit: N/m, source: P49 }

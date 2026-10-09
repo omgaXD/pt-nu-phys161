@@ -1,47 +1,33 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P22
 number: 22
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: In deep space, two uniform spheres, one of mass 24 kg and the other with mass 107 kg, are
-  released from rest with their centers 40 m apart. They accelerate toward each other because of
-  their mutual gravitational attraction. Find the speed of the sphere with mass 24 kg, when their
-  centers are 25 m apart. Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup>
-  /kg<sup>2</sup>. (1.32285E-5 m/s)
-text: In deep space, two uniform spheres, one of mass 24 kg and the other with mass 107 kg, are
-  released from rest with their centers 40 m apart. They accelerate toward each other because of
-  their mutual gravitational attraction. Find the speed of the sphere with mass 24 kg, when their
-  centers are 25 m apart. Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (1.32285E-5 m/s)
-answer: { value: 0.0000132285, unit: m/s, raw: 1.32285E-5 m/s }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Assume that the satellite orbits a planet in a circular orbit. From the observed orbital period
+  of 28.4 days, calculate the distance of the satellite from the center of the planet. Assume that
+  the satellite's motion is determined solely by the gravitational force exerted on it by the
+  planet, and the mass of the planet is m = 4 × 10<sup>24</sup> kg. Gravitational constant is 6.67 ×
+  10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (343951138.39 m)
+text: Assume that the satellite orbits a planet in a circular orbit. From the observed orbital
+  period of 28.4 days, calculate the distance of the satellite from the center of the planet. Assume
+  that the satellite's motion is determined solely by the gravitational force exerted on it by the
+  planet, and the mass of the planet is m = 4 × 10^24 kg. Gravitational constant is 6.67 × 10^-11N⋅
+  m^2 /kg^2. (343951138.39 m)
+answer: { value: 343951138.39, unit: m, raw: 343951138.39 m }
 figures: []
 literals:
+  - name: t
+    value: 28.4
+    unit: day
+    text: "28.4"
+    suggest: { min: 19.9, max: 36.9, step: 0.1, decimals: 1 }
   - name: m
-    value: 24
+    value: 4e+24
     unit: kg
-    text: "24"
-    suggest: { min: 17, max: 31, step: 1 }
-  - name: m2
-    value: 107
-    unit: kg
-    text: "107"
-    suggest: { min: 75, max: 139, step: 1 }
-  - name: d
-    value: 40
-    unit: m
-    text: "40"
-    suggest: { min: 28, max: 52, step: 1 }
-  - name: m3
-    value: 24
-    unit: kg
-    text: "24"
-    suggest: { min: 17, max: 31, step: 1 }
-  - name: d2
-    value: 25
-    unit: m
-    text: "25"
-    suggest: { min: 18, max: 33, step: 1 }
+    text: 4 × 10^24
+    suggest: { min: 2.8e+24, max: 5.2e+24, step: 1e+23 }
   - name: F
     value: 6.67e-11
     unit: N
@@ -52,25 +38,22 @@ scenario:
   source: { document: PHYS161_Exam3, labels: [ P22 ] }
   section: Gravitation
   narrative: >-
-    In deep space, two uniform spheres, one of mass {m:unit} and the other with mass {m2:unit}, are
-    released from rest with their centers {d:unit} apart. They accelerate toward each other because
-    of their mutual gravitational attraction. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+    Assume that the satellite orbits a planet in a circular orbit. From the observed orbital period
+    of {t:unit}, calculate the distance of the satellite from the center of the planet. Assume that
+    the satellite's motion is determined solely by the gravitational force exerted on it by the
+    planet, and the mass of the planet is m = {m:unit}.
   vars:
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: day }
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: m3, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
       prompt: >-
-        Find the speed of the sphere with mass {m3:unit}, when their centers are {d2:unit} apart.
-        {_0}{_u}
+        Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$. {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 24, m2: 107, d: 40, m3: 24, d2: 25, F: 6.67e-11 }
+    vars: { t: 28.4, m: 4e+24, F: 6.67e-11 }
     parts:
-      - { id: answer, answer: 0.0000132285, unit: m/s, source: P22 }
+      - { id: answer, answer: 343951138.39, unit: m, source: P22 }

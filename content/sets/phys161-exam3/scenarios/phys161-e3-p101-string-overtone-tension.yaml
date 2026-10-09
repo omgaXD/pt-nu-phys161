@@ -1,0 +1,49 @@
+# P101 — the string's frequency equals the sound's, f = v_sound / λ. The second overtone of a string
+# fixed at both ends is the third harmonic, f₃ = 3 v / (2L), so the wave speed on the string is
+# v = 2 L f / 3 and the tension is F = μ v² with μ = m / L. L is given in cm and m in g; the
+# speed of sound is a constant stated by the source.
+id: phys161-e3-p101-string-overtone-tension
+title: String tension for a given overtone sound
+source: { document: PHYS161_Exam3, labels: [ P101 ] }
+section: Waves
+tags: [ waves, string, standing-waves, overtone, sound-wavelength, tension ]
+narrative: >-
+  One string of a certain musical instrument is {L:unit} long and has a mass of {m:unit}. It is
+  being played in a room where the speed of sound is {vs:unit}.
+vars:
+  - { name: L, kind: range, min: 40, max: 70, step: 1, unit: cm, label: string length }
+  - {
+      name: m,
+      kind: range,
+      min: 6.0,
+      max: 11.0,
+      step: 0.1,
+      decimals: 1,
+      unit: g,
+      label: string mass
+    }
+  - {
+      name: lam,
+      kind: range,
+      min: 2.5,
+      max: 4.5,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: sound wavelength
+    }
+derived:
+  - { name: vs, expr: "344", unit: m/s }
+parts:
+  - id: tension
+    prompt: >-
+      To what tension must you adjust the string so that, when vibrating in its second overtone, it
+      produces sound of wavelength {lam:unit}? {_0}{_u}
+    answer: ((m / 1000) / (L / 100)) * (2 * (L / 100) * (vs / lam) / 3)^2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 55, m: 8.5, lam: 3.4, vs: 344 }
+  parts:
+    - { id: tension, answer: 21.2695, unit: N, source: P101 }

@@ -1,0 +1,26 @@
+# P19 — weight on the Moon, where the gravitational acceleration is g / 6: W = m g / 6.
+# The one-sixth ratio is a fixed fact of the problem; only the person's mass is randomized.
+id: phys161-e3-p019-moon-weight
+title: Weight of a person on the Moon
+source: { document: PHYS161_Exam3, labels: [ P19 ] }
+section: Gravitation
+tags: [ gravitation, weight, gravitational-acceleration ]
+narrative: >-
+  The gravitational acceleration on Earth is $g = {g:unit}$.
+vars:
+  - { name: m, kind: range, min: 40.0, max: 75.0, step: 0.1, decimals: 1, unit: kg, label: mass }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: moon-weight
+    prompt: >-
+      Calculate the weight of a {m}-kg person on the Moon where the gravitational acceleration is
+      one-sixth that of the Earth. {_0}{_u}
+    answer: m * g / 6
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { m: 50.3, g: 9.8 }
+  parts:
+    - { id: moon-weight, answer: 82.157, unit: N, source: P19 }

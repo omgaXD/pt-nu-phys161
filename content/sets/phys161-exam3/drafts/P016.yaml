@@ -1,49 +1,62 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P16
 number: 16
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: What is the escape speed from a 260-km-diameter asteroid with a density of 2700 kg/m3?
-  Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (159.68 m/s)
-text: What is the escape speed from a 260-km-diameter asteroid with a density of 2700 kg/m3?
-  Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (159.68 m/s)
-answer: { value: 159.68, unit: m/s, raw: 159.68 m/s }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: An object is projected straight up from the surface of the Earth with an initial speed of 8500
+  m/s. Neglecting air resistance and the rotation of the Earth, find the maximum height above the
+  surface that it reaches. The radius of the Earth is 6.371×10⁶ m and its mass is 5.97×10²⁴ kg.
+  Gravitational constant is G = 6.67×10⁻¹¹ N m²/kg². (8.72556e+06 m)
+text: An object is projected straight up from the surface of the Earth with an initial speed of 8500
+  m/s. Neglecting air resistance and the rotation of the Earth, find the maximum height above the
+  surface that it reaches. The radius of the Earth is 6.371×10^6 m and its mass is 5.97×10^24 kg.
+  Gravitational constant is G = 6.67×10^-11 N m^2/kg^2. (8.72556e+06 m)
+answer: { value: 8725560, unit: m, raw: 8.72556e+06 m }
 figures: []
 literals:
-  - name: d
-    value: 260
-    unit: km
-    text: "260"
-    suggest: { min: 182, max: 338, step: 1 }
-  - name: x
-    value: 2700
-    text: "2700"
-    suggest: { min: 1890, max: 3510, step: 1 }
-  - name: F
+  - name: v
+    value: 8500
+    unit: m/s
+    text: "8500"
+    suggest: { min: 5950, max: 11050, step: 1 }
+  - name: r
+    value: 6371000
+    unit: m
+    text: 6.371×10^6
+    suggest: { min: 4459700, max: 8282300, step: 1 }
+  - name: m
+    value: 5.97e+24
+    unit: kg
+    text: 5.97×10^24
+    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+  - name: G
     value: 6.67e-11
     unit: N
-    text: 6.67 × 10^-11
+    text: 6.67×10^-11
     suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p016
   source: { document: PHYS161_Exam3, labels: [ P16 ] }
   section: Gravitation
-  narrative: Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+  narrative: >-
+    An object is projected straight up from the surface of the Earth with an initial speed of
+    {v:unit}. Neglecting air resistance and the rotation of the Earth, find the maximum height above
+    the surface that it reaches. The radius of the Earth is {r:unit} and its mass is {m:unit}.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: G, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
       prompt: >-
-        What is the escape speed from a {d}-km-diameter asteroid with a density of {x} kg/m3?
-        {_0}{_u}
+        Gravitational constant is G = {G:unit} m$^{2}$/kg$^{2}$. {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 260, x: 2700, F: 6.67e-11 }
+    vars: { v: 8500, r: 6371000, m: 5.97e+24, G: 6.67e-11 }
     parts:
-      - { id: answer, answer: 159.68, unit: m/s, source: P16 }
+      - { id: answer, answer: 8725560, unit: m, source: P16 }

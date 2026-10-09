@@ -1,0 +1,47 @@
+# P65/P66 — the two equal masses stick together, so the spring oscillates a total mass 2m:
+# T = 2π sqrt(2m / k) and f = 1 / T. The incoming speed sets only the amplitude (see P63).
+# Same variables and ranges as P63; the source family always uses two equal masses, so one
+# variable prints both. The base canonical values are P65's; P66 overrides them with its own.
+id: phys161-e3-p065-collision-spring-period
+title: Period and frequency after a collision with a spring-mounted mass
+source: { document: PHYS161_Exam3, labels: [ P65, P66 ] }
+section: Oscillations
+tags: [ oscillations, spring, inelastic-collision, period, frequency, multi-part ]
+narrative: >-
+  A {m}-kg mass is traveling to the right with a speed of {v:unit} on a smooth horizontal surface
+  when it collides with and sticks to a second {m}-kg mass that is initially at rest but is attached
+  to a light spring with force constant {k:unit}.
+vars:
+  - { name: m, kind: range, min: 10, max: 17, step: 1, unit: kg, label: mass of each body }
+  - {
+      name: v,
+      kind: range,
+      min: 1.0,
+      max: 3.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: initial speed
+    }
+  - { name: k, kind: range, min: 60, max: 120, step: 1, unit: N/m, label: force constant }
+constraints:
+  # Keeps the article in "A {m}-kg mass" grammatical ("an 11-kg mass").
+  - "m != 11"
+parts:
+  - id: period
+    prompt: "Find the period of the subsequent oscillations. {_0}{_u}"
+    answer: 2 * pi * sqrt(2 * m / k)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: frequency
+    prompt: "Find frequency of the subsequent oscillations. {_0}{_u}"
+    answer: sqrt(k / (2 * m)) / (2 * pi)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 16, v: 2.7, k: 87 }
+  parts:
+    - { id: period, answer: 3.8106, unit: s, source: P65 }
+    - { id: frequency, answer: 0.3281, unit: Hz, source: P66, vars: { m: 10, v: 1.6, k: 85 } }

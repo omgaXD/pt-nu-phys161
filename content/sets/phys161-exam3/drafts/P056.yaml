@@ -1,56 +1,43 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P56
 number: 56
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Two megaphones at distance x = 4.99 m to each other are driven in phase by the same amplifier.
-  A listener is located directly in front of one of the megaphones at point A at distance L = 3.55
-  m. The speed of sound can be taken as 348.7 m/s. What is the lowest frequency at which
-  constructive interference occurs? (135.47 Hz)
-text: Two megaphones at distance x = 4.99 m to each other are driven in phase by the same amplifier.
-  A listener is located directly in front of one of the megaphones at point A at distance L = 3.55
-  m. The speed of sound can be taken as 348.7 m/s. What is the lowest frequency at which
-  constructive interference occurs? (135.47 Hz)
-answer: { value: 135.47, unit: Hz, raw: 135.47 Hz }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Find the frequency of a simple pendulum 53 cm long at a location where g = 9.47
+  m/s<sup>2</sup>. (0.673 Hz)
+text: Find the frequency of a simple pendulum 53 cm long at a location where g = 9.47 m/s^2. (0.673 Hz)
+answer: { value: 0.673, unit: Hz, raw: 0.673 Hz }
 figures: []
 literals:
-  - name: x
-    value: 4.99
-    unit: m
-    text: "4.99"
-    suggest: { min: 3.49, max: 6.49, step: 0.01, decimals: 2 }
-  - name: L
-    value: 3.55
-    unit: m
-    text: "3.55"
-    suggest: { min: 2.48, max: 4.62, step: 0.01, decimals: 2 }
-  - name: v
-    value: 348.7
-    unit: m/s
-    text: "348.7"
-    suggest: { min: 244.1, max: 453.3, step: 0.1, decimals: 1 }
+  - name: d
+    value: 53
+    unit: cm
+    text: "53"
+    suggest: { min: 37, max: 69, step: 1 }
+  - name: g
+    value: 9.47
+    unit: m/s^2
+    text: "9.47"
+    suggest: { min: 6.63, max: 12.31, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam3-p056
   source: { document: PHYS161_Exam3, labels: [ P56 ] }
-  section: Waves
-  narrative: >-
-    Two megaphones at distance x = {x:unit} to each other are driven in phase by the same amplifier.
-    A listener is located directly in front of one of the megaphones at point A at distance L =
-    {L:unit}. The speed of sound can be taken as {v:unit}.
+  section: Oscillations
+  narrative: ""
   vars:
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: g, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        What is the lowest frequency at which constructive interference occurs? {_0}{_u}
+        Find the frequency of a simple pendulum {d:unit} long at a location where g = {g:unit}.
+        {_0}{_u}
       answer: TODO
       unit: Hz
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { x: 4.99, L: 3.55, v: 348.7 }
+    vars: { d: 53, g: 9.47 }
     parts:
-      - { id: answer, answer: 135.47, unit: Hz, source: P56 }
+      - { id: answer, answer: 0.673, unit: Hz, source: P56 }

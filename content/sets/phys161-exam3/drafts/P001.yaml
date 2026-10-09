@@ -1,10 +1,10 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P1
 number: 1
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
 raw: >-
   At what altitude above the Earth's surface would the gravitational acceleration be 6.2
   m/s<sup>2</sup>?

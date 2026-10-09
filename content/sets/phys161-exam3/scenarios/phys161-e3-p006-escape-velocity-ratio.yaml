@@ -1,0 +1,34 @@
+# P6 — escape speed v = sqrt(2 G M / R). Planet Y has kM times the mass and kR times the radius
+# of planet X, so v_Y = v_X sqrt(kM / kR).
+id: phys161-e3-p006-escape-velocity-ratio
+title: Escape velocity from another planet
+source: { document: PHYS161_Exam3, labels: [ P6 ] }
+section: Gravitation
+tags: [ gravitation, escape-velocity, ratios ]
+narrative: >-
+  Escape velocity of a bullet fired up from the surface of planet X is {v:unit}.
+vars:
+  - { name: v, kind: range, min: 1000, max: 2000, step: 1, unit: m/s, label: escape velocity }
+  - { name: kM, kind: range, min: 0.90, max: 1.90, step: 0.01, decimals: 2, label: mass ratio }
+  - {
+      name: kR,
+      kind: range,
+      min: 0.500,
+      max: 0.950,
+      step: 0.001,
+      decimals: 3,
+      label: radius ratio
+    }
+parts:
+  - id: escape-velocity-y
+    prompt: >-
+      Find the escape velocity from the surface of another planet Y, if the mass of planet Y is {kM}
+      times that of X, and its radius is {kR} times the radius of planet X. {_0}{_u}
+    answer: v * sqrt(kM / kR)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { v: 1481, kM: 1.41, kR: 0.718 }
+  parts:
+    - { id: escape-velocity-y, answer: 2075.4, unit: m/s, source: P6 }

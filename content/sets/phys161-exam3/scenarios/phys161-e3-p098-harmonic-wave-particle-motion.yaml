@@ -1,0 +1,91 @@
+# P98/P100 — the wave travels in +x and the left end (x = 0) is at its maximum upward displacement
+# at t = 0, so y(x, t) = A cos(kx − ωt) with k = 2π / λ and ω = k v. The displacement magnitude
+# is |A cos(kx − ωt)| (P98) and the transverse velocity magnitude |∂y/∂t| = |A ω sin(kx − ωt)|
+# (P100). The amplitude is given in mm. The constraints keep both answers away from a zero of the
+# cosine or sine, where rounding the phase would swamp the tolerance. The base canonical values
+# are P98's; P100 overrides them with its own.
+id: phys161-e3-p098-harmonic-wave-particle-motion
+title: Particle motion in a transverse harmonic wave
+source: { document: PHYS161_Exam3, labels: [ P98, P100 ] }
+section: Waves
+tags: [ waves, harmonic-wave, wave-function, transverse-velocity, multi-part ]
+narrative: >-
+  A transverse harmonic wave with an amplitude of {A:unit} and wavelength of {lam:unit} travels from
+  left to right along a long, horizontal, stretched string with a speed of {v:unit}. Take the origin
+  at the left end of the undisturbed string. At time t = 0 s the left end of the string has its
+  maximum upward displacement.
+vars:
+  - {
+      name: A,
+      kind: range,
+      min: 1.0,
+      max: 3.0,
+      step: 0.1,
+      decimals: 1,
+      unit: mm,
+      label: amplitude
+    }
+  - {
+      name: lam,
+      kind: range,
+      min: 1.20,
+      max: 2.40,
+      step: 0.05,
+      decimals: 2,
+      unit: m,
+      label: wavelength
+    }
+  - { name: v, kind: range, min: 20, max: 45, step: 1, unit: m/s, label: wave speed }
+  - {
+      name: x,
+      kind: range,
+      min: 1.00,
+      max: 2.50,
+      step: 0.05,
+      decimals: 2,
+      unit: m,
+      label: particle position
+    }
+  - {
+      name: t,
+      kind: range,
+      min: 0.0300,
+      max: 0.0800,
+      step: 0.0005,
+      decimals: 4,
+      unit: s,
+      label: time
+    }
+derived:
+  - { name: phase, expr: "2 * pi * (x - v * t) / lam", unit: rad } # kx − ωt
+constraints:
+  - "abs(cos(phase)) > 0.2" # displacement not near zero
+  - "abs(sin(phase)) > 0.2" # transverse velocity not near zero
+parts:
+  - id: displacement
+    prompt: >-
+      Find the magnitude of transverse displacement of a particle {x:unit} to the right of the
+      origin at time t = {t:unit}. {_0}{_u}
+    answer: abs((A / 1000) * cos(phase))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: transverse-velocity
+    prompt: >-
+      Find the magnitude of the transverse velocity of a particle {x:unit} to the right of the
+      origin at time t = {t:unit}. {_0}{_u}
+    answer: abs((A / 1000) * (2 * pi * v / lam) * sin(phase))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { A: 2, lam: 1.65, v: 29, x: 1.4, t: 0.0595 }
+  parts:
+    - { id: displacement, answer: 0.0006505, unit: m, source: P98 }
+    - {
+        id: transverse-velocity,
+        answer: 0.08568,
+        unit: m/s,
+        source: P100,
+        vars: { A: 1.5, lam: 1.85, v: 38, x: 1.75, t: 0.0425 }
+      }

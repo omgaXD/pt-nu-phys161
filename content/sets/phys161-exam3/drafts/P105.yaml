@@ -1,63 +1,71 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P105
 number: 105
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A police siren of frequency 24 kHz is attached to a vibrating platform. The platform and siren
-  oscillate up and down in simple harmonic motion with amplitude 3 cm and frequency 7 Hz. Find the
-  maximum sound frequency that you would hear at a position directly above the siren. Use 340 m/s
-  for the speed of sound in air. (24093.50 Hz)
-text: A police siren of frequency 24 kHz is attached to a vibrating platform. The platform and siren
-  oscillate up and down in simple harmonic motion with amplitude 3 cm and frequency 7 Hz. Find the
-  maximum sound frequency that you would hear at a position directly above the siren. Use 340 m/s
-  for the speed of sound in air. (24093.50 Hz)
-answer: { value: 24093.5, unit: Hz, raw: 24093.50 Hz }
-figures: []
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 6-m, 0.825-kg wire is used to support two uniform 230-N posts of equal length inclined at an
+  angle of θ = 56˚. Assume that the wire is essentially horizontal and that the speed of sound is
+  344 m/s. A strong wind is blowing, causing the wire to vibrate in its 5th overtone. What is the
+  frequency of the sound this wire produces? (11.876 Hz)
+text: A 6-m, 0.825-kg wire is used to support two uniform 230-N posts of equal length inclined at an
+  angle of θ = 56°. Assume that the wire is essentially horizontal and that the speed of sound is
+  344 m/s. A strong wind is blowing, causing the wire to vibrate in its 5th overtone. What is the
+  frequency of the sound this wire produces? (11.876 Hz)
+answer: { value: 11.876, unit: Hz, raw: 11.876 Hz }
+figures:
+  - { src: figures/unnamed_008_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_008_OTxQ.png }
 literals:
-  - name: f
-    value: 24
-    unit: kHz
-    text: "24"
-    suggest: { min: 17, max: 31, step: 1 }
   - name: d
-    value: 3
-    unit: cm
-    text: "3"
-    suggest: { min: 2, max: 4, step: 1 }
-  - name: f2
-    value: 7
-    unit: Hz
-    text: "7"
-    suggest: { min: 5, max: 9, step: 1 }
+    value: 6
+    unit: m
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: m
+    value: 0.825
+    unit: kg
+    text: "0.825"
+    suggest: { min: 0.577, max: 1.073, step: 0.001, decimals: 3 }
+  - name: F
+    value: 230
+    unit: N
+    text: "230"
+    suggest: { min: 161, max: 299, step: 1 }
+  - name: theta
+    value: 56
+    unit: °
+    text: "56"
+    suggest: { min: 39, max: 73, step: 1 }
   - name: v
-    value: 340
+    value: 344
     unit: m/s
-    text: "340"
-    suggest: { min: 238, max: 442, step: 1 }
+    text: "344"
+    suggest: { min: 241, max: 447, step: 1 }
 scenario:
   id: phys161-exam3-p105
   source: { document: PHYS161_Exam3, labels: [ P105 ] }
-  section: Sound
+  section: Waves
+  figure: { id: fig, src: figures/unnamed_008_OTxQ.png, alt: "TODO: describe the figure" }
   narrative: >-
-    A police siren of frequency {f:unit} is attached to a vibrating platform. The platform and siren
-    oscillate up and down in simple harmonic motion with amplitude {d:unit} and frequency {f2:unit}.
-    Use {v:unit} for the speed of sound in air.
+    A {d}-m, {m}-kg wire is used to support two uniform {F}-N posts of equal length inclined at an
+    angle of θ = {theta}°. Assume that the wire is essentially horizontal and that the speed of
+    sound is {v:unit}. A strong wind is blowing, causing the wire to vibrate in its 5th overtone.
+    {@fig}
   vars:
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
     - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
   parts:
     - id: answer
       prompt: >-
-        Find the maximum sound frequency that you would hear at a position directly above the siren.
-        {_0}{_u}
+        What is the frequency of the sound this wire produces? {_0}{_u}
       answer: TODO
       unit: Hz
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { f: 24, d: 3, f2: 7, v: 340 }
+    vars: { d: 6, m: 0.825, F: 230, theta: 56, v: 344 }
     parts:
-      - { id: answer, answer: 24093.5, unit: Hz, source: P105 }
+      - { id: answer, answer: 11.876, unit: Hz, source: P105 }

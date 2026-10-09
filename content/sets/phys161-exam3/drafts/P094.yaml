@@ -1,54 +1,45 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P94
 number: 94
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A car at rest is emitting alarm sound waves of frequency 490 Hz. A motorcyclist is traveling
-  directly away from the car. What is the magnitude of the motorcyclist's velocity if he detects a
-  frequency of 470 Hz. Use speed of sound in air v = 344 m/s. (14.041 m/s)
-text: A car at rest is emitting alarm sound waves of frequency 490 Hz. A motorcyclist is traveling
-  directly away from the car. What is the magnitude of the motorcyclist's velocity if he detects a
-  frequency of 470 Hz. Use speed of sound in air v = 344 m/s. (14.041 m/s)
-answer: { value: 14.041, unit: m/s, raw: 14.041 m/s }
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A string on a certain guitar of the length of 52 cm vibrates at a fundamental frequency of 262
+  Hz. Calculate the speed of the transverse waves on the string. (272.48 m/s)
+text: A string on a certain guitar of the length of 52 cm vibrates at a fundamental frequency of 262
+  Hz. Calculate the speed of the transverse waves on the string. (272.48 m/s)
+answer: { value: 272.48, unit: m/s, raw: 272.48 m/s }
 figures: []
 literals:
+  - name: L
+    value: 52
+    unit: cm
+    text: "52"
+    suggest: { min: 36, max: 68, step: 1 }
   - name: f
-    value: 490
+    value: 262
     unit: Hz
-    text: "490"
-    suggest: { min: 343, max: 637, step: 1 }
-  - name: f2
-    value: 470
-    unit: Hz
-    text: "470"
-    suggest: { min: 329, max: 611, step: 1 }
-  - name: v
-    value: 344
-    unit: m/s
-    text: "344"
-    suggest: { min: 241, max: 447, step: 1 }
+    text: "262"
+    suggest: { min: 183, max: 341, step: 1 }
 scenario:
   id: phys161-exam3-p094
   source: { document: PHYS161_Exam3, labels: [ P94 ] }
-  section: Sound
+  section: Waves
   narrative: >-
-    A car at rest is emitting alarm sound waves of frequency {f:unit}. A motorcyclist is traveling
-    directly away from the car. Use speed of sound in air v = {v:unit}.
+    A string on a certain guitar of the length of {L:unit} vibrates at a fundamental frequency of
+    {f:unit}.
   vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
     - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
-    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
   parts:
     - id: answer
       prompt: >-
-        What is the magnitude of the motorcyclist's velocity if he detects a frequency of {f2:unit}.
-        {_0}{_u}
+        Calculate the speed of the transverse waves on the string. {_0}{_u}
       answer: TODO
       unit: m/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { f: 490, f2: 470, v: 344 }
+    vars: { L: 52, f: 262 }
     parts:
-      - { id: answer, answer: 14.041, unit: m/s, source: P94 }
+      - { id: answer, answer: 272.48, unit: m/s, source: P94 }

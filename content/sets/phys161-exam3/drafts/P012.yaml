@@ -1,65 +1,46 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P12
 number: 12
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: >-
-  Initial speed of an object projected away from the surface of Earth is 1.9×10^4
-
-  m/s. Find the object's speed when it is very far from the Earth. Neglect atmospheric friction and
-  the rotation of the Earth. The Earth’s radius and mass are 6371 km and 5.97× 10<sup>24</sup> kg,
-  respectively. Gravitational constant is 6.67 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>.
-  (15366.47 m/s)
-text: Initial speed of an object projected away from the surface of Earth is 1.9×10^4 m/s. Find the
-  object's speed when it is very far from the Earth. Neglect atmospheric friction and the rotation
-  of the Earth. The Earth’s radius and mass are 6371 km and 5.97× 10^24 kg, respectively.
-  Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2. (15366.47 m/s)
-answer: { value: 15366.47, unit: m/s, raw: 15366.47 m/s }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A satellite orbits very close to the surface of a spherical planet of uniform density 4400
+  kg/m³. Find the period of its circular orbit. Gravitational constant is G = 6.67×10⁻¹¹ N m²/kg².
+  (5666.91 s)
+text: A satellite orbits very close to the surface of a spherical planet of uniform density 4400
+  kg/m^3. Find the period of its circular orbit. Gravitational constant is G = 6.67×10^-11 N
+  m^2/kg^2. (5666.91 s)
+answer: { value: 5666.91, unit: s, raw: 5666.91 s }
 figures: []
 literals:
-  - name: v
-    value: 19000
-    unit: m/s
-    text: 1.9×10^4
-    suggest: { min: 13300, max: 24700, step: 1 }
-  - name: r
-    value: 6371
-    unit: km
-    text: "6371"
-    suggest: { min: 4460, max: 8282, step: 1 }
-  - name: m
-    value: 5.97e+24
-    unit: kg
-    text: 5.97× 10^24
-    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
-  - name: F
+  - name: rho
+    value: 4400
+    unit: kg/m^3
+    text: "4400"
+    suggest: { min: 3080, max: 5720, step: 1 }
+  - name: G
     value: 6.67e-11
     unit: N
-    text: 6.67 × 10^-11
+    text: 6.67×10^-11
     suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p012
   source: { document: PHYS161_Exam3, labels: [ P12 ] }
   section: Gravitation
   narrative: >-
-    Initial speed of an object projected away from the surface of Earth is {v:unit}. Neglect
-    atmospheric friction and the rotation of the Earth. The Earth’s radius and mass are {r:unit} and
-    {m:unit}, respectively. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
+    A satellite orbits very close to the surface of a spherical planet of uniform density
+    {rho:unit}. Gravitational constant is G = {G:unit} m$^{2}$/kg$^{2}$.
   vars:
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: G, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
-      prompt: >-
-        Find the object's speed when it is very far from the Earth. {_0}{_u}
+      prompt: Find the period of its circular orbit. {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { v: 19000, r: 6371, m: 5.97e+24, F: 6.67e-11 }
+    vars: { rho: 4400, G: 6.67e-11 }
     parts:
-      - { id: answer, answer: 15366.47, unit: m/s, source: P12 }
+      - { id: answer, answer: 5666.91, unit: s, source: P12 }

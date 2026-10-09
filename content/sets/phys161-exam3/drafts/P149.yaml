@@ -1,0 +1,63 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P149
+number: 149
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A police siren of frequency 24 kHz is attached to a vibrating platform. The platform and siren
+  oscillate up and down in simple harmonic motion with amplitude 3 cm and frequency 7 Hz. Find the
+  maximum sound frequency that you would hear at a position directly above the siren. Use 340 m/s
+  for the speed of sound in air. (24093.50 Hz)
+text: A police siren of frequency 24 kHz is attached to a vibrating platform. The platform and siren
+  oscillate up and down in simple harmonic motion with amplitude 3 cm and frequency 7 Hz. Find the
+  maximum sound frequency that you would hear at a position directly above the siren. Use 340 m/s
+  for the speed of sound in air. (24093.50 Hz)
+answer: { value: 24093.5, unit: Hz, raw: 24093.50 Hz }
+figures: []
+literals:
+  - name: f
+    value: 24
+    unit: kHz
+    text: "24"
+    suggest: { min: 17, max: 31, step: 1 }
+  - name: d
+    value: 3
+    unit: cm
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: f2
+    value: 7
+    unit: Hz
+    text: "7"
+    suggest: { min: 5, max: 9, step: 1 }
+  - name: v
+    value: 340
+    unit: m/s
+    text: "340"
+    suggest: { min: 238, max: 442, step: 1 }
+scenario:
+  id: phys161-exam3-p149
+  source: { document: PHYS161_Exam3, labels: [ P149 ] }
+  section: Sound
+  narrative: >-
+    A police siren of frequency {f:unit} is attached to a vibrating platform. The platform and siren
+    oscillate up and down in simple harmonic motion with amplitude {d:unit} and frequency {f2:unit}.
+    Use {v:unit} for the speed of sound in air.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Find the maximum sound frequency that you would hear at a position directly above the siren.
+        {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 24, d: 3, f2: 7, v: 340 }
+    parts:
+      - { id: answer, answer: 24093.5, unit: Hz, source: P149 }

@@ -1,0 +1,59 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P113
+number: 113
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A uniform cylindrical steel wire is 49 cm long and 1.63 mm in diameter, and is fixed at both
+  ends so that in its first overtone it sounds the note 451 Hz. What is the mass of this wire? The
+  density of steel is ρ = 7.95×10³ kg/m³. (0.00812883 kg)
+text: A uniform cylindrical steel wire is 49 cm long and 1.63 mm in diameter, and is fixed at both
+  ends so that in its first overtone it sounds the note 451 Hz. What is the mass of this wire? The
+  density of steel is ρ = 7.95×10^3 kg/m^3. (0.00812883 kg)
+answer: { value: 0.00812883, unit: kg, raw: 0.00812883 kg }
+figures: []
+literals:
+  - name: d
+    value: 49
+    unit: cm
+    text: "49"
+    suggest: { min: 34, max: 64, step: 1 }
+  - name: L
+    value: 1.63
+    unit: mm
+    text: "1.63"
+    suggest: { min: 1.14, max: 2.12, step: 0.01, decimals: 2 }
+  - name: f
+    value: 451
+    unit: Hz
+    text: "451"
+    suggest: { min: 316, max: 586, step: 1 }
+  - name: rho
+    value: 7950
+    unit: kg/m^3
+    text: 7.95×10^3
+    suggest: { min: 5565, max: 10335, step: 1 }
+scenario:
+  id: phys161-exam3-p113
+  source: { document: PHYS161_Exam3, labels: [ P113 ] }
+  section: Waves
+  narrative: >-
+    A uniform cylindrical steel wire is {d:unit} long and {L:unit} in diameter, and is fixed at both
+    ends so that in its first overtone it sounds the note {f:unit}. The density of steel is ρ =
+    {rho:unit}.
+  vars:
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+  parts:
+    - id: answer
+      prompt: What is the mass of this wire? {_0}{_u}
+      answer: TODO
+      unit: kg
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { d: 49, L: 1.63, f: 451, rho: 7950 }
+    parts:
+      - { id: answer, answer: 0.00812883, unit: kg, source: P113 }

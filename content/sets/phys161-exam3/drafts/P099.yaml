@@ -1,63 +1,53 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P99
 number: 99
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A 88 m long brass rod is stuck at one end. A person at the other end hears two sounds as a
-  result of two longitudinal waves, one traveling in the metal rod and the other traveling in the
-  air. What is the time interval between the two sounds? The speed of sound in air is 344 m/s.
-  Young's modulus of the brass is 9x10<sup>10</sup> Pa and density of the brass is 8600
-  kg/m<sup>3</sup>. (0.229 s)
-text: A 88 m long brass rod is stuck at one end. A person at the other end hears two sounds as a
-  result of two longitudinal waves, one traveling in the metal rod and the other traveling in the
-  air. What is the time interval between the two sounds? The speed of sound in air is 344 m/s.
-  Young's modulus of the brass is 9x10^10 Pa and density of the brass is 8600 kg/m^3. (0.229 s)
-answer: { value: 0.229, unit: s, raw: 0.229 s }
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A transverse harmonic wave with an amplitude of 1.25 mm and a wavelength of 1.72 m travels from
+  left to right along a long, horizontal, stretched string with a speed of 31 m/s. What is the
+  maximum transverse acceleration of a particle of the string? (16.0301 m/s^2)
+text: A transverse harmonic wave with an amplitude of 1.25 mm and a wavelength of 1.72 m travels
+  from left to right along a long, horizontal, stretched string with a speed of 31 m/s. What is the
+  maximum transverse acceleration of a particle of the string? (16.0301 m/s^2)
+answer: { value: 16.0301, unit: m/s^2, raw: 16.0301 m/s^2 }
 figures: []
 literals:
   - name: d
-    value: 88
+    value: 1.25
+    unit: mm
+    text: "1.25"
+    suggest: { min: 0.88, max: 1.63, step: 0.01, decimals: 2 }
+  - name: L
+    value: 1.72
     unit: m
-    text: "88"
-    suggest: { min: 62, max: 114, step: 1 }
+    text: "1.72"
+    suggest: { min: 1.2, max: 2.24, step: 0.01, decimals: 2 }
   - name: v
-    value: 344
+    value: 31
     unit: m/s
-    text: "344"
-    suggest: { min: 241, max: 447, step: 1 }
-  - name: p
-    value: 90000000000
-    unit: Pa
-    text: 9x10^10
-    suggest: { min: 63000000000, max: 117000000000, step: 1 }
-  - name: rho
-    value: 8600
-    unit: kg/m^3
-    text: "8600"
-    suggest: { min: 6020, max: 11180, step: 1 }
+    text: "31"
+    suggest: { min: 22, max: 40, step: 1 }
 scenario:
   id: phys161-exam3-p099
   source: { document: PHYS161_Exam3, labels: [ P99 ] }
-  section: Sound
+  section: Waves
   narrative: >-
-    A {d:unit} long brass rod is stuck at one end. A person at the other end hears two sounds as a
-    result of two longitudinal waves, one traveling in the metal rod and the other traveling in the
-    air. The speed of sound in air is {v:unit}. Young's modulus of the brass is {p:unit} and density
-    of the brass is {rho:unit}.
+    A transverse harmonic wave with an amplitude of {d:unit} and a wavelength of {L:unit} travels
+    from left to right along a long, horizontal, stretched string with a speed of {v:unit}.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
-    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
   parts:
     - id: answer
-      prompt: What is the time interval between the two sounds? {_0}{_u}
+      prompt: >-
+        What is the maximum transverse acceleration of a particle of the string? {_0}{_u}
       answer: TODO
-      unit: s
+      unit: m/s^2
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 88, v: 344, p: 90000000000, rho: 8600 }
+    vars: { d: 1.25, L: 1.72, v: 31 }
     parts:
-      - { id: answer, answer: 0.229, unit: s, source: P99 }
+      - { id: answer, answer: 16.0301, unit: m/s^2, source: P99 }

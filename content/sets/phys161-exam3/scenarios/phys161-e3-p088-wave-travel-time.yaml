@@ -1,0 +1,33 @@
+# P88 — wave speed v = λ f, so the time to cover a distance d is t = d / (λ f).
+id: phys161-e3-p088-wave-travel-time
+title: Travel time of a wave
+source: { document: PHYS161_Exam3, labels: [ P88 ] }
+section: Waves
+tags: [ waves, wave-speed, wavelength, frequency ]
+narrative: ""
+vars:
+  - { name: d, kind: range, min: 400, max: 850, step: 5, unit: m, label: distance }
+  - {
+      name: lam,
+      kind: range,
+      min: 0.500,
+      max: 1.000,
+      step: 0.005,
+      decimals: 3,
+      unit: m,
+      label: wavelength
+    }
+  - { name: f, kind: range, min: 300, max: 550, step: 5, unit: Hz, label: frequency }
+parts:
+  - id: travel-time
+    prompt: >-
+      Calculate the time required to travel the distance {d:unit} by a wave with wavelength
+      {lam:unit} and frequency {f:unit}. {_0}{_u}
+    answer: d / (lam * f)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { d: 620, lam: 0.755, f: 425 }
+  parts:
+    - { id: travel-time, answer: 1.9322, unit: s, source: P88 }

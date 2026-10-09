@@ -1,47 +1,68 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P13
 number: 13
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Calculate the weight of a 50.3-kg person on the Moon where the gravitational acceleration is
-  one-sixth that of the Earth. The gravitational acceleration on Earth is g = 9.8 m/s<sup>2</sup>.
-  (82.157 N)
-text: Calculate the weight of a 50.3-kg person on the Moon where the gravitational acceleration is
-  one-sixth that of the Earth. The gravitational acceleration on Earth is g = 9.8 m/s^2. (82.157 N)
-answer: { value: 82.157, unit: N, raw: 82.157 N }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: How much energy is required to lift the 8000 kg space vehicle from Earth’s surface to the
+  height of the 380 km above the surface? Neglect the rotation of the Earth. The radius of Earth is
+  6.371 × 10<sup>6</sup> m. The mass of the Earth is 5.972 × 10<sup>24</sup> kg. Gravitational
+  constant is 6.6743 × 10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (28172370630.036 J)
+text: How much energy is required to lift the 8000 kg space vehicle from Earth’s surface to the
+  height of the 380 km above the surface? Neglect the rotation of the Earth. The radius of Earth is
+  6.371 × 10^6 m. The mass of the Earth is 5.972 × 10^24 kg. Gravitational constant is 6.6743 ×
+  10^-11N⋅ m^2 /kg^2. (28172370630.036 J)
+answer: { value: 28172370630.036, unit: J, raw: 28172370630.036 J }
 figures: []
 literals:
   - name: m
-    value: 50.3
+    value: 8000
     unit: kg
-    text: "50.3"
-    suggest: { min: 35.2, max: 65.4, step: 0.1, decimals: 1 }
-  - name: g
-    value: 9.8
-    unit: m/s^2
-    text: "9.8"
-    constant: true
-    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+    text: "8000"
+    suggest: { min: 5600, max: 10400, step: 1 }
+  - name: h
+    value: 380
+    unit: km
+    text: "380"
+    suggest: { min: 266, max: 494, step: 1 }
+  - name: r
+    value: 6371000
+    unit: m
+    text: 6.371 × 10^6
+    suggest: { min: 4459700, max: 8282300, step: 1 }
+  - name: m2
+    value: 5.972e+24
+    unit: kg
+    text: 5.972 × 10^24
+    suggest: { min: 4.2e+24, max: 7.8e+24, step: 1e+23 }
+  - name: F
+    value: 6.6743e-11
+    unit: N
+    text: 6.6743 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p013
   source: { document: PHYS161_Exam3, labels: [ P13 ] }
   section: Gravitation
-  narrative: The gravitational acceleration on Earth is g = {g:unit}.
+  narrative: >-
+    Neglect the rotation of the Earth. The radius of Earth is {r:unit}. The mass of the Earth is
+    {m2:unit}. Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$.
   vars:
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-  derived:
-    - { name: g, expr: "9.8", unit: m/s^2 }
+    - { name: h, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
       prompt: >-
-        Calculate the weight of a {m}-kg person on the Moon where the gravitational acceleration is
-        one-sixth that of the Earth. {_0}{_u}
+        How much energy is required to lift the {m:unit} space vehicle from Earth’s surface to the
+        height of the {h:unit} above the surface? {_0}{_u}
       answer: TODO
-      unit: N
+      unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 50.3, g: 9.8 }
+    vars: { m: 8000, h: 380, r: 6371000, m2: 5.972e+24, F: 6.6743e-11 }
     parts:
-      - { id: answer, answer: 82.157, unit: N, source: P13 }
+      - { id: answer, answer: 28172370630.036, unit: J, source: P13 }

@@ -63,7 +63,7 @@ generated problems changed identity.
 ## Authoring workflow
 
 ```bash
-pt import "extra/fixed/PHYS161 Exam 3.html" --set phys161-exam3 --document PHYS161_Exam3 --title "PHYS161 Exam 3"
+pt import extra/fixed/PHYS161_Exam3_new.docx.html --set phys161-exam3 --document PHYS161_Exam3 --title "PHYS161 Exam 3"
 pt group phys161-exam2            # proposed multi-part scenarios (shared figure / similar text)
 pt agent-task P12 --set phys161-exam2   # JSON packet for an LLM: source, literals, answer, schema, rules
 # … write content/sets/phys161-exam2/scenarios/<id>.yaml (by hand, by agent, or in Studio) …
@@ -192,7 +192,7 @@ Values must not contain single quotes or newlines. To roll back, re-run an older
 - **Import:** the four PHYS161 sources import cleanly (`P.76.` labels, problems styled as
   headings, answers like `(0,00133459 kg)`, `(3 446 932.845 J)`, `(862.9 J/(kg K))`,
   `(45)]`); section reference sheets and pictures inside text are recorded as figure roles.
-  Exam 3 P51 has its symbol as a picture and needs a hand fix before it is playable.
+  Exam 3 P72 has its symbol as a picture and needs a hand fix before it is playable.
 
 - **mathjs is the parser only.** Expressions are parsed by a mathjs instance built from the
   parse factory alone (so `evaluate`, `import`, `createUnit` etc. do not exist in it), then

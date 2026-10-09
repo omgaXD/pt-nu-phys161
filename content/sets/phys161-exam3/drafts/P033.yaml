@@ -1,62 +1,70 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P33
 number: 33
-section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A light vertically mounted helical spring is stretched by 6.9 cm by a mass of 171 g hang at
-  spring's end. This mass is then replaced with a new 476 g bob that is set into simple harmonic
-  motion. Calculate its period. The gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (0.8796
-  s)
-text: A light vertically mounted helical spring is stretched by 6.9 cm by a mass of 171 g hang at
-  spring's end. This mass is then replaced with a new 476 g bob that is set into simple harmonic
-  motion. Calculate its period. The gravitational acceleration is g = 9.8 m/s^2. (0.8796 s)
-answer: { value: 0.8796, unit: s, raw: 0.8796 s }
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: In deep space, two uniform spheres, one of mass 29 kg and the other of mass 112 kg, are
+  released from rest with their centers 43 m apart. They accelerate toward each other because of
+  their mutual gravitational attraction. Find the speed at which they approach each other when their
+  centers are 26.5 m apart. Gravitational constant is G = 6.67×10⁻¹¹ N m²/kg². (1.65034e-05 m/s)
+text: In deep space, two uniform spheres, one of mass 29 kg and the other of mass 112 kg, are
+  released from rest with their centers 43 m apart. They accelerate toward each other because of
+  their mutual gravitational attraction. Find the speed at which they approach each other when their
+  centers are 26.5 m apart. Gravitational constant is G = 6.67×10^-11 N m^2/kg^2. (1.65034e-05 m/s)
+answer: { value: 0.0000165034, unit: m/s, raw: 1.65034e-05 m/s }
 figures: []
 literals:
-  - name: d
-    value: 6.9
-    unit: cm
-    text: "6.9"
-    suggest: { min: 4.8, max: 9, step: 0.1, decimals: 1 }
   - name: m
-    value: 171
-    unit: g
-    text: "171"
-    suggest: { min: 120, max: 222, step: 1 }
+    value: 29
+    unit: kg
+    text: "29"
+    suggest: { min: 20, max: 38, step: 1 }
   - name: m2
-    value: 476
-    unit: g
-    text: "476"
-    suggest: { min: 333, max: 619, step: 1 }
-  - name: g
-    value: 9.8
-    unit: m/s^2
-    text: "9.8"
-    constant: true
-    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+    value: 112
+    unit: kg
+    text: "112"
+    suggest: { min: 78, max: 146, step: 1 }
+  - name: d
+    value: 43
+    unit: m
+    text: "43"
+    suggest: { min: 30, max: 56, step: 1 }
+  - name: d2
+    value: 26.5
+    unit: m
+    text: "26.5"
+    suggest: { min: 18.5, max: 34.5, step: 0.1, decimals: 1 }
+  - name: G
+    value: 6.67e-11
+    unit: N
+    text: 6.67×10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p033
   source: { document: PHYS161_Exam3, labels: [ P33 ] }
-  section: Oscillations
+  section: Gravitation
   narrative: >-
-    A light vertically mounted helical spring is stretched by {d:unit} by a mass of {m:unit} hang at
-    spring's end. This mass is then replaced with a new {m2:unit} bob that is set into simple
-    harmonic motion. The gravitational acceleration is g = {g:unit}.
+    In deep space, two uniform spheres, one of mass {m:unit} and the other of mass {m2:unit}, are
+    released from rest with their centers {d:unit} apart. They accelerate toward each other because
+    of their mutual gravitational attraction. Gravitational constant is G = {G:unit}
+    m$^{2}$/kg$^{2}$.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
-  derived:
-    - { name: g, expr: "9.8", unit: m/s^2 }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: G, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
-      prompt: Calculate its period. {_0}{_u}
+      prompt: >-
+        Find the speed at which they approach each other when their centers are {d2:unit} apart.
+        {_0}{_u}
       answer: TODO
-      unit: s
+      unit: m/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 6.9, m: 171, m2: 476, g: 9.8 }
+    vars: { m: 29, m2: 112, d: 43, d2: 26.5, G: 6.67e-11 }
     parts:
-      - { id: answer, answer: 0.8796, unit: s, source: P33 }
+      - { id: answer, answer: 0.0000165034, unit: m/s, source: P33 }

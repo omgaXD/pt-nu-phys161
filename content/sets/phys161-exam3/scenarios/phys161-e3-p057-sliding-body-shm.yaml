@@ -1,0 +1,76 @@
+# P57/P59 — in simple harmonic motion the speed at displacement x is v = ω sqrt(A² − x²), so one
+# (x, v) pair fixes ω = v / sqrt(A² − x²). P57: the period is T = 2π / ω = 2π sqrt(A² − x²) / v.
+# P59: at speed v₂ the displacement is x₂ = sqrt(A² − (v₂ / ω)²).
+# The base canonical values are P57's; P59 overrides them with its own.
+id: phys161-e3-p057-sliding-body-shm
+title: Body sliding in simple harmonic motion
+source: { document: PHYS161_Exam3, labels: [ P57, P59 ] }
+section: Oscillations
+tags: [ oscillations, simple-harmonic-motion, speed, period, displacement, multi-part ]
+narrative: >-
+  A body is sliding back and forth in a simple harmonic motion with an amplitude of {A:unit} on a
+  horizontal surface. At a point {x:unit} away from equilibrium, the speed of the body is {v:unit}.
+vars:
+  - {
+      name: A,
+      kind: range,
+      min: 0.1,
+      max: 0.4,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: amplitude
+    }
+  - {
+      name: x,
+      kind: range,
+      min: 0.01,
+      max: 0.08,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: displacement
+    }
+  - { name: v, kind: range, min: 0.2, max: 0.8, step: 0.1, decimals: 1, unit: m/s, label: speed }
+  - {
+      name: v2,
+      kind: range,
+      min: 0.05,
+      max: 0.40,
+      step: 0.01,
+      decimals: 2,
+      unit: m/s,
+      label: second speed
+    }
+derived:
+  - { name: omega, expr: "v / sqrt(A^2 - x^2)", unit: rad/s }
+constraints:
+  # The given point lies well inside the path, so sqrt(A² − x²) is not a near-zero difference.
+  - "x <= 0.8 * A"
+  # The second speed is reachable (below v_max = ω A) and not so close to it that x₂ is the
+  # square root of a near-zero difference, nor so small that x₂ is just the amplitude.
+  - "v2 <= 0.8 * omega * A and v2 >= 0.2 * omega * A"
+parts:
+  - id: period
+    prompt: "What is the period? {_0}{_u}"
+    answer: 2 * pi / omega
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: displacement
+    prompt: "What is the displacement when the speed is {v2:unit}? {_0}{_u}"
+    answer: sqrt(A^2 - (v2 / omega)^2)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { A: 0.1, x: 0.03, v: 0.4, v2: 0.12 }
+  parts:
+    - { id: period, answer: 1.498, unit: s, source: P57 }
+    - {
+        id: displacement,
+        answer: 0.191,
+        unit: m,
+        source: P59,
+        vars: { A: 0.2, x: 0.02, v: 0.4, v2: 0.12 }
+      }

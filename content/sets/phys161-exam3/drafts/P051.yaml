@@ -1,57 +1,61 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P51
 number: 51
 section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A pendulum with a length of 1 m released from an initial angle of 13˚. After 970 s, its
-  amplitude has been reduced by friction to 3.4˚. What is the value of the [image]? (0.00138 s^-1)
-text: A pendulum with a length of 1 m released from an initial angle of 13°. After 970 s, its
-  amplitude has been reduced by friction to 3.4°. What is the value of the [image]? (0.00138 s^-1)
-answer: { value: 0.00138, unit: s^-1, raw: 0.00138 s^-1 }
-figures:
-  - { src: figures/PHYS161_Exam3-img1.png, original: (embedded image), role: inline }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: When a person steps into a car of mass 1770 kg, the car sinks by 5.4 cm on its springs.
+  Assuming no damping, the car and passenger then vibrate at 0.41 Hz. What is the mass of the
+  person? The gravitational acceleration on Earth is g = 9.8 m/s². (67.1811 kg)
+text: When a person steps into a car of mass 1770 kg, the car sinks by 5.4 cm on its springs.
+  Assuming no damping, the car and passenger then vibrate at 0.41 Hz. What is the mass of the
+  person? The gravitational acceleration on Earth is g = 9.8 m/s^2. (67.1811 kg)
+answer: { value: 67.1811, unit: kg, raw: 67.1811 kg }
+figures: []
 literals:
-  - name: L
-    value: 1
-    unit: m
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: theta
-    value: 13
-    unit: °
-    text: "13"
-    suggest: { min: 9, max: 17, step: 1 }
-  - name: t
-    value: 970
-    unit: s
-    text: "970"
-    suggest: { min: 679, max: 1261, step: 1 }
-  - name: theta2
-    value: 3.4
-    unit: °
-    text: "3.4"
-    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+  - name: m
+    value: 1770
+    unit: kg
+    text: "1770"
+    suggest: { min: 1239, max: 2301, step: 1 }
+  - name: d
+    value: 5.4
+    unit: cm
+    text: "5.4"
+    suggest: { min: 3.8, max: 7, step: 0.1, decimals: 1 }
+  - name: f
+    value: 0.41
+    unit: Hz
+    text: "0.41"
+    suggest: { min: 0.29, max: 0.53, step: 0.01, decimals: 2 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p051
   source: { document: PHYS161_Exam3, labels: [ P51 ] }
   section: Oscillations
   narrative: >-
-    A pendulum with a length of {L:unit} released from an initial angle of {theta}°. After {t:unit},
-    its amplitude has been reduced by friction to {theta2}°.
+    When a person steps into a car of mass {m:unit}, the car sinks by {d:unit} on its springs.
+    Assuming no damping, the car and passenger then vibrate at {f:unit}. The gravitational
+    acceleration on Earth is g = {g:unit}.
   vars:
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
-    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
-    - { name: theta2, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
-      prompt: What is the value of the [image]? {_0}{_u}
+      prompt: What is the mass of the person? {_0}{_u}
       answer: TODO
-      unit: s^-1
+      unit: kg
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { L: 1, theta: 13, t: 970, theta2: 3.4 }
+    vars: { m: 1770, d: 5.4, f: 0.41, g: 9.8 }
     parts:
-      - { id: answer, answer: 0.00138, unit: s^-1, source: P51 }
+      - { id: answer, answer: 67.1811, unit: kg, source: P51 }

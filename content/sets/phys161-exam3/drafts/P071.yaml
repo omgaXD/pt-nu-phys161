@@ -1,60 +1,65 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P71
 number: 71
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: One string of a certain musical instrument is 55 cm long and has a mass of 8.5 g. It is being
-  played in a room where the speed of sound is 344 m/s. To what tension must you adjust the string
-  so that, when vibrating in its second overtone, it produces sound of wavelength 3.4 m? (21.2695 N)
-text: One string of a certain musical instrument is 55 cm long and has a mass of 8.5 g. It is being
-  played in a room where the speed of sound is 344 m/s. To what tension must you adjust the string
-  so that, when vibrating in its second overtone, it produces sound of wavelength 3.4 m? (21.2695 N)
-answer: { value: 21.2695, unit: N, raw: 21.2695 N }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A hanging wire stretches by 2.45 mm when a 52-kg steel ball is suspended from it. The ball is
+  removed and a 24-kg ball is hung from the same wire instead. If this ball is pulled down a small
+  additional distance and released, at what frequency will it vibrate? The gravitational
+  acceleration on Earth is g = 9.8 m/s². (14.8165 Hz)
+text: A hanging wire stretches by 2.45 mm when a 52-kg steel ball is suspended from it. The ball is
+  removed and a 24-kg ball is hung from the same wire instead. If this ball is pulled down a small
+  additional distance and released, at what frequency will it vibrate? The gravitational
+  acceleration on Earth is g = 9.8 m/s^2. (14.8165 Hz)
+answer: { value: 14.8165, unit: Hz, raw: 14.8165 Hz }
 figures: []
 literals:
   - name: d
-    value: 55
-    unit: cm
-    text: "55"
-    suggest: { min: 39, max: 72, step: 1 }
+    value: 2.45
+    unit: mm
+    text: "2.45"
+    suggest: { min: 1.72, max: 3.19, step: 0.01, decimals: 2 }
   - name: m
-    value: 8.5
-    unit: g
-    text: "8.5"
-    suggest: { min: 5.9, max: 11.1, step: 0.1, decimals: 1 }
-  - name: v
-    value: 344
-    unit: m/s
-    text: "344"
-    suggest: { min: 241, max: 447, step: 1 }
-  - name: L
-    value: 3.4
-    unit: m
-    text: "3.4"
-    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+    value: 52
+    unit: kg
+    text: "52"
+    suggest: { min: 36, max: 68, step: 1 }
+  - name: m2
+    value: 24
+    unit: kg
+    text: "24"
+    suggest: { min: 17, max: 31, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p071
   source: { document: PHYS161_Exam3, labels: [ P71 ] }
-  section: Waves
+  section: Oscillations
   narrative: >-
-    One string of a certain musical instrument is {d:unit} long and has a mass of {m:unit}. It is
-    being played in a room where the speed of sound is {v:unit}.
+    A hanging wire stretches by {d:unit} when a {m}-kg steel ball is suspended from it. The ball is
+    removed and a {m2}-kg ball is hung from the same wire instead. The gravitational acceleration on
+    Earth is g = {g:unit}.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        To what tension must you adjust the string so that, when vibrating in its second overtone,
-        it produces sound of wavelength {L:unit}? {_0}{_u}
+        If this ball is pulled down a small additional distance and released, at what frequency will
+        it vibrate? {_0}{_u}
       answer: TODO
-      unit: N
+      unit: Hz
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 55, m: 8.5, v: 344, L: 3.4 }
+    vars: { d: 2.45, m: 52, m2: 24, g: 9.8 }
     parts:
-      - { id: answer, answer: 21.2695, unit: N, source: P71 }
+      - { id: answer, answer: 14.8165, unit: Hz, source: P71 }

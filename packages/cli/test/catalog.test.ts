@@ -111,8 +111,8 @@ describe('fixed fallback (source values)', () => {
         else failures.push(`${set}/${draft.label}:${r.reason}`);
       }
     }
-    expect(failures).toEqual(['phys161-exam3/P51:inline-image']);
-    expect(ok).toBe(503);
+    expect(failures).toEqual(['phys161-exam3/P72:inline-image']);
+    expect(ok).toBe(548);
   });
 });
 

@@ -1,56 +1,48 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P52
 number: 52
 section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: >-
-  A 10.6-kg object oscillates at the end of a vertical spring that has a spring constant of 2.05 ×
-  10<sup>4</sup> N/m. The effect of air resistance is represented by the damping coefficient b = 3 N
-  ⋅
-
-  s/m. Calculate the frequency of the damped oscillation. (6.998 Hz)
-text: A 10.6-kg object oscillates at the end of a vertical spring that has a spring constant of 2.05
-  × 10^4 N/m. The effect of air resistance is represented by the damping coefficient b = 3 N ⋅ s/m.
-  Calculate the frequency of the damped oscillation. (6.998 Hz)
-answer: { value: 6.998, unit: Hz, raw: 6.998 Hz }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
+  motion with amplitude of 0.57 mm. If the tip passes its equilibrium position with a speed of 1.538
+  m/s, what is the frequency of vibration? (429.439 Hz)
+text: The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
+  motion with amplitude of 0.57 mm. If the tip passes its equilibrium position with a speed of 1.538
+  m/s, what is the frequency of vibration? (429.439 Hz)
+answer: { value: 429.439, unit: Hz, raw: 429.439 Hz }
 figures: []
 literals:
-  - name: m
-    value: 10.6
-    unit: kg
-    text: "10.6"
-    suggest: { min: 7.4, max: 13.8, step: 0.1, decimals: 1 }
-  - name: k
-    value: 20500
-    unit: N/m
-    text: 2.05 × 10^4
-    suggest: { min: 14350, max: 26650, step: 1 }
-  - name: b
-    value: 3
-    unit: N
-    text: "3"
-    suggest: { min: 2, max: 4, step: 1 }
+  - name: d
+    value: 0.57
+    unit: mm
+    text: "0.57"
+    suggest: { min: 0.4, max: 0.74, step: 0.01, decimals: 2 }
+  - name: v
+    value: 1.538
+    unit: m/s
+    text: "1.538"
+    suggest: { min: 1.077, max: 1.999, step: 0.001, decimals: 3 }
 scenario:
   id: phys161-exam3-p052
   source: { document: PHYS161_Exam3, labels: [ P52 ] }
   section: Oscillations
   narrative: >-
-    A {m}-kg object oscillates at the end of a vertical spring that has a spring constant of
-    {k:unit}. The effect of air resistance is represented by the damping coefficient b = {b:unit} ⋅
-    s/m.
+    The tip of one half of a tuning fork vibrates approximately as if it were in a simple harmonic
+    motion with amplitude of {d:unit}.
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
-    - { name: b, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
   parts:
     - id: answer
-      prompt: Calculate the frequency of the damped oscillation. {_0}{_u}
+      prompt: >-
+        If the tip passes its equilibrium position with a speed of {v:unit}, what is the frequency
+        of vibration? {_0}{_u}
       answer: TODO
       unit: Hz
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 10.6, k: 20500, b: 3 }
+    vars: { d: 0.57, v: 1.538 }
     parts:
-      - { id: answer, answer: 6.998, unit: Hz, source: P52 }
+      - { id: answer, answer: 429.439, unit: Hz, source: P52 }

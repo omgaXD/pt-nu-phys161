@@ -1,53 +1,43 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P2
 number: 2
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: What is the value of gravitational acceleration g 720 km above Earth’s surface? The radius of
-  Earth is 6.371 × 10<sup>6</sup> m. The gravitational acceleration on Earth is g = 9.8
-  m/s<sup>2</sup>. (7.911 m/s^2)
-text: What is the value of gravitational acceleration g 720 km above Earth’s surface? The radius of
-  Earth is 6.371 × 10^6 m. The gravitational acceleration on Earth is g = 9.8 m/s^2. (7.911 m/s^2)
-answer: { value: 7.911, unit: m/s^2, raw: 7.911 m/s^2 }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: At what altitude above the Earth's surface would the gravitational acceleration be 0.6 of its
+  value at the surface? The radius of the Earth is 6.33×10⁶ m. (1.84199e+06 m)
+text: At what altitude above the Earth's surface would the gravitational acceleration be 0.6 of its
+  value at the surface? The radius of the Earth is 6.33×10^6 m. (1.84199e+06 m)
+answer: { value: 1841990, unit: m, raw: 1.84199e+06 m }
 figures: []
 literals:
-  - name: d
-    value: 720
-    unit: km
-    text: "720"
-    suggest: { min: 504, max: 936, step: 1 }
+  - name: x
+    value: 0.6
+    text: "0.6"
+    suggest: { min: 0.4, max: 0.8, step: 0.1, decimals: 1 }
   - name: r
-    value: 6371000
+    value: 6330000
     unit: m
-    text: 6.371 × 10^6
-    suggest: { min: 4459700, max: 8282300, step: 1 }
-  - name: g
-    value: 9.8
-    unit: m/s^2
-    text: "9.8"
-    constant: true
-    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+    text: 6.33×10^6
+    suggest: { min: 4431000, max: 8229000, step: 1 }
 scenario:
   id: phys161-exam3-p002
   source: { document: PHYS161_Exam3, labels: [ P2 ] }
   section: Gravitation
-  narrative: >-
-    The radius of Earth is {r:unit}. The gravitational acceleration on Earth is g = {g:unit}.
+  narrative: The radius of the Earth is {r:unit}.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
     - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-  derived:
-    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        What is the value of gravitational acceleration g {d:unit} above Earth’s surface? {_0}{_u}
+        At what altitude above the Earth's surface would the gravitational acceleration be {x} of
+        its value at the surface? {_0}{_u}
       answer: TODO
-      unit: m/s^2
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 720, r: 6371000, g: 9.8 }
+    vars: { x: 0.6, r: 6330000 }
     parts:
-      - { id: answer, answer: 7.911, unit: m/s^2, source: P2 }
+      - { id: answer, answer: 1841990, unit: m, source: P2 }

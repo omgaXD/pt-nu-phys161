@@ -1,0 +1,32 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P122
+number: 122
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: An organ pipe that is open at one end and closed at the other has two successive harmonics with
+  frequencies {f1} Hz and {f2} Hz. Which harmonic is the {f1} Hz one? Give the harmonic number. (11)
+text: An organ pipe that is open at one end and closed at the other has two successive harmonics
+  with frequencies {f1} Hz and {f2} Hz. Which harmonic is the {f1} Hz one? Give the harmonic number.
+  (11)
+answer: { value: 11, raw: "11" }
+figures: []
+literals: []
+scenario:
+  id: phys161-exam3-p122
+  source: { document: PHYS161_Exam3, labels: [ P122 ] }
+  section: Sound
+  narrative: >-
+    An organ pipe that is open at one end and closed at the other has two successive harmonics with
+    frequencies (f1) Hz and (f2) Hz. Which harmonic is the (f1) Hz one?
+  vars: []
+  parts:
+    - id: answer
+      prompt: Give the harmonic number. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: {}
+    parts:
+      - { id: answer, answer: 11, source: P122 }

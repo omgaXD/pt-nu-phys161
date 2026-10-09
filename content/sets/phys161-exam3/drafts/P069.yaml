@@ -1,72 +1,69 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P69
 number: 69
-section: Waves
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A transverse harmonic wave with an amplitude of 2 mm and wavelength of 1.65 m travels from left
-  to right along a long, horizontal, stretched string with a speed of 29 m/s. Take the origin at the
-  left end of the undisturbed string. At time t = 0 s the left end of the string has its maximum
-  upward displacement. Find the magnitude of transverse displacement of a particle 1.4 m to the
-  right of the origin at time t = 0.0595 s. (0.0006505 m)
-text: A transverse harmonic wave with an amplitude of 2 mm and wavelength of 1.65 m travels from
-  left to right along a long, horizontal, stretched string with a speed of 29 m/s. Take the origin
-  at the left end of the undisturbed string. At time t = 0 s the left end of the string has its
-  maximum upward displacement. Find the magnitude of transverse displacement of a particle 1.4 m to
-  the right of the origin at time t = 0.0595 s. (0.0006505 m)
-answer: { value: 0.0006505, unit: m, raw: 0.0006505 m }
+section: Oscillations
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A 2.2-kg bucket containing 10.8 kg of water is hanging from a vertical ideal spring of force
+  constant 128 N/m and oscillating up and down with an amplitude of 2.5 cm. Suddenly the bucket
+  springs a leak in the bottom such that water drops out at a steady rate of 2.2 g/s. When the
+  bucket is half full, find the magnitude of rate at which the period is changing with respect to
+  time. (0.0002216)
+text: A 2.2-kg bucket containing 10.8 kg of water is hanging from a vertical ideal spring of force
+  constant 128 N/m and oscillating up and down with an amplitude of 2.5 cm. Suddenly the bucket
+  springs a leak in the bottom such that water drops out at a steady rate of 2.2 g/s. When the
+  bucket is half full, find the magnitude of rate at which the period is changing with respect to
+  time. (0.0002216)
+answer: { value: 0.0002216, raw: "0.0002216" }
 figures: []
 literals:
+  - name: m
+    value: 2.2
+    unit: kg
+    text: "2.2"
+    suggest: { min: 1.5, max: 2.9, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 10.8
+    unit: kg
+    text: "10.8"
+    suggest: { min: 7.6, max: 14, step: 0.1, decimals: 1 }
+  - name: k
+    value: 128
+    unit: N/m
+    text: "128"
+    suggest: { min: 90, max: 166, step: 1 }
   - name: d
-    value: 2
-    unit: mm
-    text: "2"
-    suggest: { min: 1, max: 3, step: 1 }
-  - name: L
-    value: 1.65
-    unit: m
-    text: "1.65"
-    suggest: { min: 1.15, max: 2.15, step: 0.01, decimals: 2 }
-  - name: v
-    value: 29
-    unit: m/s
-    text: "29"
-    suggest: { min: 20, max: 38, step: 1 }
-  - name: d2
-    value: 1.4
-    unit: m
-    text: "1.4"
-    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
-  - name: t
-    value: 0.0595
-    unit: s
-    text: "0.0595"
-    suggest: { min: 0.0416, max: 0.0774, step: 0.0001, decimals: 4 }
+    value: 2.5
+    unit: cm
+    text: "2.5"
+    suggest: { min: 1.8, max: 3.3, step: 0.1, decimals: 1 }
+  - name: x
+    value: 2.2
+    text: "2.2"
+    suggest: { min: 1.5, max: 2.9, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p069
   source: { document: PHYS161_Exam3, labels: [ P69 ] }
-  section: Waves
+  section: Oscillations
   narrative: >-
-    A transverse harmonic wave with an amplitude of {d:unit} and wavelength of {L:unit} travels from
-    left to right along a long, horizontal, stretched string with a speed of {v:unit}. Take the
-    origin at the left end of the undisturbed string. At time t = 0 s the left end of the string has
-    its maximum upward displacement.
+    A {m}-kg bucket containing {m2:unit} of water is hanging from a vertical ideal spring of force
+    constant {k:unit} and oscillating up and down with an amplitude of {d:unit}. Suddenly the bucket
+    springs a leak in the bottom such that water drops out at a steady rate of {x} g/s.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
   parts:
     - id: answer
       prompt: >-
-        Find the magnitude of transverse displacement of a particle {d2:unit} to the right of the
-        origin at time t = {t:unit}. {_0}{_u}
+        When the bucket is half full, find the magnitude of rate at which the period is changing
+        with respect to time. {_0}
       answer: TODO
-      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 2, L: 1.65, v: 29, d2: 1.4, t: 0.0595 }
+    vars: { m: 2.2, m2: 10.8, k: 128, d: 2.5, x: 2.2 }
     parts:
-      - { id: answer, answer: 0.0006505, unit: m, source: P69 }
+      - { id: answer, answer: 0.0002216, source: P69 }

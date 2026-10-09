@@ -1,0 +1,37 @@
+# P140 — longitudinal waves in a solid rod travel at v = sqrt(Y / ρ); the pulse covers the bar's
+# length L in time t, so v = L / t and Y = ρ (L / t)². The constraint keeps the wave speed in the
+# range of real metals (1500–6000 m/s).
+id: phys161-e3-p140-metal-bar-youngs-modulus
+title: Young's modulus from the travel time of sound in a bar
+source: { document: PHYS161_Exam3, labels: [ P140 ] }
+section: Sound
+tags: [ sound, speed-of-sound, youngs-modulus ]
+narrative: >-
+  A metal bar with a length of {L:unit} has density {rho:unit}. Longitudinal sound waves take
+  {t:unit} to travel from one end of the bar to the other.
+vars:
+  - { name: L, kind: range, min: 1, max: 3, step: 1, unit: m, label: bar length }
+  - { name: rho, kind: range, min: 4000, max: 9000, step: 100, unit: kg/m^3, label: density }
+  - {
+      name: t,
+      kind: range,
+      min: 3e-4,
+      max: 9.9e-4,
+      step: 1e-5,
+      sigfigs: 2,
+      unit: s,
+      label: travel time
+    }
+constraints:
+  - "L / t >= 1500 and L / t <= 6000"
+parts:
+  - id: youngs-modulus
+    prompt: "What is Young's modulus for this metal? {_0}{_u}"
+    answer: rho * (L / t)^2
+    unit: Pa
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 1, rho: 6200, t: 4.3e-4 }
+  parts:
+    - { id: youngs-modulus, answer: 33531638723.63, unit: Pa, source: P140 }

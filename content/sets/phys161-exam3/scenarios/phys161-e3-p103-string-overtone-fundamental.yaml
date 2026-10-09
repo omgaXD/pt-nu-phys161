@@ -1,0 +1,49 @@
+# P103 — the string's frequency equals the sound's, f₃ = v_sound / λ. The second overtone of a
+# string fixed at both ends is the third harmonic, so the fundamental is f₁ = f₃ / 3. The sound
+# wavelength is given in cm; the string's length and mass do not affect the answer. The speed of
+# sound is a constant stated by the source.
+id: phys161-e3-p103-string-overtone-fundamental
+title: Fundamental from an overtone's sound wavelength
+source: { document: PHYS161_Exam3, labels: [ P103 ] }
+section: Waves
+tags: [ waves, string, standing-waves, overtone, fundamental, sound-wavelength ]
+narrative: >-
+  One string of a certain musical instrument is {L:unit} long and has a mass of {m:unit}. It is
+  being played in a room where the speed of sound is {vs:unit}.
+vars:
+  - { name: L, kind: range, min: 45, max: 75, step: 1, unit: cm, label: string length }
+  - {
+      name: m,
+      kind: range,
+      min: 7.0,
+      max: 12.0,
+      step: 0.1,
+      decimals: 1,
+      unit: g,
+      label: string mass
+    }
+  - {
+      name: lam,
+      kind: range,
+      min: 2.5,
+      max: 5.0,
+      step: 0.1,
+      decimals: 1,
+      unit: cm,
+      label: sound wavelength
+    }
+derived:
+  - { name: vs, expr: "344", unit: m/s }
+parts:
+  - id: fundamental
+    prompt: >-
+      What frequency sound does this string produce in its fundamental mode of vibration, if when
+      vibrating in its second overtone, it produces sound of wavelength {lam:unit}? {_0}{_u}
+    answer: vs / (lam / 100) / 3
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 60, m: 9.5, lam: 3.7, vs: 344 }
+  parts:
+    - { id: fundamental, answer: 3099.099, unit: Hz, source: P103 }

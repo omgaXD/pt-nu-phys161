@@ -1,61 +1,60 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P45
 number: 45
 section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A 12-kg mass is traveling to the right with a speed of 1.6 m/s on a smooth horizontal surface
-  when it collides with and sticks to a second 12-kg mass that is initially at rest but is attached
-  to a light spring with force constant 88 N/m. Find the amplitude of the subsequent oscillations.
-  (0.41779 m)
-text: A 12-kg mass is traveling to the right with a speed of 1.6 m/s on a smooth horizontal surface
-  when it collides with and sticks to a second 12-kg mass that is initially at rest but is attached
-  to a light spring with force constant 88 N/m. Find the amplitude of the subsequent oscillations.
-  (0.41779 m)
-answer: { value: 0.41779, unit: m, raw: 0.41779 m }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: "A body oscillates in a simple harmonic motion with its position described by the following
+  formula: x=Acos(ωt+φ), where A=8.1, ω=1.379, and φ=0.337. Assume all quantities are given in SI
+  units. Assuming the oscillations are governed by Hooke's law and the body's mass is 790 g,
+  calculate the total energy of the oscillator. (49.28 J)"
+text: "A body oscillates in a simple harmonic motion with its position described by the following
+  formula: x=Acos(ωt+φ), where A=8.1, ω=1.379, and φ=0.337. Assume all quantities are given in SI
+  units. Assuming the oscillations are governed by Hooke's law and the body's mass is 790 g,
+  calculate the total energy of the oscillator. (49.28 J)"
+answer: { value: 49.28, unit: J, raw: 49.28 J }
 figures: []
 literals:
+  - name: A
+    value: 8.1
+    text: "8.1"
+    suggest: { min: 5.7, max: 10.5, step: 0.1, decimals: 1 }
+  - name: omega
+    value: 1.379
+    text: "1.379"
+    suggest: { min: 0.965, max: 1.793, step: 0.001, decimals: 3 }
+  - name: phi
+    value: 0.337
+    text: "0.337"
+    suggest: { min: 0.236, max: 0.438, step: 0.001, decimals: 3 }
   - name: m
-    value: 12
-    unit: kg
-    text: "12"
-    suggest: { min: 8, max: 16, step: 1 }
-  - name: v
-    value: 1.6
-    unit: m/s
-    text: "1.6"
-    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
-  - name: m2
-    value: 12
-    unit: kg
-    text: "12"
-    suggest: { min: 8, max: 16, step: 1 }
-  - name: k
-    value: 88
-    unit: N/m
-    text: "88"
-    suggest: { min: 62, max: 114, step: 1 }
+    value: 790
+    unit: g
+    text: "790"
+    suggest: { min: 553, max: 1027, step: 1 }
 scenario:
   id: phys161-exam3-p045
   source: { document: PHYS161_Exam3, labels: [ P45 ] }
   section: Oscillations
   narrative: >-
-    A {m}-kg mass is traveling to the right with a speed of {v:unit} on a smooth horizontal surface
-    when it collides with and sticks to a second {m2}-kg mass that is initially at rest but is
-    attached to a light spring with force constant {k:unit}.
+    A body oscillates in a simple harmonic motion with its position described by the following
+    formula: x=Acos(ωt+φ), where A={A}, ω={omega}, and φ={phi}. Assume all quantities are given in
+    SI units.
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m }
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: omega, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: phi, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
   parts:
     - id: answer
-      prompt: Find the amplitude of the subsequent oscillations. {_0}{_u}
+      prompt: >-
+        Assuming the oscillations are governed by Hooke's law and the body's mass is {m:unit},
+        calculate the total energy of the oscillator. {_0}{_u}
       answer: TODO
-      unit: m
+      unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 12, v: 1.6, m2: 12, k: 88 }
+    vars: { A: 8.1, omega: 1.379, phi: 0.337, m: 790 }
     parts:
-      - { id: answer, answer: 0.41779, unit: m, source: P45 }
+      - { id: answer, answer: 49.28, unit: J, source: P45 }

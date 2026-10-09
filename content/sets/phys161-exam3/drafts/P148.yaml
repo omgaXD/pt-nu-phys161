@@ -1,0 +1,57 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P148
+number: 148
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: The sound source of a ship's sonar system operates at a frequency of 21 kHz. The speed of sound
+  in water is 1488 m/s. Calculate the absolute value of the difference in frequency between the
+  directly radiated waves and the waves reflected from a whale traveling directly toward the ship at
+  4.3 m/s. The ship is at rest in the water. (121.72 Hz)
+text: The sound source of a ship's sonar system operates at a frequency of 21 kHz. The speed of
+  sound in water is 1488 m/s. Calculate the absolute value of the difference in frequency between
+  the directly radiated waves and the waves reflected from a whale traveling directly toward the
+  ship at 4.3 m/s. The ship is at rest in the water. (121.72 Hz)
+answer: { value: 121.72, unit: Hz, raw: 121.72 Hz }
+figures: []
+literals:
+  - name: f
+    value: 21
+    unit: kHz
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: v
+    value: 1488
+    unit: m/s
+    text: "1488"
+    suggest: { min: 1042, max: 1934, step: 1 }
+  - name: v2
+    value: 4.3
+    unit: m/s
+    text: "4.3"
+    suggest: { min: 3, max: 5.6, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p148
+  source: { document: PHYS161_Exam3, labels: [ P148 ] }
+  section: Sound
+  narrative: >-
+    The sound source of a ship's sonar system operates at a frequency of {f:unit}. The speed of
+    sound in water is {v:unit}. The ship is at rest in the water.
+  vars:
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: kHz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: >-
+        Calculate the absolute value of the difference in frequency between the directly radiated
+        waves and the waves reflected from a whale traveling directly toward the ship at {v2:unit}.
+        {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { f: 21, v: 1488, v2: 4.3 }
+    parts:
+      - { id: answer, answer: 121.72, unit: Hz, source: P148 }

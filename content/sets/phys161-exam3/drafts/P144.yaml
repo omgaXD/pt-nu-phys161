@@ -1,0 +1,61 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P144
+number: 144
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: One type of steel has a density of 7.8×10<sup>3</sup> kg/m<sup>3</sup> and a breaking stress of
+  7×10<sup>8</sup> N/m<sup>2</sup>. A cylindrical guitar string is to be made of 6 g of this steel.
+  What is the length of the longest and thinnest string that can be placed under a tension of 930 N
+  without breaking? (0.579 m)
+text: One type of steel has a density of 7.8×10^3 kg/m^3 and a breaking stress of 7×10^8 N/m^2. A
+  cylindrical guitar string is to be made of 6 g of this steel. What is the length of the longest
+  and thinnest string that can be placed under a tension of 930 N without breaking? (0.579 m)
+answer: { value: 0.579, unit: m, raw: 0.579 m }
+figures: []
+literals:
+  - name: rho
+    value: 7800
+    unit: kg/m^3
+    text: 7.8×10^3
+    suggest: { min: 5460, max: 10140, step: 1 }
+  - name: p
+    value: 700000000
+    unit: N/m^2
+    text: 7×10^8
+    suggest: { min: 490000000, max: 910000000, step: 1 }
+  - name: m
+    value: 6
+    unit: g
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: F
+    value: 930
+    unit: N
+    text: "930"
+    suggest: { min: 651, max: 1209, step: 1 }
+scenario:
+  id: phys161-exam3-p144
+  source: { document: PHYS161_Exam3, labels: [ P144 ] }
+  section: Sound
+  narrative: >-
+    One type of steel has a density of {rho:unit} and a breaking stress of {p:unit}. A cylindrical
+    guitar string is to be made of {m:unit} of this steel.
+  vars:
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m^2 }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the length of the longest and thinnest string that can be placed under a tension of
+        {F:unit} without breaking? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { rho: 7800, p: 700000000, m: 6, F: 930 }
+    parts:
+      - { id: answer, answer: 0.579, unit: m, source: P144 }

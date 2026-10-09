@@ -1,0 +1,55 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P138
+number: 138
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Two guitarists try to play the same note at the same time. One plays a note of wavelength 7.1
+  cm; the other is slightly out of tune and they hear a beat of 13.45 Hz, the out-of-tune note being
+  the lower in frequency. What is the wavelength of the out-of-tune note? The speed of sound in air
+  is 345.5 m/s. (0.0711968 m)
+text: Two guitarists try to play the same note at the same time. One plays a note of wavelength 7.1
+  cm; the other is slightly out of tune and they hear a beat of 13.45 Hz, the out-of-tune note being
+  the lower in frequency. What is the wavelength of the out-of-tune note? The speed of sound in air
+  is 345.5 m/s. (0.0711968 m)
+answer: { value: 0.0711968, unit: m, raw: 0.0711968 m }
+figures: []
+literals:
+  - name: L
+    value: 7.1
+    unit: cm
+    text: "7.1"
+    suggest: { min: 5, max: 9.2, step: 0.1, decimals: 1 }
+  - name: f
+    value: 13.45
+    unit: Hz
+    text: "13.45"
+    suggest: { min: 9.41, max: 17.49, step: 0.01, decimals: 2 }
+  - name: v
+    value: 345.5
+    unit: m/s
+    text: "345.5"
+    suggest: { min: 241.9, max: 449.2, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p138
+  source: { document: PHYS161_Exam3, labels: [ P138 ] }
+  section: Sound
+  narrative: >-
+    Two guitarists try to play the same note at the same time. One plays a note of wavelength
+    {L:unit}; the other is slightly out of tune and they hear a beat of {f:unit}, the out-of-tune
+    note being the lower in frequency. The speed of sound in air is {v:unit}.
+  vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+  parts:
+    - id: answer
+      prompt: What is the wavelength of the out-of-tune note? {_0}{_u}
+      answer: TODO
+      unit: m
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { L: 7.1, f: 13.45, v: 345.5 }
+    parts:
+      - { id: answer, answer: 0.0711968, unit: m, source: P138 }

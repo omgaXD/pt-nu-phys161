@@ -1,43 +1,74 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P87
 number: 87
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: An organ pipe has two successive harmonics with frequencies 732 Hz and 915 Hz. What is the
-  fundamental frequency? (183 Hz)
-text: An organ pipe has two successive harmonics with frequencies 732 Hz and 915 Hz. What is the
-  fundamental frequency? (183 Hz)
-answer: { value: 183, unit: Hz, raw: 183 Hz }
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A nylon string is stretched between two rigid columns such that the tension in it is 175 N. The
+  string is of length L = 2 m and has the cross-sectional area that varies with distance as A(x) =
+  (1+x/L)*10^(-6), where A is in meters squared and x is in meters. Determine the time it takes for
+  a transverse pulse in the string to travel from one end to the other. The density of nylon is 1.1
+  g/cm^3. (0.006112 s)
+text: A nylon string is stretched between two rigid columns such that the tension in it is 175 N.
+  The string is of length L = 2 m and has the cross-sectional area that varies with distance as A(x)
+  = (1+x/L)*10^(-6), where A is in meters squared and x is in meters. Determine the time it takes
+  for a transverse pulse in the string to travel from one end to the other. The density of nylon is
+  1.1 g/cm^3. (0.006112 s)
+answer: { value: 0.006112, unit: s, raw: 0.006112 s }
 figures: []
 literals:
-  - name: f
-    value: 732
-    unit: Hz
-    text: "732"
-    suggest: { min: 512, max: 952, step: 1 }
-  - name: f2
-    value: 915
-    unit: Hz
-    text: "915"
-    suggest: { min: 641, max: 1190, step: 1 }
+  - name: F
+    value: 175
+    unit: N
+    text: "175"
+    suggest: { min: 122, max: 228, step: 1 }
+  - name: L
+    value: 2
+    unit: m
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: x
+    value: 1
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: x2
+    value: 10
+    text: "10"
+    suggest: { min: 7, max: 13, step: 1 }
+  - name: x3
+    value: -6
+    text: "-6"
+    suggest: { min: -8, max: -4, step: 1 }
+  - name: x4
+    value: 1.1
+    text: "1.1"
+    suggest: { min: 0.8, max: 1.4, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p087
   source: { document: PHYS161_Exam3, labels: [ P87 ] }
-  section: Sound
+  section: Waves
   narrative: >-
-    An organ pipe has two successive harmonics with frequencies {f:unit} and {f2:unit}.
+    A nylon string is stretched between two rigid columns such that the tension in it is {F:unit}.
+    The string is of length L = {L:unit} and has the cross-sectional area that varies with distance
+    as A(x) = ({x}+x/L)*{x2}^({x3}), where A is in meters squared and x is in meters. The density of
+    nylon is {x4} g/cm$^{3}$.
   vars:
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
-    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x4, kind: range, min: TODO, max: TODO, step: TODO }
   parts:
     - id: answer
-      prompt: What is the fundamental frequency? {_0}{_u}
+      prompt: >-
+        Determine the time it takes for a transverse pulse in the string to travel from one end to
+        the other. {_0}{_u}
       answer: TODO
-      unit: Hz
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { f: 732, f2: 915 }
+    vars: { F: 175, L: 2, x: 1, x2: 10, x3: -6, x4: 1.1 }
     parts:
-      - { id: answer, answer: 183, unit: Hz, source: P87 }
+      - { id: answer, answer: 0.006112, unit: s, source: P87 }

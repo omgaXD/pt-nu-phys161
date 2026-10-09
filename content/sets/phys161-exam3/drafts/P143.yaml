@@ -1,0 +1,69 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P143
+number: 143
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A uniform 135-N bar is supported horizontally by two identical wires, A and B, attached at its
+  ends. Each wire is 57 cm long and has a mass of 7.6 g. A small 175-N cube of lead is placed a
+  fraction 0.7 of the way from A to B. If wire B is plucked, what is the fundamental frequency at
+  which it vibrates? (104.713 Hz)
+text: A uniform 135-N bar is supported horizontally by two identical wires, A and B, attached at its
+  ends. Each wire is 57 cm long and has a mass of 7.6 g. A small 175-N cube of lead is placed a
+  fraction 0.7 of the way from A to B. If wire B is plucked, what is the fundamental frequency at
+  which it vibrates? (104.713 Hz)
+answer: { value: 104.713, unit: Hz, raw: 104.713 Hz }
+figures:
+  - { src: figures/unnamed_006_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_006_OTxQ.png }
+literals:
+  - name: F
+    value: 135
+    unit: N
+    text: "135"
+    suggest: { min: 95, max: 176, step: 1 }
+  - name: d
+    value: 57
+    unit: cm
+    text: "57"
+    suggest: { min: 40, max: 74, step: 1 }
+  - name: m
+    value: 7.6
+    unit: g
+    text: "7.6"
+    suggest: { min: 5.3, max: 9.9, step: 0.1, decimals: 1 }
+  - name: F2
+    value: 175
+    unit: N
+    text: "175"
+    suggest: { min: 122, max: 228, step: 1 }
+  - name: x
+    value: 0.7
+    text: "0.7"
+    suggest: { min: 0.5, max: 0.9, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p143
+  source: { document: PHYS161_Exam3, labels: [ P143 ] }
+  section: Sound
+  figure: { id: fig, src: figures/unnamed_006_OTxQ.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A uniform {F}-N bar is supported horizontally by two identical wires, A and B, attached at its
+    ends. Each wire is {d:unit} long and has a mass of {m:unit}. A small {F2}-N cube of lead is
+    placed a fraction {x} of the way from A to B. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+  parts:
+    - id: answer
+      prompt: >-
+        If wire B is plucked, what is the fundamental frequency at which it vibrates? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 135, d: 57, m: 7.6, F2: 175, x: 0.7 }
+    parts:
+      - { id: answer, answer: 104.713, unit: Hz, source: P143 }

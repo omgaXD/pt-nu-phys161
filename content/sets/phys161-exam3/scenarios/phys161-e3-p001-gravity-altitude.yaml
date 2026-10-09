@@ -1,9 +1,9 @@
-# P1/P2 — gravitational acceleration at altitude h above the Earth: g(h) = g (R_E / (R_E + h))².
-# P1 inverts it for the altitude where g(h) = a: h = R_E (sqrt(g / a) − 1); P2 evaluates g(h).
-# R_E and g are the constants the source states; only a (P1) and h (P2) are randomized.
+# P1/P3 — gravitational acceleration at altitude h above the Earth: g(h) = g (R_E / (R_E + h))².
+# P1 inverts it for the altitude where g(h) = a: h = R_E (sqrt(g / a) − 1); P3 evaluates g(h).
+# R_E and g are the constants the source states; only a (P1) and h (P3) are randomized.
 id: phys161-e3-p001-gravity-altitude
 title: Gravitational acceleration above the Earth
-source: { document: PHYS161_Exam3, labels: [ P1, P2 ] }
+source: { document: PHYS161_Exam3, labels: [ P1, P3 ] }
 section: Gravitation
 tags: [ gravitation, gravitational-acceleration, altitude, multi-part ]
 narrative: >-
@@ -36,4 +36,4 @@ canonical:
   vars: { a: 6.2, h: 720, g: 9.8, RE: 6371000 }
   parts:
     - { id: altitude, answer: 1638.858, unit: km, source: P1 }
-    - { id: gravity-at-altitude, answer: 7.911, unit: m/s^2, source: P2 }
+    - { id: gravity-at-altitude, answer: 7.911, unit: m/s^2, source: P3 }

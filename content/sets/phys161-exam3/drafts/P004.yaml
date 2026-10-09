@@ -1,51 +1,57 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P4
 number: 4
 section: Gravitation
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Escape velocity of a bullet fired up from the surface of planet X is 1481 m/s. Find the escape
-  velocity from the surface of another planet Y, if the mass of planet Y is 1.41 times that of X,
-  and its radius is 0.718 times the radius of planet X. (2075.4 m/s)
-text: Escape velocity of a bullet fired up from the surface of planet X is 1481 m/s. Find the escape
-  velocity from the surface of another planet Y, if the mass of planet Y is 1.41 times that of X,
-  and its radius is 0.718 times the radius of planet X. (2075.4 m/s)
-answer: { value: 2075.4, unit: m/s, raw: 2075.4 m/s }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: In a Star Wars movie the rebel space station is built as circular ring of 45 m in diameter. At
+  what angular speed should it be rotated so the occupants feel that they have the 75% of the weight
+  they feel on Earth? The gravitational acceleration on Earth is g = 9.8 m/s<sup>2</sup>. (0.572
+  rad/s)
+text: In a Star Wars movie the rebel space station is built as circular ring of 45 m in diameter. At
+  what angular speed should it be rotated so the occupants feel that they have the 75% of the weight
+  they feel on Earth? The gravitational acceleration on Earth is g = 9.8 m/s^2. (0.572 rad/s)
+answer: { value: 0.572, unit: rad/s, raw: 0.572 rad/s }
 figures: []
 literals:
-  - name: v
-    value: 1481
-    unit: m/s
-    text: "1481"
-    suggest: { min: 1037, max: 1925, step: 1 }
-  - name: ratio
-    value: 1.41
-    text: "1.41"
-    suggest: { min: 0.99, max: 1.83, step: 0.01, decimals: 2 }
-  - name: ratio2
-    value: 0.718
-    text: "0.718"
-    suggest: { min: 0.503, max: 0.933, step: 0.001, decimals: 3 }
+  - name: d
+    value: 45
+    unit: m
+    text: "45"
+    suggest: { min: 31, max: 59, step: 1 }
+  - name: pct
+    value: 75
+    unit: "%"
+    text: "75"
+    suggest: { min: 53, max: 98, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam3-p004
   source: { document: PHYS161_Exam3, labels: [ P4 ] }
   section: Gravitation
   narrative: >-
-    Escape velocity of a bullet fired up from the surface of planet X is {v:unit}.
+    In a Star Wars movie the rebel space station is built as circular ring of {d:unit} in diameter.
+    The gravitational acceleration on Earth is g = {g:unit}.
   vars:
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: ratio, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: ratio2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        Find the escape velocity from the surface of another planet Y, if the mass of planet Y is
-        {ratio} times that of X, and its radius is {ratio2} times the radius of planet X. {_0}{_u}
+        At what angular speed should it be rotated so the occupants feel that they have the {pct}%
+        of the weight they feel on Earth? {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: rad/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { v: 1481, ratio: 1.41, ratio2: 0.718 }
+    vars: { d: 45, pct: 75, g: 9.8 }
     parts:
-      - { id: answer, answer: 2075.4, unit: m/s, source: P4 }
+      - { id: answer, answer: 0.572, unit: rad/s, source: P4 }

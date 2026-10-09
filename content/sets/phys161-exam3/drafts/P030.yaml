@@ -1,62 +1,57 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P30
 number: 30
-section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: Four passengers with combined mass 260 kg compress the springs of a car by 5 cm when they enter
-  it. If the loaded car has a period of vibration of 1 s, what is the mass of the car? Ignore
-  damping. The gravitational acceleration is g = 9.8 m/s<sup>2</sup>. (1030.83 kg)
-text: Four passengers with combined mass 260 kg compress the springs of a car by 5 cm when they
-  enter it. If the loaded car has a period of vibration of 1 s, what is the mass of the car? Ignore
-  damping. The gravitational acceleration is g = 9.8 m/s^2. (1030.83 kg)
-answer: { value: 1030.83, unit: kg, raw: 1030.83 kg }
-figures: []
+section: Gravitation
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: Two identical stars with mass 2 × 10<sup>30</sup> kg orbit around their center of mass. Each
+  orbit is circular and has a radius of 8 × 10<sup>7</sup> km, so that the two stars are always on
+  opposite sides of the circle. Find the period of the orbit. Gravitational constant is 6.67 ×
+  10<sup>−11</sup>N⋅ m<sup>2</sup> /kg<sup>2</sup>. (24618802.81 s)
+text: Two identical stars with mass 2 × 10^30 kg orbit around their center of mass. Each orbit is
+  circular and has a radius of 8 × 10^7 km, so that the two stars are always on opposite sides of
+  the circle. Find the period of the orbit. Gravitational constant is 6.67 × 10^-11N⋅ m^2 /kg^2.
+  (24618802.81 s)
+answer: { value: 24618802.81, unit: s, raw: 24618802.81 s }
+figures:
+  - { src: figures/unnamed_007_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_007_OTxQ.png }
 literals:
   - name: m
-    value: 260
+    value: 2e+30
     unit: kg
-    text: "260"
-    suggest: { min: 182, max: 338, step: 1 }
-  - name: d
-    value: 5
-    unit: cm
-    text: "5"
-    suggest: { min: 4, max: 7, step: 1 }
-  - name: t
-    value: 1
-    unit: s
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: g
-    value: 9.8
-    unit: m/s^2
-    text: "9.8"
-    constant: true
-    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
+    text: 2 × 10^30
+    suggest: { min: 1.4e+30, max: 2.6e+30, step: 1e+29 }
+  - name: r
+    value: 80000000
+    unit: km
+    text: 8 × 10^7
+    suggest: { min: 56000000, max: 104000000, step: 1 }
+  - name: F
+    value: 6.67e-11
+    unit: N
+    text: 6.67 × 10^-11
+    suggest: { min: 4.7e-11, max: 8.7e-11, step: 1e-12 }
 scenario:
   id: phys161-exam3-p030
   source: { document: PHYS161_Exam3, labels: [ P30 ] }
-  section: Oscillations
+  section: Gravitation
+  figure: { id: fig, src: figures/unnamed_007_OTxQ.png, alt: "TODO: describe the figure" }
   narrative: >-
-    Four passengers with combined mass {m:unit} compress the springs of a car by {d:unit} when they
-    enter it. Ignore damping. The gravitational acceleration is g = {g:unit}.
+    Two identical stars with mass {m:unit} orbit around their center of mass. Each orbit is circular
+    and has a radius of {r:unit}, so that the two stars are always on opposite sides of the circle.
+    Gravitational constant is {F:unit}⋅ m$^{2}$ /kg$^{2}$. {@fig}
   vars:
     - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
-  derived:
-    - { name: g, expr: "9.8", unit: m/s^2 }
+    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: km }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
   parts:
     - id: answer
-      prompt: >-
-        If the loaded car has a period of vibration of {t:unit}, what is the mass of the car?
-        {_0}{_u}
+      prompt: Find the period of the orbit. {_0}{_u}
       answer: TODO
-      unit: kg
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 260, d: 5, t: 1, g: 9.8 }
+    vars: { m: 2e+30, r: 80000000, F: 6.67e-11 }
     parts:
-      - { id: answer, answer: 1030.83, unit: kg, source: P30 }
+      - { id: answer, answer: 24618802.81, unit: s, source: P30 }

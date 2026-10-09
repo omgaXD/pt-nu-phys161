@@ -1,0 +1,75 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P142
+number: 142
+section: Sound
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A uniform 150-N bar is supported horizontally by two identical wires A and B. A small 185-N
+  cube of lead is placed 3/4 of the way from A to B. The wires are each 56 cm long and have a mass
+  of 6 g. If both of them are simultaneously plucked at the center, what is the frequency of the
+  beats that they will produce when vibrating in their fundamental? (31.129 Hz)
+text: A uniform 150-N bar is supported horizontally by two identical wires A and B. A small 185-N
+  cube of lead is placed 3/4 of the way from A to B. The wires are each 56 cm long and have a mass
+  of 6 g. If both of them are simultaneously plucked at the center, what is the frequency of the
+  beats that they will produce when vibrating in their fundamental? (31.129 Hz)
+answer: { value: 31.129, unit: Hz, raw: 31.129 Hz }
+figures:
+  - { src: figures/unnamed_006_OTxQ.png, original: PHYS161_Exam3_new.docx_files/unnamed_006_OTxQ.png }
+literals:
+  - name: F
+    value: 150
+    unit: N
+    text: "150"
+    suggest: { min: 105, max: 195, step: 1 }
+  - name: F2
+    value: 185
+    unit: N
+    text: "185"
+    suggest: { min: 130, max: 241, step: 1 }
+  - name: x
+    value: 3
+    text: "3"
+    suggest: { min: 2, max: 4, step: 1 }
+  - name: x2
+    value: 4
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: d
+    value: 56
+    unit: cm
+    text: "56"
+    suggest: { min: 39, max: 73, step: 1 }
+  - name: m
+    value: 6
+    unit: g
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+scenario:
+  id: phys161-exam3-p142
+  source: { document: PHYS161_Exam3, labels: [ P142 ] }
+  section: Sound
+  figure: { id: fig, src: figures/unnamed_006_OTxQ.png, alt: "TODO: describe the figure" }
+  narrative: >-
+    A uniform {F}-N bar is supported horizontally by two identical wires A and B. A small {F2}-N
+    cube of lead is placed {x}/{x2} of the way from A to B. The wires are each {d:unit} long and
+    have a mass of {m:unit}. {@fig}
+  vars:
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: F2, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+  parts:
+    - id: answer
+      prompt: >-
+        If both of them are simultaneously plucked at the center, what is the frequency of the beats
+        that they will produce when vibrating in their fundamental? {_0}{_u}
+      answer: TODO
+      unit: Hz
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { F: 150, F2: 185, x: 3, x2: 4, d: 56, m: 6 }
+    parts:
+      - { id: answer, answer: 31.129, unit: Hz, source: P142 }

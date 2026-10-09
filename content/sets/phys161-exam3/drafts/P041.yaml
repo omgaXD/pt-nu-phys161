@@ -1,60 +1,56 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P41
 number: 41
 section: Oscillations
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: A body is sliding back and forth in a simple harmonic motion with an amplitude of 0.2 m on a
-  horizontal surface. At a point 0.02 m away from equilibrium, the speed of the body is 0.4 m/s.
-  What is the displacement when the speed is 0.12 m/s? (0.191 m)
-text: A body is sliding back and forth in a simple harmonic motion with an amplitude of 0.2 m on a
-  horizontal surface. At a point 0.02 m away from equilibrium, the speed of the body is 0.4 m/s.
-  What is the displacement when the speed is 0.12 m/s? (0.191 m)
-answer: { value: 0.191, unit: m, raw: 0.191 m }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A mass M is suspended from a spring and oscillates with a period of 0.753 s. Each complete
+  oscillation results in an amplitude reduction of a factor of 0.961 due to a small velocity
+  dependent frictional effect. Calculate the time it takes for the total energy of the oscillator to
+  decrease to 46% of its initial value. (7.349 s)
+text: A mass M is suspended from a spring and oscillates with a period of 0.753 s. Each complete
+  oscillation results in an amplitude reduction of a factor of 0.961 due to a small velocity
+  dependent frictional effect. Calculate the time it takes for the total energy of the oscillator to
+  decrease to 46% of its initial value. (7.349 s)
+answer: { value: 7.349, unit: s, raw: 7.349 s }
 figures: []
 literals:
-  - name: d
-    value: 0.2
-    unit: m
-    text: "0.2"
-    suggest: { min: 0.1, max: 0.3, step: 0.1, decimals: 1 }
-  - name: d2
-    value: 0.02
-    unit: m
-    text: "0.02"
-    suggest: { min: 0.01, max: 0.03, step: 0.01, decimals: 2 }
-  - name: v
-    value: 0.4
-    unit: m/s
-    text: "0.4"
-    suggest: { min: 0.3, max: 0.5, step: 0.1, decimals: 1 }
-  - name: v2
-    value: 0.12
-    unit: m/s
-    text: "0.12"
-    suggest: { min: 0.08, max: 0.16, step: 0.01, decimals: 2 }
+  - name: t
+    value: 0.753
+    unit: s
+    text: "0.753"
+    suggest: { min: 0.527, max: 0.979, step: 0.001, decimals: 3 }
+  - name: x
+    value: 0.961
+    text: "0.961"
+    suggest: { min: 0.673, max: 1.249, step: 0.001, decimals: 3 }
+  - name: pct
+    value: 46
+    unit: "%"
+    text: "46"
+    suggest: { min: 32, max: 60, step: 1 }
 scenario:
   id: phys161-exam3-p041
   source: { document: PHYS161_Exam3, labels: [ P41 ] }
   section: Oscillations
   narrative: >-
-    A body is sliding back and forth in a simple harmonic motion with an amplitude of {d:unit} on a
-    horizontal surface. At a point {d2:unit} away from equilibrium, the speed of the body is
-    {v:unit}.
+    A mass M is suspended from a spring and oscillates with a period of {t:unit}. Each complete
+    oscillation results in an amplitude reduction of a factor of {x} due to a small velocity
+    dependent frictional effect.
   vars:
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
-    - { name: v2, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: s }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
   parts:
     - id: answer
       prompt: >-
-        What is the displacement when the speed is {v2:unit}? {_0}{_u}
+        Calculate the time it takes for the total energy of the oscillator to decrease to {pct}% of
+        its initial value. {_0}{_u}
       answer: TODO
-      unit: m
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 0.2, d2: 0.02, v: 0.4, v2: 0.12 }
+    vars: { t: 0.753, x: 0.961, pct: 46 }
     parts:
-      - { id: answer, answer: 0.191, unit: m, source: P41 }
+      - { id: answer, answer: 7.349, unit: s, source: P41 }

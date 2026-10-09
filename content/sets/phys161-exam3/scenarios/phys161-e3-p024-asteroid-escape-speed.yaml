@@ -1,0 +1,27 @@
+# P24 — escape speed from a uniform spherical asteroid of diameter D and density ρ:
+# v = sqrt(2 G M / R) with M = (4/3) π R³ ρ, so v = R sqrt(8π G ρ / 3), R = D / 2. The diameter
+# is given in km and converted inside the formula.
+id: phys161-e3-p024-asteroid-escape-speed
+title: Escape speed from an asteroid
+source: { document: PHYS161_Exam3, labels: [ P24 ] }
+section: Gravitation
+tags: [ gravitation, escape-velocity, density, units ]
+narrative: >-
+  Gravitational constant is {G:unit}.
+vars:
+  - { name: D, kind: range, min: 150, max: 400, step: 10, unit: km, label: diameter }
+  - { name: rho, kind: range, min: 1800, max: 3600, step: 100, unit: kg/m^3, label: density }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: escape-speed
+    prompt: >-
+      What is the escape speed from a {D}-km-diameter asteroid with a density of {rho:unit}? {_0}{_u}
+    answer: (D * 1000 / 2) * sqrt(8 * pi * G * rho / 3)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { D: 260, rho: 2700, G: 6.67e-11 }
+  parts:
+    - { id: escape-speed, answer: 159.68, unit: m/s, source: P24 }

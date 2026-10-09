@@ -1,0 +1,64 @@
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P111
+number: 111
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: A sinusoidal transverse wave travels on a string of length 6.6 m and mass 6.2 g. The wave speed
+  is 23 m/s, the wavelength is 0.255 m and the amplitude is 8.2 cm. What is the average power
+  carried by the wave? (23.3297 W)
+text: A sinusoidal transverse wave travels on a string of length 6.6 m and mass 6.2 g. The wave
+  speed is 23 m/s, the wavelength is 0.255 m and the amplitude is 8.2 cm. What is the average power
+  carried by the wave? (23.3297 W)
+answer: { value: 23.3297, unit: W, raw: 23.3297 W }
+figures: []
+literals:
+  - name: L
+    value: 6.6
+    unit: m
+    text: "6.6"
+    suggest: { min: 4.6, max: 8.6, step: 0.1, decimals: 1 }
+  - name: m
+    value: 6.2
+    unit: g
+    text: "6.2"
+    suggest: { min: 4.3, max: 8.1, step: 0.1, decimals: 1 }
+  - name: v
+    value: 23
+    unit: m/s
+    text: "23"
+    suggest: { min: 16, max: 30, step: 1 }
+  - name: L2
+    value: 0.255
+    unit: m
+    text: "0.255"
+    suggest: { min: 0.179, max: 0.332, step: 0.001, decimals: 3 }
+  - name: d
+    value: 8.2
+    unit: cm
+    text: "8.2"
+    suggest: { min: 5.7, max: 10.7, step: 0.1, decimals: 1 }
+scenario:
+  id: phys161-exam3-p111
+  source: { document: PHYS161_Exam3, labels: [ P111 ] }
+  section: Waves
+  narrative: >-
+    A sinusoidal transverse wave travels on a string of length {L:unit} and mass {m:unit}. The wave
+    speed is {v:unit}, the wavelength is {L2:unit} and the amplitude is {d:unit}.
+  vars:
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: L2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+  parts:
+    - id: answer
+      prompt: What is the average power carried by the wave? {_0}{_u}
+      answer: TODO
+      unit: W
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { L: 6.6, m: 6.2, v: 23, L2: 0.255, d: 8.2 }
+    parts:
+      - { id: answer, answer: 23.3297, unit: W, source: P111 }

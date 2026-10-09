@@ -1,0 +1,62 @@
+# P97 — the wave speed is v = d / t and the linear mass density is μ = m / L, so the tension is
+# F = μ v² = (m / L) (d / t)².
+id: phys161-e3-p097-string-tension-wave-travel
+title: String tension from a traveling wave
+source: { document: PHYS161_Exam3, labels: [ P97 ] }
+section: Waves
+tags: [ waves, string, wave-speed, tension ]
+narrative: >-
+  A transverse wave, traveling along a string of length {L:unit} and mass {m:unit}, moves by
+  {d:unit} during a time interval of {t:unit}.
+vars:
+  - {
+      name: L,
+      kind: range,
+      min: 6.00,
+      max: 11.00,
+      step: 0.05,
+      decimals: 2,
+      unit: m,
+      label: string length
+    }
+  - {
+      name: m,
+      kind: range,
+      min: 1.2,
+      max: 2.4,
+      step: 0.1,
+      decimals: 1,
+      unit: kg,
+      label: string mass
+    }
+  - {
+      name: d,
+      kind: range,
+      min: 10.0,
+      max: 20.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m,
+      label: distance traveled
+    }
+  - {
+      name: t,
+      kind: range,
+      min: 1.00,
+      max: 2.00,
+      step: 0.05,
+      decimals: 2,
+      unit: s,
+      label: time interval
+    }
+parts:
+  - id: tension
+    prompt: "Calculate the tension in the string. {_0}{_u}"
+    answer: (m / L) * (d / t)^2
+    unit: N
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 8.45, m: 1.8, d: 14.7, t: 1.45 }
+  parts:
+    - { id: tension, answer: 21.89, unit: N, source: P97 }

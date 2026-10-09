@@ -1,0 +1,55 @@
+# P39 — the spring balance gives the force constant k = F / d; the block of mass m then
+# oscillates with period T = 2π sqrt(m / k) = 2π sqrt(m d / F). The release distance (the
+# amplitude) does not affect the period, but it is part of the problem's data.
+id: phys161-e3-p039-spring-balance-period
+title: Period of a block on a calibrated spring
+source: { document: PHYS161_Exam3, labels: [ P39 ] }
+section: Oscillations
+tags: [ oscillations, spring, hookes-law, period ]
+figure:
+  id: spring-block
+  src: figures/unnamed_010_OTxQ.png
+  alt: >-
+    A horizontal spring labelled k is fixed at its left end to a hatched vertical wall; its right
+    end is attached to a block labelled m resting on a horizontal line, which ends in an arrow
+    pointing to the right.
+narrative: >-
+  A spring is mounted horizontally, with its left end fixed. A spring balance attached to the free
+  end and pulled toward the right indicates that the stretching force is proportional to the
+  displacement, and a force of {F:unit} causes a displacement of {d:unit}. We replace the spring
+  balance with a {m:unit} block, pull it {A:unit} to the right along a frictionless surface, and
+  release it from rest. {@fig}
+vars:
+  - { name: F, kind: range, min: 4, max: 8, step: 1, unit: N, label: balance force }
+  - {
+      name: d,
+      kind: range,
+      min: 0.03,
+      max: 0.07,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: balance displacement
+    }
+  - { name: m, kind: range, min: 0.4, max: 0.8, step: 0.1, decimals: 1, unit: kg, label: mass }
+  - {
+      name: A,
+      kind: range,
+      min: 0.01,
+      max: 0.04,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: release distance
+    }
+parts:
+  - id: period
+    prompt: "Find the period of the resulting oscillation. {_0}{_u}"
+    answer: 2 * pi * sqrt(m * d / F)
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { F: 6, d: 0.05, m: 0.6, A: 0.01 }
+  parts:
+    - { id: period, answer: 0.444, unit: s, source: P39 }

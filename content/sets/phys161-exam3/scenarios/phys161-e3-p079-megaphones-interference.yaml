@@ -1,0 +1,107 @@
+# P79–P83 — two in-phase sources a distance x apart; the listener at A is a distance L in front of
+# one of them, so the path difference is Δ = sqrt(x² + L²) − L. Constructive interference:
+# Δ = n λ, f = n v / Δ (n = 1, 2); destructive interference: Δ = (n − 1/2) λ,
+# f = (2n − 1) v / (2Δ) (n = 1, 2). The base canonical values are P79's; the other parts override
+# them with their own. The figure comes from P81 and fits all four.
+id: phys161-e3-p079-megaphones-interference
+title: Interference from two megaphones
+source: { document: PHYS161_Exam3, labels: [ P79, P81, P82, P83 ] }
+section: Waves
+tags: [ waves, sound, interference, path-difference, multi-part ]
+figure:
+  id: megaphones
+  src: figures/unnamed_005_OTxQ.png
+  alt: >-
+    Two megaphones side by side a distance x apart, each sending out circular wavefronts. Point A
+    lies directly in front of the right-hand megaphone, a distance L from it along a line
+    perpendicular to the line joining the megaphones.
+narrative: >-
+  Two megaphones at distance $x = {x:unit}$ to each other are driven in phase by the same amplifier.
+  A listener is located directly in front of one of the megaphones at point A at distance $L =
+  {L:unit}$. The speed of sound can be taken as {v:unit}. {@fig}
+vars:
+  - {
+      name: x,
+      kind: range,
+      min: 3.50,
+      max: 6.50,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: distance between the megaphones
+    }
+  - {
+      name: L,
+      kind: range,
+      min: 2.50,
+      max: 4.50,
+      step: 0.01,
+      decimals: 2,
+      unit: m,
+      label: distance from the megaphone to A
+    }
+  - {
+      name: v,
+      kind: range,
+      min: 340.0,
+      max: 350.0,
+      step: 0.1,
+      decimals: 1,
+      unit: m/s,
+      label: speed of sound
+    }
+derived:
+  - { name: dpath, expr: "sqrt(x^2 + L^2) - L", unit: m }
+parts:
+  - id: constructive-lowest
+    prompt: "What is the lowest frequency at which constructive interference occurs? {_0}{_u}"
+    answer: v / dpath
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: constructive-second
+    prompt: >-
+      What is the second-lowest frequency at which constructive interference occurs? {_0}{_u}
+    answer: 2 * v / dpath
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: destructive-lowest
+    prompt: >-
+      What is the lowest frequency for which there is a minimum signal due to destructive
+      interference? {_0}{_u}
+    answer: v / (2 * dpath)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: destructive-second
+    prompt: "What is the second-lowest frequency for which there is a minimum signal? {_0}{_u}"
+    answer: 3 * v / (2 * dpath)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { x: 4.99, L: 3.55, v: 348.7 }
+  parts:
+    - { id: constructive-lowest, answer: 135.47, unit: Hz, source: P79 }
+    - {
+        id: constructive-second,
+        answer: 286.437,
+        unit: Hz,
+        source: P81,
+        vars: { x: 4.74, L: 3.41, v: 347.9 }
+      }
+    - {
+        id: destructive-lowest,
+        answer: 64.845,
+        unit: Hz,
+        source: P82,
+        vars: { x: 4.8, L: 3.05, v: 342 }
+      }
+    - {
+        id: destructive-second,
+        answer: 155.417,
+        unit: Hz,
+        source: P83,
+        vars: { x: 6.17, L: 3.95, v: 349.8 }
+      }

@@ -1,43 +1,55 @@
-# Draft imported from PHYS161 Exam 3.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P86
 number: 86
-section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161 Exam 3.html }
-raw: An organ pipe has two successive harmonics with frequencies 555 Hz and 925 Hz. What is the
-  fundamental frequency? (185 Hz)
-text: An organ pipe has two successive harmonics with frequencies 555 Hz and 925 Hz. What is the
-  fundamental frequency? (185 Hz)
-answer: { value: 185, unit: Hz, raw: 185 Hz }
+section: Waves
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+raw: An animal emits an echolocation wave. If an obstacle is 100 m from the animal, how long does it
+  take for the echolocation wave to make a round trip between the animal and the object? Density of
+  the sea water is 1.025×10<sup>3</sup> kg/m<sup>3</sup>. Bulk modulus of water B<sub>w</sub> =
+  2.0×10<sup>9</sup> N/m<sup>2</sup>. (0.143178 s)
+text: An animal emits an echolocation wave. If an obstacle is 100 m from the animal, how long does
+  it take for the echolocation wave to make a round trip between the animal and the object? Density
+  of the sea water is 1.025×10^3 kg/m^3. Bulk modulus of water B_w = 2.0×10^9 N/m^2. (0.143178 s)
+answer: { value: 0.143178, unit: s, raw: 0.143178 s }
 figures: []
 literals:
-  - name: f
-    value: 555
-    unit: Hz
-    text: "555"
-    suggest: { min: 389, max: 722, step: 1 }
-  - name: f2
-    value: 925
-    unit: Hz
-    text: "925"
-    suggest: { min: 648, max: 1203, step: 1 }
+  - name: d
+    value: 100
+    unit: m
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: rho
+    value: 1025
+    unit: kg/m^3
+    text: 1.025×10^3
+    suggest: { min: 718, max: 1333, step: 1 }
+  - name: Bw
+    value: 2000000000
+    unit: N/m^2
+    text: 2.0×10^9
+    suggest: { min: 1400000000, max: 2600000000, step: 1 }
 scenario:
   id: phys161-exam3-p086
   source: { document: PHYS161_Exam3, labels: [ P86 ] }
-  section: Sound
+  section: Waves
   narrative: >-
-    An organ pipe has two successive harmonics with frequencies {f:unit} and {f2:unit}.
+    An animal emits an echolocation wave. Density of the sea water is {rho:unit}. Bulk modulus of
+    water $B_{w}$ = {Bw:unit}.
   vars:
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
-    - { name: f2, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+    - { name: Bw, kind: range, min: TODO, max: TODO, step: TODO, unit: N/m^2 }
   parts:
     - id: answer
-      prompt: What is the fundamental frequency? {_0}{_u}
+      prompt: >-
+        If an obstacle is {d:unit} from the animal, how long does it take for the echolocation wave
+        to make a round trip between the animal and the object? {_0}{_u}
       answer: TODO
-      unit: Hz
+      unit: s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { f: 555, f2: 925 }
+    vars: { d: 100, rho: 1025, Bw: 2000000000 }
     parts:
-      - { id: answer, answer: 185, unit: Hz, source: P86 }
+      - { id: answer, answer: 0.143178, unit: s, source: P86 }
