@@ -482,15 +482,23 @@
     <!-- Scrolls inside a box a little shorter than the screen, the column names kept in view. -->
     <div class="history-scroll">
       <table class="generaltable" data-testid="history" aria-labelledby="history-title">
-        <thead><tr><th>Finished</th><th>Preset</th><th>Sets</th><th>Marks</th><th></th></tr></thead>
+        <thead><tr><th>Finished</th><th>Preset</th><th>Sets</th><th>Marks</th><th>Review</th></tr></thead>
         <tbody>
           {#each app.history as h (h.id)}
             <tr>
               <td>{formatDate(h.finishedAt)}{h.finishReason === 'timeout' ? ' (time up)' : ''}</td>
               <td>{presetName(h.preset)}</td>
               <td>{setTitles(h.sets)}</td>
-              <td>{formatMark(h.marks)} / {formatMark(h.total)}</td>
-              <td>{#if h.full && app.reviewable(h.id)}<a href={resolve(`/review/?id=${encodeURIComponent(h.id)}`)}>Review</a>{/if}</td>
+              <td class="nowrap">{formatMark(h.marks)} / {formatMark(h.total)}</td>
+              <td class="nowrap">
+                {#if h.full && app.reviewable(h.id)}
+                  <a href={resolve(`/review/?id=${encodeURIComponent(h.id)}`)}>Review</a>
+                {:else if h.full}
+                  <span class="muted" title="This attempt could not be read.">Unavailable</span>
+                {:else}
+                  <span class="muted" title="Only the most recent attempts are kept for review.">Not kept</span>
+                {/if}
+              </td>
             </tr>
           {/each}
         </tbody>

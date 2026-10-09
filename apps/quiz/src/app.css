@@ -941,6 +941,9 @@ input[type='number'].form-control {
 .history-scroll tbody tr:first-child td {
   border-top: 0;
 }
+.generaltable .nowrap {
+  white-space: nowrap;
+}
 .link-button {
   padding: 0;
   border: 0;

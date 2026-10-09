@@ -321,8 +321,19 @@ test('the history offers a review only for attempts that can still be opened', a
   // Damaged: listed, but without a review link.
   await page.evaluate((k) => localStorage.setItem(k, '{"format":1}'), key);
   await open(page, '');
-  await expect(page.getByTestId('history').locator('tbody tr')).toHaveCount(1);
+  const history = page.getByTestId('history');
+  await expect(history.locator('tbody tr')).toHaveCount(1);
+  await expect(history.getByRole('columnheader', { name: 'Review' })).toBeVisible();
   await expect(review).toHaveCount(0);
+  await expect(history.locator('tbody tr').first()).toContainText('Unavailable');
+
+  // Past the attempts kept in full, only the summary is left: it says so.
+  await page.evaluate(() => {
+    const entries = JSON.parse(localStorage.getItem('pt:v1:history')!) as { full: boolean }[];
+    localStorage.setItem('pt:v1:history', JSON.stringify(entries.map((h) => ({ ...h, full: false }))));
+  });
+  await open(page, '');
+  await expect(history.locator('tbody tr').first()).toContainText('Not kept');
 });
 
 test('reloading keeps the answers, the numbers and the deadline', async ({ page }) => {
