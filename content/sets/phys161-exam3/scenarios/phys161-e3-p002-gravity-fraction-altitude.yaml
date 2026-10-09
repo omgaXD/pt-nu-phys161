@@ -1,0 +1,27 @@
+# P2 — gravitational acceleration at altitude h above the Earth: g(h) = g (R_E / (R_E + h))².
+# For g(h) = x g the altitude is h = R_E (1 / sqrt(x) − 1); g itself cancels. R_E is the
+# constant the source states (6.33 × 10⁶ m, not P1's 6.371 × 10⁶ m); only x is randomized.
+id: phys161-e3-p002-gravity-fraction-altitude
+title: Altitude where gravity is a fraction of its surface value
+source: { document: PHYS161_Exam3, labels: [ P2 ] }
+section: Gravitation
+tags: [ gravitation, gravitational-acceleration, altitude ]
+narrative: >-
+  The radius of the Earth is {RE:unit}.
+vars:
+  - { name: x, kind: range, min: 0.30, max: 0.90, step: 0.01, decimals: 2, label: fraction of g }
+derived:
+  - { name: RE, expr: "6.33e6", unit: m }
+parts:
+  - id: altitude
+    prompt: >-
+      At what altitude above the Earth's surface would the gravitational acceleration be {x} of its
+      value at the surface? {_0}{_u}
+    answer: RE * (1 / sqrt(x) - 1)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { x: 0.6, RE: 6330000 }
+  parts:
+    - { id: altitude, answer: 1841990, unit: m, source: P2 }

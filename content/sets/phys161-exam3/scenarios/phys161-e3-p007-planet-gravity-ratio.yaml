@@ -1,0 +1,27 @@
+# P7 — surface gravity g = G M / R². Planet Y has kM times the mass and kR times the radius of
+# planet X, so g_Y / g_X = kM / kR². The constraint keeps the ratio above 1, as the question
+# ("by what factor … larger") assumes.
+id: phys161-e3-p007-planet-gravity-ratio
+title: Surface gravity of another planet
+source: { document: PHYS161_Exam3, labels: [ P7 ] }
+section: Gravitation
+tags: [ gravitation, gravitational-acceleration, ratios ]
+narrative: ""
+vars:
+  - { name: kM, kind: range, min: 1.10, max: 2.50, step: 0.01, decimals: 2, label: mass ratio }
+  - { name: kR, kind: range, min: 0.60, max: 1.20, step: 0.01, decimals: 2, label: radius ratio }
+constraints:
+  - "kM / kR^2 > 1.1" # planet Y's surface gravity is clearly larger
+parts:
+  - id: gravity-ratio
+    prompt: >-
+      Planet Y has a mass {kM} times that of planet X, and its radius is {kR} times the radius of
+      planet X. By what factor is the gravitational acceleration at the surface of planet Y larger
+      than that at the surface of planet X? {_0}
+    answer: kM / kR^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { kM: 1.78, kR: 0.93 }
+  parts:
+    - { id: gravity-ratio, answer: 2.05804, source: P7 }

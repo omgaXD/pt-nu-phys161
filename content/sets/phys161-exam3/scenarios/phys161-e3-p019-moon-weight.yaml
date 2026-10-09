@@ -1,14 +1,16 @@
-# P19 — weight on the Moon, where the gravitational acceleration is g / 6: W = m g / 6.
-# The one-sixth ratio is a fixed fact of the problem; only the person's mass is randomized.
+# P19/P20 — weight on the Moon, where the gravitational acceleration is g / 6: W = m g / 6 (P19),
+# and back from the Moon weight to the mass, m = 6 W / g (P20). The one-sixth ratio is a fixed
+# fact of the problem; only the person's mass (P19) and Moon weight (P20) are randomized.
 id: phys161-e3-p019-moon-weight
 title: Weight of a person on the Moon
-source: { document: PHYS161_Exam3, labels: [ P19 ] }
+source: { document: PHYS161_Exam3, labels: [ P19, P20 ] }
 section: Gravitation
-tags: [ gravitation, weight, gravitational-acceleration ]
+tags: [ gravitation, weight, gravitational-acceleration, multi-part ]
 narrative: >-
   The gravitational acceleration on Earth is $g = {g:unit}$.
 vars:
   - { name: m, kind: range, min: 40.0, max: 75.0, step: 0.1, decimals: 1, unit: kg, label: mass }
+  - { name: W, kind: range, min: 65, max: 150, step: 1, unit: N, label: weight on the Moon }
 derived:
   - { name: g, expr: "9.8", unit: m/s^2 }
 parts:
@@ -20,7 +22,16 @@ parts:
     unit: N
     tolerance: { rel: 0.01 }
     difficulty: 1
+  - id: mass-from-moon-weight
+    prompt: >-
+      A person weighs {W:unit} on the Moon, where the gravitational acceleration is one-sixth that
+      of the Earth. What is the mass of this person? {_0}{_u}
+    answer: 6 * W / g
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 1
 canonical:
-  vars: { m: 50.3, g: 9.8 }
+  vars: { m: 50.3, W: 115, g: 9.8 }
   parts:
     - { id: moon-weight, answer: 82.157, unit: N, source: P19 }
+    - { id: mass-from-moon-weight, answer: 70.4082, unit: kg, source: P20 }

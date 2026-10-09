@@ -1,0 +1,44 @@
+# P23 — circular orbit: G M / r² = (2π / T)² r, so T = 2π sqrt(r³ / (G M)) (Kepler's third law).
+id: phys161-e3-p023-satellite-orbit-period
+title: Orbital period from the orbit radius
+source: { document: PHYS161_Exam3, labels: [ P23 ] }
+section: Gravitation
+tags: [ gravitation, orbits, keplers-third-law ]
+narrative: >-
+  Gravitational constant is $G = {G:unit}$.
+vars:
+  - {
+      name: M,
+      kind: range,
+      min: 1e+24,
+      max: 9e+24,
+      step: 1e+24,
+      sigfigs: 1,
+      unit: kg,
+      label: planet mass
+    }
+  - {
+      name: r,
+      kind: range,
+      min: 1e+8,
+      max: 6e+8,
+      step: 1e+7,
+      sigfigs: 2,
+      unit: m,
+      label: orbit radius
+    }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+parts:
+  - id: period
+    prompt: >-
+      A satellite orbits a planet of mass {M:unit} in a circular orbit of radius {r:unit}. Calculate
+      the orbital period of the satellite. {_0}{_u}
+    answer: 2 * pi * sqrt(r^3 / (G * M))
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { M: 3e+24, r: 3.7e+8, G: 6.67e-11 }
+  parts:
+    - { id: period, answer: 3161250, unit: s, source: P23 }

@@ -1,0 +1,33 @@
+# P16 — energy conservation for an object projected straight up (no drag, no rotation):
+# ½ v0² − G M_E / R_E = −G M_E / (R_E + h), so R_E + h = 1 / (1/R_E − v0² / (2 G M_E)).
+# G, M_E and R_E are the constants the source states. The constraint keeps v0 below the escape
+# speed, so the object turns back at a finite height.
+id: phys161-e3-p016-projectile-max-height
+title: Maximum height of an object projected from the Earth
+source: { document: PHYS161_Exam3, labels: [ P16 ] }
+section: Gravitation
+tags: [ gravitation, energy-conservation, potential-energy ]
+narrative: >-
+  Neglect air resistance and the rotation of the Earth. The radius of the Earth is {RE:unit} and its
+  mass is {ME:unit}. Gravitational constant is $G = {G:unit}$.
+vars:
+  - { name: v0, kind: range, min: 4000, max: 10500, step: 100, unit: m/s, label: initial speed }
+derived:
+  - { name: RE, expr: "6.371e6", unit: m }
+  - { name: ME, expr: "5.97e24", unit: kg }
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+constraints:
+  - "v0^2 < 0.9 * 2 * G * ME / RE" # clearly below the escape speed: the object comes back
+parts:
+  - id: max-height
+    prompt: >-
+      An object is projected straight up from the surface of the Earth with an initial speed of
+      {v0:unit}. Find the maximum height above the surface that it reaches. {_0}{_u}
+    answer: 1 / (1 / RE - v0^2 / (2 * G * ME)) - RE
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { v0: 8500, RE: 6371000, ME: 5.97e+24, G: 6.67e-11 }
+  parts:
+    - { id: max-height, answer: 8725560, unit: m, source: P16 }

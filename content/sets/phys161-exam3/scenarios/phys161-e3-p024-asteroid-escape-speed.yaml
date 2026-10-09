@@ -1,16 +1,17 @@
-# P24 — escape speed from a uniform spherical asteroid of diameter D and density ρ:
-# v = sqrt(2 G M / R) with M = (4/3) π R³ ρ, so v = R sqrt(8π G ρ / 3), R = D / 2. The diameter
-# is given in km and converted inside the formula.
+# P24/P25 — a uniform spherical asteroid of diameter D and density ρ, so M = (4/3) π R³ ρ with
+# R = D / 2. P24: escape speed v = sqrt(2 G M / R) = R sqrt(8π G ρ / 3). P25: surface gravity
+# g = G M / R² = (4/3) π G ρ R. The diameter is given in km and converted inside the formulas.
+# The base canonical values are P24's; P25 overrides them.
 id: phys161-e3-p024-asteroid-escape-speed
-title: Escape speed from an asteroid
-source: { document: PHYS161_Exam3, labels: [ P24 ] }
+title: Escape speed and surface gravity of an asteroid
+source: { document: PHYS161_Exam3, labels: [ P24, P25 ] }
 section: Gravitation
-tags: [ gravitation, escape-velocity, density, units ]
+tags: [ gravitation, escape-velocity, gravitational-acceleration, density, units, multi-part ]
 narrative: >-
   Gravitational constant is {G:unit}.
 vars:
-  - { name: D, kind: range, min: 150, max: 400, step: 10, unit: km, label: diameter }
-  - { name: rho, kind: range, min: 1800, max: 3600, step: 100, unit: kg/m^3, label: density }
+  - { name: D, kind: range, min: 150, max: 400, step: 5, unit: km, label: diameter }
+  - { name: rho, kind: range, min: 1800, max: 3600, step: 50, unit: kg/m^3, label: density }
 derived:
   - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
 parts:
@@ -21,7 +22,22 @@ parts:
     unit: m/s
     tolerance: { rel: 0.01 }
     difficulty: 3
+  - id: surface-gravity
+    prompt: >-
+      What is the gravitational acceleration at the surface of a {D}-km-diameter asteroid with a
+      density of {rho:unit}? {_0}{_u}
+    answer: 4 / 3 * pi * G * rho * (D * 1000 / 2)
+    unit: m/s^2
+    tolerance: { rel: 0.01 }
+    difficulty: 3
 canonical:
   vars: { D: 260, rho: 2700, G: 6.67e-11 }
   parts:
     - { id: escape-speed, answer: 159.68, unit: m/s, source: P24 }
+    - {
+        id: surface-gravity,
+        answer: 0.0573802,
+        unit: m/s^2,
+        source: P25,
+        vars: { D: 155, rho: 2650 }
+      }

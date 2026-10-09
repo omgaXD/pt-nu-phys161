@@ -1,11 +1,12 @@
-# P4 — artificial gravity in a rotating ring station: the floor pushes the occupants toward the
+# P4/P5 — artificial gravity in a rotating ring station: the floor pushes the occupants toward the
 # centre with the centripetal force m ω² r, which they feel as their weight. For a fraction f of
-# the Earth weight, ω² (d/2) = f g, so ω = sqrt(2 f g / d).
+# the Earth weight, ω² (d/2) = f g, so ω = sqrt(2 f g / d) (P4), and the rim moves at
+# v = ω d/2 = sqrt(f g d / 2) (P5). The base canonical values are P4's; P5 overrides them.
 id: phys161-e3-p004-space-station-spin
 title: Spinning ring space station
-source: { document: PHYS161_Exam3, labels: [ P4 ] }
+source: { document: PHYS161_Exam3, labels: [ P4, P5 ] }
 section: Gravitation
-tags: [ artificial-gravity, centripetal-acceleration, angular-velocity ]
+tags: [ artificial-gravity, centripetal-acceleration, angular-velocity, multi-part ]
 narrative: >-
   In a Star Wars movie the rebel space station is built as circular ring of {d:unit} in diameter.
   The gravitational acceleration on Earth is $g = {g:unit}$.
@@ -23,7 +24,16 @@ parts:
     unit: rad/s
     tolerance: { rel: 0.01 }
     difficulty: 2
+  - id: rim-speed
+    prompt: >-
+      At what linear speed should its rim move so that the occupants feel {pct}% of the weight they
+      feel on Earth? {_0}{_u}
+    answer: sqrt((pct / 100) * g * (d / 2))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
 canonical:
   vars: { d: 45, pct: 75, g: 9.8 }
   parts:
     - { id: angular-speed, answer: 0.572, unit: rad/s, source: P4 }
+    - { id: rim-speed, answer: 12.745, unit: m/s, source: P5, vars: { d: 39, pct: 85 } }

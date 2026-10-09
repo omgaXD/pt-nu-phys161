@@ -1,0 +1,61 @@
+# P27 — energy conservation on the comet's orbit around the Sun:
+# ½ v1² − G M_S / r1 = ½ v2² − G M_S / r2, so 1/r2 = 1/r1 + (v2² − v1²) / (2 G M_S).
+# G and M_S are the constants the source states. v2 > v1 in every draw (the comet is closer to
+# the Sun), and the constraint keeps the total energy negative so the orbit stays a bound ellipse.
+id: phys161-e3-p027-comet-distance
+title: Distance of a comet from its speed
+source: { document: PHYS161_Exam3, labels: [ P27 ] }
+section: Gravitation
+tags: [ gravitation, orbits, energy-conservation ]
+narrative: >-
+  A comet travels around the Sun in a highly eccentric elliptical orbit. Gravitational constant is
+  $G = {G:unit}$. The mass of the Sun is {MS:unit}.
+vars:
+  - {
+      name: v1,
+      kind: range,
+      min: 1.6e+4,
+      max: 3e+4,
+      step: 1e+3,
+      sigfigs: 2,
+      unit: m/s,
+      label: initial speed
+    }
+  - {
+      name: r1,
+      kind: range,
+      min: 2e+11,
+      max: 3.5e+11,
+      step: 5e+9,
+      sigfigs: 3,
+      unit: m,
+      label: initial distance
+    }
+  - {
+      name: v2,
+      kind: range,
+      min: 4e+4,
+      max: 8e+4,
+      step: 1e+3,
+      sigfigs: 2,
+      unit: m/s,
+      label: final speed
+    }
+derived:
+  - { name: G, expr: "6.67e-11", unit: N m^2/kg^2 }
+  - { name: MS, expr: "1.989e30", unit: kg }
+constraints:
+  - "v1^2 < 2 * G * MS / r1" # bound (elliptical) orbit: the comet is below escape speed
+parts:
+  - id: distance
+    prompt: >-
+      It has a speed of {v1:unit} when it is at a distance of {r1:unit} from the center of the Sun.
+      At what distance from the center of the Sun is its speed {v2:unit}? {_0}{_u}
+    answer: 1 / (1 / r1 + (v2^2 - v1^2) / (2 * G * MS))
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { v1: 22000, r1: 2.35e+11, v2: 61000, G: 6.67e-11, MS: 1.989e+30 }
+  parts:
+    - { id: distance, answer: 6.07714e+10, unit: m, source: P27 }
