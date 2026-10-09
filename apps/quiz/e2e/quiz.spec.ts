@@ -16,6 +16,13 @@ async function startFrom(page: Page, query: string): Promise<void> {
   await expect(page).toHaveURL(/\/pt\/attempt\/$/);
 }
 
+/** Open "Advanced options" on the start page (remembered, so it may be open already). */
+async function showOptions(page: Page): Promise<void> {
+  const toggle = page.getByRole('button', { name: 'Advanced options' });
+  if ((await toggle.getAttribute('aria-expanded')) === 'false') await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+}
+
 const card = (page: Page) => page.locator('.que');
 const nav = (page: Page) => page.locator('section.block[aria-labelledby="quiz-nav-title"]');
 const answerField = (page: Page) => card(page).getByRole('textbox');
@@ -47,6 +54,7 @@ test('start page: presets set the options, editing makes a custom quiz', async (
 
   await page.getByRole('button', { name: /^Exam/ }).click();
   await expect(page.getByRole('button', { name: /^Exam/ })).toHaveAttribute('aria-pressed', 'true');
+  await showOptions(page);
   await expect(page.getByLabel('Number of questions')).toHaveValue('7');
   await expect(page.getByLabel('Time limit in minutes')).toHaveValue('40');
   await expect(page.getByTestId('summary')).toContainText('7 questions · shuffled · randomized values · 40 min · feedback at the end');
@@ -85,6 +93,36 @@ test('start page: presets set the options, editing makes a custom quiz', async (
   await expect(corpus.locator('summary')).toContainText('27 of 28 problems');
   await page.getByRole('button', { name: 'Copy link' }).click();
   await expect(page).toHaveURL(/ex\.corpus=P\d+/);
+});
+
+test('start page: advanced options start collapsed, are remembered, and show when they are custom', async ({ page }) => {
+  await open(page, '?p=exam&sets=corpus');
+  const toggle = page.getByRole('button', { name: 'Advanced options' });
+  const heading = page.getByRole('heading', { name: /^Advanced options/ });
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.getByLabel('Number of questions')).toHaveCount(0);
+  await expect(page.getByTestId('summary')).toContainText('7 questions · shuffled · randomized values · 40 min');
+
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await page.getByLabel('Time limit in minutes').fill('30');
+  await page.getByLabel('Time limit in minutes').blur();
+  await expect(heading).not.toContainText('Custom'); // the options are in view
+  await page.reload();
+  await page.locator('body[data-hydrated]').waitFor({ state: 'attached' });
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+
+  // Collapsed, a custom quiz still says so next to the heading.
+  await page.getByLabel('Time limit in minutes').fill('30');
+  await page.getByLabel('Time limit in minutes').blur();
+  await toggle.click();
+  await expect(page.getByLabel('Time limit in minutes')).toHaveCount(0);
+  await expect(heading).toContainText('Custom');
+  await page.getByRole('button', { name: /^Exam/ }).click();
+  await expect(heading).not.toContainText('Custom');
+  await page.reload();
+  await page.locator('body[data-hydrated]').waitFor({ state: 'attached' });
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 });
 
 test('practice: Check gives immediate feedback and locks a correct answer', async ({ page }) => {
@@ -294,6 +332,7 @@ test('the next quiz does not reuse the seed of a link', async ({ page }) => {
   await startFrom(page, '?p=exam&sets=corpus&seed=42');
   await open(page, '');
   await expect(page.getByRole('button', { name: /^Exam/ })).toHaveAttribute('aria-pressed', 'true');
+  await showOptions(page);
   await expect(page.getByLabel('Seed')).toHaveValue('');
 
   // Remembered by an older version: dropped too.
@@ -364,6 +403,7 @@ test('difficulty: the start page filters by a range, unrated problems only if as
   // Corpus: 28 rated problems, 5 of them at 4–5; demo: 7 unrated.
   await open(page, '?p=ordered&sets=corpus,demo');
   await expect(page.getByTestId('summary')).toContainText('35 questions');
+  await showOptions(page);
   await expect(page.getByLabel(/Include problems without a difficulty/)).toHaveCount(0);
   await page.getByLabel('Lowest difficulty').selectOption('4');
   await expect(page.getByTestId('summary')).toContainText('5 questions · in order · randomized values · difficulty 4–5 ·');
@@ -449,6 +489,7 @@ test('an exam never shows difficulty before it is finished; the review does', as
 
 test('difficulty orders: easy to hard or hard to easy, explained by a tooltip', async ({ page }) => {
   await open(page, '?p=ordered&sets=corpus');
+  await showOptions(page);
   const easy = page.locator('label.pt-tooltip').filter({ hasText: 'Easy to hard' });
   await expect(easy).toHaveAttribute('data-tooltip', 'Shuffled within each difficulty level. Problems without a difficulty come last.');
   await expect(page.getByRole('radio', { name: 'Easy to hard' })).toHaveAccessibleDescription(/Shuffled within each difficulty level/);

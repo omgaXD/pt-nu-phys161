@@ -750,7 +750,8 @@ details + .set-row {
 /* Sections and their problems: a tree like the course index drawer, with its
    chevrons (fa-chevron-right / -down, .fa-fw at 10px, .me-1, padding-right 4px). */
 .sections > summary::before,
-.section-row .chevron::before {
+.section-row .chevron::before,
+.collapsible-heading button::before {
   content: '';
   display: inline-block;
   width: 1.25em;
@@ -762,7 +763,8 @@ details + .set-row {
   mask: var(--chevron-right) center / contain no-repeat;
 }
 .sections[open] > summary::before,
-.section-row .chevron[aria-expanded='true']::before {
+.section-row .chevron[aria-expanded='true']::before,
+.collapsible-heading button[aria-expanded='true']::before {
   -webkit-mask-image: var(--chevron-down);
   mask-image: var(--chevron-down);
 }
@@ -809,6 +811,38 @@ details + .set-row {
 /* Problems line up under the section's checkbox (past the chevron, its margin and padding). */
 .section-tree .problem-picker {
   margin: 0.25rem 0 0.6rem calc(12.5px + 0.25rem + 4px);
+}
+/* A heading that shows or hides the block below it. The course index's chevron
+   (.courseindex-chevron: --bs-secondary-color, black on hover, 4px + .me-1 before the title),
+   as large against the heading as the 10px one is against the drawer's text. */
+.collapsible-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.collapsible-heading button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0.375rem;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.collapsible-heading button::before {
+  margin-right: calc(0.25rem + 4px);
+  font-size: 0.6em;
+  background: rgba(33, 37, 41, 0.75);
+}
+.collapsible-heading button:is(:hover, :focus-visible)::before {
+  background: #000;
+}
+.collapsible-heading button:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 .options {
   display: grid;

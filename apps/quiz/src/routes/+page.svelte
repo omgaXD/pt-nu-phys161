@@ -32,6 +32,7 @@
   import type { DifficultyLevel } from '@pt/core';
   import { DEFAULT_DIFFICULTY_NAMES } from '@pt/ui';
   import { app } from '$lib/app.svelte';
+  import { drawers } from '$lib/drawers.svelte';
   import { describeConfig, formatDate, formatMark, PRESET_INFO, presetName } from '$lib/labels';
 
   const index = app.index;
@@ -77,6 +78,9 @@
   let copied = $state(false);
 
   const preset = $derived(matchPreset(config));
+  /** "Advanced options": collapsed until opened, then remembered (presets cover the usual quizzes). */
+  const OPTIONS_BLOCK = 'start-options';
+  const optionsOpen = $derived(drawers.isExpanded(OPTIONS_BLOCK, false));
   const pool = $derived(config.sets.length ? buildPool(app.catalog(), config).length : 0);
   const questions = $derived(config.count === 'all' ? pool : Math.min(pool, config.count));
   const inProgress = $derived(app.attempt);
@@ -204,7 +208,7 @@
     {/each}
   </div>
   <p class="muted" data-testid="preset-state">
-    {#if preset === 'custom'}<span class="custom-chip">Custom</span> The options below differ from every preset.{:else}Preset: {PRESET_INFO[preset].name}. Change any option below to customise it.{/if}
+    {#if preset === 'custom'}<span class="custom-chip">Custom</span> The advanced options differ from every preset.{:else}Preset: {PRESET_INFO[preset].name}. Change any advanced option to customise it.{/if}
   </p>
 
   <h2 id="problems-title">Problems</h2>
@@ -273,152 +277,164 @@
     {/each}
   </fieldset>
 
-  <h2 id="options-title">Options</h2>
-  <fieldset aria-labelledby="options-title">
-    <div class="options">
-      <span class="label" id="opt-count">Questions</span>
-      <div class="choices" role="radiogroup" aria-labelledby="opt-count">
-        <label><input type="radio" name="count" checked={config.count === 'all'} onchange={() => (config = { ...config, count: 'all' })} /> All selected problems</label>
-        <label>
-          <input type="radio" name="count" checked={config.count !== 'all'} onchange={() => (config = { ...config, count: 7 })} /> A sample of
-        </label>
-        <input
-          class="form-control"
-          type="number"
-          min="1"
-          max="1000"
-          aria-label="Number of questions"
-          disabled={config.count === 'all'}
-          value={config.count === 'all' ? 7 : config.count}
-          onchange={(e) => (config = { ...config, count: Math.max(1, Math.min(1000, Math.round(Number(e.currentTarget.value) || 1))) })}
-        />
-      </div>
-
-      {#if config.count !== 'all'}
-        <label class="label" for="opt-draw">Spread</label>
-        <div class="choices">
-          <select id="opt-draw" class="form-select" value={config.draw} onchange={(e) => (config = { ...config, draw: e.currentTarget.value as QuizConfig['draw'] })}>
-            <option value="sections">Across sections (one per section, then repeat)</option>
-            <option value="sets">Across sets</option>
-            <option value="uniform">Uniformly over all problems</option>
-          </select>
-          <span class="hint">Variants of the same situation are never drawn together.</span>
-        </div>
-      {/if}
-
-      <span class="label" id="opt-order">Order</span>
-      <div class="choices" role="radiogroup" aria-labelledby="opt-order">
-        <label><input type="radio" name="order" checked={config.order === 'source'} onchange={() => (config = { ...config, order: 'source' })} /> As in the source</label>
-        <label><input type="radio" name="order" checked={config.order === 'shuffled'} onchange={() => (config = { ...config, order: 'shuffled' })} /> Shuffled</label>
-        <label class="pt-tooltip" data-tooltip={BY_DIFFICULTY_HINT}>
-          <input type="radio" name="order" aria-describedby="order-difficulty-hint" checked={config.order === 'easy-first'} onchange={() => (config = { ...config, order: 'easy-first' })} /> Easy to hard
-        </label>
-        <label class="pt-tooltip" data-tooltip={BY_DIFFICULTY_HINT}>
-          <input type="radio" name="order" aria-describedby="order-difficulty-hint" checked={config.order === 'hard-first'} onchange={() => (config = { ...config, order: 'hard-first' })} /> Hard to easy
-        </label>
-        <span id="order-difficulty-hint" class="pt-sr-only">{BY_DIFFICULTY_HINT}</span>
-      </div>
-
-      <span class="label" id="opt-values">Numbers</span>
-      <div class="choices" role="radiogroup" aria-labelledby="opt-values">
-        <label><input type="radio" name="values" checked={config.values === 'random'} onchange={() => (config = { ...config, values: 'random' })} /> Randomized</label>
-        <label><input type="radio" name="values" checked={config.values === 'source'} onchange={() => (config = { ...config, values: 'source' })} /> The source's own numbers</label>
-      </div>
-
-      <span class="label">Content</span>
-      <div class="choices">
-        <label><input type="checkbox" checked={config.includeFixed} onchange={(e) => (config = { ...config, includeFixed: e.currentTarget.checked })} /> Include problems not randomized yet</label>
-      </div>
-
-      <span class="label" id="opt-difficulty">Difficulty</span>
-      <div class="choices" role="group" aria-labelledby="opt-difficulty">
-        <label>
-          from
-          <select class="form-select" aria-label="Lowest difficulty" value={String(range.min)} onchange={(e) => setDifficulty({ min: Number(e.currentTarget.value) as DifficultyLevel })}>
-            {#each LEVELS as d (d)}<option value={String(d)}>{d} · {DEFAULT_DIFFICULTY_NAMES[d]}</option>{/each}
-          </select>
-        </label>
-        <label>
-          to
-          <select class="form-select" aria-label="Highest difficulty" value={String(range.max)} onchange={(e) => setDifficulty({ max: Number(e.currentTarget.value) as DifficultyLevel })}>
-            {#each LEVELS as d (d)}<option value={String(d)}>{d} · {DEFAULT_DIFFICULTY_NAMES[d]}</option>{/each}
-          </select>
-        </label>
-        {#if difficultyFilter(config.difficulty)}
+  <h2 class="collapsible-heading">
+    <button
+      type="button"
+      aria-expanded={optionsOpen}
+      aria-controls={optionsOpen ? 'advanced-options' : undefined}
+      onclick={() => drawers.setExpanded(OPTIONS_BLOCK, !optionsOpen, false)}
+    >
+      <span id="options-title">Advanced options</span>
+    </button>
+    {#if preset === 'custom' && !optionsOpen}<span class="custom-chip">Custom</span>{/if}
+  </h2>
+  {#if optionsOpen}
+    <fieldset id="advanced-options" aria-labelledby="options-title">
+      <div class="options">
+        <span class="label" id="opt-count">Questions</span>
+        <div class="choices" role="radiogroup" aria-labelledby="opt-count">
+          <label><input type="radio" name="count" checked={config.count === 'all'} onchange={() => (config = { ...config, count: 'all' })} /> All selected problems</label>
           <label>
-            <input type="checkbox" checked={range.unrated} onchange={(e) => setDifficulty({ unrated: e.currentTarget.checked })} /> Include problems without a difficulty (not randomized yet)
+            <input type="radio" name="count" checked={config.count !== 'all'} onchange={() => (config = { ...config, count: 7 })} /> A sample of
           </label>
-        {/if}
-      </div>
-
-      <span class="label" id="opt-feedback">Feedback</span>
-      <div class="choices" role="radiogroup" aria-labelledby="opt-feedback">
-        <label><input type="radio" name="feedback" checked={config.feedback === 'immediate'} onchange={() => (config = { ...config, feedback: 'immediate' })} /> Check each answer</label>
-        <label><input type="radio" name="feedback" checked={config.feedback === 'deferred'} onchange={() => (config = { ...config, feedback: 'deferred' })} /> Only after finishing</label>
-      </div>
-
-      {#if config.feedback === 'immediate'}
-        <span class="label">Tries</span>
-        <div class="choices">
-          <label>
-            <input type="checkbox" checked={config.maxTries === null} onchange={(e) => (config = { ...config, maxTries: e.currentTarget.checked ? null : 3 })} /> Unlimited
-          </label>
-          {#if config.maxTries !== null}
-            <input
-              class="form-control"
-              type="number"
-              min="1"
-              max="99"
-              aria-label="Tries per question"
-              value={config.maxTries}
-              onchange={(e) => (config = { ...config, maxTries: Math.max(1, Math.min(99, Math.round(Number(e.currentTarget.value) || 1))) })}
-            />
-          {/if}
-          <label><input type="checkbox" checked={config.allowReveal} onchange={(e) => (config = { ...config, allowReveal: e.currentTarget.checked })} /> "Show correct answer" button</label>
-        </div>
-      {/if}
-
-      <span class="label">Time limit</span>
-      <div class="choices">
-        <label>
-          <input
-            type="checkbox"
-            checked={config.timeLimitMinutes !== null}
-            onchange={(e) => (config = { ...config, timeLimitMinutes: e.currentTarget.checked ? 40 : null })}
-          /> Enable
-        </label>
-        {#if config.timeLimitMinutes !== null}
           <input
             class="form-control"
             type="number"
             min="1"
-            max="600"
-            aria-label="Time limit in minutes"
-            value={config.timeLimitMinutes}
-            onchange={(e) => (config = { ...config, timeLimitMinutes: Math.max(1, Math.min(600, Math.round(Number(e.currentTarget.value) || 1))) })}
-          /> minutes
-        {/if}
-      </div>
+            max="1000"
+            aria-label="Number of questions"
+            disabled={config.count === 'all'}
+            value={config.count === 'all' ? 7 : config.count}
+            onchange={(e) => (config = { ...config, count: Math.max(1, Math.min(1000, Math.round(Number(e.currentTarget.value) || 1))) })}
+          />
+        </div>
 
-      <label class="label" for="opt-seed">Seed</label>
-      <div class="choices">
-        <input
-          id="opt-seed"
-          class="form-control"
-          type="number"
-          min="0"
-          placeholder="random"
-          value={config.seed ?? ''}
-          onchange={(e) => {
-            const v = e.currentTarget.value.trim();
-            const { seed: _drop, ...rest } = config;
-            config = v === '' ? rest : { ...rest, seed: Math.max(0, Math.min(0xffff_ffff, Math.round(Number(v)) || 0)) };
-          }}
-        />
-        <span class="hint">Same seed and options, same questions and numbers (share links carry it).</span>
+        {#if config.count !== 'all'}
+          <label class="label" for="opt-draw">Spread</label>
+          <div class="choices">
+            <select id="opt-draw" class="form-select" value={config.draw} onchange={(e) => (config = { ...config, draw: e.currentTarget.value as QuizConfig['draw'] })}>
+              <option value="sections">Across sections (one per section, then repeat)</option>
+              <option value="sets">Across sets</option>
+              <option value="uniform">Uniformly over all problems</option>
+            </select>
+            <span class="hint">Variants of the same situation are never drawn together.</span>
+          </div>
+        {/if}
+
+        <span class="label" id="opt-order">Order</span>
+        <div class="choices" role="radiogroup" aria-labelledby="opt-order">
+          <label><input type="radio" name="order" checked={config.order === 'source'} onchange={() => (config = { ...config, order: 'source' })} /> As in the source</label>
+          <label><input type="radio" name="order" checked={config.order === 'shuffled'} onchange={() => (config = { ...config, order: 'shuffled' })} /> Shuffled</label>
+          <label class="pt-tooltip" data-tooltip={BY_DIFFICULTY_HINT}>
+            <input type="radio" name="order" aria-describedby="order-difficulty-hint" checked={config.order === 'easy-first'} onchange={() => (config = { ...config, order: 'easy-first' })} /> Easy to hard
+          </label>
+          <label class="pt-tooltip" data-tooltip={BY_DIFFICULTY_HINT}>
+            <input type="radio" name="order" aria-describedby="order-difficulty-hint" checked={config.order === 'hard-first'} onchange={() => (config = { ...config, order: 'hard-first' })} /> Hard to easy
+          </label>
+          <span id="order-difficulty-hint" class="pt-sr-only">{BY_DIFFICULTY_HINT}</span>
+        </div>
+
+        <span class="label" id="opt-values">Numbers</span>
+        <div class="choices" role="radiogroup" aria-labelledby="opt-values">
+          <label><input type="radio" name="values" checked={config.values === 'random'} onchange={() => (config = { ...config, values: 'random' })} /> Randomized</label>
+          <label><input type="radio" name="values" checked={config.values === 'source'} onchange={() => (config = { ...config, values: 'source' })} /> The source's own numbers</label>
+        </div>
+
+        <span class="label">Content</span>
+        <div class="choices">
+          <label><input type="checkbox" checked={config.includeFixed} onchange={(e) => (config = { ...config, includeFixed: e.currentTarget.checked })} /> Include problems not randomized yet</label>
+        </div>
+
+        <span class="label" id="opt-difficulty">Difficulty</span>
+        <div class="choices" role="group" aria-labelledby="opt-difficulty">
+          <label>
+            from
+            <select class="form-select" aria-label="Lowest difficulty" value={String(range.min)} onchange={(e) => setDifficulty({ min: Number(e.currentTarget.value) as DifficultyLevel })}>
+              {#each LEVELS as d (d)}<option value={String(d)}>{d} · {DEFAULT_DIFFICULTY_NAMES[d]}</option>{/each}
+            </select>
+          </label>
+          <label>
+            to
+            <select class="form-select" aria-label="Highest difficulty" value={String(range.max)} onchange={(e) => setDifficulty({ max: Number(e.currentTarget.value) as DifficultyLevel })}>
+              {#each LEVELS as d (d)}<option value={String(d)}>{d} · {DEFAULT_DIFFICULTY_NAMES[d]}</option>{/each}
+            </select>
+          </label>
+          {#if difficultyFilter(config.difficulty)}
+            <label>
+              <input type="checkbox" checked={range.unrated} onchange={(e) => setDifficulty({ unrated: e.currentTarget.checked })} /> Include problems without a difficulty (not randomized yet)
+            </label>
+          {/if}
+        </div>
+
+        <span class="label" id="opt-feedback">Feedback</span>
+        <div class="choices" role="radiogroup" aria-labelledby="opt-feedback">
+          <label><input type="radio" name="feedback" checked={config.feedback === 'immediate'} onchange={() => (config = { ...config, feedback: 'immediate' })} /> Check each answer</label>
+          <label><input type="radio" name="feedback" checked={config.feedback === 'deferred'} onchange={() => (config = { ...config, feedback: 'deferred' })} /> Only after finishing</label>
+        </div>
+
+        {#if config.feedback === 'immediate'}
+          <span class="label">Tries</span>
+          <div class="choices">
+            <label>
+              <input type="checkbox" checked={config.maxTries === null} onchange={(e) => (config = { ...config, maxTries: e.currentTarget.checked ? null : 3 })} /> Unlimited
+            </label>
+            {#if config.maxTries !== null}
+              <input
+                class="form-control"
+                type="number"
+                min="1"
+                max="99"
+                aria-label="Tries per question"
+                value={config.maxTries}
+                onchange={(e) => (config = { ...config, maxTries: Math.max(1, Math.min(99, Math.round(Number(e.currentTarget.value) || 1))) })}
+              />
+            {/if}
+            <label><input type="checkbox" checked={config.allowReveal} onchange={(e) => (config = { ...config, allowReveal: e.currentTarget.checked })} /> "Show correct answer" button</label>
+          </div>
+        {/if}
+
+        <span class="label">Time limit</span>
+        <div class="choices">
+          <label>
+            <input
+              type="checkbox"
+              checked={config.timeLimitMinutes !== null}
+              onchange={(e) => (config = { ...config, timeLimitMinutes: e.currentTarget.checked ? 40 : null })}
+            /> Enable
+          </label>
+          {#if config.timeLimitMinutes !== null}
+            <input
+              class="form-control"
+              type="number"
+              min="1"
+              max="600"
+              aria-label="Time limit in minutes"
+              value={config.timeLimitMinutes}
+              onchange={(e) => (config = { ...config, timeLimitMinutes: Math.max(1, Math.min(600, Math.round(Number(e.currentTarget.value) || 1))) })}
+            /> minutes
+          {/if}
+        </div>
+
+        <label class="label" for="opt-seed">Seed</label>
+        <div class="choices">
+          <input
+            id="opt-seed"
+            class="form-control"
+            type="number"
+            min="0"
+            placeholder="random"
+            value={config.seed ?? ''}
+            onchange={(e) => {
+              const v = e.currentTarget.value.trim();
+              const { seed: _drop, ...rest } = config;
+              config = v === '' ? rest : { ...rest, seed: Math.max(0, Math.min(0xffff_ffff, Math.round(Number(v)) || 0)) };
+            }}
+          />
+          <span class="hint">Same seed and options, same questions and numbers (share links carry it).</span>
+        </div>
       </div>
-    </div>
-  </fieldset>
+    </fieldset>
+  {/if}
 
   <div class="start-summary" data-testid="summary">
     {#if setsCount === 0}
