@@ -1,0 +1,35 @@
+# P47 — at equilibrium the spring holds the hanging mass: k d = m g, so k = m g / d (d in cm,
+# m in g, both converted inside the formula).
+id: phys161-e3-p047-helical-spring-constant
+title: Force constant of a vertical spring
+source: { document: PHYS161_Exam3, labels: [ P47 ] }
+section: Oscillations
+tags: [ oscillations, spring, hookes-law, equilibrium, units ]
+narrative: >-
+  A light vertically mounted helical spring is stretched by {d:unit} when a mass of {m:unit} hangs
+  at the spring's end. The gravitational acceleration on Earth is $g = {g:unit}$.
+vars:
+  - {
+      name: d,
+      kind: range,
+      min: 3.0,
+      max: 9.5,
+      step: 0.1,
+      decimals: 1,
+      unit: cm,
+      label: stretch
+    }
+  - { name: m, kind: range, min: 100, max: 250, step: 5, unit: g, label: hanging mass }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: force-constant
+    prompt: "What is the force constant of the spring? {_0}{_u}"
+    answer: (m / 1000) * g / (d / 100)
+    unit: N/m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { d: 4.9, m: 165, g: 9.8 }
+  parts:
+    - { id: force-constant, answer: 33, unit: N/m, source: P47 }

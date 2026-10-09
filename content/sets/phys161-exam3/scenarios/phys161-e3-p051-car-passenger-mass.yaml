@@ -1,0 +1,52 @@
+# P51 — the person's weight fixes the spring constant, k = m g / d, and the car and passenger
+# vibrate at ω = 2π f = sqrt(k / (M + m)). Eliminating k: m (g / d − ω²) = ω² M, so
+# m = ω² M / (g / d − ω²) (d in cm, converted inside the formula). The constraint keeps the
+# person's mass that the numbers imply between 45 and 110 kg.
+id: phys161-e3-p051-car-passenger-mass
+title: Mass of a passenger from a car's vibration
+source: { document: PHYS161_Exam3, labels: [ P51 ] }
+section: Oscillations
+tags: [ oscillations, spring, hookes-law, frequency ]
+narrative: >-
+  When a person steps into a car of mass {M:unit}, the car sinks by {d:unit} on its springs.
+  Assuming no damping, the car and passenger then vibrate at {f:unit}. The gravitational
+  acceleration on Earth is $g = {g:unit}$.
+vars:
+  - { name: M, kind: range, min: 1100, max: 2100, step: 10, unit: kg, label: car mass }
+  - {
+      name: d,
+      kind: range,
+      min: 4.0,
+      max: 7.0,
+      step: 0.1,
+      decimals: 1,
+      unit: cm,
+      label: sink distance
+    }
+  - {
+      name: f,
+      kind: range,
+      min: 0.35,
+      max: 0.50,
+      step: 0.01,
+      decimals: 2,
+      unit: Hz,
+      label: frequency
+    }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: w2, expr: "(2 * pi * f)^2", unit: s^-2 }
+  - { name: mp, expr: "w2 * M / (g / (d / 100) - w2)", unit: kg }
+constraints:
+  - "mp >= 45 and mp <= 110" # a plausible person
+parts:
+  - id: person-mass
+    prompt: "What is the mass of the person? {_0}{_u}"
+    answer: mp
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { M: 1770, d: 5.4, f: 0.41, g: 9.8 }
+  parts:
+    - { id: person-mass, answer: 67.1811, unit: kg, source: P51 }

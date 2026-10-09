@@ -1,11 +1,13 @@
-# P63 — the completely inelastic collision gives the pair v' = m v / (2m) = v / 2 (the source
+# P63/P64 — the completely inelastic collision gives the pair v' = m v / (2m) = v / 2 (the source
 # family always uses two equal masses, so one variable prints both). Right after the collision
-# the spring is unstretched, so ½ (2m) v'² = ½ k A², i.e. A = v' sqrt(2m / k) = v sqrt(m / (2k)).
+# the spring is unstretched, so the oscillation energy is E = ½ (2m) v'² = m v² / 4 (P64), and
+# E = ½ k A² gives A = v' sqrt(2m / k) = v sqrt(m / (2k)) (P63). The base canonical values are
+# P63's; P64 overrides them.
 id: phys161-e3-p063-collision-spring-amplitude
-title: Amplitude after a collision with a spring-mounted mass
-source: { document: PHYS161_Exam3, labels: [ P63 ] }
+title: Amplitude and energy after a collision with a spring-mounted mass
+source: { document: PHYS161_Exam3, labels: [ P63, P64 ] }
 section: Oscillations
-tags: [ oscillations, spring, inelastic-collision, amplitude ]
+tags: [ oscillations, spring, inelastic-collision, amplitude, energy, multi-part ]
 narrative: >-
   A {m}-kg mass is traveling to the right with a speed of {v:unit} on a smooth horizontal surface
   when it collides with and sticks to a second {m}-kg mass that is initially at rest but is attached
@@ -33,7 +35,14 @@ parts:
     unit: m
     tolerance: { rel: 0.01 }
     difficulty: 3
+  - id: energy
+    prompt: "Find the total energy of the subsequent oscillations. {_0}{_u}"
+    answer: (2 * m) * (m * v / (2 * m))^2 / 2
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
 canonical:
   vars: { m: 12, v: 1.6, k: 88 }
   parts:
     - { id: amplitude, answer: 0.41779, unit: m, source: P63 }
+    - { id: energy, answer: 14.3325, unit: J, source: P64, vars: { m: 13, v: 2.1, k: 93 } }

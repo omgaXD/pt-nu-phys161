@@ -1,10 +1,11 @@
-# P73/P78 — weakly damped (underdamped) spring: ω' = sqrt(k/m − (b/2m)²), f' = ω' / 2π.
-# The amplitude decays as e^{−(b/2m) t}, so over one period T' = 2π / ω' it falls by the fraction
-# 1 − e^{−(b/2m) T'}, printed as a percentage. The base canonical values are P73's; P78 overrides
-# them with its own. The constraint keeps the motion underdamped (never binding here).
+# P73/P74/P78 — weakly damped (underdamped) spring: ω' = sqrt(k/m − (b/2m)²), f' = ω' / 2π.
+# The amplitude decays as e^{−(b/2m) t}: it falls to 1/e after t = 2m / b (P74), and over one
+# period T' = 2π / ω' it falls by the fraction 1 − e^{−(b/2m) T'}, printed as a percentage (P78).
+# The base canonical values are P73's; P74 and P78 override them with their own. The constraint
+# keeps the motion underdamped (never binding here).
 id: phys161-e3-p073-damped-spring-object
 title: Damped oscillation of an object on a spring
-source: { document: PHYS161_Exam3, labels: [ P73, P78 ] }
+source: { document: PHYS161_Exam3, labels: [ P73, P74, P78 ] }
 section: Oscillations
 tags: [ oscillations, damping, spring, frequency, amplitude-decay, multi-part ]
 narrative: >-
@@ -53,6 +54,14 @@ parts:
     unit: Hz
     tolerance: { rel: 0.01 }
     difficulty: 2
+  - id: decay-time
+    prompt: >-
+      After what time does the amplitude of the oscillation fall to $1/e$ of its initial value?
+      {_0}{_u}
+    answer: 1 / gamma
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: amplitude-decrease
     prompt: >-
       By what percentage does the amplitude of the oscillation decrease in each cycle? {_0}{_u}
@@ -64,6 +73,7 @@ canonical:
   vars: { m: 10.6, k: 20500, b: 3 }
   parts:
     - { id: damped-frequency, answer: 6.998, unit: Hz, source: P73 }
+    - { id: decay-time, answer: 5.24324, unit: s, source: P74, vars: { m: 9.7, k: 30500, b: 3.7 } }
     - {
         id: amplitude-decrease,
         answer: 1.8237,

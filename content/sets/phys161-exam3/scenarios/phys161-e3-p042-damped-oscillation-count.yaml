@@ -1,0 +1,28 @@
+# P42 — each cycle multiplies the amplitude by r, so the energy (∝ A²) by r². The energy falls to
+# the fraction p after n = ln p / (2 ln r) cycles; the source prints this n unrounded. The period
+# does not enter the answer.
+id: phys161-e3-p042-damped-oscillation-count
+title: Oscillations for a damped oscillator's energy to decay
+source: { document: PHYS161_Exam3, labels: [ P42 ] }
+section: Oscillations
+tags: [ oscillations, damping, energy, logarithms ]
+narrative: >-
+  A mass is suspended from a spring and oscillates with a period of {T:unit}. Each complete
+  oscillation reduces the amplitude by a factor of {r} because of a small velocity-dependent
+  frictional effect.
+vars:
+  - { name: T, kind: range, min: 0.5, max: 1.0, step: 0.05, unit: s, label: period }
+  - { name: r, kind: range, min: 0.90, max: 0.98, step: 0.01, label: amplitude factor per cycle }
+  - { name: p, kind: range, min: 0.20, max: 0.70, step: 0.01, label: remaining energy fraction }
+parts:
+  - id: oscillations
+    prompt: >-
+      How many complete oscillations does it take for the total energy of the oscillator to decrease
+      to {p} of its initial value? {_0}
+    answer: ln(p) / (2 * ln(r))
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { T: 0.7, r: 0.94, p: 0.39 }
+  parts:
+    - { id: oscillations, answer: 7.60891, source: P42 }

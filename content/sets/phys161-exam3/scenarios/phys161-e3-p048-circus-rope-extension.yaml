@@ -1,17 +1,18 @@
-# P48 — the rope acts as a spring with k = m ω² = 4π² m / T², so the static extension is
-# x = m g / k = g T² / (4π²). The performer's mass cancels, but it is part of the problem's data.
+# P48/P49 — the rope acts as a spring with k = m ω² = 4π² m / T² (P49), so the static extension
+# is x = m g / k = g T² / (4π²) (P48: the performer's mass cancels, but it is part of the data).
+# The base canonical values are P48's; P49 overrides them.
 id: phys161-e3-p048-circus-rope-extension
-title: Extension of a circus performer's elastic rope
-source: { document: PHYS161_Exam3, labels: [ P48 ] }
+title: A circus performer's elastic rope
+source: { document: PHYS161_Exam3, labels: [ P48, P49 ] }
 section: Oscillations
-tags: [ oscillations, spring, hookes-law, period, equilibrium ]
+tags: [ oscillations, spring, hookes-law, period, equilibrium, multi-part ]
 narrative: >-
   Circus performer of mass {m:unit} oscillates up and down at the end of a long elastic rope at a
   rate of once every {T:unit}. The elastic rope obeys Hooke's Law. The gravitational acceleration is
   $g = {g:unit}$.
 vars:
-  - { name: m, kind: range, min: 55, max: 100, step: 1, unit: kg, label: performer's mass }
-  - { name: T, kind: range, min: 4.0, max: 7.0, step: 0.1, decimals: 1, unit: s, label: period }
+  - { name: m, kind: range, min: 55, max: 100, step: 0.5, unit: kg, label: performer's mass }
+  - { name: T, kind: range, min: 4.0, max: 7.0, step: 0.05, unit: s, label: period }
 derived:
   - { name: g, expr: "9.8", unit: m/s^2 }
 parts:
@@ -23,7 +24,14 @@ parts:
     unit: m
     tolerance: { rel: 0.01 }
     difficulty: 2
+  - id: force-constant
+    prompt: "What is the force constant of the rope? {_0}{_u}"
+    answer: 4 * pi^2 * m / T^2
+    unit: N/m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
 canonical:
   vars: { m: 77, T: 5.5, g: 9.8 }
   parts:
     - { id: extension, answer: 7.5091662226928, unit: m, source: P48 }
+    - { id: force-constant, answer: 74.4598, unit: N/m, source: P49, vars: { m: 88.5, T: 6.85 } }

@@ -1,0 +1,41 @@
+# P71 — the wire acts as a spring: the first ball fixes k = m1 g / Δx (Δx in mm). The second ball
+# then vibrates at f = sqrt(k / m2) / (2π) = sqrt(m1 g / (Δx m2)) / (2π). Both masses stay below
+# 80 kg and m2 ≠ 18 so "a {m}-kg" never needs "an".
+id: phys161-e3-p071-wire-ball-swap-frequency
+title: Vibration frequency of a different ball on a wire
+source: { document: PHYS161_Exam3, labels: [ P71 ] }
+section: Oscillations
+tags: [ oscillations, spring, static-stretch, frequency ]
+narrative: >-
+  A hanging wire stretches by {dx:unit} when a {m1}-kg steel ball is suspended from it. The ball is
+  removed and a {m2}-kg ball is hung from the same wire instead. The gravitational acceleration on
+  Earth is $g = {g:unit}$.
+vars:
+  - {
+      name: dx,
+      kind: range,
+      min: 1.50,
+      max: 3.50,
+      step: 0.05,
+      unit: mm,
+      label: stretch of the wire
+    }
+  - { name: m1, kind: range, min: 40, max: 79, step: 1, unit: kg, label: first ball mass }
+  - { name: m2, kind: range, min: 15, max: 39, step: 1, unit: kg, label: second ball mass }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+constraints:
+  - "m2 != 18" # keeps the article in "a {m2}-kg ball" grammatical
+parts:
+  - id: frequency
+    prompt: >-
+      If this ball is pulled down a small additional distance and released, at what frequency will
+      it vibrate? {_0}{_u}
+    answer: sqrt(m1 * g / ((dx / 1000) * m2)) / (2 * pi)
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { dx: 2.45, m1: 52, m2: 24, g: 9.8 }
+  parts:
+    - { id: frequency, answer: 14.8165, unit: Hz, source: P71 }
