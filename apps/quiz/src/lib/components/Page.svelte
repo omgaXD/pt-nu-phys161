@@ -1,7 +1,10 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { resolve } from '$app/paths';
+  import { page } from '$app/state';
   import type { ImportChoices } from '$lib/app.svelte';
   import { drawers } from '$lib/drawers.svelte';
+  import { ISSUES_URL, REPO_URL } from '$lib/repo';
   import CourseIndexSection from './CourseIndexSection.svelte';
   import FaIcon from './FaIcon.svelte';
   import StateActions from './StateActions.svelte';
@@ -21,6 +24,9 @@
   // The course index's "⋮" menu. In Moodle it holds expand/collapse actions; here it hides an easter egg.
   let menuOpen = $state(false);
   let menuEl: HTMLElement | undefined = $state();
+
+  const aboutHref = resolve('/about/');
+  const onAbout = $derived(page.url.pathname === aboutHref);
 </script>
 
 <svelte:window
@@ -33,7 +39,7 @@
 />
 
 
-<!-- Moodle Boost's #page.drawers: the course-index drawer on the left (app-wide actions here),
+<!-- Moodle Boost's #page.drawers: the course-index drawer on the left (app-wide links and actions here),
      the block drawer on the right, each closable and reopened from a toggle at the edge. -->
 <div id="page" class="drawers" class:show-drawer-left={drawers.left} class:show-drawer-right={blocks && drawers.right} class:narrow>
   <div class="drawer drawer-left" class:show={drawers.left} aria-label="Course index" role="region">
@@ -54,7 +60,26 @@
     </div>
     <div class="drawercontent">
       <nav class="courseindex" aria-label="Course index">
-        <CourseIndexSection id="general" title="General"><StateActions {onimported} /></CourseIndexSection>
+        <CourseIndexSection id="general" title="General">
+          <!-- As Moodle's leaves; the current page's is li.pageitem. -->
+          <ul class="courseindex-sectioncontent unlist">
+            <li class="courseindex-item d-flex" class:pageitem={onAbout}>
+              <span class="completioninfo"></span>
+              <a class="courseindex-link text-truncate" href={aboutHref} aria-current={onAbout ? 'page' : undefined}>About</a>
+            </li>
+            <li class="courseindex-item d-flex">
+              <span class="completioninfo"></span>
+              <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- an external address -->
+              <a class="courseindex-link text-truncate" href={REPO_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
+            </li>
+            <li class="courseindex-item d-flex">
+              <span class="completioninfo"></span>
+              <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- an external address -->
+              <a class="courseindex-link text-truncate" href={ISSUES_URL} target="_blank" rel="noopener noreferrer">Feedback</a>
+            </li>
+          </ul>
+        </CourseIndexSection>
+        <CourseIndexSection id="data" title="Data"><StateActions {onimported} /></CourseIndexSection>
       </nav>
     </div>
   </div>

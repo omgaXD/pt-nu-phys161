@@ -321,7 +321,7 @@ h3 {
    (.courseindex-item.courseindex-section-title: chevron + .courseindex-link) + the collapsible
    .courseindex-item-content with its leaves (li.courseindex-item.d-flex > span.completioninfo +
    .courseindex-link.text-truncate). Everything in --bs-secondary-color, black on hover. Here the
-   whole title row is one toggle button, and the leaves are buttons for app-wide actions. */
+   whole title row is one toggle button, and the leaves are app links or buttons for app-wide actions. */
 .unlist,
 .unlist li {
   margin: 0;
@@ -353,7 +353,21 @@ h3 {
 }
 .courseindex .courseindex-item:not(.courseindex-section-title):is(:hover, :focus-within) .courseindex-link {
   color: #000;
+  text-decoration: none;
   cursor: pointer;
+}
+/* The current page's leaf (.pageitem): white on primary blue, dimmer on hover and focus. */
+.courseindex .courseindex-item.pageitem {
+  background-color: #0d6efd;
+}
+.courseindex .courseindex-item.pageitem .courseindex-link {
+  color: #fff;
+}
+.courseindex .courseindex-item.pageitem:is(:hover, :focus-within) {
+  background-color: #025ce2;
+}
+.courseindex .courseindex-item.pageitem:is(:hover, :focus-within) .courseindex-link {
+  color: #e6e6e6;
 }
 .courseindex .courseindex-item .courseindex-link:focus-visible {
   outline: 0;

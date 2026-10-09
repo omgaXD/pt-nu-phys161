@@ -1,4 +1,5 @@
 import { type Browser, expect, type Page, test } from '@playwright/test';
+import { ISSUES_URL, REPO_URL } from '../src/lib/repo';
 
 // Content (see prepare.mjs): set "corpus" = the 21 authored reference scenarios
 // (28 source problems over 10 sections, randomized), set "demo" = 7 imported
@@ -352,7 +353,7 @@ test('reloading keeps the answers, the numbers and the deadline', async ({ page 
   await expect(page.getByRole('timer')).toHaveText(/0:(40:00|39:\d\d)/);
 
   // The start page offers to continue.
-  await page.getByRole('link', { name: 'Back' }).click();
+  await page.getByRole('link', { name: 'Back', exact: true }).click();
   await expect(page.getByTestId('resume')).toContainText('1 of 7 answered');
   await page.getByRole('link', { name: 'Continue the last attempt' }).click();
   await expect(page).toHaveURL(/attempt\/$/);
@@ -426,7 +427,7 @@ test('solved problems are counted and left out on request, as exclusions a link 
   await answerField(page).fill('191.88 J');
   await page.getByRole('button', { name: 'Check' }).click();
   await expect(card(page).locator('.state')).toHaveText('Correct');
-  await page.getByRole('link', { name: 'Back' }).click();
+  await page.getByRole('link', { name: 'Back', exact: true }).click();
   await expect(page.locator('.set-row').filter({ hasText: 'Reference corpus' })).toContainText('1 solved');
   await expect(page.getByTestId('summary')).toContainText('28 questions');
   const corpus = page.locator('details.sections').first();
@@ -559,24 +560,41 @@ test('difficulty orders: easy to hard or hard to easy, explained by a tooltip', 
   }
 });
 
-test('the course index: a "General" section that collapses from its whole title row, remembered', async ({ page }) => {
+test('the course index: sections collapse from their whole title row, remembered', async ({ page }) => {
   await open(page, '');
   const index = page.locator('.drawer-left .courseindex');
-  const general = index.getByRole('button', { name: 'General' });
+  const data = index.getByRole('button', { name: 'Data' });
   const exportLink = index.getByRole('button', { name: 'Export state' });
-  await expect(general).toHaveAttribute('aria-expanded', 'true');
+  await expect(data).toHaveAttribute('aria-expanded', 'true');
   await expect(exportLink).toBeVisible();
   await expect(index.getByRole('button', { name: 'Import state' })).toBeVisible();
   // The title text collapses it too, not only the chevron.
-  await general.locator('.courseindex-link').click();
-  await expect(general).toHaveAttribute('aria-expanded', 'false');
+  await data.locator('.courseindex-link').click();
+  await expect(data).toHaveAttribute('aria-expanded', 'false');
   await expect(exportLink).toHaveCount(0);
+  await expect(index.getByRole('link', { name: 'About' })).toBeVisible(); // General stays open
   await page.reload();
   await page.locator('body[data-hydrated]').waitFor({ state: 'attached' });
-  await expect(general).toHaveAttribute('aria-expanded', 'false');
-  await general.locator('.courseindex-chevron').click();
-  await expect(general).toHaveAttribute('aria-expanded', 'true');
+  await expect(data).toHaveAttribute('aria-expanded', 'false');
+  await data.locator('.courseindex-chevron').click();
+  await expect(data).toHaveAttribute('aria-expanded', 'true');
   await expect(exportLink).toBeVisible();
+});
+
+test('the course index: "General" links to the About page and the GitHub repository', async ({ page }) => {
+  await open(page, '');
+  const index = page.locator('.drawer-left .courseindex');
+  await expect(index.getByRole('button', { name: 'General' })).toHaveAttribute('aria-expanded', 'true');
+  await expect(index.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', REPO_URL);
+  await expect(index.getByRole('link', { name: 'Feedback' })).toHaveAttribute('href', ISSUES_URL);
+  const about = index.getByRole('link', { name: 'About' });
+  await expect(about).not.toHaveAttribute('aria-current');
+  await about.click();
+  await expect(page).toHaveURL(/\/pt\/about\/$/);
+  await expect(page.getByRole('heading', { name: 'About' })).toBeVisible();
+  // The current page's leaf is highlighted, as in Moodle.
+  await expect(about).toHaveAttribute('aria-current', 'page');
+  await expect(index.locator('.pageitem')).toHaveText('About');
 });
 
 test('export and import move the attempt and progress to another browser', async ({ page, browser }) => {
@@ -615,7 +633,7 @@ test('export and import move the attempt and progress to another browser', async
   await expect(card(other).locator('.qno')).toHaveText('3');
   await expect(answerField(other)).toHaveValue('12');
   await expect(nav(other).getByRole('button', { name: /^1, correct/ })).toBeVisible();
-  await other.getByRole('link', { name: 'Back' }).click();
+  await other.getByRole('link', { name: 'Back', exact: true }).click();
   await expect(corpusRow).toContainText('1 solved');
   await expect(other.getByTestId('resume')).toContainText('2 of 28 answered');
   await context.close();
