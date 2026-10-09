@@ -324,6 +324,8 @@ test('the history offers a review only for attempts that can still be opened', a
   const history = page.getByTestId('history');
   await expect(history.locator('tbody tr')).toHaveCount(1);
   await expect(history.getByRole('columnheader', { name: 'Review' })).toBeVisible();
+  await expect(history.getByRole('columnheader', { name: 'Grade / 10.00' })).toBeVisible();
+  await expect(history.locator('tbody tr').first().locator('td').nth(4)).toHaveText('0.00');
   await expect(review).toHaveCount(0);
   await expect(history.locator('tbody tr').first()).toContainText('Unavailable');
 

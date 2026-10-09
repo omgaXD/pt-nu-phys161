@@ -482,7 +482,7 @@
     <!-- Scrolls inside a box a little shorter than the screen, the column names kept in view. -->
     <div class="history-scroll">
       <table class="generaltable" data-testid="history" aria-labelledby="history-title">
-        <thead><tr><th>Finished</th><th>Preset</th><th>Sets</th><th>Marks</th><th>Review</th></tr></thead>
+        <thead><tr><th>Finished</th><th>Preset</th><th>Sets</th><th>Marks</th><th>Grade / 10.00</th><th>Review</th></tr></thead>
         <tbody>
           {#each app.history as h (h.id)}
             <tr>
@@ -490,6 +490,8 @@
               <td>{presetName(h.preset)}</td>
               <td>{setTitles(h.sets)}</td>
               <td class="nowrap">{formatMark(h.marks)} / {formatMark(h.total)}</td>
+              <!-- Out of 10, as in the review, so attempts of different lengths compare. -->
+              <td>{formatMark(h.total ? (10 * h.marks) / h.total : 0)}</td>
               <td class="nowrap">
                 {#if h.full && app.reviewable(h.id)}
                   <a href={resolve(`/review/?id=${encodeURIComponent(h.id)}`)}>Review</a>
