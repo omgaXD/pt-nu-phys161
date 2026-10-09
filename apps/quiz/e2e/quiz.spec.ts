@@ -273,6 +273,23 @@ test('reloading keeps the answers, the numbers and the deadline', async ({ page 
   await expect(page).toHaveURL(/attempt\/$/);
 });
 
+test('abandoning the attempt in progress asks first', async ({ page }) => {
+  await startFrom(page, '?p=exam&sets=corpus&seed=7');
+  await open(page, '');
+  const resume = page.getByTestId('resume');
+  const asked: string[] = [];
+  page.on('dialog', (d) => {
+    asked.push(d.message());
+    void (asked.length === 1 ? d.dismiss() : d.accept());
+  });
+  await resume.getByRole('button', { name: 'Abandon it' }).click();
+  expect(asked).toEqual(['Abandon the attempt in progress? Its answers are lost.']);
+  await expect(resume).toBeVisible();
+  await resume.getByRole('button', { name: 'Abandon it' }).click();
+  await expect(resume).toHaveCount(0);
+  await expect(page.getByTestId('history')).toHaveCount(0);
+});
+
 test('the next quiz does not reuse the seed of a link', async ({ page }) => {
   await startFrom(page, '?p=exam&sets=corpus&seed=42');
   await open(page, '');

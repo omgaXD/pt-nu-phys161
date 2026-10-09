@@ -189,7 +189,7 @@
       {inProgress.answers.filter((a) => a.value.trim() !== '').length} of {inProgress.questions.length} answered.
       <div class="actions" style="margin-top: 0.5rem">
         <a class="btn btn-primary" href={resolve('/attempt/')}>Continue the last attempt</a>
-        <button type="button" class="btn btn-secondary" onclick={() => app.abandon()}>Abandon it</button>
+        <button type="button" class="btn btn-secondary" onclick={() => confirm('Abandon the attempt in progress? Its answers are lost.') && app.abandon()}>Abandon it</button>
       </div>
     </div>
   {/if}
