@@ -475,24 +475,27 @@
     <button type="button" class="btn btn-secondary" onclick={copyLink} disabled={setsCount === 0}>{copied ? 'Link copied' : 'Copy link'}</button>
   </div>
 
-  <h2>Previous attempts</h2>
+  <h2 id="history-title">Previous attempts</h2>
   {#if app.history.length === 0}
     <p class="muted">No finished attempts yet.</p>
   {:else}
-    <table class="generaltable" data-testid="history">
-      <thead><tr><th>Finished</th><th>Preset</th><th>Sets</th><th>Marks</th><th></th></tr></thead>
-      <tbody>
-        {#each app.history as h (h.id)}
-          <tr>
-            <td>{formatDate(h.finishedAt)}{h.finishReason === 'timeout' ? ' (time up)' : ''}</td>
-            <td>{presetName(h.preset)}</td>
-            <td>{setTitles(h.sets)}</td>
-            <td>{formatMark(h.marks)} / {formatMark(h.total)}</td>
-            <td>{#if h.full && app.reviewable(h.id)}<a href={resolve(`/review/?id=${encodeURIComponent(h.id)}`)}>Review</a>{/if}</td>
-          </tr>
-        {/each}
-      </tbody>
-    </table>
+    <!-- Scrolls inside a box a little shorter than the screen, the column names kept in view. -->
+    <div class="history-scroll">
+      <table class="generaltable" data-testid="history" aria-labelledby="history-title">
+        <thead><tr><th>Finished</th><th>Preset</th><th>Sets</th><th>Marks</th><th></th></tr></thead>
+        <tbody>
+          {#each app.history as h (h.id)}
+            <tr>
+              <td>{formatDate(h.finishedAt)}{h.finishReason === 'timeout' ? ' (time up)' : ''}</td>
+              <td>{presetName(h.preset)}</td>
+              <td>{setTitles(h.sets)}</td>
+              <td>{formatMark(h.marks)} / {formatMark(h.total)}</td>
+              <td>{#if h.full && app.reviewable(h.id)}<a href={resolve(`/review/?id=${encodeURIComponent(h.id)}`)}>Review</a>{/if}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
   {/if}
   <div class="actions">
     {#if app.history.length > 0}

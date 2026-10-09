@@ -915,6 +915,32 @@ input[type='number'].form-control {
   align-items: center;
   gap: 0.5rem;
 }
+/* Previous attempts: a scrolling box a little shorter than the screen (below the navbar), with the
+   drawers' thin scrollbar. Separate borders, so the sticky header row keeps its rules. */
+.history-scroll {
+  max-height: calc(100vh - 60px - 4rem);
+  max-height: calc(100dvh - 60px - 4rem);
+  margin-bottom: 1rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #6c757d #f8f9fa;
+}
+.history-scroll .generaltable {
+  margin-bottom: 0;
+  border-top: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.history-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  border-bottom: 1px solid #dee2e6;
+}
+.history-scroll tbody tr:first-child td {
+  border-top: 0;
+}
 .link-button {
   padding: 0;
   border: 0;
