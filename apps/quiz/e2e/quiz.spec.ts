@@ -438,11 +438,11 @@ test('difficulty: the start page filters by a range, unrated problems only if as
   await open(page, '?p=ordered&sets=corpus,demo');
   await expect(page.getByTestId('summary')).toContainText('35 questions');
   await showOptions(page);
-  await expect(page.getByLabel(/Include problems without a difficulty/)).toHaveCount(0);
+  await expect(page.getByLabel('Also include problems without a difficulty')).toHaveCount(0);
   await page.getByLabel('Lowest difficulty').selectOption('4');
   await expect(page.getByTestId('summary')).toContainText('5 questions · in order · randomized values · difficulty 4–5 ·');
   await expect(page.getByTestId('preset-state')).toContainText('Custom');
-  await page.getByLabel(/Include problems without a difficulty/).check();
+  await page.getByLabel('Also include problems without a difficulty').check();
   await expect(page.getByTestId('summary')).toContainText('12 questions');
   await expect(page.getByTestId('summary')).toContainText('difficulty 4–5 (+ unrated)');
   // A bound crossing the other one moves it along.

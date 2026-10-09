@@ -394,7 +394,7 @@
           </label>
           {#if difficultyFilter(config.difficulty)}
             <label>
-              <input type="checkbox" checked={range.unrated} onchange={(e) => setDifficulty({ unrated: e.currentTarget.checked })} /> Include problems without a difficulty (not randomized yet)
+              <input type="checkbox" checked={range.unrated} onchange={(e) => setDifficulty({ unrated: e.currentTarget.checked })} /> Also include problems without a difficulty
             </label>
           {/if}
         </div>
