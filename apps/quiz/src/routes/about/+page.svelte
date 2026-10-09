@@ -61,5 +61,5 @@
 		own projects and purposes. Crediting me is appreciated, but optional.
 	</p>
 	<p>Alternatively, if you want to contribute, reach out to me on Telegram.</p>
-  <a href="/">To Home</a>
+  <a href={resolve("/")}>To Home</a>
 </Page>
