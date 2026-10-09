@@ -268,9 +268,11 @@
           <summary>
             Sections ({picked.filter((p) => p.state !== 'none').length} of {s.sections.length} · {picked.reduce((n, p) => n + p.selected, 0)} of {qs.length} problems)
           </summary>
-          <div class="actions">
+          <div class="actions section-actions">
             <button type="button" class="link-button" onclick={() => (config = setAllSections(config, s.id, true))}>All</button>
+            <span aria-hidden="true">·</span>
             <button type="button" class="link-button" onclick={() => (config = setAllSections(config, s.id, false))}>None</button>
+            <span aria-hidden="true">·</span>
             <button type="button" class="link-button" disabled={solved === 0} onclick={() => (config = withoutSolved(config, [s.id]))}>Leave out solved ({solved})</button>
           </div>
           <ul class="section-tree">

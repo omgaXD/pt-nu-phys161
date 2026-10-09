@@ -747,6 +747,12 @@ details + .set-row {
 .sections > summary::-webkit-details-marker {
   display: none;
 }
+/* All · None · Leave out solved: at the size of the summary above, the dots as muted as the counts. */
+.section-actions {
+  margin-top: 0.15rem;
+  font-size: 0.875rem;
+  color: rgba(33, 37, 41, 0.75);
+}
 /* Sections and their problems: a tree like the course index drawer, with its
    chevrons (fa-chevron-right / -down, .fa-fw at 10px, .me-1, padding-right 4px). */
 .sections > summary::before,
