@@ -77,6 +77,7 @@ test('start page: presets set the options, editing makes a custom quiz', async (
   await corpus.locator('summary').click();
   await corpus.getByRole('button', { name: /^Expand / }).first().click();
   const tile = corpus.locator('.problem-picker .pt-nav-item').first();
+  await expect(corpus.locator('.problem-picker .pt-nav-grid').first()).toHaveCSS('column-gap', '6px'); // as Moodle's quiz navigation
   await expect(tile).toHaveAttribute('aria-pressed', 'true');
   await tile.click();
   await expect(tile).toHaveAttribute('aria-pressed', 'false');

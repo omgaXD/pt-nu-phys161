@@ -292,8 +292,10 @@
 
 /* ---- Quiz navigation buttons (.qnbutton) -------------------------------- */
 
-/* `nav.` outranks the component's own .pt-nav-grid grid, whatever the stylesheet order. */
-.pt-theme-moodle nav.pt-nav-grid {
+/* #mod_quiz_navblock .qnbutton's margin: 0 6px 6px 0, here a gap. The element name outranks the
+   component's own .pt-nav-grid grid, whatever the stylesheet order; `div` is the start page's
+   problem picker. */
+.pt-theme-moodle :is(nav, div).pt-nav-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
