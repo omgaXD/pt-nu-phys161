@@ -1,0 +1,51 @@
+# P99 — cycle 1 → 2 at constant volume, Q₁₂ = n C_V (T₂ − T₁); 2 → 3 adiabatic, Q = 0; 3 → 1 at
+# constant pressure, Q₃₁ = n C_p (T₁ − T₃); C_V = R / (γ − 1), C_p = γ C_V. The net heat is their
+# sum. On a true adiabat T₃ = T₂ (T₁ / T₂)^((γ−1)/γ) (P₃ = P₁ and P₂ / P₁ = T₂ / T₁); the printed
+# T₃ is that value rounded to a kelvin plus a small offset (−6…+6 K), because the source's
+# T₃ = 498 K sits 5 K off the adiabat through its T₁ and T₂.
+id: phys161-e4-p099-diatomic-cycle-net-heat
+title: Net heat of a diatomic gas cycle
+source: { document: PHYS161_Exam4, labels: [ P99 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, heat-engine, cycle, adiabatic ]
+figure:
+  id: cycle-123
+  src: figures/unnamed_002_xiMS.png
+  alt: >-
+    A pV diagram of a three-stage cycle. State 1 at 1.00 atm and temperature T₁; a vertical arrow
+    rises to state 2 at T₂; a curve falls down and to the right to state 3 at T₃, back at 1.00 atm;
+    a horizontal arrow runs left from 3 to 1.
+narrative: >-
+  A heat engine takes {n} mol of a diatomic ideal gas around the cycle shown in PV-diagram. Process
+  1 → 2 is at constant volume, process 2 → 3 is adiabatic, and process 3 → 1 is at a constant
+  pressure of 1 atm. The value of γ for this gas is 1.4. {@fig}
+vars:
+  - { name: n, kind: range, min: 0.20, max: 0.60, step: 0.05, unit: mol, label: amount of gas }
+  - { name: T1, kind: range, min: 280, max: 320, step: 1, unit: K, label: temperature at 1 }
+  - { name: T2, kind: range, min: 500, max: 700, step: 1, unit: K, label: temperature at 2 }
+  - {
+      name: dT3,
+      kind: range,
+      min: -6,
+      max: 6,
+      step: 1,
+      unit: K,
+      label: offset of T₃ from the adiabat
+    }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+  - { name: gamma, expr: "1.4" }
+  - { name: T3, expr: "round(T2 * (T1 / T2)^((gamma - 1) / gamma)) + dT3", unit: K }
+parts:
+  - id: net-heat
+    prompt: >-
+      Find the net heat flow into the engine in one cycle. $T_1 = {T1:unit}$, $T_2 = {T2:unit}$ and
+      $T_3 = {T3:unit}$. The universal gas constant is $R = {R:unit}$. 1 atm = 101325 Pa. {_0}{_u}
+    answer: n * R / (gamma - 1) * (T2 - T1) + n * gamma * R / (gamma - 1) * (T1 - T3)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { n: 0.3, T1: 297, T2: 603, dT3: 5, R: 8.31, gamma: 1.4, T3: 498 }
+  parts:
+    - { id: net-heat, answer: 153.3195, unit: J, source: P99 }

@@ -1,0 +1,41 @@
+# P76/P77 — a Carnot engine between T_h and T_c has efficiency 1 − T_c / T_h, so it delivers
+# W = Q_h (1 − T_c / T_h) (P76). Run in reverse as a refrigerator, removing Q_c from the cold
+# reservoir takes W = Q_c (T_h / T_c − 1) (P77). The base canonical values are P76's; P77
+# overrides them.
+id: phys161-e4-p076-carnot-engine-refrigerator
+title: Carnot engine and refrigerator
+source: { document: PHYS161_Exam4, labels: [ P76, P77 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, carnot, efficiency, refrigerator, multi-part ]
+narrative: >-
+  A Carnot engine operates between a hot reservoir at {Th:unit} and a cold reservoir at {Tc:unit}.
+vars:
+  - { name: Th, kind: range, min: 380, max: 600, step: 5, unit: K, label: hot reservoir }
+  - { name: Tc, kind: range, min: 250, max: 320, step: 5, unit: K, label: cold reservoir }
+  - { name: Qh, kind: range, min: 300, max: 800, step: 1, unit: J, label: heat absorbed }
+  - { name: Qc, kind: range, min: 500, max: 1500, step: 50, unit: J, label: heat removed }
+constraints:
+  - "Th - Tc >= 60" # a working engine with a clear temperature difference
+parts:
+  - id: engine-work
+    prompt: >-
+      If it absorbs {Qh:unit} of heat per cycle at the hot reservoir, how much work per cycle does
+      it deliver? {_0}{_u}
+    answer: Qh * (1 - Tc / Th)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: refrigerator-work
+    prompt: >-
+      If the same engine working in reverse functions as a refrigerator between the same two
+      reservoirs how much work per cycle must be supplied to remove {Qc:unit} of heat from the cold
+      reservoir? {_0}{_u}
+    answer: Qc * (Th / Tc - 1)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { Th: 495, Tc: 305, Qh: 494, Qc: 1000 }
+  parts:
+    - { id: engine-work, answer: 189.61616161616, unit: J, source: P76 }
+    - { id: refrigerator-work, answer: 500, unit: J, source: P77, vars: { Th: 390, Tc: 260 } }

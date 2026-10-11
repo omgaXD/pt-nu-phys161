@@ -1,0 +1,43 @@
+# P95/P96 — a Carnot engine with heat input Q_h and work W has efficiency W / Q_h = 1 − T_c / T_h,
+# so T_c = T_h (1 − W / Q_h) (P95, in K with the source's 273 offset; exactUnit). It rejects
+# Q_c = Q_h − W per cycle, so melting a block of ice takes m L_f / (Q_h − W) cycles (P96, printed
+# unrounded; T_h does not enter). The base canonical values are P95's (with P96's ice mass); P96
+# overrides them.
+id: phys161-e4-p095-co2-carnot-engine
+title: Carnot engine with carbon dioxide
+source: { document: PHYS161_Exam4, labels: [ P95, P96 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, carnot, efficiency, latent-heat, multi-part ]
+narrative: >-
+  A Carnot engine has $CO_2$ as its working substance. The gas is to have a maximum temperature of
+  {Th:unit}. With a heat input of {Qh:unit} per cycle, you want {W:unit} of useful work.
+vars:
+  - { name: Th, kind: range, min: 400, max: 600, step: 1, unit: °C, label: maximum temperature }
+  - { name: Qh, kind: range, min: 350, max: 550, step: 10, unit: J, label: heat input per cycle }
+  - { name: W, kind: range, min: 150, max: 400, step: 10, unit: J, label: work per cycle }
+  - { name: m, kind: range, min: 5, max: 20, step: 1, unit: kg, label: ice mass }
+derived:
+  - { name: Lf, expr: "334", unit: kJ/kg }
+constraints:
+  - "W / Qh >= 0.4 and W / Qh <= 0.75" # a demanding but possible Carnot efficiency
+parts:
+  - id: cold-temperature
+    prompt: "Find the temperature of the cold reservoir. Answer in kelvins (K). {_0}{_u}"
+    answer: (Th + 273) * (1 - W / Qh)
+    unit: K
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: cycles
+    prompt: >-
+      For how many cycles must this engine run to melt completely a {m} kg block of ice originally
+      at 0°C, using only the heat rejected by the engine. Heat of fusion of water is {Lf:unit}.
+      Answer without units. {_0}
+    answer: m * Lf * 1000 / (Qh - W)
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { Th: 491, Qh: 440, W: 290, m: 12, Lf: 334 }
+  parts:
+    - { id: cold-temperature, answer: 260.45, unit: K, source: P95 }
+    - { id: cycles, answer: 30830.769, source: P96, vars: { Th: 496, Qh: 420 } }

@@ -1,0 +1,33 @@
+# P79/P80 — the ice melts reversibly at 0 °C, taking Q = m L_f from the lake, which is barely
+# warmer (also at about 273 K). ΔS_ice = +Q / T (P79) and ΔS_lake = −Q / T (P80). The mass is in g.
+# The base canonical values are P79's; P80 overrides them.
+id: phys161-e4-p079-ice-melting-lake-entropy
+title: Entropy of ice melting in a lake
+source: { document: PHYS161_Exam4, labels: [ P79, P80 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, entropy, latent-heat, multi-part ]
+narrative: >-
+  A block of ice with a mass of {m:unit} at 0°C is placed in a large lake. The temperature of the
+  lake is just slightly higher than 0°C, and the ice melts. Heat of fusion of water is {Lf:unit}.
+vars:
+  - { name: m, kind: range, min: 100, max: 500, step: 1, unit: g, label: ice mass }
+derived:
+  - { name: Lf, expr: "334", unit: kJ/kg }
+parts:
+  - id: ice-entropy
+    prompt: "What is the entropy change of the ice? {_0}{_u}"
+    answer: (m / 1000) * Lf * 1000 / 273
+    unit: J/K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: lake-entropy
+    prompt: "What is the entropy change of the lake? {_0}{_u}"
+    answer: -(m / 1000) * Lf * 1000 / 273
+    unit: J/K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 238, Lf: 334 }
+  parts:
+    - { id: ice-entropy, answer: 291.17948717949, unit: J/K, source: P79 }
+    - { id: lake-entropy, answer: -289.95604395604, unit: J/K, source: P80, vars: { m: 237 } }

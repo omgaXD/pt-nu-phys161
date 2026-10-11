@@ -403,10 +403,9 @@ overridable English).
 
 ### Content
 
-- **PHYS161 Exams 1–3:** all 150 problems of each are randomized: same situation, new numbers
-  every attempt, each checked against the answer printed in the exam document.
-- **PHYS161 Exam 4:** all 99 problems are playable with the exam's own numbers; randomizing
-  them is not done yet.
+- **PHYS161 Exams 1–4:** every problem is randomized (150 each in Exams 1–3, 99 in Exam 4):
+  same situation, new numbers every attempt, each checked against the answer printed in the
+  exam document.
 - Figures from the exam documents, and per-section reference sheets (e.g. a
   moment-of-inertia table) that open from the question.
 

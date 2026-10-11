@@ -1,0 +1,39 @@
+# P97/P98 — Carnot: T_h = T_c / (1 − e). Raising e₁ to e₂ with T_c fixed needs T_h to rise by
+# T_c (1 / (1 − e₂) − 1 / (1 − e₁)) (P97); with T_h fixed T_c must drop by
+# T_c (1 − (1 − e₂) / (1 − e₁)) (P98). Temperatures use the source's 273 offset. The base
+# canonical values are P97's; P98 overrides them.
+id: phys161-e4-p097-carnot-efficiency-increase
+title: Raising the efficiency of a Carnot engine
+source: { document: PHYS161_Exam4, labels: [ P97, P98 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, carnot, efficiency, multi-part ]
+narrative: >-
+  A Carnot engine whose low-temperature reservoir is at {Tc:unit} has an efficiency of {e1}%. The
+  efficiency is to be increased to {e2}%.
+vars:
+  - { name: Tc, kind: range, min: -100, max: 30, step: 5, unit: °C, label: cold reservoir }
+  - { name: e1, kind: range, min: 15, max: 35, step: 5, unit: "%", label: initial efficiency }
+  - { name: e2, kind: range, min: 40, max: 60, step: 5, unit: "%", label: target efficiency }
+parts:
+  - id: hot-increase
+    prompt: >-
+      By how many kelvins must the temperature of the high-temperature reservoir be increased if the
+      temperature of the low-temperature reservoir remains constant? {_0}{_u}
+    answer: (Tc + 273) * (1 / (1 - e2 / 100) - 1 / (1 - e1 / 100))
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: cold-decrease
+    prompt: >-
+      By how many kelvins must the temperature of the low-temperature reservoir be decreased if the
+      temperature of the high-temperature reservoir remains constant? Find the magnitude of the
+      temperature change. {_0}{_u}
+    answer: (Tc + 273) * (1 - (1 - e2 / 100) / (1 - e1 / 100))
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { Tc: -90, e1: 25, e2: 50 }
+  parts:
+    - { id: hot-increase, answer: 122, unit: K, source: P97 }
+    - { id: cold-decrease, answer: 67.667, unit: K, source: P98, vars: { Tc: -70 } }
