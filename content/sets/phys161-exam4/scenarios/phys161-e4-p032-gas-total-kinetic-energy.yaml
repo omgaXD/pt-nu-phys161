@@ -1,0 +1,28 @@
+# P32 — a monatomic ideal gas has only translational kinetic energy, (3/2) k_B T per atom, so the
+# total is (3/2) n R T.
+id: phys161-e4-p032-gas-total-kinetic-energy
+title: Total kinetic energy of a monatomic gas
+source: { document: PHYS161_Exam4, labels: [ P32 ] }
+section: Kinetic Theory of Gases
+tags: [ kinetic-theory, kinetic-energy, internal-energy ]
+narrative: >-
+  Boltzmann constant $k_B = 1.38\times10^{-23}$ J/K. Avogadro's number $N_A = 6.022\times10^{23}$
+  1/mol. The universal gas constant is $R = {R:unit}$.
+vars:
+  - { name: n, kind: range, min: 0.30, max: 1.50, step: 0.01, unit: mol, label: amount of gas }
+  - { name: T, kind: range, min: 250, max: 600, step: 1, unit: K, label: temperature }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: kinetic-energy
+    prompt: >-
+      Calculate the total kinetic energy content of {n} moles of a monatomic ideal gas at a
+      temperature of {T:unit}. {_0}{_u}
+    answer: 1.5 * n * R * T
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { n: 0.71, T: 483, R: 8.31 }
+  parts:
+    - { id: kinetic-energy, answer: 4274.62245, unit: J, source: P32 }

@@ -1,0 +1,27 @@
+# P47 — at fixed volume and temperature P ∝ n ∝ m, so P₂ = P₁ (m₁ + Δm) / m₁. The molar mass is
+# stated but cancels.
+id: phys161-e4-p047-tank-added-nitrogen
+title: Tank pressure after adding nitrogen
+source: { document: PHYS161_Exam4, labels: [ P47 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, gas-laws ]
+narrative: >-
+  Molar mass of diatomic nitrogen is $M_{N2}$ = 28 g/mol.
+vars:
+  - { name: P1, kind: range, min: 90000, max: 120000, step: 1, unit: Pa, label: initial pressure }
+  - { name: m1, kind: range, min: 15.0, max: 35.0, step: 0.1, unit: kg, label: initial mass }
+  - { name: dm, kind: range, min: 10.0, max: 40.0, step: 0.1, unit: kg, label: added mass }
+parts:
+  - id: pressure
+    prompt: >-
+      A storage tank at pressure of {P1:unit} contains {m1:unit} of diatomic nitrogen. What is the
+      pressure if an additional {dm:unit} of nitrogen is added without changing the temperature?
+      {_0}{_u}
+    answer: P1 * (m1 + dm) / m1
+    unit: Pa
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { P1: 104712, m1: 26.2, dm: 32.9 }
+  parts:
+    - { id: pressure, answer: 236201.49618321, unit: Pa, source: P47 }

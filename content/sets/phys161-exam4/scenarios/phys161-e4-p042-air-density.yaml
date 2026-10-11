@@ -1,0 +1,29 @@
+# P42 — ρ = P M / (R T) with the mean molar mass of air from its molar fractions,
+# M = 0.78 · 28 + 0.21 · 32 + 0.01 · 40 = 28.96 g/mol. The volume does not enter. The pressure is
+# in atm; the temperature uses the source's 273 offset.
+id: phys161-e4-p042-air-density
+title: Density of air from its composition
+source: { document: PHYS161_Exam4, labels: [ P42 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, density, molar-mass ]
+narrative: >-
+  In terms of molar fraction, air contains 78% $N_2$, 21% $O_2$, and 1% Ar molecules. Molar masses:
+  $M_{N2}$ = 28 g/mol, $M_{O2}$ = 32 g/mol, and $M_{Ar}$ = 40 g/mol. The universal gas constant is
+  $R = {R:unit}$. 1 atm = 101325 Pa 1 L = 0.001 m^3
+vars:
+  - { name: V, kind: range, min: 400, max: 600, step: 10, unit: mL, label: volume }
+  - { name: P, kind: range, min: 0.95, max: 1.10, step: 0.01, unit: atm, label: pressure }
+  - { name: T, kind: range, min: -10, max: 30, step: 1, unit: °C, label: temperature }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: density
+    prompt: "Calculate the density of {V:unit} air under {P:unit} pressure at {T:unit}. {_0}{_u}"
+    answer: P * 101325 * (0.78 * 0.028 + 0.21 * 0.032 + 0.01 * 0.040) / (R * (T + 273))
+    unit: kg/m^3
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { V: 510, P: 1.04, T: 0, R: 8.31 }
+  parts:
+    - { id: density, answer: 1.3451937424789, unit: kg/m^3, source: P42 }

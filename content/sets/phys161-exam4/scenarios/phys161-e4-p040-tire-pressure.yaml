@@ -1,0 +1,48 @@
+# P40 — a fixed amount of air: P V / T = const, so P₂ = P₁ (V₁ / V₂)(T₂ / T₁). The initial
+# pressure is in atm; the temperatures use the 273.15 offset, which this problem's printed answer
+# uses.
+id: phys161-e4-p040-tire-pressure
+title: Tire pressure after driving
+source: { document: PHYS161_Exam4, labels: [ P40 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, gas-laws ]
+narrative: >-
+  An automobile tire has a volume of {V1:unit} on a cold day when the temperature of the air in the
+  tire is {T1:unit} and the pressure is {P1:unit}. After the car is driven on the highway, the
+  temperature of the air in the tires has risen to {T2:unit} and the volume has risen to {V2:unit}.
+  Normal atmosphere pressure $P_0 = 101325$ Pa.
+vars:
+  - {
+      name: V1,
+      kind: range,
+      min: 0.140,
+      max: 0.160,
+      step: 0.001,
+      unit: m^3,
+      label: initial volume
+    }
+  - {
+      name: dV,
+      kind: range,
+      min: 0.002,
+      max: 0.012,
+      step: 0.001,
+      unit: m^3,
+      label: volume increase
+    }
+  - { name: T1, kind: range, min: -5, max: 10, step: 1, unit: °C, label: initial temperature }
+  - { name: T2, kind: range, min: 30, max: 50, step: 1, unit: °C, label: final temperature }
+  - { name: P1, kind: range, min: 1.8, max: 2.6, step: 0.1, unit: atm, label: initial pressure }
+derived:
+  - { name: V2, expr: "V1 + dV", unit: m^3 }
+parts:
+  - id: pressure
+    prompt: "What then is the pressure? {_0}{_u}"
+    answer: P1 * 101325 * V1 / V2 * (T2 + 273.15) / (T1 + 273.15)
+    unit: Pa
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { V1: 0.151, dV: 0.009, T1: 5, T2: 41, P1: 2.2 }
+  parts:
+    - { id: pressure, answer: 237604.27904795, unit: Pa, source: P40 }

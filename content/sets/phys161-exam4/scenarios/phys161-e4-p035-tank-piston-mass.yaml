@@ -1,0 +1,31 @@
+# P35 — with vacuum above it, the piston is held up by the gas alone: P π r² = m g, so
+# m = P π r² / g. The amount of gas and its temperature do not enter. The radius is in cm.
+id: phys161-e4-p035-tank-piston-mass
+title: Mass of a piston held up by a gas
+source: { document: PHYS161_Exam4, labels: [ P35 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, pressure, equilibrium ]
+narrative: >-
+  A vertical cylindrical tank contains {n:unit} of an ideal gas under a pressure of 1 atm at 20°C.
+  The round part of the tank has a radius of {r:unit}, and the gas is supporting a piston that can
+  move up and down in the cylinder without friction.
+vars:
+  - { name: n, kind: range, min: 1.00, max: 2.50, step: 0.01, unit: mol, label: amount of gas }
+  - { name: r, kind: range, min: 1.5, max: 3.0, step: 0.1, unit: cm, label: tank radius }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: piston-mass
+    prompt: >-
+      What is the mass of this piston? Assume a vacuum in the tank above the piston. Pressure 1 atm
+      = 101325 Pa and gravitational acceleration $g = {g:unit}$. The universal gas constant is $R =
+      {R:unit}$. {_0}{_u}
+    answer: 101325 * pi * (r / 100)^2 / g
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { n: 1.87, r: 1.8, g: 9.8, R: 8.31 }
+  parts:
+    - { id: piston-mass, answer: 10.52, unit: kg, source: P35 }

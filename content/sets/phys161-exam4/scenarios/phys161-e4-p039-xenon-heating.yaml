@@ -1,0 +1,37 @@
+# P39 — a rigid cylinder: all the heat raises the internal energy of the monatomic gas,
+# Q = (3/2) n R ΔT with n = m / M, so T₂ = T₁ + 2Q / (3 n R). The answer is in K (exactUnit) with
+# the 273.15 offset, which this problem's printed answer uses.
+id: phys161-e4-p039-xenon-heating
+title: Equilibrium temperature of heated xenon
+source: { document: PHYS161_Exam4, labels: [ P39 ] }
+section: Kinetic Theory of Gases
+tags: [ kinetic-theory, internal-energy, heat ]
+narrative: >-
+  A sample of {m:unit} of xenon is contained in a rigid metal cylinder, big enough that the xenon
+  can be modeled as an ideal monatomic gas, at a temperature of {T1:unit}. The cylinder is moved
+  outside on a hot summer day. As the xenon comes into equilibrium by reaching the temperature of
+  its surrounding, {Q:unit} of heat is conducted to it through the cylinder walls.
+vars:
+  - { name: m, kind: range, min: 0.100, max: 0.300, step: 0.001, unit: kg, label: xenon mass }
+  - { name: T1, kind: range, min: 15, max: 25, step: 1, unit: °C, label: initial temperature }
+  - { name: Q, kind: range, min: 150, max: 500, step: 1, unit: J, label: heat conducted }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+  - { name: n, expr: "m / 0.1313", unit: mol }
+constraints:
+  - "2 * Q / (3 * n * R) >= 5 and 2 * Q / (3 * n * R) <= 30" # a hot day: 5–30 °C warmer
+parts:
+  - id: final-temperature
+    prompt: >-
+      What is the equilibrium temperature? Ignore the expansion of the metal cylinder. The universal
+      gas constant is $R = {R:unit}$. Answer in kelvins (K). Molar mass of xenon M = 131.3 g/mol.
+      {_0}{_u}
+    answer: T1 + 273.15 + 2 * Q / (3 * n * R)
+    unit: K
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { m: 0.155, T1: 22, Q: 284, R: 8.31 }
+  parts:
+    - { id: final-temperature, answer: 314.4500789, unit: K, source: P39 }

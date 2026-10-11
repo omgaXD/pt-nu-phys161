@@ -1,0 +1,27 @@
+# P41 — N = P V / (k_B T). The volume is in mL and the pressure in atm; the temperature uses the
+# source's 273 offset.
+id: phys161-e4-p041-molecules-in-a-breath
+title: Molecules in one breath
+source: { document: PHYS161_Exam4, labels: [ P41 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, number-of-molecules ]
+narrative: >-
+  Boltzmann's constant $k_B = 1.38\cdot10^{-23}$ J/K. 1 atm = 101325 Pa 1 L = 0.001 m^3
+vars:
+  - { name: V, kind: range, min: 400, max: 600, step: 10, unit: mL, label: breath volume }
+  - { name: T, kind: range, min: 10, max: 37, step: 1, unit: °C, label: temperature }
+  - { name: P, kind: range, min: 0.95, max: 1.10, step: 0.01, unit: atm, label: pressure }
+derived:
+  - { name: kB, expr: "1.38e-23", unit: J/K }
+parts:
+  - id: molecules
+    prompt: >-
+      Calculate the number of molecules in the air in one breath, with a volume of {V:unit},
+      {T:unit} and {P:unit}. {_0}
+    answer: P * 101325 * V * 1e-6 / (kB * (T + 273))
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { V: 490, T: 16, P: 1.02, kB: 1.38e-23 }
+  parts:
+    - { id: molecules, answer: 1.2698e+22, source: P41 }

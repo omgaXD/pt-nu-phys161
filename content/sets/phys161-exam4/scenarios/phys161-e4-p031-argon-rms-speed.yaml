@@ -1,0 +1,26 @@
+# P31 — v_rms = sqrt(3 R T / M) with R T = P V / n, so v_rms = sqrt(3 P V / (n M)). The volume is in
+# liters and the pressure in atm, converted inside the formula.
+id: phys161-e4-p031-argon-rms-speed
+title: RMS speed of argon in a container
+source: { document: PHYS161_Exam4, labels: [ P31 ] }
+section: Kinetic Theory of Gases
+tags: [ kinetic-theory, rms-speed, ideal-gas, units ]
+narrative: >-
+  Molar mass of argon is 39.948 g/mol. The standard atmosphere pressure is 101325 Pa.
+vars:
+  - { name: V, kind: range, min: 5.0, max: 12.0, step: 0.1, unit: L, label: volume }
+  - { name: n, kind: range, min: 1.0, max: 2.5, step: 0.1, unit: mol, label: amount of argon }
+  - { name: P, kind: range, min: 3.0, max: 6.0, step: 0.1, unit: atm, label: pressure }
+parts:
+  - id: rms-speed
+    prompt: >-
+      Find the root mean square speed of argon atom in an {V} liter container filled with {n:unit}
+      of argon gas at pressure of {P:unit}. {_0}{_u}
+    answer: sqrt(3 * P * 101325 * V / 1000 / (n * 0.039948))
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { V: 8.1, n: 1.6, P: 4.7 }
+  parts:
+    - { id: rms-speed, answer: 425.50322889891, unit: m/s, source: P31 }

@@ -1,0 +1,28 @@
+# P50 — ideal gas law with n = m / M: P = (m / M) R T / V. The volume is in liters; the temperature
+# uses the 273.15 offset, which this problem's printed answer uses.
+id: phys161-e4-p050-argon-container-pressure
+title: Pressure of argon in a container
+source: { document: PHYS161_Exam4, labels: [ P50 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, pressure ]
+narrative: >-
+  Molar mass of argon is $M_{Ar}$ = 40 g/mol. The universal gas constant is $R = {R:unit}$.
+vars:
+  - { name: V, kind: range, min: 20, max: 60, step: 1, unit: L, label: container volume }
+  - { name: m, kind: range, min: 50, max: 150, step: 1, unit: kg, label: argon mass }
+  - { name: T, kind: range, min: 10, max: 40, step: 1, unit: °C, label: temperature }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: pressure
+    prompt: >-
+      What is the pressure inside a {V} L container holding {m:unit} of argon gas at {T:unit}?
+      {_0}{_u}
+    answer: (m / 0.040) * R * (T + 273.15) / (V / 1000)
+    unit: Pa
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { V: 39, m: 108, T: 26, R: 8.31 }
+  parts:
+    - { id: pressure, answer: 172103296.1538, unit: Pa, source: P50 }

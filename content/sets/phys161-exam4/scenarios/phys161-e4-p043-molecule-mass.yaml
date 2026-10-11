@@ -1,0 +1,23 @@
+# P43 — one mole has N_A molecules, so a molecule's mass is M / N_A (M in g/mol, answer in kg).
+id: phys161-e4-p043-molecule-mass
+title: Mass of one molecule
+source: { document: PHYS161_Exam4, labels: [ P43 ] }
+section: Kinetic Theory of Gases
+tags: [ kinetic-theory, molar-mass, avogadro ]
+narrative: >-
+  Avogadro's number $N_A = {NA:unit}$.
+vars:
+  - { name: M, kind: range, min: 2, max: 60, step: 1, unit: g/mol, label: molar mass }
+derived:
+  - { name: NA, expr: "6.022e23", unit: 1/mol }
+parts:
+  - id: molecule-mass
+    prompt: "Find the mass of a molecule of the gas with molar mass {M:unit}. {_0}{_u}"
+    answer: M / 1000 / NA
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { M: 32, NA: 6.022e+23 }
+  parts:
+    - { id: molecule-mass, answer: 5.3138492195284e-26, unit: kg, source: P43 }
