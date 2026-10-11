@@ -28,6 +28,7 @@ jobs:
       - run: pnpm -r build
         env:
           BASE_PATH: /${{ github.event.repository.name }}
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/quiz/build

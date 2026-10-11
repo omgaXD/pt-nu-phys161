@@ -44,6 +44,10 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    # Only for vars.DOMAIN (the site URL baked into the link previews); the deploy job records the deployment.
+    environment:
+      name: production
+      deployment: false
     permissions:
       contents: read
       packages: write
@@ -70,6 +74,7 @@ jobs:
         with:
           context: .
           push: true
+          build-args: PUBLIC_SITE_URL=https://${{ vars.DOMAIN }}
           tags: |
             ${{ steps.name.outputs.image }}
             ${{ steps.name.outputs.repo }}:latest

@@ -267,7 +267,8 @@ everything the user does is kept in `localStorage`.
 - `src/lib/repo.ts`: the repository URL used for the Feedback link.
 
 Build with `pnpm --filter @pt/quiz-app build`; set `BASE_PATH=/<sub-path>` to serve from a
-sub-path. A deployed site shows every problem and its answer to anyone with the URL.
+sub-path, and `PUBLIC_SITE_URL` to the site's absolute URL (base path included) so link
+previews in chats get an image. A deployed site shows every problem and its answer to anyone with the URL.
 
 ### The problem format
 
