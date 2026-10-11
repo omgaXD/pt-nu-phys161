@@ -1,0 +1,31 @@
+# P9 — all the potential energy heats the ball: m g h = m c ΔT, so ΔT = g h / c (the mass
+# cancels). The absolute temperature uses the source's 273 offset (exactUnit K).
+id: phys161-e4-p009-falling-lead-ball
+title: Temperature of a falling lead ball
+source: { document: PHYS161_Exam4, labels: [ P9 ] }
+section: Temperature and heat
+tags: [ heat, energy-conservation, specific-heat ]
+narrative: >-
+  Initial temperature of the ball is {T0:unit} and $c_{lead} = {c:unit}$. The gravitational
+  acceleration is $g = {g:unit}$.
+vars:
+  - { name: h, kind: range, min: 50, max: 200, step: 0.1, unit: m, label: height }
+  - { name: T0, kind: range, min: 15, max: 25, step: 0.1, unit: °C, label: initial temperature }
+derived:
+  - { name: c, expr: "128", unit: J/(kg °C) }
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: final-temperature
+    prompt: >-
+      Calculate the absolute temperature of the lead ball after it falls from the height of {h:unit}
+      on the floor without bouncing off, so that all the energy of the fall goes into heating the
+      lead. {_0}{_u}
+    answer: 273 + T0 + g * h / c
+    unit: K
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { h: 126.1, T0: 20.1, c: 128, g: 9.8 }
+  parts:
+    - { id: final-temperature, answer: 302.75453125, unit: K, source: P9 }

@@ -1,0 +1,29 @@
+# P14 — a hole expands like the material around it: its diameter grows by (1 + α ΔT), so its area
+# is A = π (d/2)² (1 + α ΔT)². The diameter is given in cm; the answer is in m².
+id: phys161-e4-p014-hole-area-expansion
+title: Area of a hole in a heated plate
+source: { document: PHYS161_Exam4, labels: [ P14 ] }
+section: Temperature and heat
+tags: [ thermal-expansion, area-expansion ]
+narrative: >-
+  A machinist bores a hole of diameter {d:unit} in a steel plate at a temperature of {T1:unit}.
+  Linear coefficient of expansion for steel is $1.2 \cdot 10^{-5}\ 1/°\text{C}$.
+vars:
+  - { name: d, kind: range, min: 0.8, max: 3.0, step: 0.1, unit: cm, label: hole diameter }
+  - { name: T1, kind: range, min: 15, max: 25, step: 1, unit: °C, label: initial temperature }
+  - { name: T2, kind: range, min: 100, max: 300, step: 1, unit: °C, label: final temperature }
+derived:
+  - { name: alpha, expr: "1.2e-5", unit: 1/K }
+parts:
+  - id: area
+    prompt: >-
+      What is the cross-sectional area of the hole when the temperature of the plate is increased to
+      {T2:unit}? {_0}{_u}
+    answer: pi * (d / 200)^2 * (1 + alpha * (T2 - T1))^2
+    unit: m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { d: 1.5, T1: 21, T2: 176, alpha: 1.2e-5 }
+  parts:
+    - { id: area, answer: 0.000177371965, unit: m^2, source: P14 }

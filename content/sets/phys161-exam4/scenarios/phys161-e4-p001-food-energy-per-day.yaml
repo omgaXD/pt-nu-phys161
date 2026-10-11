@@ -1,0 +1,25 @@
+# P1 — energy used in a day at a steady power P: E = P · 86 400 s, converted to kilocalories
+# with the source's 1 kcal = 4.186 kJ. The answer must be given in kcal (exactUnit).
+id: phys161-e4-p001-food-energy-per-day
+title: Food energy needed per day
+source: { document: PHYS161_Exam4, labels: [ P1 ] }
+section: Temperature and heat
+tags: [ heat, energy, power, units ]
+narrative: ""
+vars:
+  - { name: P, kind: range, min: 60, max: 150, step: 1, unit: W, label: metabolic power }
+parts:
+  - id: food-energy
+    prompt: >-
+      Assuming that the human body is 100 percent efficient in converting consumed food energy into
+      work and heat at the rate of {P:unit}, calculate how many kilocalories of food energy a human
+      needs per 24 hours. 1 kcal = 4.186 kJ. {_0}{_u}
+    answer: P * 86400 / 4186
+    unit: kcal
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { P: 97 }
+  parts:
+    - { id: food-energy, answer: 2002.1022455805, unit: kcal, source: P1 }

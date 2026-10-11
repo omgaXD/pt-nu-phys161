@@ -1,0 +1,40 @@
+# P6/P7 — warm water poured onto ice at 0 °C cools to 0 °C and melts m = m_w c_w T_w / L_f of the
+# ice; the constraint keeps some ice unmelted, so the system ends at 0 °C and the liquid mass is
+# m_w + m. P7 is the same problem worded the other way round (water poured onto the ice); it is a
+# second canonical row of the one part. The base canonical values are P6's; P7 overrides them.
+id: phys161-e4-p006-ice-water-cup
+title: Liquid mass after mixing ice and warm water
+source: { document: PHYS161_Exam4, labels: [ P6, P7 ] }
+section: Temperature and heat
+tags: [ heat, calorimetry, phase-change, latent-heat ]
+narrative: >-
+  An insulated cup containing {mi:unit} of ice at 0°C is filled with {mw:unit} of water at
+  {Tw:unit}. Specific heat of water is {cw:unit}. Latent heat of fusion for water is {Lf:unit}.
+vars:
+  - { name: mi, kind: range, min: 0.30, max: 3.00, step: 0.01, unit: kg, label: ice mass }
+  - { name: mw, kind: range, min: 0.100, max: 0.200, step: 0.001, unit: kg, label: water mass }
+  - { name: Tw, kind: range, min: 60, max: 95, step: 1, unit: °C, label: water temperature }
+derived:
+  - { name: cw, expr: "4186", unit: J/(kg K) }
+  - { name: Lf, expr: "334", unit: kJ/kg }
+  - { name: melted, expr: "mw * cw * Tw / (Lf * 1000)", unit: kg }
+constraints:
+  - "melted < 0.8 * mi" # some ice is left, so the mixture ends at 0 °C
+parts:
+  - id: liquid-mass
+    prompt: "Calculate the mass of liquid after the system reaches thermal equilibrium. {_0}{_u}"
+    answer: mw + melted
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { mi: 0.35, mw: 0.133, Tw: 86, cw: 4186, Lf: 334 }
+  parts:
+    - { id: liquid-mass, answer: 0.2763517005988, unit: kg, source: P6 }
+    - {
+        id: liquid-mass,
+        answer: 0.26523035928144,
+        unit: kg,
+        source: P7,
+        vars: { mi: 2.81, mw: 0.13, Tw: 83 }
+      }
