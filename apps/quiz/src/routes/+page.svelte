@@ -257,7 +257,7 @@
       <div class="set-row">
         <label><input type="checkbox" checked={on} onchange={(e) => toggleSet(s.id, e.currentTarget.checked)} /> {s.title}</label>
         <span class="counts">
-          {s.questions} problems · {s.authored} randomized · {s.fixed} with source values{s.missing ? ` · ${s.missing} not playable` : ''} · {solvedIn(s.id)} solved
+          {s.questions} problems · {solvedIn(s.id)} solved
         </span>
       </div>
       {#if on}
@@ -303,7 +303,7 @@
                       {sec.name}
                     </label>
                     <span class="counts">
-                      {sel.state === 'some' ? `${sel.selected} of ${sel.total}` : sel.total} · {sec.authored} randomized · {solvedIn(s.id, sec.id)} solved
+                      {sel.state === 'some' ? `${sel.selected} of ${sel.total}` : sel.total} · {solvedIn(s.id, sec.id)} solved
                     </span>
                   </div>
                 </div>
