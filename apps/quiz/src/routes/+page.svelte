@@ -345,14 +345,13 @@
         })}
 
         {#if config.count !== 'all'}
-          <label class="label" for="opt-draw">Spread</label>
+          <label class="label" for="opt-draw">Sampling</label>
           <div class="choices">
             <select id="opt-draw" class="form-select" value={config.draw} onchange={(e) => (config = { ...config, draw: e.currentTarget.value as QuizConfig['draw'] })}>
-              <option value="sections">Across sections (one per section, then repeat)</option>
-              <option value="sets">Across sets</option>
-              <option value="uniform">Uniformly over all problems</option>
+              <option value="sections">Over sections</option>
+              <option value="sets">Over sets</option>
+              <option value="uniform">Uniform</option>
             </select>
-            <span class="hint">Variants of the same situation are never drawn together.</span>
           </div>
         {/if}
 
