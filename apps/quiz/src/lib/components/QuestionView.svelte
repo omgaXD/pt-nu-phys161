@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FieldContents } from '@pt/core';
-  import { type Attempt, isLocked, type QuestionSnapshot, questionState, type SectionReference, triesLeft } from '@pt/quiz';
+  import { type Attempt, isLocked, type QuestionSnapshot, questionState, type SectionReference, triesLeft, triesToCorrect } from '@pt/quiz';
   import { DifficultyDots, FlagToggle, PartFeedback, ProblemBody, QuestionCard } from '@pt/ui';
   import { formatMark, STATE_TEXT } from '$lib/labels';
 
@@ -48,9 +48,23 @@
     return { result: last.result, showAnswer: locked, tryAgain: !locked && last.result.fraction < 1 };
   });
 
+  /** Immediate feedback: the checkmark's tooltip, how many tries the correct answer took. */
+  const triesTooltip = $derived.by(() => {
+    const n = triesToCorrect(attempt, index);
+    return n === null ? undefined : n === 1 ? 'First try' : `After ${n} attempts`;
+  });
+
   /** The mark beside the field and "One possible correct answer is", inside the question box (qtype_formulas). */
   const partOutcomes = $derived(
-    outcome ? { [partId]: { fraction: outcome.result?.fraction ?? (state === 'notanswered' ? 0 : undefined), showAnswer: outcome.showAnswer } } : {},
+    outcome
+      ? {
+          [partId]: {
+            fraction: outcome.result?.fraction ?? (state === 'notanswered' ? 0 : undefined),
+            showAnswer: outcome.showAnswer,
+            tooltip: outcome.result ? triesTooltip : undefined,
+          },
+        }
+      : {},
   );
   /** The yellow box below holds the verdict; a shown answer alone leaves it out. */
   const hasFeedback = $derived(!!outcome && (!!outcome.result || state === 'notanswered' || state === 'unavailable'));

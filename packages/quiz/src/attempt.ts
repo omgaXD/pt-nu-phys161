@@ -264,7 +264,7 @@ export interface AttemptSummary {
   incorrect: number;
   revealed: number;
   unanswered: number;
-  /** Immediate feedback: solved at the first Check / after retries. */
+  /** Immediate feedback: solved at the first try / after retries (see triesToCorrect). */
   firstTry: number;
   afterRetries: number;
   durationMs: number;
@@ -282,6 +282,17 @@ export function questionMark(a: Attempt, i: number): number | null {
   if (state === 'revealed') return 0;
   if (state === 'correct' || state === 'partiallycorrect' || state === 'incorrect') return lastCheck(a, i)?.result.fraction ?? 0;
   return null;
+}
+
+/**
+ * Immediate feedback: how many tries a correct question took, its Checks plus, after finishing,
+ * the grading of an answer no Check had seen. Null unless the question is correct.
+ */
+export function triesToCorrect(a: Attempt, i: number): number | null {
+  if (a.config.feedback !== 'immediate' || questionState(a, i) !== 'correct') return null;
+  const n = a.checks[i]?.length ?? 0;
+  const last = lastCheck(a, i);
+  return last && sameAnswer(last.answer, a.answers[i] ?? blank()) ? n : n + 1;
 }
 
 /** Marks and counts of a finished attempt (or the checks so far of one in progress). */
@@ -306,9 +317,9 @@ export function summarizeAttempt(a: Attempt, now = a.finishedAt ?? a.startedAt):
     s.marks += questionMark(a, i) ?? 0;
     if (state === 'correct') {
       s.correct++;
-      const n = a.checks[i]?.length ?? 0;
+      const n = triesToCorrect(a, i);
       if (n === 1) s.firstTry++;
-      else if (n > 1) s.afterRetries++;
+      else if (n !== null && n > 1) s.afterRetries++;
     } else if (state === 'partiallycorrect') s.partial++;
     else if (state === 'incorrect') s.incorrect++;
     else if (state === 'revealed') s.revealed++;

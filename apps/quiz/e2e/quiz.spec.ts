@@ -176,6 +176,13 @@ test('practice: Check gives immediate feedback and locks a correct answer', asyn
   await expect(nav(page).getByRole('button', { name: /^1, correct/ })).toHaveAttribute('data-state', 'correct');
   await expect(page.getByRole('button', { name: 'Check' })).toHaveCount(0);
   await expect(answerField(page)).toBeDisabled();
+  // The checkmark's tooltip counts the tries, shown on hover only.
+  const mark = card(page).locator('.pt-outcome-icon');
+  const tooltipShown = () => mark.evaluate((el) => getComputedStyle(el, '::before').display === 'block');
+  await expect(mark).toHaveAttribute('data-tooltip', 'After 2 attempts');
+  expect(await tooltipShown()).toBe(false);
+  await mark.hover();
+  expect(await tooltipShown()).toBe(true);
 
   await page.getByRole('button', { name: 'Next page' }).click();
   await expect(card(page).locator('.qno')).toHaveText('2');
@@ -191,6 +198,13 @@ test('practice: Check gives immediate feedback and locks a correct answer', asyn
   await expect(rows.nth(1).locator('td').nth(1)).toHaveText('Partially correct');
   await expect(rows.nth(1).locator('td').nth(2)).toHaveText(/^0\.(?!00)\d\d$/);
   await expect(rows.nth(2).locator('td').nth(2)).toHaveText('');
+
+  // The review keeps the count; a partial mark has none.
+  await page.getByRole('button', { name: 'Submit all and finish' }).click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Submit all and finish' }).click();
+  await expect(page.getByTestId('review-summary')).toContainText('1 correct (0 at the first try, 1 after retries)');
+  await expect(page.locator('#question-1 .pt-outcome-icon')).toHaveAttribute('data-tooltip', 'After 2 attempts');
+  await expect(page.locator('#question-2 .pt-outcome-icon')).not.toHaveAttribute('data-tooltip');
 });
 
 test('maxTries locks a wrong answer and shows the correct one', async ({ page }) => {
@@ -217,6 +231,7 @@ test('maxTries locks a wrong answer and shows the correct one', async ({ page })
   await answerField(page).fill('191.88 J');
   await answerField(page).press('Enter');
   await expect(card(page).locator('.state')).toHaveText('Correct');
+  await expect(card(page).locator('.pt-outcome-icon')).toHaveAttribute('data-tooltip', 'First try'); // counted since the Reset
 });
 
 test('Show correct answer locks the question and earns nothing', async ({ page }) => {

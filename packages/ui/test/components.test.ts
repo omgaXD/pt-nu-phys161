@@ -93,6 +93,17 @@ describe('ProblemBody', () => {
     expect(parts[1]!.querySelector('.pt-outcome-icon')).toHaveAttribute('aria-label', 'Incorrect');
     expect(parts[1]!.querySelector('.pt-part-correct-answer')).toHaveTextContent('One possible correct answer is:');
     expect(container.querySelectorAll('.pt-outcome-icon')).toHaveLength(2);
+    expect(parts[0]!.querySelector('.pt-outcome-icon')).toHaveAttribute('title', 'Correct');
+  });
+
+  it('gives the mark a hover tooltip in place of its title', () => {
+    const [first] = inst.parts.map((p) => p.partId) as [string];
+    const { container } = render(ProblemBody, { instance: inst, outcomes: { [first]: { fraction: 1, tooltip: 'First try' } } });
+    const icon = container.querySelector('.pt-outcome-icon')!;
+    expect(icon).toHaveClass('pt-tooltip');
+    expect(icon).toHaveAttribute('data-tooltip', 'First try');
+    expect(icon).toHaveAttribute('aria-label', 'Correct. First try');
+    expect(icon).not.toHaveAttribute('title');
   });
 
   it('renders vectors in unit-vector notation (C6)', () => {

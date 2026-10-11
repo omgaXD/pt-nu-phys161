@@ -68,7 +68,7 @@
           <tr>
             <th scope="row">Details</th>
             <td>
-              {s.correct} correct ({s.firstTry} at the first check, {s.afterRetries} after retries), {s.incorrect} incorrect, {s.revealed} answer{s.revealed === 1 ? '' : 's'} shown, {s.unanswered} not answered
+              {s.correct} correct ({s.firstTry} at the first try, {s.afterRetries} after retries), {s.incorrect} incorrect, {s.revealed} answer{s.revealed === 1 ? '' : 's'} shown, {s.unanswered} not answered
             </td>
           </tr>
         {/if}

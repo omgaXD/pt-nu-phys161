@@ -13,6 +13,7 @@ import {
   startAttempt,
   summarizeAttempt,
   triesLeft,
+  triesToCorrect,
 } from '../src/index.ts';
 import { corpusById, corpusCatalog } from './helpers.ts';
 
@@ -67,6 +68,22 @@ describe('immediate feedback', () => {
     expect(isLocked(a, 0)).toBe(true);
     expect(run(a, { type: 'answer', index: 0, answer: wrong })).toBe(a); // locked
     expect(summarizeAttempt(a)).toMatchObject({ correct: 1, firstTry: 0, afterRetries: 1, marks: 1 });
+  });
+
+  it('triesToCorrect counts the Checks, and the grading at finish of an unchecked answer', () => {
+    let a = start();
+    a = run(a, { type: 'answer', index: 0, answer: correct(a, 0) }, { type: 'check', index: 0, now: 1 });
+    a = run(a, { type: 'answer', index: 1, answer: wrong }, { type: 'check', index: 1, now: 2 }, { type: 'answer', index: 1, answer: correct(a, 1) });
+    a = run(a, { type: 'answer', index: 2, answer: correct(a, 2) }, { type: 'answer', index: 3, answer: wrong }, { type: 'check', index: 3, now: 3 });
+    expect([0, 1, 2, 3].map((i) => triesToCorrect(a, i))).toEqual([1, null, null, null]); // 1 and 2 not checked yet, 3 wrong
+    a = run(a, { type: 'finish', now: 4, reason: 'submitted' });
+    expect([0, 1, 2, 3].map((i) => triesToCorrect(a, i))).toEqual([1, 2, 1, null]);
+    expect(summarizeAttempt(a)).toMatchObject({ correct: 3, firstTry: 2, afterRetries: 1 });
+    // An exam has no tries to count.
+    let exam = start({}, 'exam');
+    exam = run(exam, { type: 'answer', index: 0, answer: correct(exam, 0) }, { type: 'finish', now: 1, reason: 'submitted' });
+    expect(questionState(exam, 0)).toBe('correct');
+    expect(triesToCorrect(exam, 0)).toBeNull();
   });
 
   it('an edited answer is "saved" until checked again; checking the same answer twice costs nothing', () => {

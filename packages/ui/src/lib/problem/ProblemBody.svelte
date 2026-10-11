@@ -33,6 +33,8 @@
   interface PartOutcome {
     fraction?: number;
     showAnswer?: boolean;
+    /** Hover text for the mark. */
+    tooltip?: string;
   }
 
   let {
@@ -83,7 +85,7 @@
 
 {#snippet mark(partId: string)}
   {@const fraction = outcomes[partId]?.fraction}
-  {#if fraction !== undefined}<OutcomeIcon {fraction} />{/if}
+  {#if fraction !== undefined}<OutcomeIcon {fraction} tooltip={outcomes[partId]?.tooltip} />{/if}
 {/snippet}
 
 {#snippet figureSnippet(_id: string)}
