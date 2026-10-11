@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="%sveltekit.assets%/favicon.svg" />
     <!-- Link previews (Discord, Telegram…). Crawlers don't run JS, so these live here, not in
-         <svelte:head>. PUBLIC_SITE_URL is the absolute site URL with any base path, set at build. -->
+         <svelte:head>. PUBLIC_OG_IMAGE is static/og-image.png's absolute URL, set at build; left
+         empty (as in local builds), the prerender crawler skips it. -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="PHYS161 Practice Quiz" />
-    <meta property="og:image" content="%sveltekit.env.PUBLIC_SITE_URL%/og-image.png" />
+    <meta property="og:image" content="%sveltekit.env.PUBLIC_OG_IMAGE%" />
     <meta property="og:image:width" content="512" />
     <meta property="og:image:height" content="512" />
     <meta name="twitter:card" content="summary" />

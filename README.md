@@ -264,11 +264,18 @@ everything the user does is kept in `localStorage`.
 - `src/routes/`: `/` start page, `/attempt` and `/attempt/summary`, `/review`, `/about`.
 - `src/lib/components/`: the Moodle page frame with its drawers, question view, quiz navigation,
   timer, state export/import.
-- `src/lib/repo.ts`: the repository URL used for the Feedback link.
+- `src/lib/repo.ts`: the repository URL used for the GitHub and Feedback links.
 
-Build with `pnpm --filter @pt/quiz-app build`; set `BASE_PATH=/<sub-path>` to serve from a
-sub-path, and `PUBLIC_SITE_URL` to the site's absolute URL (base path included) so link
-previews in chats get an image. A deployed site shows every problem and its answer to anyone with the URL.
+Build with `pnpm --filter @pt/quiz-app build`. Settings, as environment variables or in
+`apps/quiz/.env`:
+
+- `BASE_PATH=/<sub-path>` serves the site from a sub-path.
+- `PUBLIC_OG_IMAGE` is the absolute URL of `static/og-image.png` once deployed, so link
+  previews in chats get an image.
+- `PUBLIC_REPO_URL` is the repository the GitHub and Feedback links point to; without it they
+  are hidden.
+
+Both workflows set them. A deployed site shows every problem and its answer to anyone with the URL.
 
 ### The problem format
 

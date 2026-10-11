@@ -67,16 +67,18 @@
               <span class="completioninfo"></span>
               <a class="courseindex-link text-truncate" href={aboutHref} aria-current={onAbout ? 'page' : undefined}>About</a>
             </li>
-            <li class="courseindex-item d-flex">
-              <span class="completioninfo"></span>
-              <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- an external address -->
-              <a class="courseindex-link text-truncate" href={REPO_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
-            </li>
-            <li class="courseindex-item d-flex">
-              <span class="completioninfo"></span>
-              <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- an external address -->
-              <a class="courseindex-link text-truncate" href={ISSUES_URL} target="_blank" rel="noopener noreferrer">Feedback</a>
-            </li>
+            {#if REPO_URL}
+              <li class="courseindex-item d-flex">
+                <span class="completioninfo"></span>
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- an external address -->
+                <a class="courseindex-link text-truncate" href={REPO_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
+              </li>
+              <li class="courseindex-item d-flex">
+                <span class="completioninfo"></span>
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- an external address -->
+                <a class="courseindex-link text-truncate" href={ISSUES_URL} target="_blank" rel="noopener noreferrer">Feedback</a>
+              </li>
+            {/if}
           </ul>
         </CourseIndexSection>
         <CourseIndexSection id="data" title="Data"><StateActions {onimported} /></CourseIndexSection>

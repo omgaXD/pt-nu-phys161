@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import { BASE, E2E_STATIC, PORT } from './e2e/paths';
+import { BASE, E2E_STATIC, PORT, REPO_URL } from './e2e/paths';
 
 export default defineConfig({
   testDir: 'e2e',
@@ -18,6 +18,6 @@ export default defineConfig({
     url: `http://localhost:${PORT}${BASE}/`,
     reuseExistingServer: false,
     timeout: 180_000,
-    env: { BASE_PATH: BASE, PT_QUIZ_ASSETS: E2E_STATIC },
+    env: { BASE_PATH: BASE, PT_QUIZ_ASSETS: E2E_STATIC, PUBLIC_REPO_URL: REPO_URL },
   },
 });

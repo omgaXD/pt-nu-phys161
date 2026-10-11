@@ -1,5 +1,5 @@
 import { type Browser, expect, type Page, test } from '@playwright/test';
-import { ISSUES_URL, REPO_URL } from '../src/lib/repo';
+import { REPO_URL } from './paths';
 
 // Content (see prepare.mjs): set "corpus" = the 21 authored reference scenarios
 // (28 source problems over 10 sections, randomized), set "demo" = 7 imported
@@ -601,7 +601,7 @@ test('the course index: "General" links to the About page and the GitHub reposit
   const index = page.locator('.drawer-left .courseindex');
   await expect(index.getByRole('button', { name: 'General' })).toHaveAttribute('aria-expanded', 'true');
   await expect(index.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', REPO_URL);
-  await expect(index.getByRole('link', { name: 'Feedback' })).toHaveAttribute('href', ISSUES_URL);
+  await expect(index.getByRole('link', { name: 'Feedback' })).toHaveAttribute('href', `${REPO_URL}/issues`);
   const about = index.getByRole('link', { name: 'About' });
   await expect(about).not.toHaveAttribute('aria-current');
   await about.click();

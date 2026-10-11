@@ -74,7 +74,9 @@ jobs:
         with:
           context: .
           push: true
-          build-args: PUBLIC_SITE_URL=https://${{ vars.DOMAIN }}
+          build-args: |
+            PUBLIC_OG_IMAGE=https://${{ vars.DOMAIN }}/og-image.png
+            PUBLIC_REPO_URL=${{ github.server_url }}/${{ github.repository }}
           tags: |
             ${{ steps.name.outputs.image }}
             ${{ steps.name.outputs.repo }}:latest
