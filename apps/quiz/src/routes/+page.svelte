@@ -212,7 +212,6 @@
 {/snippet}
 
 <Page narrow onimported={(c) => c.prefs && (config = savedConfig())}>
-  <ol class="breadcrumb"><li>Home</li></ol>
   <div class="page-header">
     <img class="activity-icon" src={quizIcon} alt="" />
     <h1>Start a quiz</h1>
