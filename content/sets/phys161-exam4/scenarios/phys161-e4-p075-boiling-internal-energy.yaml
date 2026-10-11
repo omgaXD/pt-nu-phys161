@@ -1,0 +1,29 @@
+# P75 — boiling at constant pressure: Q = m L_v with m = ρ V_water, and the vapor pushes back the
+# atmosphere, W = P (V_steam − V_water). ΔU = Q − W. The steam volume keeps the source's ratio to
+# the water volume (1607 L of steam from 1.6 L of water), rounded to a liter as printed.
+id: phys161-e4-p075-boiling-internal-energy
+title: Internal energy change when water boils
+source: { document: PHYS161_Exam4, labels: [ P75 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, internal-energy, latent-heat, phase-change ]
+narrative: >-
+  Assume the process is done at atmospheric pressure P = 1 atm. Latent heat of vaporization of water
+  is $L_v$ = {Lv:unit}. Density of water ρ = 1000 kg/m^3. 1 atm = 101325 Pa, 1 L = 0.001 m^3.
+vars:
+  - { name: Vw, kind: range, min: 0.5, max: 3.0, step: 0.1, unit: L, label: water volume }
+derived:
+  - { name: Lv, expr: "2256", unit: kJ/kg }
+  - { name: Vs, expr: "round(Vw * 1004.4)", unit: L }
+parts:
+  - id: internal-energy
+    prompt: >-
+      Determine the change in internal energy of {Vw:unit} of water at 100°C when it is fully boiled
+      from liquid to gas, which results in {Vs:unit} of steam at 100°C. {_0}{_u}
+    answer: Vw * Lv * 1000 - 101325 * (Vs - Vw) / 1000
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { Vw: 1.6, Lv: 2256, Vs: 1607 }
+  parts:
+    - { id: internal-energy, answer: 3446932.845, unit: J, source: P75 }

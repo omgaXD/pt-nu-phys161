@@ -6,23 +6,16 @@ section: Temperature and heat
 tags: [ heat, specific-heat ]
 narrative: >-
   You are given a sample of metal and asked to determine its specific heat. You weigh the sample and
-  find that its weight is {W:unit}. You carefully add {Q:unit} of heat energy to the sample and find
-  that its temperature rises by {dT:unit}. The gravitational acceleration is $g = {g:unit}$.
+  find that its weight is {W:unit}. You carefully add $ {q4}\times10^{4}$ J of heat energy to the
+  sample and find that its temperature rises by {dT:unit}. The gravitational acceleration is $g =
+  {g:unit}$.
 vars:
   - { name: W, kind: range, min: 10, max: 50, step: 0.1, unit: N, label: weight }
-  - {
-      name: Q,
-      kind: range,
-      min: 1e+4,
-      max: 3e+4,
-      step: 1e+3,
-      sigfigs: 2,
-      unit: J,
-      label: heat added
-    }
+  - { name: q4, kind: range, min: 1.0, max: 3.0, step: 0.1, label: heat added in 10⁴ J }
   - { name: dT, kind: range, min: 10, max: 30, step: 1, unit: °C, label: temperature rise }
 derived:
   - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: Q, expr: "q4 * 1e4", unit: J }
 parts:
   - id: specific-heat
     prompt: "What is the sample's specific heat? Answer in J/ (kg K). {_0}{_u}"
@@ -32,6 +25,6 @@ parts:
     tolerance: { rel: 0.01 }
     difficulty: 2
 canonical:
-  vars: { W: 26.4, Q: 15000, dT: 17, g: 9.8 }
+  vars: { W: 26.4, q4: 1.5, dT: 17, g: 9.8 }
   parts:
     - { id: specific-heat, answer: 327.54010695187, unit: J/(kg K), source: P12 }

@@ -1,0 +1,38 @@
+# P74 — B → D → A ends at the starting temperature, so ΔU = 0 and the net heat equals the net work:
+# W_BD = P (V_D − V_B) at constant pressure, W_DA = 0 at constant volume, |Q| = P (V_B − V_D).
+# The pressure is in atm and the volumes in L.
+id: phys161-e4-p074-bda-total-heat
+title: Net heat of an isobaric-then-isochoric process
+source: { document: PHYS161_Exam4, labels: [ P74 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, heat, isobaric, isochoric, pv-diagram ]
+figure:
+  id: bda-path
+  src: figures/unnamed_007_xiMS.png
+  alt: >-
+    A pV diagram, V in L. A falling curve (an isotherm) passes through state A at high pressure P_A
+    and small volume, and through state B at low pressure P_B and large volume. A horizontal line at
+    P_B runs left from B to state D below A, with an arrow pointing left, and a vertical line runs
+    up from D to A with an arrow pointing up.
+narrative: >-
+  An ideal gas is slowly compressed at a constant pressure of {P:unit} from {VB:unit} to {VD:unit}
+  (B to D in figure below). Heat is then added to the gas, holding the volume constant, and the
+  pressure and temperature are allowed to rise (line DA) until the temperature reaches its original
+  value ($T_A = T_B$). 1 atm = 101325 Pa, 1 L = 0.001 m^3. {@fig}
+vars:
+  - { name: P, kind: range, min: 1.0, max: 3.0, step: 0.1, unit: atm, label: pressure }
+  - { name: VB, kind: range, min: 8, max: 16, step: 1, unit: L, label: volume at B }
+  - { name: VD, kind: range, min: 1, max: 4, step: 0.5, unit: L, label: volume at D }
+parts:
+  - id: total-heat
+    prompt: >-
+      In the process BDA, calculate the absolute value of the amount of total heat involved in these
+      processes. {_0}{_u}
+    answer: P * 101325 * (VB - VD) / 1000
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { P: 1.9, VB: 12, VD: 2 }
+  parts:
+    - { id: total-heat, answer: 1925.175, unit: J, source: P74 }

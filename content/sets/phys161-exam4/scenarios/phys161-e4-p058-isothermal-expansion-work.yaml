@@ -1,0 +1,31 @@
+# P58 — isothermal expansion: W = n R T ln(V₂ / V₁) = P₁ V₁ ln(V₂ / V₁); the amount of gas is
+# part of the data but not needed. Volumes are in liters.
+id: phys161-e4-p058-isothermal-expansion-work
+title: Work in an isothermal expansion
+source: { document: PHYS161_Exam4, labels: [ P58 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, isothermal, work ]
+narrative: >-
+  The universal gas constant is $R = {R:unit}$. 1 L = 0.001 m^3.
+vars:
+  - { name: n, kind: range, min: 0.10, max: 0.50, step: 0.05, unit: mol, label: amount of gas }
+  - { name: p5, kind: range, min: 1.0, max: 5.0, step: 0.1, label: initial pressure in 10⁵ N/m² }
+  - { name: V1, kind: range, min: 1.0, max: 2.0, step: 0.1, unit: L, label: initial volume }
+  - { name: V2, kind: range, min: 2.5, max: 5.0, step: 0.1, unit: L, label: final volume }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+  - { name: P1, expr: "p5 * 1e5", unit: N/m^2 }
+parts:
+  - id: work
+    prompt: >-
+      {n} moles of an ideal gas, at an initial pressure of $ {p5}\times10^{5}$ N/m^2 and an initial
+      volume of {V1} l, undergo an isothermal expansion to a volume of {V2} l. Find the work done by
+      the gas. {_0}{_u}
+    answer: P1 * V1 / 1000 * ln(V2 / V1)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { n: 0.2, p5: 3, V1: 1.4, V2: 3.5, R: 8.31 }
+  parts:
+    - { id: work, answer: 384.83, unit: J, source: P58 }
