@@ -179,7 +179,7 @@ test('practice: Check gives immediate feedback and locks a correct answer', asyn
   // The checkmark's tooltip counts the tries, shown on hover only.
   const mark = card(page).locator('.pt-outcome-icon');
   const tooltipShown = () => mark.evaluate((el) => getComputedStyle(el, '::before').display === 'block');
-  await expect(mark).toHaveAttribute('data-tooltip', 'After 2 attempts');
+  await expect(mark).toHaveAttribute('data-tooltip', 'After 1 mistake');
   expect(await tooltipShown()).toBe(false);
   await mark.hover();
   expect(await tooltipShown()).toBe(true);
@@ -203,7 +203,7 @@ test('practice: Check gives immediate feedback and locks a correct answer', asyn
   await page.getByRole('button', { name: 'Submit all and finish' }).click();
   await page.getByRole('dialog').getByRole('button', { name: 'Submit all and finish' }).click();
   await expect(page.getByTestId('review-summary')).toContainText('1 correct (0 at the first try, 1 after retries)');
-  await expect(page.locator('#question-1 .pt-outcome-icon')).toHaveAttribute('data-tooltip', 'After 2 attempts');
+  await expect(page.locator('#question-1 .pt-outcome-icon')).toHaveAttribute('data-tooltip', 'After 1 mistake');
   await expect(page.locator('#question-2 .pt-outcome-icon')).not.toHaveAttribute('data-tooltip');
 });
 

@@ -48,10 +48,12 @@
     return { result: last.result, showAnswer: locked, tryAgain: !locked && last.result.fraction < 1 };
   });
 
-  /** Immediate feedback: the checkmark's tooltip, how many tries the correct answer took. */
+  /** Immediate feedback: the checkmark's tooltip, how many wrong tries came before the correct answer. */
   const triesTooltip = $derived.by(() => {
     const n = triesToCorrect(attempt, index);
-    return n === null ? undefined : n === 1 ? 'First try' : `After ${n} attempts`;
+    if (n === null) return undefined;
+    const mistakes = n - 1;
+    return mistakes === 0 ? 'First try' : `After ${mistakes} ${mistakes === 1 ? 'mistake' : 'mistakes'}`;
   });
 
   /** The mark beside the field and "One possible correct answer is", inside the question box (qtype_formulas). */
