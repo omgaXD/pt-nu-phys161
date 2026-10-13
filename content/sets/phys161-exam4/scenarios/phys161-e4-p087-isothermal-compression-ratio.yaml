@@ -1,0 +1,30 @@
+# P87 — isothermal compression takes W = n R T ln(V₁ / V₂), so the volume shrinks by the factor
+# V₁ / V₂ = exp(W / (n R T)). The work (to 1 J, as printed) is computed from a hidden factor, so the
+# factor stays moderate; the answer uses the printed work.
+id: phys161-e4-p087-isothermal-compression-ratio
+title: Volume ratio of an isothermal compression
+source: { document: PHYS161_Exam4, labels: [ P87 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, isothermal, work ]
+narrative: >-
+  The universal gas constant is $R = {R:unit}$.
+vars:
+  - { name: n, kind: range, min: 0.30, max: 2.00, step: 0.05, unit: mol, label: amount of gas }
+  - { name: T, kind: range, min: 25, max: 60, step: 0.5, unit: K, label: temperature }
+  # Hidden compression factor; the printed work carries it.
+  - { name: r, kind: range, min: 2, max: 8, step: 0.01, label: compression factor }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+  - { name: W, expr: "round(n * R * T * ln(r))", unit: J }
+parts:
+  - id: factor
+    prompt: >-
+      It takes {W:unit} of work to compress quasi-statically {n} moles of an ideal gas at a constant
+      temperature of {T:unit}. By what factor was the volume reduced? {_0}
+    answer: exp(W / (n * R * T))
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { n: 0.95, T: 33.5, r: 5.59, R: 8.31, W: 455 }
+  parts:
+    - { id: factor, answer: 5.5870399637413, source: P87 }

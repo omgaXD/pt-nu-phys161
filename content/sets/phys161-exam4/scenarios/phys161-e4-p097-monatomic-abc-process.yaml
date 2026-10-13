@@ -1,12 +1,12 @@
-# P97/P99/P100 — half a mole of a monatomic gas goes a → b along a straight line and b → c at
-# constant pressure P_b. T_c = P_b V_c / (n R) (P97). The work is the area under the path,
+# P97/P98/P99/P100 — half a mole of a monatomic gas goes a → b along a straight line and b → c at
+# constant pressure P_b. T_b = P_b V_b / (n R) (P98) and T_c = P_b V_c / (n R) (P97). The work is the area under the path,
 # W = ½ (P_a + P_b)(V_b − V_a) + P_b (V_c − V_b) (P99). With ΔU = (3/2)(P_b V_c − P_a V_a), the
 # heat is Q = ΔU + W, given in magnitude ("leaves (or enters)") (P100); the constraint keeps |Q|
 # clearly away from zero. Pressures are printed in units of 10⁵ Pa, as in the source. The base
-# canonical values are P97's; P99 and P100 override them.
+# canonical values are P97's; P98, P99 and P100 override them.
 id: phys161-e4-p097-monatomic-abc-process
 title: Monatomic gas taken from a to c
-source: { document: PHYS161_Exam4, labels: [ P97, P99, P100 ] }
+source: { document: PHYS161_Exam4, labels: [ P97, P98, P99, P100 ] }
 section: 1st Law of Thermodynamics
 tags: [ first-law, work, heat, internal-energy, pv-diagram, multi-part ]
 figure:
@@ -45,6 +45,14 @@ derived:
 constraints:
   - "abs(Q) >= 50" # the heat is not a near-cancellation
 parts:
+  - id: temperature-b
+    prompt: >-
+      Calculate the temperature of the gas at state b. The universal gas constant is $R = {R:unit}$.
+      {_0}{_u}
+    answer: Pb * Vb / (0.5 * R)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: final-temperature
     prompt: >-
       Calculate the final temperature of the gas. The universal gas constant is $R = {R:unit}$.
@@ -70,6 +78,13 @@ canonical:
   vars: { pa5: 4.15, pb5: 1.95, Va: 0.0019, d1: 0.0009, d2: 0.0013, R: 8.31 }
   parts:
     - { id: final-temperature, answer: 192.41877256318, unit: K, source: P97 }
+    - {
+        id: temperature-b,
+        answer: 136.10108303249,
+        unit: K,
+        source: P98,
+        vars: { pa5: 3.95, pb5: 1.95, Va: 0.0021, d1: 0.0008, d2: 0.0011 }
+      }
     - {
         id: work,
         answer: 515.5,

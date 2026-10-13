@@ -1,29 +1,52 @@
-# P113 — boiling at constant pressure: Q = m L_v with m = ρ V_water, and the vapor pushes back the
-# atmosphere, W = P (V_steam − V_water). ΔU = Q − W. The steam volume keeps the source's ratio to
-# the water volume (1607 L of steam from 1.6 L of water), rounded to a liter as printed.
+# P113/P114 — boiling at constant pressure: the vapor pushes back the atmosphere,
+# W = P (V_steam − V_water) (P114), and Q = m L_v with m = ρ V_water, so ΔU = Q − W (P113). The two
+# problems print different steam-to-water ratios (1607 L from 1.6 L, 1770 L from 1.1 L), so the
+# ratio is a hidden variable spanning both and the steam volume is rounded to a liter as printed.
+# The base canonical values are P113's; P114 overrides them.
 id: phys161-e4-p113-boiling-internal-energy
-title: Internal energy change when water boils
-source: { document: PHYS161_Exam4, labels: [ P113 ] }
+title: Work and internal energy when water boils
+source: { document: PHYS161_Exam4, labels: [ P113, P114 ] }
 section: 1st Law of Thermodynamics
-tags: [ first-law, internal-energy, latent-heat, phase-change ]
+tags: [ first-law, work, internal-energy, latent-heat, phase-change, multi-part ]
 narrative: >-
-  Assume the process is done at atmospheric pressure P = 1 atm. Latent heat of vaporization of water
-  is $L_v$ = {Lv:unit}. Density of water ρ = 1000 kg/m^3. 1 atm = 101325 Pa, 1 L = 0.001 m^3.
+  {Vw:unit} of water at 100°C is fully boiled from liquid to gas at constant atmospheric pressure P
+  = 1 atm, which results in {Vs:unit} of steam at 100°C. Latent heat of vaporization of water is
+  $L_v$ = {Lv:unit}. Density of water ρ = 1000 kg/m^3. 1 atm = 101325 Pa, 1 L = 0.001 m^3.
 vars:
   - { name: Vw, kind: range, min: 0.5, max: 3.0, step: 0.1, unit: L, label: water volume }
+  # Hidden steam-to-water volume ratio; the printed steam volume carries it.
+  - {
+      name: ratio,
+      kind: range,
+      min: 1000,
+      max: 1700,
+      step: 0.1,
+      label: steam-to-water volume ratio
+    }
 derived:
   - { name: Lv, expr: "2256", unit: kJ/kg }
-  - { name: Vs, expr: "round(Vw * 1004.4)", unit: L }
+  - { name: Vs, expr: "round(Vw * ratio)", unit: L }
 parts:
+  - id: work
+    prompt: "Determine the work done by the water. {_0}{_u}"
+    answer: 101325 * (Vs - Vw) / 1000
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: internal-energy
-    prompt: >-
-      Determine the change in internal energy of {Vw:unit} of water at 100°C when it is fully boiled
-      from liquid to gas, which results in {Vs:unit} of steam at 100°C. {_0}{_u}
+    prompt: "Determine the change in internal energy of the water. {_0}{_u}"
     answer: Vw * Lv * 1000 - 101325 * (Vs - Vw) / 1000
     unit: J
     tolerance: { rel: 0.01 }
     difficulty: 3
 canonical:
-  vars: { Vw: 1.6, Lv: 2256, Vs: 1607 }
+  vars: { Vw: 1.6, ratio: 1004.4, Lv: 2256, Vs: 1607 }
   parts:
     - { id: internal-energy, answer: 3446932.845, unit: J, source: P113 }
+    - {
+        id: work,
+        answer: 179233.7925,
+        unit: J,
+        source: P114,
+        vars: { Vw: 1.1, ratio: 1609.1, Vs: 1770 }
+      }
