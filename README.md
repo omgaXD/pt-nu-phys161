@@ -37,7 +37,7 @@ Data, not code:
 ```
 content/sets/<set>/     the PHYS161 Exam 1–4 sets: set.yaml, scenarios/, drafts/, figures/
 fixtures/corpus/        21 reference scenarios that span the feature space (the integration test suite)
-extra/fixed/            the exam source documents (Google Docs HTML + images), the input to `pt import`
+extra/                  local only, git-ignored: the exam source documents (Google Docs HTML + images), the input to `pt import`
 deploy/                 Caddyfile and production docker-compose for the quiz
 ```
 

@@ -291,7 +291,8 @@ describe('pt import', () => {
     expect(o.text()).toMatch(/2 figure stub\(s\), 1 image\(s\) copied, 2 section\(s\)/);
   });
 
-  // The real sources (extra/fixed/, committed with their images).
+  // The real sources (extra/fixed/ with their images): git-ignored, so these run only where
+  // a local copy exists.
   const SOURCES = join(HERE, '../../../extra/fixed');
   const REAL = [
     { file: 'PHYS161_Exam1_new.docx.html', problems: 150, sections: 11, figures: 41, inline: [] as string[] },
