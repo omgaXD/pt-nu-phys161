@@ -1,11 +1,13 @@
-# P22 — area expansion of the cube's six faces: ΔA = 2α · 6a² · ΔT (the linear approximation the
-# source uses). The edge is given in cm; the answer is in m².
+# P22/P23 — a heated brass cube: its six faces grow by ΔA = 2α · 6a² · ΔT (P22) and its volume by
+# ΔV = 3α · a³ · ΔT (P23), the linear approximations the source uses. The edge is given in cm; the
+# answers are in m² and m³. The base canonical values are P22's; P23 overrides them.
 id: phys161-e4-p022-cube-surface-expansion
-title: Surface area increase of a heated brass cube
-source: { document: PHYS161_Exam4, labels: [ P22 ] }
+title: Surface and volume increase of a heated brass cube
+source: { document: PHYS161_Exam4, labels: [ P22, P23 ] }
 section: Temperature and heat
-tags: [ thermal-expansion, area-expansion ]
+tags: [ thermal-expansion, area-expansion, volume-expansion, multi-part ]
 narrative: >-
+  A cube made of brass, with an edge length of {a:unit}, is heated from {T1:unit} to {T2:unit}.
   Assume that the coefficient of linear expansion for brass is $19 \times 10^{-6}\ 1/\text{K}$.
 vars:
   - { name: a, kind: range, min: 20, max: 60, step: 1, unit: cm, label: edge length }
@@ -16,14 +18,25 @@ derived:
   - { name: T2, expr: "T1 + dT", unit: °C }
 parts:
   - id: area-increase
-    prompt: >-
-      A cube made of brass, with an edge length of {a:unit}, is heated from {T1:unit} to {T2:unit}.
-      Calculate the increase of the cube's surface area. {_0}{_u}
+    prompt: "Calculate the increase of the cube's surface area. {_0}{_u}"
     answer: 2 * alpha * 6 * (a / 100)^2 * dT
     unit: m^2
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: volume-increase
+    prompt: "Calculate the increase of the cube's volume. {_0}{_u}"
+    answer: 3 * alpha * (a / 100)^3 * dT
+    unit: m^3
     tolerance: { rel: 0.01 }
     difficulty: 2
 canonical:
   vars: { a: 44, T1: 44.5, dT: 12, alpha: 1.9e-5 }
   parts:
     - { id: area-increase, answer: 0.0005296896, unit: m^2, source: P22 }
+    - {
+        id: volume-increase,
+        answer: 2.9253312e-5,
+        unit: m^3,
+        source: P23,
+        vars: { a: 36, T1: 44.5, dT: 11 }
+      }

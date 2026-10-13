@@ -1,0 +1,33 @@
+# P2 — the food energy is released over 24 hours (86 400 s): P = E / 86 400 s, with the source's
+# 1 kcal = 4.186 kJ. The answer must be given in watts (exactUnit).
+id: phys161-e4-p002-food-energy-power
+title: Average power from daily food energy
+source: { document: PHYS161_Exam4, labels: [ P2 ] }
+section: Temperature and heat
+tags: [ heat, energy, power, units ]
+narrative: ""
+vars:
+  - {
+      name: E,
+      kind: range,
+      min: 1500,
+      max: 3200,
+      step: 10,
+      unit: kcal,
+      label: food energy per day
+    }
+parts:
+  - id: power
+    prompt: >-
+      Assuming that the human body is 100 percent efficient in converting consumed food energy into
+      work and heat, a person consumes {E} kilocalories of food energy per 24 hours. At what average
+      rate, in watts, does the body release this energy? 1 kcal = 4.186 kJ. {_0}{_u}
+    answer: E * 4186 / 86400
+    unit: W
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { E: 1840 }
+  parts:
+    - { id: power, answer: 89.146296296296, unit: W, source: P2 }

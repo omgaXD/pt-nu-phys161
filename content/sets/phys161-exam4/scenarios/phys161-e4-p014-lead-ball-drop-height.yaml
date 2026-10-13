@@ -1,0 +1,27 @@
+# P14 — all the potential energy heats the ball: m g h = m c ΔT, so h = c ΔT / g (the mass
+# cancels).
+id: phys161-e4-p014-lead-ball-drop-height
+title: Drop height to warm a lead ball
+source: { document: PHYS161_Exam4, labels: [ P14 ] }
+section: Temperature and heat
+tags: [ heat, energy-conservation, specific-heat ]
+narrative: >-
+  A lead ball falls from rest and lands on the floor without bouncing, so that all of the energy of
+  the fall goes into heating the ball. The specific heat of lead is {c:unit} and the gravitational
+  acceleration is $g = {g:unit}$.
+vars:
+  - { name: dT, kind: range, min: 0.50, max: 5.00, step: 0.05, unit: K, label: temperature rise }
+derived:
+  - { name: c, expr: "127.5", unit: J/(kg K) }
+  - { name: g, expr: "9.8", unit: m/s^2 }
+parts:
+  - id: height
+    prompt: "From what height must it fall for its temperature to rise by {dT:unit}? {_0}{_u}"
+    answer: c * dT / g
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { dT: 2, c: 127.5, g: 9.8 }
+  parts:
+    - { id: height, answer: 26.020408163265, unit: m, source: P14 }

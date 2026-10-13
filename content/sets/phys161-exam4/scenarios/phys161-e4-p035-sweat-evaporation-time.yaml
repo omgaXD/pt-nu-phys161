@@ -1,0 +1,27 @@
+# P35 — evaporating m of water removes m L_v, so at power P it takes t = m L_v / P. The latent heat
+# is in kJ/g and the mass in g.
+id: phys161-e4-p035-sweat-evaporation-time
+title: Time to shed body heat by evaporation
+source: { document: PHYS161_Exam4, labels: [ P35 ] }
+section: Temperature and heat
+tags: [ heat, latent-heat, power ]
+narrative: ""
+vars:
+  - { name: P, kind: range, min: 80, max: 150, step: 1, unit: W, label: heat production }
+  - { name: m, kind: range, min: 10, max: 100, step: 1, unit: g, label: water mass }
+derived:
+  - { name: Lv, expr: "2.42", unit: kJ/g }
+parts:
+  - id: time
+    prompt: >-
+      A person produces heat at the rate of about {P:unit} when at rest, and gets rid of it entirely
+      by evaporating water. How long does it take to evaporate {m:unit} of water this way? Latent
+      heat of vaporization for water is {Lv:unit}. {_0}{_u}
+    answer: m * Lv * 1000 / P
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { P: 117, m: 36, Lv: 2.42 }
+  parts:
+    - { id: time, answer: 744.61538461538, unit: s, source: P35 }

@@ -1,0 +1,34 @@
+# P25 — the kettle and the water warm together: T₂ = T₁ + Q / (m_k c_Al + m_w c_w). The source
+# prints the answer as a bare number; it is the final temperature in °C.
+id: phys161-e4-p025-kettle-final-temperature
+title: Final temperature of a heated kettle
+source: { document: PHYS161_Exam4, labels: [ P25 ] }
+section: Temperature and heat
+tags: [ heat, specific-heat ]
+narrative: >-
+  An aluminum tea kettle with mass {mk:unit} containing {mw:unit} of water is placed on a stove at
+  {T1:unit}. Specific heat of aluminum is {cal:unit}. Specific heat of water is {cw:unit}.
+vars:
+  - { name: mk, kind: range, min: 0.5, max: 2.5, step: 0.1, unit: kg, label: kettle mass }
+  - { name: mw, kind: range, min: 0.50, max: 3.00, step: 0.05, unit: kg, label: water mass }
+  - { name: T1, kind: range, min: 10, max: 25, step: 1, unit: °C, label: initial temperature }
+  - { name: Q, kind: range, min: 100, max: 500, step: 10, unit: kJ, label: heat added }
+derived:
+  - { name: cal, expr: "910", unit: J/(kg K) }
+  - { name: cw, expr: "4186", unit: J/(kg K) }
+  - { name: T2, expr: "T1 + Q * 1000 / (mk * cal + mw * cw)", unit: °C }
+constraints:
+  - "T2 <= 95" # the water stays below boiling
+parts:
+  - id: final-temperature
+    prompt: >-
+      If no heat is lost to the surroundings and {Q:unit} of heat is added, what is the final
+      temperature? {_0}{_u}
+    answer: T2
+    unit: °C
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { mk: 1.7, mw: 1.55, T1: 17, Q: 230, cal: 910, cw: 4186 }
+  parts:
+    - { id: final-temperature, answer: 45.623697932933, unit: °C, source: P25 }

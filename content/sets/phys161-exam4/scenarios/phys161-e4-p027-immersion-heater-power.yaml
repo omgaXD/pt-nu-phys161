@@ -1,0 +1,29 @@
+# P27 — all the heater's power warms the water: P t = m c_w ΔT, so P = m c_w (T₂ − T₁) / t.
+id: phys161-e4-p027-immersion-heater-power
+title: Power of an immersion heater
+source: { document: PHYS161_Exam4, labels: [ P27 ] }
+section: Temperature and heat
+tags: [ heat, specific-heat, power ]
+narrative: >-
+  A student makes a cup of coffee by placing an electric immersion heater in {m:unit} of water.
+  Specific heat of water is {cw:unit}.
+vars:
+  - { name: m, kind: range, min: 0.5, max: 2.5, step: 0.1, unit: kg, label: water mass }
+  - { name: T1, kind: range, min: 10, max: 25, step: 1, unit: °C, label: initial temperature }
+  - { name: T2, kind: range, min: 60, max: 95, step: 1, unit: °C, label: final temperature }
+  - { name: t, kind: range, min: 600, max: 3000, step: 10, unit: s, label: heating time }
+derived:
+  - { name: cw, expr: "4186", unit: J/(kg K) }
+parts:
+  - id: power
+    prompt: >-
+      The temperature must be raised from {T1:unit} to {T2:unit} in {t:unit}. Assuming that all of
+      the heater's power goes into heating the water, what power must the heater have? {_0}{_u}
+    answer: m * cw * (T2 - T1) / t
+    unit: W
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 1.4, T1: 16, T2: 77, t: 1790, cw: 4186 }
+  parts:
+    - { id: power, answer: 199.71173184358, unit: W, source: P27 }

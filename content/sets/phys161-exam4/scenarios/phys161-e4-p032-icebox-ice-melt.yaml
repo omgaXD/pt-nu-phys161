@@ -1,27 +1,42 @@
-# P32 — conduction through the walls, H = k A ΔT / d, for one day (86 400 s) melts
-# m = H · 86 400 / L_f of ice. The wall thickness is given in cm.
+# P32/P33 — conduction through the walls brings in H = k A ΔT / d (P33); in one day (86 400 s) that
+# melts m = H · 86 400 / L_f of ice (P32). The wall thickness is given in cm. The base canonical
+# values are P32's; P33 overrides them (it prints k = 0.0115 W/(m °C)).
 id: phys161-e4-p032-icebox-ice-melt
-title: Ice melted in a foam icebox in a day
-source: { document: PHYS161_Exam4, labels: [ P32 ] }
+title: Heat flow into a foam icebox
+source: { document: PHYS161_Exam4, labels: [ P32, P33 ] }
 section: Temperature and heat
-tags: [ heat-conduction, thermal-conductivity, latent-heat ]
+tags: [ heat-conduction, thermal-conductivity, latent-heat, multi-part ]
 narrative: >-
   A polystyrene foam icebox has a total area of {A:unit} and walls with an average thickness of
-  {d:unit}. The box contains ice, water, and canned beverages at 0°C. The inside of the box is kept
-  cold by melting ice. Thermal conductivity of polystyrene foam is $k = {k:unit}$. Latent heat of
-  fusion of water is {Lf:unit}.
+  {d:unit}. The box contains ice, water, and canned beverages at 0°C, and it is kept in the trunk of
+  a car at {T:unit}. The inside of the box is kept cold by melting ice. Thermal conductivity of
+  polystyrene foam is $k = {k:unit}$. Latent heat of fusion of water is {Lf:unit}.
 vars:
   - { name: A, kind: range, min: 0.50, max: 1.50, step: 0.01, unit: m^2, label: total area }
   - { name: d, kind: range, min: 1.0, max: 4.0, step: 0.1, unit: cm, label: wall thickness }
   - { name: T, kind: range, min: 20, max: 40, step: 1, unit: °C, label: outside temperature }
+  - {
+      name: k,
+      kind: range,
+      min: 0.0100,
+      max: 0.0120,
+      step: 0.0005,
+      unit: W/(m °C),
+      label: thermal conductivity
+    }
 derived:
-  - { name: k, expr: "0.010", unit: W/(m °C) }
   - { name: Lf, expr: "334", unit: kJ/kg }
+  - { name: H, expr: "k * A * T / (d / 100)", unit: W }
 parts:
+  - id: heat-flow
+    prompt: "What is the rate of heat flow into the box? {_0}{_u}"
+    answer: H
+    unit: W
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: ice-melted
-    prompt: >-
-      How much ice melts in one day if the icebox is kept in the trunk of a car at {T:unit}? {_0}{_u}
-    answer: k * A * T / (d / 100) * 86400 / (Lf * 1000)
+    prompt: "How much ice melts in one day? {_0}{_u}"
+    answer: H * 86400 / (Lf * 1000)
     unit: kg
     tolerance: { rel: 0.01 }
     difficulty: 3
@@ -29,3 +44,10 @@ canonical:
   vars: { A: 0.94, d: 2, T: 27, k: 0.01, Lf: 334 }
   parts:
     - { id: ice-melted, answer: 3.2826826347305, unit: kg, source: P32 }
+    - {
+        id: heat-flow,
+        answer: 17.4225,
+        unit: W,
+        source: P33,
+        vars: { A: 1.01, d: 2.2, T: 33, k: 0.0115 }
+      }

@@ -1,0 +1,30 @@
+# P5 — linear thermal expansion run backwards: ΔT = ΔL / (α L). The observed elongation (in cm,
+# 0.1 cm as printed) is computed from a hidden temperature change, so every draw is a realistic
+# seasonal swing; the answer uses the printed ΔL. α is printed as a multiple of 10⁻⁶.
+id: phys161-e4-p005-bridge-temperature-change
+title: Temperature change from a bridge's elongation
+source: { document: PHYS161_Exam4, labels: [ P5 ] }
+section: Temperature and heat
+tags: [ thermal-expansion, linear-expansion ]
+narrative: >-
+  A bridge is built from steel as a single, continuous structure {L:unit} long. Its length is
+  observed to increase by {dL:unit}. Taking the coefficient of thermal expansion of steel equal to $
+  {a6} \times 10^{-6}\ 1/\text{K}$.
+vars:
+  - { name: L, kind: range, min: 80, max: 250, step: 1, unit: m, label: bridge length }
+  - { name: a6, kind: range, min: 10.0, max: 13.0, step: 0.1, decimals: 1, label: α in 10⁻⁶ 1/K }
+  # Hidden temperature change; the printed elongation carries it.
+  - { name: dT, kind: range, min: 30, max: 80, step: 0.1, unit: K, label: temperature change }
+derived:
+  - { name: dL, expr: "round(a6 * 1e-6 * L * dT * 100, 1)", unit: cm }
+parts:
+  - id: temperature-change
+    prompt: "Calculate the temperature change that produced this. {_0}{_u}"
+    answer: (dL / 100) / (a6 * 1e-6 * L)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { L: 156, a6: 11.7, dT: 60.8, dL: 11.1 }
+  parts:
+    - { id: temperature-change, answer: 60.815253122945, unit: K, source: P5 }

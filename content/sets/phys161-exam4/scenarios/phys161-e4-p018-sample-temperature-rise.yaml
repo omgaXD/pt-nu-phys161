@@ -1,0 +1,30 @@
+# P18 — the sample's mass comes from its weight, m = W / g, and ΔT = Q / (m c).
+id: phys161-e4-p018-sample-temperature-rise
+title: Temperature rise of a weighed sample
+source: { document: PHYS161_Exam4, labels: [ P18 ] }
+section: Temperature and heat
+tags: [ heat, specific-heat ]
+narrative: >-
+  You are given a sample of metal whose weight is {W:unit} and whose specific heat is {c:unit}. You
+  carefully add $ {q4}\times10^{4}$ J of heat energy to the sample. The gravitational acceleration
+  is $g = {g:unit}$.
+vars:
+  - { name: W, kind: range, min: 10, max: 50, step: 0.1, unit: N, label: weight }
+  - { name: c, kind: range, min: 130, max: 900, step: 1, unit: J/(kg K), label: specific heat }
+  - { name: q4, kind: range, min: 1.00, max: 3.00, step: 0.01, label: heat added in 10⁴ J }
+derived:
+  - { name: g, expr: "9.8", unit: m/s^2 }
+  - { name: Q, expr: "q4 * 1e4", unit: J }
+constraints:
+  - "Q * g / (W * c) <= 100" # a temperature rise a metal sample survives
+parts:
+  - id: temperature-rise
+    prompt: "By how much does its temperature rise? {_0}{_u}"
+    answer: Q * g / (W * c)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { W: 26.7, c: 535, q4: 1.45, g: 9.8 }
+  parts:
+    - { id: temperature-rise, answer: 9.9478455318702, unit: K, source: P18 }
