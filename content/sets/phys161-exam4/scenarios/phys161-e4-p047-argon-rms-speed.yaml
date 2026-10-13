@@ -1,26 +1,42 @@
-# P47 — v_rms = sqrt(3 R T / M) with R T = P V / n, so v_rms = sqrt(3 P V / (n M)). The volume is in
-# liters and the pressure in atm, converted inside the formula.
+# P47/P48 — the ideal gas law gives T = P V / (n R) (P48), and v_rms = sqrt(3 R T / M) with
+# R T = P V / n, so v_rms = sqrt(3 P V / (n M)) (P47). The volume is in liters and the pressure in
+# atm, converted inside the formulas. The base canonical values are P47's; P48 overrides them.
 id: phys161-e4-p047-argon-rms-speed
-title: RMS speed of argon in a container
-source: { document: PHYS161_Exam4, labels: [ P47 ] }
+title: Argon in a container
+source: { document: PHYS161_Exam4, labels: [ P47, P48 ] }
 section: Kinetic Theory of Gases
-tags: [ kinetic-theory, rms-speed, ideal-gas, units ]
+tags: [ kinetic-theory, rms-speed, ideal-gas, units, multi-part ]
 narrative: >-
-  Molar mass of argon is 39.948 g/mol. The standard atmosphere pressure is 101325 Pa.
+  An {V} liter container is filled with {n:unit} of argon gas at a pressure of {P:unit}. Molar mass
+  of argon is 39.948 g/mol. The universal gas constant is $R = {R:unit}$. The standard atmosphere
+  pressure is 101325 Pa. 1 L = 0.001 m^3.
 vars:
   - { name: V, kind: range, min: 5.0, max: 12.0, step: 0.1, unit: L, label: volume }
   - { name: n, kind: range, min: 1.0, max: 2.5, step: 0.1, unit: mol, label: amount of argon }
   - { name: P, kind: range, min: 3.0, max: 6.0, step: 0.1, unit: atm, label: pressure }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
 parts:
+  - id: temperature
+    prompt: "Find the temperature of the gas. {_0}{_u}"
+    answer: P * 101325 * V / 1000 / (n * R)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 1
   - id: rms-speed
-    prompt: >-
-      Find the root mean square speed of argon atom in an {V} liter container filled with {n:unit}
-      of argon gas at pressure of {P:unit}. {_0}{_u}
+    prompt: "Find the root mean square speed of an argon atom. {_0}{_u}"
     answer: sqrt(3 * P * 101325 * V / 1000 / (n * 0.039948))
     unit: m/s
     tolerance: { rel: 0.01 }
     difficulty: 3
 canonical:
-  vars: { V: 8.1, n: 1.6, P: 4.7 }
+  vars: { V: 8.1, n: 1.6, P: 4.7, R: 8.31 }
   parts:
     - { id: rms-speed, answer: 425.50322889891, unit: m/s, source: P47 }
+    - {
+        id: temperature,
+        answer: 261.83165494965,
+        unit: K,
+        source: P48,
+        vars: { V: 8.5, n: 1.9, P: 4.8 }
+      }

@@ -1,23 +1,30 @@
-# P45 — the average translational kinetic energy is (3/2) k_B T with T = P V / (n R); the source
-# evaluates it as (3/2) P V / (n N_A), which is the same thing with k_B = R / N_A. The volume is in
-# liters.
+# P45/P46 — the gas temperature is T = P V / (n R) (P46), and the average translational kinetic
+# energy is (3/2) k_B T (P45); the source evaluates the latter as (3/2) P V / (n N_A), which is the
+# same thing with k_B = R / N_A. The volume is in liters. The base canonical values are P45's; P46
+# overrides them.
 id: phys161-e4-p045-balloon-molecule-energy
-title: Kinetic energy of a molecule in a balloon
-source: { document: PHYS161_Exam4, labels: [ P45 ] }
+title: Oxygen in a balloon
+source: { document: PHYS161_Exam4, labels: [ P45, P46 ] }
 section: Kinetic Theory of Gases
-tags: [ kinetic-theory, kinetic-energy, ideal-gas ]
+tags: [ kinetic-theory, kinetic-energy, ideal-gas, multi-part ]
 narrative: >-
   A spherical {V}-liters balloon contains {n}-mol of oxygen gas at a pressure of {P:unit}. The
   universal gas constant is $R = {R:unit}$. Boltzmann constant $k_B = 1.38\times10^{-23}$ J/K.
-  Avogadro's number $N_A = 6.022\times10^{23}$ 1/mol.
+  Avogadro's number $N_A = 6.022\times10^{23}$ 1/mol. 1 L = 0.001 m^3.
 vars:
   - { name: V, kind: range, min: 10, max: 30, step: 0.1, unit: L, label: balloon volume }
-  - { name: n, kind: range, min: 5, max: 25, step: 1, unit: mol, label: amount of gas }
+  - { name: n, kind: range, min: 5, max: 25, step: 0.5, unit: mol, label: amount of gas }
   - { name: P, kind: range, min: 150000, max: 300000, step: 1000, unit: Pa, label: pressure }
 derived:
   - { name: R, expr: "8.31", unit: J/(mol K) }
   - { name: NA, expr: "6.022e23", unit: 1/mol }
 parts:
+  - id: temperature
+    prompt: "Find the temperature of the gas in the balloon. {_0}{_u}"
+    answer: P * V / 1000 / (n * R)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 1
   - id: kinetic-energy
     prompt: >-
       Find the average translational kinetic energy of an oxygen molecule in the balloon. {_0}{_u}
@@ -29,3 +36,10 @@ canonical:
   vars: { V: 19.3, n: 16, P: 202000, R: 8.31, NA: 6.022e+23 }
   parts:
     - { id: kinetic-energy, answer: 6.0693083693125e-22, unit: J, source: P45 }
+    - {
+        id: temperature,
+        answer: 44.653028479743,
+        unit: K,
+        source: P46,
+        vars: { V: 24.2, n: 13.5, P: 207000 }
+      }

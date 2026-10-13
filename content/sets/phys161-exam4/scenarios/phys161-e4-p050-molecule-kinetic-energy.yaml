@@ -1,0 +1,25 @@
+# P50 — the average translational kinetic energy of a molecule is (3/2) k_B T.
+id: phys161-e4-p050-molecule-kinetic-energy
+title: Kinetic energy of a gas molecule at a temperature
+source: { document: PHYS161_Exam4, labels: [ P50 ] }
+section: Kinetic Theory of Gases
+tags: [ kinetic-theory, kinetic-energy, temperature ]
+narrative: >-
+  Boltzmann constant $k_B = 1.38\times10^{-23}$ J/K.
+vars:
+  - { name: T, kind: range, min: 200, max: 800, step: 1, unit: K, label: temperature }
+derived:
+  - { name: kB, expr: "1.38e-23", unit: J/K }
+parts:
+  - id: kinetic-energy
+    prompt: >-
+      Calculate the average translational kinetic energy of one molecule of a monatomic ideal gas at
+      a temperature of {T:unit}. {_0}{_u}
+    answer: 1.5 * kB * T
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { T: 526, kB: 1.38e-23 }
+  parts:
+    - { id: kinetic-energy, answer: 1.08882e-20, unit: J, source: P50 }

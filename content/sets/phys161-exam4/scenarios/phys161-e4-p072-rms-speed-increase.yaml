@@ -1,19 +1,25 @@
-# P72 — v_rms ∝ sqrt(T), so raising v_rms by p% needs T₂ = T₁ (1 + p/100)². The answer is in K
-# (exactUnit) with the 273.15 offset, which this problem's printed answer uses.
+# P72/P73 — v_rms ∝ sqrt(T), so raising v_rms by p% needs T₂ = T₁ (1 + p/100)², a rise of
+# ((1 + p/100)² − 1) · 100% (P73). The temperature answer is in K (exactUnit) with the 273.15
+# offset, which P72's printed answer uses. The base canonical values are P72's; P73 overrides them.
 id: phys161-e4-p072-rms-speed-increase
 title: Temperature for a higher rms speed
-source: { document: PHYS161_Exam4, labels: [ P72 ] }
+source: { document: PHYS161_Exam4, labels: [ P72, P73 ] }
 section: Kinetic Theory of Gases
-tags: [ kinetic-theory, rms-speed, temperature ]
-narrative: ""
+tags: [ kinetic-theory, rms-speed, temperature, multi-part ]
+narrative: >-
+  The root-mean-square speed of the molecules in a gas at {T1:unit} is to be increased by {p}%.
 vars:
   - { name: T1, kind: range, min: 10, max: 30, step: 1, unit: °C, label: initial temperature }
-  - { name: p, kind: range, min: 2, max: 10, step: 1, unit: "%", label: speed increase }
+  - { name: p, kind: range, min: 2, max: 10, step: 0.5, unit: "%", label: speed increase }
 parts:
+  - id: percentage
+    prompt: "By what percentage must the absolute temperature be raised? {_0}{_u}"
+    answer: ((1 + p / 100)^2 - 1) * 100
+    unit: "%"
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: temperature
-    prompt: >-
-      The root-mean-square speed of molecules in a gas at {T1:unit} is to be increased by {p}%. To
-      what temperature must it be raised? Answer in kelvins (K). {_0}{_u}
+    prompt: "To what temperature must it be raised? Answer in kelvins (K). {_0}{_u}"
     answer: (T1 + 273.15) * (1 + p / 100)^2
     unit: K
     exactUnit: true
@@ -23,3 +29,4 @@ canonical:
   vars: { T1: 20, p: 3 }
   parts:
     - { id: temperature, answer: 311, unit: K, source: P72 }
+    - { id: percentage, answer: 8.16, unit: "%", source: P73, vars: { p: 4 } }

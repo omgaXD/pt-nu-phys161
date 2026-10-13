@@ -1,23 +1,32 @@
-# P64 — one mole has N_A molecules, so a molecule's mass is M / N_A (M in g/mol, answer in kg).
+# P64/P65 — one mole has N_A molecules, so a molecule's mass is M / N_A (P64; M in g/mol, answer in
+# kg) and a mass m holds N = (m / M) N_A molecules (P65). The base canonical values are P64's; P65
+# overrides them.
 id: phys161-e4-p064-molecule-mass
-title: Mass of one molecule
-source: { document: PHYS161_Exam4, labels: [ P64 ] }
+title: Molecules and molar mass
+source: { document: PHYS161_Exam4, labels: [ P64, P65 ] }
 section: Kinetic Theory of Gases
-tags: [ kinetic-theory, molar-mass, avogadro ]
+tags: [ kinetic-theory, molar-mass, avogadro, multi-part ]
 narrative: >-
-  Avogadro's number $N_A = {NA:unit}$.
+  A gas has molar mass {M:unit}. Avogadro's number $N_A = {NA:unit}$.
 vars:
-  - { name: M, kind: range, min: 2, max: 60, step: 1, unit: g/mol, label: molar mass }
+  - { name: M, kind: range, min: 2, max: 60, step: 0.5, unit: g/mol, label: molar mass }
+  - { name: m, kind: range, min: 5, max: 100, step: 0.1, unit: g, label: gas mass }
 derived:
   - { name: NA, expr: "6.022e23", unit: 1/mol }
 parts:
   - id: molecule-mass
-    prompt: "Find the mass of a molecule of the gas with molar mass {M:unit}. {_0}{_u}"
+    prompt: "Find the mass of a molecule of the gas. {_0}{_u}"
     answer: M / 1000 / NA
     unit: kg
     tolerance: { rel: 0.01 }
     difficulty: 1
+  - id: molecules
+    prompt: "How many molecules are contained in {m:unit} of the gas? {_0}"
+    answer: m / M * NA
+    tolerance: { rel: 0.01 }
+    difficulty: 1
 canonical:
-  vars: { M: 32, NA: 6.022e+23 }
+  vars: { M: 32, m: 10, NA: 6.022e+23 }
   parts:
     - { id: molecule-mass, answer: 5.3138492195284e-26, unit: kg, source: P64 }
+    - { id: molecules, answer: 9.5013777777778e+23, source: P65, vars: { M: 22.5, m: 35.5 } }

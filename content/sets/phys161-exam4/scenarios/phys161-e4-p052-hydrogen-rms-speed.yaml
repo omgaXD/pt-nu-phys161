@@ -1,0 +1,25 @@
+# P52 — v_rms = sqrt(3 R T / M), with the molar mass in g/mol.
+id: phys161-e4-p052-hydrogen-rms-speed
+title: RMS speed of hydrogen molecules
+source: { document: PHYS161_Exam4, labels: [ P52 ] }
+section: Kinetic Theory of Gases
+tags: [ kinetic-theory, rms-speed ]
+narrative: >-
+  The universal gas constant is $R = {R:unit}$.
+vars:
+  - { name: T, kind: range, min: 200, max: 800, step: 1, unit: K, label: temperature }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: rms-speed
+    prompt: >-
+      At a temperature of {T:unit}, what is the root-mean-square speed of hydrogen molecules, whose
+      molar mass is 2 g/mol? {_0}{_u}
+    answer: sqrt(3 * R * T / 0.002)
+    unit: m/s
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { T: 460, R: 8.31 }
+  parts:
+    - { id: rms-speed, answer: 2394.5563268468, unit: m/s, source: P52 }

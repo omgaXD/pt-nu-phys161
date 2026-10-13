@@ -1,0 +1,36 @@
+# P68 — n / V = P / (R T) for V = 1 m³. The temperature uses the source's 273 offset, which this
+# problem's printed answer uses.
+id: phys161-e4-p068-vacuum-moles-per-volume
+title: Moles per cubic metre in a vacuum
+source: { document: PHYS161_Exam4, labels: [ P68 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, amount-of-substance ]
+narrative: >-
+  The universal gas constant is $R = {R:unit}$.
+vars:
+  - {
+      name: P,
+      kind: range,
+      min: 1e-7,
+      max: 9.9e-7,
+      step: 1e-8,
+      sigfigs: 2,
+      unit: N/m^2,
+      label: pressure
+    }
+  - { name: T, kind: range, min: 15, max: 35, step: 1, unit: °C, label: temperature }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: moles
+    prompt: >-
+      A vacuum system can achieve a pressure of {P:unit} at {T:unit}. How many moles of gas are
+      there in one cubic metre at this pressure and temperature? {_0}{_u}
+    answer: P / (R * (T + 273))
+    unit: mol
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { P: 4.7e-7, T: 20, R: 8.31 }
+  parts:
+    - { id: moles, answer: 1.9303195705655e-10, unit: mol, source: P68 }

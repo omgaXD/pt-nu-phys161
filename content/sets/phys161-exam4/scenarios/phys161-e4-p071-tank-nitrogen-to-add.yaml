@@ -1,0 +1,43 @@
+# P71 — at fixed volume and temperature P ∝ n ∝ m, so reaching P₂ needs m₁ P₂ / P₁ in the tank:
+# Δm = m₁ (P₂ / P₁ − 1). The molar mass is stated but cancels.
+id: phys161-e4-p071-tank-nitrogen-to-add
+title: Nitrogen to add to raise a tank's pressure
+source: { document: PHYS161_Exam4, labels: [ P71 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, gas-laws ]
+narrative: >-
+  A storage tank at a pressure of {P1:unit} contains {m1:unit} of diatomic nitrogen. Molar mass of
+  diatomic nitrogen is 28 g/mol.
+vars:
+  - {
+      name: P1,
+      kind: range,
+      min: 90000,
+      max: 120000,
+      step: 100,
+      unit: Pa,
+      label: initial pressure
+    }
+  - { name: m1, kind: range, min: 15.0, max: 35.0, step: 0.1, unit: kg, label: initial mass }
+  - {
+      name: P2,
+      kind: range,
+      min: 150000,
+      max: 300000,
+      step: 500,
+      unit: Pa,
+      label: final pressure
+    }
+parts:
+  - id: added-mass
+    prompt: >-
+      How much additional nitrogen must be added, without changing the temperature or the volume, to
+      raise the pressure to {P2:unit}? {_0}{_u}
+    answer: m1 * (P2 / P1 - 1)
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { P1: 105500, m1: 23.6, P2: 213000 }
+  parts:
+    - { id: added-mass, answer: 24.047393364929, unit: kg, source: P71 }

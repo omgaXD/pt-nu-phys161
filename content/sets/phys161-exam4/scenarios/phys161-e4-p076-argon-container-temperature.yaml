@@ -1,0 +1,32 @@
+# P76 — ideal gas law with n = m / M: T = P V M / (m R). The volume is in liters and the pressure is
+# printed in units of 10⁶ Pa; it is computed from a hidden temperature (to 1 MPa, as printed), so
+# every draw is a realistic gas temperature; the answer uses the printed pressure.
+id: phys161-e4-p076-argon-container-temperature
+title: Temperature of argon in a container
+source: { document: PHYS161_Exam4, labels: [ P76 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, temperature ]
+narrative: >-
+  Molar mass of argon is 40 g/mol. The universal gas constant is $R = {R:unit}$. 1 L = 0.001 m^3.
+vars:
+  - { name: V, kind: range, min: 20, max: 60, step: 0.5, unit: L, label: container volume }
+  - { name: m, kind: range, min: 50, max: 150, step: 1, unit: kg, label: argon mass }
+  # Hidden temperature; the printed pressure carries it.
+  - { name: T, kind: range, min: 200, max: 400, step: 1, unit: K, label: temperature }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+  - { name: p6, expr: "round((m / 0.040) * R * T / (V / 1000) / 1e6)" }
+  - { name: P, expr: "p6 * 1e6", unit: Pa }
+parts:
+  - id: temperature
+    prompt: >-
+      What is the temperature inside a {V} L container holding {m:unit} of argon gas at a pressure
+      of $ {p6}\times10^{6}$ Pa? {_0}{_u}
+    answer: P * (V / 1000) * 0.040 / (m * R)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { V: 34.5, m: 117, T: 244, R: 8.31, p6: 172 }
+  parts:
+    - { id: temperature, answer: 244.12971705390, unit: K, source: P76 }

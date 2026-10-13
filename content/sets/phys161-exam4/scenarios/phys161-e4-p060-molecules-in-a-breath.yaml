@@ -1,27 +1,36 @@
-# P60 — N = P V / (k_B T). The volume is in mL and the pressure in atm; the temperature uses the
-# source's 273 offset.
+# P60/P61 — one breath of air: n = P V / (R T) (P61) and N = P V / (k_B T) (P60). The volume is in
+# mL and the pressure in atm; the temperature uses the source's 273 offset. The base canonical
+# values are P60's; P61 overrides them.
 id: phys161-e4-p060-molecules-in-a-breath
-title: Molecules in one breath
-source: { document: PHYS161_Exam4, labels: [ P60 ] }
+title: Air in one breath
+source: { document: PHYS161_Exam4, labels: [ P60, P61 ] }
 section: Kinetic Theory of Gases
-tags: [ ideal-gas, number-of-molecules ]
+tags: [ ideal-gas, number-of-molecules, multi-part ]
 narrative: >-
-  Boltzmann's constant $k_B = 1.38\cdot10^{-23}$ J/K. 1 atm = 101325 Pa 1 L = 0.001 m^3
+  One breath of air has a volume of {V:unit}, at {T:unit} and {P:unit}. The universal gas constant
+  is $R = {R:unit}$. Boltzmann's constant $k_B = 1.38\cdot10^{-23}$ J/K. 1 atm = 101325 Pa. 1 L =
+  0.001 m^3.
 vars:
-  - { name: V, kind: range, min: 400, max: 600, step: 10, unit: mL, label: breath volume }
+  - { name: V, kind: range, min: 400, max: 600, step: 5, unit: mL, label: breath volume }
   - { name: T, kind: range, min: 10, max: 37, step: 1, unit: °C, label: temperature }
   - { name: P, kind: range, min: 0.95, max: 1.10, step: 0.01, unit: atm, label: pressure }
 derived:
   - { name: kB, expr: "1.38e-23", unit: J/K }
+  - { name: R, expr: "8.31", unit: J/(mol K) }
 parts:
+  - id: moles
+    prompt: "Calculate the number of moles of air in the breath. {_0}{_u}"
+    answer: P * 101325 * V * 1e-6 / (R * (T + 273))
+    unit: mol
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: molecules
-    prompt: >-
-      Calculate the number of molecules in the air in one breath, with a volume of {V:unit},
-      {T:unit} and {P:unit}. {_0}
+    prompt: "Calculate the number of molecules in the air in the breath. {_0}"
     answer: P * 101325 * V * 1e-6 / (kB * (T + 273))
     tolerance: { rel: 0.01 }
     difficulty: 2
 canonical:
-  vars: { V: 490, T: 16, P: 1.02, kB: 1.38e-23 }
+  vars: { V: 490, T: 16, P: 1.02, kB: 1.38e-23, R: 8.31 }
   parts:
     - { id: molecules, answer: 1.2698e+22, source: P60 }
+    - { id: moles, answer: 0.0260056831002, unit: mol, source: P61, vars: { V: 585, T: 15, P: 1.05 } }
