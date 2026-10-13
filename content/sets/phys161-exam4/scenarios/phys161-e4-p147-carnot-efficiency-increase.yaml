@@ -1,10 +1,10 @@
-# P147/P149 — Carnot: T_h = T_c / (1 − e). Raising e₁ to e₂ with T_c fixed needs T_h to rise by
-# T_c (1 / (1 − e₂) − 1 / (1 − e₁)) (P147); with T_h fixed T_c must drop by
+# P147/P148/P149 — Carnot: T_h = T_c / (1 − e) (P148). Raising e₁ to e₂ with T_c fixed needs T_h
+# to rise by T_c (1 / (1 − e₂) − 1 / (1 − e₁)) (P147); with T_h fixed T_c must drop by
 # T_c (1 − (1 − e₂) / (1 − e₁)) (P149). Temperatures use the source's 273 offset. The base
-# canonical values are P147's; P149 overrides them.
+# canonical values are P147's; P148 and P149 override them.
 id: phys161-e4-p147-carnot-efficiency-increase
 title: Raising the efficiency of a Carnot engine
-source: { document: PHYS161_Exam4, labels: [ P147, P149 ] }
+source: { document: PHYS161_Exam4, labels: [ P147, P148, P149 ] }
 section: 2nd Law of Thermodynamics
 tags: [ second-law, carnot, efficiency, multi-part ]
 narrative: >-
@@ -15,6 +15,14 @@ vars:
   - { name: e1, kind: range, min: 15, max: 35, step: 5, unit: "%", label: initial efficiency }
   - { name: e2, kind: range, min: 40, max: 60, step: 5, unit: "%", label: target efficiency }
 parts:
+  - id: hot-temperature
+    prompt: >-
+      What is the temperature of its high-temperature reservoir? Answer in kelvins (K). {_0}{_u}
+    answer: (Tc + 273) / (1 - e1 / 100)
+    unit: K
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: hot-increase
     prompt: >-
       By how many kelvins must the temperature of the high-temperature reservoir be increased if the
@@ -36,4 +44,5 @@ canonical:
   vars: { Tc: -90, e1: 25, e2: 50 }
   parts:
     - { id: hot-increase, answer: 122, unit: K, source: P147 }
+    - { id: hot-temperature, answer: 228.75, unit: K, source: P148, vars: { e1: 20 } }
     - { id: cold-decrease, answer: 67.667, unit: K, source: P149, vars: { Tc: -70 } }
