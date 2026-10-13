@@ -1,11 +1,12 @@
 # P101/P103/P104 — adiabatic compression to half the volume: T V^(γ−1) and P V^γ are constant, so
 # T₂ = T₁ 2^(γ−1) (P101) and P₂ = P₁ 2^γ (P103). Cooling back to T₁ at constant pressure shrinks the
-# volume to V₃ = (V₁ / 2) T₁ / T₂ = V₁ / 2^γ (P104). The temperature uses the source's 273 offset;
-# volumes are in L and pressures in atm. The base canonical values are P101's; P103 and P104 override
-# them.
+# volume to V₃ = (V₁ / 2) T₁ / T₂ = V₁ / 2^γ (P104). The work done on the gas is the rise in
+# internal energy, W = (P₂ V₂ − P₁ V₁) / (γ − 1) = P₁ V₁ (2^(γ−1) − 1) / (γ − 1) (P102). The temperature uses the source's 273 offset;
+# volumes are in L and pressures in atm. The base canonical values are P101's; P102, P103 and P104
+# override them.
 id: phys161-e4-p101-nitrogen-adiabatic-compression
 title: Rapid compression of nitrogen
-source: { document: PHYS161_Exam4, labels: [ P101, P103, P104 ] }
+source: { document: PHYS161_Exam4, labels: [ P101, P102, P103, P104 ] }
 section: 1st Law of Thermodynamics
 tags: [ first-law, adiabatic, ideal-gas, multi-part ]
 narrative: >-
@@ -33,6 +34,12 @@ parts:
     unit: K
     tolerance: { rel: 0.01 }
     difficulty: 3
+  - id: work-on-gas
+    prompt: "How much work is done on the gas? {_0}{_u}"
+    answer: P1 * 101325 * V1 / 1000 * (2^(gamma - 1) - 1) / (gamma - 1)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 4
   - id: final-pressure
     prompt: "Calculate the final pressure of the gas. {_0}{_u}"
     answer: P1 * 101325 * 2^gamma
@@ -51,6 +58,13 @@ canonical:
   vars: { V1: 1.65, P1: 0.98, T1: 2, gamma: 1.4 }
   parts:
     - { id: final-temperature, answer: 362.86467546255, unit: K, source: P101 }
+    - {
+        id: work-on-gas,
+        answer: 128.33918076489,
+        unit: J,
+        source: P102,
+        vars: { V1: 1.57, P1: 1.01 }
+      }
     - {
         id: final-pressure,
         answer: 270072.26089931,

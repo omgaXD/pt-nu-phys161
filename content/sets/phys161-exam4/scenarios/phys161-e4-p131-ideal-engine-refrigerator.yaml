@@ -1,10 +1,11 @@
-# P131/P133 — the ideal (Carnot) engine delivers W = Q_h (1 − T_c / T_h) (P131). That work drives a
+# P131/P132/P133 — the ideal (Carnot) engine delivers W = Q_h (1 − T_c / T_h) (P131) and rejects
+# Q_h T_c / T_h to the cold reservoir (P132). The work drives a
 # refrigerator extracting Q_c from its cold reservoir, so its coefficient of performance is
-# K = Q_c / W (P133, as the source computes it). The base canonical values are P131's; P133
-# overrides them.
+# K = Q_c / W (P133, as the source computes it). The base canonical values are P131's; P132 and
+# P133 override them.
 id: phys161-e4-p131-ideal-engine-refrigerator
 title: Ideal engine driving a refrigerator
-source: { document: PHYS161_Exam4, labels: [ P131, P133 ] }
+source: { document: PHYS161_Exam4, labels: [ P131, P132, P133 ] }
 section: 2nd Law of Thermodynamics
 tags: [ second-law, carnot, refrigerator, coefficient-of-performance, multi-part ]
 narrative: >-
@@ -32,6 +33,12 @@ parts:
     unit: J
     tolerance: { rel: 0.01 }
     difficulty: 2
+  - id: rejected-heat
+    prompt: "How much heat does it reject to the cold reservoir? {_0}{_u}"
+    answer: Qh * Tc / Th
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: refrigerator-cop
     prompt: >-
       The work from the engine goes into an ideal refrigerator which extracts {Qc:unit} of heat from
@@ -43,6 +50,13 @@ canonical:
   vars: { Qh: 10500, Tc: 230, Th: 575, Qc: 4400 }
   parts:
     - { id: work, answer: 6300, unit: J, source: P131 }
+    - {
+        id: rejected-heat,
+        answer: 3792.9824561404,
+        unit: J,
+        source: P132,
+        vars: { Qh: 9200, Tc: 235, Th: 570 }
+      }
     - {
         id: refrigerator-cop,
         answer: 0.71296296296296,

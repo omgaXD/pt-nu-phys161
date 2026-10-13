@@ -1,10 +1,11 @@
-# P124/P126/P127 — the lead cools from T_i to the lake's T_L, giving the lake Q = m c (T_i − T_L).
+# P124–P127 — the lead cools from T_i to the lake's T_L, giving the lake Q = m c (T_i − T_L) (P125).
 # The lake stays at T_L: ΔS_lake = Q / T_L (P124). The lead: ΔS_lead = m c ln(T_L / T_i) (P126).
 # The universe: their sum (P127). Temperatures use the source's 273 offset. The base canonical
-# values are P124's (P127 shares them); P126 overrides the mass.
+# values are P124's (P127 shares them); P126 overrides the mass and P125 the data (it prints
+# c = 125 J/(kg K)).
 id: phys161-e4-p124-hot-lead-in-lake
 title: Entropy changes when hot lead cools in a lake
-source: { document: PHYS161_Exam4, labels: [ P124, P126, P127 ] }
+source: { document: PHYS161_Exam4, labels: [ P124, P125, P126, P127 ] }
 section: 2nd Law of Thermodynamics
 tags: [ second-law, entropy, specific-heat, multi-part ]
 narrative: >-
@@ -14,11 +15,17 @@ vars:
   - { name: m, kind: range, min: 2, max: 10, step: 1, unit: kg, label: lead mass }
   - { name: Ti, kind: range, min: 200, max: 400, step: 5, unit: °C, label: lead temperature }
   - { name: TL, kind: range, min: 5, max: 25, step: 1, unit: °C, label: lake temperature }
+  - { name: c, kind: choice, options: [ 125, 128 ], unit: J/(kg K), label: specific heat of lead }
 derived:
-  - { name: c, expr: "128", unit: J/(kg K) }
   - { name: Slake, expr: "m * c * (Ti - TL) / (TL + 273)", unit: J/K }
   - { name: Slead, expr: "m * c * ln((TL + 273) / (Ti + 273))", unit: J/K }
 parts:
+  - id: heat
+    prompt: "How much heat flows from the lead into the lake? {_0}{_u}"
+    answer: m * c * (Ti - TL)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
   - id: lake-entropy
     prompt: "Determine the entropy change of the lake. {_0}{_u}"
     answer: Slake
@@ -41,5 +48,6 @@ canonical:
   vars: { m: 8, Ti: 320, TL: 14, c: 128 }
   parts:
     - { id: lake-entropy, answer: 1091.79, unit: J/K, source: P124 }
+    - { id: heat, answer: 242250, unit: J, source: P125, vars: { m: 6, Ti: 340, TL: 17, c: 125 } }
     - { id: lead-entropy, answer: -371.56, unit: J/K, source: P126, vars: { m: 4 } }
     - { id: universe-entropy, answer: 348.4, unit: J/K, source: P127 }

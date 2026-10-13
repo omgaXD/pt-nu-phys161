@@ -1,0 +1,24 @@
+# P120 — no engine beats Carnot: e_max = 1 − T_c / T_h, as a fraction. The temperatures use the
+# source's 273 offset.
+id: phys161-e4-p120-engine-max-efficiency
+title: Maximum efficiency of a heat engine
+source: { document: PHYS161_Exam4, labels: [ P120 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, carnot, efficiency ]
+narrative: ""
+vars:
+  - { name: Tc, kind: range, min: 10, max: 60, step: 1, unit: °C, label: exhaust temperature }
+  - { name: Th, kind: range, min: 200, max: 600, step: 5, unit: °C, label: intake temperature }
+parts:
+  - id: efficiency
+    prompt: >-
+      A heat engine exhausts its heat at a temperature of {Tc:unit} and takes in heat at {Th:unit}.
+      What is the maximum possible efficiency of this engine? Give the answer as a fraction, not a
+      percentage. {_0}
+    answer: 1 - (Tc + 273) / (Th + 273)
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { Tc: 42, Th: 455 }
+  parts:
+    - { id: efficiency, answer: 0.56730769230769, source: P120 }

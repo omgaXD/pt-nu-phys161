@@ -1,12 +1,15 @@
-# P141 — at constant pressure T ∝ V, so ΔS = n C_p ln(T₂ / T₁) = n (5/2) R ln(V₂ / V₁) for a
-# monatomic ideal gas. The initial temperature does not enter.
+# P141/P142 — at constant pressure T ∝ V, so T₂ = T₁ V₂ / V₁ (P142) and
+# ΔS = n C_p ln(T₂ / T₁) = n (5/2) R ln(V₂ / V₁) for a monatomic ideal gas (P141; the initial
+# temperature does not enter). The base canonical values are P141's; P142 overrides them.
 id: phys161-e4-p141-isobaric-cooling-entropy
-title: Entropy change of a gas cooled at constant pressure
-source: { document: PHYS161_Exam4, labels: [ P141 ] }
+title: Gas cooled at constant pressure
+source: { document: PHYS161_Exam4, labels: [ P141, P142 ] }
 section: 2nd Law of Thermodynamics
-tags: [ second-law, entropy, isobaric ]
+tags: [ second-law, entropy, isobaric, multi-part ]
 narrative: >-
-  The universal gas constant is $R = {R:unit}$.
+  A system consisting of {n} mol of a monatomic ideal gas is cooled at constant pressure from a
+  volume of {V1:unit} to {V2:unit}. The initial temperature was {T1:unit}. The universal gas
+  constant is $R = {R:unit}$.
 vars:
   - { name: n, kind: range, min: 10, max: 40, step: 1, unit: mol, label: amount of gas }
   - { name: V1, kind: range, min: 30, max: 60, step: 1, unit: L, label: initial volume }
@@ -15,11 +18,14 @@ vars:
 derived:
   - { name: R, expr: "8.31", unit: J/(mol K) }
 parts:
+  - id: final-temperature
+    prompt: "What is the final temperature of the gas? {_0}{_u}"
+    answer: T1 * V2 / V1
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 1
   - id: entropy
-    prompt: >-
-      A system consisting of {n} mol of a monatomic ideal gas is cooled at constant pressure from a
-      volume {V1:unit} to {V2:unit}. The initial temperature was {T1:unit}. What is the change in
-      entropy of the gas? {_0}{_u}
+    prompt: "What is the change in entropy of the gas? {_0}{_u}"
     answer: n * 2.5 * R * ln(V2 / V1)
     unit: J/K
     tolerance: { rel: 0.01 }
@@ -28,3 +34,10 @@ canonical:
   vars: { n: 23, V1: 48, V2: 11, T1: 293, R: 8.31 }
   parts:
     - { id: entropy, answer: -703.9823, unit: J/K, source: P141 }
+    - {
+        id: final-temperature,
+        answer: 61.772727272727,
+        unit: K,
+        source: P142,
+        vars: { n: 28, V1: 44, V2: 9, T1: 302 }
+      }

@@ -1,0 +1,25 @@
+# P122 — the ice melts reversibly at 0 °C (273 K, the source's offset), so ΔS = m L_f / T and
+# m = ΔS T / L_f. The answer is in g, as printed.
+id: phys161-e4-p122-ice-mass-from-entropy
+title: Mass of melted ice from its entropy change
+source: { document: PHYS161_Exam4, labels: [ P122 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, entropy, latent-heat ]
+narrative: >-
+  A block of ice at 0°C is placed in a large lake whose temperature is just slightly above 0°C, and
+  the ice melts completely. Latent heat of fusion for water is {Lf:unit}.
+vars:
+  - { name: S, kind: range, min: 100, max: 600, step: 1, unit: J/K, label: entropy change }
+derived:
+  - { name: Lf, expr: "334", unit: kJ/kg }
+parts:
+  - id: mass
+    prompt: "The entropy change of the ice is {S:unit}. What was the mass of the block? {_0}{_u}"
+    answer: S * 273 / (Lf * 1000) * 1000
+    unit: g
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { S: 302, Lf: 334 }
+  parts:
+    - { id: mass, answer: 246.84431137725, unit: g, source: P122 }

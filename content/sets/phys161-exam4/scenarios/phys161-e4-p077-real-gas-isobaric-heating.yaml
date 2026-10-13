@@ -1,11 +1,12 @@
-# P77/P79/P80 — heat Q added at constant pressure: the gas does W = P ΔV, so ΔU = Q − W (P80).
+# P77/P78/P79/P80 — heat Q added at constant pressure: the gas does W = P ΔV (P78), so
+# ΔU = Q − W (P80).
 # For n moles, n ΔT = P ΔV / R, so C_p = Q / (n ΔT) = Q R / (P ΔV) (P79) and
 # C_V = ΔU / (n ΔT) = (Q − P ΔV) R / (P ΔV) (P77). Volumes are in cm³ and the pressure in atm.
 # The constraint keeps W ≤ 0.4 Q, so C_V ≥ 1.5 R as for any real gas. The base canonical values
-# are P77's; P79 and P80 override them.
+# are P77's; P78, P79 and P80 override them.
 id: phys161-e4-p077-real-gas-isobaric-heating
 title: Heating a real gas at constant pressure
-source: { document: PHYS161_Exam4, labels: [ P77, P79, P80 ] }
+source: { document: PHYS161_Exam4, labels: [ P77, P78, P79, P80 ] }
 section: 1st Law of Thermodynamics
 tags: [ first-law, isobaric, molar-specific-heat, internal-energy, multi-part ]
 narrative: >-
@@ -15,7 +16,7 @@ narrative: >-
 vars:
   - { name: Q, kind: range, min: 25.0, max: 40.0, step: 0.1, unit: J, label: heat added }
   - { name: V1, kind: range, min: 40.0, max: 60.0, step: 0.1, unit: cm^3, label: initial volume }
-  - { name: dV, kind: range, min: 20.0, max: 60.0, step: 0.1, unit: cm^3, label: volume increase }
+  - { name: dV, kind: range, min: 20.0, max: 70.0, step: 0.1, unit: cm^3, label: volume increase }
   - {
       name: P,
       kind: range,
@@ -48,6 +49,12 @@ parts:
     unit: J/(mol K)
     tolerance: { rel: 0.01 }
     difficulty: 3
+  - id: work
+    prompt: "How much work does the gas do? {_0}{_u}"
+    answer: W
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
   - id: internal-energy
     prompt: "By how much did the internal energy of the gas change? {_0}{_u}"
     answer: Q - W
@@ -72,3 +79,4 @@ canonical:
         source: P80,
         vars: { Q: 37.3, V1: 57.2, dV: 54.8 }
       }
+    - { id: work, answer: 6.626655, unit: J, source: P78, vars: { Q: 38, V1: 45.5, dV: 65.4 } }

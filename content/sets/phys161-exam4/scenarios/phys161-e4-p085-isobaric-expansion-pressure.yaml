@@ -1,0 +1,30 @@
+# P85 — isobaric work W = P (V₂ − V₁), so P = W / (V₂ − V₁). The work (in kJ, as printed) is
+# computed from a hidden pressure, so every draw is a realistic pressure; the answer uses the printed
+# work.
+id: phys161-e4-p085-isobaric-expansion-pressure
+title: Pressure from the work of an isobaric expansion
+source: { document: PHYS161_Exam4, labels: [ P85 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, isobaric, work ]
+narrative: >-
+  An ideal monatomic gas expands reversibly from {V1:unit} to {V2:unit} at constant pressure, doing
+  {W:unit} of work. 1 atm = 101325 Pa.
+vars:
+  - { name: V1, kind: range, min: 1.0, max: 2.5, step: 0.1, unit: m^3, label: initial volume }
+  - { name: dV, kind: range, min: 0.3, max: 2.0, step: 0.1, unit: m^3, label: volume increase }
+  # Hidden pressure; the printed work carries it.
+  - { name: P, kind: range, min: 0.80, max: 2.50, step: 0.01, unit: atm, label: pressure }
+derived:
+  - { name: V2, expr: "V1 + dV", unit: m^3 }
+  - { name: W, expr: "round(P * 101325 * dV / 1000)", unit: kJ }
+parts:
+  - id: pressure
+    prompt: "What is the pressure of the gas? {_0}{_u}"
+    answer: W * 1000 / dV
+    unit: Pa
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { V1: 2.3, dV: 1.1, P: 1.08, V2: 3.4, W: 120 }
+  parts:
+    - { id: pressure, answer: 109090.90909091, unit: Pa, source: P85 }

@@ -1,11 +1,11 @@
 # P90/P92 — the work of a cycle is the area it encloses on the pV diagram (positive when traversed
 # clockwise). ADBA is the triangle A(V₁, p₁), D(V₁, p₂), B(V₂, p₁): W = ½ (p₂ − p₁)(V₂ − V₁) (P90).
-# ADCBA is the whole rectangle: W = (p₂ − p₁)(V₂ − V₁) (P92). Pressures are in atm and volumes in
-# L. The two problems print the same figure. The base canonical values are P90's; P92 overrides
-# them.
+# ABDA is the same triangle traversed the other way, so its work is the negative (P91). ADCBA is the
+# whole rectangle: W = (p₂ − p₁)(V₂ − V₁) (P92). Pressures are in atm and volumes in L. The three
+# problems print the same figure. The base canonical values are P90's; P91 and P92 override them.
 id: phys161-e4-p090-pv-cycle-work
 title: Work around cycles on a pV diagram
-source: { document: PHYS161_Exam4, labels: [ P90, P92 ] }
+source: { document: PHYS161_Exam4, labels: [ P90, P91, P92 ] }
 section: 1st Law of Thermodynamics
 tags: [ first-law, work, pv-diagram, cycle, multi-part ]
 figure:
@@ -36,6 +36,14 @@ parts:
     unit: J
     tolerance: { rel: 0.01 }
     difficulty: 3
+  - id: reverse-triangle-work
+    prompt: >-
+      Calculate the work done by the gas in the quasi-static process represented by the ABDA cycle
+      path, that is the ADBA cycle traversed in the opposite direction. {_0}{_u}
+    answer: -0.5 * (p2 - p1) * 101325 * (V2 - V1) / 1000
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 3
   - id: rectangle-work
     prompt: >-
       Calculate the work done by the gas in the quasi-static processes represented by the ADCBA
@@ -48,4 +56,11 @@ canonical:
   vars: { p1: 2, dp: 4, V1: 2, dV: 4 }
   parts:
     - { id: triangle-work, answer: 810.6, unit: J, source: P90 }
+    - {
+        id: reverse-triangle-work,
+        answer: -607.95,
+        unit: J,
+        source: P91,
+        vars: { p1: 2, dp: 3, V1: 1, dV: 4 }
+      }
     - { id: rectangle-work, answer: 1621.2, unit: J, source: P92, vars: { p1: 1, V1: 1 } }

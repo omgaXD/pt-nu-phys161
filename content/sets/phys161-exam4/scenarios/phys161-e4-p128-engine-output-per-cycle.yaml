@@ -1,9 +1,9 @@
-# P128/P130 — at f cycles per second an output power P is W = P / f per cycle (P130). With efficiency
-# e the engine takes in Q_h = W / e and rejects Q_c = Q_h − W = W (1/e − 1) per cycle (P128). The
-# base canonical values are P128's; P130 overrides them.
+# P128/P129/P130 — at f cycles per second an output power P is W = P / f per cycle (P130). With
+# efficiency e the engine takes in Q_h = W / e (P129) and rejects Q_c = Q_h − W = W (1/e − 1) per
+# cycle (P128). The base canonical values are P128's; P129 and P130 override them.
 id: phys161-e4-p128-engine-output-per-cycle
-title: Work and rejected heat per cycle of an engine
-source: { document: PHYS161_Exam4, labels: [ P128, P130 ] }
+title: Work and heat per cycle of an engine
+source: { document: PHYS161_Exam4, labels: [ P128, P129, P130 ] }
 section: 2nd Law of Thermodynamics
 tags: [ second-law, heat-engine, efficiency, power, multi-part ]
 narrative: >-
@@ -13,6 +13,12 @@ vars:
   - { name: P, kind: range, min: 150, max: 400, step: 1, unit: W, label: output power }
   - { name: f, kind: range, min: 5, max: 20, step: 1, label: cycles per second }
 parts:
+  - id: absorbed-heat
+    prompt: "How much heat does it absorb from the hot reservoir in each cycle? {_0}{_u}"
+    answer: (P / f) * 100 / eff
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
   - id: rejected-heat
     prompt: "How much heat is rejected each cycle? {_0}{_u}"
     answer: (P / f) * (100 / eff - 1)
@@ -29,6 +35,13 @@ canonical:
   vars: { eff: 20, P: 215, f: 8 }
   parts:
     - { id: rejected-heat, answer: 107.5, unit: J, source: P128 }
+    - {
+        id: absorbed-heat,
+        answer: 86.877828054299,
+        unit: J,
+        source: P129,
+        vars: { eff: 17, P: 192, f: 13 }
+      }
     - {
         id: work-per-cycle,
         answer: 18.692307692308,

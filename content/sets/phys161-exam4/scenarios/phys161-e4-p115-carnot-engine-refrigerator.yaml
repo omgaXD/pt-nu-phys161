@@ -1,35 +1,47 @@
-# P115/P117 — a Carnot engine between T_h and T_c has efficiency 1 − T_c / T_h, so it delivers
-# W = Q_h (1 − T_c / T_h) (P115). Run in reverse as a refrigerator, removing Q_c from the cold
-# reservoir takes W = Q_c (T_h / T_c − 1) (P117). The base canonical values are P115's; P117
-# overrides them.
+# P115–P118 — a Carnot engine between T_h and T_c has efficiency 1 − T_c / T_h, so it delivers
+# W = Q_h (1 − T_c / T_h) (P115) and rejects Q_c = Q_h T_c / T_h (P116). Run in reverse as a
+# refrigerator its coefficient of performance is T_c / (T_h − T_c) (P118), so removing Q_c from the
+# cold reservoir takes W = Q_c (T_h / T_c − 1) (P117). The base canonical values are P115's; P116,
+# P117 and P118 override them.
 id: phys161-e4-p115-carnot-engine-refrigerator
 title: Carnot engine and refrigerator
-source: { document: PHYS161_Exam4, labels: [ P115, P117 ] }
+source: { document: PHYS161_Exam4, labels: [ P115, P116, P117, P118 ] }
 section: 2nd Law of Thermodynamics
-tags: [ second-law, carnot, efficiency, refrigerator, multi-part ]
+tags: [ second-law, carnot, efficiency, refrigerator, coefficient-of-performance, multi-part ]
 narrative: >-
   A Carnot engine operates between a hot reservoir at {Th:unit} and a cold reservoir at {Tc:unit}.
+  It absorbs {Qh:unit} of heat per cycle at the hot reservoir.
 vars:
-  - { name: Th, kind: range, min: 380, max: 600, step: 5, unit: K, label: hot reservoir }
-  - { name: Tc, kind: range, min: 250, max: 320, step: 5, unit: K, label: cold reservoir }
+  - { name: Th, kind: range, min: 340, max: 600, step: 5, unit: K, label: hot reservoir }
+  - { name: Tc, kind: range, min: 250, max: 340, step: 5, unit: K, label: cold reservoir }
   - { name: Qh, kind: range, min: 300, max: 800, step: 1, unit: J, label: heat absorbed }
   - { name: Qc, kind: range, min: 500, max: 1500, step: 50, unit: J, label: heat removed }
 constraints:
   - "Th - Tc >= 60" # a working engine with a clear temperature difference
 parts:
   - id: engine-work
-    prompt: >-
-      If it absorbs {Qh:unit} of heat per cycle at the hot reservoir, how much work per cycle does
-      it deliver? {_0}{_u}
+    prompt: "How much work per cycle does it deliver? {_0}{_u}"
     answer: Qh * (1 - Tc / Th)
     unit: J
     tolerance: { rel: 0.01 }
     difficulty: 2
-  - id: refrigerator-work
+  - id: rejected-heat
+    prompt: "How much heat does it reject per cycle to the cold reservoir? {_0}{_u}"
+    answer: Qh * Tc / Th
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: refrigerator-cop
     prompt: >-
       If the same engine working in reverse functions as a refrigerator between the same two
-      reservoirs how much work per cycle must be supplied to remove {Qc:unit} of heat from the cold
-      reservoir? {_0}{_u}
+      reservoirs, what is its coefficient of performance? {_0}
+    answer: Tc / (Th - Tc)
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: refrigerator-work
+    prompt: >-
+      How much work per cycle must be supplied to the refrigerator to remove {Qc:unit} of heat from
+      the cold reservoir? {_0}{_u}
     answer: Qc * (Th / Tc - 1)
     unit: J
     tolerance: { rel: 0.01 }
@@ -38,4 +50,12 @@ canonical:
   vars: { Th: 495, Tc: 305, Qh: 494, Qc: 1000 }
   parts:
     - { id: engine-work, answer: 189.61616161616, unit: J, source: P115 }
+    - {
+        id: rejected-heat,
+        answer: 278.37623762376,
+        unit: J,
+        source: P116,
+        vars: { Th: 505, Tc: 330, Qh: 426 }
+      }
     - { id: refrigerator-work, answer: 500, unit: J, source: P117, vars: { Th: 390, Tc: 260 } }
+    - { id: refrigerator-cop, answer: 2.3809523809524, source: P118, vars: { Th: 355, Tc: 250 } }

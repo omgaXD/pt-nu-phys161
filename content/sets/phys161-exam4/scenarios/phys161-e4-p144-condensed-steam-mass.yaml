@@ -1,0 +1,34 @@
+# P144 — condensing at 100 °C (373 K, the source's offset) gives off Q = m L_v, so ΔS = −m L_v / T
+# and m = |ΔS| T / L_v. The answer is in g, as printed.
+id: phys161-e4-p144-condensed-steam-mass
+title: Mass of condensed steam from its entropy change
+source: { document: PHYS161_Exam4, labels: [ P144 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, entropy, latent-heat, phase-change ]
+narrative: >-
+  Latent heat of vaporization of water is {Lv:unit}.
+vars:
+  - {
+      name: S,
+      kind: range,
+      min: 300,
+      max: 2500,
+      step: 5,
+      unit: J/K,
+      label: magnitude of the entropy change
+    }
+derived:
+  - { name: Lv, expr: "2254", unit: kJ/kg }
+parts:
+  - id: mass
+    prompt: >-
+      Steam at 100°C condenses to water at the same temperature, and the entropy change of the steam
+      is −{S:unit}. What mass of steam condensed? {_0}{_u}
+    answer: S * 373 / (Lv * 1000) * 1000
+    unit: g
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { S: 1205, Lv: 2254 }
+  parts:
+    - { id: mass, answer: 199.40771960958, unit: g, source: P144 }

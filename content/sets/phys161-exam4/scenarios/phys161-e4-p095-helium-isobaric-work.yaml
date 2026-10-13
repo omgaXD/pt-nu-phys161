@@ -1,0 +1,28 @@
+# P95 — work at constant pressure: W = P (V₂ − V₁). The pressure is printed in units of 10⁵ Pa and
+# the volumes in L, as in the source.
+id: phys161-e4-p095-helium-isobaric-work
+title: Work of helium heated at constant pressure
+source: { document: PHYS161_Exam4, labels: [ P95 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, isobaric, work ]
+narrative: >-
+  A cylinder with a frictionless, movable piston contains helium gas at a pressure of $
+  {p5}\times10^{5}$ Pa occupying {V1} L. The gas is heated at constant pressure until it occupies
+  {V2} L. 1 L = 0.001 m^3.
+vars:
+  - { name: p5, kind: range, min: 0.90, max: 1.50, step: 0.01, label: pressure in 10⁵ Pa }
+  - { name: V1, kind: range, min: 2.0, max: 5.0, step: 0.1, unit: L, label: initial volume }
+  - { name: dV, kind: range, min: 1.0, max: 4.0, step: 0.1, unit: L, label: volume increase }
+derived:
+  - { name: V2, expr: "V1 + dV", unit: L }
+parts:
+  - id: work
+    prompt: "How much work does the gas do? {_0}{_u}"
+    answer: p5 * 1e5 * dV / 1000
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
+canonical:
+  vars: { p5: 1.02, V1: 3.7, dV: 3, V2: 6.7 }
+  parts:
+    - { id: work, answer: 306, unit: J, source: P95 }

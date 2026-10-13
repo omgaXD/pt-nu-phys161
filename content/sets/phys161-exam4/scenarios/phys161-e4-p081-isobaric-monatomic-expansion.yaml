@@ -1,10 +1,10 @@
-# P81/P83/P84 — reversible isobaric expansion of an ideal gas from V₁ to V₂ at pressure P:
-# n = P V₁ / (R T₁) (P81), T₂ = T₁ V₂ / V₁ (P83) and W = P (V₂ − V₁) (P84). The pressure is in atm.
-# The base canonical values are P81's; P83 and P84 override them (P83 states no pressure and P84
-# no temperature; they keep P81's).
+# P81/P82/P83/P84 — reversible isobaric expansion of an ideal gas from V₁ to V₂ at pressure P:
+# n = P V₁ / (R T₁) (P81), T₂ = T₁ V₂ / V₁ (P82, P83) and W = P (V₂ − V₁) (P84). The pressure is in
+# atm. The base canonical values are P81's; P82, P83 and P84 override them (P82 and P83 state no
+# pressure and P84 no temperature; they keep P81's).
 id: phys161-e4-p081-isobaric-monatomic-expansion
 title: Isobaric expansion of a monatomic gas
-source: { document: PHYS161_Exam4, labels: [ P81, P83, P84 ] }
+source: { document: PHYS161_Exam4, labels: [ P81, P82, P83, P84 ] }
 section: 1st Law of Thermodynamics
 tags: [ first-law, isobaric, ideal-gas, work, multi-part ]
 narrative: >-
@@ -41,6 +41,13 @@ canonical:
   vars: { V1: 1, dV: 1.7, P: 1.82, T1: 278, R: 8.31 }
   parts:
     - { id: moles, answer: 79.82559800535, unit: mol, source: P81 }
+    - {
+        id: final-temperature,
+        answer: 395.83333333333,
+        unit: K,
+        source: P82,
+        vars: { V1: 1.8, dV: 0.7, T1: 285 }
+      }
     - {
         id: final-temperature,
         answer: 392.21052631579,

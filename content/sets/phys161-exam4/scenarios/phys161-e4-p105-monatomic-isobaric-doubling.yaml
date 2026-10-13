@@ -1,15 +1,17 @@
 # P105/P107 — isobaric expansion of a monatomic ideal gas: W = P ΔV = n R ΔT, ΔU = (3/2) n R ΔT
-# = (3/2) W (P107) and Q = ΔU + W = (5/2) W (P105). Doubling the volume fixes nothing else.
+# = (3/2) W (P107) and Q = ΔU + W = (5/2) W (P105). If the expansion is isothermal instead, ΔU = 0
+# and Q = W (P106). Doubling the volume fixes nothing else. The base canonical values are P105's
+# (P107 shares them); P106 overrides the work.
 id: phys161-e4-p105-monatomic-isobaric-doubling
 title: Monatomic gas doubling its volume at constant pressure
-source: { document: PHYS161_Exam4, labels: [ P105, P107 ] }
+source: { document: PHYS161_Exam4, labels: [ P105, P106, P107 ] }
 section: 1st Law of Thermodynamics
 tags: [ first-law, isobaric, internal-energy, heat, multi-part ]
 narrative: >-
   A monatomic ideal gas expands slowly to twice its original volume, doing {W:unit} of work in the
   process. The universal gas constant is $R = {R:unit}$.
 vars:
-  - { name: W, kind: range, min: 100, max: 400, step: 10, unit: J, label: work done }
+  - { name: W, kind: range, min: 100, max: 400, step: 5, unit: J, label: work done }
 derived:
   - { name: R, expr: "8.31", unit: J/(mol K) }
 parts:
@@ -19,6 +21,12 @@ parts:
     unit: J
     tolerance: { rel: 0.01 }
     difficulty: 2
+  - id: isothermal-heat
+    prompt: "Find the heat added to the gas if the process is isothermal. {_0}{_u}"
+    answer: W
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 1
   - id: internal-energy
     prompt: "Find the change in internal energy of the gas if the process is isobaric. {_0}{_u}"
     answer: 1.5 * W
@@ -30,3 +38,4 @@ canonical:
   parts:
     - { id: heat, answer: 500, unit: J, source: P105 }
     - { id: internal-energy, answer: 300, unit: J, source: P107 }
+    - { id: isothermal-heat, answer: 315, unit: J, source: P106, vars: { W: 315 } }

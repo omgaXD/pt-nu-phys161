@@ -1,23 +1,30 @@
-# P136 — reversible isothermal compression of an ideal gas: ΔU = 0, so the gas gives off Q = −W_on,
-# and ΔS = Q / T = −W_on / T. The amount of gas does not enter. The temperature uses the source's
-# 273 offset.
+# P136/P137 — reversible isothermal compression of an ideal gas: ΔU = 0, so the gas gives off
+# Q = W_on, and its entropy changes by −W_on / T (P136) while the surroundings at the same
+# temperature gain +W_on / T (P137). The amount of gas does not enter. The temperature uses the
+# source's 273 offset. The base canonical values are P136's; P137 overrides them.
 id: phys161-e4-p136-isothermal-compression-entropy
-title: Entropy change in an isothermal compression
-source: { document: PHYS161_Exam4, labels: [ P136 ] }
+title: Entropy changes in an isothermal compression
+source: { document: PHYS161_Exam4, labels: [ P136, P137 ] }
 section: 2nd Law of Thermodynamics
-tags: [ second-law, entropy, isothermal ]
-narrative: ""
+tags: [ second-law, entropy, isothermal, multi-part ]
+narrative: >-
+  {n} moles of an ideal gas undergo a reversible isothermal compression at {T:unit}. During this
+  compression, {W:unit} of work is done on the gas, and the heat produced flows into the
+  surroundings at the same temperature.
 vars:
   - { name: n, kind: range, min: 2, max: 6, step: 1, label: moles of gas }
-  - { name: T, kind: range, min: 0, max: 40, step: 1, unit: °C, label: temperature }
+  - { name: T, kind: range, min: 0, max: 40, step: 0.5, unit: °C, label: temperature }
   - { name: W, kind: range, min: 800, max: 3000, step: 10, unit: J, label: work done on the gas }
 parts:
   - id: entropy
-    prompt: >-
-      {n} moles of an ideal gas undergo a reversible isothermal compression at {T:unit}. During this
-      compression, {W:unit} of work is done on the gas. What is the change in entropy of the gas?
-      {_0}{_u}
+    prompt: "What is the change in entropy of the gas? {_0}{_u}"
     answer: -W / (T + 273)
+    unit: J/K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: surroundings-entropy
+    prompt: "What is the entropy change of the surroundings? {_0}{_u}"
+    answer: W / (T + 273)
     unit: J/K
     tolerance: { rel: 0.01 }
     difficulty: 2
@@ -25,3 +32,10 @@ canonical:
   vars: { n: 3, T: 22, W: 1550 }
   parts:
     - { id: entropy, answer: -5.2542372881356, unit: J/K, source: P136 }
+    - {
+        id: surroundings-entropy,
+        answer: 5.2849740932642,
+        unit: J/K,
+        source: P137,
+        vars: { T: 16.5, W: 1530 }
+      }
