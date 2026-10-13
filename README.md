@@ -6,11 +6,13 @@ randomized problems, an editor for writing them, and the quiz app that serves th
 site.
 
 The code is MIT-licensed ([LICENSE](LICENSE)): take any part of it for your own projects.
-Credit is appreciated but optional. Bug reports and suggestions go to
+Credit is appreciated but optional. A few icons come from Moodle and Font Awesome under their
+own licenses; see [Credits](#credits). Bug reports and suggestions go to
 [GitHub Issues](https://github.com/omgaXD/pt-nu-phys161/issues).
 
 - [For developers](#for-developers): what each module does, and how to lift one out
 - [Features](#features): what the quiz, the editor and the tools do
+- [Credits](#credits): third-party icons and the look the quiz reproduces
 
 ---
 
@@ -465,3 +467,18 @@ overridable English).
 - Group drafts into multi-part scenarios, and hand a problem to an LLM as a self-contained task.
 - Check that every problem reproduces its printed answer, fuzz it across seeds, count its
   variants, lint a set, format files, report coverage, and bundle everything for the quiz.
+
+## Credits
+
+The quiz reproduces the look of [Moodle](https://moodle.org)'s Boost theme, which is built on
+[Bootstrap](https://getbootstrap.com). This project is not affiliated with or endorsed by Moodle
+Pty Ltd; "Moodle" is their trademark.
+
+Third-party material keeps its own copyright and license, which the MIT license of this
+repository does not replace. The icon files also name their source and license in a comment.
+
+| Files | Source | License |
+| --- | --- | --- |
+| [`flag-on.svg`](packages/ui/src/lib/themes/moodle-icons/flag-on.svg), [`grade_partiallycorrect.svg`](packages/ui/src/lib/themes/moodle-icons/grade_partiallycorrect.svg), [`quiz-monologo.svg`](apps/quiz/src/lib/assets/quiz-monologo.svg) | Moodle icons, © Moodle Pty Ltd and contributors | [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.html) |
+| [`grade_correct.svg`](packages/ui/src/lib/themes/moodle-icons/grade_correct.svg), [`grade_incorrect.svg`](packages/ui/src/lib/themes/moodle-icons/grade_incorrect.svg), the glyphs in [`FaIcon.svelte`](apps/quiz/src/lib/components/FaIcon.svelte) and the chevrons in [`app.css`](apps/quiz/src/app.css) | [Font Awesome Free 6](https://fontawesome.com), © Fonticons, Inc. | [CC BY 4.0](https://fontawesome.com/license/free) |
+| The select arrow, invalid-field and close-button icons and the colour and size values in [`moodle.css`](packages/ui/src/lib/themes/moodle.css) and [`app.css`](apps/quiz/src/app.css) | Bootstrap 5.3, © The Bootstrap Authors | [MIT](https://github.com/twbs/bootstrap/blob/main/LICENSE) |
