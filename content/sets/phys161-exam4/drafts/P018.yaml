@@ -1,85 +1,61 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P18
 number: 18
 section: Temperature and heat
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: >-
-  An insulated beaker with negligible mass contains 0.225 kg of water at a temperature of 91°C. How
-  many kilograms of ice at a temperature of -14°C must be dropped into the water to make the final
-  temperature of the system 33°C? Specific heat of water is 4186 J/ (kg K).
-
-  Specific heat of ice is 2100 J/ (kg K). Latent heat of fusion for water is 334 kJ/kg.
-
-  (0.10891956342291 kg)
-text: An insulated beaker with negligible mass contains 0.225 kg of water at a temperature of 91°C.
-  How many kilograms of ice at a temperature of -14°C must be dropped into the water to make the
-  final temperature of the system 33°C? Specific heat of water is 4186 J/ (kg K). Specific heat of
-  ice is 2100 J/ (kg K). Latent heat of fusion for water is 334 kJ/kg. (0.10891956342291 kg)
-answer: { value: 0.10891956342291, unit: kg, raw: 0.10891956342291 kg }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: You are given a sample of metal whose weight is 26.7 N and whose specific heat is 535 J/(kg K).
+  You carefully add 1.45×10⁴ J of heat energy to the sample. By how much does its temperature rise?
+  The gravitational acceleration is g = 9.8 m/s². (9.94785 K)
+text: You are given a sample of metal whose weight is 26.7 N and whose specific heat is 535 J/(kg
+  K). You carefully add 1.45×10^4 J of heat energy to the sample. By how much does its temperature
+  rise? The gravitational acceleration is g = 9.8 m/s^2. (9.94785 K)
+answer: { value: 9.94785, unit: K, raw: 9.94785 K }
 figures: []
 literals:
-  - name: m
-    value: 0.225
-    unit: kg
-    text: "0.225"
-    suggest: { min: 0.158, max: 0.293, step: 0.001, decimals: 3 }
-  - name: T
-    value: 91
-    unit: °C
-    text: "91"
-    suggest: { min: 64, max: 118, step: 1 }
-  - name: T2
-    value: -14
-    unit: °C
-    text: "-14"
-    suggest: { min: -18, max: -10, step: 1 }
-  - name: T3
-    value: 33
-    unit: °C
-    text: "33"
-    suggest: { min: 23, max: 43, step: 1 }
+  - name: F
+    value: 26.7
+    unit: N
+    text: "26.7"
+    suggest: { min: 18.7, max: 34.7, step: 0.1, decimals: 1 }
   - name: c
-    value: 4186
+    value: 535
     unit: J/(kg K)
-    text: "4186"
-    suggest: { min: 2930, max: 5442, step: 1 }
-  - name: c2
-    value: 2100
-    unit: J/(kg K)
-    text: "2100"
-    suggest: { min: 1470, max: 2730, step: 1 }
-  - name: Lh
-    value: 334
-    unit: kJ/kg
-    text: "334"
-    suggest: { min: 234, max: 434, step: 1 }
+    text: "535"
+    suggest: { min: 375, max: 696, step: 1 }
+  - name: E
+    value: 14500
+    unit: J
+    text: 1.45×10^4
+    suggest: { min: 10150, max: 18850, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam4-p018
   source: { document: PHYS161_Exam4, labels: [ P18 ] }
   section: Temperature and heat
   narrative: >-
-    An insulated beaker with negligible mass contains {m:unit} of water at a temperature of
-    {T:unit}. Specific heat of water is {c:unit}. Specific heat of ice is {c2:unit}. Latent heat of
-    fusion for water is {Lh:unit}.
+    You are given a sample of metal whose weight is {F:unit} and whose specific heat is {c:unit}.
+    You carefully add {E:unit} of heat energy to the sample. The gravitational acceleration is g =
+    {g:unit}.
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: T3, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: F, kind: range, min: TODO, max: TODO, step: TODO, unit: N }
     - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
-    - { name: c2, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
-    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
-      prompt: >-
-        How many kilograms of ice at a temperature of {T2:unit} must be dropped into the water to
-        make the final temperature of the system {T3:unit}? {_0}{_u}
+      prompt: By how much does its temperature rise? {_0}{_u}
       answer: TODO
-      unit: kg
+      unit: K
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 0.225, T: 91, T2: -14, T3: 33, c: 4186, c2: 2100, Lh: 334 }
+    vars: { F: 26.7, c: 535, E: 14500, g: 9.8 }
     parts:
-      - { id: answer, answer: 0.10891956342291, unit: kg, source: P18 }
+      - { id: answer, answer: 9.94785, unit: K, source: P18 }

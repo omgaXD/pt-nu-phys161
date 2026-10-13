@@ -1,68 +1,63 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P7
 number: 7
 section: Temperature and heat
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: >-
-  A portion of 0.13 kg of water at 83°C is poured into an insulated cup containing 2.81 kg of ice at
-  0°C. Calculate the mass of liquid when the system reaches thermal equilibrium. Heat of fusion of
-  water is 334 kJ/kg. Specific heat of water is 4186 J/(kg K).
-
-  (0.26523035928144 kg)
-text: A portion of 0.13 kg of water at 83°C is poured into an insulated cup containing 2.81 kg of
-  ice at 0°C. Calculate the mass of liquid when the system reaches thermal equilibrium. Heat of
-  fusion of water is 334 kJ/kg. Specific heat of water is 4186 J/(kg K). (0.26523035928144 kg)
-answer: { value: 0.26523035928144, unit: kg, raw: 0.26523035928144 kg }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A railroad rail made of steel is 1028 m long and it is fastened securely at both ends when the
+  temperature is 16°C. As the temperature increases, the rail begins to buckle upwards, taking the
+  shape of an isosceles triangle. How high is this buckle when the temperature is 34°C? Assume that
+  the coefficient of linear expansion for steel is 11.9×10<sup>−6</sup> 1/K. (10.638682550015 m)
+text: A railroad rail made of steel is 1028 m long and it is fastened securely at both ends when the
+  temperature is 16°C. As the temperature increases, the rail begins to buckle upwards, taking the
+  shape of an isosceles triangle. How high is this buckle when the temperature is 34°C? Assume that
+  the coefficient of linear expansion for steel is 11.9×10^-6 1/K. (10.638682550015 m)
+answer: { value: 10.638682550015, unit: m, raw: 10.638682550015 m }
 figures: []
 literals:
-  - name: m
-    value: 0.13
-    unit: kg
-    text: "0.13"
-    suggest: { min: 0.09, max: 0.17, step: 0.01, decimals: 2 }
+  - name: d
+    value: 1028
+    unit: m
+    text: "1028"
+    suggest: { min: 720, max: 1336, step: 1 }
   - name: T
-    value: 83
+    value: 16
     unit: °C
-    text: "83"
-    suggest: { min: 58, max: 108, step: 1 }
-  - name: m2
-    value: 2.81
-    unit: kg
-    text: "2.81"
-    suggest: { min: 1.97, max: 3.65, step: 0.01, decimals: 2 }
-  - name: Lh
-    value: 334
-    unit: kJ/kg
-    text: "334"
-    suggest: { min: 234, max: 434, step: 1 }
-  - name: c
-    value: 4186
-    unit: J/(kg K)
-    text: "4186"
-    suggest: { min: 2930, max: 5442, step: 1 }
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: T2
+    value: 34
+    unit: °C
+    text: "34"
+    suggest: { min: 24, max: 44, step: 1 }
+  - name: alpha
+    value: 0.0000119
+    unit: 1/K
+    text: 11.9×10^-6
+    suggest: { min: 0.0000083, max: 0.0000155, step: 1e-7, decimals: 7 }
 scenario:
   id: phys161-exam4-p007
   source: { document: PHYS161_Exam4, labels: [ P7 ] }
   section: Temperature and heat
   narrative: >-
-    A portion of {m:unit} of water at {T:unit} is poured into an insulated cup containing {m2:unit}
-    of ice at 0°C. Heat of fusion of water is {Lh:unit}. Specific heat of water is {c:unit}.
+    A railroad rail made of steel is {d:unit} long and it is fastened securely at both ends when the
+    temperature is {T:unit}. As the temperature increases, the rail begins to buckle upwards, taking
+    the shape of an isosceles triangle. Assume that the coefficient of linear expansion for steel is
+    {alpha:unit}.
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
     - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
-    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/K }
   parts:
     - id: answer
       prompt: >-
-        Calculate the mass of liquid when the system reaches thermal equilibrium. {_0}{_u}
+        How high is this buckle when the temperature is {T2:unit}? {_0}{_u}
       answer: TODO
-      unit: kg
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 0.13, T: 83, m2: 2.81, Lh: 334, c: 4186 }
+    vars: { d: 1028, T: 16, T2: 34, alpha: 0.0000119 }
     parts:
-      - { id: answer, answer: 0.26523035928144, unit: kg, source: P7 }
+      - { id: answer, answer: 10.638682550015, unit: m, source: P7 }

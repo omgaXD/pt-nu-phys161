@@ -1,0 +1,47 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P137
+number: 137
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Three moles of an ideal gas undergo a reversible isothermal compression at 16.5°. During this
+  compression, 1530 J of work is done on the gas, and the heat produced flows into the surroundings
+  at the same temperature. What is the entropy change of the surroundings? (5.28497 J/K)
+text: Three moles of an ideal gas undergo a reversible isothermal compression at 16.5°. During this
+  compression, 1530 J of work is done on the gas, and the heat produced flows into the surroundings
+  at the same temperature. What is the entropy change of the surroundings? (5.28497 J/K)
+answer: { value: 5.28497, unit: J/K, raw: 5.28497 J/K }
+figures: []
+literals:
+  - name: theta
+    value: 16.5
+    unit: °
+    text: "16.5"
+    suggest: { min: 11.5, max: 21.4, step: 0.1, decimals: 1 }
+  - name: E
+    value: 1530
+    unit: J
+    text: "1530"
+    suggest: { min: 1071, max: 1989, step: 1 }
+scenario:
+  id: phys161-exam4-p137
+  source: { document: PHYS161_Exam4, labels: [ P137 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    Three moles of an ideal gas undergo a reversible isothermal compression at {theta}°. During this
+    compression, {E:unit} of work is done on the gas, and the heat produced flows into the
+    surroundings at the same temperature.
+  vars:
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+  parts:
+    - id: answer
+      prompt: What is the entropy change of the surroundings? {_0}{_u}
+      answer: TODO
+      unit: J/K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { theta: 16.5, E: 1530 }
+    parts:
+      - { id: answer, answer: 5.28497, unit: J/K, source: P137 }

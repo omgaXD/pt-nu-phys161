@@ -1,62 +1,73 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P25
 number: 25
 section: Temperature and heat
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A power input of 155 W is required to keep the interior surface of the box of an apparatus 55°C
-  above the temperature of the outer surface. The total area of the box is 2.15 m<sup>2</sup>, and
-  the wall thickness is 3.1 cm. Find the thermal conductivity of the material of the box.
-  (0.040634249471459 W/(m K))
-text: A power input of 155 W is required to keep the interior surface of the box of an apparatus
-  55°C above the temperature of the outer surface. The total area of the box is 2.15 m^2, and the
-  wall thickness is 3.1 cm. Find the thermal conductivity of the material of the box.
-  (0.040634249471459 W/(m K))
-answer: { value: 0.040634249471459, unit: W/(m K), raw: 0.040634249471459 W/(m K) }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: An aluminum tea kettle with mass 1.7 kg containing 1.55 kg of water is placed on a stove at
+  17°. If no heat is lost to the surroundings and 230 kJ of heat is added, what is the final
+  temperature? Specific heat of aluminum is 910 J/(kg K). Specific heat of water is 4186 J/(kg K).
+  (45.6237)
+text: An aluminum tea kettle with mass 1.7 kg containing 1.55 kg of water is placed on a stove at
+  17°. If no heat is lost to the surroundings and 230 kJ of heat is added, what is the final
+  temperature? Specific heat of aluminum is 910 J/(kg K). Specific heat of water is 4186 J/(kg K).
+  (45.6237)
+answer: { value: 45.6237, raw: "45.6237" }
 figures: []
 literals:
-  - name: P
-    value: 155
-    unit: W
-    text: "155"
-    suggest: { min: 109, max: 202, step: 1 }
-  - name: T
-    value: 55
-    unit: °C
-    text: "55"
-    suggest: { min: 39, max: 72, step: 1 }
-  - name: A
-    value: 2.15
-    unit: m^2
-    text: "2.15"
-    suggest: { min: 1.51, max: 2.8, step: 0.01, decimals: 2 }
-  - name: d
-    value: 3.1
-    unit: cm
-    text: "3.1"
-    suggest: { min: 2.2, max: 4, step: 0.1, decimals: 1 }
+  - name: m
+    value: 1.7
+    unit: kg
+    text: "1.7"
+    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
+  - name: m2
+    value: 1.55
+    unit: kg
+    text: "1.55"
+    suggest: { min: 1.09, max: 2.02, step: 0.01, decimals: 2 }
+  - name: theta
+    value: 17
+    unit: °
+    text: "17"
+    suggest: { min: 12, max: 22, step: 1 }
+  - name: E
+    value: 230
+    unit: kJ
+    text: "230"
+    suggest: { min: 161, max: 299, step: 1 }
+  - name: c
+    value: 910
+    unit: J/(kg K)
+    text: "910"
+    suggest: { min: 637, max: 1183, step: 1 }
+  - name: c2
+    value: 4186
+    unit: J/(kg K)
+    text: "4186"
+    suggest: { min: 2930, max: 5442, step: 1 }
 scenario:
   id: phys161-exam4-p025
   source: { document: PHYS161_Exam4, labels: [ P25 ] }
   section: Temperature and heat
   narrative: >-
-    A power input of {P:unit} is required to keep the interior surface of the box of an apparatus
-    {T:unit} above the temperature of the outer surface. The total area of the box is {A:unit}, and
-    the wall thickness is {d:unit}.
+    An aluminum tea kettle with mass {m:unit} containing {m2:unit} of water is placed on a stove at
+    {theta}°. Specific heat of aluminum is {c:unit}. Specific heat of water is {c2:unit}.
   vars:
-    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: A, kind: range, min: TODO, max: TODO, step: TODO, unit: m^2 }
-    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: c2, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
   parts:
     - id: answer
       prompt: >-
-        Find the thermal conductivity of the material of the box. {_0}{_u}
+        If no heat is lost to the surroundings and {E:unit} of heat is added, what is the final
+        temperature? {_0}
       answer: TODO
-      unit: W/(m K)
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { P: 155, T: 55, A: 2.15, d: 3.1 }
+    vars: { m: 1.7, m2: 1.55, theta: 17, E: 230, c: 910, c2: 4186 }
     parts:
-      - { id: answer, answer: 0.040634249471459, unit: W/(m K), source: P25 }
+      - { id: answer, answer: 45.6237, source: P25 }

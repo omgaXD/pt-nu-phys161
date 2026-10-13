@@ -1,144 +1,69 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P99
 number: 99
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A heat engine takes 0.3 mol of a diatomic ideal gas around the cycle shown in PV-diagram.
-  Process 1 → 2 is at constant volume, process 2 → 3 is adiabatic, and process 3 → 1 is at a
-  constant pressure of 1 atm. The value of γ for this gas is 1.4. Find the net heat flow into the
-  engine in one cycle. T<sub>1</sub> = 297 K, T<sub>2</sub> = 603 K and T<sub>3</sub> = 498 K. The
-  universal gas constant is R = 8.31 J/(mol K). 1 atm = 101325 Pa. (153.3195 J)
-text: A heat engine takes 0.3 mol of a diatomic ideal gas around the cycle shown in PV-diagram.
-  Process 1 → 2 is at constant volume, process 2 → 3 is adiabatic, and process 3 → 1 is at a
-  constant pressure of 1 atm. The value of γ for this gas is 1.4. Find the net heat flow into the
-  engine in one cycle. T_1 = 297 K, T_2 = 603 K and T_3 = 498 K. The universal gas constant is R =
-  8.31 J/(mol K). 1 atm = 101325 Pa. (153.3195 J)
-answer: { value: 153.3195, unit: J, raw: 153.3195 J }
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: One-half mole of a monatomic ideal gas is taken from state a to state c. If P<sub>a</sub> =
+  4.05×10<sup>5</sup> Pa, P<sub>b</sub> = 2.15×10<sup>5</sup> Pa, V<sub>a</sub> = 0.0021
+  m<sup>3</sup>, V<sub>b</sub> = 0.003 m<sup>3</sup>, and V<sub>c</sub> = 0.0041 m<sup>3</sup>,
+  calculate the work done on (or by) the gas as it moves from state a to state c. (515.5 J)
+text: One-half mole of a monatomic ideal gas is taken from state a to state c. If P_a = 4.05×10^5
+  Pa, P_b = 2.15×10^5 Pa, V_a = 0.0021 m^3, V_b = 0.003 m^3, and V_c = 0.0041 m^3, calculate the
+  work done on (or by) the gas as it moves from state a to state c. (515.5 J)
+answer: { value: 515.5, unit: J, raw: 515.5 J }
 figures:
-  - { src: figures/unnamed_002_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_002_xiMS.png }
+  - { src: figures/unnamed_009_p-J8.png, original: PHYS161_Exam4_new.docx_files/unnamed_009_p-J8.png }
 literals:
-  - name: n
-    value: 0.3
-    unit: mol
-    text: "0.3"
-    suggest: { min: 0.2, max: 0.4, step: 0.1, decimals: 1 }
-  - name: x
-    value: 1
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: x2
-    value: 2
-    text: "2"
-    suggest: { min: 1, max: 3, step: 1 }
-  - name: x3
-    value: 2
-    text: "2"
-    suggest: { min: 1, max: 3, step: 1 }
-  - name: x4
-    value: 3
-    text: "3"
-    suggest: { min: 2, max: 4, step: 1 }
-  - name: x5
-    value: 3
-    text: "3"
-    suggest: { min: 2, max: 4, step: 1 }
-  - name: x6
-    value: 1
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: p
-    value: 1
-    unit: atm
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: x7
-    value: 1.4
-    text: "1.4"
-    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
-  - name: T1
-    value: 297
-    unit: K
-    text: "297"
-    suggest: { min: 208, max: 386, step: 1 }
-  - name: T2
-    value: 603
-    unit: K
-    text: "603"
-    suggest: { min: 422, max: 784, step: 1 }
-  - name: T3
-    value: 498
-    unit: K
-    text: "498"
-    suggest: { min: 349, max: 647, step: 1 }
-  - name: R
-    value: 8.31
-    unit: J/(mol K)
-    text: "8.31"
-    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
-  - name: p2
-    value: 1
-    unit: atm
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: atm
-    value: 101325
+  - name: Pa
+    value: 405000
     unit: Pa
-    text: "101325"
-    suggest: { min: 70928, max: 131723, step: 1 }
+    text: 4.05×10^5
+    suggest: { min: 283500, max: 526500, step: 1 }
+  - name: Pb
+    value: 215000
+    unit: Pa
+    text: 2.15×10^5
+    suggest: { min: 150500, max: 279500, step: 1 }
+  - name: Va
+    value: 0.0021
+    unit: m^3
+    text: "0.0021"
+    suggest: { min: 0.0015, max: 0.0027, step: 0.0001, decimals: 4 }
+  - name: Vb
+    value: 0.003
+    unit: m^3
+    text: "0.003"
+    suggest: { min: 0.002, max: 0.004, step: 0.001, decimals: 3 }
+  - name: Vc
+    value: 0.0041
+    unit: m^3
+    text: "0.0041"
+    suggest: { min: 0.0029, max: 0.0053, step: 0.0001, decimals: 4 }
 scenario:
   id: phys161-exam4-p099
   source: { document: PHYS161_Exam4, labels: [ P99 ] }
-  section: 2nd Law of Thermodynamics
-  figure: { id: fig, src: figures/unnamed_002_xiMS.png, alt: "TODO: describe the figure" }
+  section: 1st Law of Thermodynamics
+  figure: { id: fig, src: figures/unnamed_009_p-J8.png, alt: "TODO: describe the figure" }
   narrative: >-
-    A heat engine takes {n:unit} of a diatomic ideal gas around the cycle shown in PV-diagram.
-    Process {x} → {x2} is at constant volume, process {x3} → {x4} is adiabatic, and process {x5} →
-    {x6} is at a constant pressure of {p:unit}. The value of γ for this gas is {x7}. The universal
-    gas constant is R = {R:unit}. {p2:unit} = {atm:unit}. {@fig}
+    One-half mole of a monatomic ideal gas is taken from state a to state c. {@fig}
   vars:
-    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x2, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x3, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x4, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x5, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: x6, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
-    - { name: x7, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: T1, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
-    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
-    - { name: T3, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
-    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
-    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
-    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Pa, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Pb, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Va, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: Vb, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: Vc, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
   parts:
     - id: answer
       prompt: >-
-        Find the net heat flow into the engine in one cycle. $T_{1}$ = {T1:unit}, $T_{2}$ =
-        {T2:unit} and $T_{3}$ = {T3:unit}. {_0}{_u}
+        If $P_{a}$ = {Pa:unit}, $P_{b}$ = {Pb:unit}, $V_{a}$ = {Va:unit}, $V_{b}$ = {Vb:unit}, and
+        $V_{c}$ = {Vc:unit}, calculate the work done on (or by) the gas as it moves from state a to
+        state c. {_0}{_u}
       answer: TODO
       unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars:
-      {
-        n: 0.3,
-        x: 1,
-        x2: 2,
-        x3: 2,
-        x4: 3,
-        x5: 3,
-        x6: 1,
-        p: 1,
-        x7: 1.4,
-        T1: 297,
-        T2: 603,
-        T3: 498,
-        R: 8.31,
-        p2: 1,
-        atm: 101325
-      }
+    vars: { Pa: 405000, Pb: 215000, Va: 0.0021, Vb: 0.003, Vc: 0.0041 }
     parts:
-      - { id: answer, answer: 153.3195, unit: J, source: P99 }
+      - { id: answer, answer: 515.5, unit: J, source: P99 }

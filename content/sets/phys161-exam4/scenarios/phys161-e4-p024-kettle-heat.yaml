@@ -1,0 +1,30 @@
+# P24 — the kettle and the water warm together: Q = (m_k c_Al + m_w c_w)(T₂ − T₁).
+id: phys161-e4-p024-kettle-heat
+title: Heat to warm a kettle of water
+source: { document: PHYS161_Exam4, labels: [ P24 ] }
+section: Temperature and heat
+tags: [ heat, specific-heat ]
+narrative: >-
+  An aluminum tea kettle with mass {mk:unit} and containing {mw:unit} of water is placed on a stove.
+  Specific heat of aluminum is {cal:unit}, Specific heat of water is {cw:unit}.
+vars:
+  - { name: mk, kind: range, min: 0.5, max: 2.5, step: 0.1, unit: kg, label: kettle mass }
+  - { name: mw, kind: range, min: 0.5, max: 3.0, step: 0.1, unit: kg, label: water mass }
+  - { name: T1, kind: range, min: 10, max: 25, step: 1, unit: °C, label: initial temperature }
+  - { name: T2, kind: range, min: 60, max: 95, step: 1, unit: °C, label: final temperature }
+derived:
+  - { name: cal, expr: "910", unit: J/(kg K) }
+  - { name: cw, expr: "4186", unit: J/(kg K) }
+parts:
+  - id: heat
+    prompt: >-
+      If no heat is lost to the surroundings, how much heat must be added to raise the temperature
+      from {T1:unit} to {T2:unit}? {_0}{_u}
+    answer: (mk * cal + mw * cw) * (T2 - T1)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { mk: 1.5, mw: 1.6, T1: 21, T2: 77, cal: 910, cw: 4186 }
+  parts:
+    - { id: heat, answer: 451505.6, unit: J, source: P24 }

@@ -1,0 +1,56 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P109
+number: 109
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A monatomic ideal gas undergoes two processes. In the first, the volume remains constant at
+  0.22 m³ while the pressure increases from 1.6×10⁵ Pa to 4.7×10⁵ Pa. The second process is a
+  compression at constant pressure. How much heat is added to the gas during the FIRST process
+  alone? (102300 J)
+text: A monatomic ideal gas undergoes two processes. In the first, the volume remains constant at
+  0.22 m^3 while the pressure increases from 1.6×10^5 Pa to 4.7×10^5 Pa. The second process is a
+  compression at constant pressure. How much heat is added to the gas during the FIRST process
+  alone? (102300 J)
+answer: { value: 102300, unit: J, raw: 102300 J }
+figures: []
+literals:
+  - name: V
+    value: 0.22
+    unit: m^3
+    text: "0.22"
+    suggest: { min: 0.15, max: 0.29, step: 0.01, decimals: 2 }
+  - name: p
+    value: 160000
+    unit: Pa
+    text: 1.6×10^5
+    suggest: { min: 112000, max: 208000, step: 1 }
+  - name: p2
+    value: 470000
+    unit: Pa
+    text: 4.7×10^5
+    suggest: { min: 329000, max: 611000, step: 1 }
+scenario:
+  id: phys161-exam4-p109
+  source: { document: PHYS161_Exam4, labels: [ P109 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    A monatomic ideal gas undergoes two processes. In the first, the volume remains constant at
+    {V:unit} while the pressure increases from {p:unit} to {p2:unit}. The second process is a
+    compression at constant pressure.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+  parts:
+    - id: answer
+      prompt: >-
+        How much heat is added to the gas during the FIRST process alone? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 0.22, p: 160000, p2: 470000 }
+    parts:
+      - { id: answer, answer: 102300, unit: J, source: P109 }

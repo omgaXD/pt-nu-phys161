@@ -1,0 +1,86 @@
+# P97/P99/P100 — half a mole of a monatomic gas goes a → b along a straight line and b → c at
+# constant pressure P_b. T_c = P_b V_c / (n R) (P97). The work is the area under the path,
+# W = ½ (P_a + P_b)(V_b − V_a) + P_b (V_c − V_b) (P99). With ΔU = (3/2)(P_b V_c − P_a V_a), the
+# heat is Q = ΔU + W, given in magnitude ("leaves (or enters)") (P100); the constraint keeps |Q|
+# clearly away from zero. Pressures are printed in units of 10⁵ Pa, as in the source. The base
+# canonical values are P97's; P99 and P100 override them.
+id: phys161-e4-p097-monatomic-abc-process
+title: Monatomic gas taken from a to c
+source: { document: PHYS161_Exam4, labels: [ P97, P99, P100 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, work, heat, internal-energy, pv-diagram, multi-part ]
+figure:
+  id: abc-path
+  src: figures/unnamed_009_p-J8.png
+  alt: >-
+    A pV diagram, p in Pa against V in m³. A straight line slopes down from state a at (V_a, P_a) to
+    state b at (V_b, P_b), and a horizontal line at P_b continues right to state c at V_c; arrows
+    point from a to b and from b to c.
+narrative: >-
+  One-half mole of a monatomic ideal gas is taken from state a to state c. $P_a = {pa5}\times10^{5}$
+  Pa, $P_b = {pb5}\times10^{5}$ Pa, $V_a = {Va:unit}$, $V_b = {Vb:unit}$, and $V_c = {Vc:unit}$.
+  {@fig}
+vars:
+  - { name: pa5, kind: range, min: 3.50, max: 4.50, step: 0.05, label: P_a in 10⁵ Pa }
+  - { name: pb5, kind: range, min: 1.50, max: 2.50, step: 0.05, label: P_b in 10⁵ Pa }
+  - {
+      name: Va,
+      kind: range,
+      min: 0.0015,
+      max: 0.0025,
+      step: 0.0001,
+      unit: m^3,
+      label: volume at a
+    }
+  - { name: d1, kind: range, min: 0.0005, max: 0.0012, step: 0.0001, unit: m^3, label: V_b − V_a }
+  - { name: d2, kind: range, min: 0.0008, max: 0.0016, step: 0.0001, unit: m^3, label: V_c − V_b }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+  - { name: Pa, expr: "pa5 * 1e5", unit: Pa }
+  - { name: Pb, expr: "pb5 * 1e5", unit: Pa }
+  - { name: Vb, expr: "Va + d1", unit: m^3 }
+  - { name: Vc, expr: "Vb + d2", unit: m^3 }
+  - { name: W, expr: "0.5 * (Pa + Pb) * (Vb - Va) + Pb * (Vc - Vb)", unit: J }
+  - { name: Q, expr: "1.5 * (Pb * Vc - Pa * Va) + W", unit: J }
+constraints:
+  - "abs(Q) >= 50" # the heat is not a near-cancellation
+parts:
+  - id: final-temperature
+    prompt: >-
+      Calculate the final temperature of the gas. The universal gas constant is $R = {R:unit}$.
+      {_0}{_u}
+    answer: Pb * Vc / (0.5 * R)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: work
+    prompt: >-
+      Calculate the work done on (or by) the gas as it moves from state a to state c. {_0}{_u}
+    answer: W
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: heat
+    prompt: "How much heat leaves (or enters) the system during this process? {_0}{_u}"
+    answer: abs(Q)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { pa5: 4.15, pb5: 1.95, Va: 0.0019, d1: 0.0009, d2: 0.0013, R: 8.31 }
+  parts:
+    - { id: final-temperature, answer: 192.41877256318, unit: K, source: P97 }
+    - {
+        id: work,
+        answer: 515.5,
+        unit: J,
+        source: P99,
+        vars: { pa5: 4.05, pb5: 2.15, Va: 0.0021, d1: 0.0009, d2: 0.0011 }
+      }
+    - {
+        id: heat,
+        answer: 336.22,
+        unit: J,
+        source: P100,
+        vars: { pa5: 3.95, pb5: 1.95, Va: 0.0022, d1: 0.0007, d2: 0.0012 }
+      }

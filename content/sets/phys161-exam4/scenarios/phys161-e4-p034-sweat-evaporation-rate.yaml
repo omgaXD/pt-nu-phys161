@@ -1,0 +1,27 @@
+# P34 — evaporation removes L_v per gram, so the rate is P / L_v; with L_v in kJ/g and P in W the
+# answer is in g/s (exactUnit).
+id: phys161-e4-p034-sweat-evaporation-rate
+title: Evaporation rate to shed body heat
+source: { document: PHYS161_Exam4, labels: [ P34 ] }
+section: Temperature and heat
+tags: [ heat, latent-heat, power ]
+narrative: ""
+vars:
+  - { name: P, kind: range, min: 80, max: 150, step: 1, unit: W, label: heat production }
+derived:
+  - { name: Lv, expr: "2.430", unit: kJ/g }
+parts:
+  - id: evaporation-rate
+    prompt: >-
+      A person produces heat at the rate of about {P:unit} when at rest. At what rate must water
+      evaporate from the body to get rid of all this energy? Ignore heat transfer by other methods.
+      Latent heat of vaporization for water is 2.430 kJ/g. Answer in g/s. {_0}{_u}
+    answer: P / (Lv * 1000)
+    unit: g/s
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { P: 117, Lv: 2.43 }
+  parts:
+    - { id: evaporation-rate, answer: 0.048148, unit: g/s, source: P34 }

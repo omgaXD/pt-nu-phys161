@@ -1,60 +1,78 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P81
 number: 81
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: >-
-  A 8 kg piece of lead at a temperature of 320 ˚C is placed in a lake whose temperature is 14°C.
-  Determine the entropy change of the lake.
-
-  Specific heat of the lead is c<sub>lead</sub> = 128 J/(kg K). (1091.79 J/K)
-text: A 8 kg piece of lead at a temperature of 320 °C is placed in a lake whose temperature is 14°C.
-  Determine the entropy change of the lake. Specific heat of the lead is c_lead = 128 J/(kg K).
-  (1091.79 J/K)
-answer: { value: 1091.79, unit: J/K, raw: 1091.79 J/K }
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: An ideal monatomic gas expands reversibly from 1 m<sup>3</sup> to 2.7 m<sup>3</sup> at a
+  constant pressure of 1.82 atm and initial temperature of 278 K. The standard atmosphere pressure
+  is 1 atm = 101325 Pa. Gas constant is R = 8.31 J/(mol K). Find the number of moles of gas.
+  (79.82559800535 mol)
+text: An ideal monatomic gas expands reversibly from 1 m^3 to 2.7 m^3 at a constant pressure of 1.82
+  atm and initial temperature of 278 K. The standard atmosphere pressure is 1 atm = 101325 Pa. Gas
+  constant is R = 8.31 J/(mol K). Find the number of moles of gas. (79.82559800535 mol)
+answer: { value: 79.82559800535, unit: mol, raw: 79.82559800535 mol }
 figures: []
 literals:
-  - name: m
-    value: 8
-    unit: kg
-    text: "8"
-    suggest: { min: 6, max: 10, step: 1 }
+  - name: V
+    value: 1
+    unit: m^3
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: V2
+    value: 2.7
+    unit: m^3
+    text: "2.7"
+    suggest: { min: 1.9, max: 3.5, step: 0.1, decimals: 1 }
+  - name: p
+    value: 1.82
+    unit: atm
+    text: "1.82"
+    suggest: { min: 1.27, max: 2.37, step: 0.01, decimals: 2 }
   - name: T
-    value: 320
-    unit: °C
-    text: "320"
-    suggest: { min: 224, max: 416, step: 1 }
-  - name: T2
-    value: 14
-    unit: °C
-    text: "14"
-    suggest: { min: 10, max: 18, step: 1 }
-  - name: clead
-    value: 128
-    unit: J/(kg K)
-    text: "128"
-    suggest: { min: 90, max: 166, step: 1 }
+    value: 278
+    unit: K
+    text: "278"
+    suggest: { min: 195, max: 361, step: 1 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam4-p081
   source: { document: PHYS161_Exam4, labels: [ P81 ] }
-  section: 2nd Law of Thermodynamics
+  section: 1st Law of Thermodynamics
   narrative: >-
-    A {m:unit} piece of lead at a temperature of {T:unit} is placed in a lake whose temperature is
-    {T2:unit}. Specific heat of the lead is $c_{lead}$ = {clead:unit}.
+    An ideal monatomic gas expands reversibly from {V:unit} to {V2:unit} at a constant pressure of
+    {p:unit} and initial temperature of {T:unit}. The standard atmosphere pressure is {p2:unit} =
+    {atm:unit}. Gas constant is R = {R:unit}.
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: clead, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
   parts:
     - id: answer
-      prompt: Determine the entropy change of the lake. {_0}{_u}
+      prompt: Find the number of moles of gas. {_0}{_u}
       answer: TODO
-      unit: J/K
+      unit: mol
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 8, T: 320, T2: 14, clead: 128 }
+    vars: { V: 1, V2: 2.7, p: 1.82, T: 278, p2: 1, atm: 101325, R: 8.31 }
     parts:
-      - { id: answer, answer: 1091.79, unit: J/K, source: P81 }
+      - { id: answer, answer: 79.82559800535, unit: mol, source: P81 }

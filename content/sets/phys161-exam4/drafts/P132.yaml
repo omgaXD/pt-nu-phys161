@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P132
+number: 132
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: An ideal engine extracts 9200 J of heat from its hot reservoir while operating between 235 K
+  and 570 K. How much heat does it reject to the cold reservoir? (3792.98 J)
+text: An ideal engine extracts 9200 J of heat from its hot reservoir while operating between 235 K
+  and 570 K. How much heat does it reject to the cold reservoir? (3792.98 J)
+answer: { value: 3792.98, unit: J, raw: 3792.98 J }
+figures: []
+literals:
+  - name: E
+    value: 9200
+    unit: J
+    text: "9200"
+    suggest: { min: 6440, max: 11960, step: 1 }
+  - name: T
+    value: 235
+    unit: K
+    text: "235"
+    suggest: { min: 165, max: 306, step: 1 }
+  - name: T2
+    value: 570
+    unit: K
+    text: "570"
+    suggest: { min: 399, max: 741, step: 1 }
+scenario:
+  id: phys161-exam4-p132
+  source: { document: PHYS161_Exam4, labels: [ P132 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    An ideal engine extracts {E:unit} of heat from its hot reservoir while operating between
+    {T:unit} and {T2:unit}.
+  vars:
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+  parts:
+    - id: answer
+      prompt: How much heat does it reject to the cold reservoir? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { E: 9200, T: 235, T2: 570 }
+    parts:
+      - { id: answer, answer: 3792.98, unit: J, source: P132 }

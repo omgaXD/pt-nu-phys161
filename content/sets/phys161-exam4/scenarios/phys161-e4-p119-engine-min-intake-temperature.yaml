@@ -1,0 +1,25 @@
+# P119 — no engine beats Carnot, e ≤ 1 − T_c / T_h, so T_h ≥ T_c / (1 − e). The temperature uses
+# the source's 273 offset.
+id: phys161-e4-p119-engine-min-intake-temperature
+title: Minimum intake temperature of a heat engine
+source: { document: PHYS161_Exam4, labels: [ P119 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, carnot, efficiency ]
+narrative: ""
+vars:
+  - { name: Tc, kind: range, min: 10, max: 60, step: 1, unit: °C, label: exhaust temperature }
+  - { name: eff, kind: range, min: 30, max: 70, step: 1, unit: "%", label: maximum efficiency }
+parts:
+  - id: intake-temperature
+    prompt: >-
+      The maximum possible efficiency of a heat engine which exhausts its heat at a temperature of
+      {Tc:unit} is {eff} percent. What is the minimum value of the temperature at which the engine
+      takes in heat? {_0}{_u}
+    answer: (Tc + 273) / (1 - eff / 100)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { Tc: 31, eff: 57 }
+  parts:
+    - { id: intake-temperature, answer: 706.977, unit: K, source: P119 }

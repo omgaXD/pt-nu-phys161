@@ -1,0 +1,31 @@
+# P30 — the hanging weight keeps the tension fixed, and f = (1 / 2L) sqrt(T / μ) with μ = m / L
+# gives f ∝ L^(−1/2). Heating lengthens the wire by α ΔT, so to first order the frequency drops by
+# |Δf| = f α ΔT / 2 (the source's linear approximation). The weight does not enter the answer.
+id: phys161-e4-p030-wire-frequency-heating
+title: Frequency change of a heated wire
+source: { document: PHYS161_Exam4, labels: [ P30 ] }
+section: Temperature and heat
+tags: [ thermal-expansion, standing-waves, frequency ]
+narrative: >-
+  A {M} kg weight is hanging from the ceiling by a thin copper wire. In its fundamental mode, this
+  wire vibrates at the frequency {f:unit}. Coefficient of linear expansion of copper is $1.7 \times
+  10^{-5}\ 1/°\text{C}$.
+vars:
+  - { name: M, kind: range, min: 50, max: 150, step: 5, unit: kg, label: hanging mass }
+  - { name: f, kind: range, min: 200, max: 600, step: 1, unit: Hz, label: fundamental frequency }
+  - { name: dT, kind: range, min: 10, max: 50, step: 1, unit: °C, label: temperature rise }
+derived:
+  - { name: alpha, expr: "1.7e-5", unit: 1/K }
+parts:
+  - id: frequency-change
+    prompt: >-
+      You then increase the temperature of the wire by {dT:unit}. Find the magnitude of the change
+      of fundamental frequency. {_0}{_u}
+    answer: f * alpha * dT / 2
+    unit: Hz
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { M: 100, f: 429, dT: 29, alpha: 1.7e-5 }
+  parts:
+    - { id: frequency-change, answer: 0.1057485, unit: Hz, source: P30 }

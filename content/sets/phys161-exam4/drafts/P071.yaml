@@ -1,47 +1,60 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P71
 number: 71
-section: 1st Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A monatomic ideal gas expands slowly to twice its original volume, doing 200 J of work in the
-  process. Find the change in internal energy of the gas if the process is isobaric. The universal
-  gas constant is R = 8.31 J/(mol K). (300 J)
-text: A monatomic ideal gas expands slowly to twice its original volume, doing 200 J of work in the
-  process. Find the change in internal energy of the gas if the process is isobaric. The universal
-  gas constant is R = 8.31 J/(mol K). (300 J)
-answer: { value: 300, unit: J, raw: 300 J }
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A storage tank at a pressure of 105500 Pa contains 23.6 kg of diatomic nitrogen. How much
+  additional nitrogen must be added, without changing the temperature or the volume, to raise the
+  pressure to 213000 Pa? Molar mass of diatomic nitrogen is 28 g/mol. (24.0474 kg)
+text: A storage tank at a pressure of 105500 Pa contains 23.6 kg of diatomic nitrogen. How much
+  additional nitrogen must be added, without changing the temperature or the volume, to raise the
+  pressure to 213000 Pa? Molar mass of diatomic nitrogen is 28 g/mol. (24.0474 kg)
+answer: { value: 24.0474, unit: kg, raw: 24.0474 kg }
 figures: []
 literals:
-  - name: E
-    value: 200
-    unit: J
-    text: "200"
-    suggest: { min: 140, max: 260, step: 1 }
-  - name: R
-    value: 8.31
-    unit: J/(mol K)
-    text: "8.31"
-    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+  - name: p
+    value: 105500
+    unit: Pa
+    text: "105500"
+    suggest: { min: 73850, max: 137150, step: 1 }
+  - name: m
+    value: 23.6
+    unit: kg
+    text: "23.6"
+    suggest: { min: 16.5, max: 30.7, step: 0.1, decimals: 1 }
+  - name: p2
+    value: 213000
+    unit: Pa
+    text: "213000"
+    suggest: { min: 149100, max: 276900, step: 1 }
+  - name: M
+    value: 28
+    unit: g/mol
+    text: "28"
+    suggest: { min: 20, max: 36, step: 1 }
 scenario:
   id: phys161-exam4-p071
   source: { document: PHYS161_Exam4, labels: [ P71 ] }
-  section: 1st Law of Thermodynamics
+  section: Kinetic Theory of Gases
   narrative: >-
-    A monatomic ideal gas expands slowly to twice its original volume, doing {E:unit} of work in the
-    process. The universal gas constant is R = {R:unit}.
+    A storage tank at a pressure of {p:unit} contains {m:unit} of diatomic nitrogen. Molar mass of
+    diatomic nitrogen is {M:unit}.
   vars:
-    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
-    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
   parts:
     - id: answer
       prompt: >-
-        Find the change in internal energy of the gas if the process is isobaric. {_0}{_u}
+        How much additional nitrogen must be added, without changing the temperature or the volume,
+        to raise the pressure to {p2:unit}? {_0}{_u}
       answer: TODO
-      unit: J
+      unit: kg
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { E: 200, R: 8.31 }
+    vars: { p: 105500, m: 23.6, p2: 213000, M: 28 }
     parts:
-      - { id: answer, answer: 300, unit: J, source: P71 }
+      - { id: answer, answer: 24.0474, unit: kg, source: P71 }

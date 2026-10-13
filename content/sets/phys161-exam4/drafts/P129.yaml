@@ -1,0 +1,50 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P129
+number: 129
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: The output of an engine with an efficiency of 17% is 192 W. It works at 13 cycles/s. How much
+  heat does it absorb from the hot reservoir in each cycle? (86.8778 J)
+text: The output of an engine with an efficiency of 17% is 192 W. It works at 13 cycles/s. How much
+  heat does it absorb from the hot reservoir in each cycle? (86.8778 J)
+answer: { value: 86.8778, unit: J, raw: 86.8778 J }
+figures: []
+literals:
+  - name: pct
+    value: 17
+    unit: "%"
+    text: "17"
+    suggest: { min: 12, max: 22, step: 1 }
+  - name: P
+    value: 192
+    unit: W
+    text: "192"
+    suggest: { min: 134, max: 250, step: 1 }
+  - name: f
+    value: 13
+    unit: Hz
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+scenario:
+  id: phys161-exam4-p129
+  source: { document: PHYS161_Exam4, labels: [ P129 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    The output of an engine with an efficiency of {pct}% is {P:unit}. It works at {f:unit}.
+  vars:
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
+    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+  parts:
+    - id: answer
+      prompt: >-
+        How much heat does it absorb from the hot reservoir in each cycle? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { pct: 17, P: 192, f: 13 }
+    parts:
+      - { id: answer, answer: 86.8778, unit: J, source: P129 }

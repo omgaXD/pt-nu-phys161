@@ -1,65 +1,56 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P6
 number: 6
 section: Temperature and heat
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: An insulated cup containing 0.35 kg of ice at 0°C is filled with 0.133 kg of water at 86°C.
-  Calculate the mass of liquid after the system reaches thermal equilibrium. Specific heat of water
-  is 4186 J/ (kg K). Latent heat of fusion for water is 334 kJ/kg. (0.2763517005988 kg)
-text: An insulated cup containing 0.35 kg of ice at 0°C is filled with 0.133 kg of water at 86°C.
-  Calculate the mass of liquid after the system reaches thermal equilibrium. Specific heat of water
-  is 4186 J/ (kg K). Latent heat of fusion for water is 334 kJ/kg. (0.2763517005988 kg)
-answer: { value: 0.2763517005988, unit: kg, raw: 0.2763517005988 kg }
-figures: []
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Figure shows how a bar with a crack at its center buckles upward as a result of a temperature
+  rise of 30.5°C. If the fixed distance L = 18.3 m and the coefficient of linear expansion is
+  3.4×10<sup>−4</sup> 1/K, find the distance x to which the center rises. (1.32114 m)
+text: Figure shows how a bar with a crack at its center buckles upward as a result of a temperature
+  rise of 30.5°C. If the fixed distance L = 18.3 m and the coefficient of linear expansion is
+  3.4×10^-4 1/K, find the distance x to which the center rises. (1.32114 m)
+answer: { value: 1.32114, unit: m, raw: 1.32114 m }
+figures:
+  - { src: figures/unnamed_002_p-J8.png, original: PHYS161_Exam4_new.docx_files/unnamed_002_p-J8.png }
 literals:
-  - name: m
-    value: 0.35
-    unit: kg
-    text: "0.35"
-    suggest: { min: 0.24, max: 0.45, step: 0.01, decimals: 2 }
-  - name: m2
-    value: 0.133
-    unit: kg
-    text: "0.133"
-    suggest: { min: 0.093, max: 0.173, step: 0.001, decimals: 3 }
   - name: T
-    value: 86
+    value: 30.5
     unit: °C
-    text: "86"
-    suggest: { min: 60, max: 112, step: 1 }
-  - name: c
-    value: 4186
-    unit: J/(kg K)
-    text: "4186"
-    suggest: { min: 2930, max: 5442, step: 1 }
-  - name: Lh
-    value: 334
-    unit: kJ/kg
-    text: "334"
-    suggest: { min: 234, max: 434, step: 1 }
+    text: "30.5"
+    suggest: { min: 21.3, max: 39.6, step: 0.1, decimals: 1 }
+  - name: L
+    value: 18.3
+    unit: m
+    text: "18.3"
+    suggest: { min: 12.8, max: 23.8, step: 0.1, decimals: 1 }
+  - name: alpha
+    value: 0.00034
+    unit: 1/K
+    text: 3.4×10^-4
+    suggest: { min: 0.00024, max: 0.00044, step: 0.00001, decimals: 5 }
 scenario:
   id: phys161-exam4-p006
   source: { document: PHYS161_Exam4, labels: [ P6 ] }
   section: Temperature and heat
+  figure: { id: fig, src: figures/unnamed_002_p-J8.png, alt: "TODO: describe the figure" }
   narrative: >-
-    An insulated cup containing {m:unit} of ice at 0°C is filled with {m2:unit} of water at
-    {T:unit}. Specific heat of water is {c:unit}. Latent heat of fusion for water is {Lh:unit}.
+    Figure shows how a bar with a crack at its center buckles upward as a result of a temperature
+    rise of {T:unit}. {@fig}
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
     - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
-    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/K }
   parts:
     - id: answer
       prompt: >-
-        Calculate the mass of liquid after the system reaches thermal equilibrium. {_0}{_u}
+        If the fixed distance L = {L:unit} and the coefficient of linear expansion is {alpha:unit},
+        find the distance x to which the center rises. {_0}{_u}
       answer: TODO
-      unit: kg
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 0.35, m2: 0.133, T: 86, c: 4186, Lh: 334 }
+    vars: { T: 30.5, L: 18.3, alpha: 0.00034 }
     parts:
-      - { id: answer, answer: 0.2763517005988, unit: kg, source: P6 }
+      - { id: answer, answer: 1.32114, unit: m, source: P6 }

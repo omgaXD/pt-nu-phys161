@@ -1,65 +1,45 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P53
 number: 53
-section: 1st Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: Let 37.3 J of heat be added to a particular real gas. As a result, its volume changes from 57.2
-  to 112 cm<sup>3</sup> while the pressure remains constant at 1.0 atm. By how much did the internal
-  energy of the gas change? The standard atmosphere pressure is 101325 Pa. (31.74739 J)
-text: Let 37.3 J of heat be added to a particular real gas. As a result, its volume changes from
-  57.2 to 112 cm^3 while the pressure remains constant at 1.0 atm. By how much did the internal
-  energy of the gas change? The standard atmosphere pressure is 101325 Pa. (31.74739 J)
-answer: { value: 31.74739, unit: J, raw: 31.74739 J }
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Find the temperature of the ideal gas with the average translational kinetic energy of a
+  molecule 7.6×10<sup>−21</sup> J. Boltzmann constant k<sub>B</sub> = 1.38×10<sup>-23</sup> J/K.
+  (367.14975845411 K)
+text: Find the temperature of the ideal gas with the average translational kinetic energy of a
+  molecule 7.6×10^-21 J. Boltzmann constant k_B = 1.38×10^-23 J/K. (367.14975845411 K)
+answer: { value: 367.14975845411, unit: K, raw: 367.14975845411 K }
 figures: []
 literals:
   - name: E
-    value: 37.3
+    value: 7.6e-21
     unit: J
-    text: "37.3"
-    suggest: { min: 26.1, max: 48.5, step: 0.1, decimals: 1 }
-  - name: x
-    value: 57.2
-    text: "57.2"
-    suggest: { min: 40, max: 74.4, step: 0.1, decimals: 1 }
-  - name: V
-    value: 112
-    unit: cm^3
-    text: "112"
-    suggest: { min: 78, max: 146, step: 1 }
-  - name: p
-    value: 1
-    unit: atm
-    text: "1.0"
-    suggest: { min: 0.7, max: 1.3, step: 0.1, decimals: 1 }
-  - name: p2
-    value: 101325
-    unit: Pa
-    text: "101325"
-    suggest: { min: 70928, max: 131723, step: 1 }
+    text: 7.6×10^-21
+    suggest: { min: 5.3e-21, max: 9.9e-21, step: 1e-22 }
+  - name: kB
+    value: 1.38e-23
+    unit: J/K
+    text: 1.38×10^-23
+    suggest: { min: 1e-23, max: 1.8e-23, step: 1e-24 }
 scenario:
   id: phys161-exam4-p053
   source: { document: PHYS161_Exam4, labels: [ P53 ] }
-  section: 1st Law of Thermodynamics
-  narrative: >-
-    Let {E:unit} of heat be added to a particular real gas. As a result, its volume changes from {x}
-    to {V:unit} while the pressure remains constant at {p:unit}. The standard atmosphere pressure is
-    {p2:unit}.
+  section: Kinetic Theory of Gases
+  narrative: Boltzmann constant $k_{B}$ = {kB:unit}.
   vars:
     - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
-    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
-    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
-    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: kB, kind: range, min: TODO, max: TODO, step: TODO, unit: J/K }
   parts:
     - id: answer
       prompt: >-
-        By how much did the internal energy of the gas change? {_0}{_u}
+        Find the temperature of the ideal gas with the average translational kinetic energy of a
+        molecule {E:unit}. {_0}{_u}
       answer: TODO
-      unit: J
+      unit: K
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { E: 37.3, x: 57.2, V: 112, p: 1, p2: 101325 }
+    vars: { E: 7.6e-21, kB: 1.38e-23 }
     parts:
-      - { id: answer, answer: 31.74739, unit: J, source: P53 }
+      - { id: answer, answer: 367.14975845411, unit: K, source: P53 }

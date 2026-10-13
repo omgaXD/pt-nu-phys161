@@ -1,0 +1,31 @@
+# P45 — the average translational kinetic energy is (3/2) k_B T with T = P V / (n R); the source
+# evaluates it as (3/2) P V / (n N_A), which is the same thing with k_B = R / N_A. The volume is in
+# liters.
+id: phys161-e4-p045-balloon-molecule-energy
+title: Kinetic energy of a molecule in a balloon
+source: { document: PHYS161_Exam4, labels: [ P45 ] }
+section: Kinetic Theory of Gases
+tags: [ kinetic-theory, kinetic-energy, ideal-gas ]
+narrative: >-
+  A spherical {V}-liters balloon contains {n}-mol of oxygen gas at a pressure of {P:unit}. The
+  universal gas constant is $R = {R:unit}$. Boltzmann constant $k_B = 1.38\times10^{-23}$ J/K.
+  Avogadro's number $N_A = 6.022\times10^{23}$ 1/mol.
+vars:
+  - { name: V, kind: range, min: 10, max: 30, step: 0.1, unit: L, label: balloon volume }
+  - { name: n, kind: range, min: 5, max: 25, step: 1, unit: mol, label: amount of gas }
+  - { name: P, kind: range, min: 150000, max: 300000, step: 1000, unit: Pa, label: pressure }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+  - { name: NA, expr: "6.022e23", unit: 1/mol }
+parts:
+  - id: kinetic-energy
+    prompt: >-
+      Find the average translational kinetic energy of an oxygen molecule in the balloon. {_0}{_u}
+    answer: 3 * P * V / 1000 / (2 * n * NA)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { V: 19.3, n: 16, P: 202000, R: 8.31, NA: 6.022e+23 }
+  parts:
+    - { id: kinetic-energy, answer: 6.0693083693125e-22, unit: J, source: P45 }

@@ -1,58 +1,86 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P91
 number: 91
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A student immerses one end of a copper rod in boiling water at 100°C and the other end in an
-  ice-water mixture at 0°C. The sides of the rod are insulated. After steady-state conditions have
-  been achieved in the rod, 0.16 kg of ice melts in a certain time interval. For this time interval,
-  find the entropy change of the ice-water mixture. Heat of fusion of water is 334 kJ/kg.
-  (195.75091575092 J/K)
-text: A student immerses one end of a copper rod in boiling water at 100°C and the other end in an
-  ice-water mixture at 0°C. The sides of the rod are insulated. After steady-state conditions have
-  been achieved in the rod, 0.16 kg of ice melts in a certain time interval. For this time interval,
-  find the entropy change of the ice-water mixture. Heat of fusion of water is 334 kJ/kg.
-  (195.75091575092 J/K)
-answer: { value: 195.75091575092, unit: J/K, raw: 195.75091575092 J/K }
-figures: []
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: PV diagram is shown below. Calculate the work done by the gas in the quasi-static process
+  represented by the ABDA cycle path, that is the ADBA cycle traversed in the opposite direction. p1
+  = 2 atm, p2 = 5 atm, V1 = 1 L, V2 = 5 L. 1 atm = 101325 Pa. 1 L = 0.001 m³. (-607.95 J)
+text: PV diagram is shown below. Calculate the work done by the gas in the quasi-static process
+  represented by the ABDA cycle path, that is the ADBA cycle traversed in the opposite direction. p1
+  = 2 atm, p2 = 5 atm, V1 = 1 L, V2 = 5 L. 1 atm = 101325 Pa. 1 L = 0.001 m^3. (-607.95 J)
+answer: { value: -607.95, unit: J, raw: -607.95 J }
+figures:
+  - { src: figures/unnamed_003_p-J8.png, original: PHYS161_Exam4_new.docx_files/unnamed_003_p-J8.png }
 literals:
-  - name: T
-    value: 100
-    unit: °C
-    text: "100"
-    suggest: { min: 70, max: 130, step: 1 }
-  - name: m
-    value: 0.16
-    unit: kg
-    text: "0.16"
-    suggest: { min: 0.11, max: 0.21, step: 0.01, decimals: 2 }
-  - name: Lh
-    value: 334
-    unit: kJ/kg
-    text: "334"
-    suggest: { min: 234, max: 434, step: 1 }
+  - name: p1
+    value: 2
+    unit: atm
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: p2
+    value: 5
+    unit: atm
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: V1
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: V2
+    value: 5
+    unit: L
+    text: "5"
+    suggest: { min: 4, max: 7, step: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
 scenario:
   id: phys161-exam4-p091
   source: { document: PHYS161_Exam4, labels: [ P91 ] }
-  section: 2nd Law of Thermodynamics
-  narrative: >-
-    A student immerses one end of a copper rod in boiling water at {T:unit} and the other end in an
-    ice-water mixture at 0°C. The sides of the rod are insulated. After steady-state conditions have
-    been achieved in the rod, {m:unit} of ice melts in a certain time interval. For this time
-    interval, find the entropy change of the ice-water mixture.
+  section: 1st Law of Thermodynamics
+  figure: { id: fig, src: figures/unnamed_003_p-J8.png, alt: "TODO: describe the figure" }
+  narrative: PV diagram is shown below. {@fig}
   vars:
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+    - { name: p1, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: V1, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
   parts:
     - id: answer
-      prompt: Heat of fusion of water is {Lh:unit}. {_0}{_u}
+      prompt: >-
+        Calculate the work done by the gas in the quasi-static process represented by the ABDA cycle
+        path, that is the ADBA cycle traversed in the opposite direction. p1 = {p1:unit}, p2 =
+        {p2:unit}, V1 = {V1:unit}, V2 = {V2:unit}. {p:unit} = {atm:unit}. {V:unit} = {L:unit}.
+        {_0}{_u}
       answer: TODO
-      unit: J/K
+      unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { T: 100, m: 0.16, Lh: 334 }
+    vars: { p1: 2, p2: 5, V1: 1, V2: 5, p: 1, atm: 101325, V: 1, L: 0.001 }
     parts:
-      - { id: answer, answer: 195.75091575092, unit: J/K, source: P91 }
+      - { id: answer, answer: -607.95, unit: J, source: P91 }

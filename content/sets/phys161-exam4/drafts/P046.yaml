@@ -1,68 +1,70 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P46
 number: 46
 section: Kinetic Theory of Gases
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: If the root-mean-square speed of oxygen molecules inside a refrigerator of volume 617 L is 445
-  m/s, what is the partial pressure of the oxygen? There are 5.57 moles of oxygen in the
-  refrigerator, and the molar mass of oxygen is 32 g/mol. The universal gas constant is R = 8.31
-  J/(mol K). (19068.598595354 Pa)
-text: If the root-mean-square speed of oxygen molecules inside a refrigerator of volume 617 L is 445
-  m/s, what is the partial pressure of the oxygen? There are 5.57 moles of oxygen in the
-  refrigerator, and the molar mass of oxygen is 32 g/mol. The universal gas constant is R = 8.31
-  J/(mol K). (19068.598595354 Pa)
-answer: { value: 19068.598595354, unit: Pa, raw: 19068.598595354 Pa }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A spherical 24.2-liter balloon contains 13.5 mol of oxygen gas at a pressure of 207000 Pa. Find
+  the temperature of the gas in the balloon. The universal gas constant is R = 8.31 J/(mol K). 1 L =
+  0.001 m³. (44.653 K)
+text: A spherical 24.2-liter balloon contains 13.5 mol of oxygen gas at a pressure of 207000 Pa.
+  Find the temperature of the gas in the balloon. The universal gas constant is R = 8.31 J/(mol K).
+  1 L = 0.001 m^3. (44.653 K)
+answer: { value: 44.653, unit: K, raw: 44.653 K }
 figures: []
 literals:
   - name: V
-    value: 617
+    value: 24.2
     unit: L
-    text: "617"
-    suggest: { min: 432, max: 802, step: 1 }
-  - name: v
-    value: 445
-    unit: m/s
-    text: "445"
-    suggest: { min: 312, max: 579, step: 1 }
+    text: "24.2"
+    suggest: { min: 16.9, max: 31.5, step: 0.1, decimals: 1 }
   - name: n
-    value: 5.57
+    value: 13.5
     unit: mol
-    text: "5.57"
-    suggest: { min: 3.9, max: 7.24, step: 0.01, decimals: 2 }
-  - name: M
-    value: 32
-    unit: g/mol
-    text: "32"
-    suggest: { min: 22, max: 42, step: 1 }
+    text: "13.5"
+    suggest: { min: 9.4, max: 17.6, step: 0.1, decimals: 1 }
+  - name: p
+    value: 207000
+    unit: Pa
+    text: "207000"
+    suggest: { min: 144900, max: 269100, step: 1 }
   - name: R
     value: 8.31
     unit: J/(mol K)
     text: "8.31"
     suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
 scenario:
   id: phys161-exam4-p046
   source: { document: PHYS161_Exam4, labels: [ P46 ] }
   section: Kinetic Theory of Gases
   narrative: >-
-    There are {n:unit} of oxygen in the refrigerator, and the molar mass of oxygen is {M:unit}. The
-    universal gas constant is R = {R:unit}.
+    A spherical {V}-liter balloon contains {n:unit} of oxygen gas at a pressure of {p:unit}. The
+    universal gas constant is R = {R:unit}. {V2:unit} = {L:unit}.
   vars:
     - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
-    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
     - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
-    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
     - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
   parts:
     - id: answer
-      prompt: >-
-        If the root-mean-square speed of oxygen molecules inside a refrigerator of volume {V:unit}
-        is {v:unit}, what is the partial pressure of the oxygen? {_0}{_u}
+      prompt: Find the temperature of the gas in the balloon. {_0}{_u}
       answer: TODO
-      unit: Pa
+      unit: K
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { V: 617, v: 445, n: 5.57, M: 32, R: 8.31 }
+    vars: { V: 24.2, n: 13.5, p: 207000, R: 8.31, V2: 1, L: 0.001 }
     parts:
-      - { id: answer, answer: 19068.598595354, unit: Pa, source: P46 }
+      - { id: answer, answer: 44.653, unit: K, source: P46 }

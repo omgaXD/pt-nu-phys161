@@ -1,0 +1,65 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P142
+number: 142
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A system consisting of 28 mol of a monatomic ideal gas is cooled at constant pressure from a
+  volume of 44 L to 9 L. The initial temperature was 302 K. What is the final temperature of the
+  gas? The universal gas constant is R = 8.31 J/(mol K). (61.7727 K)
+text: A system consisting of 28 mol of a monatomic ideal gas is cooled at constant pressure from a
+  volume of 44 L to 9 L. The initial temperature was 302 K. What is the final temperature of the
+  gas? The universal gas constant is R = 8.31 J/(mol K). (61.7727 K)
+answer: { value: 61.7727, unit: K, raw: 61.7727 K }
+figures: []
+literals:
+  - name: n
+    value: 28
+    unit: mol
+    text: "28"
+    suggest: { min: 20, max: 36, step: 1 }
+  - name: V
+    value: 44
+    unit: L
+    text: "44"
+    suggest: { min: 31, max: 57, step: 1 }
+  - name: V2
+    value: 9
+    unit: L
+    text: "9"
+    suggest: { min: 6, max: 12, step: 1 }
+  - name: T
+    value: 302
+    unit: K
+    text: "302"
+    suggest: { min: 211, max: 393, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p142
+  source: { document: PHYS161_Exam4, labels: [ P142 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A system consisting of {n:unit} of a monatomic ideal gas is cooled at constant pressure from a
+    volume of {V:unit} to {V2:unit}. The initial temperature was {T:unit}. The universal gas
+    constant is R = {R:unit}.
+  vars:
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: What is the final temperature of the gas? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { n: 28, V: 44, V2: 9, T: 302, R: 8.31 }
+    parts:
+      - { id: answer, answer: 61.7727, unit: K, source: P142 }

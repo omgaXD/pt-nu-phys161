@@ -1,0 +1,47 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P122
+number: 122
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A block of ice at 0° is placed in a large lake whose temperature is just slightly above 0°, and
+  the ice melts completely. The entropy change of the ice is 302 J/K. What was the mass of the
+  block? Latent heat of fusion for water is 334 kJ/kg. (246.844 g)
+text: A block of ice at 0° is placed in a large lake whose temperature is just slightly above 0°,
+  and the ice melts completely. The entropy change of the ice is 302 J/K. What was the mass of the
+  block? Latent heat of fusion for water is 334 kJ/kg. (246.844 g)
+answer: { value: 246.844, unit: g, raw: 246.844 g }
+figures: []
+literals:
+  - name: S
+    value: 302
+    unit: J/K
+    text: "302"
+    suggest: { min: 211, max: 393, step: 1 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
+scenario:
+  id: phys161-exam4-p122
+  source: { document: PHYS161_Exam4, labels: [ P122 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A block of ice at 0° is placed in a large lake whose temperature is just slightly above 0°, and
+    the ice melts completely. The entropy change of the ice is {S:unit}. Latent heat of fusion for
+    water is {Lh:unit}.
+  vars:
+    - { name: S, kind: range, min: TODO, max: TODO, step: TODO, unit: J/K }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: What was the mass of the block? {_0}{_u}
+      answer: TODO
+      unit: g
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { S: 302, Lh: 334 }
+    parts:
+      - { id: answer, answer: 246.844, unit: g, source: P122 }

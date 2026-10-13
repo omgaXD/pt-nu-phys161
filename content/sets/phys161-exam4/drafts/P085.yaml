@@ -1,49 +1,63 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P85
 number: 85
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: An output of an engine with efficiency of 15% is 243 W. It works at 13 cycles/s. How much work
-  is done in each cycle? (18.692307692308 J)
-text: An output of an engine with efficiency of 15% is 243 W. It works at 13 cycles/s. How much work
-  is done in each cycle? (18.692307692308 J)
-answer: { value: 18.692307692308, unit: J, raw: 18.692307692308 J }
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: An ideal monatomic gas expands reversibly from 2.3 m³ to 3.4 m³ at constant pressure, doing 120
+  kJ of work. What is the pressure of the gas? 1 atm = 101325 Pa. (109091 Pa)
+text: An ideal monatomic gas expands reversibly from 2.3 m^3 to 3.4 m^3 at constant pressure, doing
+  120 kJ of work. What is the pressure of the gas? 1 atm = 101325 Pa. (109091 Pa)
+answer: { value: 109091, unit: Pa, raw: 109091 Pa }
 figures: []
 literals:
-  - name: pct
-    value: 15
-    unit: "%"
-    text: "15"
-    suggest: { min: 11, max: 20, step: 1 }
-  - name: P
-    value: 243
-    unit: W
-    text: "243"
-    suggest: { min: 170, max: 316, step: 1 }
-  - name: f
-    value: 13
-    unit: Hz
-    text: "13"
-    suggest: { min: 9, max: 17, step: 1 }
+  - name: V
+    value: 2.3
+    unit: m^3
+    text: "2.3"
+    suggest: { min: 1.6, max: 3, step: 0.1, decimals: 1 }
+  - name: V2
+    value: 3.4
+    unit: m^3
+    text: "3.4"
+    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+  - name: E
+    value: 120
+    unit: kJ
+    text: "120"
+    suggest: { min: 84, max: 156, step: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
 scenario:
   id: phys161-exam4-p085
   source: { document: PHYS161_Exam4, labels: [ P85 ] }
-  section: 2nd Law of Thermodynamics
+  section: 1st Law of Thermodynamics
   narrative: >-
-    An output of an engine with efficiency of {pct}% is {P:unit}. It works at {f:unit}.
+    An ideal monatomic gas expands reversibly from {V:unit} to {V2:unit} at constant pressure, doing
+    {E:unit} of work.
   vars:
-    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
-    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
   parts:
     - id: answer
-      prompt: How much work is done in each cycle? {_0}{_u}
+      prompt: >-
+        What is the pressure of the gas? {p:unit} = {atm:unit}. {_0}{_u}
       answer: TODO
-      unit: J
+      unit: Pa
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { pct: 15, P: 243, f: 13 }
+    vars: { V: 2.3, V2: 3.4, E: 120, p: 1, atm: 101325 }
     parts:
-      - { id: answer, answer: 18.692307692308, unit: J, source: P85 }
+      - { id: answer, answer: 109091, unit: Pa, source: P85 }

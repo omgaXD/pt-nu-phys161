@@ -1,0 +1,53 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P111
+number: 111
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: 5.8 moles of an ideal monatomic gas expand adiabatically, performing 10500 J of work in the
+  process. What is the magnitude of the change in internal energy per mole of the gas? The universal
+  gas constant is R = 8.31 J/(mol K). (1810.34 J/mol)
+text: 5.8 moles of an ideal monatomic gas expand adiabatically, performing 10500 J of work in the
+  process. What is the magnitude of the change in internal energy per mole of the gas? The universal
+  gas constant is R = 8.31 J/(mol K). (1810.34 J/mol)
+answer: { value: 1810.34, unit: J/mol, raw: 1810.34 J/mol }
+figures: []
+literals:
+  - name: n
+    value: 5.8
+    unit: mol
+    text: "5.8"
+    suggest: { min: 4.1, max: 7.5, step: 0.1, decimals: 1 }
+  - name: E
+    value: 10500
+    unit: J
+    text: "10500"
+    suggest: { min: 7350, max: 13650, step: 1 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p111
+  source: { document: PHYS161_Exam4, labels: [ P111 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    {n:unit} of an ideal monatomic gas expand adiabatically, performing {E:unit} of work in the
+    process. The universal gas constant is R = {R:unit}.
+  vars:
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the magnitude of the change in internal energy per mole of the gas? {_0}{_u}
+      answer: TODO
+      unit: J/mol
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { n: 5.8, E: 10500, R: 8.31 }
+    parts:
+      - { id: answer, answer: 1810.34, unit: J/mol, source: P111 }

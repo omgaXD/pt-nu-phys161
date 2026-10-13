@@ -1,63 +1,54 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P5
 number: 5
 section: Temperature and heat
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A railroad rail made of steel is 1028 m long and it is fastened securely at both ends when the
-  temperature is 16°C. As the temperature increases, the rail begins to buckle upwards, taking the
-  shape of an isosceles triangle. How high is this buckle when the temperature is 34°C? Assume that
-  the coefficient of linear expansion for steel is 11.9×10<sup>−6</sup> 1/K. (10.638682550015 m)
-text: A railroad rail made of steel is 1028 m long and it is fastened securely at both ends when the
-  temperature is 16°C. As the temperature increases, the rail begins to buckle upwards, taking the
-  shape of an isosceles triangle. How high is this buckle when the temperature is 34°C? Assume that
-  the coefficient of linear expansion for steel is 11.9×10^-6 1/K. (10.638682550015 m)
-answer: { value: 10.638682550015, unit: m, raw: 10.638682550015 m }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A bridge is built from steel as a single, continuous structure 156 m long. Its length is
+  observed to increase by 11.1 cm. Taking the coefficient of thermal expansion of steel equal to
+  11.7×10⁻⁶ 1/K, calculate the temperature change that produced this. (60.8153 K)
+text: A bridge is built from steel as a single, continuous structure 156 m long. Its length is
+  observed to increase by 11.1 cm. Taking the coefficient of thermal expansion of steel equal to
+  11.7×10^-6 1/K, calculate the temperature change that produced this. (60.8153 K)
+answer: { value: 60.8153, unit: K, raw: 60.8153 K }
 figures: []
 literals:
   - name: d
-    value: 1028
+    value: 156
     unit: m
-    text: "1028"
-    suggest: { min: 720, max: 1336, step: 1 }
-  - name: T
-    value: 16
-    unit: °C
-    text: "16"
-    suggest: { min: 11, max: 21, step: 1 }
-  - name: T2
-    value: 34
-    unit: °C
-    text: "34"
-    suggest: { min: 24, max: 44, step: 1 }
+    text: "156"
+    suggest: { min: 109, max: 203, step: 1 }
+  - name: d2
+    value: 11.1
+    unit: cm
+    text: "11.1"
+    suggest: { min: 7.8, max: 14.4, step: 0.1, decimals: 1 }
   - name: alpha
-    value: 0.0000119
+    value: 0.0000117
     unit: 1/K
-    text: 11.9×10^-6
-    suggest: { min: 0.0000083, max: 0.0000155, step: 1e-7, decimals: 7 }
+    text: 11.7×10^-6
+    suggest: { min: 0.0000082, max: 0.0000152, step: 1e-7, decimals: 7 }
 scenario:
   id: phys161-exam4-p005
   source: { document: PHYS161_Exam4, labels: [ P5 ] }
   section: Temperature and heat
   narrative: >-
-    A railroad rail made of steel is {d:unit} long and it is fastened securely at both ends when the
-    temperature is {T:unit}. As the temperature increases, the rail begins to buckle upwards, taking
-    the shape of an isosceles triangle. Assume that the coefficient of linear expansion for steel is
-    {alpha:unit}.
+    A bridge is built from steel as a single, continuous structure {d:unit} long. Its length is
+    observed to increase by {d2:unit}.
   vars:
     - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
     - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/K }
   parts:
     - id: answer
       prompt: >-
-        How high is this buckle when the temperature is {T2:unit}? {_0}{_u}
+        Taking the coefficient of thermal expansion of steel equal to {alpha:unit}, calculate the
+        temperature change that produced this. {_0}{_u}
       answer: TODO
-      unit: m
+      unit: K
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { d: 1028, T: 16, T2: 34, alpha: 0.0000119 }
+    vars: { d: 156, d2: 11.1, alpha: 0.0000117 }
     parts:
-      - { id: answer, answer: 10.638682550015, unit: m, source: P5 }
+      - { id: answer, answer: 60.8153, unit: K, source: P5 }

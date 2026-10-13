@@ -1,0 +1,35 @@
+# P6 — each half of the bar (L/2) expands to (L/2)(1 + α ΔT) and the halves form an isosceles
+# triangle over the fixed span L, so the centre rises x = (L/2) sqrt((1 + α ΔT)² − 1).
+# α is printed as a multiple of 10⁻⁴ (the source's value is large on purpose).
+id: phys161-e4-p006-cracked-bar-buckle
+title: Buckling of a cracked bar
+source: { document: PHYS161_Exam4, labels: [ P6 ] }
+section: Temperature and heat
+tags: [ thermal-expansion, linear-expansion, geometry ]
+figure:
+  id: cracked-bar
+  src: figures/unnamed_002_p-J8.png
+  alt: >-
+    Top: a straight bar lies between two fixed blocks a distance L apart, with a crack at its
+    centre. Bottom: after heating, the two halves tilt up into an inverted V between the same
+    blocks, and the centre of the bar has risen a height x above the line joining the blocks.
+narrative: >-
+  Figure shows how a bar with a crack at its center buckles upward as a result of a temperature rise
+  of {dT:unit}. {@fig}
+vars:
+  - { name: dT, kind: range, min: 20, max: 40, step: 0.5, unit: °C, label: temperature rise }
+  - { name: L, kind: range, min: 10, max: 25, step: 0.1, unit: m, label: fixed distance }
+  - { name: a4, kind: range, min: 2.0, max: 5.0, step: 0.1, decimals: 1, label: α in 10⁻⁴ 1/K }
+parts:
+  - id: rise
+    prompt: >-
+      If the fixed distance $L = {L:unit}$ and the coefficient of linear expansion is $ {a4} \times
+      10^{-4}\ 1/\text{K}$, find the distance x to which the center rises. {_0}{_u}
+    answer: (L / 2) * sqrt((1 + a4 * 1e-4 * dT)^2 - 1)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { dT: 30.5, L: 18.3, a4: 3.4 }
+  parts:
+    - { id: rise, answer: 1.32114, unit: m, source: P6 }

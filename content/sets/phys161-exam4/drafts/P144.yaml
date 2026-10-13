@@ -1,0 +1,52 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P144
+number: 144
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Steam at 100° condenses to water at the same temperature, and the entropy change of the steam
+  is -1205 J/K. What mass of steam condensed? Latent heat of vaporization of water is 2254 kJ/kg.
+  (199.408 g)
+text: Steam at 100° condenses to water at the same temperature, and the entropy change of the steam
+  is -1205 J/K. What mass of steam condensed? Latent heat of vaporization of water is 2254 kJ/kg.
+  (199.408 g)
+answer: { value: 199.408, unit: g, raw: 199.408 g }
+figures: []
+literals:
+  - name: theta
+    value: 100
+    unit: °
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: S
+    value: -1205
+    unit: J/K
+    text: "-1205"
+    suggest: { min: -1566, max: -843, step: 1 }
+  - name: Lh
+    value: 2254
+    unit: kJ/kg
+    text: "2254"
+    suggest: { min: 1578, max: 2930, step: 1 }
+scenario:
+  id: phys161-exam4-p144
+  source: { document: PHYS161_Exam4, labels: [ P144 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    Steam at {theta}° condenses to water at the same temperature, and the entropy change of the
+    steam is {S:unit}. Latent heat of vaporization of water is {Lh:unit}.
+  vars:
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: S, kind: range, min: TODO, max: TODO, step: TODO, unit: J/K }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+  parts:
+    - id: answer
+      prompt: What mass of steam condensed? {_0}{_u}
+      answer: TODO
+      unit: g
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { theta: 100, S: -1205, Lh: 2254 }
+    parts:
+      - { id: answer, answer: 199.408, unit: g, source: P144 }

@@ -1,0 +1,57 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P125
+number: 125
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A 6 kg piece of lead at a temperature of 340° is placed in a lake whose temperature is 17°. How
+  much heat flows from the lead into the lake? Specific heat of the lead is 125 J/(kg K). (242250 J)
+text: A 6 kg piece of lead at a temperature of 340° is placed in a lake whose temperature is 17°.
+  How much heat flows from the lead into the lake? Specific heat of the lead is 125 J/(kg K).
+  (242250 J)
+answer: { value: 242250, unit: J, raw: 242250 J }
+figures: []
+literals:
+  - name: m
+    value: 6
+    unit: kg
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: theta
+    value: 340
+    unit: °
+    text: "340"
+    suggest: { min: 238, max: 442, step: 1 }
+  - name: theta2
+    value: 17
+    unit: °
+    text: "17"
+    suggest: { min: 12, max: 22, step: 1 }
+  - name: c
+    value: 125
+    unit: J/(kg K)
+    text: "125"
+    suggest: { min: 88, max: 163, step: 1 }
+scenario:
+  id: phys161-exam4-p125
+  source: { document: PHYS161_Exam4, labels: [ P125 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A {m:unit} piece of lead at a temperature of {theta}° is placed in a lake whose temperature is
+    {theta2}°. Specific heat of the lead is {c:unit}.
+  vars:
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: theta2, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+  parts:
+    - id: answer
+      prompt: How much heat flows from the lead into the lake? {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { m: 6, theta: 340, theta2: 17, c: 125 }
+    parts:
+      - { id: answer, answer: 242250, unit: J, source: P125 }

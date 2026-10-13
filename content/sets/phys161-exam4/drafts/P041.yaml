@@ -1,88 +1,82 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P41
 number: 41
 section: Kinetic Theory of Gases
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: >-
-  Calculate the number of molecules in the air in one breath, with a volume of 490 mL, 16°C and 1.02
-  atm. Boltzmann's constant k<sub>B</sub> = 1.38⋅10<sup>−23</sup> J/K.
-
-  1 atm = 101325 Pa
-
-  1 L = 0.001 m<sup>3</sup>
-
-  (1.2698E+22)
-text: Calculate the number of molecules in the air in one breath, with a volume of 490 mL, 16°C and
-  1.02 atm. Boltzmann's constant k_B = 1.38⋅10^-23 J/K. 1 atm = 101325 Pa 1 L = 0.001 m^3
-  (1.2698E+22)
-answer: { value: 1.2698e+22, raw: "1.2698E+22" }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: An air bubble at the bottom of a lake 29 m deep has a volume of 1.7 cm³. The temperature at the
+  bottom is 6° and at the top 16°. What is the volume of the bubble just before it reaches the
+  surface? Atmospheric pressure is 101325 Pa, the density of water is 997 kg/m³ and g = 9.8 m/s².
+  (6.68524 cm^3)
+text: An air bubble at the bottom of a lake 29 m deep has a volume of 1.7 cm^3. The temperature at
+  the bottom is 6° and at the top 16°. What is the volume of the bubble just before it reaches the
+  surface? Atmospheric pressure is 101325 Pa, the density of water is 997 kg/m^3 and g = 9.8 m/s^2.
+  (6.68524 cm^3)
+answer: { value: 6.68524, unit: cm^3, raw: 6.68524 cm^3 }
 figures: []
 literals:
+  - name: d
+    value: 29
+    unit: m
+    text: "29"
+    suggest: { min: 20, max: 38, step: 1 }
   - name: V
-    value: 490
-    unit: mL
-    text: "490"
-    suggest: { min: 343, max: 637, step: 1 }
-  - name: T
+    value: 1.7
+    unit: cm^3
+    text: "1.7"
+    suggest: { min: 1.2, max: 2.2, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 6
+    unit: °
+    text: "6"
+    suggest: { min: 4, max: 8, step: 1 }
+  - name: theta2
     value: 16
-    unit: °C
+    unit: °
     text: "16"
     suggest: { min: 11, max: 21, step: 1 }
   - name: p
-    value: 1.02
-    unit: atm
-    text: "1.02"
-    suggest: { min: 0.71, max: 1.33, step: 0.01, decimals: 2 }
-  - name: kB
-    value: 1.38e-23
-    unit: J/K
-    text: 1.38⋅10^-23
-    suggest: { min: 1e-23, max: 1.8e-23, step: 1e-24 }
-  - name: p2
-    value: 1
-    unit: atm
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: atm
     value: 101325
     unit: Pa
     text: "101325"
     suggest: { min: 70928, max: 131723, step: 1 }
-  - name: V2
-    value: 1
-    unit: L
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: L
-    value: 0.001
-    unit: m^3
-    text: "0.001"
-    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+  - name: rho
+    value: 997
+    unit: kg/m^3
+    text: "997"
+    suggest: { min: 698, max: 1296, step: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam4-p041
   source: { document: PHYS161_Exam4, labels: [ P41 ] }
   section: Kinetic Theory of Gases
   narrative: >-
-    Boltzmann's constant $k_{B}$ = {kB:unit}. {p2:unit} = {atm:unit} {V2:unit} = {L:unit}
+    An air bubble at the bottom of a lake {d:unit} deep has a volume of {V:unit}. The temperature at
+    the bottom is {theta}° and at the top {theta2}°. Atmospheric pressure is {p:unit}, the density
+    of water is {rho:unit} and g = {g:unit}.
   vars:
-    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: mL }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
-    - { name: kB, kind: range, min: TODO, max: TODO, step: TODO, unit: J/K }
-    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
-    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
-    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: theta2, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: rho, kind: range, min: TODO, max: TODO, step: TODO, unit: kg/m^3 }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        Calculate the number of molecules in the air in one breath, with a volume of {V:unit},
-        {T:unit} and {p:unit}. {_0}
+        What is the volume of the bubble just before it reaches the surface? {_0}{_u}
       answer: TODO
+      unit: cm^3
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { V: 490, T: 16, p: 1.02, kB: 1.38e-23, p2: 1, atm: 101325, V2: 1, L: 0.001 }
+    vars: { d: 29, V: 1.7, theta: 6, theta2: 16, p: 101325, rho: 997, g: 9.8 }
     parts:
-      - { id: answer, answer: 1.2698e+22, source: P41 }
+      - { id: answer, answer: 6.68524, unit: cm^3, source: P41 }

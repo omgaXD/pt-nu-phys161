@@ -1,0 +1,74 @@
+# P77/P79/P80 — heat Q added at constant pressure: the gas does W = P ΔV, so ΔU = Q − W (P80).
+# For n moles, n ΔT = P ΔV / R, so C_p = Q / (n ΔT) = Q R / (P ΔV) (P79) and
+# C_V = ΔU / (n ΔT) = (Q − P ΔV) R / (P ΔV) (P77). Volumes are in cm³ and the pressure in atm.
+# The constraint keeps W ≤ 0.4 Q, so C_V ≥ 1.5 R as for any real gas. The base canonical values
+# are P77's; P79 and P80 override them.
+id: phys161-e4-p077-real-gas-isobaric-heating
+title: Heating a real gas at constant pressure
+source: { document: PHYS161_Exam4, labels: [ P77, P79, P80 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, isobaric, molar-specific-heat, internal-energy, multi-part ]
+narrative: >-
+  Let {Q:unit} of heat be added to a particular real gas. As a result, its volume changes from {V1}
+  to {V2} cm^3 while the pressure remains constant at {P:unit}. The standard atmosphere pressure is
+  101325 Pa.
+vars:
+  - { name: Q, kind: range, min: 25.0, max: 40.0, step: 0.1, unit: J, label: heat added }
+  - { name: V1, kind: range, min: 40.0, max: 60.0, step: 0.1, unit: cm^3, label: initial volume }
+  - { name: dV, kind: range, min: 20.0, max: 60.0, step: 0.1, unit: cm^3, label: volume increase }
+  - {
+      name: P,
+      kind: range,
+      min: 0.8,
+      max: 1.5,
+      step: 0.1,
+      decimals: 1,
+      unit: atm,
+      label: pressure
+    }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+  - { name: V2, expr: "V1 + dV", unit: cm^3 }
+  - { name: W, expr: "P * 101325 * (V2 - V1) * 1e-6", unit: J }
+constraints:
+  - "W <= 0.4 * Q" # C_V ≥ 1.5 R
+parts:
+  - id: cv
+    prompt: >-
+      Find the molar specific heat at constant volume. Universal gas constant is {R:unit}. {_0}{_u}
+    answer: (Q - W) * R / W
+    unit: J/(mol K)
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: cp
+    prompt: >-
+      What is the molar specific heat at constant pressure? Universal gas constant is {R:unit}.
+      {_0}{_u}
+    answer: Q * R / W
+    unit: J/(mol K)
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: internal-energy
+    prompt: "By how much did the internal energy of the gas change? {_0}{_u}"
+    answer: Q - W
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { Q: 29.2, V1: 42.6, dV: 26.7, P: 1, R: 8.31 }
+  parts:
+    - { id: cv, answer: 81.382473601189, unit: J/(mol K), source: P77 }
+    - {
+        id: cp,
+        answer: 87.499164498489,
+        unit: J/(mol K),
+        source: P79,
+        vars: { Q: 31.9, V1: 48, dV: 29.9 }
+      }
+    - {
+        id: internal-energy,
+        answer: 31.74739,
+        unit: J,
+        source: P80,
+        vars: { Q: 37.3, V1: 57.2, dV: 54.8 }
+      }

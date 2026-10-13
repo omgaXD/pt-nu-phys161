@@ -1,0 +1,30 @@
+# P55 — the gas below the piston fills V = n R T / P (T = 20 °C + 273), so the column is
+# h = V / (π r²) tall. The radius is in cm.
+id: phys161-e4-p055-tank-gas-column
+title: Height of a gas column under a piston
+source: { document: PHYS161_Exam4, labels: [ P55 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, volume ]
+narrative: >-
+  A vertical cylindrical tank contains {n:unit} of an ideal gas under a pressure of 1 atm at 20°C.
+  The round part of the tank has a radius of {r:unit}, and the gas is supporting a piston that can
+  move up and down in the cylinder without friction.
+vars:
+  - { name: n, kind: range, min: 1.00, max: 2.50, step: 0.01, unit: mol, label: amount of gas }
+  - { name: r, kind: range, min: 8.0, max: 14.0, step: 0.1, unit: cm, label: tank radius }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: column-height
+    prompt: >-
+      How tall is the column of gas that is supporting the piston? Assume a vacuum in the tank above
+      the piston. Pressure 1 atm = 101325 Pa and the universal gas constant is $R = {R:unit}$.
+      {_0}{_u}
+    answer: n * R * 293 / 101325 / (pi * (r / 100)^2)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { n: 1.73, r: 10.2, R: 8.31 }
+  parts:
+    - { id: column-height, answer: 1.2718852142085, unit: m, source: P55 }

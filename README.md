@@ -411,7 +411,7 @@ overridable English).
 
 ### Content
 
-- **PHYS161 Exams 1–4:** every problem is randomized (150 each in Exams 1–3, 99 in Exam 4):
+- **PHYS161 Exams 1–4:** 150 problems each, randomized (all of Exams 1–3, 99 of Exam 4 so far):
   same situation, new numbers every attempt, each checked against the answer printed in the
   exam document.
 - Figures from the exam documents, and per-section reference sheets (e.g. a

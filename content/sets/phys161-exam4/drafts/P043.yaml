@@ -1,43 +1,49 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P43
 number: 43
 section: Kinetic Theory of Gases
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: Find the mass of a molecule of the gas with molar mass 32 g/mol. Avogadro's number
-  N<sub>A</sub> = 6.022×10<sup>23</sup> 1/mol. (5.3138492195284E-26 kg)
-text: Find the mass of a molecule of the gas with molar mass 32 g/mol. Avogadro's number N_A =
-  6.022×10^23 1/mol. (5.3138492195284E-26 kg)
-answer: { value: 5.3138492195284e-26, unit: kg, raw: 5.3138492195284E-26 kg }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Consider a gas mixture of helium atoms and oxygen molecules in thermal equilibrium, with O₂
+  treated as diatomic. Molar mass of helium is 4 g/mol and molar mass of oxygen is 31.95 g/mol. By
+  what factor is the root-mean-square speed of the helium atoms larger than that of the oxygen
+  molecules? (2.82622)
+text: Consider a gas mixture of helium atoms and oxygen molecules in thermal equilibrium, with O_2
+  treated as diatomic. Molar mass of helium is 4 g/mol and molar mass of oxygen is 31.95 g/mol. By
+  what factor is the root-mean-square speed of the helium atoms larger than that of the oxygen
+  molecules? (2.82622)
+answer: { value: 2.82622, raw: "2.82622" }
 figures: []
 literals:
   - name: M
-    value: 32
+    value: 4
     unit: g/mol
-    text: "32"
-    suggest: { min: 22, max: 42, step: 1 }
-  - name: NA
-    value: 6.022e+23
-    unit: 1/mol
-    text: 6.022×10^23
-    suggest: { min: 4.2e+23, max: 7.8e+23, step: 1e+22 }
+    text: "4"
+    suggest: { min: 3, max: 5, step: 1 }
+  - name: M2
+    value: 31.95
+    unit: g/mol
+    text: "31.95"
+    suggest: { min: 22.37, max: 41.54, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam4-p043
   source: { document: PHYS161_Exam4, labels: [ P43 ] }
   section: Kinetic Theory of Gases
-  narrative: Avogadro's number $N_{A}$ = {NA:unit}.
+  narrative: >-
+    Consider a gas mixture of helium atoms and oxygen molecules in thermal equilibrium, with $O_{2}$
+    treated as diatomic. Molar mass of helium is {M:unit} and molar mass of oxygen is {M2:unit}.
   vars:
     - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
-    - { name: NA, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/mol }
+    - { name: M2, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
   parts:
     - id: answer
       prompt: >-
-        Find the mass of a molecule of the gas with molar mass {M:unit}. {_0}{_u}
+        By what factor is the root-mean-square speed of the helium atoms larger than that of the
+        oxygen molecules? {_0}
       answer: TODO
-      unit: kg
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { M: 32, NA: 6.022e+23 }
+    vars: { M: 4, M2: 31.95 }
     parts:
-      - { id: answer, answer: 5.3138492195284e-26, unit: kg, source: P43 }
+      - { id: answer, answer: 2.82622, source: P43 }

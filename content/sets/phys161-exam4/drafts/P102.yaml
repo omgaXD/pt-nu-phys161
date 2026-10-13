@@ -1,0 +1,92 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P102
+number: 102
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: In a cylinder sealed with a piston, you rapidly compress 1.57 L of N₂ gas initially at 1.01 atm
+  and 2° to half its original volume. Assume N₂ behaves like an ideal diatomic gas and that the
+  compression is adiabatic with γ = 1.4. How much work is done on the gas? 1 atm = 101325 Pa. 1 L =
+  0.001 m³. The universal gas constant is R = 8.31 J/(mol K). (128.339 J)
+text: In a cylinder sealed with a piston, you rapidly compress 1.57 L of N_2 gas initially at 1.01
+  atm and 2° to half its original volume. Assume N_2 behaves like an ideal diatomic gas and that the
+  compression is adiabatic with γ = 1.4. How much work is done on the gas? 1 atm = 101325 Pa. 1 L =
+  0.001 m^3. The universal gas constant is R = 8.31 J/(mol K). (128.339 J)
+answer: { value: 128.339, unit: J, raw: 128.339 J }
+figures: []
+literals:
+  - name: V
+    value: 1.57
+    unit: L
+    text: "1.57"
+    suggest: { min: 1.1, max: 2.04, step: 0.01, decimals: 2 }
+  - name: p
+    value: 1.01
+    unit: atm
+    text: "1.01"
+    suggest: { min: 0.71, max: 1.31, step: 0.01, decimals: 2 }
+  - name: theta
+    value: 2
+    unit: °
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: gamma
+    value: 1.4
+    text: "1.4"
+    suggest: { min: 1, max: 1.8, step: 0.1, decimals: 1 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+scenario:
+  id: phys161-exam4-p102
+  source: { document: PHYS161_Exam4, labels: [ P102 ] }
+  section: 1st Law of Thermodynamics
+  narrative: >-
+    In a cylinder sealed with a piston, you rapidly compress {V:unit} of $N_{2}$ gas initially at
+    {p:unit} and {theta}° to half its original volume. Assume $N_{2}$ behaves like an ideal diatomic
+    gas and that the compression is adiabatic with γ = {gamma}. The universal gas constant is R =
+    {R:unit}.
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: gamma, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+  parts:
+    - id: answer
+      prompt: >-
+        How much work is done on the gas? {p2:unit} = {atm:unit}. {V2:unit} = {L:unit}. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 1.57, p: 1.01, theta: 2, gamma: 1.4, p2: 1, atm: 101325, V2: 1, L: 0.001, R: 8.31 }
+    parts:
+      - { id: answer, answer: 128.339, unit: J, source: P102 }

@@ -1,10 +1,10 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P1
 number: 1
 section: Temperature and heat
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
 raw: Assuming that the human body is 100 percent efficient in converting consumed food energy into
   work and heat at the rate of 97 W, calculate how many kilocalories of food energy a human needs
   per 24 hours. 1 kcal = 4.186 kJ. (2002.1022455805)

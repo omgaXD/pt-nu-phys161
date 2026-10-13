@@ -1,47 +1,70 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P78
 number: 78
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: The maximum possible efficiency of a heat engine which exhausts its heat at a temperature of
-  31°C is 57 percent. What is the minimum value of the temperature at which the engine takes in
-  heat? (706.977 K)
-text: The maximum possible efficiency of a heat engine which exhausts its heat at a temperature of
-  31°C is 57 percent. What is the minimum value of the temperature at which the engine takes in
-  heat? (706.977 K)
-answer: { value: 706.977, unit: K, raw: 706.977 K }
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Let 38 J of heat be added to a particular real gas. As a result, its volume changes from 45.5
+  to 110.9 cm³ while the pressure remains constant at 1 atm. How much work does the gas do? 1 atm =
+  101325 Pa. (6.62666 J)
+text: Let 38 J of heat be added to a particular real gas. As a result, its volume changes from 45.5
+  to 110.9 cm^3 while the pressure remains constant at 1 atm. How much work does the gas do? 1 atm =
+  101325 Pa. (6.62666 J)
+answer: { value: 6.62666, unit: J, raw: 6.62666 J }
 figures: []
 literals:
-  - name: T
-    value: 31
-    unit: °C
-    text: "31"
-    suggest: { min: 22, max: 40, step: 1 }
-  - name: pct
-    value: 57
-    unit: "%"
-    text: "57"
-    suggest: { min: 40, max: 74, step: 1 }
+  - name: E
+    value: 38
+    unit: J
+    text: "38"
+    suggest: { min: 27, max: 49, step: 1 }
+  - name: x
+    value: 45.5
+    text: "45.5"
+    suggest: { min: 31.8, max: 59.2, step: 0.1, decimals: 1 }
+  - name: V
+    value: 110.9
+    unit: cm^3
+    text: "110.9"
+    suggest: { min: 77.6, max: 144.2, step: 0.1, decimals: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
 scenario:
   id: phys161-exam4-p078
   source: { document: PHYS161_Exam4, labels: [ P78 ] }
-  section: 2nd Law of Thermodynamics
+  section: 1st Law of Thermodynamics
   narrative: >-
-    The maximum possible efficiency of a heat engine which exhausts its heat at a temperature of
-    {T:unit} is {pct:unit}.
+    Let {E:unit} of heat be added to a particular real gas. As a result, its volume changes from {x}
+    to {V:unit} while the pressure remains constant at {p:unit}.
   vars:
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
   parts:
     - id: answer
       prompt: >-
-        What is the minimum value of the temperature at which the engine takes in heat? {_0}{_u}
+        How much work does the gas do? {p2:unit} = {atm:unit}. {_0}{_u}
       answer: TODO
-      unit: K
+      unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { T: 31, pct: 57 }
+    vars: { E: 38, x: 45.5, V: 110.9, p: 1, p2: 1, atm: 101325 }
     parts:
-      - { id: answer, answer: 706.977, unit: K, source: P78 }
+      - { id: answer, answer: 6.62666, unit: J, source: P78 }

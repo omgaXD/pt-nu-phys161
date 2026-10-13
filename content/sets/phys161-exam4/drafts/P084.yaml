@@ -1,49 +1,64 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P84
 number: 84
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: An output of an engine with efficiency of 20% is 215 W. It works at 8 cycles/s. How much heat
-  is rejected each cycle? (107.5 J)
-text: An output of an engine with efficiency of 20% is 215 W. It works at 8 cycles/s. How much heat
-  is rejected each cycle? (107.5 J)
-answer: { value: 107.5, unit: J, raw: 107.5 J }
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: An ideal monatomic gas expands reversibly from 2.1 m<sup>3</sup> to 2.8 m<sup>3</sup> at a
+  constant pressure of 1.89 atm. The standard atmosphere pressure is 1 atm = 101325 Pa. Calculate
+  the work done by the gas. (134052.975 J)
+text: An ideal monatomic gas expands reversibly from 2.1 m^3 to 2.8 m^3 at a constant pressure of
+  1.89 atm. The standard atmosphere pressure is 1 atm = 101325 Pa. Calculate the work done by the
+  gas. (134052.975 J)
+answer: { value: 134052.975, unit: J, raw: 134052.975 J }
 figures: []
 literals:
-  - name: pct
-    value: 20
-    unit: "%"
-    text: "20"
-    suggest: { min: 14, max: 26, step: 1 }
-  - name: P
-    value: 215
-    unit: W
-    text: "215"
-    suggest: { min: 151, max: 280, step: 1 }
-  - name: f
-    value: 8
-    unit: Hz
-    text: "8"
-    suggest: { min: 6, max: 10, step: 1 }
+  - name: V
+    value: 2.1
+    unit: m^3
+    text: "2.1"
+    suggest: { min: 1.5, max: 2.7, step: 0.1, decimals: 1 }
+  - name: V2
+    value: 2.8
+    unit: m^3
+    text: "2.8"
+    suggest: { min: 2, max: 3.6, step: 0.1, decimals: 1 }
+  - name: p
+    value: 1.89
+    unit: atm
+    text: "1.89"
+    suggest: { min: 1.32, max: 2.46, step: 0.01, decimals: 2 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
 scenario:
   id: phys161-exam4-p084
   source: { document: PHYS161_Exam4, labels: [ P84 ] }
-  section: 2nd Law of Thermodynamics
+  section: 1st Law of Thermodynamics
   narrative: >-
-    An output of an engine with efficiency of {pct}% is {P:unit}. It works at {f:unit}.
+    An ideal monatomic gas expands reversibly from {V:unit} to {V2:unit} at a constant pressure of
+    {p:unit}. The standard atmosphere pressure is {p2:unit} = {atm:unit}.
   vars:
-    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
-    - { name: P, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
-    - { name: f, kind: range, min: TODO, max: TODO, step: TODO, unit: Hz }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
   parts:
     - id: answer
-      prompt: How much heat is rejected each cycle? {_0}{_u}
+      prompt: Calculate the work done by the gas. {_0}{_u}
       answer: TODO
       unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { pct: 20, P: 215, f: 8 }
+    vars: { V: 2.1, V2: 2.8, p: 1.89, p2: 1, atm: 101325 }
     parts:
-      - { id: answer, answer: 107.5, unit: J, source: P84 }
+      - { id: answer, answer: 134052.975, unit: J, source: P84 }

@@ -1,0 +1,38 @@
+# P36 — conduction through a slab: H = k A (T₁ − T₂) / d. The thickness is given in mm.
+id: phys161-e4-p036-window-heat-flow
+title: Heat flow through a window
+source: { document: PHYS161_Exam4, labels: [ P36 ] }
+section: Temperature and heat
+tags: [ heat-conduction, thermal-conductivity ]
+figure:
+  id: window
+  src: figures/unnamed_006_p-J8.png
+  alt: >-
+    A thin vertical glass slab of area A seen at an angle. Its left face is at temperature T₁ and
+    its right face at T₂; arrows at the bottom mark the slab's thickness d.
+narrative: >-
+  A major source of heat loss from a house in cold weather is through the windows. Thermal
+  conductivity of the glass $k = {k:unit}$. {@fig}
+vars:
+  - { name: a, kind: range, min: 1.0, max: 2.5, step: 0.1, unit: m, label: window width }
+  - { name: b, kind: range, min: 0.8, max: 2.0, step: 0.1, unit: m, label: window height }
+  - { name: d, kind: range, min: 2.5, max: 6.0, step: 0.1, unit: mm, label: thickness }
+  - { name: T1, kind: range, min: 15, max: 24, step: 1, unit: °C, label: inner temperature }
+  - { name: dT, kind: range, min: 2, max: 10, step: 1, unit: °C, label: temperature difference }
+derived:
+  - { name: k, expr: "0.84", unit: W/(m °C) }
+  - { name: T2, expr: "T1 - dT", unit: °C }
+parts:
+  - id: heat-flow
+    prompt: >-
+      Calculate the rate of heat flow through a glass window {a} m × {b} m in A area and $d =
+      {d:unit}$ thick, if the temperatures at the inner and outer surfaces are $T_1 = {T1:unit}$ and
+      $T_2 = {T2:unit}$, respectively. {_0}{_u}
+    answer: k * a * b * dT / (d / 1000)
+    unit: J/s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { a: 2, b: 1.3, d: 3.4, T1: 16, dT: 3, k: 0.84 }
+  parts:
+    - { id: heat-flow, answer: 1927, unit: J/s, source: P36 }

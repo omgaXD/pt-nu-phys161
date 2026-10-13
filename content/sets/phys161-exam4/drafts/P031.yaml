@@ -1,65 +1,97 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P31
 number: 31
-section: Kinetic Theory of Gases
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: Find the root mean square speed of argon atom in an 8.1 liter container filled with 1.6 mol of
-  argon gas at pressure of 4.7 atm. Molar mass of argon is 39.948 g/mol. The standard atmosphere
-  pressure is 101325 Pa. (425.50322889891 m/s)
-text: Find the root mean square speed of argon atom in an 8.1 liter container filled with 1.6 mol of
-  argon gas at pressure of 4.7 atm. Molar mass of argon is 39.948 g/mol. The standard atmosphere
-  pressure is 101325 Pa. (425.50322889891 m/s)
-answer: { value: 425.50322889891, unit: m/s, raw: 425.50322889891 m/s }
-figures: []
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: "Rods of copper, brass, and steel are welded together to form a Y-shaped figure. The
+  cross-sectional area of each rod is 1.8 cm<sup>2</sup>. The free end of the copper rod is
+  maintained at 100°C, and the free ends of the brass and steel rods at 0°C. Assume there is no heat
+  loss from the surfaces of the rods. The lengths of the rods are: copper, 11 cm; brass, 21 cm;
+  steel, 23 cm. What is the temperature of the junction point? Answer in Kelvins (K). Thermal
+  conductivity of the copper is 390 W/(m °C). Thermal conductivity of the steel is 50 W/(m °C).
+  Thermal conductivity of the brass is 130 W/(m °C). (353.9114729 K)"
+text: "Rods of copper, brass, and steel are welded together to form a Y-shaped figure. The
+  cross-sectional area of each rod is 1.8 cm^2. The free end of the copper rod is maintained at
+  100°C, and the free ends of the brass and steel rods at 0°C. Assume there is no heat loss from the
+  surfaces of the rods. The lengths of the rods are: copper, 11 cm; brass, 21 cm; steel, 23 cm. What
+  is the temperature of the junction point? Answer in Kelvins (K). Thermal conductivity of the
+  copper is 390 W/(m °C). Thermal conductivity of the steel is 50 W/(m °C). Thermal conductivity of
+  the brass is 130 W/(m °C). (353.9114729 K)"
+answer: { value: 353.9114729, unit: K, raw: 353.9114729 K }
+figures:
+  - { src: figures/unnamed_007_p-J8.png, original: PHYS161_Exam4_new.docx_files/unnamed_007_p-J8.png }
 literals:
-  - name: V
-    value: 8.1
-    unit: L
-    text: "8.1"
-    suggest: { min: 5.7, max: 10.5, step: 0.1, decimals: 1 }
-  - name: n
-    value: 1.6
-    unit: mol
-    text: "1.6"
-    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
-  - name: p
-    value: 4.7
-    unit: atm
-    text: "4.7"
-    suggest: { min: 3.3, max: 6.1, step: 0.1, decimals: 1 }
-  - name: M
-    value: 39.948
-    unit: g/mol
-    text: "39.948"
-    suggest: { min: 27.964, max: 51.932, step: 0.001, decimals: 3 }
-  - name: p2
-    value: 101325
-    unit: Pa
-    text: "101325"
-    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: A
+    value: 1.8
+    unit: cm^2
+    text: "1.8"
+    suggest: { min: 1.3, max: 2.3, step: 0.1, decimals: 1 }
+  - name: T
+    value: 100
+    unit: °C
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: d
+    value: 11
+    unit: cm
+    text: "11"
+    suggest: { min: 8, max: 14, step: 1 }
+  - name: d2
+    value: 21
+    unit: cm
+    text: "21"
+    suggest: { min: 15, max: 27, step: 1 }
+  - name: d3
+    value: 23
+    unit: cm
+    text: "23"
+    suggest: { min: 16, max: 30, step: 1 }
+  - name: kc
+    value: 390
+    unit: W/(m °C)
+    text: "390"
+    suggest: { min: 273, max: 507, step: 1 }
+  - name: kc2
+    value: 50
+    unit: W/(m °C)
+    text: "50"
+    suggest: { min: 35, max: 65, step: 1 }
+  - name: kc3
+    value: 130
+    unit: W/(m °C)
+    text: "130"
+    suggest: { min: 91, max: 169, step: 1 }
 scenario:
   id: phys161-exam4-p031
   source: { document: PHYS161_Exam4, labels: [ P31 ] }
-  section: Kinetic Theory of Gases
+  section: Temperature and heat
+  figure: { id: fig, src: figures/unnamed_007_p-J8.png, alt: "TODO: describe the figure" }
   narrative: >-
-    Molar mass of argon is {M:unit}. The standard atmosphere pressure is {p2:unit}.
+    Rods of copper, brass, and steel are welded together to form a Y-shaped figure. The
+    cross-sectional area of each rod is {A:unit}. The free end of the copper rod is maintained at
+    {T:unit}, and the free ends of the brass and steel rods at 0°C. Assume there is no heat loss
+    from the surfaces of the rods. The lengths of the rods are: copper, {d:unit}; brass, {d2:unit};
+    steel, {d3:unit}. Answer in Kelvins (K). Thermal conductivity of the copper is {kc:unit}.
+    Thermal conductivity of the steel is {kc2:unit}. Thermal conductivity of the brass is
+    {kc3:unit}. {@fig}
   vars:
-    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
-    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
-    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
-    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: A, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^2 }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: d3, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
+    - { name: kc, kind: range, min: TODO, max: TODO, step: TODO, unit: W/(m °C) }
+    - { name: kc2, kind: range, min: TODO, max: TODO, step: TODO, unit: W/(m °C) }
+    - { name: kc3, kind: range, min: TODO, max: TODO, step: TODO, unit: W/(m °C) }
   parts:
     - id: answer
-      prompt: >-
-        Find the root mean square speed of argon atom in an {V:unit} container filled with {n:unit}
-        of argon gas at pressure of {p:unit}. {_0}{_u}
+      prompt: What is the temperature of the junction point? {_0}{_u}
       answer: TODO
-      unit: m/s
+      unit: K
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { V: 8.1, n: 1.6, p: 4.7, M: 39.948, p2: 101325 }
+    vars: { A: 1.8, T: 100, d: 11, d2: 21, d3: 23, kc: 390, kc2: 50, kc3: 130 }
     parts:
-      - { id: answer, answer: 425.50322889891, unit: m/s, source: P31 }
+      - { id: answer, answer: 353.9114729, unit: K, source: P31 }

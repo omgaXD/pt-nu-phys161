@@ -1,46 +1,73 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P79
 number: 79
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A block of ice with a mass of 238 g at 0°C is placed in a large lake. The temperature of the
-  lake is just slightly higher than 0°C, and the ice melts. What is the entropy change of the ice?
-  Heat of fusion of water is 334 kJ/kg. (291.17948717949 J/K)
-text: A block of ice with a mass of 238 g at 0°C is placed in a large lake. The temperature of the
-  lake is just slightly higher than 0°C, and the ice melts. What is the entropy change of the ice?
-  Heat of fusion of water is 334 kJ/kg. (291.17948717949 J/K)
-answer: { value: 291.17948717949, unit: J/K, raw: 291.17948717949 J/K }
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Let 31.9 J of heat be added to a particular real gas. As a result, its volume changes from 48
+  to 77.9 cm<sup>3</sup> while the pressure remains constant at 1.0 atm. What is the molar specific
+  heat at constant pressure? The standard atmosphere pressure is 101325 Pa. Universal gas constant
+  is 8.31 J/(mol K). (87.499164498489 J/mol K)
+text: Let 31.9 J of heat be added to a particular real gas. As a result, its volume changes from 48
+  to 77.9 cm^3 while the pressure remains constant at 1.0 atm. What is the molar specific heat at
+  constant pressure? The standard atmosphere pressure is 101325 Pa. Universal gas constant is 8.31
+  J/(mol K). (87.499164498489 J/mol K)
+answer: { value: 87.499164498489, unit: J/mol K, raw: 87.499164498489 J/mol K }
 figures: []
 literals:
-  - name: m
-    value: 238
-    unit: g
-    text: "238"
-    suggest: { min: 167, max: 309, step: 1 }
-  - name: Lh
-    value: 334
-    unit: kJ/kg
-    text: "334"
-    suggest: { min: 234, max: 434, step: 1 }
+  - name: E
+    value: 31.9
+    unit: J
+    text: "31.9"
+    suggest: { min: 22.3, max: 41.5, step: 0.1, decimals: 1 }
+  - name: x
+    value: 48
+    text: "48"
+    suggest: { min: 34, max: 62, step: 1 }
+  - name: V
+    value: 77.9
+    unit: cm^3
+    text: "77.9"
+    suggest: { min: 54.5, max: 101.3, step: 0.1, decimals: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1.0"
+    suggest: { min: 0.7, max: 1.3, step: 0.1, decimals: 1 }
+  - name: p2
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: C
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam4-p079
   source: { document: PHYS161_Exam4, labels: [ P79 ] }
-  section: 2nd Law of Thermodynamics
+  section: 1st Law of Thermodynamics
   narrative: >-
-    A block of ice with a mass of {m:unit} at 0°C is placed in a large lake. The temperature of the
-    lake is just slightly higher than 0°C, and the ice melts. Heat of fusion of water is {Lh:unit}.
+    Let {E:unit} of heat be added to a particular real gas. As a result, its volume changes from {x}
+    to {V:unit} while the pressure remains constant at {p:unit}. The standard atmosphere pressure is
+    {p2:unit}. Universal gas constant is {C:unit}.
   vars:
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: g }
-    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
+    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: x, kind: range, min: TODO, max: TODO, step: TODO }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: cm^3 }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: C, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
   parts:
     - id: answer
-      prompt: What is the entropy change of the ice? {_0}{_u}
+      prompt: >-
+        What is the molar specific heat at constant pressure? {_0}{_u}
       answer: TODO
-      unit: J/K
+      unit: J/mol K
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { m: 238, Lh: 334 }
+    vars: { E: 31.9, x: 48, V: 77.9, p: 1, p2: 101325, C: 8.31 }
     parts:
-      - { id: answer, answer: 291.17948717949, unit: J/K, source: P79 }
+      - { id: answer, answer: 87.499164498489, unit: J/mol K, source: P79 }

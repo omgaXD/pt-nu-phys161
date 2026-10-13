@@ -1,0 +1,28 @@
+# P7 — the rail expands to L (1 + α ΔT) between fixed ends L apart and buckles into an isosceles
+# triangle, so its apex rises h = (L/2) sqrt((1 + α ΔT)² − 1). α is printed as a multiple of 10⁻⁶.
+id: phys161-e4-p007-rail-buckle
+title: Buckling of a railroad rail
+source: { document: PHYS161_Exam4, labels: [ P7 ] }
+section: Temperature and heat
+tags: [ thermal-expansion, linear-expansion, geometry ]
+narrative: >-
+  A railroad rail made of steel is {L:unit} long and it is fastened securely at both ends when the
+  temperature is {T1:unit}. As the temperature increases, the rail begins to buckle upwards, taking
+  the shape of an isosceles triangle. Assume that the coefficient of linear expansion for steel is $
+  {a6} \times 10^{-6}\ 1/\text{K}$.
+vars:
+  - { name: L, kind: range, min: 500, max: 1500, step: 1, unit: m, label: rail length }
+  - { name: T1, kind: range, min: 5, max: 20, step: 1, unit: °C, label: initial temperature }
+  - { name: T2, kind: range, min: 28, max: 45, step: 1, unit: °C, label: final temperature }
+  - { name: a6, kind: range, min: 10.0, max: 13.0, step: 0.1, decimals: 1, label: α in 10⁻⁶ 1/K }
+parts:
+  - id: buckle-height
+    prompt: "How high is this buckle when the temperature is {T2:unit}? {_0}{_u}"
+    answer: (L / 2) * sqrt((1 + a6 * 1e-6 * (T2 - T1))^2 - 1)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { L: 1028, T1: 16, T2: 34, a6: 11.9 }
+  parts:
+    - { id: buckle-height, answer: 10.638682550015, unit: m, source: P7 }

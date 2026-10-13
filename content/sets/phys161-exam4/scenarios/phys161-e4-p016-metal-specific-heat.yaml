@@ -1,0 +1,53 @@
+# P16 — calorimetry: the hot piece gives up m_p c (T_p − T_f) to the water and the container (same
+# metal): m_p c (T_p − T_f) = (m_w c_w + m_c c)(T_f − T₀), so
+# c = m_w c_w (T_f − T₀) / (m_p (T_p − T_f) − m_c (T_f − T₀)).
+# The printed final temperature is computed from a hidden specific heat (0.1 °C, as printed), so
+# every draw is consistent; the answer uses the printed T_f. The constraint keeps the temperature
+# rise at least 2 °C, so the rounding of T_f moves the answer by at most a few percent.
+id: phys161-e4-p016-metal-specific-heat
+title: Specific heat of a metal by calorimetry
+source: { document: PHYS161_Exam4, labels: [ P16 ] }
+section: Temperature and heat
+tags: [ heat, calorimetry, specific-heat ]
+narrative: >-
+  A metal container of mass {mc:unit} contains {mw:unit} of water. A {mp}-kg piece of the same
+  metal, initially at a temperature of {Tp:unit}, is dropped into the water. The container and the
+  water initially have a temperature of {T0:unit} and the final temperature of the entire system is
+  {Tf:unit}. Specific heat of water is {cw:unit}.
+vars:
+  - { name: mc, kind: range, min: 5.0, max: 10.0, step: 0.1, unit: kg, label: container mass }
+  - { name: mw, kind: range, min: 10.0, max: 20.0, step: 0.1, unit: kg, label: water mass }
+  - { name: mp, kind: range, min: 1.00, max: 2.50, step: 0.01, unit: kg, label: piece mass }
+  - { name: Tp, kind: range, min: 150, max: 250, step: 1, unit: °C, label: piece temperature }
+  - {
+      name: T0,
+      kind: range,
+      min: 10.0,
+      max: 20.0,
+      step: 0.1,
+      unit: °C,
+      label: initial temperature
+    }
+  # Hidden specific heat of the metal; the printed final temperature carries it.
+  - { name: c, kind: range, min: 380, max: 900, step: 1, unit: J/(kg K), label: specific heat }
+derived:
+  - { name: cw, expr: "4186", unit: J/(kg °C) }
+  - {
+      name: Tf,
+      expr: "round((mp * c * Tp + (mw * cw + mc * c) * T0) / (mp * c + mw * cw + mc * c), 1)",
+      unit: °C
+    }
+constraints:
+  - "Tf - T0 >= 2" # a temperature rise the rounding of T_f barely affects
+parts:
+  - id: specific-heat
+    prompt: "Calculate the specific heat of the metal in units J/(kg K). {_0}{_u}"
+    answer: mw * cw * (Tf - T0) / (mp * (Tp - Tf) - mc * (Tf - T0))
+    unit: J/(kg K)
+    exactUnit: true
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { mc: 7.9, mw: 15.3, mp: 1.68, Tp: 184, T0: 14.4, c: 863, cw: 4186, Tf: 17.8 }
+  parts:
+    - { id: specific-heat, answer: 862.89099526066, unit: J/(kg K), source: P16 }

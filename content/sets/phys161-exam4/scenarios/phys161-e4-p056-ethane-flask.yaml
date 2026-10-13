@@ -1,0 +1,46 @@
+# P56/P57 — warmed to T₂ with the stopcock open, the flask holds n = P₀ V / (R T₂) at atmospheric
+# pressure. Closed and cooled back to T₁ at fixed volume, the pressure falls to P₀ T₁ / T₂ (P56),
+# and the gas left has mass n M = P₀ V M / (R T₂) (P57). The volume is in liters. The base
+# canonical values are P56's; P57 overrides them.
+id: phys161-e4-p056-ethane-flask
+title: Ethane in a flask with a stopcock
+source: { document: PHYS161_Exam4, labels: [ P56, P57 ] }
+section: Kinetic Theory of Gases
+tags: [ ideal-gas, gas-laws, multi-part ]
+narrative: >-
+  A flask with a volume of {V:unit}, provided with a stopcock, contains ethane gas at {T1:unit} and
+  atmospheric pressure $1.01325\times10^{5}$ Pa. The molar mass of ethane is 30.1 g/mol. The system
+  is warmed to a temperature of {T2:unit}, with the stopcock open to the atmosphere. The stopcock is
+  then closed, and the flask is cooled to its original temperature.
+vars:
+  - { name: V, kind: range, min: 1.00, max: 2.00, step: 0.01, unit: L, label: flask volume }
+  - { name: T1, kind: range, min: 280, max: 300, step: 1, unit: K, label: initial temperature }
+  - { name: T2, kind: range, min: 350, max: 420, step: 1, unit: K, label: warmed temperature }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: final-pressure
+    prompt: "What is the final pressure of the ethane in the flask? 1 L = 0.001 m^3. {_0}{_u}"
+    answer: 101325 * T1 / T2
+    unit: Pa
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: remaining-mass
+    prompt: >-
+      Find the mass of ethane remaining in the flask. 1 L = 0.001 m^3. The universal gas constant is
+      $R = {R:unit}$. {_0}{_u}
+    answer: 101325 * V / 1000 * 0.0301 / (R * T2)
+    unit: kg
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { V: 1.29, T1: 295, T2: 388, R: 8.31 }
+  parts:
+    - { id: final-pressure, answer: 77038.337628866, unit: Pa, source: P56 }
+    - {
+        id: remaining-mass,
+        answer: 0.00133459,
+        unit: kg,
+        source: P57,
+        vars: { V: 1.4, T1: 290, T2: 385 }
+      }

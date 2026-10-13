@@ -1,0 +1,67 @@
+# P101/P103/P104 — adiabatic compression to half the volume: T V^(γ−1) and P V^γ are constant, so
+# T₂ = T₁ 2^(γ−1) (P101) and P₂ = P₁ 2^γ (P103). Cooling back to T₁ at constant pressure shrinks the
+# volume to V₃ = (V₁ / 2) T₁ / T₂ = V₁ / 2^γ (P104). The temperature uses the source's 273 offset;
+# volumes are in L and pressures in atm. The base canonical values are P101's; P103 and P104 override
+# them.
+id: phys161-e4-p101-nitrogen-adiabatic-compression
+title: Rapid compression of nitrogen
+source: { document: PHYS161_Exam4, labels: [ P101, P103, P104 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, adiabatic, ideal-gas, multi-part ]
+narrative: >-
+  In a cylinder sealed with a piston, you rapidly compress {V1:unit} of $N_2$ gas initially at
+  {P1:unit} pressure and {T1:unit} to half its original volume. Assume $N_2$ behaves like an ideal
+  gas. Assume the compression is adiabatic, γ = 1.4. 1 atm = 101325 Pa 1 L = 0.001 m^3
+vars:
+  - { name: V1, kind: range, min: 1.00, max: 3.00, step: 0.01, unit: L, label: initial volume }
+  - {
+      name: P1,
+      kind: range,
+      min: 0.90,
+      max: 1.10,
+      step: 0.01,
+      unit: atm,
+      label: initial pressure
+    }
+  - { name: T1, kind: range, min: 0, max: 25, step: 1, unit: °C, label: initial temperature }
+derived:
+  - { name: gamma, expr: "1.4" }
+parts:
+  - id: final-temperature
+    prompt: "Calculate the final temperature of the gas. {_0}{_u}"
+    answer: (T1 + 273) * 2^(gamma - 1)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: final-pressure
+    prompt: "Calculate the final pressure of the gas. {_0}{_u}"
+    answer: P1 * 101325 * 2^gamma
+    unit: Pa
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+  - id: cooled-volume
+    prompt: >-
+      If you now cool the gas back to {T1:unit} without changing the pressure, what is its final
+      volume? {_0}{_u}
+    answer: V1 / 1000 / 2^gamma
+    unit: m^3
+    tolerance: { rel: 0.01 }
+    difficulty: 4
+canonical:
+  vars: { V1: 1.65, P1: 0.98, T1: 2, gamma: 1.4 }
+  parts:
+    - { id: final-temperature, answer: 362.86467546255, unit: K, source: P101 }
+    - {
+        id: final-pressure,
+        answer: 270072.26089931,
+        unit: Pa,
+        source: P103,
+        vars: { V1: 1.23, P1: 1.01 }
+      }
+    - {
+        id: cooled-volume,
+        answer: 0.00090942993990624,
+        unit: m^3,
+        source: P104,
+        vars: { V1: 2.4, P1: 0.92, T1: 3 }
+      }

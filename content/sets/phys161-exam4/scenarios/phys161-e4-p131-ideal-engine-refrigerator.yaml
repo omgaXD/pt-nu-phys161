@@ -1,0 +1,51 @@
+# P131/P133 — the ideal (Carnot) engine delivers W = Q_h (1 − T_c / T_h) (P131). That work drives a
+# refrigerator extracting Q_c from its cold reservoir, so its coefficient of performance is
+# K = Q_c / W (P133, as the source computes it). The base canonical values are P131's; P133
+# overrides them.
+id: phys161-e4-p131-ideal-engine-refrigerator
+title: Ideal engine driving a refrigerator
+source: { document: PHYS161_Exam4, labels: [ P131, P133 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, carnot, refrigerator, coefficient-of-performance, multi-part ]
+narrative: >-
+  An ideal engine extracts {Qh:unit} of heat from its hot reservoir while operating between
+  {Tc:unit} and {Th:unit}.
+vars:
+  - { name: Qh, kind: range, min: 8000, max: 13000, step: 100, unit: J, label: heat extracted }
+  - { name: Tc, kind: range, min: 200, max: 260, step: 5, unit: K, label: cold reservoir }
+  - { name: Th, kind: range, min: 450, max: 600, step: 5, unit: K, label: hot reservoir }
+  - {
+      name: Qc,
+      kind: range,
+      min: 3000,
+      max: 6000,
+      step: 100,
+      unit: J,
+      label: heat extracted by the refrigerator
+    }
+derived:
+  - { name: W, expr: "Qh * (1 - Tc / Th)", unit: J }
+parts:
+  - id: work
+    prompt: "Find the work done by an ideal engine. {_0}{_u}"
+    answer: W
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+  - id: refrigerator-cop
+    prompt: >-
+      The work from the engine goes into an ideal refrigerator which extracts {Qc:unit} of heat from
+      its cold reservoir. Find the coefficient of performance of the ideal refrigerator. {_0}
+    answer: Qc / W
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { Qh: 10500, Tc: 230, Th: 575, Qc: 4400 }
+  parts:
+    - { id: work, answer: 6300, unit: J, source: P131 }
+    - {
+        id: refrigerator-cop,
+        answer: 0.71296296296296,
+        source: P133,
+        vars: { Qh: 10800, Tc: 225, Th: 525 }
+      }

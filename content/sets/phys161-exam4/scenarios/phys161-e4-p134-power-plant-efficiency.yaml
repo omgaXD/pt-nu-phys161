@@ -1,0 +1,26 @@
+# P134 — efficiency = electric power / heat input rate, with the heat rate (coal per hour / 3600 s)
+# times the heat of combustion. The constraint keeps it between 20% and 45%, as for real plants.
+id: phys161-e4-p134-power-plant-efficiency
+title: Efficiency of a coal power plant
+source: { document: PHYS161_Exam4, labels: [ P134 ] }
+section: 2nd Law of Thermodynamics
+tags: [ second-law, heat-engine, efficiency, power ]
+narrative: ""
+vars:
+  - { name: m, kind: range, min: 100000, max: 200000, step: 1000, unit: kg, label: coal per hour }
+  - { name: P, kind: range, min: 200, max: 500, step: 10, unit: MW, label: power output }
+  - { name: H, kind: range, min: 24, max: 32, step: 1, unit: MJ/kg, label: heat of combustion }
+constraints:
+  - "P / (m / 3600 * H) >= 0.2 and P / (m / 3600 * H) <= 0.45" # a realistic plant
+parts:
+  - id: efficiency
+    prompt: >-
+      A coal power plant consumes {m:unit} of coal per hour and produces {P:unit} of power. If the
+      heat of combustion of coal is {H:unit}, what is the efficiency of the power plant? {_0}
+    answer: P / (m / 3600 * H)
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { m: 140000, P: 300, H: 30 }
+  parts:
+    - { id: efficiency, answer: 0.25714285714286, source: P134 }

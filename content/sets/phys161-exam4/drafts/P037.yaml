@@ -1,83 +1,81 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P37
 number: 37
-section: Kinetic Theory of Gases
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A flask with a volume of 1.29 L, provided with a stopcock, contains ethane gas at 295 K and
-  atmospheric pressure 1.01325×10<sup>5</sup> Pa. The molar mass of ethane is 30.1 g/mol. The system
-  is warmed to a temperature of 388 K, with the stopcock open to the atmosphere. The stopcock is
-  then closed, and the flask is cooled to its original temperature. What is the final pressure of
-  the ethane in the flask? 1 L = 0.001 m<sup>3</sup>. (77038.337628866 Pa)
-text: A flask with a volume of 1.29 L, provided with a stopcock, contains ethane gas at 295 K and
-  atmospheric pressure 1.01325×10^5 Pa. The molar mass of ethane is 30.1 g/mol. The system is warmed
-  to a temperature of 388 K, with the stopcock open to the atmosphere. The stopcock is then closed,
-  and the flask is cooled to its original temperature. What is the final pressure of the ethane in
-  the flask? 1 L = 0.001 m^3. (77038.337628866 Pa)
-answer: { value: 77038.337628866, unit: Pa, raw: 77038.337628866 Pa }
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A major source of heat loss from a house in cold weather is through the windows. A glass window
+  is 1.95 m × 1 m in area and d = 4.1 mm thick. The inner and outer surface temperatures are 19.5°
+  and 11.5° respectively. How much energy flows through this window in 6.5 hours? Thermal
+  conductivity of the glass k = 0.8 W/(m °C). (7.12273e+07 J)
+text: A major source of heat loss from a house in cold weather is through the windows. A glass
+  window is 1.95 m × 1 m in area and d = 4.1 mm thick. The inner and outer surface temperatures are
+  19.5° and 11.5° respectively. How much energy flows through this window in 6.5 hours? Thermal
+  conductivity of the glass k = 0.8 W/(m °C). (7.12273e+07 J)
+answer: { value: 71227300, unit: J, raw: 7.12273e+07 J }
 figures: []
 literals:
-  - name: V
-    value: 1.29
-    unit: L
-    text: "1.29"
-    suggest: { min: 0.9, max: 1.68, step: 0.01, decimals: 2 }
-  - name: T
-    value: 295
-    unit: K
-    text: "295"
-    suggest: { min: 207, max: 384, step: 1 }
-  - name: p
-    value: 101325
-    unit: Pa
-    text: 1.01325×10^5
-    suggest: { min: 70928, max: 131723, step: 1 }
-  - name: M
-    value: 30.1
-    unit: g/mol
-    text: "30.1"
-    suggest: { min: 21.1, max: 39.1, step: 0.1, decimals: 1 }
-  - name: T2
-    value: 388
-    unit: K
-    text: "388"
-    suggest: { min: 272, max: 504, step: 1 }
-  - name: V2
+  - name: d
+    value: 1.95
+    unit: m
+    text: "1.95"
+    suggest: { min: 1.37, max: 2.54, step: 0.01, decimals: 2 }
+  - name: d2
     value: 1
-    unit: L
+    unit: m
     text: "1"
     suggest: { min: 1, max: 1, step: 1 }
-  - name: L
-    value: 0.001
-    unit: m^3
-    text: "0.001"
-    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+  - name: d3
+    value: 4.1
+    unit: mm
+    text: "4.1"
+    suggest: { min: 2.9, max: 5.3, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 19.5
+    unit: °
+    text: "19.5"
+    suggest: { min: 13.6, max: 25.4, step: 0.1, decimals: 1 }
+  - name: theta2
+    value: 11.5
+    unit: °
+    text: "11.5"
+    suggest: { min: 8, max: 15, step: 0.1, decimals: 1 }
+  - name: t
+    value: 6.5
+    unit: h
+    text: "6.5"
+    suggest: { min: 4.5, max: 8.5, step: 0.1, decimals: 1 }
+  - name: k
+    value: 0.8
+    unit: W/(m °C)
+    text: "0.8"
+    suggest: { min: 0.6, max: 1, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam4-p037
   source: { document: PHYS161_Exam4, labels: [ P37 ] }
-  section: Kinetic Theory of Gases
+  section: Temperature and heat
   narrative: >-
-    A flask with a volume of {V:unit}, provided with a stopcock, contains ethane gas at {T:unit} and
-    atmospheric pressure {p:unit}. The molar mass of ethane is {M:unit}. The system is warmed to a
-    temperature of {T2:unit}, with the stopcock open to the atmosphere. The stopcock is then closed,
-    and the flask is cooled to its original temperature.
+    A major source of heat loss from a house in cold weather is through the windows. A glass window
+    is {d:unit} × {d2:unit} in area and d = {d3:unit} thick. The inner and outer surface
+    temperatures are {theta}° and {theta2}° respectively. Thermal conductivity of the glass k =
+    {k:unit}.
   vars:
-    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
-    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
-    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
-    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d3, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: theta2, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: t, kind: range, min: TODO, max: TODO, step: TODO, unit: h }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: W/(m °C) }
   parts:
     - id: answer
       prompt: >-
-        What is the final pressure of the ethane in the flask? {V2:unit} = {L:unit}. {_0}{_u}
+        How much energy flows through this window in {t:unit}? {_0}{_u}
       answer: TODO
-      unit: Pa
+      unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { V: 1.29, T: 295, p: 101325, M: 30.1, T2: 388, V2: 1, L: 0.001 }
+    vars: { d: 1.95, d2: 1, d3: 4.1, theta: 19.5, theta2: 11.5, t: 6.5, k: 0.8 }
     parts:
-      - { id: answer, answer: 77038.337628866, unit: Pa, source: P37 }
+      - { id: answer, answer: 71227300, unit: J, source: P37 }

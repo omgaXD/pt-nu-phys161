@@ -1,0 +1,45 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P120
+number: 120
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A heat engine exhausts its heat at a temperature of 42° and takes in heat at 455°. What is the
+  maximum possible efficiency of this engine? Give the answer as a fraction, not a percentage.
+  (0.567308)
+text: A heat engine exhausts its heat at a temperature of 42° and takes in heat at 455°. What is the
+  maximum possible efficiency of this engine? Give the answer as a fraction, not a percentage.
+  (0.567308)
+answer: { value: 0.567308, raw: "0.567308" }
+figures: []
+literals:
+  - name: theta
+    value: 42
+    unit: °
+    text: "42"
+    suggest: { min: 29, max: 55, step: 1 }
+  - name: theta2
+    value: 455
+    unit: °
+    text: "455"
+    suggest: { min: 319, max: 592, step: 1 }
+scenario:
+  id: phys161-exam4-p120
+  source: { document: PHYS161_Exam4, labels: [ P120 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A heat engine exhausts its heat at a temperature of {theta}° and takes in heat at {theta2}°.
+    What is the maximum possible efficiency of this engine?
+  vars:
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: theta2, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+  parts:
+    - id: answer
+      prompt: Give the answer as a fraction, not a percentage. {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { theta: 42, theta2: 455 }
+    parts:
+      - { id: answer, answer: 0.567308, source: P120 }

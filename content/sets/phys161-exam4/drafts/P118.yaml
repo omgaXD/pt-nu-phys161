@@ -1,0 +1,46 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P118
+number: 118
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A Carnot engine operates between a hot reservoir at 355 K and a cold reservoir at 250 K. If the
+  same engine working in reverse functions as a refrigerator between the same two reservoirs, what
+  is its coefficient of performance? (2.38095)
+text: A Carnot engine operates between a hot reservoir at 355 K and a cold reservoir at 250 K. If
+  the same engine working in reverse functions as a refrigerator between the same two reservoirs,
+  what is its coefficient of performance? (2.38095)
+answer: { value: 2.38095, raw: "2.38095" }
+figures: []
+literals:
+  - name: T
+    value: 355
+    unit: K
+    text: "355"
+    suggest: { min: 248, max: 462, step: 1 }
+  - name: T2
+    value: 250
+    unit: K
+    text: "250"
+    suggest: { min: 175, max: 325, step: 1 }
+scenario:
+  id: phys161-exam4-p118
+  source: { document: PHYS161_Exam4, labels: [ P118 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A Carnot engine operates between a hot reservoir at {T:unit} and a cold reservoir at {T2:unit}.
+  vars:
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+  parts:
+    - id: answer
+      prompt: >-
+        If the same engine working in reverse functions as a refrigerator between the same two
+        reservoirs, what is its coefficient of performance? {_0}
+      answer: TODO
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { T: 355, T2: 250 }
+    parts:
+      - { id: answer, answer: 2.38095, source: P118 }

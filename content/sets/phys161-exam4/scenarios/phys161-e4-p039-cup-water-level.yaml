@@ -1,0 +1,33 @@
+# P39 — the water cools to 0 °C and melts m = m_w c_w T_w / L_f of ice, all of it (the final state
+# is all liquid at 0 °C). The melted ice adds a volume m / ρ, so in a cylinder of radius r the
+# level rises by m / (ρ π r²). The radius is given in cm.
+id: phys161-e4-p039-cup-water-level
+title: Rise of the water level after melting ice
+source: { document: PHYS161_Exam4, labels: [ P39 ] }
+section: Temperature and heat
+tags: [ heat, calorimetry, latent-heat, density ]
+narrative: >-
+  An insulated cylindrical cup contains {mw:unit} of water at {Tw:unit}. Some ice at 0°C is placed
+  into the cup. When the system reaches thermal equilibrium, the final temperature will be 0°C with
+  all the ice melted. The internal radius of the cup is {r:unit}. Specific heat of water is
+  {cw:unit}. Latent heat of fusion for water is {Lf:unit}. Density of water is 1 g/cm^3.
+vars:
+  - { name: mw, kind: range, min: 0.200, max: 0.500, step: 0.001, unit: kg, label: water mass }
+  - { name: Tw, kind: range, min: 60, max: 95, step: 1, unit: °C, label: water temperature }
+  - { name: r, kind: range, min: 4.0, max: 7.0, step: 0.1, unit: cm, label: cup radius }
+derived:
+  - { name: cw, expr: "4186", unit: J/(kg K) }
+  - { name: Lf, expr: "334", unit: kJ/kg }
+parts:
+  - id: level-rise
+    prompt: >-
+      Calculate by how much the water level will be higher compared to that before adding the ice.
+      {_0}{_u}
+    answer: (mw * cw * Tw / (Lf * 1000)) / 1000 / (pi * (r / 100)^2)
+    unit: m
+    tolerance: { rel: 0.01 }
+    difficulty: 3
+canonical:
+  vars: { mw: 0.393, Tw: 88, r: 5.5, cw: 4186, Lf: 334 }
+  parts:
+    - { id: level-rise, answer: 0.045609228711262, unit: m, source: P39 }

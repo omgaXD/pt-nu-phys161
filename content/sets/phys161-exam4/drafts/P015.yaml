@@ -1,58 +1,60 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P15
 number: 15
 section: Temperature and heat
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A cube made of brass, with an edge length of 44 cm, is heated from 44.5°C to 56.5°C. Calculate
-  the increase of the cube's surface area. Assume that the coefficient of linear expansion for brass
-  is 19 × 10<sup>−6</sup> 1/K. (0.0005296896 m^2)
-text: A cube made of brass, with an edge length of 44 cm, is heated from 44.5°C to 56.5°C. Calculate
-  the increase of the cube's surface area. Assume that the coefficient of linear expansion for brass
-  is 19 × 10^-6 1/K. (0.0005296896 m^2)
-answer: { value: 0.0005296896, unit: m^2, raw: 0.0005296896 m^2 }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A block of ice at 0°C whose mass initially is m = 19.9 kg slides along a horizontal surface,
+  starting at a speed v = 4.62 m/s and finally coming to rest after traveling a certain distance.
+  Compute the mass of ice melted as a result of the friction between the block and the surface.
+  (Assume that all the heat generated owing to friction goes into the block of ice.) Latent heat of
+  fusion for water is 334 kJ/kg. (0.00063585862275449 kg)
+text: A block of ice at 0°C whose mass initially is m = 19.9 kg slides along a horizontal surface,
+  starting at a speed v = 4.62 m/s and finally coming to rest after traveling a certain distance.
+  Compute the mass of ice melted as a result of the friction between the block and the surface.
+  (Assume that all the heat generated owing to friction goes into the block of ice.) Latent heat of
+  fusion for water is 334 kJ/kg. (0.00063585862275449 kg)
+answer: { value: 0.00063585862275449, unit: kg, raw: 0.00063585862275449 kg }
 figures: []
 literals:
-  - name: L
-    value: 44
-    unit: cm
-    text: "44"
-    suggest: { min: 31, max: 57, step: 1 }
-  - name: T
-    value: 44.5
-    unit: °C
-    text: "44.5"
-    suggest: { min: 31.1, max: 57.9, step: 0.1, decimals: 1 }
-  - name: T2
-    value: 56.5
-    unit: °C
-    text: "56.5"
-    suggest: { min: 39.5, max: 73.5, step: 0.1, decimals: 1 }
-  - name: alpha
-    value: 0.000019
-    unit: 1/K
-    text: 19 × 10^-6
-    suggest: { min: 0.000013, max: 0.000025, step: 0.000001, decimals: 6 }
+  - name: m
+    value: 19.9
+    unit: kg
+    text: "19.9"
+    suggest: { min: 13.9, max: 25.9, step: 0.1, decimals: 1 }
+  - name: v
+    value: 4.62
+    unit: m/s
+    text: "4.62"
+    suggest: { min: 3.23, max: 6.01, step: 0.01, decimals: 2 }
+  - name: Lh
+    value: 334
+    unit: kJ/kg
+    text: "334"
+    suggest: { min: 234, max: 434, step: 1 }
 scenario:
   id: phys161-exam4-p015
   source: { document: PHYS161_Exam4, labels: [ P15 ] }
   section: Temperature and heat
   narrative: >-
-    A cube made of brass, with an edge length of {L:unit}, is heated from {T:unit} to {T2:unit}.
-    Assume that the coefficient of linear expansion for brass is {alpha:unit}.
+    A block of ice at 0°C whose mass initially is m = {m:unit} slides along a horizontal surface,
+    starting at a speed v = {v:unit} and finally coming to rest after traveling a certain distance.
+    (Assume that all the heat generated owing to friction goes into the block of ice.) Latent heat
+    of fusion for water is {Lh:unit}.
   vars:
-    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/K }
+    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
+    - { name: v, kind: range, min: TODO, max: TODO, step: TODO, unit: m/s }
+    - { name: Lh, kind: range, min: TODO, max: TODO, step: TODO, unit: kJ/kg }
   parts:
     - id: answer
-      prompt: Calculate the increase of the cube's surface area. {_0}{_u}
+      prompt: >-
+        Compute the mass of ice melted as a result of the friction between the block and the
+        surface. {_0}{_u}
       answer: TODO
-      unit: m^2
+      unit: kg
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { L: 44, T: 44.5, T2: 56.5, alpha: 0.000019 }
+    vars: { m: 19.9, v: 4.62, Lh: 334 }
     parts:
-      - { id: answer, answer: 0.0005296896, unit: m^2, source: P15 }
+      - { id: answer, answer: 0.00063585862275449, unit: kg, source: P15 }

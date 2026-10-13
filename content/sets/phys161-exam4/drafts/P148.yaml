@@ -1,0 +1,45 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P148
+number: 148
+section: 2nd Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A Carnot engine whose low-temperature reservoir is at -90° has an efficiency of 20%. What is
+  the temperature of its high-temperature reservoir? Answer in kelvins (K). (228.75 K)
+text: A Carnot engine whose low-temperature reservoir is at -90° has an efficiency of 20%. What is
+  the temperature of its high-temperature reservoir? Answer in kelvins (K). (228.75 K)
+answer: { value: 228.75, unit: K, raw: 228.75 K }
+figures: []
+literals:
+  - name: theta
+    value: -90
+    unit: °
+    text: "-90"
+    suggest: { min: -117, max: -63, step: 1 }
+  - name: pct
+    value: 20
+    unit: "%"
+    text: "20"
+    suggest: { min: 14, max: 26, step: 1 }
+scenario:
+  id: phys161-exam4-p148
+  source: { document: PHYS161_Exam4, labels: [ P148 ] }
+  section: 2nd Law of Thermodynamics
+  narrative: >-
+    A Carnot engine whose low-temperature reservoir is at {theta}° has an efficiency of {pct}%.
+    Answer in kelvins (K).
+  vars:
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+  parts:
+    - id: answer
+      prompt: >-
+        What is the temperature of its high-temperature reservoir? {_0}{_u}
+      answer: TODO
+      unit: K
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { theta: -90, pct: 20 }
+    parts:
+      - { id: answer, answer: 228.75, unit: K, source: P148 }

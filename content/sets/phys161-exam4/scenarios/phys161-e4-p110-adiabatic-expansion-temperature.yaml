@@ -1,0 +1,28 @@
+# P110 — adiabatic: Q = 0, so the work comes from the internal energy, W = (3/2) n R |ΔT| for a
+# monatomic gas, |ΔT| = 2W / (3 n R).
+id: phys161-e4-p110-adiabatic-expansion-temperature
+title: Temperature drop in an adiabatic expansion
+source: { document: PHYS161_Exam4, labels: [ P110 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, adiabatic, internal-energy ]
+narrative: >-
+  The universal gas constant is $R = {R:unit}$.
+vars:
+  - { name: n, kind: range, min: 2.0, max: 12.0, step: 0.1, unit: mol, label: amount of gas }
+  - { name: W, kind: range, min: 3000, max: 15000, step: 100, unit: J, label: work performed }
+derived:
+  - { name: R, expr: "8.31", unit: J/(mol K) }
+parts:
+  - id: temperature-change
+    prompt: >-
+      {n} moles of an ideal monatomic gas expand adiabatically, performing {W:unit} of work in the
+      process. What is the magnitude of change in temperature of the gas during this expansion?
+      {_0}{_u}
+    answer: 2 * W / (3 * n * R)
+    unit: K
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { n: 8.3, W: 9200, R: 8.31 }
+  parts:
+    - { id: temperature-change, answer: 88.923685113499, unit: K, source: P110 }

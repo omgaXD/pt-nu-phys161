@@ -1,0 +1,34 @@
+# P108 — no work at constant volume; the constant-pressure compression from V₁ to V₂ takes
+# W = P₂ (V₁ − V₂) done on the gas. The initial pressure does not enter. Pressures are printed
+# in units of 10⁵ Pa, as in the source.
+id: phys161-e4-p108-isochoric-isobaric-work
+title: Work done on a gas in two processes
+source: { document: PHYS161_Exam4, labels: [ P108 ] }
+section: 1st Law of Thermodynamics
+tags: [ first-law, work, isochoric, isobaric ]
+narrative: ""
+vars:
+  - { name: V1, kind: range, min: 0.10, max: 0.30, step: 0.01, unit: m^3, label: initial volume }
+  - { name: dV, kind: range, min: 0.04, max: 0.15, step: 0.01, unit: m^3, label: volume decrease }
+  - { name: p15, kind: range, min: 1.0, max: 3.0, step: 0.1, label: initial pressure in 10⁵ Pa }
+  - { name: p25, kind: range, min: 4.0, max: 6.0, step: 0.1, label: final pressure in 10⁵ Pa }
+derived:
+  - { name: V2, expr: "V1 - dV", unit: m^3 }
+  - { name: P2, expr: "p25 * 1e5", unit: Pa }
+constraints:
+  - "V2 >= 0.04" # the gas keeps a sensible volume
+parts:
+  - id: work
+    prompt: >-
+      A gas undergoes two processes. In the first, the volume remains constant at {V1:unit} and the
+      pressure increases from $ {p15}\times10^{5}$ Pa to $ {p25}\times10^{5}$ Pa. The second process
+      is a compression to a volume of {V2:unit} at a constant pressure of $ {p25}\times10^{5}$ Pa.
+      Find the magnitude of total work done on the gas during both processes. {_0}{_u}
+    answer: P2 * (V1 - V2)
+    unit: J
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { V1: 0.19, dV: 0.1, p15: 1.7, p25: 5 }
+  parts:
+    - { id: work, answer: 50000, unit: J, source: P108 }

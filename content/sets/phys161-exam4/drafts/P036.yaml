@@ -1,84 +1,77 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P36
 number: 36
-section: Kinetic Theory of Gases
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A vertical cylindrical tank contains 1.73 mol of an ideal gas under a pressure of 1 atm at
-  20°C. The round part of the tank has a radius of 10.2 cm, and the gas is supporting a piston that
-  can move up and down in the cylinder without friction. How tall is the column of gas that is
-  supporting the piston? Assume a vacuum in the tank above the piston. Pressure 1 atm = 101325 Pa
-  and the universal gas constant is R = 8.31 J/(mol K). (1.2718852142085 m)
-text: A vertical cylindrical tank contains 1.73 mol of an ideal gas under a pressure of 1 atm at
-  20°C. The round part of the tank has a radius of 10.2 cm, and the gas is supporting a piston that
-  can move up and down in the cylinder without friction. How tall is the column of gas that is
-  supporting the piston? Assume a vacuum in the tank above the piston. Pressure 1 atm = 101325 Pa
-  and the universal gas constant is R = 8.31 J/(mol K). (1.2718852142085 m)
-answer: { value: 1.2718852142085, unit: m, raw: 1.2718852142085 m }
-figures: []
+section: Temperature and heat
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A major source of heat loss from a house in cold weather is through the windows. Calculate the
+  rate of heat flow through a glass window 2 m × 1.3 m in A area and d = 3.4 mm thick, if the
+  temperatures at the inner and outer surfaces are T<sub>1</sub> = 16°C and T<sub>2</sub> = 13°C,
+  respectively. Thermal conductivity of the glass k = 0.84 W / (m ⋅°C). (1927 J/s)
+text: A major source of heat loss from a house in cold weather is through the windows. Calculate the
+  rate of heat flow through a glass window 2 m × 1.3 m in A area and d = 3.4 mm thick, if the
+  temperatures at the inner and outer surfaces are T_1 = 16°C and T_2 = 13°C, respectively. Thermal
+  conductivity of the glass k = 0.84 W / (m ⋅°C). (1927 J/s)
+answer: { value: 1927, unit: J/s, raw: 1927 J/s }
+figures:
+  - { src: figures/unnamed_006_p-J8.png, original: PHYS161_Exam4_new.docx_files/unnamed_006_p-J8.png }
 literals:
-  - name: n
-    value: 1.73
-    unit: mol
-    text: "1.73"
-    suggest: { min: 1.21, max: 2.25, step: 0.01, decimals: 2 }
-  - name: p
-    value: 1
-    unit: atm
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: T
-    value: 20
+  - name: d
+    value: 2
+    unit: m
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: d2
+    value: 1.3
+    unit: m
+    text: "1.3"
+    suggest: { min: 0.9, max: 1.7, step: 0.1, decimals: 1 }
+  - name: d3
+    value: 3.4
+    unit: mm
+    text: "3.4"
+    suggest: { min: 2.4, max: 4.4, step: 0.1, decimals: 1 }
+  - name: T1
+    value: 16
     unit: °C
-    text: "20"
-    suggest: { min: 14, max: 26, step: 1 }
-  - name: r
-    value: 10.2
-    unit: cm
-    text: "10.2"
-    suggest: { min: 7.1, max: 13.3, step: 0.1, decimals: 1 }
-  - name: p2
-    value: 1
-    unit: atm
-    text: "1"
-    suggest: { min: 1, max: 1, step: 1 }
-  - name: atm
-    value: 101325
-    unit: Pa
-    text: "101325"
-    suggest: { min: 70928, max: 131723, step: 1 }
-  - name: R
-    value: 8.31
-    unit: J/(mol K)
-    text: "8.31"
-    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+    text: "16"
+    suggest: { min: 11, max: 21, step: 1 }
+  - name: T2
+    value: 13
+    unit: °C
+    text: "13"
+    suggest: { min: 9, max: 17, step: 1 }
+  - name: k
+    value: 0.84
+    unit: W
+    text: "0.84"
+    suggest: { min: 0.59, max: 1.09, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam4-p036
   source: { document: PHYS161_Exam4, labels: [ P36 ] }
-  section: Kinetic Theory of Gases
+  section: Temperature and heat
+  figure: { id: fig, src: figures/unnamed_006_p-J8.png, alt: "TODO: describe the figure" }
   narrative: >-
-    A vertical cylindrical tank contains {n:unit} of an ideal gas under a pressure of {p:unit} at
-    {T:unit}. The round part of the tank has a radius of {r:unit}, and the gas is supporting a
-    piston that can move up and down in the cylinder without friction. Assume a vacuum in the tank
-    above the piston. Pressure {p2:unit} = {atm:unit} and the universal gas constant is R =
-    {R:unit}.
+    A major source of heat loss from a house in cold weather is through the windows. Thermal
+    conductivity of the glass k = {k:unit} / (m ⋅°C). {@fig}
   vars:
-    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: r, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
-    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
-    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: d, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d2, kind: range, min: TODO, max: TODO, step: TODO, unit: m }
+    - { name: d3, kind: range, min: TODO, max: TODO, step: TODO, unit: mm }
+    - { name: T1, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
+    - { name: k, kind: range, min: TODO, max: TODO, step: TODO, unit: W }
   parts:
     - id: answer
       prompt: >-
-        How tall is the column of gas that is supporting the piston? {_0}{_u}
+        Calculate the rate of heat flow through a glass window {d:unit} × {d2:unit} in A area and d
+        = {d3:unit} thick, if the temperatures at the inner and outer surfaces are $T_{1}$ =
+        {T1:unit} and $T_{2}$ = {T2:unit}, respectively. {_0}{_u}
       answer: TODO
-      unit: m
+      unit: J/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { n: 1.73, p: 1, T: 20, r: 10.2, p2: 1, atm: 101325, R: 8.31 }
+    vars: { d: 2, d2: 1.3, d3: 3.4, T1: 16, T2: 13, k: 0.84 }
     parts:
-      - { id: answer, answer: 1.2718852142085, unit: m, source: P36 }
+      - { id: answer, answer: 1927, unit: J/s, source: P36 }

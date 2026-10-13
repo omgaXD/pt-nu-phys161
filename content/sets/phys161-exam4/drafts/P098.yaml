@@ -1,56 +1,75 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P98
 number: 98
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A Carnot engine whose low-temperature reservoir is at -70°C has an efficiency of 25%.The
-  efficiency is to be increased to 50%. By how many kelvins must the temperature of the
-  low-temperature reservoir be decreased if the temperature of the high-temperature reservoir
-  remains constant? Find the magnitude of the temperature change. (67.667 K)
-text: A Carnot engine whose low-temperature reservoir is at -70°C has an efficiency of 25%.The
-  efficiency is to be increased to 50%. By how many kelvins must the temperature of the
-  low-temperature reservoir be decreased if the temperature of the high-temperature reservoir
-  remains constant? Find the magnitude of the temperature change. (67.667 K)
-answer: { value: 67.667, unit: K, raw: 67.667 K }
-figures: []
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: One-half mole of a monatomic ideal gas is taken from state a to state c along the path shown.
+  If P_a = 3.95×10⁵ Pa, Pb = 1.95×10⁵ Pa, V_a = 0.0021 m³, Vb = 0.0029 m³ and V_c = 0.004 m³,
+  calculate the temperature of the gas at state b. The universal gas constant is R = 8.31 J/(mol K).
+  (136.101 K)
+text: One-half mole of a monatomic ideal gas is taken from state a to state c along the path shown.
+  If P_a = 3.95×10^5 Pa, Pb = 1.95×10^5 Pa, V_a = 0.0021 m^3, Vb = 0.0029 m^3 and V_c = 0.004 m^3,
+  calculate the temperature of the gas at state b. The universal gas constant is R = 8.31 J/(mol K).
+  (136.101 K)
+answer: { value: 136.101, unit: K, raw: 136.101 K }
+figures:
+  - { src: figures/unnamed_009_p-J8.png, original: PHYS161_Exam4_new.docx_files/unnamed_009_p-J8.png }
 literals:
-  - name: T
-    value: -70
-    unit: °C
-    text: "-70"
-    suggest: { min: -91, max: -49, step: 1 }
-  - name: pct
-    value: 25
-    unit: "%"
-    text: "25"
-    suggest: { min: 18, max: 33, step: 1 }
-  - name: pct2
-    value: 50
-    unit: "%"
-    text: "50"
-    suggest: { min: 35, max: 65, step: 1 }
+  - name: Pa
+    value: 395000
+    unit: Pa
+    text: 3.95×10^5
+    suggest: { min: 276500, max: 513500, step: 1 }
+  - name: Pb
+    value: 195000
+    unit: Pa
+    text: 1.95×10^5
+    suggest: { min: 136500, max: 253500, step: 1 }
+  - name: Va
+    value: 0.0021
+    unit: m^3
+    text: "0.0021"
+    suggest: { min: 0.0015, max: 0.0027, step: 0.0001, decimals: 4 }
+  - name: Vb
+    value: 0.0029
+    unit: m^3
+    text: "0.0029"
+    suggest: { min: 0.002, max: 0.0038, step: 0.0001, decimals: 4 }
+  - name: Vc
+    value: 0.004
+    unit: m^3
+    text: "0.004"
+    suggest: { min: 0.003, max: 0.005, step: 0.001, decimals: 3 }
+  - name: R
+    value: 8.31
+    unit: J/(mol K)
+    text: "8.31"
+    suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
 scenario:
   id: phys161-exam4-p098
   source: { document: PHYS161_Exam4, labels: [ P98 ] }
-  section: 2nd Law of Thermodynamics
+  section: 1st Law of Thermodynamics
+  figure: { id: fig, src: figures/unnamed_009_p-J8.png, alt: "TODO: describe the figure" }
   narrative: >-
-    A Carnot engine whose low-temperature reservoir is at {T:unit} has an efficiency of {pct}%.The
-    efficiency is to be increased to {pct2}%. By how many kelvins must the temperature of the
-    low-temperature reservoir be decreased if the temperature of the high-temperature reservoir
-    remains constant?
+    One-half mole of a monatomic ideal gas is taken from state a to state c along the path shown. If
+    $P_{a}$ = {Pa:unit}, Pb = {Pb:unit}, $V_{a}$ = {Va:unit}, Vb = {Vb:unit} and $V_{c}$ =
+    {Vc:unit}, calculate the temperature of the gas at state b. {@fig}
   vars:
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: pct, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
-    - { name: pct2, kind: range, min: TODO, max: TODO, step: TODO, unit: "%" }
+    - { name: Pa, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Pb, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: Va, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: Vb, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: Vc, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+    - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
   parts:
     - id: answer
-      prompt: Find the magnitude of the temperature change. {_0}{_u}
+      prompt: The universal gas constant is R = {R:unit}. {_0}{_u}
       answer: TODO
       unit: K
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { T: -70, pct: 25, pct2: 50 }
+    vars: { Pa: 395000, Pb: 195000, Va: 0.0021, Vb: 0.0029, Vc: 0.004, R: 8.31 }
     parts:
-      - { id: answer, answer: 67.667, unit: K, source: P98 }
+      - { id: answer, answer: 136.101, unit: K, source: P98 }

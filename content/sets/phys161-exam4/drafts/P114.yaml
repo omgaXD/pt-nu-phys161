@@ -1,0 +1,83 @@
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
+# Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
+
+label: P114
+number: 114
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Determine the work done by 1.1 L of water at 100° when it is fully boiled from liquid to gas at
+  constant atmospheric pressure, producing 1770 L of steam at 100°. 1 atm = 101325 Pa. 1 L = 0.001
+  m³. (179234 J)
+text: Determine the work done by 1.1 L of water at 100° when it is fully boiled from liquid to gas
+  at constant atmospheric pressure, producing 1770 L of steam at 100°. 1 atm = 101325 Pa. 1 L =
+  0.001 m^3. (179234 J)
+answer: { value: 179234, unit: J, raw: 179234 J }
+figures: []
+literals:
+  - name: V
+    value: 1.1
+    unit: L
+    text: "1.1"
+    suggest: { min: 0.8, max: 1.4, step: 0.1, decimals: 1 }
+  - name: theta
+    value: 100
+    unit: °
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: V2
+    value: 1770
+    unit: L
+    text: "1770"
+    suggest: { min: 1239, max: 2301, step: 1 }
+  - name: theta2
+    value: 100
+    unit: °
+    text: "100"
+    suggest: { min: 70, max: 130, step: 1 }
+  - name: p
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V3
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
+scenario:
+  id: phys161-exam4-p114
+  source: { document: PHYS161_Exam4, labels: [ P114 ] }
+  section: 1st Law of Thermodynamics
+  narrative: ""
+  vars:
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: theta2, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V3, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
+  parts:
+    - id: answer
+      prompt: >-
+        Determine the work done by {V:unit} of water at {theta}° when it is fully boiled from liquid
+        to gas at constant atmospheric pressure, producing {V2:unit} of steam at {theta2}°. {p:unit}
+        = {atm:unit}. {V3:unit} = {L:unit}. {_0}{_u}
+      answer: TODO
+      unit: J
+      tolerance: { rel: 0.01 }
+  canonical:
+    vars: { V: 1.1, theta: 100, V2: 1770, theta2: 100, p: 1, atm: 101325, V3: 1, L: 0.001 }
+    parts:
+      - { id: answer, answer: 179234, unit: J, source: P114 }

@@ -1,75 +1,83 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P61
 number: 61
-section: 1st Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: >-
-  Three moles of an ideal gas are taken around the cycle acba. For this gas, C<sub>p</sub> = 29.1
-  J/(mol⋅K). Process ac is at constant pressure, process ba is at constant volume, and process cb
-
-  is adiabatic. The temperatures of the gas in states a, c and b are T<sub>a</sub> = 298 K,
-  T<sub>c</sub> = 489 K, and T<sub>b</sub> = 598 K. Calculate the magnitude of the total work for
-  the cycle. The universal gas constant is R = 8.31 J/(mol K). (2036.7 J)
-text: Three moles of an ideal gas are taken around the cycle acba. For this gas, C_p = 29.1
-  J/(mol⋅K). Process ac is at constant pressure, process ba is at constant volume, and process cb is
-  adiabatic. The temperatures of the gas in states a, c and b are T_a = 298 K, T_c = 489 K, and T_b
-  = 598 K. Calculate the magnitude of the total work for the cycle. The universal gas constant is R
-  = 8.31 J/(mol K). (2036.7 J)
-answer: { value: 2036.7, unit: J, raw: 2036.7 J }
-figures:
-  - { src: figures/unnamed_009_xiMS.png, original: PHYS161%20Exam%204_files/unnamed_009_xiMS.png }
+section: Kinetic Theory of Gases
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Calculate the number of moles of air in one breath, with a volume of 585 mL, at 15° and 1.05
+  atm. The universal gas constant is R = 8.31 J/(mol K). 1 atm = 101325 Pa. 1 L = 0.001 m³.
+  (0.0260057 mol)
+text: Calculate the number of moles of air in one breath, with a volume of 585 mL, at 15° and 1.05
+  atm. The universal gas constant is R = 8.31 J/(mol K). 1 atm = 101325 Pa. 1 L = 0.001 m^3.
+  (0.0260057 mol)
+answer: { value: 0.0260057, unit: mol, raw: 0.0260057 mol }
+figures: []
 literals:
-  - name: Cp
-    value: 29.1
-    unit: J/(mol K)
-    text: "29.1"
-    suggest: { min: 20.4, max: 37.8, step: 0.1, decimals: 1 }
-  - name: Ta
-    value: 298
-    unit: K
-    text: "298"
-    suggest: { min: 209, max: 387, step: 1 }
-  - name: Tc
-    value: 489
-    unit: K
-    text: "489"
-    suggest: { min: 342, max: 636, step: 1 }
-  - name: Tb
-    value: 598
-    unit: K
-    text: "598"
-    suggest: { min: 419, max: 777, step: 1 }
+  - name: V
+    value: 585
+    unit: mL
+    text: "585"
+    suggest: { min: 410, max: 761, step: 1 }
+  - name: theta
+    value: 15
+    unit: °
+    text: "15"
+    suggest: { min: 11, max: 20, step: 1 }
+  - name: p
+    value: 1.05
+    unit: atm
+    text: "1.05"
+    suggest: { min: 0.74, max: 1.37, step: 0.01, decimals: 2 }
   - name: R
     value: 8.31
     unit: J/(mol K)
     text: "8.31"
     suggest: { min: 5.82, max: 10.8, step: 0.01, decimals: 2 }
+  - name: p2
+    value: 1
+    unit: atm
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: atm
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
+  - name: V2
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
 scenario:
   id: phys161-exam4-p061
   source: { document: PHYS161_Exam4, labels: [ P61 ] }
-  section: 1st Law of Thermodynamics
-  figure: { id: fig, src: figures/unnamed_009_xiMS.png, alt: "TODO: describe the figure" }
+  section: Kinetic Theory of Gases
   narrative: >-
-    Three moles of an ideal gas are taken around the cycle acba. For this gas, $C_{p}$ = {Cp:unit}.
-    Process ac is at constant pressure, process ba is at constant volume, and process cb is
-    adiabatic. The temperatures of the gas in states a, c and b are $T_{a}$ = {Ta:unit}, $T_{c}$ =
-    {Tc:unit}, and $T_{b}$ = {Tb:unit}. The universal gas constant is R = {R:unit}. {@fig}
+    The universal gas constant is R = {R:unit}. {p2:unit} = {atm:unit}. {V2:unit} = {L:unit}.
   vars:
-    - { name: Cp, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
-    - { name: Ta, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
-    - { name: Tc, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
-    - { name: Tb, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: mL }
+    - { name: theta, kind: range, min: TODO, max: TODO, step: TODO, unit: ° }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
     - { name: R, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(mol K) }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: atm, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
   parts:
     - id: answer
       prompt: >-
-        Calculate the magnitude of the total work for the cycle. {_0}{_u}
+        Calculate the number of moles of air in one breath, with a volume of {V:unit}, at {theta}°
+        and {p:unit}. {_0}{_u}
       answer: TODO
-      unit: J
+      unit: mol
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { Cp: 29.1, Ta: 298, Tc: 489, Tb: 598, R: 8.31 }
+    vars: { V: 585, theta: 15, p: 1.05, R: 8.31, p2: 1, atm: 101325, V2: 1, L: 0.001 }
     parts:
-      - { id: answer, answer: 2036.7, unit: J, source: P61 }
+      - { id: answer, answer: 0.0260057, unit: mol, source: P61 }

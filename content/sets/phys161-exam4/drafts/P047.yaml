@@ -1,60 +1,65 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P47
 number: 47
 section: Kinetic Theory of Gases
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A storage tank at pressure of 104712 Pa contains 26.2 kg of diatomic nitrogen. What is the
-  pressure if an additional 32.9 kg of nitrogen is added without changing the temperature? Molar
-  mass of diatomic nitrogen is M<sub>N2</sub> = 28 g/mol. (236201.49618321 Pa)
-text: A storage tank at pressure of 104712 Pa contains 26.2 kg of diatomic nitrogen. What is the
-  pressure if an additional 32.9 kg of nitrogen is added without changing the temperature? Molar
-  mass of diatomic nitrogen is M_N2 = 28 g/mol. (236201.49618321 Pa)
-answer: { value: 236201.49618321, unit: Pa, raw: 236201.49618321 Pa }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: Find the root mean square speed of argon atom in an 8.1 liter container filled with 1.6 mol of
+  argon gas at pressure of 4.7 atm. Molar mass of argon is 39.948 g/mol. The standard atmosphere
+  pressure is 101325 Pa. (425.50322889891 m/s)
+text: Find the root mean square speed of argon atom in an 8.1 liter container filled with 1.6 mol of
+  argon gas at pressure of 4.7 atm. Molar mass of argon is 39.948 g/mol. The standard atmosphere
+  pressure is 101325 Pa. (425.50322889891 m/s)
+answer: { value: 425.50322889891, unit: m/s, raw: 425.50322889891 m/s }
 figures: []
 literals:
+  - name: V
+    value: 8.1
+    unit: L
+    text: "8.1"
+    suggest: { min: 5.7, max: 10.5, step: 0.1, decimals: 1 }
+  - name: n
+    value: 1.6
+    unit: mol
+    text: "1.6"
+    suggest: { min: 1.1, max: 2.1, step: 0.1, decimals: 1 }
   - name: p
-    value: 104712
-    unit: Pa
-    text: "104712"
-    suggest: { min: 73298, max: 136126, step: 1 }
-  - name: m
-    value: 26.2
-    unit: kg
-    text: "26.2"
-    suggest: { min: 18.3, max: 34.1, step: 0.1, decimals: 1 }
-  - name: m2
-    value: 32.9
-    unit: kg
-    text: "32.9"
-    suggest: { min: 23, max: 42.8, step: 0.1, decimals: 1 }
-  - name: MN2
-    value: 28
+    value: 4.7
+    unit: atm
+    text: "4.7"
+    suggest: { min: 3.3, max: 6.1, step: 0.1, decimals: 1 }
+  - name: M
+    value: 39.948
     unit: g/mol
-    text: "28"
-    suggest: { min: 20, max: 36, step: 1 }
+    text: "39.948"
+    suggest: { min: 27.964, max: 51.932, step: 0.001, decimals: 3 }
+  - name: p2
+    value: 101325
+    unit: Pa
+    text: "101325"
+    suggest: { min: 70928, max: 131723, step: 1 }
 scenario:
   id: phys161-exam4-p047
   source: { document: PHYS161_Exam4, labels: [ P47 ] }
   section: Kinetic Theory of Gases
   narrative: >-
-    A storage tank at pressure of {p:unit} contains {m:unit} of diatomic nitrogen. Molar mass of
-    diatomic nitrogen is $M_{N2}$ = {MN2:unit}.
+    Molar mass of argon is {M:unit}. The standard atmosphere pressure is {p2:unit}.
   vars:
-    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
-    - { name: m, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: m2, kind: range, min: TODO, max: TODO, step: TODO, unit: kg }
-    - { name: MN2, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: n, kind: range, min: TODO, max: TODO, step: TODO, unit: mol }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: atm }
+    - { name: M, kind: range, min: TODO, max: TODO, step: TODO, unit: g/mol }
+    - { name: p2, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
   parts:
     - id: answer
       prompt: >-
-        What is the pressure if an additional {m2:unit} of nitrogen is added without changing the
-        temperature? {_0}{_u}
+        Find the root mean square speed of argon atom in an {V:unit} container filled with {n:unit}
+        of argon gas at pressure of {p:unit}. {_0}{_u}
       answer: TODO
-      unit: Pa
+      unit: m/s
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { p: 104712, m: 26.2, m2: 32.9, MN2: 28 }
+    vars: { V: 8.1, n: 1.6, p: 4.7, M: 39.948, p2: 101325 }
     parts:
-      - { id: answer, answer: 236201.49618321, unit: Pa, source: P47 }
+      - { id: answer, answer: 425.50322889891, unit: m/s, source: P47 }

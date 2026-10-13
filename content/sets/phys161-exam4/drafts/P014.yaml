@@ -1,60 +1,58 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P14
 number: 14
 section: Temperature and heat
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A machinist bores a hole of diameter 1.5 cm in a steel plate at a temperature of 21°C. What is
-  the cross-sectional area of the hole when the temperature of the plate is increased to 176°C?
-  Linear coefficient of expansion for steel is 1.2 · 10<sup>-5</sup> 1/°C. (0.0001773719650 m^2)
-text: A machinist bores a hole of diameter 1.5 cm in a steel plate at a temperature of 21°C. What is
-  the cross-sectional area of the hole when the temperature of the plate is increased to 176°C?
-  Linear coefficient of expansion for steel is 1.2 · 10^-5 1/°C. (0.0001773719650 m^2)
-answer: { value: 0.000177371965, unit: m^2, raw: 0.0001773719650 m^2 }
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A lead ball falls from rest and lands on the floor without bouncing, so that all of the energy
+  of the fall goes into heating the ball. From what height must it fall for its temperature to rise
+  by 2 K? The specific heat of lead is 127.5 J/(kg K) and the gravitational acceleration is g = 9.8
+  m/s². (26.0204 m)
+text: A lead ball falls from rest and lands on the floor without bouncing, so that all of the energy
+  of the fall goes into heating the ball. From what height must it fall for its temperature to rise
+  by 2 K? The specific heat of lead is 127.5 J/(kg K) and the gravitational acceleration is g = 9.8
+  m/s^2. (26.0204 m)
+answer: { value: 26.0204, unit: m, raw: 26.0204 m }
 figures: []
 literals:
-  - name: D
-    value: 1.5
-    unit: cm
-    text: "1.5"
-    suggest: { min: 1, max: 2, step: 0.1, decimals: 1 }
   - name: T
-    value: 21
-    unit: °C
-    text: "21"
-    suggest: { min: 15, max: 27, step: 1 }
-  - name: T2
-    value: 176
-    unit: °C
-    text: "176"
-    suggest: { min: 123, max: 229, step: 1 }
-  - name: alpha
-    value: 0.000012
-    unit: 1/°C
-    text: 1.2 · 10^-5
-    suggest: { min: 0.000008, max: 0.000016, step: 0.000001, decimals: 6 }
+    value: 2
+    unit: K
+    text: "2"
+    suggest: { min: 1, max: 3, step: 1 }
+  - name: c
+    value: 127.5
+    unit: J/(kg K)
+    text: "127.5"
+    suggest: { min: 89.3, max: 165.8, step: 0.1, decimals: 1 }
+  - name: g
+    value: 9.8
+    unit: m/s^2
+    text: "9.8"
+    constant: true
+    suggest: { min: 6.9, max: 12.7, step: 0.1, decimals: 1 }
 scenario:
   id: phys161-exam4-p014
   source: { document: PHYS161_Exam4, labels: [ P14 ] }
   section: Temperature and heat
   narrative: >-
-    A machinist bores a hole of diameter {D:unit} in a steel plate at a temperature of {T:unit}.
-    Linear coefficient of expansion for steel is {alpha:unit}.
+    A lead ball falls from rest and lands on the floor without bouncing, so that all of the energy
+    of the fall goes into heating the ball. The specific heat of lead is {c:unit} and the
+    gravitational acceleration is g = {g:unit}.
   vars:
-    - { name: D, kind: range, min: TODO, max: TODO, step: TODO, unit: cm }
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: T2, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: alpha, kind: range, min: TODO, max: TODO, step: TODO, unit: 1/°C }
+    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: K }
+    - { name: c, kind: range, min: TODO, max: TODO, step: TODO, unit: J/(kg K) }
+  derived:
+    - { name: g, expr: "9.8", unit: m/s^2 }
   parts:
     - id: answer
       prompt: >-
-        What is the cross-sectional area of the hole when the temperature of the plate is increased
-        to {T2:unit}? {_0}{_u}
+        From what height must it fall for its temperature to rise by {T:unit}? {_0}{_u}
       answer: TODO
-      unit: m^2
+      unit: m
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { D: 1.5, T: 21, T2: 176, alpha: 0.000012 }
+    vars: { T: 2, c: 127.5, g: 9.8 }
     parts:
-      - { id: answer, answer: 0.000177371965, unit: m^2, source: P14 }
+      - { id: answer, answer: 26.0204, unit: m, source: P14 }

@@ -1,53 +1,65 @@
-# Draft imported from PHYS161 Exam 4.html — not yet a scenario.
+# Draft imported from PHYS161_Exam4_new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P95
 number: 95
-section: 2nd Law of Thermodynamics
-source: { document: PHYS161_Exam4, file: PHYS161 Exam 4.html }
-raw: A Carnot engine has CO<sub>2</sub> as its working substance. The gas is to have a maximum
-  temperature of 491°C. With a heat input of 440 J per cycle, you want 290 J of useful work. Find
-  the temperature of the cold reservoir. Answer in kelvins (K). (260.45 K)
-text: A Carnot engine has CO_2 as its working substance. The gas is to have a maximum temperature of
-  491°C. With a heat input of 440 J per cycle, you want 290 J of useful work. Find the temperature
-  of the cold reservoir. Answer in kelvins (K). (260.45 K)
-answer: { value: 260.45, unit: K, raw: 260.45 K }
+section: 1st Law of Thermodynamics
+source: { document: PHYS161_Exam4, file: PHYS161_Exam4_new.docx.html }
+raw: A cylinder with a frictionless, movable piston contains helium gas at a pressure of 1.02×10⁵ Pa
+  occupying 3.7 L. The gas is heated at constant pressure until it occupies 6.7 L. How much work
+  does the gas do? 1 L = 0.001 m³. (306 J)
+text: A cylinder with a frictionless, movable piston contains helium gas at a pressure of 1.02×10^5
+  Pa occupying 3.7 L. The gas is heated at constant pressure until it occupies 6.7 L. How much work
+  does the gas do? 1 L = 0.001 m^3. (306 J)
+answer: { value: 306, unit: J, raw: 306 J }
 figures: []
 literals:
-  - name: T
-    value: 491
-    unit: °C
-    text: "491"
-    suggest: { min: 344, max: 638, step: 1 }
-  - name: E
-    value: 440
-    unit: J
-    text: "440"
-    suggest: { min: 308, max: 572, step: 1 }
-  - name: E2
-    value: 290
-    unit: J
-    text: "290"
-    suggest: { min: 203, max: 377, step: 1 }
+  - name: p
+    value: 102000
+    unit: Pa
+    text: 1.02×10^5
+    suggest: { min: 71400, max: 132600, step: 1 }
+  - name: V
+    value: 3.7
+    unit: L
+    text: "3.7"
+    suggest: { min: 2.6, max: 4.8, step: 0.1, decimals: 1 }
+  - name: V2
+    value: 6.7
+    unit: L
+    text: "6.7"
+    suggest: { min: 4.7, max: 8.7, step: 0.1, decimals: 1 }
+  - name: V3
+    value: 1
+    unit: L
+    text: "1"
+    suggest: { min: 1, max: 1, step: 1 }
+  - name: L
+    value: 0.001
+    unit: m^3
+    text: "0.001"
+    suggest: { min: 0.001, max: 0.001, step: 0.001, decimals: 3 }
 scenario:
   id: phys161-exam4-p095
   source: { document: PHYS161_Exam4, labels: [ P95 ] }
-  section: 2nd Law of Thermodynamics
+  section: 1st Law of Thermodynamics
   narrative: >-
-    A Carnot engine has CO_2 as its working substance. The gas is to have a maximum temperature of
-    {T:unit}. With a heat input of {E:unit} per cycle, you want {E2:unit} of useful work. Answer in
-    kelvins (K).
+    A cylinder with a frictionless, movable piston contains helium gas at a pressure of {p:unit}
+    occupying {V:unit}. The gas is heated at constant pressure until it occupies {V2:unit}.
   vars:
-    - { name: T, kind: range, min: TODO, max: TODO, step: TODO, unit: °C }
-    - { name: E, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
-    - { name: E2, kind: range, min: TODO, max: TODO, step: TODO, unit: J }
+    - { name: p, kind: range, min: TODO, max: TODO, step: TODO, unit: Pa }
+    - { name: V, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: V2, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: V3, kind: range, min: TODO, max: TODO, step: TODO, unit: L }
+    - { name: L, kind: range, min: TODO, max: TODO, step: TODO, unit: m^3 }
   parts:
     - id: answer
-      prompt: Find the temperature of the cold reservoir. {_0}{_u}
+      prompt: >-
+        How much work does the gas do? {V3:unit} = {L:unit}. {_0}{_u}
       answer: TODO
-      unit: K
+      unit: J
       tolerance: { rel: 0.01 }
   canonical:
-    vars: { T: 491, E: 440, E2: 290 }
+    vars: { p: 102000, V: 3.7, V2: 6.7, V3: 1, L: 0.001 }
     parts:
-      - { id: answer, answer: 260.45, unit: K, source: P95 }
+      - { id: answer, answer: 306, unit: J, source: P95 }

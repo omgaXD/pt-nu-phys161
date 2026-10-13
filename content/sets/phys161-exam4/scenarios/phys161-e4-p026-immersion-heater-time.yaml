@@ -1,0 +1,29 @@
+# P26 — all the heater's power warms the water: P t = m c_w ΔT, so t = m c_w (T₂ − T₁) / P.
+id: phys161-e4-p026-immersion-heater-time
+title: Time for an immersion heater to warm water
+source: { document: PHYS161_Exam4, labels: [ P26 ] }
+section: Temperature and heat
+tags: [ heat, specific-heat, power ]
+narrative: >-
+  A student makes a cup of coffee by first placing a {P}-W electric immersion heater in {m:unit} of
+  water. Specific heat of water is {cw:unit}.
+vars:
+  - { name: P, kind: range, min: 100, max: 500, step: 10, unit: W, label: heater power }
+  - { name: m, kind: range, min: 0.5, max: 2.5, step: 0.1, unit: kg, label: water mass }
+  - { name: T1, kind: range, min: 10, max: 25, step: 1, unit: °C, label: initial temperature }
+  - { name: T2, kind: range, min: 60, max: 95, step: 1, unit: °C, label: final temperature }
+derived:
+  - { name: cw, expr: "4186", unit: J/(kg K) }
+parts:
+  - id: time
+    prompt: >-
+      How much time is required to raise the temperature from {T1:unit} to {T2:unit}? Assume that
+      all of the heater's power goes into heating the water. {_0}{_u}
+    answer: m * cw * (T2 - T1) / P
+    unit: s
+    tolerance: { rel: 0.01 }
+    difficulty: 2
+canonical:
+  vars: { P: 180, m: 1.7, T1: 20, T2: 80, cw: 4186 }
+  parts:
+    - { id: time, answer: 2372.0666666667, unit: s, source: P26 }
