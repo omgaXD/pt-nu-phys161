@@ -250,6 +250,33 @@ test('Show correct answer locks the question and earns nothing', async ({ page }
   await expect(page.getByTestId('review-summary')).toContainText('1 answer shown');
 });
 
+test('copying question text gives each formula once, as TeX', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await startFrom(page, '?p=ordered&sets=corpus&values=source');
+  await nav(page).getByRole('button', { name: /^3,/ }).click();
+  const text = card(page).locator('.formulation');
+  await expect(text.locator('.katex')).toHaveCount(3);
+
+  await text.selectText();
+  await page.keyboard.press('ControlOrMeta+C');
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toContain('by a force $F$ of magnitude');
+  expect(copied).toContain('between the ramp and the suitcase is $\\mu_k = 0.36$. The suitcase');
+  expect(copied).toContain('by the force $F$.');
+  expect(copied).not.toContain('μ'); // neither the screen-reader copy nor the visible one
+
+  // A selection that starts inside a formula takes all of it.
+  await text.locator('.katex-html').first().evaluate((el) => {
+    const range = document.createRange();
+    range.setStart(el.firstChild!, 0);
+    range.setEndAfter(el);
+    getSelection()!.removeAllRanges();
+    getSelection()!.addRange(range);
+  });
+  await page.keyboard.press('ControlOrMeta+C');
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('$F$');
+});
+
 test('exam from a seeded link: 7 problems from different sections, feedback only at the end', async ({ page, request }) => {
   const corpus = (await (await request.get('content/sets/corpus.json')).json()) as { questions: { label: string; section: string }[] };
   const sectionOf = new Map(corpus.questions.map((q) => [q.label, q.section]));

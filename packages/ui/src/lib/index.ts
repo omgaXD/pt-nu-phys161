@@ -3,6 +3,7 @@
 // data fetching, no stores, no routing.
 
 // Math (KaTeX behind one function, swappable for MathJax)
+export { copyMathAsTex } from './math/copy.js';
 export { default as MathBlock } from './math/MathBlock.svelte';
 export { default as MathInline } from './math/MathInline.svelte';
 export { renderTex } from './math/render.js';

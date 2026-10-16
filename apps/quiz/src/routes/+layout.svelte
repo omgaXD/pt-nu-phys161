@@ -2,6 +2,7 @@
   import '@pt/ui/styles.css';
   import '@pt/ui/themes/moodle.css';
   import '../app.css';
+  import { copyMathAsTex } from '@pt/ui';
   import { onMount, type Snippet } from 'svelte';
   import { resolve } from '$app/paths';
   import { app } from '$lib/app.svelte';
@@ -12,11 +13,15 @@
   onMount(() => {
     const flush = (): void => app.save();
     window.addEventListener('pagehide', flush);
+    const uninstallCopy = copyMathAsTex();
     void app.init().then(() => {
       // Marks the page as interactive with content loaded (end-to-end tests wait for this).
       document.body.dataset.hydrated = 'true';
     });
-    return () => window.removeEventListener('pagehide', flush);
+    return () => {
+      window.removeEventListener('pagehide', flush);
+      uninstallCopy();
+    };
   });
 
   // Auto-submit at the deadline wherever the user is in the app.

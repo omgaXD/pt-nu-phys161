@@ -1,14 +1,16 @@
 <script lang="ts">
   import '@pt/ui/styles.css';
   import '../app.css';
+  import { copyMathAsTex } from '@pt/ui';
   import { onMount, type Snippet } from 'svelte';
   import { resolve } from '$app/paths';
 
   let { children }: { children: Snippet } = $props();
 
-  // Marks the page as interactive (end-to-end tests wait for this).
   onMount(() => {
+    // Marks the page as interactive (end-to-end tests wait for this).
     document.body.dataset.hydrated = 'true';
+    return copyMathAsTex();
   });
 </script>
 
