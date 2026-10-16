@@ -1,7 +1,7 @@
 # Physics Trainer — PHYS161
 
 Randomized physics problems and a Moodle-style quiz to practise them on. The repository holds
-the problems of the four PHYS161 exam sets, the tools that turned the exam documents into
+the problems of the four PHYS161 problem sets, the tools that turned the exam documents into
 randomized problems, an editor for writing them, and the quiz app that serves them as a static
 site.
 
@@ -37,7 +37,7 @@ Vitest and Playwright for tests.
 Data, not code:
 
 ```
-content/sets/<set>/     the PHYS161 Exam 1–4 sets: set.yaml, scenarios/, drafts/, figures/
+content/sets/<set>/     the PHYS161 Problem Sets 1–4: set.yaml, scenarios/, drafts/, figures/
 fixtures/corpus/        21 reference scenarios that span the feature space (the integration test suite)
 extra/                  local only, git-ignored: the exam source documents (Google Docs HTML + images), the input to `pt import`
 deploy/                 Caddyfile and production docker-compose for the quiz
@@ -354,7 +354,7 @@ printed answer as the formula). An **authored** scenario replaces it as soon as 
 `canonical.parts[].source` labels names the problem, so randomizing a set is incremental:
 
 ```bash
-pt import extra/fixed/PHYS161_Exam2_new.docx.html --set phys161-exam2 --document PHYS161_Exam2 --title "PHYS161 Exam 2"
+pt import extra/fixed/PHYS161_Exam2_new.docx.html --set phys161-exam2 --document PHYS161_Exam2 --title "PHYS161 Problem Set 2"
 pt group phys161-exam2                          # families of problems that share a situation
 pt agent-task P12 --set phys161-exam2           # packet for an LLM (or a person)
 # … write content/sets/phys161-exam2/scenarios/<id>.yaml by hand, by agent, or in Studio …
@@ -413,7 +413,7 @@ overridable English).
 
 ### Content
 
-- **PHYS161 Exams 1–4:** every problem is randomized (150 in each exam):
+- **PHYS161 Problem Sets 1–4:** every problem is randomized (150 in each set):
   same situation, new numbers every attempt, each checked against the answer printed in the
   exam document.
 - Figures from the exam documents, and per-section reference sheets (e.g. a

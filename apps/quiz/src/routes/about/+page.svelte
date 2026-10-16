@@ -37,7 +37,7 @@
 			in Moodle, the buttons are like in Moodle.
 		</li>
 		<li>
-			<b>Randomised problems.</b> I've employed LLMs to review the problems from our Exam sets & to translate them
+			<b>Randomised problems.</b> I've employed LLMs to review the problems from our problem sets & to translate them
 			to a format that my quiz engine understands. So, just like on the real exam, you can meet the same problem with
 			different values.
 		</li>

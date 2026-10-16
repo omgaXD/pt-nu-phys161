@@ -3,7 +3,7 @@
 # `pt check --root fixtures` asserts they reproduce.
 id: corpus
 title: Reference corpus
-description: PHYS161 Exam 2 problems chosen to span the feature space (C1–C14 plus companions).
+description: PHYS161 Problem Set 2 problems chosen to span the feature space (C1–C14 plus companions).
 source: { document: PHYS161_Exam2 }
 sections:
   - Work
