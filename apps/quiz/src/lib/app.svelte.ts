@@ -25,6 +25,7 @@ import {
   type QuizStateFile,
   QuizStorage,
   reduceAttempt,
+  removedFrom,
   resumeAttempt,
   snapshotAtStart,
   type StorageLike,
@@ -98,6 +99,8 @@ export class QuizApp {
       const loaded = await Promise.all(index.sets.map(async (s) => BundleSetSchema.parse(await fetchJson(`sets/${s.id}.json`))));
       this.index = index;
       this.sets = Object.fromEntries(loaded.map((s) => [s.setId, s]));
+      // Problems taken out of the source leave the attempts stored here.
+      this.persist(() => this.storage.removeQuestions(removedFrom(this.catalog())));
       this.mastery = this.storage.mastery();
       this.history = this.storage.history();
       const current = this.storage.loadCurrent();

@@ -227,6 +227,38 @@ export function reduceAttempt(a: Attempt, action: AttemptAction): Attempt {
   }
 }
 
+/** Questions whose problem left the content: their set is in `catalog`, their label is not. */
+export function removedFrom(catalog: readonly CatalogSet[]): (q: AttemptQuestion) => boolean {
+  const keys = new Map(catalog.map((s) => [s.setId, new Set(s.questions.map((q) => q.key))]));
+  return (q) => keys.get(q.setId)?.has(q.key) === false;
+}
+
+/**
+ * The attempt without the questions `drop` picks (problems that left the content), or null when
+ * none would be left. Each question's records go with it; the page stays on the same question,
+ * or moves to the next one left when that one goes.
+ */
+export function removeQuestions(a: Attempt, drop: (q: AttemptQuestion) => boolean): Attempt | null {
+  const keep = a.questions.flatMap((q, i) => (drop(q) ? [] : [i]));
+  if (keep.length === a.questions.length) return a;
+  if (keep.length === 0) return null;
+  const pick = <T>(list: readonly T[]): T[] => keep.map((i) => list[i] as T);
+  const page = keep.findIndex((i) => i >= a.page);
+  return {
+    ...a,
+    questions: pick(a.questions),
+    snapshots: pick(a.snapshots),
+    answers: pick(a.answers),
+    checks: pick(a.checks),
+    revealed: pick(a.revealed),
+    flagged: pick(a.flagged),
+    unavailable: pick(a.unavailable),
+    final: pick(a.final),
+    marks: pick(a.marks),
+    page: page === -1 ? keep.length - 1 : page,
+  };
+}
+
 export type QuestionState =
   | 'notyetanswered'
   | 'answersaved'

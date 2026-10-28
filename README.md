@@ -147,9 +147,9 @@ The logic behind the quiz app, with no Svelte and no DOM. Storage is injected.
 | `draw.ts` | `selectQuestions`: the pool the configuration allows, a sample spread over problems, sections or sets (never two problems of one family), then the order. |
 | `random.ts` | `hash32`, `questionSeed`, seeded streams and shuffle. A question's numbers come from `hash(attempt seed, set/label)`, so they don't depend on its position. |
 | `materialize.ts` | `materialize`: builds the snapshot of one question (its instance and grading fields), falling back to the source's numbers if constraints can't be met. |
-| `attempt.ts` | `startAttempt` and `reduceAttempt`, a pure reducer over `answer`, `check`, `reveal`, `reset`, `flag`, `goto`, `tick`, `finish`; `questionState`, `summarizeAttempt`. Attempts are plain JSON. |
+| `attempt.ts` | `startAttempt` and `reduceAttempt`, a pure reducer over `answer`, `check`, `reveal`, `reset`, `flag`, `goto`, `tick`, `finish`; `questionState`, `summarizeAttempt`; `removeQuestions` and `removedFrom` for problems that left the content. Attempts are plain JSON. |
 | `mastery.ts` | Per-problem progress keyed by `set/label`, so a problem stays solved after it is randomized. |
-| `storage.ts` | `QuizStorage` over any `localStorage`-like object: the current attempt, history (the last 10 kept in full), mastery, preferences, quota handling. |
+| `storage.ts` | `QuizStorage` over any `localStorage`-like object: the current attempt, history (the last 10 kept in full), mastery, preferences, quota handling. `removeQuestions` takes removed problems out of every stored attempt (the app runs it on load). |
 | `url.ts` | `encodeConfig` / `decodeConfig`: share links that name the nearest preset and only the fields that differ. |
 | `transfer.ts` | Export/import state files with schema validation and merging. |
 | `bundle.ts` | The static content format the app loads (`index.json`, `sets/<id>.json`). |

@@ -1,4 +1,4 @@
-import { type Attempt, summarizeAttempt } from './attempt.js';
+import { type Attempt, type AttemptQuestion, removeQuestions, summarizeAttempt } from './attempt.js';
 import type { PresetId } from './config.js';
 import type { Mastery } from './mastery.js';
 import type { QuestionSnapshot } from './materialize.js';
@@ -192,6 +192,55 @@ export class QuizStorage {
   updateFinished(a: Attempt): void {
     if (a.finishedAt === null || !this.history().some((h) => h.id === a.id && h.full)) return;
     this.saveAttempt(a);
+  }
+
+  /**
+   * Take the questions `drop` picks (problems that left the content) out of the attempt in
+   * progress and every finished attempt kept in full, and recount their history entries. An
+   * attempt left without questions is dropped; summary-only entries stay as they are. Returns how
+   * many attempts changed.
+   */
+  removeQuestions(drop: (q: AttemptQuestion) => boolean): number {
+    // The stored record without its snapshots is enough to tell, so untouched attempts are not parsed.
+    const affected = (id: string): boolean => {
+      const questions = this.read<{ questions?: unknown }>(`attempt:${id}`)?.questions;
+      return Array.isArray(questions) && (questions as AttemptQuestion[]).some(drop);
+    };
+    let changed = 0;
+    const currentId = this.read<string>('current');
+    const current = currentId !== null && affected(currentId) ? this.loadAttempt(currentId) : null;
+    if (current) {
+      const next = removeQuestions(current, drop);
+      // Fewer questions, maybe as many snapshots: write them again.
+      this.written.delete(current.id);
+      if (next) this.saveCurrent(next);
+      else this.abandonCurrent();
+      changed++;
+    }
+    const recount = new Map<string, Pick<HistoryEntry, 'marks' | 'total' | 'questions'> | null>();
+    for (const h of this.history()) {
+      const a = h.full && affected(h.id) ? this.loadAttempt(h.id) : null;
+      if (!a) continue;
+      const next = removeQuestions(a, drop);
+      this.written.delete(a.id);
+      if (next) {
+        this.saveAttempt(next);
+        const s = summarizeAttempt(next);
+        recount.set(h.id, { marks: s.marks, total: s.total, questions: next.questions.length });
+      } else {
+        this.removeFull(h.id);
+        recount.set(h.id, null);
+      }
+    }
+    if (recount.size > 0) {
+      this.updateHistory((stored) =>
+        stored.flatMap((h) => {
+          const r = recount.get(h.id);
+          return r === undefined ? [h] : r === null ? [] : [{ ...h, ...r }];
+        }),
+      );
+    }
+    return changed + recount.size;
   }
 
   // ---- History, mastery, preferences ------------------------------------

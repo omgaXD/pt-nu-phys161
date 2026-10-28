@@ -9,6 +9,8 @@ import {
   questionMark,
   questionState,
   reduceAttempt,
+  removedFrom,
+  removeQuestions,
   snapshotAtStart,
   startAttempt,
   summarizeAttempt,
@@ -206,5 +208,38 @@ describe('paging and availability', () => {
     const a = start();
     const other = materialize(a.questions[1]!, corpusById.get(a.questions[1]!.scenarioId)!, 999, 'x');
     expect(run(a, { type: 'snapshot', index: 0, snapshot: other })).toBe(a);
+  });
+
+  it('removeQuestions takes questions out with their records; the page stays on its question', () => {
+    const a = run(
+      start(),
+      { type: 'answer', index: 1, answer: correct(start(), 1) },
+      { type: 'check', index: 1, now: T0 + 1 },
+      { type: 'flag', index: 3, flagged: true },
+      { type: 'goto', page: 3 },
+    );
+    const gone = new Set([a.questions[0]!.key, a.questions[2]!.key]);
+    const b = removeQuestions(a, (q) => gone.has(q.key))!;
+    expect(b.questions.map((q) => q.key)).toEqual(a.questions.filter((q) => !gone.has(q.key)).map((q) => q.key));
+    expect(b.snapshots[0]).toBe(a.snapshots[1]);
+    expect(questionState(b, 0)).toBe('correct');
+    expect(b.flagged[1]).toBe(true);
+    expect(b.page).toBe(1);
+    expect(summarizeAttempt(b).correct).toBe(1);
+    // On a removed question: the next one left, or the last one.
+    expect(removeQuestions(run(a, { type: 'goto', page: 2 }), (q) => gone.has(q.key))!.page).toBe(1);
+    const last = a.questions.at(-1)!.key;
+    expect(removeQuestions(run(a, { type: 'goto', page: 999 }), (q) => q.key === last)!.page).toBe(a.questions.length - 2);
+    expect(removeQuestions(a, () => false)).toBe(a);
+    expect(removeQuestions(a, () => true)).toBeNull();
+  });
+
+  it('removedFrom picks the questions whose label left a set that is still there', () => {
+    const a = start();
+    const [first, ...rest] = catalog[0]!.questions;
+    const removed = removedFrom([{ setId: 'corpus', questions: rest }]);
+    expect(a.questions.filter(removed).map((q) => q.key)).toEqual([first!.key]);
+    // A set that is not loaded at all says nothing about its questions.
+    expect(a.questions.some(removedFrom([]))).toBe(false);
   });
 });

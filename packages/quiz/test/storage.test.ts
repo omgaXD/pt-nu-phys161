@@ -130,6 +130,36 @@ describe('storage', () => {
     expect(s.loadCurrent()).not.toBeNull();
   });
 
+  it('takes removed problems out of the stored attempts and recounts their history entries', () => {
+    const mem = memoryStorage();
+    const s = new QuizStorage(mem, { keepFull: 2 });
+    const finish = (a: Attempt): Attempt => reduceAttempt(a, { type: 'finish', now: 5000, reason: 'submitted' });
+    for (const id of ['f1', 'f2', 'f3']) s.archive(finish(answerRight(answerRight(attempt(id), 0), 1)));
+    const current = reduceAttempt(answerRight(attempt('c1'), 1), { type: 'goto', page: 1 });
+    // The removed question was never snapshotted: as many snapshots are left, but they move.
+    s.saveCurrent({ ...current, snapshots: current.snapshots.map((x, i) => (i === 0 ? null : x)) });
+    const gone = current.questions[0]!.key;
+
+    expect(s.removeQuestions((q) => q.key === gone)).toBe(3);
+    const c = new QuizStorage(mem).loadCurrent()!;
+    expect(c.questions.map((q) => q.key)).toEqual(current.questions.slice(1).map((q) => q.key));
+    expect(c.snapshots).toEqual(current.snapshots.slice(1));
+    expect(c.page).toBe(0);
+    expect(s.history().map((h) => [h.id, h.full, h.marks, h.total, h.questions])).toEqual([
+      ['f3', true, 1, 6, 6],
+      ['f2', true, 1, 6, 6],
+      ['f1', false, 2, 7, 7], // a summary only: nothing to take out
+    ]);
+    expect(s.loadAttempt('f3')!.questions.some((q) => q.key === gone)).toBe(false);
+    expect(s.removeQuestions((q) => q.key === gone)).toBe(0);
+
+    // Nothing left: the attempt goes.
+    expect(s.removeQuestions(() => true)).toBe(3);
+    expect(s.loadCurrent()).toBeNull();
+    expect(s.history().map((h) => h.id)).toEqual(['f1']);
+    expect(mem.keys().sort()).toEqual(['pt:v1:history']);
+  });
+
   it('stores mastery and preferences, and ignores corrupt data', () => {
     const mem = memoryStorage();
     const s = new QuizStorage(mem);
