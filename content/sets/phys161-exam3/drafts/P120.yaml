@@ -1,15 +1,15 @@
-# Draft imported from PHYS161_Exam3_new.docx.html — not yet a scenario.
+# Draft imported from PHYS161_Exam3_new-new.docx.html — not yet a scenario.
 # Resolve the TODOs, move `scenario` to ../scenarios/<id>.yaml, run `pt check`.
 
 label: P120
 number: 120
 section: Sound
-source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new.docx.html }
+source: { document: PHYS161_Exam3, file: PHYS161_Exam3_new-new.docx.html }
 raw: Calculate the intensity of a sound wave traveling in air at 335.5 m/s and having a pressure
-  amplitude of 0.8 Pa. The density of air is 1.22 kg/m³. (0.000781804 W)
+  amplitude of 0.8 Pa. The density of air is 1.22 kg/m³. (0.000781804 W/m^2)
 text: Calculate the intensity of a sound wave traveling in air at 335.5 m/s and having a pressure
-  amplitude of 0.8 Pa. The density of air is 1.22 kg/m^3. (0.000781804 W)
-answer: { value: 0.000781804, unit: W, raw: 0.000781804 W }
+  amplitude of 0.8 Pa. The density of air is 1.22 kg/m^3. (0.000781804 W/m^2)
+answer: { value: 0.000781804, unit: W/m^2, raw: 0.000781804 W/m^2 }
 figures: []
 literals:
   - name: v
@@ -42,9 +42,9 @@ scenario:
         Calculate the intensity of a sound wave traveling in air at {v:unit} and having a pressure
         amplitude of {p:unit}. {_0}{_u}
       answer: TODO
-      unit: W
+      unit: W/m^2
       tolerance: { rel: 0.01 }
   canonical:
     vars: { v: 335.5, p: 0.8, rho: 1.22 }
     parts:
-      - { id: answer, answer: 0.000781804, unit: W, source: P120 }
+      - { id: answer, answer: 0.000781804, unit: W/m^2, source: P120 }

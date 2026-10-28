@@ -8,8 +8,8 @@ source: { document: PHYS161_Exam3, labels: [ P4, P5 ] }
 section: Gravitation
 tags: [ artificial-gravity, centripetal-acceleration, angular-velocity, multi-part ]
 narrative: >-
-  In a Star Wars movie the rebel space station is built as circular ring of {d:unit} in diameter.
-  The gravitational acceleration on Earth is $g = {g:unit}$.
+  In a Star Wars movie the rebel space station is built as a circular ring of {d:unit} in
+  diameter. The gravitational acceleration on Earth is $g = {g:unit}$.
 vars:
   - { name: d, kind: range, min: 30, max: 60, step: 1, unit: m, label: diameter }
   - { name: pct, kind: range, min: 50, max: 95, step: 5, unit: "%", label: weight fraction }

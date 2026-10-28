@@ -1,6 +1,6 @@
 # P120 — intensity of a sound wave from its pressure amplitude, I = p_max² / (2 ρ v). The air
 # density 1.22 kg/m³ is the source's constant; the pressure amplitude and the speed of sound are
-# its data. The source prints the answer in W; an intensity is in W/m², which the part expects.
+# its data.
 id: phys161-e3-p120-sound-intensity-pressure
 title: Sound intensity from a pressure amplitude
 source: { document: PHYS161_Exam3, labels: [ P120 ] }
