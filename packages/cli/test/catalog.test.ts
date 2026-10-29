@@ -112,7 +112,7 @@ describe('fixed fallback (source values)', () => {
       }
     }
     expect(failures).toEqual(['phys161-exam3/P72:inline-image']);
-    expect(ok).toBe(597);
+    expect(ok).toBe(594);
   });
 });
 

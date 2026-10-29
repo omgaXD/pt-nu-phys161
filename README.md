@@ -413,7 +413,7 @@ overridable English).
 
 ### Content
 
-- **PHYS161 Problem Sets 1–4:** every problem is randomized (150 in Sets 1, 2 and 4, 148 in Set 3):
+- **PHYS161 Problem Sets 1–4:** every problem is randomized (150 in Sets 1, 2 and 4, 145 in Set 3):
   same situation, new numbers every attempt, each checked against the answer printed in the
   exam document.
 - Figures from the exam documents, and per-section reference sheets (e.g. a
